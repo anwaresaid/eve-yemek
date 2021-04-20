@@ -6,7 +6,7 @@
 >https://nextjs.org/  
 >https://primefaces.org/primereact/showcase/#/setup
 
-##### App Running on https://localhost16500
+##### App Running on https://localhost:16500
 ````bash
 yarn run build
 yarn run start
