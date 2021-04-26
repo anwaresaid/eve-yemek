@@ -3,18 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5000",
     "build": "next build",
     "start": "next start -p 16500"
   },
   "dependencies": {
     "classnames": "^2.2.6",
     "next": "^10.0.0",
+    "primeflex": "2.0.0",
     "primeicons": "^4.1.0",
     "primereact": "^6.2.1",
-    "primeflex": "2.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "typescript": "^4.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.4"
   }
 }
