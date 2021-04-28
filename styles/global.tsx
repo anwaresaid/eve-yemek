@@ -12,13 +12,28 @@ const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
     }
 
+    *{
+        box-sizing: border-box;
+    }
+
     .app{
         
     }
 
     .main-context{
+        min-height:100vh;
+        background:#f4f4f4;
         margin-left:${variables.sidebar_left_margin}px;
         padding:10px;
+    }
+
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-bottom: .5rem;
+        font-family: inherit;
+        font-weight: 500;
+        line-height: 1.2;
+        color: inherit;
     }
 
 `;
