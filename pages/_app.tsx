@@ -4,7 +4,9 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import '../styles/styles.css'
+import React from 'react';
+import Sidebar from '../components/Sidebar';
+import GlobalStyle from "../styles/global";
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -15,10 +17,19 @@ function MyApp({ Component, pageProps }) {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <meta name="description" content="Eve yemek admin panel" />
-                <meta name="theme-color" content="#000000" />
             </Head>
 
-            <Component {...pageProps} />
+            <GlobalStyle/>
+
+            {
+                //TODO: Add condition here to redirect login page if not logged in
+            }
+            <div className="app">
+                <Sidebar/>
+                <div className="main-context">
+                    <Component {...pageProps} />
+                </div>
+            </div>
         </>
     )
 }
