@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -10,11 +10,11 @@ import GlobalStyle from "../styles/global";
 import { Provider } from "react-redux";
 import initStore from "../store/createStore";
 import withRedux from 'next-redux-wrapper';
+import Login from "./auth/login";
 
 function MyApp({ Component, pageProps }) {
-
-    //Example is logged in constant
-    const LOGGED_IN = true;
+  //Example is logged in constant
+  const LOGGED_IN = false;
 
     const store = initStore();
 
@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
                             <Component {...pageProps} />
                         </div>
                     </> : <>
-                        Got you, you shall not pass ! <i>without login</i>
+                        <Login/>
                     </>}
                     
                 </div>
