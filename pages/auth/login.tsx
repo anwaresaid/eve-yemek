@@ -41,7 +41,7 @@ const Login = () => {
                   onChange={(e) => setRemember(e.checked)}
                 />
                 <label htmlFor='remember'>
-                  {remember ? "Remember me" : "Dont Remember me"}
+                  {remember ? "Remember me" : "Remember me"}
                 </label>
               </div>
               <Button
