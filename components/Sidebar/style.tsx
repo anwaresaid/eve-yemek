@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import vars from "../../styles/variables";
 
 export const Container = styled.div`
     position:fixed;
     top:0;
     left:0;
     height:100%;
-    width:250px;
-    max-width:250px;
+    width:${vars.sidebar_left_margin}px;
+    max-width:${vars.sidebar_left_margin}px;
     box-shadow:0px 0px 25px 0px rgba(0,0,0,.15);
     padding:0 8px;
 
@@ -28,7 +29,11 @@ export const Container = styled.div`
     }
 
     .p-menuitem-active{
-        background:#d8d8d8!important;
+        background:${vars.colors.eve_yemek_color}!important;
+
+        span{
+            color:#fff!important;
+        }
     }
 `;
 
