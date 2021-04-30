@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Sidebar from '../components/Sidebar';
 import foodsActions from "../store/actions/foods.action";
 
+//Example
+
 const Foods = (props) => {
 
     useEffect(()=>{
