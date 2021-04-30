@@ -37,7 +37,7 @@ export const LoginWrapper = styled.div`
 
   .p-card {
     border-radius: 20px;
-    padding: 0px 20px 20px 20px;
+    padding: 0px 20px 10px 20px;
   }
   .p-card-body {
     width: 360px;
