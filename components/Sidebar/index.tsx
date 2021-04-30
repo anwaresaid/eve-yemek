@@ -26,7 +26,7 @@ const Sidebar = () => {
 		{ label:"Kontrol Paneli", template:menuTemplate, url:"/"},
 		{ label:"Canlı Siparişler", template:menuTemplate, url:"/live-orders" },
 		{ label:"Siparişler", template:menuTemplate, url:"/orders" },
-		{ label:"Yemekler", template:menuTemplate, url:"/dishes" },
+		{ label:"Yemekler", template:menuTemplate, url:"/foods" },
 		{ label:"Eklentiler", template:menuTemplate, url:"/addons" },
 		{ label:"Ayarlar", template:menuTemplate, url:"/settings" }
 	]

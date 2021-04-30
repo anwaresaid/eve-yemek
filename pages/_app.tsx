@@ -8,7 +8,7 @@ import React from 'react';
 import Sidebar from '../components/Sidebar';
 import GlobalStyle from "../styles/global";
 import { Provider } from "react-redux";
-import initStore from "../redux/createStore";
+import initStore from "../store/createStore";
 import withRedux from 'next-redux-wrapper';
 
 function MyApp({ Component, pageProps }) {
