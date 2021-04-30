@@ -40,9 +40,7 @@ const Login = () => {
                   checked={remember}
                   onChange={(e) => setRemember(e.checked)}
                 />
-                <label htmlFor='remember'>
-                  {remember ? "Remember me" : "Remember me"}
-                </label>
+                <label htmlFor='remember'>Remember me</label>
               </div>
               <Button
                 label='Login'
