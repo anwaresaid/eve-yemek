@@ -26,20 +26,21 @@ export const LoginWrapper = styled.div`
     padding: 12px;
     width: 200px;
     margin-top: 25px;
-    margin-left: 80px;
+    margin-left: 50px;
 
     &:active,
     &:focus,
     &:hover {
-      background: #ff0429 !important;
+      background: ${vars.colors.eve_yemek_color_darker} !important;
     }
   }
 
   .p-card {
     border-radius: 20px;
+    padding: 0px 20px 20px 20px;
   }
   .p-card-body {
-    width: 420px;
+    width: 360px;
     padding: 25px;
   }
 `;
@@ -50,7 +51,7 @@ export const Wrapper = styled.div`
   background-image: url(/login/login-background.png);
   background-size: cover;
 `;
-export const Header = styled.h2`
+export const Header = styled.h1`
   margin-bottom: 30px;
   margin-top: 0px;
   text-transform: uppercase;

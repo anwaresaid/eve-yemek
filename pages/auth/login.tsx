@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //import of styled components
 import * as S from "./style";
@@ -8,8 +8,11 @@ import { InputText } from "primereact/inputtext";
 import { Card } from "primereact/card";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
+import { Checkbox } from "primereact/checkbox";
 
 const Login = () => {
+  const [remember, setRemember] = useState(true);
+
   return (
     <>
       <S.Wrapper>
@@ -30,6 +33,16 @@ const Login = () => {
                     name='password'
                   />
                 </div>
+              </div>
+              <div className='p-field-checkbox'>
+                <Checkbox
+                  inputId='remember'
+                  checked={remember}
+                  onChange={(e) => setRemember(e.checked)}
+                />
+                <label htmlFor='remember'>
+                  {remember ? "Remember me" : "Dont Remember me"}
+                </label>
               </div>
               <Button
                 label='Login'
