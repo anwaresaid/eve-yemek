@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import variables from "./variables";
+import vars from "./variables";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
     .main-context{
         min-height:100vh;
         background:#f4f4f4;
-        margin-left:${variables.sidebar_left_margin}px;
+        margin-left:${vars.sidebar_left_margin}px;
         padding:10px;
     }
 
