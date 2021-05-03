@@ -1,13 +1,8 @@
-import React, { useState, useRef } from 'react';
-import Sidebar from '../components/Sidebar';
+import React, { useState, useRef } from "react";
+import Sidebar from "../components/Sidebar";
 
 const Index = () => {
-
-  return (
-    <>
-      Dashboard
-    </>
-  );
-}
+  return <>Dashboard</>;
+};
 
 export default Index;
