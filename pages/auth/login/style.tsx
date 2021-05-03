@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import vars from "../../styles/variables";
+import vars from "../../../styles/variables";
 
 export const LoginWrapper = styled.div`
   display: flex;
@@ -50,14 +50,14 @@ export const Wrapper = styled.div`
   width: 100%;
   background-image: url(/login/login-background.png);
   background-size: cover;
+
+  .pi-eye,
+  .pi-eye-slash {
+    cursor: pointer;
+  }
 `;
 export const Header = styled.h1`
   margin-bottom: 30px;
   margin-top: 0px;
   text-transform: uppercase;
-`;
-export const Form = styled.form`
-  .pi-eye:before {
-    cursor: pointer;
-  }
 `;
