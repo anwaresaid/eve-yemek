@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import * as S from './style'
 import { Column } from 'primereact/column';
-import ProductService from './restTest';
 import { Button } from 'primereact/button';
 import { Ripple } from 'primereact/ripple';
 import classNames from 'classnames';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
+import RestaurantsService from "../../store/services/restaurants.service";
+
 
 
 const Index = () => {
@@ -19,8 +20,9 @@ const Index = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
+    const restaurantService = new RestaurantsService();
+    
 
-    const restaurantService = new ProductService();
 
 //pagination
 
@@ -32,7 +34,6 @@ const Index = () => {
             }
             else {
                 const first = currentPage ? options.rows * (page - 1) : 0;
-
                 setFirst1(first);
                 setPageInputTooltip('Press \'Enter\' key to go to this page.');
             }
@@ -44,11 +45,10 @@ const Index = () => {
     }
 
     useEffect(() => {
-        setRestaurants(restaurantService.getProductsSmall().data);
+        restaurantService.getRestaurants().then(data => setRestaurants(data.items));
 
-        
-    }, []);
-
+        }, []);
+    
     const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
     const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
 // global filter
@@ -115,16 +115,17 @@ const Index = () => {
     };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${rowData.image}`}  alt={rowData.image} className="product-image" />
+         return <img src={`${rowData.image}`}  alt={rowData.image} className="restaurant-image" />
     }
     const statusBodyTemplate = (rowData) => {
-        if(rowData.active == "true")
+        if(rowData.active == true)
         {
-            return <Tag className="p-mr-2" severity="success" value={rowData.active} rounded></Tag>;
+            return <Tag className="p-mr-2" severity="success" value="True" rounded></Tag>;
+
         }
         else
         { 
-            return <Tag severity="danger" value={rowData.active} rounded></Tag>;
+            return <Tag severity="danger" value="False" rounded></Tag>;
         }
     }
     const actionBodyTemplate = (rowData) => {
@@ -144,15 +145,14 @@ const Index = () => {
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                     header={header} className="p-datatable-restaurants"
                     globalFilter={globalFilter} emptyMessage="No Restaurants found.">
-                        <Column field="id" header="id" sortable></Column>
+                        <Column field="_id" header="Id" sortable></Column>
                         <Column header="Image" body={imageBodyTemplate}></Column>
-                        <Column field="restaurant" header="Restaurant Name" sortable></Column>
-                        <Column field="restuarantowner" header="Restaurant owner"  sortable></Column>
+                        <Column field="name" header="Restaurant Name" sortable></Column>
+                        <Column field="owner_name" header="Restaurant owner"  sortable></Column>
                         <Column field="active" header="Active" body={statusBodyTemplate} sortable></Column>
                         <Column header= "Edit" body={actionBodyTemplate}></Column>
                     </S.Table>
             </div>
-
         </div>
     );
 }

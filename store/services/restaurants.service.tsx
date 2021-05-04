@@ -1,24 +1,30 @@
-import axios from "axios";
+import axios from "../../helpers/_axios";
 
-//Example
+// const RestaurantsService = function () {
+//     //const STORAGE_KEY = 'user_storage_key';
+  
+//     // const getAllRestaurants = async () => {
+//     //   return axios.get("https://dev.eve-yemek.com/foods?offset=0&limit=2")
+//     //     .then(res=>{
+//     //         return res.data;
+//     //     })
+//     //     .catch(err=>{
+//     //         console.log(err);
+//     //         return { error:true }
+//     //     })
+//     // };
+  
+//     // return Object.freeze({
+//     //     getAllRestaurants
+//     // });
+//   };
+  
+//   export default RestaurantsService();
 
-const FoodsService = function () {
-    //const STORAGE_KEY = 'user_storage_key';
-  
-    const getAllFoods = async () => {
-      return axios.get("https://dev.eve-yemek.com/foods?offset=0&limit=2")
-        .then(res=>{
-            return res.data;
-        })
-        .catch(err=>{
-            console.log(err);
-            return { error:true }
-        })
-    };
-  
-    return Object.freeze({
-        getAllFoods
-    });
-  };
-  
-  export default FoodsService();
+export default class RestaurantsService {
+
+    getRestaurants() {
+        return axios.get('https://dev.eve-yemek.com/restaurants')
+                .then(res => res.data);
+    }
+}

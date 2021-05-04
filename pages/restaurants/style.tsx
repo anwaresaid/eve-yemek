@@ -9,19 +9,27 @@ export const Table = styled(DataTable)`
     display: flex;
     justify-content: space-between;
 }
+.restaurant-image {
+    width: 100px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
 
 `;
 
 
 export const TextCotainerT = styled.div`
         color:white;
-        width:30%;
-        height:30%;
+        width:60%;
+        height:60%;
         text-align: center;
         background-color:green;
         
 `;
 
+export const imgContainer  = styled.img`
+        width:50px;
+        height:50px;
+`;
 
 export const TextCotainerF = styled.div`
         color:white;
