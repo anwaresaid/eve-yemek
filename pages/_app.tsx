@@ -4,19 +4,49 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import GlobalStyle from "../styles/global";
 import { Provider } from "react-redux";
-import initStore from "../store/createStore";
-import withRedux from 'next-redux-wrapper';
-import Login from "./auth/login";
+import store from "../store/store";
+import { useRouter } from 'next/router';
 
-function MyApp({ Component, pageProps }) {
-  //Example is logged in constant
-  const LOGGED_IN = false;
 
-    const store = initStore();
+function MyApp(props) {
+    //Example is logged in constant
+
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [init, setInit] = useState(false);
+
+    const router = useRouter();
+
+    useEffect(()=>{
+        setLoggedIn(Boolean(localStorage.getItem("access_token")));
+        setInit(true);
+    }, []);
+
+    const renderPanels = () => {
+        if(router.pathname === "/auth/login"){
+            if(loggedIn){
+                router.push("/");
+            }else{
+                return <props.Component {...props.pageProps} />
+            }
+            return;
+        }
+
+        if(loggedIn){
+            return (<>
+                <Sidebar/>
+                <div className="main-context">
+                    <props.Component {...props.pageProps} />
+                </div>
+            </>)
+        }else{
+            router.push("/auth/login");
+            return;
+        }
+    }
 
     return (
         <>
@@ -31,15 +61,7 @@ function MyApp({ Component, pageProps }) {
                 <div className="app">
                     <GlobalStyle/>
 
-                    {/*TODO: Create a proper AuthProvider and AuthContext for using here*/}
-                    {LOGGED_IN ? <>
-                        <Sidebar/>
-                        <div className="main-context">
-                            <Component {...pageProps} />
-                        </div>
-                    </> : <>
-                        <Login/>
-                    </>}
+                    {init && renderPanels()}
                     
                 </div>
             </Provider>
@@ -47,4 +69,4 @@ function MyApp({ Component, pageProps }) {
     )
 }
 
-export default withRedux(initStore)(MyApp);
+export default MyApp;
