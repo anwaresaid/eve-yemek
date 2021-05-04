@@ -70,7 +70,7 @@ const Login = (props) => {
 								/>
 								<label htmlFor='remember'>Remember me</label>
 							</div>
-							<div>
+							<div className="p-error">
 								{props?.user?.login_error_msg}
 							</div>
 							<Button

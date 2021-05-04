@@ -16,7 +16,7 @@ const UserService = function () {
             return { ok:true, data: res.data };
         })
         .catch(err=>{
-            return { ok:false, err:err?.response?.data }
+            return { ok:false, err:err?.data || err?.response?.data }
         })
     };
   

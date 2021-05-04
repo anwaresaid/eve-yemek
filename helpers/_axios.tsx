@@ -1,5 +1,4 @@
 import axios from "axios";
-import router from "next/router";
 import { baseUrl } from "./constants";
 
 const axiosInstance = axios.create({
@@ -14,11 +13,14 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(function (config) {
     const auth_token = localStorage.getItem("access_token");
-    if(auth_token){
-        config.headers['Authorization'] = 'Bearer ' + auth_token;
-    }else{
-        localStorage.clear();
-        window.location.replace("/auth/login");
+    if(window.location.pathname !== "/auth/login"){
+        if(auth_token){
+            config.headers['Authorization'] = 'Bearer ' + auth_token;
+        }else{
+            localStorage.clear();
+            //console.log("request,,");
+            window.location.replace("/auth/login");
+        }
     }
     return config;
 
@@ -32,8 +34,9 @@ axiosInstance.interceptors.response.use(function (config) {
 
 }, async function (error) {
 
-    if(error?.response?.status === 401){
+    if(window.location.pathname !== "/auth/login" && error?.response?.status === 401){
         await localStorage.clear();
+        //console.log("response,,");
         window.location.replace("/auth/login");
     }
 

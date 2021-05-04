@@ -15,10 +15,8 @@ const login = (email: string, password: string) => async dispatch => {
             await dispatch({ type:userTypes.LOGIN_FAILED, payload:{ login_error_msg:res?.err?.message || "Something went wrong while logging in" } })
         }
 
-        return {};
     } catch (err) {
         dispatch({ type:userTypes.LOGIN_FAILED, payload:{ login_error_msg:"Something went wrong while logging in" } });
-        return {};
     }
 }
 
