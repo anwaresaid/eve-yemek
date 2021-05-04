@@ -11,9 +11,9 @@ import { Provider } from "react-redux";
 import store from "../store/store";
 import { useRouter } from 'next/router';
 
-
-function MyApp(props) {
-    //Example is logged in constant
+function MyApp({ Component, pageProps }) {
+  //Example is logged in constant
+  const LOGGED_IN = true;
 
     const [loggedIn, setLoggedIn] = useState(false);
     const [init, setInit] = useState(false);
