@@ -24,8 +24,13 @@ const Sidebar = () => {
 
 	const items:any = [
 		{ label:"Kontrol Paneli", template:menuTemplate, url:"/"},
-		{ label:"Restoranlar", template:menuTemplate, url:"/restaurants" },
-		{ label:"Siparişler", template:menuTemplate, url:"/orders"}
+		{ label:"Canlı Siparişler", template:menuTemplate, url:"/live-orders" },
+		{ label:"Siparişler", template:menuTemplate, url:"/orders" },
+		{ label:"Yemekler", template:menuTemplate, url:"/foods" },
+		{ label:"Eklentiler", template:menuTemplate, url:"/addons" },
+		{ label:"Ayarlar", template:menuTemplate, url:"/settings" },
+		{ separator:true },
+		{ label:"Çıkış yap", template:menuTemplate, url:"/auth/logout" }
 	]
 
     return (
