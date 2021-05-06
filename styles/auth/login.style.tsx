@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import vars from "../../../styles/variables";
+import vars from "../core/variables";
 
 export const LoginWrapper = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 //import of styled components
-import * as S from "./style";
+import * as S from "../../styles/auth/login.style";
 
 //import of primereact components
 import { InputText } from "primereact/inputtext";
@@ -11,7 +11,7 @@ import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { connect, useSelector } from "react-redux";
 
-import userActions from "../../../store/actions/user.action";
+import userActions from "../../store/actions/user.action";
 
 const Login = (props) => {
 	const [email, setEmail] = useState("");
