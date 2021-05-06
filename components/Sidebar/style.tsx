@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import vars from "../../styles/variables";
+import vars from "../../styles/core/variables";
 
 export const Container = styled.div`
     position:fixed;

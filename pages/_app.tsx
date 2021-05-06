@@ -6,7 +6,7 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
-import GlobalStyle from "../styles/global";
+import GlobalStyle from "../styles/core/global";
 import { Provider } from "react-redux";
 import store from "../store/store";
 import { useRouter } from "next/router";
