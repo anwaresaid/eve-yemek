@@ -3,22 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 5000",
+    "dev": "next dev -p 5001",
     "build": "next build",
-    "start": "next start -p 16500"
+    "start": "next start -p 16500",
+    "export": "next export"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "next": "^10.0.0",
+    "next-redux-wrapper": "^6.0.2",
     "primeflex": "2.0.0",
     "primeicons": "^4.1.0",
     "primereact": "^6.2.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-redux": "^7.2.4",
     "react-transition-group": "^4.4.1",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.32.11",
+    "styled-components": "^5.2.3",
     "typescript": "^4.2.4"
   },
   "devDependencies": {
-    "@types/react": "^17.0.4"
+    "@types/react": "^17.0.4",
+    "babel-plugin-styled-components": "^1.12.0"
   }
 }
