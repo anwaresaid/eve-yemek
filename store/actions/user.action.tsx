@@ -8,7 +8,7 @@ const login = (email: string, password: string) => async dispatch => {
         const res: any = await UserService.login(email, password);
         
         if (res?.ok) {
-            const access_token = res?.data?.access_token;
+            const access_token = res?.data?.accessToken;
             await dispatch({ type: userTypes.LOGIN, payload: access_token });
             window.location.replace("/");
         } else {
