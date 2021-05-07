@@ -28,12 +28,8 @@ export default class FoodsService{
         return axios.get('https://dev.eve-yemek.com/foods')
                 .then(res => res.data);
     }
-    getRestaurant(id){
-        return axios.get('https://dev.eve-yemek.com/restaurants/'+ id)
-        .then(res => res.data)
-    }
-    getCategory(id){
-        return axios.get('https://dev.eve-yemek.com/category/'+ id)
+    getDrinks(){
+        return axios.get('https://dev.eve-yemek.com/add-ons')
         .then(res => res.data)
     }
 }

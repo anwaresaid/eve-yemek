@@ -52,34 +52,34 @@ const FoodsList =  () => {
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const foodService = new FoodService();
 
-    useEffect( () => {
-        // foodService.getFoods().then
-        // (data => {setFoods(data.items); return data.items}).then
-        // (data => foodService.getRestaurant(data.items?.restaurant_id)).then
-        // (data => setRestaurant(data.items));
-        settingItems();
-    }, []);
+     useEffect( () => {
+         foodService.getFoods().then(data => setFoods(data.items));
+    //     // (data => {setFoods(data.items); return data.items}).then
+    //     // (data => foodService.getRestaurant(data.items?.restaurant_id)).then
+    //     // (data => setRestaurant(data.items));
+    //     settingItems();
+     }, []);
     
 
-    const settingItems  = async ()=>{
-        const resfoods = await foodService.getFoods();
+    // const settingItems  = async ()=>{
+    //     const resfoods = await foodService.getFoods();
         
-        setFoods(resfoods.items);
-        //const resRestaurant = await foodService.getRestaurant(resfoods.items.restaurant_id);
-        //setRestaurant(resRestaurant);
-        resfoods.items.forEach(item=> async () =>{
-            const foodsCategory = await foodService.getCategory(item.food_category_id);
-            console.log("category", foodsCategory.name);
+    //     setFoods(resfoods.items);
+    //     //const resRestaurant = await foodService.getRestaurant(resfoods.items.restaurant_id);
+    //     //setRestaurant(resRestaurant);
+    //     resfoods.items.forEach(item=> async () =>{
+    //         const foodsCategory = await foodService.getCategory(item.food_category_id);
+    //         console.log("category", foodsCategory.name);
 
-        })
+    //     })
         
-        // const foodsExpanded = resfoods.items.map((item) => () => {
-        //     console.log("items",item);
-        // })
-        console.log("check after foods")
+    //     // const foodsExpanded = resfoods.items.map((item) => () => {
+    //     //     console.log("items",item);
+    //     // })
+    //     console.log("check after foods")
 
-        setFoodsExpanded(foodsExpanded);
-    } 
+    //     setFoodsExpanded(foodsExpanded);
+    // } 
 
     const onPageInputKeyDown = (event, options) => {
         if (event.key === 'Enter') {

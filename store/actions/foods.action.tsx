@@ -5,15 +5,18 @@ import FoodsService from "../services/foods.service";
 
 const getAllFoods = () => async dispatch => {
     try{
-
-        const res = await FoodsService.getAllFoods();
+        
+        dispatch({type: foodsTypes.FOOD_CREATE_REQUEST})
+        
+        const foodService = new FoodsService;
+        const res = await foodService.getFoods();
 
         if(res?.error){
             // Dispatch error
             return;
         }
 
-        dispatch({type:foodsTypes.GET_ALL_FOODS, payload:res});
+        dispatch({type:foodsTypes.FOOD_CREATE_REQUEST});
 
     }catch(err){
         return Promise.reject(err);

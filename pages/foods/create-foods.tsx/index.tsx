@@ -9,18 +9,26 @@ import * as S from './style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
+import FoodService from '../../../store/services/foods.service';
 
 export const CreatFoods = () => {
     const [totalSize, setTotalSize] = useState(0);
     const [files, setFile] = useState([]);
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
-    const [value17, setValue17] = useState(20);
+    const [price, setPrice] = useState(0);
+    const [drinks, setDrinks] = useState(null);
+    const [discountPrice, setDiscountPrice] = useState(0);
     const [vegi, setVegi] = useState(false);
     const [featured, setFeatured] = useState(false);
     const [active, setActive] = useState(false);
+    const foodService = new FoodService();
 
 
+    useEffect(() =>{
+        foodService.getDrinks().then(data => setDrinks(data));
+
+    }, []);
     const [selectedCity1, setSelectedCity1] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -109,7 +117,7 @@ export const CreatFoods = () => {
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
-    
+    console.log("drinks", drinks);
     return (
         <div>
 
@@ -145,11 +153,11 @@ export const CreatFoods = () => {
             <div className="p-grid p-fluid">
                     <div className="p-field p-col-12 p-md-3">
                         <h4> Fiyat</h4>
-                        <InputNumber id="stacked" value={value17} onValueChange={(e) => setValue17(e.value)} showButtons mode="currency" currency="TRY" />
+                        <InputNumber id="stacked" value={price} onValueChange={(e) => setPrice(e.value)} showButtons mode="currency" currency="TRY" />
                     </div>
                     <div className="p-field p-col-12 p-md-3">
                         <h4> İndirimli Fiyat</h4>
-                        <InputNumber id="stacked" value={value17} onValueChange={(e) => setValue17(e.value)} showButtons mode="currency" currency="TRY" />
+                        <InputNumber id="stacked" value={discountPrice} onValueChange={(e) => setDiscountPrice(e.value)} showButtons mode="currency" currency="TRY" />
                     </div>
             </div>
             <div>
