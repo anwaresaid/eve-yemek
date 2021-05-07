@@ -31,8 +31,8 @@ const Sidebar = () => {
 		{ label:"Ayarlar", template:menuTemplate, url:"/settings" },
 		{ separator:true },
 		{ label:"Restorantlar", template:menuTemplate, expanded: true,items:[
-			{ label:"restaruants list", template:menuTemplate, url:"/restaurants" },
-			{ label:"create restuarant", template:menuTemplate, url:"/create-restaurants" },
+			{ label:"Restorantlar Listesi", template:menuTemplate, url:"/restaurants" },
+			{ label:"Restorant Oluştur", template:menuTemplate, url:"/create-restaurants" },
 		] },
 		{ separator:true },
 		{ label:"Çıkış yap", template:menuTemplate, url:"/auth/logout" },
