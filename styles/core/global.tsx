@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
         sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        line-height:1.5em;
     }
 
     *{
@@ -24,12 +25,12 @@ const GlobalStyle = createGlobalStyle`
         min-height:100vh;
         background:#f4f4f4;
         margin-left:${vars.sidebar_left_margin}px;
-        padding:10px;
+        padding:25px;
     }
 
 
     .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        margin-bottom: .5rem;
+        margin-bottom: 1rem;
         font-family: inherit;
         font-weight: 500;
         line-height: 1.2;

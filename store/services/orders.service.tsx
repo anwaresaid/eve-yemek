@@ -6,4 +6,9 @@ export default class OrdersService {
         return axios.get('https://dev.eve-yemek.com/orders')
                 .then(res => res.data);
     }
+
+    getOrder(id){
+        return axios.get('https://dev.eve-yemek.com/orders/'+id)
+                .then(res => res.data);
+    }
 }

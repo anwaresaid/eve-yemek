@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import * as S from '../styles/restaurants.style'
+import * as S from '../../styles/restaurants.style'
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-import OrdersService from "../store/services/orders.service";
-
-
+import OrdersService from "../../store/services/orders.service";
+import { useRouter } from 'next/router';
 
 const Orders = () => {
 
+    const router = useRouter();
 
     const [orders, setOrders] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
@@ -20,7 +20,7 @@ const Orders = () => {
 
     const header =(
         <div className="table-header">
-            Siparişler
+            Siparişler Listesi
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
@@ -28,10 +28,16 @@ const Orders = () => {
         </div>
     )
 
-    const actionBodyTemplate = (rowData) => {
+    const handleViewButtonClick = (id) => {
+        if(id){
+            router.push(`/orders/${id}`);
+        }
+    }
+
+    const actionBodyTemplate = (rowData:any) => {
         return (
             <React.Fragment>
-                <Button label="Görüntüle" className="p-button-sm p-button-info" />
+                <Button label="Görüntüle" className="p-button-sm p-button-info" onClick={()=>handleViewButtonClick(rowData?._id)}/>
             </React.Fragment>
         );
     }
