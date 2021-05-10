@@ -8,8 +8,13 @@ const login = (email: string, password: string) => async dispatch => {
         const res: any = await UserService.login(email, password);
         
         if (res?.ok) {
-            const access_token = res?.data?.accessToken;
-            await dispatch({ type: userTypes.LOGIN, payload: access_token });
+            const user = {
+                id:res?.data?.id,
+                email:res?.data?.email,
+                roles:res?.data?.roles,
+                access_token: res?.data?.access_token
+            };
+            await dispatch({ type: userTypes.LOGIN, payload: user });
             window.location.replace("/");
         } else {
             await dispatch({ type:userTypes.LOGIN_FAILED, payload:{ login_error_msg:res?.err?.message || "Something went wrong while logging in" } })

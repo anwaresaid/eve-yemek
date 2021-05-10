@@ -7,10 +7,11 @@ function userReducer(state = initialState, action) {
 
   switch (type) {
     case userTypes.LOGIN:
-    	localStorage.setItem("access_token", payload);
+    	localStorage.setItem("access_token", payload.access_token);
+		localStorage.setItem("user", JSON.stringify(payload));
 		return { 
 			...state,
-			access_token: payload,
+			user:payload
 		}
 	case userTypes.LOGIN_FAILED:
 		return {
