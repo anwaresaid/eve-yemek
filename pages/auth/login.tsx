@@ -28,7 +28,7 @@ const Login = (props) => {
 		}
 
 		//props.login("eveyemektesting+1620040878@gmail.com","123456");
-		props.login(email, password);
+		props.login(email, password, remember);
 	}
 
 	return (
