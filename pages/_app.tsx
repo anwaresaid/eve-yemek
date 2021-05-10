@@ -38,7 +38,7 @@ function MyApp(props) {
             return (
                 <>
                     <Sidebar />
-                    <div className='main-context'>
+                    <div className="main-context">
                         <props.Component {...props.pageProps} />
                     </div>
                 </>
@@ -52,17 +52,17 @@ function MyApp(props) {
     return (
         <>
             <Head>
-                <link rel='shortcut icon' href='/images/logos/logo.png'></link>
+                <link rel="shortcut icon" href="/images/logos/logo.png"></link>
                 <title>Eve Yemek - Admin Panel</title>
-                <meta charSet='utf-8' />
+                <meta charSet="utf-8" />
                 <meta
-                    name='viewport'
-                    content='initial-scale=1.0, width=device-width'
+                    name="viewport"
+                    content="initial-scale=1.0, width=device-width"
                 />
-                <meta name='description' content='Eve yemek admin panel' />
+                <meta name="description" content="Eve yemek admin panel" />
             </Head>
             <Provider store={store}>
-                <div className='app'>
+                <div className="app">
                     <GlobalStyle />
 
                     {init && renderPanels()}
