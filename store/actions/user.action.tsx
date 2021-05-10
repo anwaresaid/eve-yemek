@@ -1,11 +1,11 @@
 import { userTypes } from "../types/user.type";
 import UserService from "../services/user.service";
 
-const login = (email: string, password: string) => async dispatch => {
+const login = (email: string, password: string, remember: boolean) => async dispatch => {
 
     try {
 
-        const res: any = await UserService.login(email, password);
+        const res: any = await UserService.login(email, password, remember);
         
         if (res?.ok) {
             const access_token = res?.data?.accessToken;
