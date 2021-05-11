@@ -2,8 +2,10 @@ import React, { useState, useRef } from "react";
 import * as S from "../styles/index.style";
 import { Card } from "primereact/card";
 import { Line } from "react-chartjs-2";
+import withAuth from "../helpers/withAuth";
 
-const Index = () => {
+const Index = (props) => {
+
     const lineChartData = {
         labels: ["28", "30", "1", "2", "3", "4", "5"],
         datasets: [
@@ -103,4 +105,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default withAuth(Index);

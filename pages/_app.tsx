@@ -10,44 +10,11 @@ import GlobalStyle from "../styles/core/global";
 import { Provider } from "react-redux";
 import store from "../store/store";
 import { useRouter } from "next/router";
+import { allMenuItems } from "../helpers/constants";
+import { Column } from "primereact/column";
+import withAuth from "../helpers/withAuth";
 
 function MyApp(props) {
-    //Example is logged in constant
-
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [init, setInit] = useState(false);
-
-    const router = useRouter();
-
-    useEffect(() => {
-        setLoggedIn(Boolean(localStorage.getItem("access_token")));
-        setInit(true);
-    }, []);
-
-    const renderPanels = () => {
-        if (router.pathname === "/auth/login") {
-            if (loggedIn) {
-                router.push("/");
-            } else {
-                return <props.Component {...props.pageProps} />;
-            }
-            return;
-        }
-
-        if (!loggedIn) {
-            router.push("/auth/login");
-            return;
-        }
-
-        return (
-            <>
-                <Sidebar />
-                <div className="main-context">
-                    <props.Component {...props.pageProps} />
-                </div>
-            </>
-        );
-    };
 
     return (
         <>
@@ -65,7 +32,7 @@ function MyApp(props) {
                 <div className="app">
                     <GlobalStyle />
 
-                    {init && renderPanels()}
+                    <props.Component {...props.pageProps} />
                 </div>
             </Provider>
         </>

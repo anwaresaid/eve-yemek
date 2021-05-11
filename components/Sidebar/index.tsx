@@ -9,8 +9,6 @@ const Sidebar = () => {
     const router = useRouter();
     const routeName = router?.asPath;
 
-    const user = JSON.parse(localStorage.getItem("user"));
-
     const [menus, setMenus] = useState([]);
 
     //Store menus with compared roles
@@ -20,6 +18,7 @@ const Sidebar = () => {
 
     // Setting "initMenus" with user's accessable routes, by "roles"
     useEffect(()=>{
+        const user = JSON.parse(localStorage.getItem("user"));
         if(user?.roles){
             generateInitMenus(user.roles);
             setFirstRun(true);
