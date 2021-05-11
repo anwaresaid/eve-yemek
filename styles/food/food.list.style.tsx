@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import vars from "../../styles/variables";
 import { DataTable } from 'primereact/datatable';
 export const Table = styled(DataTable)`
     .datatable-filter-demo .p-paginator .p-paginator-current {

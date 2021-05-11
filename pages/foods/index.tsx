@@ -6,10 +6,9 @@ import { Ripple } from 'primereact/ripple';
 import classNames from 'classnames';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
-import * as S from './style'
+import * as S from '../../styles/food/food.list.style'
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
-// import ProductService from '../service/ProductService';
 
 
 const FoodsList =  () => {

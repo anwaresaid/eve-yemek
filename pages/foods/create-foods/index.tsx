@@ -5,7 +5,7 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Button } from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import * as S from './style'
+import * as S from '../../../styles/food/create-food/food.create.style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
@@ -54,7 +54,6 @@ export const CreatFoods = () => {
     const settingDropDownNames= () => {
         const addonsNames = addonslist.items.map(addon => {return{name: addon.name}});
         setAddonsName(addonsNames);
-        console.log("checking")
 
         const foodCategoryNames = foodCatlist.items.map(res => {return{name: res.name}});
         setFoodCategoryName(foodCategoryNames);
