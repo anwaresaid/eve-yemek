@@ -34,19 +34,19 @@ function MyApp(props) {
             return;
         }
 
-        if (loggedIn) {
-            return (
-                <>
-                    <Sidebar />
-                    <div className="main-context">
-                        <props.Component {...props.pageProps} />
-                    </div>
-                </>
-            );
-        } else {
+        if (!loggedIn) {
             router.push("/auth/login");
             return;
         }
+
+        return (
+            <>
+                <Sidebar />
+                <div className="main-context">
+                    <props.Component {...props.pageProps} />
+                </div>
+            </>
+        );
     };
 
     return (

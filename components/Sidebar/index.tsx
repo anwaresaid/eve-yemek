@@ -1,14 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Menu } from "primereact/menu";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as S from "./style";
+import { allMenuItems } from "../../helpers/constants";
 
 const Sidebar = () => {
     const router = useRouter();
     const routeName = router?.asPath;
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const [menus, setMenus] = useState([]);
+
+    //Store menus with compared roles
+    const [initMenus, setInitMenus] = useState([]);
+
+    const [firstRun, setFirstRun] = useState(false);
+
+    // Setting "initMenus" with user's accessable routes, by "roles"
+    useEffect(()=>{
+        if(user?.roles){
+            generateInitMenus(user.roles);
+            setFirstRun(true);
+        }else{
+            //User has no roles, log out
+            alert("User has no roles");
+        }
+    },[]);
+
+    // Adding tempolate: menuTemplate to menu constants
+    useEffect(()=>{
+        if(firstRun){
+            generateMenus();
+        }
+    }, [router.asPath, initMenus])
+
+    const generateInitMenus = (userRoles) => {
+        //console.log("generate init menu");
+        setInitMenus(allMenuItems.filter(e=>{
+            if(e?.url && e?.roles.includes(...userRoles)){
+                return e;
+            }
+            else if(e.items && e.items.length > 0){
+                e.items = e.items.filter(k=>{
+                    if(k?.url && k?.roles.includes(...userRoles)){
+                        return k;
+                    }
+                    return false;
+                });
+                if(e.items && e.items.length > 0){
+                    return e;
+                }
+            }
+            return false;
+        }));
+    }
+
+    const generateMenus = () => {
+        //console.log("generate menu");
+        setMenus(initMenus.map(e=>{
+
+            if(e.url){
+                e.template = menuTemplate;
+                return e;
+            }else if(e.items && e.items.length > 0){
+                e.items = e.items.map(k=>{
+                    if(k.url){
+                        k.template = menuTemplate;
+                        return k;
+                    }
+                });
+                return e;
+            }else{
+                return e;
+            }
+        }));
+    }
+
     const menuTemplate = (item, options) => {
+        //console.log("Creating menus");
+
         const activeClass = routeName === item.url ? " p-menuitem-active" : "";
 
         return (
@@ -28,45 +100,14 @@ const Sidebar = () => {
         );
     };
 
-    const items: any = [
-        { label: "Kontrol Paneli", template: menuTemplate, url: "/" },
-        {
-            label: "Canlı Siparişler",
-            template: menuTemplate,
-            url: "/live-orders",
-        },
-        { label: "Siparişler", template: menuTemplate, url: "/orders" },
-        { label: "Yemekler", template: menuTemplate, url: "/foods" },
-        { label: "Eklentiler", template: menuTemplate, url: "/addons" },
-        { label: "Ayarlar", template: menuTemplate, url: "/settings" },
-        { separator: true },
-        {
-            label: "Restorantlar",
-            template: menuTemplate,
-            expanded: true,
-            items: [
-                {
-                    label: "Restorantlar Listesi",
-                    template: menuTemplate,
-                    url: "/restaurants",
-                },
-                {
-                    label: "Restorant Oluştur",
-                    template: menuTemplate,
-                    url: "/create-restaurants",
-                },
-            ],
-        },
-        { separator: true },
-        { label: "Çıkış yap", template: menuTemplate, url: "/auth/logout" },
-    ];
-
     return (
         <S.Container>
             <S.TopLogoContainer>
                 <img src="/images/logos/eve-yemek-05.png" />
             </S.TopLogoContainer>
-            <Menu model={items} />
+            {menus && 
+                <Menu model={menus} />
+            }
         </S.Container>
     );
 };

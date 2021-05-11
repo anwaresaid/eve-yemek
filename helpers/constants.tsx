@@ -1,7 +1,7 @@
 export const baseUrl = "https://dev.eve-yemek.com";
 
 // prettier-ignore
-export const menuItems:any = [
+export const allMenuItems:any = [
     { label:"Kontrol Paneli",          url:"/",              roles:["admin", "restaurant_owner"] },
     { label:"Restoranlar",             url:"/restaurants",   roles:["admin"] },
     { label:"Canlı Siparişler",        url:"/live-orders",   roles:["restaurant_owner"] },
