@@ -2,7 +2,7 @@ import { restaurantsTypes } from "../types/restaurants.type";
 
 const initialState = [];
 
-export const listRestaurantOnwersReducer = (state = initialState, action) => {
+export const listRestaurantOwnersReducer = (state = initialState, action) => {
   switch (action.type) {
     case restaurantsTypes.RESTAURAT_OWNER_LIST_REQUEST:
       return { loading: true}
@@ -10,7 +10,7 @@ export const listRestaurantOnwersReducer = (state = initialState, action) => {
       return {
         loading: false,
         success: true,
-        restaurantOnwers: action.payload
+        restaurantOwners: action.payload
       }
 
     case restaurantsTypes.RESTAURAT_OWNER_LIST_FAIL:

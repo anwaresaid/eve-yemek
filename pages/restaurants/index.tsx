@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import * as S from '../styles/restaurants.style'
+import * as S from '../../styles/restaurants/restaurants.style'
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import RestaurantsService from "../store/services/restaurants.service";
+import RestaurantsService from "../../store/services/restaurants.service";
 
 
 

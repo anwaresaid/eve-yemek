@@ -13,7 +13,7 @@ import {updateRestaurant} from '../../../store/actions/restaurant.action';
 import {listRestaurantOwners} from '../../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
-
+import { InputMask } from 'primereact/inputmask';
 
 
     const UpdateRestaurants = () => {
@@ -22,14 +22,24 @@ import {RootState} from 'typesafe-actions';
     const [files, setFile] = useState(null);
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
-    const [price, setPrice] = useState(0);
     const [resOwnersName, setResOwnersName] = useState(null);
-    const [discountPrice, setDiscountPrice] = useState(0);
     const [vegi, setVegi] = useState(false);
     const [featured, setFeatured] = useState(false);
     const [active, setActive] = useState(false);
     const [foodName, setFoodName] = useState(null);
     const [description, setDescription] = useState();
+    const [phoneNumber, setPhoneNumber] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [rating, setRating] = useState(null);
+    const [deliveryTime, setDeliveryTime] = useState(null);
+    const [address, setAddress] = useState(null);
+    const [postalCode, setPostalCode] = useState(null);
+    const [lat, setLat] = useState(null);
+    const [long, setLong] = useState(null);
+    const [commission, setCommission] = useState(null);
+    const [license, setLicense] = useState(null);
+    const [resCharge, setResCharge] = useState(null);
+    const [deliveryRad, setDeliveryRad] = useState(null);
     const dispatch = useDispatch();
 
 //setting dropdown selected items
@@ -41,23 +51,24 @@ import {RootState} from 'typesafe-actions';
     
 //use selectors for setting dispatch to variable.
     const resOwnersList = useSelector((state:RootState) => state.listRestaurantOwners);
-    const { loading: reOwnersLoading, success:addonSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
+    const { loading, success:resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
 
 //setting names for dropdowns.
-    // const settingDropDownNames= () => {
-    //     const restOnwersName = resOwnerslist.items.map(addon => {return{name: addon.name}});
-    //     setResOwnersName(restOnwersName);
-    //    }
+    const settingDropDownNames= () => {
+        const restOnwersName = resOwnerslist.items.map(resOwner => {return{name: resOwner.name}});
+        setResOwnersName(restOnwersName);
+       }
 
     
     useEffect(() =>{
-
+        if(!resOnwersSuccess)
             dispatch(listRestaurantOwners());
-        
+        if(resOnwersSuccess)
+            settingDropDownNames();
+          
 
-        // if(addonSuccess)
-        //         settingDropDownNames();
-    }, []);
+       
+    }, [resOnwersSuccess]);
   
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -75,11 +86,11 @@ import {RootState} from 'typesafe-actions';
         { name: 'Paris', code: 'PRS' }
     ];
 //on change functions    
-    // const onResOwnerChange= (e:any) => {
-    //     let selectedResOwner = resOwnerslist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-    //     setSelectedResOwner(selectedResOwner[0]);
-    //     setSelectedResOwnerName(e.value);
-    // }
+    const onResOwnerChange= (e:any) => {
+        let selectedResOwner = resOwnerslist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
+        setSelectedResOwner(selectedResOwner[0]);
+        setSelectedResOwnerName(e.value);
+    }
     const onCityChange = (e) => {
         setSelectedCity(e.value);
     }
@@ -186,57 +197,97 @@ import {RootState} from 'typesafe-actions';
             <Toast ref={toast}></Toast>
              <S.ContainerCard>
                  <form onSubmit = {onSubmit} >
+                     
                     <div className="p-fluid">
-                        <div className="p-field">
-                        <h4>Restauran</h4>
-                <Dropdown value={selectedResOwner} options={resOwnersName} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
-                        </div>
-                        <div className="p-field">
-                            <h4>Yemek Adı</h4>
+                        <div className="p-field p-col-12">
+                            <h4>Ad</h4>
                             <InputText id="foodName "  onChange={onNameChange} type="text"/>
                         </div>
-                        <div className="p-field">
-                            <h4>Yemek Açıklaması</h4>
+                        <div className="p-field p-col-12">
+                            <h4>Açıklama</h4>
                             <InputText id="description" onChange={onDescriptionChange} type="text"/>
                         </div>
+                        <div className="p-field p-col-12">
+                            <h4>Restoran Sahibi </h4>
+                            <Dropdown value={selectedResOwner} options={resOwnersName} onChange={onResOwnerChange} optionLabel="name" placeholder="Select a City" />
+                        </div>
                     </div>
-            <FileUpload ref={fileUploadRef} name="image" url="./" multiple accept="image/*" maxFileSize={1000000}
-                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
-                uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                    <div className="p-field p-col-12">
+                        <FileUpload ref={fileUploadRef} name="image" url="./" multiple accept="image/*" maxFileSize={1000000}
+                            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
+                            uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <h4>Telefon</h4>
+                        <InputMask id="phone" mask="(999) 999-9999" value={phoneNumber} placeholder="(999) 999-9999" onChange={(e) => setPhoneNumber(e.value)}></InputMask>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <h4>Email</h4>
+                        <InputText id="inputtext" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <h4>Şehir</h4>
+                        <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Yemek Kategorisi" />
+                        <h4>İlçe</h4>
+                        <Dropdown value={selectedCounty} options={counties} onChange={onCountyChange} optionLabel="name" placeholder="Eklentileri Seç" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <h4>Derece</h4>
+                        <InputNumber id="stacked" value={rating} onValueChange={(e) => setRating(e.value)} showButtons mode="currency" currency="TRY" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <h4> Tahmini Teslim Süresi (dakika)</h4>
+                        <InputNumber id="stacked" value={deliveryTime} onValueChange={(e) => setDeliveryTime(e.value)} showButtons mode="currency" currency="TRY" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <h4>Açık Adres</h4>
+                        <InputText id="inputtext" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <h4>Posta kodu</h4>
+                        <InputText id="inputtext" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <h4>Enlem</h4>
+                        <InputNumber id="stacked" value={lat} onValueChange={(e) => setLat(e.value)} showButtons mode="currency" currency="TRY" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <h4>Boylam</h4>
+                        <InputNumber id="stacked" value={long} onValueChange={(e) => setLong(e.value)} showButtons mode="currency" currency="TRY" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <h4>Komisyon Oranı %</h4>
+                        <InputNumber id="stacked" value={commission} onValueChange={(e) => setCommission(e.value)} showButtons mode="currency" currency="TRY" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <h4>Lisans Kodu</h4>
+                        <InputText id="inputtext" value={license} onChange={(e) => setLicense(e.target.value)} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <h4>Restoran Ücreti</h4>
+                        <InputNumber id="stacked" value={resCharge} onValueChange={(e) => setResCharge(e.value)} showButtons mode="currency" currency="TRY" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <h4>Teslimat Yarıçapı (km)</h4>
+                        <InputNumber id="stacked" value={deliveryRad} onValueChange={(e) => setDeliveryRad(e.value)} showButtons mode="currency" currency="TRY" />
+                    </div>
                 <div className="p-fluid">
-                        <div className="card">
-                <h4>Yemek Kategorisi</h4>
-                <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Yemek Kategorisi" />
-                <h4>Eklentileri Seç</h4>
-                <Dropdown value={selectedCounty} options={counties} onChange={onCountyChange} optionLabel="name" placeholder="Eklentileri Seç" />
-                </div>
-            </div>
-            <div className="p-grid p-fluid">
-                    <div className="p-field p-col-12 p-md-3">
-                        <h4> Fiyat</h4>
-                        <InputNumber id="stacked" value={price} onValueChange={(e) => setPrice(e.value)} showButtons mode="currency" currency="TRY" />
-                    </div>
-                    <div className="p-field p-col-12 p-md-3">
-                        <h4> İndirimli Fiyat</h4>
-                        <InputNumber id="stacked" value={discountPrice} onValueChange={(e) => setDiscountPrice(e.value)} showButtons mode="currency" currency="TRY" />
-                    </div>
             </div>
             <div>
-                
                 <h4>Saf Sebze Mi</h4>
                 <InputSwitch checked={vegi} onChange={(e) => setVegi(e.value)} />
                 
                 <h4>Öne Çıkma</h4>
                 <InputSwitch checked={featured} onChange={(e) => setFeatured(e.value)} />
 
-                <h4>Aktif</h4>
+                <h4>Açık?</h4>
                 <InputSwitch checked={active} onChange={(e) => setActive(e.value)} />
             </div>
 
             <S.SubmitBtn>
 
-                <Button type="submit" label="Update"/>
+                <Button type="submit" label="Create"/>
             </S.SubmitBtn>
             </form>
             </S.ContainerCard>
