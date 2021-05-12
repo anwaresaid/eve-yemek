@@ -78,7 +78,7 @@ import {useRouter} from 'next/router';
                 let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(restaurant.name)==0;});
                 return selectedResOwners[0];
          })
-            setSelectedResOwnerName({name:restaurant.owner_name});
+            setSelectedResOwnerName({name: restaurant.owner_name});
             setPhoneNumber(restaurant.phone);
             setSelectedRestaurantName(restaurant.name);
             setDescription(restaurant.description);
@@ -101,8 +101,7 @@ import {useRouter} from 'next/router';
         }
        
     }, [resOnwersSuccess,resSuccess]);
-    console.log(restaurant);
-    console.log(selectedResOwnerName);
+
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
