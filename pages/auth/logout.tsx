@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import auth from "../../helpers/core/auth";
 
 const Logout = (props) => {
 	

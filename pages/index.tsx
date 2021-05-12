@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import * as S from "../styles/index.style";
 import { Card } from "primereact/card";
 import { Line } from "react-chartjs-2";
-import withAuth from "../helpers/withAuth";
 
 const Index = (props) => {
 
@@ -105,4 +104,4 @@ const Index = (props) => {
     );
 };
 
-export default withAuth(Index);
+export default Index;

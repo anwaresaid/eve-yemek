@@ -1,86 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "primereact/menu";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import * as S from "./style";
-import { allMenuItems } from "../../helpers/constants";
 import auth from "../../helpers/core/auth";
+import { allMenuItems } from "../../helpers/constants";
 
 const Sidebar = () => {
-    const router = useRouter();
-    const routeName = router?.asPath;
-
-    const [menus, setMenus] = useState([]);
-
-    //Store menus with compared roles
     const [initMenus, setInitMenus] = useState([]);
 
-    const [firstRun, setFirstRun] = useState(false);
-
-    // Setting "initMenus" with user's accessable routes, by "roles"
-    useEffect(()=>{
-        if(auth.user?.roles){
-            generateInitMenus(auth.user.roles);
-            setFirstRun(true);
-        }else{
-            //User has no roles, log out
-            alert("User has no roles");
-        }
-    },[]);
-
-    // Adding tempolate: menuTemplate to menu constants
-    useEffect(()=>{
-        if(firstRun){
-            generateMenus();
-        }
-    }, [router.asPath, initMenus])
-
-    const generateInitMenus = (userRoles) => {
-        //console.log("generate init menu");
-        setInitMenus(allMenuItems.filter(e=>{
-            if(e?.url && e?.roles.includes(...userRoles)){
-                return e;
-            }
-            else if(e.items && e.items.length > 0){
-                e.items = e.items.filter(k=>{
-                    if(k?.url && k?.roles.includes(...userRoles)){
-                        return k;
-                    }
-                    return false;
-                });
-                if(e.items && e.items.length > 0){
-                    return e;
-                }
-            }
-            return false;
-        }));
-    }
-
-    const generateMenus = () => {
-        //console.log("generate menu");
-        setMenus(initMenus.map(e=>{
-
-            if(e.url){
-                e.template = menuTemplate;
-                return e;
-            }else if(e.items && e.items.length > 0){
-                e.items = e.items.map(k=>{
-                    if(k.url){
-                        k.template = menuTemplate;
-                        return k;
-                    }
-                });
-                return e;
-            }else{
-                return e;
-            }
-        }));
-    }
-
     const menuTemplate = (item, options) => {
-        //console.log("Creating menus");
+        //console.log("menu template");
 
-        const activeClass = routeName === item.url ? " p-menuitem-active" : "";
+        const activeClass =
+            window.location.pathname === item.url ? " p-menuitem-active" : "";
 
         return (
             <Link href={item.url || "#"}>
@@ -99,16 +31,42 @@ const Sidebar = () => {
         );
     };
 
-    return (
-        <S.Container>
-            <S.TopLogoContainer>
-                <img src="/images/logos/eve-yemek-05.png" />
-            </S.TopLogoContainer>
-            {menus && 
-                <Menu model={menus} />
-            }
-        </S.Container>
-    );
+    //Detect the menus that can be shown
+    useEffect(() => {
+        setInitMenus(
+            allMenuItems.filter((e: any) => {
+                if (e.roles) {
+                    e.template = menuTemplate;
+                    return auth.hasRoles(e.roles);
+                } else if (e?.items) {
+                    e.items = e.items?.filter((k: any) => {
+                        if (k.roles) {
+                            k.template = menuTemplate;
+                            return auth.hasRoles(k.roles);
+                        }
+                    });
+                    return e.items?.length > 0;
+                }
+            })
+        );
+    }, []);
+
+    const renderMenu = () => {
+        if (initMenus.length > 0) {
+            return (
+                <>
+                    <S.Container>
+                        <S.TopLogoContainer>
+                            <img src="/images/logos/eve-yemek-05.png" />
+                        </S.TopLogoContainer>
+                        <Menu model={initMenus} />
+                    </S.Container>
+                </>
+            );
+        }
+    };
+
+    return <>{renderMenu()}</>;
 };
 
 export default Sidebar;
