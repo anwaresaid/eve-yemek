@@ -9,10 +9,7 @@ import Sidebar from "../components/Sidebar";
 import GlobalStyle from "../styles/core/global";
 import { Provider } from "react-redux";
 import store from "../store/store";
-import { useRouter } from "next/router";
-import { allMenuItems } from "../helpers/constants";
-import { Column } from "primereact/column";
-import withAuth from "../helpers/withAuth";
+import auth from "../helpers/core/auth";
 
 function MyApp(props) {
 

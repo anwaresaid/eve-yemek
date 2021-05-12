@@ -5,6 +5,7 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import RestaurantsService from "../store/services/restaurants.service";
+import withAuth from '../helpers/withAuth';
 
 
 
@@ -99,4 +100,4 @@ const Index = () => {
     );
 }
 
-export default Index;
+export default withAuth(Index);

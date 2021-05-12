@@ -1,22 +1,16 @@
 import router from "next/router";
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
+import { allMenuItems } from "./constants";
+import auth from "./core/auth";
 
 const withAuth = (Component) => (props) => {
 
     const [ok, setOk] = useState(false);
 
     const loginCheck = () => {
-        const loggedIn = Boolean(localStorage.getItem("access_token"));
-        const user = JSON.parse(localStorage.getItem("user"));
 
-        if (router.pathname === "/auth/login") {
-            if (loggedIn) {
-                router.push("/");
-            }
-        }
-
-        if (!loggedIn || !user?.roles) {
+        if (!auth.loggedIn || !auth.user?.roles) {
             router.push("/auth/login");
             return;
         }
@@ -25,6 +19,7 @@ const withAuth = (Component) => (props) => {
     };
 
     useEffect(()=>{
+        auth.init();
         loginCheck();
     }, []);
 

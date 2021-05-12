@@ -1,5 +1,6 @@
 import { userTypes } from "../types/user.type";
 import UserService from "../services/user.service";
+import auth from "../../helpers/core/auth";
 
 const login = (email: string, password: string) => async dispatch => {
 
@@ -14,6 +15,7 @@ const login = (email: string, password: string) => async dispatch => {
                 roles:res?.data?.roles,
                 access_token: res?.data?.access_token
             };
+            auth.login(user);
             await dispatch({ type: userTypes.LOGIN, payload: user });
             window.location.replace("/");
         } else {
@@ -21,6 +23,7 @@ const login = (email: string, password: string) => async dispatch => {
         }
 
     } catch (err) {
+        console.log(err);
         dispatch({ type:userTypes.LOGIN_FAILED, payload:{ login_error_msg:"Something went wrong while logging in" } });
     }
 }

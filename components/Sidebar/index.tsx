@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import * as S from "./style";
 import { allMenuItems } from "../../helpers/constants";
+import auth from "../../helpers/core/auth";
 
 const Sidebar = () => {
     const router = useRouter();
@@ -18,9 +19,8 @@ const Sidebar = () => {
 
     // Setting "initMenus" with user's accessable routes, by "roles"
     useEffect(()=>{
-        const user = JSON.parse(localStorage.getItem("user"));
-        if(user?.roles){
-            generateInitMenus(user.roles);
+        if(auth.user?.roles){
+            generateInitMenus(auth.user.roles);
             setFirstRun(true);
         }else{
             //User has no roles, log out
