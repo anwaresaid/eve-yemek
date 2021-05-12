@@ -9,14 +9,16 @@ import * as S from '../../../styles/restaurants/restaurants.create.style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
-import {createRestaurant} from '../../../store/actions/restaurant.action';
+import {updateRestaurant} from '../../../store/actions/restaurant.action';
 import {listRestaurantOwners} from '../../../store/actions/restaurant.action';
+import {findRestaurant} from '../../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import { InputMask } from 'primereact/inputmask';
+import {useRouter} from 'next/router';
 
 
-    const CreateRestaurants = () => {
+    const UpdateRestaurants = () => {
 // settign variables
     const [totalSize, setTotalSize] = useState(0);
     const [files, setFile] = useState(null);
@@ -42,18 +44,20 @@ import { InputMask } from 'primereact/inputmask';
     const [deliveryRad, setDeliveryRad] = useState(0);
     const [minAmount, setMinAmount] = useState(0);
     const dispatch = useDispatch();
-
+    const router = useRouter();
 //setting dropdown selected items
     const [selectedResOwner, setSelectedResOwner] = useState(null);
-    const [selectedResOwnernName, setSelectedResOwnerName] = useState(null);
+    const [selectedResOwnerName, setSelectedResOwnerName] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
     const [selectedCounty, setSelectedCounty] = useState(null);
+    const [selectedRestaurantName, setSelectedRestaurantName] = useState("");
     
     
 //use selectors for setting dispatch to variable.
     const resOwnersList = useSelector((state:RootState) => state.listRestaurantOwners);
-
+    const resDetails = useSelector((state:RootState) => state.findRestaurant);
     const { loading, success:resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
+    const { loading: resLoading, success:resSuccess, restaurant} = resDetails;
 
 //setting names for dropdowns.
     const settingDropDownNames= () => {
@@ -66,13 +70,39 @@ import { InputMask } from 'primereact/inputmask';
     useEffect(() =>{
         if(!resOnwersSuccess)
             dispatch(listRestaurantOwners());
-        if(resOnwersSuccess)
+        if(!resSuccess)
+            dispatch(findRestaurant(router.query.id));
+        if(resOnwersSuccess && resSuccess){
             settingDropDownNames();
-          
+            setSelectedResOwner(()=>{
+                let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(restaurant.name)==0;});
+                return selectedResOwners[0];
+         })
+            setSelectedResOwnerName({name:restaurant.owner_name});
+            setPhoneNumber(restaurant.phone);
+            setSelectedRestaurantName(restaurant.name);
+            setDescription(restaurant.description);
+            setEmail(restaurant.email);
+            setSelectedCity({name: restaurant.city_id});
+            setSelectedCounty({name: restaurant.town_id});
+            setRating(restaurant.rating);
+            setDeliveryTime(restaurant.delivery_time);
+            setLat(restaurant.latitude);
+            setLong(restaurant.longitude);
+            setCommission(restaurant.commission_rate);
+            setLicense(restaurant.license_code);
+            setResCharge(restaurant.restaurant_charges);
+            setDeliveryRad(restaurant.delivery_radius);
+            setMinAmount(restaurant.minimum_order_amount);
+            setVegi(restaurant.is_veg);
+            setFeatured(restaurant.featured);
+            setActive(restaurant.active);
 
+        }
        
-    }, [resOnwersSuccess]);
-  
+    }, [resOnwersSuccess,resSuccess]);
+    console.log(restaurant);
+    console.log(selectedResOwnerName);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -187,14 +217,15 @@ import { InputMask } from 'primereact/inputmask';
     // on submit function    
     const onSubmit = (e:any) => {
         e.preventDefault();
-       const creatingRestaurant = { 
+       const updatingRestaurant = { 
         owner_id: selectedResOwner._id,
-        name : restaurantName,
+        name : selectedRestaurantName,
         description : description,
-        image : files.objectURL,
+        image : restaurant.image,
         phone : phoneNumber,
         email : email,
         rating : rating,
+        for_two:10,
         delivery_time : deliveryTime,
         commission_rate : commission,
         license_code : license,
@@ -211,7 +242,7 @@ import { InputMask } from 'primereact/inputmask';
         latitude: lat.toString(),
         longtitude: long.toString(),            
                }
-               dispatch(createRestaurant(creatingRestaurant));     
+               dispatch(updateRestaurant(router.query.id,updatingRestaurant));     
        };
     return (
         <div>
@@ -223,15 +254,15 @@ import { InputMask } from 'primereact/inputmask';
                     <div className="p-fluid">
                         <div className="p-field p-col-12">
                             <h4>Ad</h4>
-                            <InputText id="foodName "  onChange={onNameChange} type="text"/>
+                            <InputText id="foodName " value={selectedRestaurantName} onChange={onNameChange} type="text"/>
                         </div>
                         <div className="p-field p-col-12">
                             <h4>Açıklama</h4>
-                            <InputText id="description" onChange={onDescriptionChange} type="text"/>
+                            <InputText id="description" value={description} onChange={onDescriptionChange} type="text"/>
                         </div>
                         <div className="p-field p-col-12">
                             <h4>Restoran Sahibi </h4>
-                            <Dropdown value={selectedResOwnernName} options={resOwnersName} onChange={onResOwnerChange} optionLabel="name" placeholder="Select an Owner" />
+                                <Dropdown value={selectedResOwnerName} options={resOwnersName} onChange={onResOwnerChange} optionLabel="name" placeholder="Select an Owner" />
                         </div>
                     </div>
                     <div className="p-field p-col-12">
@@ -321,4 +352,4 @@ import { InputMask } from 'primereact/inputmask';
     )
 }
 
- export default  (CreateRestaurants);
+ export default  (UpdateRestaurants);
