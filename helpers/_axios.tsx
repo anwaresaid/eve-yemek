@@ -16,7 +16,8 @@ axiosInstance.interceptors.request.use(function (config) {
     if(window.location.pathname !== "/auth/login"){
         if(auth_token){
             config.headers['Authorization'] = 'Bearer ' + auth_token;
-        }else{
+        }
+        else{
             localStorage.clear();
             //console.log("request,,");
             window.location.replace("/auth/login");
@@ -35,9 +36,9 @@ axiosInstance.interceptors.response.use(function (config) {
 }, async function (error) {
 
     if(window.location.pathname !== "/auth/login" && error?.response?.status === 401){
-        await localStorage.clear();
+        // await localStorage.clear();
         //console.log("response,,");
-        window.location.replace("/auth/login");
+        // window.location.replace("/auth/login");
     }
 
     return Promise.reject(error);

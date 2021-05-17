@@ -32,7 +32,7 @@ const Sidebar = () => {
 		{ separator:true },
 		{ label:"Restorantlar", template:menuTemplate, expanded: true,items:[
 			{ label:"Restorantlar Listesi", template:menuTemplate, url:"/restaurants" },
-			{ label:"Restorant Oluştur", template:menuTemplate, url:"/create-restaurants" },
+			{ label:"Restorant Oluştur", template:menuTemplate, url:"/restaurants/create-restaurants" },
 		] },
 		{ separator:true },
 		{ label:"Çıkış yap", template:menuTemplate, url:"/auth/logout" },
