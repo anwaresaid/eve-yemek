@@ -2,7 +2,7 @@ import { foodsTypes } from "../types/foods.type";
 
 const initialState = [];
 
-function tutorialReducer(state = initialState, action) {
+export const createFoodReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (action.type) {
@@ -25,5 +25,3 @@ function tutorialReducer(state = initialState, action) {
       return state;
   }
 };
-
-export default tutorialReducer;

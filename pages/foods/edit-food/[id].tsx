@@ -5,18 +5,19 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Button } from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import * as S from './style'
+import * as S from '../../../styles/food/create-food/food.create.style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
-import {createFood} from '../../../store/actions/foods.action';
 import {listAddons} from '../../../store/actions/addons.action';
 import {listFoodCategory} from '../../../store/actions/foodCategory.action';
 import {listRestaurants} from '../../../store/actions/restaurants.action';
 import {useDispatch,useSelector} from 'react-redux';
+import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
+import {useRouter} from 'next/router';
 
-export const CreatFoods = () => {
+export const EditFoods = () => {
 
     const [totalSize, setTotalSize] = useState(0);
     const [files, setFile] = useState(null);
@@ -32,7 +33,11 @@ export const CreatFoods = () => {
     const [description, setDescription] = useState();
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
+    const router = useRouter();
     const dispatch = useDispatch();
+
+
+    const [selectedCities2, setSelectedCities2] = useState(null);
 
 //setting dropdown selected items
     const [selectedAddon, setSelectedAddon] = useState(null);
@@ -54,7 +59,6 @@ export const CreatFoods = () => {
     const settingDropDownNames= () => {
         const addonsNames = addonslist.items.map(addon => {return{name: addon.name}});
         setAddonsName(addonsNames);
-        console.log("checking")
 
         const foodCategoryNames = foodCatlist.items.map(res => {return{name: res.name}});
         setFoodCategoryName(foodCategoryNames);
@@ -73,17 +77,21 @@ export const CreatFoods = () => {
 
         if(!restaurantsSuccess)
             dispatch(listRestaurants());
+            if(!resSuccess)
+            dispatch(findRestaurant(router.query.id));
 
         if(addonSuccess && restaurantsSuccess && foodCatSuccess)
                 settingDropDownNames();
     }, [addonSuccess,foodCatSuccess,restaurantsSuccess]);
   
 //on change functions    
-    const onAddonChange= (e:any) => {
-        let selectedaddons = addonslist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        setSelectedAddon(selectedaddons[0]);
-        setSelectedAddonName(e.value);
-    }
+    // const onAddonChange= (e:any) => {
+    //     let selectedaddons = addonslist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
+    //     console.log("checking adons", addonslist.items);
+    //     console.log("checking adons", cities);
+    //     setSelectedAddon(selectedaddons[0]);
+    //     setSelectedAddonName(e.value);
+    // }
     const onCategoryChange= (e:any) => {
         let selectedCategory = foodCatlist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
         setSelectedFoodCategory(selectedCategory[0]);
@@ -178,26 +186,45 @@ export const CreatFoods = () => {
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
+    function multiSelect(){
+        if(addonsName != null)
+            return(
+                <div>
 
+                <h5>Chips</h5>
+                <MultiSelect value={selectedAddonName} options={addonsName} onChange={(e) => setSelectedAddonName(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
+                </div>
+
+            )
+    }
     // on submit function    
     const onSubmit = (e:any) => {
         e.preventDefault();
-       const creatingFood = { 
-                name: foodName, 
-                image: files.objectURL, 
-                price: price,
-                discount_price: discountPrice , 
-                restaurant_id: selectedRestaurant._id, 
-                food_category_id: selectedFoodCategory._id, 
-                add_on_id: selectedAddon._id,
-                is_veg: vegi,
-                featured: featured,
-                active: active,
-                description: description,
-               }
-               dispatch(createFood(creatingFood))     
-               console.log(creatingFood);
+    //    const creatingFood = { 
+    //             name: foodName, 
+    //             image: files.objectURL, 
+    //             price: price,
+    //             discount_price: discountPrice , 
+    //             restaurant_id: selectedRestaurant._id, 
+    //             food_category_id: selectedFoodCategory._id, 
+    //             add_on_id: selectedAddon._id,
+    //             is_veg: vegi,
+    //             featured: featured,
+    //             active: active,
+    //             description: description,
+    //            }
+    //            dispatch(createFood(creatingFood))     
+    //            console.log(creatingFood);
        };
+
+
+       const cities = [
+        {name: 'New York', code: 'NY'},
+        {name: 'Rome', code: 'RM'},
+        {name: 'London', code: 'LDN'},
+        {name: 'Istanbul', code: 'IST'},
+        {name: 'Paris', code: 'PRS'}
+    ];
 
     return (
         <div>
@@ -228,7 +255,11 @@ export const CreatFoods = () => {
                 <h4>Yemek Kategorisi</h4>
                 <Dropdown value={selectedFoodCategoryName} options={foodCategoryName} onChange={onCategoryChange} optionLabel="name" placeholder="Yemek Kategorisi" />
                 <h4>Eklentileri Seç</h4>
-                <Dropdown value={selectedAddonName} options={addonsName} onChange={onAddonChange} optionLabel="name" placeholder="Eklentileri Seç" />
+                {/* <Dropdown value={selectedAddonName} options={addonsName} onChange={onAddonChange} optionLabel="name" placeholder="Eklentileri Seç" /> */}
+                <div>
+                    {multiSelect()}
+                </div>
+
                 </div>
             </div>
             <div className="p-grid p-fluid">
@@ -263,4 +294,4 @@ export const CreatFoods = () => {
     )
 }
 
- export default  (CreatFoods);
+ export default  (EditFoods);

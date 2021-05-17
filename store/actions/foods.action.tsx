@@ -9,16 +9,18 @@ export const createFood = (
         price,
         discount_price,
         restaurant_id,
-        category_id, 
+        food_category_id, 
         add_on_id,
         is_veg,
         featured,
-        is_active,
+        active,
         description,} 
      ) => async dispatch => {
     try{
         
-        dispatch({type: foodsTypes.FOOD_CREATE_REQUEST})
+        dispatch({
+          type: foodsTypes.FOOD_CREATE_REQUEST
+        });
         
         const foodService = new FoodsService;
         const res = await foodService.createFood(
@@ -28,11 +30,11 @@ export const createFood = (
             price,
             discount_price,
             restaurant_id,
-            category_id,
+            food_category_id,
             add_on_id,
             is_veg,
             featured,
-            is_active
+            active
         );
 
         dispatch({
@@ -47,8 +49,5 @@ export const createFood = (
               ? error.response.data.message
               : error.message,
         });
-
-      dispatch({type:foodsTypes.FOOD_CREATE_REQUEST});
-
   }
 }

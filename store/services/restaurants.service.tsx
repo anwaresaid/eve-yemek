@@ -25,5 +25,5 @@ export default class RestaurantsService {
     async updateRestaurant(id,restaurantUpdate){
         const {data} = await axios.put(`https://dev.eve-yemek.com/restaurants/${id}`,{...restaurantUpdate});
         return data;
+            }
     }
-}
