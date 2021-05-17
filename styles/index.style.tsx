@@ -1,8 +1,5 @@
 import styled from "styled-components";
 export const DashboardWrapper = styled.div`
-    .p-grid {
-        margin: 10px;
-    }
 
     .box {
         border-radius: 4px;
@@ -54,7 +51,7 @@ export const DashboardWrapper = styled.div`
     }
 
     .p-component {
-        margin: 15px !important;
+        margin-top: 15px !important;
     }
 
     .p-component i {
