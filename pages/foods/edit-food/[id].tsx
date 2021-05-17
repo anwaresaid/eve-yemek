@@ -15,7 +15,10 @@ import {listRestaurants} from '../../../store/actions/restaurants.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
+<<<<<<< HEAD
 import {useRouter} from 'next/router';
+=======
+>>>>>>> 55018f2 (added edit page)
 
 export const EditFoods = () => {
 
@@ -33,7 +36,10 @@ export const EditFoods = () => {
     const [description, setDescription] = useState();
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
+<<<<<<< HEAD
     const router = useRouter();
+=======
+>>>>>>> 55018f2 (added edit page)
     const dispatch = useDispatch();
 
 
@@ -77,8 +83,11 @@ export const EditFoods = () => {
 
         if(!restaurantsSuccess)
             dispatch(listRestaurants());
+<<<<<<< HEAD
             if(!resSuccess)
             dispatch(findRestaurant(router.query.id));
+=======
+>>>>>>> 55018f2 (added edit page)
 
         if(addonSuccess && restaurantsSuccess && foodCatSuccess)
                 settingDropDownNames();

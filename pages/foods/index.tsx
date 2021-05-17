@@ -1,46 +1,19 @@
-import React, { useState, useRef,useEffect } from "react";
-import { DataTable } from 'primereact/datatable';
+import React, { useState,useEffect } from "react";
 import { Column } from 'primereact/column';
 import FoodService from '../../store/services/foods.service';
 import { Ripple } from 'primereact/ripple';
 import classNames from 'classnames';
-import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import * as S from '../../styles/food/food.list.style'
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
+import {useRouter} from 'next/router'
 
 
 const FoodsList =  () => {
 
-    // import React, { useState, useRef, useEffect } from 'react';
-// import { connect } from 'react-redux';
-// import Sidebar from '../components/Sidebar';
-// import foodsActions from "../store/actions/foods.action";
 
-// //Example
 
-// const Foods = (props) => {
-
-//     useEffect(()=>{
-//         (async()=>{
-//             const allFoods = await props.getAllFoods();
-//             console.log(allFoods);
-//         })();
-//     }, []);
-
-//     return (
-//         <>
-
-//         </>
-//     );
-// }
-
-// function mapStateToProps(state) {
-//   return { allState:state };
-// }
-
-// export default connect(mapStateToProps, foodsActions)(Foods);
     const [foods, setFoods] = useState([]);
     const [foodsExpanded, setFoodsExpanded] = useState([]);
     const [category, setCategory] = useState([]);
@@ -50,35 +23,13 @@ const FoodsList =  () => {
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const foodService = new FoodService();
-
+    const router = useRouter();
      useEffect( () => {
          foodService.getFoods().then(data => setFoods(data.items));
-    //     // (data => {setFoods(data.items); return data.items}).then
-    //     // (data => foodService.getRestaurant(data.items?.restaurant_id)).then
-    //     // (data => setRestaurant(data.items));
-    //     settingItems();
      }, []);
     
 
-    // const settingItems  = async ()=>{
-    //     const resfoods = await foodService.getFoods();
-        
-    //     setFoods(resfoods.items);
-    //     //const resRestaurant = await foodService.getRestaurant(resfoods.items.restaurant_id);
-    //     //setRestaurant(resRestaurant);
-    //     resfoods.items.forEach(item=> async () =>{
-    //         const foodsCategory = await foodService.getCategory(item.food_category_id);
-    //         console.log("category", foodsCategory.name);
 
-    //     })
-        
-    //     // const foodsExpanded = resfoods.items.map((item) => () => {
-    //     //     console.log("items",item);
-    //     // })
-    //     console.log("check after foods")
-
-    //     setFoodsExpanded(foodsExpanded);
-    // } 
 
     const onPageInputKeyDown = (event, options) => {
         if (event.key === 'Enter') {
@@ -99,7 +50,6 @@ const FoodsList =  () => {
     }
 
     const imageBodyTemplate = (rowData) => {
-        console.log("row data", rowData);
         return <img src={`${rowData.image}`}  alt={rowData.image} className="food-image" />
    }
    const statusBodyTemplate = (rowData) => {
@@ -117,7 +67,7 @@ const FoodsList =  () => {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/foods/edit-food/${rowData._id}`)}} />
             </React.Fragment>
         );
     }
