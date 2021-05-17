@@ -24,32 +24,45 @@ function MyApp(props) {
     }, []);
 
     const authCheck = () => {
-        if ((!auth.loggedIn || !auth.user?.roles) && window.location.pathname !== "/auth/login") {
-            window.location.replace("/auth/login");
-            return;
-        }
-
-        if(auth.loggedIn && window.location.pathname === "/auth/login"){
+        if (auth.loggedIn && window.location.pathname === "/auth/login") {
             window.location.replace("/");
             return;
         }
 
-        if(!auth.isAllowedRoute(window.location.pathname)){
-            setError(true);
+        if (window.location.pathname !== "/auth/login") {
+            if (!auth.loggedIn || !auth.user?.roles) {
+                window.location.replace("/auth/login");
+                return;
+            }
+
+            //Check is route direcly allowed
+            if (!auth.isAllowedRoute(window.location.pathname)) {
+
+                //If not, then check with id, like [/orders/]123456 find inside [*] and check with that
+                if (
+                    !auth.isAllowedRoute(
+                        window.location.pathname.substr(
+                            0,
+                            window.location.pathname.indexOf("/", 3) // The second "/"
+                        )
+                    )
+                ) {
+                    setError(true);
+                }
+            }
         }
 
         setAuthCheckFinish(true);
     };
 
     const renderComp = () => {
-
-        if(!authCheckFinish){
+        if (!authCheckFinish) {
             //TODO: Loading comp
-            return (()=><>Loading</>)();
+            return (() => <>Loading</>)();
         }
 
         if (error) {
-            return <Error statusCode={404}/>;
+            return <Error statusCode={404} />;
         }
 
         if (loggedIn) {
