@@ -3,7 +3,8 @@ import * as S from "../styles/index.style";
 import { Card } from "primereact/card";
 import { Line } from "react-chartjs-2";
 
-const Index = () => {
+const Index = (props) => {
+
     const lineChartData = {
         labels: ["28", "30", "1", "2", "3", "4", "5"],
         datasets: [

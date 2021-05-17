@@ -9,63 +9,80 @@ import Sidebar from "../components/Sidebar";
 import GlobalStyle from "../styles/core/global";
 import { Provider } from "react-redux";
 import store from "../store/store";
-import { useRouter } from "next/router";
+import auth from "../helpers/core/auth";
+import Error from "next/error";
 
 function MyApp(props) {
-    //Example is logged in constant
-
     const [loggedIn, setLoggedIn] = useState(false);
-    const [init, setInit] = useState(false);
-
-    const router = useRouter();
+    const [error, setError] = useState(false);
+    const [authCheckFinish, setAuthCheckFinish] = useState(false);
 
     useEffect(() => {
-        setLoggedIn(Boolean(localStorage.getItem("access_token")));
-        setInit(true);
+        auth.init();
+        authCheck();
+        setLoggedIn(auth.loggedIn);
     }, []);
 
-    const renderPanels = () => {
-        if (router.pathname === "/auth/login") {
-            if (loggedIn) {
-                router.push("/");
-            } else {
-                return <props.Component {...props.pageProps} />;
-            }
+    const authCheck = () => {
+        if ((!auth.loggedIn || !auth.user?.roles) && window.location.pathname !== "/auth/login") {
+            window.location.replace("/auth/login");
             return;
+        }
+
+        if(auth.loggedIn && window.location.pathname === "/auth/login"){
+            window.location.replace("/");
+            return;
+        }
+
+        if(!auth.isAllowedRoute(window.location.pathname)){
+            setError(true);
+        }
+
+        setAuthCheckFinish(true);
+    };
+
+    const renderComp = () => {
+
+        if(!authCheckFinish){
+            //TODO: Loading comp
+            return (()=><>Loading</>)();
+        }
+
+        if (error) {
+            return <Error statusCode={404}/>;
         }
 
         if (loggedIn) {
             return (
                 <>
                     <Sidebar />
-                    <div className='main-context'>
+                    <div className="main-context">
                         <props.Component {...props.pageProps} />
                     </div>
                 </>
             );
-        } else {
-            router.push("/auth/login");
-            return;
         }
+
+        return <props.Component {...props.pageProps} />;
     };
 
     return (
         <>
             <Head>
-                <link rel='shortcut icon' href='/images/logos/logo.png'></link>
+                <link rel="shortcut icon" href="/images/logos/logo.png"></link>
                 <title>Eve Yemek - Admin Panel</title>
-                <meta charSet='utf-8' />
+                <meta charSet="utf-8" />
                 <meta
-                    name='viewport'
-                    content='initial-scale=1.0, width=device-width'
+                    name="viewport"
+                    content="initial-scale=1.0, width=device-width"
                 />
-                <meta name='description' content='Eve yemek admin panel' />
+                <meta name="description" content="Eve yemek admin panel" />
             </Head>
             <Provider store={store}>
-                <div className='app'>
+                <div className="app">
                     <GlobalStyle />
 
-                    {init && renderPanels()}
+                    {renderComp()}
                 </div>
             </Provider>
         </>

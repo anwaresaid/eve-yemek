@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import * as S from '../styles/restaurants.style'
+import * as S from '../../styles/restaurants/restaurants.style'
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import RestaurantsService from "../store/services/restaurants.service";
-
-
+import { listRestaurant } from "../../store/actions/restaurant.action";
+import {useDispatch,useSelector} from 'react-redux';
+import {RootState} from 'typesafe-actions';
+import {useRouter} from 'next/router'
 
 const Index = () => {
 
@@ -17,9 +18,17 @@ const Index = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
-    const restaurantService = new RestaurantsService();
-    
-
+    const dispatch = useDispatch();
+    const resList = useSelector((state: RootState) =>  state.listRestaurant)
+    const {loading, success, restaurants: allRes} = resList;
+    const router = useRouter();
+    useEffect(() => {
+        // restaurantService.getRestaurants().then(data => setRestaurants(data.items));
+        if(!success)
+            dispatch(listRestaurant());
+        if(success)
+            setRestaurants(allRes.items);
+        }, [success]);
 
 //pagination
 
@@ -41,10 +50,6 @@ const Index = () => {
         setCurrentPage(event.target.value);
     }
 
-    useEffect(() => {
-        restaurantService.getRestaurants().then(data => setRestaurants(data.items));
-
-        }, []);
 
     const header =(
         <div className="table-header">
@@ -71,12 +76,14 @@ const Index = () => {
         }
     }
     const actionBodyTemplate = (rowData) => {
+        console.log("row data", rowData);
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/restaurants/edit-restaurants/${rowData._id}`)}}/>
             </React.Fragment>
         );
     }
+
     return (
         <div>
 
@@ -92,7 +99,7 @@ const Index = () => {
                         <Column field="name" header="Restaurant Name" sortable></Column>
                         <Column field="owner_name" header="Restaurant owner"  sortable></Column>
                         <Column field="active" header="Active" body={statusBodyTemplate} sortable></Column>
-                        <Column header= "Edit" body={actionBodyTemplate}></Column>
+                        <Column header= "Edit" body={actionBodyTemplate} ></Column>
                     </S.Table>
             </div>
         </div>
