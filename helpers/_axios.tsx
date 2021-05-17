@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(function (config) {
     if(window.location.pathname !== "/auth/login" && error?.response?.status === 401){
         auth.logout();
         //console.log("response,,");
-        window.location.replace("/auth/login");
+        // window.location.replace("/auth/login");
     }
 
     return Promise.reject(error);

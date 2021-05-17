@@ -31,3 +31,4 @@ const login = (email: string, password: string) => async dispatch => {
 export default {
     login
 }
+
