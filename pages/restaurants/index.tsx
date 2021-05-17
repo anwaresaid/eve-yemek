@@ -9,7 +9,6 @@ import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import {useRouter} from 'next/router'
 
-
 const Index = () => {
 
 
