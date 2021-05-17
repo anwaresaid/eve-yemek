@@ -6,9 +6,13 @@ export const allMenuItems:any = [
     { label:"Restoranlar",             url:"/restaurants",   roles:["admin"]                     },
     { label:"Canlı Siparişler",        url:"/live-orders",   roles:["restaurant_owner"]          },
     { label:"Siparişler",              url:"/orders",        roles:["admin", "restaurant_owner"] },
-    { label:"Yemekler",   expanded: true, items: [
+    { label:"Yemekler",           expanded: true, items: [
         { label:"Yemek Listesi",       url:"/dishes",        roles:["admin", "restaurant_owner"] },
         { label:"Yemek Oluştur",       url:"/dishes/create", roles:["admin", "restaurant_owner"] }
+    ] },
+    { label:"Yemek Kategorileri", expanded: true, items: [
+        { label:"Kategori Listesi",       url:"/dish_categories",        roles:["admin", "restaurant_owner"] },
+        { label:"Kategori Oluştur",       url:"/dish_categories/create", roles:["admin", "restaurant_owner"] }
     ] },
     { label:"Eklentiler", expanded: true, items: [
         { label:"Eklentiler Listesi",  url:"/addons",        roles:["admin", "restaurant_owner"] },
