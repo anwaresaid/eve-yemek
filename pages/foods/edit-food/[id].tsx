@@ -11,14 +11,13 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
 import {listAddons} from '../../../store/actions/addons.action';
 import {listFoodCategory} from '../../../store/actions/foodCategory.action';
-import {listRestaurants} from '../../../store/actions/restaurants.action';
+import { listRestaurant } from '../../../store/actions/restaurant.action';
+import { findFood } from '../../../store/actions/foods.action';
+import { updateFood } from '../../../store/actions/foods.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
-<<<<<<< HEAD
 import {useRouter} from 'next/router';
-=======
->>>>>>> 55018f2 (added edit page)
 
 export const EditFoods = () => {
 
@@ -36,30 +35,28 @@ export const EditFoods = () => {
     const [description, setDescription] = useState();
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
-<<<<<<< HEAD
+    const [setIsDone, setSetIsDone] = useState(false);
     const router = useRouter();
-=======
->>>>>>> 55018f2 (added edit page)
     const dispatch = useDispatch();
 
 
-    const [selectedCities2, setSelectedCities2] = useState(null);
-
 //setting dropdown selected items
-    const [selectedAddon, setSelectedAddon] = useState(null);
     const [selectedAddonName, setSelectedAddonName] = useState(null);
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
     const [selectedRestaurantName, setSelectedRestaurantName] = useState(null);
     const [selectedFoodCategory, setSelectedFoodCategory] = useState(null);
     const [selectedFoodCategoryName, setSelectedFoodCategoryName] = useState(null);
+
     
 //use selectors for setting dispatch to variable.
     const addonList = useSelector((state:RootState) => state.listAddons);
     const { loading: addonsLoading, success:addonSuccess, addons: addonslist } = addonList;
     const resFoodCat = useSelector((state:RootState) => state.listFoodCategory);
     const { loading: foodCatLoading, success: foodCatSuccess, foodCat: foodCatlist } = resFoodCat;
-    const resRestaurants = useSelector((state:RootState) => state.listRestaurants);
-    const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants: restaurants } = resRestaurants;
+    const resRestaurants = useSelector((state:RootState) => state.listRestaurant);
+    const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants} = resRestaurants;
+    const resFood = useSelector((state:RootState) => state.findFood);
+    const { loading: foodLoading , success: foodSuccess, food: foods } = resFood;
 
 //setting names for dropdowns.
     const settingDropDownNames= () => {
@@ -82,25 +79,44 @@ export const EditFoods = () => {
             dispatch(listFoodCategory());
 
         if(!restaurantsSuccess)
-            dispatch(listRestaurants());
-<<<<<<< HEAD
-            if(!resSuccess)
-            dispatch(findRestaurant(router.query.id));
-=======
->>>>>>> 55018f2 (added edit page)
-
-        if(addonSuccess && restaurantsSuccess && foodCatSuccess)
+            dispatch(listRestaurant());
+        
+        if(!foodSuccess)
+           {    
+             dispatch( findFood(router.query.id));
+           }
+    
+        
+           
+        if(addonSuccess && restaurantsSuccess && foodCatSuccess && foodSuccess)
+        {
                 settingDropDownNames();
-    }, [addonSuccess,foodCatSuccess,restaurantsSuccess]);
+                setSelectedRestaurant(()=>{
+                let selectedRes = restaurants.items.filter(data  => {return data._id === foods.restaurant_id});
+                return selectedRes[0];
+                });
+                if(selectedRestaurant && !setIsDone)
+                {setSelectedRestaurantName({name : selectedRestaurant.name});
+                setSelectedRestaurant(foods.restaurant_id);
+                setSelectedFoodCategoryName({name : foods.food_category_id.name});
+                setSelectedFoodCategory(foods.food_category_id);
+                setFoodName(foods.name);
+                setDescription(foods.description);
+                setPrice(foods.price);
+                setDiscountPrice(foods.discount_price);
+                setVegi(foods.is_veg);
+                setActive(foods.active);
+                setFeatured(foods.featured);
+                setSetIsDone(true);
+            }
+                // setSelectedAddonName()
+                
+
+
+        }
+    }, [addonSuccess,foodCatSuccess,restaurantsSuccess,foodSuccess,selectedRestaurant]);
   
 //on change functions    
-    // const onAddonChange= (e:any) => {
-    //     let selectedaddons = addonslist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-    //     console.log("checking adons", addonslist.items);
-    //     console.log("checking adons", cities);
-    //     setSelectedAddon(selectedaddons[0]);
-    //     setSelectedAddonName(e.value);
-    // }
     const onCategoryChange= (e:any) => {
         let selectedCategory = foodCatlist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
         setSelectedFoodCategory(selectedCategory[0]);
@@ -113,7 +129,7 @@ export const EditFoods = () => {
 
     }
     const onNameChange= (e:any) => {
-        setFoodName((e?.target as any)?.value)
+        setFoodName((e?.target as any)?.value);
     }
     const onDescriptionChange= (e:any) => {
         setDescription((e?.target as any)?.value)
@@ -129,7 +145,6 @@ export const EditFoods = () => {
             _totalSize += e.files[i].size;
         }
         setTotalSize(_totalSize);
-
     }
 
 
@@ -199,8 +214,6 @@ export const EditFoods = () => {
         if(addonsName != null)
             return(
                 <div>
-
-                <h5>Chips</h5>
                 <MultiSelect value={selectedAddonName} options={addonsName} onChange={(e) => setSelectedAddonName(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
                 </div>
 
@@ -209,31 +222,21 @@ export const EditFoods = () => {
     // on submit function    
     const onSubmit = (e:any) => {
         e.preventDefault();
-    //    const creatingFood = { 
-    //             name: foodName, 
-    //             image: files.objectURL, 
-    //             price: price,
-    //             discount_price: discountPrice , 
-    //             restaurant_id: selectedRestaurant._id, 
-    //             food_category_id: selectedFoodCategory._id, 
-    //             add_on_id: selectedAddon._id,
-    //             is_veg: vegi,
-    //             featured: featured,
-    //             active: active,
-    //             description: description,
-    //            }
-    //            dispatch(createFood(creatingFood))     
-    //            console.log(creatingFood);
+        
+       const updatingFood = { 
+                name: foodName, 
+                image: foods.image, 
+                price: price,
+                discount_price: discountPrice , 
+                restaurant_id: selectedRestaurant._id, 
+                food_category_id: selectedFoodCategory._id, 
+                is_veg: vegi,
+                featured: featured,
+                active: active,
+                description: description,
+               }
+               dispatch(updateFood(router.query.id,updatingFood))     
        };
-
-
-       const cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
-    ];
 
     return (
         <div>
@@ -248,11 +251,11 @@ export const EditFoods = () => {
                         </div>
                         <div className="p-field">
                             <h4>Yemek Adı</h4>
-                            <InputText id="foodName "  onChange={onNameChange} type="text"/>
+                            <InputText id="selectedFoodName "  onChange={onNameChange} value={foodName} type="text"/>
                         </div>
                         <div className="p-field">
                             <h4>Yemek Açıklaması</h4>
-                            <InputText id="description" onChange={onDescriptionChange} type="text"/>
+                            <InputText id="description" value={description} onChange={onDescriptionChange} type="text"/>
                         </div>
                     </div>
             <FileUpload ref={fileUploadRef} name="image" url="./" multiple accept="image/*" maxFileSize={1000000}

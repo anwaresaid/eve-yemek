@@ -130,7 +130,8 @@ import {useRouter} from 'next/router';
         setSelectedCounty(e.value);
     }
     const onNameChange= (e:any) => {
-        setRestaurantName((e?.target as any)?.value)
+        setRestaurantName((e?.target as any)?.value);
+        setSelectedRestaurantName((e?.target as any)?.value);
     }
     const onDescriptionChange= (e:any) => {
         setDescription((e?.target as any)?.value)
@@ -253,7 +254,7 @@ import {useRouter} from 'next/router';
                     <div className="p-fluid">
                         <div className="p-field p-col-12">
                             <h4>Ad</h4>
-                            <InputText id="foodName " value={selectedRestaurantName} onChange={onNameChange} type="text"/>
+                            <InputText id="restaurantName " value={selectedRestaurantName} onChange={onNameChange} type="text"/>
                         </div>
                         <div className="p-field p-col-12">
                             <h4>Açıklama</h4>

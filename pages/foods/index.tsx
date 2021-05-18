@@ -11,9 +11,6 @@ import {useRouter} from 'next/router'
 
 
 const FoodsList =  () => {
-
-
-
     const [foods, setFoods] = useState([]);
     const [foodsExpanded, setFoodsExpanded] = useState([]);
     const [category, setCategory] = useState([]);

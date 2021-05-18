@@ -12,12 +12,12 @@ import { InputSwitch } from 'primereact/inputswitch';
 import {createFood} from '../../../store/actions/foods.action';
 import {listAddons} from '../../../store/actions/addons.action';
 import {listFoodCategory} from '../../../store/actions/foodCategory.action';
-import {listRestaurants} from '../../../store/actions/restaurants.action';
+import {listRestaurant} from '../../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
 
-export const CreatFoods = () => {
+export const Index = () => {
 
     const [totalSize, setTotalSize] = useState(0);
     const [files, setFile] = useState(null);
@@ -35,9 +35,6 @@ export const CreatFoods = () => {
     const [restaurantName, setRestaurantName] = useState(null);
     const dispatch = useDispatch();
 
-
-    const [selectedCities2, setSelectedCities2] = useState(null);
-
 //setting dropdown selected items
     const [selectedAddon, setSelectedAddon] = useState(null);
     const [selectedAddonName, setSelectedAddonName] = useState(null);
@@ -51,7 +48,8 @@ export const CreatFoods = () => {
     const { loading: addonsLoading, success:addonSuccess, addons: addonslist } = addonList;
     const resFoodCat = useSelector((state:RootState) => state.listFoodCategory);
     const { loading: foodCatLoading, success: foodCatSuccess, foodCat: foodCatlist } = resFoodCat;
-    const resRestaurants = useSelector((state:RootState) => state.listRestaurants);
+    const resRestaurants = useSelector((state:RootState) => state.listRestaurant);
+
     const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants: restaurants } = resRestaurants;
 
 //setting names for dropdowns.
@@ -75,20 +73,22 @@ export const CreatFoods = () => {
             dispatch(listFoodCategory());
 
         if(!restaurantsSuccess)
-            dispatch(listRestaurants());
+            dispatch(listRestaurant());
 
         if(addonSuccess && restaurantsSuccess && foodCatSuccess)
                 settingDropDownNames();
     }, [addonSuccess,foodCatSuccess,restaurantsSuccess]);
   
-//on change functions    
-    // const onAddonChange= (e:any) => {
-    //     let selectedaddons = addonslist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-    //     console.log("checking adons", addonslist.items);
-    //     console.log("checking adons", cities);
-    //     setSelectedAddon(selectedaddons[0]);
-    //     setSelectedAddonName(e.value);
-    // }
+
+    const filterByReference = (selectedAddons) => {
+        let res = [];
+        res =  addonslist.items.filter(addon => {
+           return selectedAddons.find(sAddon => {
+              return sAddon.name === addon.name;
+           });
+        });
+        return res;
+     }
     const onCategoryChange= (e:any) => {
         let selectedCategory = foodCatlist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
         setSelectedFoodCategory(selectedCategory[0]);
@@ -187,9 +187,15 @@ export const CreatFoods = () => {
         if(addonsName != null)
             return(
                 <div>
-
-                <h5>Chips</h5>
-                <MultiSelect value={selectedAddonName} options={addonsName} onChange={(e) => setSelectedAddonName(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
+                <MultiSelect value={selectedAddonName} options={addonsName} onChange={(e) => {setSelectedAddonName(e.value); 
+                var selectedaddons; 
+                if(selectedAddonName)
+                    selectedaddons = filterByReference(selectedAddonName);
+                if(selectedaddons){
+                    let addonsId = selectedaddons.map(addon=> addon._id);
+                    setSelectedAddon(addonsId);
+                }
+                }} optionLabel="name" placeholder="Select addons" display="addons" />
                 </div>
 
             )
@@ -211,18 +217,7 @@ export const CreatFoods = () => {
                 description: description,
                }
                dispatch(createFood(creatingFood))     
-               console.log(creatingFood);
        };
-
-
-       const cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
-    ];
-
     return (
         <div>
             <h1>Oluştur</h1>
@@ -232,7 +227,7 @@ export const CreatFoods = () => {
                     <div className="p-fluid">
                         <div className="p-field">
                         <h4>Restauran</h4>
-                <Dropdown value={selectedRestaurantName} options={restaurantName} onChange={onRestaurantChange} optionLabel="name" placeholder="Select a City" />
+                <Dropdown value={selectedRestaurantName} options={restaurantName} onChange={onRestaurantChange} optionLabel="name" placeholder="Select a Restaurant" />
                         </div>
                         <div className="p-field">
                             <h4>Yemek Adı</h4>
@@ -291,4 +286,4 @@ export const CreatFoods = () => {
     )
 }
 
- export default  (CreatFoods);
+ export default  (Index);

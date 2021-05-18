@@ -25,3 +25,51 @@ export const createFoodReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const updateFoodReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (action.type) {
+    case foodsTypes.FOOD_UPDATE_REQUEST:
+      return { loading: true}
+    case foodsTypes.FOOD_UPDATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        food: action.payload
+      }
+
+    case foodsTypes.FOOD_UPDATE_SUCCESS:
+      return {
+        loading: false,
+        error: action.payload
+      } 
+      
+    default:
+      return state;
+  }
+};
+
+export const findFoodReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (action.type) {
+    case foodsTypes.FOOD_FIND_REQUEST:
+      return { loading: true}
+    case foodsTypes.FOOD_FIND_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        food: action.payload
+      }
+
+    case foodsTypes.FOOD_FIND_SUCCESS:
+      return {
+        loading: false,
+        error: action.payload
+      } 
+      
+    default:
+      return state;
+  }
+};

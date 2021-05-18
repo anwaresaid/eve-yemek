@@ -51,3 +51,51 @@ export const createFood = (
         });
   }
 }
+export const updateFood = (id,updatedFood) => async dispatch => {
+    try{
+        
+        dispatch({
+          type: foodsTypes.FOOD_UPDATE_REQUEST
+        });
+        
+        const foodService = new FoodsService;
+        const res = await foodService.updateFood(id,{...updatedFood});
+
+        dispatch({
+            type: foodsTypes.FOOD_UPDATE_SUCCESS,
+            payload: res,
+          });
+        }catch (error) {
+        dispatch({
+          type: foodsTypes.FOOD_UPDATE_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+  }
+}
+export const findFood = (id) => async dispatch => {
+    try{
+        
+        dispatch({
+          type: foodsTypes.FOOD_FIND_REQUEST
+        });
+        
+        const foodService = new FoodsService;
+        const res = await foodService.findFood(id);
+
+        dispatch({
+            type: foodsTypes.FOOD_FIND_SUCCESS,
+            payload: res,
+          });
+        }catch (error) {
+        dispatch({
+          type: foodsTypes.FOOD_FIND_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+  }
+}
