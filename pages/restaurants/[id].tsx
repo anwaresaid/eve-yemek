@@ -5,13 +5,13 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Button } from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import * as S from '../../../styles/restaurants/restaurants.create.style'
+import * as S from '../../styles/restaurants/restaurants.create.style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
-import {updateRestaurant} from '../../../store/actions/restaurant.action';
-import {listRestaurantOwners} from '../../../store/actions/restaurant.action';
-import {findRestaurant} from '../../../store/actions/restaurant.action';
+import {updateRestaurant} from '../../store/actions/restaurant.action';
+import {listRestaurantOwners} from '../../store/actions/restaurant.action';
+import {findRestaurant} from '../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import { InputMask } from 'primereact/inputmask';

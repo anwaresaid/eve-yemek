@@ -1,9 +1,9 @@
 import axios from "../../helpers/_axios";
 
 export default class FoodsService{
-    getFoods() {
-        return axios.get('https://dev.eve-yemek.com/foods')
-                .then(res => res.data);
+    async getFood() {
+        const {data} = await axios.get('https://dev.eve-yemek.com/foods');
+        return data;
     }
 
     async createFood(

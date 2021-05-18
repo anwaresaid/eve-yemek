@@ -79,7 +79,7 @@ const Index = () => {
         console.log("row data", rowData);
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/restaurants/edit-restaurants/${rowData._id}`)}}/>
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/restaurants/${rowData._id}`)}}/>
             </React.Fragment>
         );
     }
