@@ -10,11 +10,14 @@ export const Container = styled.div`
     max-width:${vars.sidebar_left_margin}px;
     box-shadow:0px 0px 25px 0px rgba(0,0,0,.15);
     padding:0 8px;
+    display:flex;
+    flex-direction: column;
 
     .p-menu{
         width:100%;
         height:100%;
         border:0!important;
+        overflow-y:auto;
     }
 
     .p-menuitem-link{

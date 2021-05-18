@@ -5,13 +5,13 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Button } from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import * as S from '../../../styles/restaurants/restaurants.create.style'
+import * as S from '../../styles/restaurants/restaurants.create.style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
-import {updateRestaurant} from '../../../store/actions/restaurant.action';
-import {listRestaurantOwners} from '../../../store/actions/restaurant.action';
-import {findRestaurant} from '../../../store/actions/restaurant.action';
+import {updateRestaurant} from '../../store/actions/restaurant.action';
+import {listRestaurantOwners} from '../../store/actions/restaurant.action';
+import {findRestaurant} from '../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import { InputMask } from 'primereact/inputmask';
@@ -130,7 +130,8 @@ import {useRouter} from 'next/router';
         setSelectedCounty(e.value);
     }
     const onNameChange= (e:any) => {
-        setRestaurantName((e?.target as any)?.value)
+        setRestaurantName((e?.target as any)?.value);
+        setSelectedRestaurantName((e?.target as any)?.value);
     }
     const onDescriptionChange= (e:any) => {
         setDescription((e?.target as any)?.value)
@@ -253,7 +254,7 @@ import {useRouter} from 'next/router';
                     <div className="p-fluid">
                         <div className="p-field p-col-12">
                             <h4>Ad</h4>
-                            <InputText id="foodName " value={selectedRestaurantName} onChange={onNameChange} type="text"/>
+                            <InputText id="restaurantName " value={selectedRestaurantName} onChange={onNameChange} type="text"/>
                         </div>
                         <div className="p-field p-col-12">
                             <h4>Açıklama</h4>
