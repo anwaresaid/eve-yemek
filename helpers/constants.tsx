@@ -3,12 +3,15 @@ export const baseUrl = "https://dev.eve-yemek.com";
 // prettier-ignore
 export const allMenuItems:any = [
     { label:"Kontrol Paneli",          url:"/",              roles:["admin", "restaurant_owner"] },
-    { label:"Restoranlar",             url:"/restaurants",   roles:["admin"]                     },
     { label:"Canlı Siparişler",        url:"/live-orders",   roles:["restaurant_owner"]          },
     { label:"Siparişler",              url:"/orders",        roles:["admin", "restaurant_owner"] },
+    { label:"Restoranlar",           expanded: true, items: [
+        { label:"Restoranlar Listesi",             url:"/restaurants",   roles:["admin"]                     },
+        { label:"Restoranlar Oluştur",             url:"/restaurants/create",   roles:["admin"]              },
+    ] },
     { label:"Yemekler",           expanded: true, items: [
-        { label:"Yemek Listesi",       url:"/dishes",        roles:["admin", "restaurant_owner"] },
-        { label:"Yemek Oluştur",       url:"/dishes/create", roles:["admin", "restaurant_owner"] }
+        { label:"Yemek Listesi",       url:"/foods",        roles:["admin", "restaurant_owner"] },
+        { label:"Yemek Oluştur",       url:"/foods/create", roles:["admin", "restaurant_owner"] }
     ] },
     { label:"Yemek Kategorileri", expanded: true, items: [
         { label:"Kategori Listesi",       url:"/dish_categories",        roles:["admin", "restaurant_owner"] },
