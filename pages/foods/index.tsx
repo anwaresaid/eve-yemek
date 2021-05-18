@@ -24,10 +24,14 @@ const FoodsList =  () => {
     const foodService = new FoodService();
     const router = useRouter();
 
+    const __dd = useSelector((state:RootState) => state);
+
     const res = useSelector((state:RootState) => state.listFood);
     const {loading, success, foods: foodList} = res;
 
     
+    console.log(__dd);
+
 
      useEffect( () => {
         //  foodService.getFood().then(data => setFoods(data.items));
@@ -35,7 +39,7 @@ const FoodsList =  () => {
             dispatch(listFood());
         if(success)
             setFoods(foodList.items);
-     }, []);
+     }, [success]);
     
 
 
