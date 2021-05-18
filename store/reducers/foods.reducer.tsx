@@ -73,3 +73,27 @@ export const findFoodReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const listFoodReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (action.type) {
+    case foodsTypes.FOOD_LIST_REQUEST:
+      return { loading: true}
+    case foodsTypes.FOOD_LIST_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        foods: action.payload
+      }
+
+    case foodsTypes.FOOD_LIST_SUCCESS:
+      return {
+        loading: false,
+        error: action.payload
+      } 
+      
+    default:
+      return state;
+  }
+};

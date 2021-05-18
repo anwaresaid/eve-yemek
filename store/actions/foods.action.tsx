@@ -99,3 +99,27 @@ export const findFood = (id) => async dispatch => {
         });
   }
 }
+export const listFood = () => async dispatch => {
+    try{
+        
+        dispatch({
+          type: foodsTypes.FOOD_LIST_REQUEST
+        });
+        
+        const foodService = new FoodsService;
+        const res = await foodService.getFood();
+
+        dispatch({
+            type: foodsTypes.FOOD_LIST_SUCCESS,
+            payload: res,
+          });
+        }catch (error) {
+        dispatch({
+          type: foodsTypes.FOOD_LIST_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+  }
+}

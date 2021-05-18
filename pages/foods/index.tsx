@@ -7,7 +7,10 @@ import { InputText } from 'primereact/inputtext';
 import * as S from '../../styles/food/food.list.style'
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/router';
+import { listFood } from '../../store/actions/foods.action';
+import {useDispatch,useSelector} from 'react-redux';
+import { RootState } from "typesafe-actions";
 
 
 const FoodsList =  () => {
@@ -17,10 +20,21 @@ const FoodsList =  () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
+    const dispatch = useDispatch();
     const foodService = new FoodService();
     const router = useRouter();
+
+    const res = useSelector((state:RootState) => state.listFood);
+    const {loading, success, foods: foodList} = res;
+
+    
+
      useEffect( () => {
-         foodService.getFoods().then(data => setFoods(data.items));
+        //  foodService.getFood().then(data => setFoods(data.items));
+        if(!success)
+            dispatch(listFood());
+        if(success)
+            setFoods(foodList.items);
      }, []);
     
 
