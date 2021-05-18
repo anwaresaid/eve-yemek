@@ -12,8 +12,6 @@ import {useRouter} from 'next/router'
 
 const FoodsList =  () => {
     const [foods, setFoods] = useState([]);
-    const [foodsExpanded, setFoodsExpanded] = useState([]);
-    const [category, setCategory] = useState([]);
     const [first1, setFirst1] = useState(0);
     const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -64,7 +62,7 @@ const FoodsList =  () => {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/foods/edit-food/${rowData._id}`)}} />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/foods/${rowData._id}`)}} />
             </React.Fragment>
         );
     }

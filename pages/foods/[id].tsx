@@ -5,15 +5,15 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Button } from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import * as S from '../../../styles/food/create-food/food.create.style'
+import * as S from '../../styles/food/create-food/food.create.style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
-import {listAddons} from '../../../store/actions/addons.action';
-import {listFoodCategory} from '../../../store/actions/foodCategory.action';
-import { listRestaurant } from '../../../store/actions/restaurant.action';
-import { findFood } from '../../../store/actions/foods.action';
-import { updateFood } from '../../../store/actions/foods.action';
+import {listAddons} from '../../store/actions/addons.action';
+import {listFoodCategory} from '../../store/actions/foodCategory.action';
+import { listRestaurant } from '../../store/actions/restaurant.action';
+import { findFood } from '../../store/actions/foods.action';
+import { updateFood } from '../../store/actions/foods.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
