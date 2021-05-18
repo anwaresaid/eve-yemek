@@ -24,13 +24,8 @@ const FoodsList =  () => {
     const foodService = new FoodService();
     const router = useRouter();
 
-    const __dd = useSelector((state:RootState) => state);
-
     const res = useSelector((state:RootState) => state.listFood);
     const {loading, success, foods: foodList} = res;
-
-    
-    console.log(__dd);
 
 
      useEffect( () => {
