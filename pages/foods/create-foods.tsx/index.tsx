@@ -9,27 +9,64 @@ import * as S from './style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
-import FoodService from '../../../store/services/foods.service';
+import AddonService from '../../../store/services/addons.service';
+import FoodCategoryService from '../../../store/services/food-category.service';
+import RestaurantsService from '../../../store/services/restaurants.service';
+import {createFood} from '../../../store/actions/foods.action'
+import { useDispatch, useSelector } from 'react-redux';
 
 export const CreatFoods = () => {
     const [totalSize, setTotalSize] = useState(0);
-    const [files, setFile] = useState([]);
+    const [files, setFile] = useState([null]);
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
     const [price, setPrice] = useState(0);
-    const [drinks, setDrinks] = useState(null);
+    const [addons, setAddons] = useState(null);
+    const [addonsName, setAddonsName] = useState(null);
     const [discountPrice, setDiscountPrice] = useState(0);
     const [vegi, setVegi] = useState(false);
     const [featured, setFeatured] = useState(false);
     const [active, setActive] = useState(false);
-    const foodService = new FoodService();
+    const [foodName, setFoodName] = useState(null);
+    const [description, setDescription] = useState();
+    const [foodCategory, setFoodCategory] = useState(null);
+    const [foodCategoryName, setFoodCategoryName] = useState(null);
+    const [restaurantName, setRestaurantName] = useState(null);
+    const [restaurant, setRestaurant] = useState(null);
+    const dispatch = useDispatch();
 
+    const [selectedAddon, setSelectedAddon] = useState(null);
+    const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+    const [selectedFoodCategory, setSelectedFoodCategory] = useState(null);
+    //const [selectedAddon, setSelectedAddon] = useState(null);
+
+    const foodCategoryService = new FoodCategoryService();
+    const addonService = new AddonService();
+    const restaurantService = new RestaurantsService();
+
+    const settingItems = async() => {
+        const resAddons = await addonService.getAddons();
+        setAddons(resAddons);
+        const addonsNames = await resAddons.items.map(addon => {return{name: addon.name}});
+        setAddonsName(addonsNames);
+
+        const resFoodCat = await foodCategoryService.getFoodCategory();
+        setFoodCategory(resFoodCat);
+        const foodCategoryNames = await resFoodCat.items.map(res => {return{name: res.name}});
+        setFoodCategoryName(foodCategoryNames);
+
+        // const resRestaurant = await restaurantService.getRestaurants();
+        // setRestaurant(resRestaurant);
+        // const restaurantNames = await resRestaurant.items.map(res => {return{name: res.name}});
+        // setRestaurantName(restaurantNames);
+
+        
+    }
 
     useEffect(() =>{
-        foodService.getDrinks().then(data => setDrinks(data));
-
+        settingItems();
     }, []);
-    const [selectedCity1, setSelectedCity1] = useState(null);
+
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -37,11 +74,27 @@ export const CreatFoods = () => {
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
     ];
-    const onCityChange = (e) => {
-        setSelectedCity1(e.value);
+    const onAddonChange= (e:any) => {
+        let selectedaddons = addons.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
+        setSelectedAddon(selectedaddons);
+    }
+    const onCategoryChange= (e:any) => {
+        let selectedCategory = foodCategory.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
+        setSelectedFoodCategory(selectedCategory);
+    }
+    const onRestaurantChange= (e:any) => {
+        let selectedRestaurants = restaurant.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
+        setSelectedRestaurant(selectedRestaurants);
+        console.log(selectedRestaurants);
+    }
+    const onNameChange= (e:any) => {
+        setFoodName((e?.target as any)?.value)
+    }
+    const onDescriptionChange= (e:any) => {
+        setDescription((e?.target as any)?.value)
     }
 
-    const onTemplateSelect = (e) => {
+    const onTemplateSelect = (e:any) => {
         let _totalSize = totalSize;
         // e.files.map(file => {
         //     _totalSize += file.size;
@@ -105,6 +158,27 @@ export const CreatFoods = () => {
         )
     }
 
+    const onSubmit = (e:any) => {
+        e?.preventDefault();
+       const creatingFood = { 
+                name: foodName, 
+                image: files, 
+                price: price,
+                discount_price: discountPrice , 
+                restaurant_id: selectedRestaurant._id, 
+                category_id: selectedFoodCategory._id, 
+                add_on_id: selectedAddon._id,
+                is_veg: vegi,
+                featured: featured,
+                is_active: active,
+                description: description,
+               }
+               dispatch(createFood(creatingFood))
+               console.log("checking on submit", creatingFood)       
+       };
+
+
+
     const emptyTemplate = () => {
         return (
             <div className="p-d-flex p-ai-center p-dir-col">
@@ -117,25 +191,26 @@ export const CreatFoods = () => {
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
-    console.log("drinks", drinks);
+
     return (
         <div>
 
             <h1>Oluştur</h1>
             <Toast ref={toast}></Toast>
              <S.ContainerCard>
+                 <form onSubmit = {onSubmit} >
                     <div className="p-fluid">
                         <div className="p-field">
                         <h4>Restauran</h4>
-                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+                <Dropdown value={selectedRestaurant} options={restaurantName} onChange={onRestaurantChange} optionLabel="name" placeholder="Select a City" />
                         </div>
                         <div className="p-field">
                             <h4>Yemek Adı</h4>
-                            <InputText id="firstname1" type="text"/>
+                            <InputText id="foodName "  onChange={onNameChange} type="text"/>
                         </div>
                         <div className="p-field">
                             <h4>Yemek Açıklaması</h4>
-                            <InputText id="lastname1" type="text"/>
+                            <InputText id="description" onChange={onDescriptionChange} type="text"/>
                         </div>
                     </div>
             <FileUpload ref={fileUploadRef} name="image" url="./" multiple accept="image/*" maxFileSize={1000000}
@@ -145,9 +220,9 @@ export const CreatFoods = () => {
                 <div className="p-fluid">
                         <div className="card">
                 <h4>Yemek Kategorisi</h4>
-                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Yemek Kategorisi" />
+                <Dropdown value={selectedFoodCategory} options={foodCategoryName} onChange={onCategoryChange} optionLabel="name" placeholder="Yemek Kategorisi" />
                 <h4>Eklentileri Seç</h4>
-                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Eklentileri Seç" />
+                <Dropdown value={selectedAddon} options={addonsName} onChange={onAddonChange} optionLabel="name" placeholder="Eklentileri Seç" />
                 </div>
             </div>
             <div className="p-grid p-fluid">
@@ -174,8 +249,9 @@ export const CreatFoods = () => {
 
             <S.SubmitBtn>
 
-                <Button type="button" label="Submit"/>
+                <Button type="submit" label="Submit"/>
             </S.SubmitBtn>
+            </form>
             </S.ContainerCard>
         </div>
     )

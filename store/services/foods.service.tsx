@@ -28,8 +28,31 @@ export default class FoodsService{
         return axios.get('https://dev.eve-yemek.com/foods')
                 .then(res => res.data);
     }
-    getDrinks(){
-        return axios.get('https://dev.eve-yemek.com/add-ons')
-        .then(res => res.data)
+
+    createFood(
+        name: string,
+        description: string, 
+        image: string, 
+        price:number,
+        discount_price: number,
+        restaurant_id: string,
+        category_id: string, 
+        add_on_id: string,
+       is_vegan: boolean,
+       featured: boolean,
+       is_active: boolean){
+        return axios.post('https://dev.eve-yemek.com/foods',{
+            name,
+            description,
+            image,
+            price,
+            discount_price,
+            restaurant_id,
+            category_id,
+            add_on_id,
+            is_vegan,
+            featured,
+            is_active
+        })
     }
 }
