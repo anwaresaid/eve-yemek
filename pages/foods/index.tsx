@@ -27,7 +27,6 @@ const FoodsList =  () => {
     const res = useSelector((state:RootState) => state.listFood);
     const {loading, success, foods: foodList} = res;
 
-    
 
      useEffect( () => {
         //  foodService.getFood().then(data => setFoods(data.items));
@@ -35,7 +34,7 @@ const FoodsList =  () => {
             dispatch(listFood());
         if(success)
             setFoods(foodList.items);
-     }, []);
+     }, [success]);
     
 
 
@@ -90,7 +89,7 @@ const FoodsList =  () => {
             List of Food
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search" />
+                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
             </span>
         </div>
     )
