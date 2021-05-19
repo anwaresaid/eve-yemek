@@ -114,7 +114,7 @@ export const EditFoods = () => {
 
 
         }
-    }, [addonSuccess,foodCatSuccess,restaurantsSuccess,foodSuccess,selectedRestaurant]);
+    }, [addonSuccess,foodCatSuccess,restaurantsSuccess,foodSuccess,selectedRestaurant, router.query.id]);
   
 //on change functions    
     const onCategoryChange= (e:any) => {

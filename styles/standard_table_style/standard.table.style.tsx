@@ -10,9 +10,9 @@ export const Table = styled(DataTable)`
     display: flex;
     justify-content: space-between;
 }
-.restaurant-image {
-    width: 100px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+td{
+    word-wrap:break-word
 }
 
 `;
