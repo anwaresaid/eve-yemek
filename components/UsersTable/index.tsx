@@ -30,13 +30,20 @@ const UsersTable = (props) => {
         </div>
     )
 
+    const activeStatus = () => (
+        <div>
+            <Button className="p-button p-component p-disabled p-button-rounded p-button-outlined p-button-icon-only">
+                <span className="p-button-icon p-c pi pi-check"></span>
+            </Button>
+        </div>
+    )
 
     const columns = [
         {field: 'name', header: 'Ad'},
         {field: 'email', header: 'E-Posta'},
         {field: 'phone', header: 'Telefon'},
         {field: 'howLongAgo', header: 'Oluşturma'}, // in days
-        {field: 'active', header: 'Aktif'},
+        {field: 'active', header: 'Aktif', body: activeStatus},
         {field: 'ops', header: 'İşlemler', body: islemlerTemplate}
     ]
     return (
