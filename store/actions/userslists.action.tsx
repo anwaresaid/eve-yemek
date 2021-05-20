@@ -2,7 +2,6 @@ import UsersListsService from "../services/userslists.service";
 import { usersListTypes } from "../types/userslists.type";
 
 export const listCustomers = () => async (dispatch, getState) => {
-    console.log("Fetching")
     try {
 
         dispatch({
@@ -100,7 +99,6 @@ export const addUser = (data) => async (dispatch, getState) => {
 export const updateUser = (id, data) => async (dispatch, getState) => {
 
     try {
-
         dispatch({
             type: usersListTypes.UPDATE_USER_REQUEST,
         });
@@ -109,22 +107,27 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
 
         
         const result = await usersListsService.updateUser(id, data);
-        console.log(result)
+        
         dispatch({
             type: usersListTypes.UPDATE_USER_SUCCESS,
             payload: result,
         });
-
+        
         dispatch({
             type: usersListTypes.UPDATE_USER_END
         })
-
+        
+        dispatch({
+            type: usersListTypes.CUSTOMER_LIST_UPDATE_ROW,
+            payload: result
+        })
+        
         return result
 
     } catch (error){
         dispatch({
             type: usersListTypes.UPDATE_USER_FAIL,
-            payload: error.response.data.error.response.message[0]
+            payload: error.response.data.error?.response.message[0]
         })
     }
 

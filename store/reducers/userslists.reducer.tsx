@@ -19,6 +19,13 @@ export const usersListsReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
               } 
+        case usersListTypes.CUSTOMER_LIST_UPDATE_ROW:
+            const index = state.users.items.findIndex(item => item._id === action.payload.id); 
+            const newArray = [...state.users.items]
+            newArray[index] = action.payload
+            return {
+                ...state, users: {...state.users, items: newArray}
+            }
         default:
             return state;
     }

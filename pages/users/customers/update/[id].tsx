@@ -15,7 +15,7 @@ const UpdateUser = () => {
     const [data, setData] = useState({name:'', email:'', phone:'', roles:[]})
 
     const userDetails = useSelector((state:RootState) => state.singleUser)
-    const { loading=true, success:getUserSuccess, userData} = userDetails
+    const { loading, success:getUserSuccess, userData} = userDetails
 
     const updateDetails = useSelector((state:RootState) => state.updateUser)
     var { updating, success:updateUserSuccess = false, response, error} = updateDetails
