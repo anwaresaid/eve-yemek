@@ -9,9 +9,13 @@ import * as S from '../../../styles/food/create-food/food.create.style';
 import { InputSwitch } from 'primereact/inputswitch';
 import { createFoodCategory } from '../../../store/actions/foodCategory.action';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'typesafe-actions';
+import { foodCategoryTypes } from '../../../store/types/foodCategory.type';
+import { useRouter } from 'next/router';
 
 export const Index = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [totalSize, setTotalSize] = useState(0);
   const [files, setFile] = useState(null);
@@ -20,8 +24,15 @@ export const Index = () => {
   const [isActive, setIsActive] = useState(false);
   const [categoryName, setCategoryName] = useState(null);
 
+  const foodCategoryCreate = useSelector((state:RootState) => state.createFoodCategory);
+  const { success } = foodCategoryCreate;
+
   useEffect(() => {
-  }, []);
+    if(success){
+      router.push('/food_categories')
+      dispatch({type: foodCategoryTypes.FOOD_CATEGORY_CREATE_RESET})
+    }
+  }, [success]);
 
   const onCategoryNameChange = (e: any) => {
     setCategoryName((e?.target as any)?.value);
