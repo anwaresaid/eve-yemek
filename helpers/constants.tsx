@@ -14,8 +14,8 @@ export const allMenuItems:any = [
         { label:"Yemek Oluştur",       url:"/foods/create", roles:["admin", "restaurant_owner"] }
     ] },
     { label:"Yemek Kategorileri", expanded: true, items: [
-        { label:"Kategori Listesi",       url:"/dish_categories",        roles:["admin", "restaurant_owner"] },
-        { label:"Kategori Oluştur",       url:"/dish_categories/create", roles:["admin", "restaurant_owner"] }
+        { label:"Kategori Listesi",       url:"/food_categories",        roles:["admin", "restaurant_owner"] },
+        { label:"Kategori Oluştur",       url:"/food_categories/create", roles:["admin", "restaurant_owner"] }
     ] },
     { label:"Eklentiler", expanded: true, items: [
         { label:"Eklentiler Listesi",  url:"/addons",        roles:["admin", "restaurant_owner"] },

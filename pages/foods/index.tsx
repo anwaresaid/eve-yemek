@@ -27,7 +27,6 @@ const FoodsList =  () => {
     const res = useSelector((state:RootState) => state.listFood);
     const {loading, success, foods: foodList} = res;
 
-    
 
      useEffect( () => {
         //  foodService.getFood().then(data => setFoods(data.items));
@@ -35,7 +34,7 @@ const FoodsList =  () => {
             dispatch(listFood());
         if(success)
             setFoods(foodList.items);
-     }, []);
+     }, [success]);
     
 
 
