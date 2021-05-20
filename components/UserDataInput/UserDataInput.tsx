@@ -33,12 +33,12 @@ const UserDataInput = (props) => {
     }, [inputData])
 
     useEffect(()=>{
-        if(props.updateProps.updateUserSuccess)
+        if(props.updateProps?.updateUserSuccess)
             toast.current.show({severity: 'success', summary: 'Updated User', detail: 'Updated user ' + inputData.name})
-        else if (!props.updateProps.updating && props.updateProps.error)
+        else if (!props.updateProps?.updating && props.updateProps?.error)
             toast.current.show({severity: 'warn', summary: 'Error', detail: 'Server: ' + props.updateProps.error});
             
-    },[props.updateProps.updateUserSuccess, props.updateProps.updating])
+    },[props.updateProps?.updateUserSuccess, props.updateProps?.updating])
 
     const onSubmit = (e:any) => {
         e.preventDefault();
