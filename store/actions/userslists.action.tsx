@@ -2,7 +2,7 @@ import UsersListsService from "../services/userslists.service";
 import { usersListTypes } from "../types/userslists.type";
 
 export const listCustomers = () => async (dispatch, getState) => {
-
+    console.log("Fetching")
     try {
 
         dispatch({
@@ -64,6 +64,39 @@ export const getSingleUser = (id) => async (dispatch, getState) => {
 
 }
 
+export const addUser = (data) => async (dispatch, getState) => {
+    console.log(data)
+    try {
+
+        dispatch({
+            type: usersListTypes.ADD_USER_REQUEST,
+        });
+
+        const usersListsService = new UsersListsService;
+
+        
+        const result = await usersListsService.addUser(data);
+
+        dispatch({
+            type: usersListTypes.ADD_USER_SUCCESS,
+            payload: result,
+        });
+
+        console.log(result)
+        return result
+
+    } catch (error){
+        dispatch({
+            type: usersListTypes.ADD_USER_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        })
+    }
+
+}
+
 export const updateUser = (id, data) => async (dispatch, getState) => {
 
     try {
@@ -76,7 +109,7 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
 
         
         const result = await usersListsService.updateUser(id, data);
-
+        console.log(result)
         dispatch({
             type: usersListTypes.UPDATE_USER_SUCCESS,
             payload: result,
@@ -91,10 +124,7 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
     } catch (error){
         dispatch({
             type: usersListTypes.UPDATE_USER_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
+            payload: error.response.data.error.response.message[0]
         })
     }
 

@@ -15,7 +15,7 @@ const UsersTable = (props) => {
     const islemlerTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-info p-mr-2" onClick={()=>{router.push({pathname: '/users/customers/'+rowData._id})}}/>
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-info p-mr-2" onClick={()=>{router.push({pathname: '/users/customers/update/'+rowData._id})}}/>
             </React.Fragment>
         );
     }

@@ -22,7 +22,8 @@ export const allMenuItems:any = [
         { label:"Eklentiler Oluştur",  url:"/addons/create", roles:["admin", "restaurant_owner"] }
     ] },
     { label:"Hesap Ayarları", expanded: true, items: [
-        { label:"Müşteriler",  url:"/users/customers", roles:["admin"] }
+        { label:"Müşteriler",  url:"/users/customers", roles:["admin"] },
+        { label:"Kullanıcı Ekle", url:"users/add",  roles:["admin"] },
     ] },
     { separator:true },
     { label:"Çıkış yap",               url:"/auth/logout",   roles:["admin", "restaurant_owner"] }

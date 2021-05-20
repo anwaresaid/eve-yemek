@@ -13,7 +13,7 @@ import {
     findFoodReducer,
     listFoodReducer,
  } from "./foods.reducer";
-import {singleUserReducer, updateUserReducer, usersListsReducer} from "./userslists.reducer"
+import {addUserReducer, singleUserReducer, updateUserReducer, usersListsReducer} from "./userslists.reducer"
 
 export default combineReducers({
     user,
@@ -30,6 +30,7 @@ export default combineReducers({
     listFood: listFoodReducer,
     usersLists: usersListsReducer,
     singleUser: singleUserReducer,
-    updateUser: updateUserReducer
+    updateUser: updateUserReducer,
+    addUser: addUserReducer
 });
 

@@ -49,6 +49,30 @@ export const singleUserReducer = (state = initialState, action) => {
 
 }
 
+export const addUserReducer = (state = initialState, action) => {
+    const { type, payload } = action;
+
+    switch (action.type) {
+        case usersListTypes.ADD_USER_REQUEST:
+            return {adding: true}
+        case usersListTypes.ADD_USER_SUCCESS:
+            return {
+                adding: false,
+                success: true,
+                response: action.payload
+            }
+        case usersListTypes.ADD_USER_FAIL:
+            return {
+                adding: false,
+                error: action.payload
+            } 
+              
+        default:
+            return state;
+    }
+
+}
+
 export const updateUserReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
