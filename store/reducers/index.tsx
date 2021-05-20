@@ -7,7 +7,7 @@ import {createRestaurantReducer,
     listRestaurantOwnersReducer} from "./restaurants.reducer";
 import {listAddonsReducer} from "./addons.reducer";
 import {listRestaurantReducer} from "./restaurants.reducer";
-import {listFoodCategoryReducer} from "./foodCategory.reducer";
+import {foodCategoryDetailsReducer, listFoodCategoryReducer} from "./foodCategory.reducer";
 import { 
     updateFoodReducer, 
     findFoodReducer,
@@ -22,11 +22,14 @@ export default combineReducers({
     listRestaurant: listRestaurantReducer,
     findRestaurant: findRestaurantReducer,
     createRestaurant: createRestaurantReducer,
+
     createFood: createFoodReducer,
     listAddons: listAddonsReducer,
-    listFoodCategory: listFoodCategoryReducer,
     updateFood: updateFoodReducer,
     findFood: findFoodReducer,
     listFood: listFoodReducer,
+
+    listFoodCategory: listFoodCategoryReducer,
+    foodCategoryDetails:foodCategoryDetailsReducer,
 });
 

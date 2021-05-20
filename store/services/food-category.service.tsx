@@ -1,10 +1,19 @@
-import axios from "../../helpers/_axios";
+import axios from '../../helpers/_axios';
 
-export default class FoodCategorynService{
+export default class FoodCategorynService {
+  public async getFoodCategory() {
+    const { data } = await axios.get(
+      'https://dev.eve-yemek.com/food-categories'
+    );
 
-    async getFoodCategory(){
-        const {data} = await axios.get('https://dev.eve-yemek.com/food-categories');
-       
-        return data
-    }
+    return data;
+  }
+
+  public async getFoodCategoryDetails(id: string) {
+    const { data } = await axios.get(
+      `https://dev.eve-yemek.com/food-categories/${id}`
+    );
+
+    return data;
+  }
 }
