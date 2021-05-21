@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react'
 import {useRouter} from 'next/router'
 import {RootState} from 'typesafe-actions'
 import {useDispatch,useSelector} from 'react-redux'
-import {getSingleUser, updateUser} from '../../../../store/actions/userslists.action'
-import UserDataInput from '../../../../components/UserDataInput/UserDataInput'
+import {getSingleUser, updateUser} from '../../store/actions/userslists.action'
+import UserDataInput from '../../components/UserDataInput/UserDataInput'
 
 
 
-const UpdateUser = () => {
+const UpdateUser = (props) => {
     const router = useRouter()
     const dispatch = useDispatch()
-    const [id, setID] = useState(router.query.id)
+    const [id, setID] = useState(props.id)
 
     const [data, setData] = useState({name:'', email:'', phone:'', roles:[]})
 
@@ -32,7 +32,7 @@ const UpdateUser = () => {
     
     useEffect(() => {
         if(!updating && updateUserSuccess)
-            setTimeout(() => {  router.push('/users/customers') }, 2000)
+            setTimeout(() => {  router.push(props.returnTo) }, 2000)
     }, [updating])
 
     return (

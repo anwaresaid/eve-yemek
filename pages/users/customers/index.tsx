@@ -10,23 +10,23 @@ const customerList = () => {
     const [users, setUsers] = useState([]);
     const [first1, setFirst1] = useState(0);
     const dispatch = useDispatch();
-    const res = useSelector((state:RootState) => state.usersLists);
-    const {loading, success, users: allUsers} = res;
+    const res = useSelector((state:RootState) => state.listCustomers);
+    const {loading, success, customers} = res;
 
     useEffect( () => {
-        if (!allUsers)
+        if (!customers)
             dispatch(listCustomers());
      }, [dispatch]);
 
     useEffect(() => {
         if(success)
-            setUsers(allUsers.items);
+            setUsers(customers.items);
     }, [success])
 
      
     return (
         <div>
-            {!loading && <UsersTable users={users}></UsersTable>}
+            {!loading && <UsersTable users={users} role="customers"></UsersTable>}
             {loading && <ProgressSpinner/>}
         </div>
     );

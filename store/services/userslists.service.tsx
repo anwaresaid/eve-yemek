@@ -2,8 +2,8 @@ import axios from "../../helpers/_axios";
 
 export default class UsersListsService {
 
-    async getCustomers() {
-        const {data}  = await axios.get('https://dev.eve-yemek.com/users?fields=roles&text=customer')
+    async getUsersByRole(role) {
+        const {data}  = await axios.get('https://dev.eve-yemek.com/users?fields=roles&text='+role)
         return data;
     }
 
