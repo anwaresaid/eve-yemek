@@ -16,4 +16,13 @@ export default class FoodCategorynService {
 
     return data;
   }
+
+  public async createFoodCategory(createFoodCategoryDTO: any) {
+    const { data } = await axios.post(
+      'https://dev.eve-yemek.com/food-categories',
+      createFoodCategoryDTO
+    );
+
+    return data;
+  }
 }

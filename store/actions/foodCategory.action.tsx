@@ -24,6 +24,31 @@ export const listFoodCategory = () => async (dispatch) => {
   }
 };
 
+export const createFoodCategory = (data: any) => async (dispatch) => {
+  try {
+    dispatch({
+      type: foodCategoryTypes.FOOD_CATEGORY_CREATE_REQUEST,
+    });
+
+    const foodCategoryService = new FoodCategoryService();
+
+    const res = await foodCategoryService.createFoodCategory(data);
+
+    dispatch({
+      type: foodCategoryTypes.FOOD_CATEGORY_CREATE_SUCCESS,
+      payload: res,
+    });
+  } catch (err) {
+    dispatch({
+      type: foodCategoryTypes.FOOD_CATEGORY_CREATE_FAIL,
+      payload:
+        err.response && err.response.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
 export const getFoodCategoryDetails = (id: any) => async (dispatch) => {
   try {
     dispatch({
@@ -38,7 +63,7 @@ export const getFoodCategoryDetails = (id: any) => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      type: foodCategoryTypes.FOOD_CATEGORY_DETAILS_FAIL,
+      type: foodCategoryTypes.FOOD_CATEGORY_CREATE_FAIL,
       payload:
         err.response && err.response.response.data.message
           ? err.response.data.message
