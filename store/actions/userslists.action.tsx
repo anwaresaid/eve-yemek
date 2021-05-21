@@ -81,17 +81,22 @@ export const addUser = (data) => async (dispatch, getState) => {
             payload: result,
         });
 
-        console.log(result)
+        
         return result
 
     } catch (error){
         dispatch({
             type: usersListTypes.ADD_USER_FAIL,
         payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
+            error.response && error.response.data.error ?
+            error.response.data.error?.message : "Error"
         })
+    } finally {
+
+        dispatch({
+            type: usersListTypes.ADD_USER_END
+        })
+        
     }
 
 }
@@ -127,7 +132,9 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
     } catch (error){
         dispatch({
             type: usersListTypes.UPDATE_USER_FAIL,
-            payload: error.response.data.error?.response.message[0]
+            payload: 
+                error.response && error.response.data.error ?
+                error.response.data.error?.response.message[0] : "Error"
         })
     }
 

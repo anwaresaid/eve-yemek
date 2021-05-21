@@ -17,6 +17,7 @@ export const usersListTypes = {
     ADD_USER_REQUEST: 'ADD_USER_REQUEST',
     ADD_USER_SUCCESS: 'ADD_USER_SUCCESS',
     ADD_USER_FAIL: 'ADD_USER_FAIL',
+    ADD_USER_END: 'ADD_USER_END',
 
     USER_ROLES_FOR_DROPDOWN: [
         {label: "Customer Service", value: 'customer_service'},
