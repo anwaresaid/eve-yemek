@@ -22,5 +22,6 @@ export const allMenuItems:any = [
         { label:"Eklentiler Oluştur",  url:"/addons/create", roles:["admin", "restaurant_owner"] }
     ] },
     { separator:true },
+    { label:"Ayarlar",                 url:"/settings",   roles:["admin"] },
     { label:"Çıkış yap",               url:"/auth/logout",   roles:["admin", "restaurant_owner"] }
 ];
