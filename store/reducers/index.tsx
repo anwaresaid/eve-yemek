@@ -13,7 +13,7 @@ import {
     findFoodReducer,
     listFoodReducer,
  } from "./foods.reducer";
-
+import {addUserReducer, singleUserReducer, updateUserReducer, usersListsReducer} from "./userslists.reducer"
 
 export default combineReducers({
     user,
@@ -28,12 +28,18 @@ export default combineReducers({
     findFood: findFoodReducer,
     listFood: listFoodReducer,
 
+    usersLists: usersListsReducer,
+    singleUser: singleUserReducer,
+    updateUser: updateUserReducer,
+    addUser: addUserReducer,
+  
+    listAddons: listAddonsReducer,
+
     listFoodCategory: listFoodCategoryReducer,
     foodCategoryDetails: foodCategoryDetailsReducer,
     createFoodCategory: createFoodCategoryReducer,
     updateFoodCategory: updateFoodCategoryReducer,
 
-    listAddons: listAddonsReducer,
 
 
 });
