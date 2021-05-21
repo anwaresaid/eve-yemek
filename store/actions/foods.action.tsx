@@ -10,7 +10,6 @@ export const createFood = (
         discount_price,
         restaurant_id,
         food_category_id, 
-        add_on_id,
         is_veg,
         featured,
         active,

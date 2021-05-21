@@ -16,6 +16,8 @@ import {listRestaurant} from '../../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
+import { useFormik } from 'formik';
+import { classNames } from 'primereact/utils';
 
 export const Index = () => {
 
@@ -33,6 +35,8 @@ export const Index = () => {
     const [description, setDescription] = useState();
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
+    const [formData, setFormData] = useState({});
+    const [showMessage, setShowMessage] = useState(false);
     const dispatch = useDispatch();
 
 //setting dropdown selected items
@@ -49,9 +53,85 @@ export const Index = () => {
     const resFoodCat = useSelector((state:RootState) => state.listFoodCategory);
     const { loading: foodCatLoading, success: foodCatSuccess, foodCat: foodCatlist } = resFoodCat;
     const resRestaurants = useSelector((state:RootState) => state.listRestaurant);
-
+    
     const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants: restaurants } = resRestaurants;
+    
+    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const getFormErrorMessage = (name) => {
+        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+    };
 
+    const formik = useFormik({
+        initialValues:{
+            restaurant: '',
+            name: '',
+            description: '',
+            file: '',
+            category: '',
+            addons: '',
+            price: 0,
+            discountPrice: 0,
+            vegi: false,
+            featured: false,
+            active: false
+        },
+        validate: (data)=>{
+            let errors = {
+                restaurant: '',
+                name: '',
+                description: '',
+                file: '',
+                category: '',
+                addons: '',
+            };
+
+            if (!data.restaurant) {
+                errors.restaurant = 'restaurant is required.';
+            }
+
+            if (!data.name) {
+                errors.name = 'name is required.';
+            }
+            if (!data.description) {
+                errors.description = 'description is required.';
+            }
+            if (!data.file) {
+                errors.file = 'Image is required.';
+            }
+
+            if (!data.category) {
+                errors.category = 'category is required.';
+            }
+            if (!data.addons) {
+                errors.addons = 'addons required.';
+            }
+
+            return errors;
+        },
+        onSubmit: (data) => {
+            setFormData(data);
+            setShowMessage(true);
+            let selectedRestaurants = restaurants.items.filter(data  => {return data.name.localeCompare(formik.values.restaurant)==0;});
+            let res = selectedRestaurants;
+            console.log("checking full restaurant", res );
+            // dispatch(createFood(data.name, data.file, data.price,data.discountPrice, data.restaurant._id, data.category._id, addons._id , data.vegi, data.featured, data.active, data.description ));
+                const creatingFood = { 
+                                name: data.name, 
+                                image: data.file, 
+                                price: data.price,
+                                discount_price: data.discountPrice , 
+                                restaurant_id: data.restaurant, 
+                                food_category_id: data.category, 
+                                add_on_id: data.addons,
+                                is_veg: data.vegi,
+                                featured: data.featured,
+                                active: data.active,
+                                description: data.description,        
+            }
+            
+            formik.resetForm();
+        }
+    });
 //setting names for dropdowns.
     const settingDropDownNames= () => {
         const addonsNames = addonslist.items.map(addon => {return{name: addon.name}});
@@ -91,12 +171,14 @@ export const Index = () => {
      }
     const onCategoryChange= (e:any) => {
         let selectedCategory = foodCatlist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        setSelectedFoodCategory(selectedCategory[0]);
+        formik.values.category = selectedCategory[0];
+        // setSelectedFoodCategory(selectedCategory[0]);
         setSelectedFoodCategoryName(e.value);
     }
     const onRestaurantChange= (e:any) => {
         let selectedRestaurants = restaurants.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        setSelectedRestaurant(selectedRestaurants[0]);
+        formik.values.restaurant = selectedRestaurants;
+        // setSelectedRestaurant(selectedRestaurants[0]);
         setSelectedRestaurantName(e.value);
 
     }
@@ -123,7 +205,8 @@ export const Index = () => {
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
-        setFile(e.files[0]);
+        // setFile(e.files[0]);
+        formik.values.file=e.files[0];
         e.files.forEach(file => {
             _totalSize += (file.size || 0);
         });
@@ -187,7 +270,8 @@ export const Index = () => {
         if(addonsName != null)
             return(
                 <div>
-                <MultiSelect value={selectedAddonName} options={addonsName} onChange={(e) => {setSelectedAddonName(e.value); 
+                <MultiSelect id="addons" name="addons" value={formik.values.addons} options={addonsName} onChange={formik.handleChange} optionLabel="name" placeholder="Select addons" display="addons" className={classNames({ 'p-invalid': isFormFieldValid('category') })}/>
+                {/* <MultiSelect value={selectedAddonName} options={addonsName} onChange={(e) => {setSelectedAddonName(e.value); 
                 var selectedaddons; 
                 if(selectedAddonName)
                     selectedaddons = filterByReference(selectedAddonName);
@@ -195,94 +279,106 @@ export const Index = () => {
                     let addonsId = selectedaddons.map(addon=> addon._id);
                     setSelectedAddon(addonsId);
                 }
-                }} optionLabel="name" placeholder="Select addons" display="addons" />
+                }} optionLabel="name" placeholder="Select addons" display="addons" /> */}
                 </div>
 
             )
     }
     // on submit function    
-    const onSubmit = (e:any) => {
-        e.preventDefault();
-       const creatingFood = { 
-                name: foodName, 
-                image: files.objectURL, 
-                price: price,
-                discount_price: discountPrice , 
-                restaurant_id: selectedRestaurant._id, 
-                food_category_id: selectedFoodCategory._id, 
-                add_on_id: selectedAddon._id,
-                is_veg: vegi,
-                featured: featured,
-                active: active,
-                description: description,
-               }
-               dispatch(createFood(creatingFood))     
-       };
+    // const onSubmit = (e:any) => {
+    //     e.preventDefault();
+    //    const creatingFood = { 
+    //             name: foodName, 
+    //             image: files.objectURL, 
+    //             price: price,
+    //             discount_price: discountPrice , 
+    //             restaurant_id: selectedRestaurant._id, 
+    //             food_category_id: selectedFoodCategory._id, 
+    //             add_on_id: selectedAddon._id,
+    //             is_veg: vegi,
+    //             featured: featured,
+    //             active: active,
+    //             description: description,
+    //            }
+    //            dispatch(createFood(creatingFood))     
+    //    };
+    
+    {console.log("name",restaurants)}
     return (
         <div>
             <h1>Oluştur</h1>
             <Toast ref={toast}></Toast>
-             <S.ContainerCard>
-                 <form onSubmit = {onSubmit} >
+            <S.ContainerCard>
+                 <form onSubmit = {formik.handleSubmit} >
                     <div className="p-fluid">
                         <div className="p-field">
-                        <h4>Restauran</h4>
-                <Dropdown value={selectedRestaurantName} options={restaurantName} onChange={onRestaurantChange} optionLabel="name" placeholder="Select a Restaurant" />
+                            <h4>Restauran</h4>
+                            <Dropdown id="restaurant" name="restaurant" value={formik.values.restaurant} options={restaurantName} onChange={formik.handleChange} optionLabel="name" placeholder="Select a Restaurant" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('restaurant') })} />
+                            <label htmlFor="restaurant" className={classNames({ 'p-error': isFormFieldValid('restaurant') })}></label>
+                            {getFormErrorMessage('restaurant')}
                         </div>
                         <div className="p-field">
                             <h4>Yemek Adı</h4>
-                            <InputText id="foodName "  onChange={onNameChange} type="text"/>
+                            <InputText id="name" name="name" value={formik.values.name}  onChange={formik.handleChange} type="text"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
+                            <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+                            {getFormErrorMessage('name')}
                         </div>
                         <div className="p-field">
                             <h4>Yemek Açıklaması</h4>
-                            <InputText id="description" onChange={onDescriptionChange} type="text"/>
+                            <InputText id="description" name="description" onChange={formik.handleChange} type="text"    autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })}/>
+                            <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
+                            {getFormErrorMessage('description')}
                         </div>
                     </div>
-            <FileUpload ref={fileUploadRef} name="image" url="./" multiple accept="image/*" maxFileSize={1000000}
-                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
-                uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
-                <div className="p-fluid">
+                    <FileUpload ref={fileUploadRef} id="file" name="file" url="./" multiple accept="image/*" maxFileSize={1000000}
+                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                        headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
+                        uploadOptions={uploadOptions} cancelOptions={cancelOptions} className={classNames({ 'p-invalid': isFormFieldValid('file') })} />
+                          <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
+                                        {getFormErrorMessage('file')}
+                    <div className="p-fluid">
                         <div className="card">
-                <h4>Yemek Kategorisi</h4>
-                <Dropdown value={selectedFoodCategoryName} options={foodCategoryName} onChange={onCategoryChange} optionLabel="name" placeholder="Yemek Kategorisi" />
-                <h4>Eklentileri Seç</h4>
-                {/* <Dropdown value={selectedAddonName} options={addonsName} onChange={onAddonChange} optionLabel="name" placeholder="Eklentileri Seç" /> */}
-                <div>
-                    {multiSelect()}
-                </div>
+                            <h4>Yemek Kategorisi</h4>
+                            <Dropdown id="category" name="category" value={formik.values.category} options={foodCategoryName} onChange={formik.handleChange} optionLabel="name" placeholder="Yemek Kategorisi" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('category') })}/>
+                            <label htmlFor="category" className={classNames({ 'p-error': isFormFieldValid('category') })}></label>
+                                        {getFormErrorMessage('category')}
+                            <h4>Eklentileri Seç</h4>
+                            {/* <Dropdown value={selectedAddonName} options={addonsName} onChange={onAddonChange} optionLabel="name" placeholder="Eklentileri Seç" /> */}
+                            <div>
+                                {multiSelect()}
+                                <label htmlFor="category" className={classNames({ 'p-error': isFormFieldValid('category') })}></label>
+                                        {getFormErrorMessage('category')}
+                            </div>
 
-                </div>
-            </div>
-            <div className="p-grid p-fluid">
-                    <div className="p-field p-col-12 p-md-3">
-                        <h4> Fiyat</h4>
-                        <InputNumber id="stacked" value={price} onValueChange={(e) => setPrice(e.value)} showButtons mode="currency" currency="TRY" />
+                        </div>
                     </div>
-                    <div className="p-field p-col-12 p-md-3">
-                        <h4> İndirimli Fiyat</h4>
-                        <InputNumber id="stacked" value={discountPrice} onValueChange={(e) => setDiscountPrice(e.value)} showButtons mode="currency" currency="TRY" />
+                    <div className="p-grid p-fluid">
+                        <div className="p-field p-col-12 p-md-3">
+                            <h4> Fiyat</h4>
+                            <InputNumber id="price" name="price" value={formik.values.price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
+                        </div>
+                        <div className="p-field p-col-12 p-md-3">
+                            <h4> İndirimli Fiyat</h4>
+                            <InputNumber id="discountPrice" name="discountPrice" value={formik.values.discountPrice} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
+                        </div>
                     </div>
-            </div>
-            <div>
-                
-                <h4>Saf Sebze Mi</h4>
-                <InputSwitch checked={vegi} onChange={(e) => setVegi(e.value)} />
-                
-                <h4>Öne Çıkma</h4>
-                <InputSwitch checked={featured} onChange={(e) => setFeatured(e.value)} />
+                    <div>
+                    
+                        <h4>Saf Sebze Mi</h4>
+                        <InputSwitch checked={formik.values.vegi} name="vegi" id="vegi"  onChange={formik.handleChange} />
+                        
+                        <h4>Öne Çıkma</h4>
+                        <InputSwitch checked={formik.values.featured} name="featured" id="featured" onChange={formik.handleChange} />
 
-                <h4>Aktif</h4>
-                <InputSwitch checked={active} onChange={(e) => setActive(e.value)} />
-            </div>
-
-            <S.SubmitBtn>
-
-                <Button type="submit" label="Submit"/>
-            </S.SubmitBtn>
-            </form>
+                        <h4>Aktif</h4>
+                        <InputSwitch checked={formik.values.active} name="active" id="active" onChange={formik.handleChange} />
+                    </div>
+                    <S.SubmitBtn>
+                        <Button type="submit" label="Submit"/>
+                    </S.SubmitBtn>
+                </form>
             </S.ContainerCard>
-        </div>
+    </div>
     )
 }
 

@@ -28,8 +28,8 @@ const FoodsList =  () => {
     const {loading, success, foods: foodList} = res;
 
 
+
      useEffect( () => {
-        //  foodService.getFood().then(data => setFoods(data.items));
         if(!success)
             dispatch(listFood());
         if(success)
