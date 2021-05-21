@@ -43,6 +43,9 @@ export const foodCategoryDetailsReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+    case foodCategoryTypes.FOOD_CATEGORY_DETAILS_RESET:
+      return {};
+
     default:
       return state;
   }

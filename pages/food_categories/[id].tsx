@@ -38,6 +38,9 @@ export const FoodCategoryEdit = () => {
           dispatch({
             type: foodCategoryTypes.FOOD_CATEGORY_UPDATE_RESET
           })
+          dispatch({
+            type: foodCategoryTypes.FOOD_CATEGORY_DETAILS_RESET
+          })
           router.push('/food_categories')
         }
       }else{
