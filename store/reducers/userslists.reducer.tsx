@@ -2,7 +2,7 @@ import {usersListTypes} from "../types/userslists.type"
 
 const initialState = [];
 
-export const usersListsReducer = (state = initialState, action) => {
+export const customerListReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
     switch (action.type) {
@@ -12,7 +12,7 @@ export const usersListsReducer = (state = initialState, action) => {
             return {
                 loading: false,
                 success: true,
-                users: action.payload
+                customers: action.payload
             }
         case usersListTypes.CUSTOMER_LIST_FAIL:
             return {
@@ -20,11 +20,41 @@ export const usersListsReducer = (state = initialState, action) => {
                 error: action.payload
               } 
         case usersListTypes.CUSTOMER_LIST_UPDATE_ROW:
-            const index = state.users.items.findIndex(item => item._id === action.payload.id); 
-            const newArray = [...state.users.items]
+            const index = state.customers.items.findIndex(item => item._id === action.payload.id); 
+            const newArray = [...state.customers.items]
             newArray[index] = action.payload
             return {
-                ...state, users: {...state.users, items: newArray}
+                ...state, customers: {...state.customers, items: newArray}
+            }
+        default:
+            return state;
+    }
+
+}
+
+export const restaurantOwnerListReducer = (state = initialState, action) => {
+    const { type, payload } = action;
+
+    switch (action.type) {
+        case usersListTypes.RESTAURANT_OWNER_LIST_REQUEST:
+            return {loading: true}
+        case usersListTypes.RESTAURANT_OWNER_LIST_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                restaurantOwners: action.payload
+            }
+        case usersListTypes.RESTAURANT_OWNER_LIST_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+              } 
+        case usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW:
+            const index = state.restaurantOwners.items.findIndex(item => item._id === action.payload.id); 
+            const newArray = [...state.restaurantOwners.items]
+            newArray[index] = action.payload
+            return {
+                ...state, restaurantOwners: {...state.restaurantOwners, items: newArray}
             }
         default:
             return state;

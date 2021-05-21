@@ -1,3 +1,4 @@
+import restaurantOwnerList from "../../pages/users/restaurant_owners";
 import UsersListsService from "../services/userslists.service";
 import { usersListTypes } from "../types/userslists.type";
 
@@ -9,7 +10,7 @@ export const listCustomers = () => async (dispatch, getState) => {
         });
 
         const usersListsService = new UsersListsService;
-        const result = await usersListsService.getCustomers();
+        const result = await usersListsService.getUsersByRole('customer');
 
 
 
@@ -22,6 +23,33 @@ export const listCustomers = () => async (dispatch, getState) => {
     } catch (error){
         dispatch({
             type: usersListTypes.CUSTOMER_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        })
+    }
+
+}
+
+export const listRestaurantOwners = () => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: usersListTypes.RESTAURANT_OWNER_LIST_REQUEST,
+        });
+
+        const usersListsService = new UsersListsService;
+        const result = await usersListsService.getUsersByRole('restaurant_owner');
+
+        dispatch({
+            type: usersListTypes.RESTAURANT_OWNER_LIST_SUCCESS,
+            payload: parseDateInAllRows(result),
+        });
+
+    } catch (error){
+        dispatch({
+            type: usersListTypes.RESTAURANT_OWNER_LIST_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

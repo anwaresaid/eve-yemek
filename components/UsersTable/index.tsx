@@ -15,7 +15,7 @@ const UsersTable = (props) => {
 
     const editButton = (rowData) => {
         return (
-            editTagTemplate(()=>{router.push({pathname: '/users/customers/update/'+rowData._id})}, "pi-user-edit")
+            editTagTemplate(()=>{router.push({pathname: '/users/'+props.role+'/update/'+rowData._id})}, "pi-user-edit")
         )
     }
 
