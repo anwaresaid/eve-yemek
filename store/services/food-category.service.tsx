@@ -25,4 +25,13 @@ export default class FoodCategorynService {
 
     return data;
   }
+
+  public async updateFoodCategory(id: string, updateFoodCategoryDTO: any) {
+    const { data } = await axios.put(
+      `https://dev.eve-yemek.com/food-categories/${id}`,
+      updateFoodCategoryDTO
+    );
+
+    return data;
+  }
 }

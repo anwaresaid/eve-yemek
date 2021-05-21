@@ -70,3 +70,29 @@ export const createFoodCategoryReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const updateFoodCategoryReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case foodCategoryTypes.FOOD_CATEGORY_UPDATE_REQUEST:
+      return { loading: true };
+
+    case foodCategoryTypes.FOOD_CATEGORY_UPDATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        updatedFoodCategory: action.payload,
+      };
+
+    case foodCategoryTypes.FOOD_CATEGORY_UPDATE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case foodCategoryTypes.FOOD_CATEGORY_UPDATE_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};

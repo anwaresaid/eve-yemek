@@ -10,7 +10,8 @@ import { InputSwitch } from 'primereact/inputswitch';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import { useRouter } from 'next/router';
-import { getFoodCategoryDetails } from '../../store/actions/foodCategory.action';
+import { getFoodCategoryDetails, updateFoodCategory } from '../../store/actions/foodCategory.action';
+import { foodCategoryTypes } from '../../store/types/foodCategory.type';
 
 export const FoodCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -26,14 +27,23 @@ export const FoodCategoryEdit = () => {
   const foodCategoryDetails = useSelector((state:RootState) => state.foodCategoryDetails);
   const { foodCategory, loading, success: detailsSuccess } = foodCategoryDetails;
 
+  const updatedFoodCategory = useSelector((state:RootState) => state.updateFoodCategory);
+  const { loading: loadingUpdate, success: successUpdate } = updatedFoodCategory;
+
   useEffect(() => {
       if(detailsSuccess && foodCategory.id === router.query.id){
         setIsActive(foodCategory.active);
         setCategoryName(foodCategory.name)
+        if(successUpdate){
+          dispatch({
+            type: foodCategoryTypes.FOOD_CATEGORY_UPDATE_RESET
+          })
+          router.push('/food_categories')
+        }
       }else{
         dispatch(getFoodCategoryDetails(router.query.id))
       }
-  }, [dispatch, detailsSuccess, foodCategory]);
+  }, [dispatch, detailsSuccess, foodCategory, successUpdate]);
 
   const onCategoryNameChange = (e: any) => {
     setCategoryName((e?.target as any)?.value);
@@ -179,11 +189,11 @@ export const FoodCategoryEdit = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     
-    // dispatch(createFoodCategory({
-    //   name: categoryName,
-    //   image: files.objectURL,
-    //   active: isActive
-    // }))
+    dispatch(updateFoodCategory(foodCategory.id, {
+      name: categoryName,
+      image: files.objectURL,
+      active: isActive
+    }))
   };
 
   return (
