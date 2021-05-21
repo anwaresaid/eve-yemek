@@ -11,6 +11,7 @@ import {useRouter} from 'next/router';
 import { listFood } from '../../store/actions/foods.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { RootState } from "typesafe-actions";
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 
 const FoodsList =  () => {
@@ -128,21 +129,26 @@ const FoodsList =  () => {
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
     }
-    
+    console.log(foods);
     return(
-        <S.Table value={foods} removableSort paginator
-        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
-        header={header} className="p-datatable-restaurants"
-        globalFilter={globalFilter} emptyMessage="No Food found.">
-                        <Column field="_id" header="ID" sortable></Column>
-                        <Column body={imageBodyTemplate} header="Resim" sortable></Column>
-                        <Column field="name" header="Ad" sortable></Column>
-                        <Column field="food_category_id" header="Kategori" sortable></Column>
-                        <Column field="price" header="Fiyat" body={priceBodyTemplate} sortable></Column>
-                        <Column body={statusBodyTemplate} header="aktif" sortable></Column>
-                        <Column header= "Islemler" body={actionBodyTemplate}></Column>
-        </S.Table>
+        <div>
+
+            {loading ? <ProgressSpinner/> :  
+            <S.Table value={foods} removableSort paginator
+            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
+            header={header} className="p-datatable-restaurants"
+            globalFilter={globalFilter} emptyMessage="No Food found.">
+                            <Column field="_id" header="ID" sortable></Column>
+                            <Column body={imageBodyTemplate} header="Resim" sortable></Column>
+                            <Column field="name" header="Ad" sortable></Column>
+                            <Column field="food_category_id" header="Kategori" sortable></Column>
+                            <Column field="price" header="Fiyat" body={priceBodyTemplate} sortable></Column>
+                            <Column body={statusBodyTemplate} header="aktif" sortable></Column>
+                            <Column header= "Islemler" body={actionBodyTemplate}></Column>
+            </S.Table>
+}
+        </div>
     )
 
 }

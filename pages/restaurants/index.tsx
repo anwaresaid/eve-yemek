@@ -7,7 +7,8 @@ import { Tag } from 'primereact/tag';
 import { listRestaurant } from "../../store/actions/restaurant.action";
 import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/router';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const Index = () => {
 
@@ -86,7 +87,7 @@ const Index = () => {
 
     return (
         <div>
-
+            {loading ? <ProgressSpinner/> :
             <div className="card">
                 <h1>Restaurants</h1>
                     <S.Table value={restaurants} removableSort paginator
@@ -102,6 +103,7 @@ const Index = () => {
                         <Column header= "Edit" body={actionBodyTemplate} ></Column>
                     </S.Table>
             </div>
+}
         </div>
     );
 }

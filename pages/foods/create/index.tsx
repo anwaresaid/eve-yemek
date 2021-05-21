@@ -19,33 +19,18 @@ import {RootState} from 'typesafe-actions';
 import { useFormik } from 'formik';
 import { classNames } from 'primereact/utils';
 
+
 export const Index = () => {
 
     const [totalSize, setTotalSize] = useState(0);
-    const [files, setFile] = useState(null);
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
-    const [price, setPrice] = useState(0);
     const [addonsName, setAddonsName] = useState(null);
-    const [discountPrice, setDiscountPrice] = useState(0);
-    const [vegi, setVegi] = useState(false);
-    const [featured, setFeatured] = useState(false);
-    const [active, setActive] = useState(false);
-    const [foodName, setFoodName] = useState(null);
-    const [description, setDescription] = useState();
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
     const [formData, setFormData] = useState({});
     const [showMessage, setShowMessage] = useState(false);
     const dispatch = useDispatch();
-
-//setting dropdown selected items
-    const [selectedAddon, setSelectedAddon] = useState(null);
-    const [selectedAddonName, setSelectedAddonName] = useState(null);
-    const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-    const [selectedRestaurantName, setSelectedRestaurantName] = useState(null);
-    const [selectedFoodCategory, setSelectedFoodCategory] = useState(null);
-    const [selectedFoodCategoryName, setSelectedFoodCategoryName] = useState(null);
     
 //use selectors for setting dispatch to variable.
     const addonList = useSelector((state:RootState) => state.listAddons);
@@ -54,8 +39,8 @@ export const Index = () => {
     const { loading: foodCatLoading, success: foodCatSuccess, foodCat: foodCatlist } = resFoodCat;
     const resRestaurants = useSelector((state:RootState) => state.listRestaurant);
     
-    const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants: restaurants } = resRestaurants;
-    
+    const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants } = resRestaurants;
+
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
     const getFormErrorMessage = (name) => {
         return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
@@ -63,30 +48,31 @@ export const Index = () => {
 
     const formik = useFormik({
         initialValues:{
-            restaurant: '',
+            resName: '',
             name: '',
             description: '',
             file: '',
-            category: '',
+            categoryName: '',
+            restaurant_id:'',
+            food_category_id: '',
             addons: '',
+            image: 'imageurl',
             price: 0,
-            discountPrice: 0,
-            vegi: false,
+            discount_price: 0,
+            is_veg: false,
             featured: false,
             active: false
         },
         validate: (data)=>{
-            let errors = {
-                restaurant: '',
-                name: '',
-                description: '',
-                file: '',
-                category: '',
-                addons: '',
-            };
+            let errors:any = {}
 
-            if (!data.restaurant) {
-                errors.restaurant = 'restaurant is required.';
+            if (!data.resName) {
+                errors.resName = 'restaurant is required.';
+            }else{
+                let selectedRestaurants = restaurants.items.filter(data  => {return data.name.localeCompare(formik.values.resName.name)==0;});
+                if(selectedRestaurants!=null)
+                    formik.values.restaurant_id = selectedRestaurants[0]?._id;
+
             }
 
             if (!data.name) {
@@ -99,8 +85,13 @@ export const Index = () => {
                 errors.file = 'Image is required.';
             }
 
-            if (!data.category) {
-                errors.category = 'category is required.';
+            if (!data.categoryName) {
+                errors.categoryName = 'categoryName is required.';
+            }
+            else{
+                let selectedCategory:any = foodCatlist.items.filter(data  => {return data.name.localeCompare(formik.values.categoryName.name)==0;});
+                if(selectedCategory)
+                    formik.values.food_category_id = selectedCategory[0]?._id;
             }
             if (!data.addons) {
                 errors.addons = 'addons required.';
@@ -108,32 +99,17 @@ export const Index = () => {
 
             return errors;
         },
-        onSubmit: (data) => {
+        onSubmit: (data:any) => {
             setFormData(data);
             setShowMessage(true);
-            let selectedRestaurants = restaurants.items.filter(data  => {return data.name.localeCompare(formik.values.restaurant)==0;});
-            let res = selectedRestaurants;
-            console.log("checking full restaurant", res );
-            // dispatch(createFood(data.name, data.file, data.price,data.discountPrice, data.restaurant._id, data.category._id, addons._id , data.vegi, data.featured, data.active, data.description ));
-                const creatingFood = { 
-                                name: data.name, 
-                                image: data.file, 
-                                price: data.price,
-                                discount_price: data.discountPrice , 
-                                restaurant_id: data.restaurant, 
-                                food_category_id: data.category, 
-                                add_on_id: data.addons,
-                                is_veg: data.vegi,
-                                featured: data.featured,
-                                active: data.active,
-                                description: data.description,        
-            }
-            
-            formik.resetForm();
+            console.log("checking data", data);
+            dispatch(createFood(data));
+
         }
     });
 //setting names for dropdowns.
     const settingDropDownNames= () => {
+        var res = restaurants.items
         const addonsNames = addonslist.items.map(addon => {return{name: addon.name}});
         setAddonsName(addonsNames);
 
@@ -160,34 +136,17 @@ export const Index = () => {
     }, [addonSuccess,foodCatSuccess,restaurantsSuccess]);
   
 
-    const filterByReference = (selectedAddons) => {
-        let res = [];
-        res =  addonslist.items.filter(addon => {
-           return selectedAddons.find(sAddon => {
-              return sAddon.name === addon.name;
-           });
-        });
-        return res;
-     }
-    const onCategoryChange= (e:any) => {
-        let selectedCategory = foodCatlist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        formik.values.category = selectedCategory[0];
-        // setSelectedFoodCategory(selectedCategory[0]);
-        setSelectedFoodCategoryName(e.value);
-    }
-    const onRestaurantChange= (e:any) => {
-        let selectedRestaurants = restaurants.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        formik.values.restaurant = selectedRestaurants;
-        // setSelectedRestaurant(selectedRestaurants[0]);
-        setSelectedRestaurantName(e.value);
+    // const filterByReference = (selectedAddons) => {
+    //     let res = [];
+    //     res =  addonslist.items.filter(addon => {
+    //        return selectedAddons.find(sAddon => {
+    //           return sAddon.name === addon.name;
+    //        });
+    //     });
+    //     return res;
+    //  }
 
-    }
-    const onNameChange= (e:any) => {
-        setFoodName((e?.target as any)?.value)
-    }
-    const onDescriptionChange= (e:any) => {
-        setDescription((e?.target as any)?.value)
-    }
+
 
 //image upload functions    
     const onTemplateSelect = (e:any) => {
@@ -270,52 +229,23 @@ export const Index = () => {
         if(addonsName != null)
             return(
                 <div>
-                <MultiSelect id="addons" name="addons" value={formik.values.addons} options={addonsName} onChange={formik.handleChange} optionLabel="name" placeholder="Select addons" display="addons" className={classNames({ 'p-invalid': isFormFieldValid('category') })}/>
-                {/* <MultiSelect value={selectedAddonName} options={addonsName} onChange={(e) => {setSelectedAddonName(e.value); 
-                var selectedaddons; 
-                if(selectedAddonName)
-                    selectedaddons = filterByReference(selectedAddonName);
-                if(selectedaddons){
-                    let addonsId = selectedaddons.map(addon=> addon._id);
-                    setSelectedAddon(addonsId);
-                }
-                }} optionLabel="name" placeholder="Select addons" display="addons" /> */}
+                <MultiSelect id="addons" name="addons" value={formik.values.addons} options={addonsName} onChange={formik.handleChange} optionLabel="name" placeholder="Select addons" display="addons" className={classNames({ 'p-invalid': isFormFieldValid('addons') })}/>
                 </div>
 
             )
     }
-    // on submit function    
-    // const onSubmit = (e:any) => {
-    //     e.preventDefault();
-    //    const creatingFood = { 
-    //             name: foodName, 
-    //             image: files.objectURL, 
-    //             price: price,
-    //             discount_price: discountPrice , 
-    //             restaurant_id: selectedRestaurant._id, 
-    //             food_category_id: selectedFoodCategory._id, 
-    //             add_on_id: selectedAddon._id,
-    //             is_veg: vegi,
-    //             featured: featured,
-    //             active: active,
-    //             description: description,
-    //            }
-    //            dispatch(createFood(creatingFood))     
-    //    };
-    
-    {console.log("name",restaurants)}
     return (
         <div>
             <h1>Oluştur</h1>
             <Toast ref={toast}></Toast>
             <S.ContainerCard>
-                 <form onSubmit = {formik.handleSubmit} >
+                 <form onSubmit={formik.handleSubmit}  >
                     <div className="p-fluid">
                         <div className="p-field">
                             <h4>Restauran</h4>
-                            <Dropdown id="restaurant" name="restaurant" value={formik.values.restaurant} options={restaurantName} onChange={formik.handleChange} optionLabel="name" placeholder="Select a Restaurant" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('restaurant') })} />
-                            <label htmlFor="restaurant" className={classNames({ 'p-error': isFormFieldValid('restaurant') })}></label>
-                            {getFormErrorMessage('restaurant')}
+                            <Dropdown id="resName" name="resName" value={formik.values.resName} options={restaurantName} onChange={formik.handleChange} optionLabel="name" placeholder="Select a Restaurant" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('resName') })} />
+                            <label htmlFor="resName" className={classNames({ 'p-error': isFormFieldValid('resName') })}></label>
+                            {getFormErrorMessage('resName')}
                         </div>
                         <div className="p-field">
                             <h4>Yemek Adı</h4>
@@ -339,15 +269,16 @@ export const Index = () => {
                     <div className="p-fluid">
                         <div className="card">
                             <h4>Yemek Kategorisi</h4>
-                            <Dropdown id="category" name="category" value={formik.values.category} options={foodCategoryName} onChange={formik.handleChange} optionLabel="name" placeholder="Yemek Kategorisi" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('category') })}/>
-                            <label htmlFor="category" className={classNames({ 'p-error': isFormFieldValid('category') })}></label>
-                                        {getFormErrorMessage('category')}
+                            <Dropdown id="categoryName" name="categoryName" value={formik.values.categoryName}
+                             options={foodCategoryName} onChange={formik.handleChange} optionLabel="name"
+                              placeholder="Yemek Kategorisi" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
+                            <label htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
+                                        {getFormErrorMessage('categoryName')}
                             <h4>Eklentileri Seç</h4>
-                            {/* <Dropdown value={selectedAddonName} options={addonsName} onChange={onAddonChange} optionLabel="name" placeholder="Eklentileri Seç" /> */}
                             <div>
                                 {multiSelect()}
-                                <label htmlFor="category" className={classNames({ 'p-error': isFormFieldValid('category') })}></label>
-                                        {getFormErrorMessage('category')}
+                                <label htmlFor="addons" className={classNames({ 'p-error': isFormFieldValid('addons') })}></label>
+                                        {getFormErrorMessage('addons')}
                             </div>
 
                         </div>
@@ -359,7 +290,7 @@ export const Index = () => {
                         </div>
                         <div className="p-field p-col-12 p-md-3">
                             <h4> İndirimli Fiyat</h4>
-                            <InputNumber id="discountPrice" name="discountPrice" value={formik.values.discountPrice} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
+                            <InputNumber id="discount_price" name="discount_price" value={formik.values.discount_price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
                         </div>
                     </div>
                     <div>

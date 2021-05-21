@@ -85,6 +85,11 @@ export const listRestaurantReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       } 
+    case restaurantsTypes.RESTAURAT_LIST_RESET:
+      return {
+        success:false,
+      } 
+
       
     default:
       return state;
