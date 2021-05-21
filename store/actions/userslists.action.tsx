@@ -1,6 +1,7 @@
 import restaurantOwnerList from "../../pages/users/restaurant_owners";
 import UsersListsService from "../services/userslists.service";
 import { usersListTypes } from "../types/userslists.type";
+import {useDispatch} from 'react-redux'
 
 export const listCustomers = () => async (dispatch, getState) => {
     try {
@@ -130,7 +131,6 @@ export const addUser = (data) => async (dispatch, getState) => {
 }
 
 export const updateUser = (id, data) => async (dispatch, getState) => {
-
     try {
         dispatch({
             type: usersListTypes.UPDATE_USER_REQUEST,
@@ -144,16 +144,15 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
         dispatch({
             type: usersListTypes.UPDATE_USER_SUCCESS,
             payload: result,
-        });
+        })
+        var tempRoles = [...data.roles, ...result.roles]
         
         dispatch({
             type: usersListTypes.UPDATE_USER_END
         })
         
-        dispatch({
-            type: usersListTypes.CUSTOMER_LIST_UPDATE_ROW,
-            payload: result
-        })
+        updateEditedRowInStore(tempRoles, result, dispatch)
+        
         
         return result
 
@@ -173,4 +172,21 @@ function parseDateInAllRows(rows){
         row.howLongAgo = Math.round(((new Date()).getTime() - (new Date(row.createdAt)).getTime() ) / (1000*60*60*24)) + " gün önce"
     }
     return rows
+}
+
+function updateEditedRowInStore(roles, result, dispatch){
+    for (let role of roles){
+        switch (role) {
+            case "customer":
+                dispatch({
+                    type: usersListTypes.CUSTOMER_LIST_UPDATE_ROW,
+                    payload: result
+                })
+            case "restaurant_owner":
+                dispatch({
+                    type: usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW,
+                    payload: result
+                })
+        }
+    }
 }

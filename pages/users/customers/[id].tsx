@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {useRouter} from 'next/router'
-import UpdateUser from '../../../../components/UpdateUser'
+import UpdateUser from '../../../components/UpdateUser'
 
-const UpdateRestaurantOwner = () => {
+const UpdateCustomer = () => {
    
     const router = useRouter()
     const [id, setID] = useState(router.query.id)
@@ -10,9 +10,9 @@ const UpdateRestaurantOwner = () => {
     return(
         <UpdateUser 
             id={id}
-            returnTo="/users/restaurant_owners">
+            returnTo="/users/customers">
         </UpdateUser>
     )
 }
 
-export default UpdateRestaurantOwner
+export default UpdateCustomer

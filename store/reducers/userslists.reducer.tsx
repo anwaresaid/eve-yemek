@@ -51,10 +51,10 @@ export const restaurantOwnerListReducer = (state = initialState, action) => {
               } 
         case usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW:
             const index = state.restaurantOwners.items.findIndex(item => item._id === action.payload.id); 
-            const newArray = [...state.restaurantOwners.items]
-            newArray[index] = action.payload
+            const tempResOwners = [...state.restaurantOwners.items]
+            tempResOwners[index] = action.payload
             return {
-                ...state, restaurantOwners: {...state.restaurantOwners, items: newArray}
+                ...state, restaurantOwners: {...state.restaurantOwners, items: tempResOwners}
             }
         default:
             return state;
