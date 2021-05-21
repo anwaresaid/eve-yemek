@@ -15,6 +15,7 @@ import {findRestaurant} from '../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import { InputMask } from 'primereact/inputmask';
+import { restaurantsTypes } from '../../store/types/restaurants.type';
 import {useRouter} from 'next/router';
 import { useFormik } from 'formik';
 import { classNames } from 'primereact/utils';
@@ -27,37 +28,20 @@ import { classNames } from 'primereact/utils';
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
     const [resOwnersName, setResOwnersName] = useState([" "]);
-    const [vegi, setVegi] = useState(false);
-    const [featured, setFeatured] = useState(false);
-    const [active, setActive] = useState(false);
-    const [restaurantName, setRestaurantName] = useState([""]);
-    const [description, setDescription] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState(null);
-    const [email, setEmail] = useState("");
-    const [rating, setRating] = useState(0);
-    const [deliveryTime, setDeliveryTime] = useState(0);
-    const [address, setAddress] = useState("");
-    const [postalCode, setPostalCode] = useState("");
-    const [lat, setLat] = useState(null);
-    const [long, setLong] = useState(null);
-    const [commission, setCommission] = useState(0);
-    const [license, setLicense] = useState("");
-    const [resCharge, setResCharge] = useState(null);
-    const [deliveryRad, setDeliveryRad] = useState(0);
-    const [minAmount, setMinAmount] = useState(0);
+
     const dispatch = useDispatch();
     const router = useRouter();
 //setting dropdown selected items
     const [selectedResOwner, setSelectedResOwner] = useState(null);
-    const [selectedResOwnerName, setSelectedResOwnerName] = useState(null);
-    const [selectedCity, setSelectedCity] = useState(null);
-    const [selectedCounty, setSelectedCounty] = useState(null);
-    const [selectedRestaurantName, setSelectedRestaurantName] = useState("");
     const [reloadCheck, setReloadCheck] = useState(false);
     
 //use selectors for setting dispatch to variable.
+
     const resOwnersList = useSelector((state:RootState) => state.listRestaurantOwners);
     const resDetails = useSelector((state:RootState) => state.findRestaurant);
+    const updatedRestaurant = useSelector((state:RootState) => state.updateRestaurant);
+    
+    const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success:resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
     const { loading: resLoading, success:resSuccess, restaurant} = resDetails;
 
@@ -92,6 +76,7 @@ import { classNames } from 'primereact/utils';
             is_veg : false,
             featured : false,
             active : false,
+            owner : '',
             owner_name : '',
             city : '',
             town : '',
@@ -101,8 +86,9 @@ import { classNames } from 'primereact/utils';
             longtitudeInt: '',
             city_id:'',
             town_id:'',
-            longtitude: 'latcheck',
-            latitude: 'longcheck'
+            longtitude: '',
+            latitude: '',
+            is_open: false,
 
         },
         validate: (data)=>{
@@ -154,16 +140,14 @@ import { classNames } from 'primereact/utils';
                 errors.delivery_radius = 'delivery radius is required.';
             }
             
-            if (!data.owner_name) {
-                errors.owner_name = 'owner name is required.';
+            if (!data.owner) {
+                errors.owner = 'owner name is required.';
             }
             else
             {
-                let selectedResOwners = resOwnersList.restaurantOwners.items.filter(data  => {return data.name.localeCompare(formik.values.owner_name.name)==0;});
-                // console.log("checking owners",resOwnersList.restaurantOwners.items);
-                // console.log("checking res owners",selectedResOwners);
-                // console.log("checking formik",formik.values.owner_name.name);
+                let selectedResOwners = resOwnersList.restaurantOwners.items.filter(data  => {return data.name.localeCompare(formik.values.owner.name)==0;});
                 formik.values.owner_id = selectedResOwners[0]?._id;
+                formik.values.owner_name = formik.values.owner.name;
 
             }
               
@@ -192,14 +176,14 @@ import { classNames } from 'primereact/utils';
             }
             else
             {
-                //formik.values.latitude = formik.values.latitudeInt.toString();
+                formik.values.longtitude = formik.values.longtitudeInt?.toString(); 
             }
             if (!data.longtitudeInt) {
                 errors.longtitudeInt = 'longtitude is required.';
             }
             else
             {
-                //formik.values.longtitude = formik.values.longtitudeInt.toString(); 
+                formik.values.latitude = formik.values.latitudeInt?.toString();
             }
             return errors;
         },
@@ -227,12 +211,16 @@ import { classNames } from 'primereact/utils';
         if(!reloadCheck)
         // if(!resOwnerslist)
         {
-            console.log("checking insdie the if statement")
             dispatch(listRestaurantOwners());
         // if(!restaurant)
             dispatch(findRestaurant(router.query.id));
         }
-     }, [dispatch,router.query.id]);
+        if(successUpdate){
+            dispatch({type:restaurantsTypes.RESTAURAT_UPDATE_RESET});
+            dispatch({type:restaurantsTypes.RESTAURAT_FIND_RESET});
+            //router.push('/restaurants');
+        }
+     }, [dispatch,router.query.id,successUpdate]);
 
     useEffect(() => {
         if(resOnwersSuccess&&resSuccess){
@@ -241,7 +229,7 @@ import { classNames } from 'primereact/utils';
             let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(restaurant.name)==0;});
             return selectedResOwners[0];
      })
-                    formik.values.owner_name = {name : restaurant.owner_name};
+                    formik.values.owner = {name : restaurant.owner_name};
                     formik.values.name = restaurant.name;
                     formik.values.description = restaurant.description;
                     formik.values.email = restaurant.email;
@@ -276,26 +264,7 @@ import { classNames } from 'primereact/utils';
         { name: 'London', code: 'LDN' },
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
-    ];
-//on change functions    
-    const onResOwnerChange= (e:any) => {
-        let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        setSelectedResOwner(selectedResOwners[0]);
-        setSelectedResOwnerName(e.value);
-    }
-    const onCityChange = (e) => {
-        setSelectedCity(e.value);
-    }
-    const onCountyChange = (e) => {
-        setSelectedCounty(e.value);
-    }
-    const onNameChange= (e:any) => {
-        setRestaurantName((e?.target as any)?.value);
-        setSelectedRestaurantName((e?.target as any)?.value);
-    }
-    const onDescriptionChange= (e:any) => {
-        setDescription((e?.target as any)?.value)
-    }
+    ];   
 
 //image upload functions    
     const onTemplateSelect = (e:any) => {
@@ -374,39 +343,8 @@ import { classNames } from 'primereact/utils';
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
 
-    // on submit function    
-    // const onSubmit = (e:any) => {
-    //     e.preventDefault();
-    //    const updatingRestaurant = { 
-    //     owner_id: selectedResOwner._id,
-    //     name : selectedRestaurantName,
-    //     description : description,
-    //     image : restaurant.image,
-    //     phone : phoneNumber,
-    //     email : email,
-    //     rating : rating,
-    //     for_two:10,
-    //     delivery_time : deliveryTime,
-    //     commission_rate : commission,
-    //     license_code : license,
-    //     restaurant_charges : resCharge,
-    //     delivery_radius : deliveryRad,
-    //     is_veg : vegi,
-    //     featured : featured,
-    //     active : active,
-    //     owner_name : selectedResOwner.name,
-    //     city_id : selectedCity.name,
-    //     town_id : selectedCounty.name,
-    //     is_agreement : true,
-    //     minimum_order_amount: minAmount,
-    //     latitude: lat.toString(),
-    //     longtitude: long.toString(),            
-    //            }
-    //            dispatch(updateRestaurant(router.query.id,updatingRestaurant));     
-    //    };
-    // console.log("data", formik.values);
-    // console.log("res", restaurant);
-
+    console.log(formik.values);
+    console.log(restaurant);
     return (
         <div>
             <h1>Oluştur</h1>
@@ -429,9 +367,9 @@ import { classNames } from 'primereact/utils';
                         </div>
                         <div className="p-field p-col-12">
                             <h4>Restoran Sahibi </h4>
-                            <Dropdown  id="owner_name " name="owner_name"  value={formik.values.owner_name} options={resOwnersName} onChange={formik.handleChange} optionLabel="name" placeholder="Select an Owner" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('owner_name') })} />
-                            <label htmlFor="owner_name" className={classNames({ 'p-error': isFormFieldValid('owner_name') })}></label>
-                            {getFormErrorMessage('owner_name')}
+                            <Dropdown  id="owner " name="owner"  value={formik.values.owner} options={resOwnersName} onChange={formik.handleChange} optionLabel="name" placeholder="Select an Owner" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('owner') })} />
+                            <label htmlFor="owner" className={classNames({ 'p-error': isFormFieldValid('owner') })}></label>
+                            {getFormErrorMessage('owner')}
                         </div>
                     </div>
                     <div className="p-field p-col-12">

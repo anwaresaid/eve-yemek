@@ -93,7 +93,6 @@ export const getSingleUser = (id) => async (dispatch, getState) => {
 }
 
 export const addUser = (data) => async (dispatch, getState) => {
-    console.log(data)
     try {
 
         dispatch({

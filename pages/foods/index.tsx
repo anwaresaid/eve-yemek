@@ -17,7 +17,6 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 const FoodsList =  () => {
     const [foods, setFoods] = useState([]);
     const [first1, setFirst1] = useState(0);
-    const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
@@ -129,7 +128,6 @@ const FoodsList =  () => {
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
     }
-    console.log(foods);
     return(
         <div>
 

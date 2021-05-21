@@ -13,7 +13,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 const Index = () => {
 
 
-    const [restaurants, setRestaurants] = useState([]);
+
     const [first1, setFirst1] = useState(0);
     const [rows1, setRows1] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
@@ -21,15 +21,14 @@ const Index = () => {
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const dispatch = useDispatch();
     const resList = useSelector((state: RootState) =>  state.listRestaurant)
-    const {loading, success, restaurants: allRes} = resList;
+    const {loading, success, restaurants} = resList;
     const router = useRouter();
     useEffect(() => {
         // restaurantService.getRestaurants().then(data => setRestaurants(data.items));
-        if(!success)
-            dispatch(listRestaurant());
-        if(success)
-            setRestaurants(allRes.items);
-        }, [success]);
+      
+        dispatch(listRestaurant());
+
+        }, [dispatch]);
 
 //pagination
 
@@ -77,7 +76,6 @@ const Index = () => {
         }
     }
     const actionBodyTemplate = (rowData) => {
-        console.log("row data", rowData);
         return (
             <React.Fragment>
                 <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/restaurants/${rowData._id}`)}}/>
@@ -87,10 +85,10 @@ const Index = () => {
 
     return (
         <div>
-            {loading ? <ProgressSpinner/> :
+            {loading ? <ProgressSpinner/> :success && 
             <div className="card">
                 <h1>Restaurants</h1>
-                    <S.Table value={restaurants} removableSort paginator
+                    <S.Table value={restaurants.items} removableSort paginator
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="{totalRecords} kayıttan {first} - {last} arasındaki kayıtlar gösteriliyor" rows={10} rowsPerPageOptions={[10,20,50]}
                     header={header} className="p-datatable-restaurants"

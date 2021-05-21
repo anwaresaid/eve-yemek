@@ -15,7 +15,9 @@ import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import { InputMask } from 'primereact/inputmask';
 import { useFormik } from 'formik';
+import { restaurantsTypes } from "../../../store/types/restaurants.type";
 import { classNames } from 'primereact/utils';
+import { useRouter } from 'next/router';
 
 
     const CreateRestaurants = () => {
@@ -24,7 +26,11 @@ import { classNames } from 'primereact/utils';
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
     const [resOwnersName, setResOwnersName] = useState([" "]);
+    const restaurantCreate = useSelector((state:RootState) => state.createRestaurant);
+  const { success } = restaurantCreate;
+    
     const dispatch = useDispatch();
+    const router = useRouter();
     
 //use selectors for setting dispatch to variable.
     const resOwnersList = useSelector((state:RootState) => state.listRestaurantOwners);
@@ -71,8 +77,9 @@ import { classNames } from 'primereact/utils';
             longtitudeInt: '',
             city_id:'',
             town_id:'',
-            longtitude: 'latcheck',
-            latitude: 'longcheck'
+            longtitude: '',
+            latitude: '',
+            is_open: false,
 
         },
         validate: (data)=>{
@@ -124,14 +131,14 @@ import { classNames } from 'primereact/utils';
                 errors.delivery_radius = 'delivery radius is required.';
             }
             
-            if (!data.owner_name) {
-                errors.owner_name = 'owner name is required.';
+            if (!data.owner) {
+                errors.owner = 'owner name is required.';
             }
             else
             {
-                let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(formik.values.owner_name.name)==0;});
+                let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(formik.values.owner?.name)==0;});
                 formik.values.owner_id = selectedResOwners[0]?._id;
-
+                formik.values.owner_name = formik.values.owner?.name;
             }
               
             if (!data.city) {
@@ -159,20 +166,18 @@ import { classNames } from 'primereact/utils';
             }
             else
             {
-                //formik.values.latitude = formik.values.latitudeInt.toString();
+                formik.values.latitude = formik.values.latitudeInt?.toString();
             }
             if (!data.longtitudeInt) {
                 errors.longtitudeInt = 'longtitude is required.';
             }
             else
             {
-                //formik.values.longtitude = formik.values.longtitudeInt.toString(); 
+                formik.values.longtitude = formik.values.longtitudeInt?.toString(); 
             }
-            console.log(formik.values.longtitude);
             return errors;
         },
         onSubmit: (data:any) => {
-            console.log("data", data);
             // setFormData(data);
             // setShowMessage(true);
             dispatch(createRestaurant(data));
@@ -185,11 +190,16 @@ import { classNames } from 'primereact/utils';
         if(!resOnwersSuccess)
             dispatch(listRestaurantOwners());
         if(resOnwersSuccess)
+        {
             settingDropDownNames();
-          
+        } 
+        if(success){
+            router.push('/restaurants');
+            dispatch({type: restaurantsTypes.RESTAURAT_CREATE_RESET});
+        }
 
        
-    }, [resOnwersSuccess]);
+    }, [resOnwersSuccess,success]);
   
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -284,7 +294,6 @@ import { classNames } from 'primereact/utils';
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
-
     return (
         <div>
             <h1>Oluştur</h1>
@@ -307,9 +316,9 @@ import { classNames } from 'primereact/utils';
                         </div>
                         <div className="p-field p-col-12">
                             <h4>Restoran Sahibi </h4>
-                            <Dropdown  id="owner_name " name="owner_name"  value={formik.values.owner_name} options={resOwnersName} onChange={formik.handleChange} optionLabel="name" placeholder="Select an Owner" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('owner_name') })} />
-                            <label htmlFor="owner_name" className={classNames({ 'p-error': isFormFieldValid('owner_name') })}></label>
-                            {getFormErrorMessage('owner_name')}
+                            <Dropdown  id="owner " name="owner"  value={formik.values.owner} options={resOwnersName} onChange={formik.handleChange} optionLabel="name" placeholder="Select an Owner" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('owner') })} />
+                            <label htmlFor="owner" className={classNames({ 'p-error': isFormFieldValid('owner') })}></label>
+                            {getFormErrorMessage('owner')}
                         </div>
                     </div>
                     <div className="p-field p-col-12">

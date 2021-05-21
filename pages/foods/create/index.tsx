@@ -28,8 +28,6 @@ export const Index = () => {
     const [addonsName, setAddonsName] = useState(null);
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
-    const [formData, setFormData] = useState({});
-    const [showMessage, setShowMessage] = useState(false);
     const dispatch = useDispatch();
     
 //use selectors for setting dispatch to variable.
@@ -100,9 +98,8 @@ export const Index = () => {
             return errors;
         },
         onSubmit: (data:any) => {
-            setFormData(data);
-            setShowMessage(true);
-            console.log("checking data", data);
+            // setFormData(data);
+            // setShowMessage(true);
             dispatch(createFood(data));
 
         }

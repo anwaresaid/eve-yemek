@@ -32,8 +32,6 @@ export const EditFoods = () => {
     const [restaurantName, setRestaurantName] = useState(null);
     const [setIsDone, setSetIsDone] = useState(false);
     const router = useRouter();
-    const [showMessage, setShowMessage] = useState(false);
-    const [formData, setFormData] = useState({});
     const dispatch = useDispatch();
 
 
@@ -118,12 +116,11 @@ export const EditFoods = () => {
             if (!data.addons) {
                 errors.addons = 'addons required.';
             }
-            console.log(errors);
             return errors;
         },
         onSubmit: (data:any) => {
-            setFormData(data);
-            setShowMessage(true);
+            // setFormData(data);
+            // setShowMessage(true);
             dispatch(updateFood(router.query.id,data));
             
         }

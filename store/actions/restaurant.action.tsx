@@ -86,10 +86,6 @@ export const listRestaurant = () => async (dispatch, getState) => {
       type: restaurantsTypes.RESTAURAT_LIST_SUCCESS,
       payload: res,
     });
-
-    // dispatch({
-    //   type: restaurantsTypes.RESTAURAT_LIST_RESET,
-    // })
   } catch (error) {
     dispatch({
       type: restaurantsTypes.RESTAURAT_LIST_FAIL,
