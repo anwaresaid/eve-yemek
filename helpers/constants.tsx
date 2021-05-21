@@ -23,7 +23,7 @@ export const allMenuItems:any = [
     ] },
     { label:"Hesap Ayarları", expanded: true, items: [
         { label:"Müşteriler",  url:"/users/customers", roles:["admin"] },
-        { label:"Kullanıcı Ekle", url:"users/add",  roles:["admin"] },
+        { label:"Kullanıcı Oluştur", url:"/users/add",  roles:["admin"] },
     ] },
     { separator:true },
     { label:"Çıkış yap",               url:"/auth/logout",   roles:["admin", "restaurant_owner"] }

@@ -73,6 +73,13 @@ export const addUserReducer = (state = initialState, action) => {
                 adding: false,
                 error: action.payload
             } 
+        case usersListTypes.ADD_USER_END:
+            return {
+                adding: false,
+                success: false,
+                error: null,
+                response: null
+            }
               
         default:
             return state;

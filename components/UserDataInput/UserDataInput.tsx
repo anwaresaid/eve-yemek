@@ -3,7 +3,7 @@ import {InputText} from 'primereact/inputtext'
 import {useRouter} from 'next/router'
 import {useDispatch,useSelector} from 'react-redux'
 import {addUser, updateUser} from '../../store/actions/userslists.action'
-import {RootState} from 'typesafe-actions'
+import {InputSwitch} from 'primereact/inputswitch';
 import { Button } from 'primereact/button'
 import { MultiSelect } from 'primereact/multiselect';
 import { ProgressSpinner } from 'primereact/progressspinner'
@@ -59,28 +59,32 @@ const UserDataInput = (props) => {
                 <h1>{updating ? "Kullanıcı Düzenle" : "Kullanıcı Oluştur"}</h1>
                 <form onSubmit={onSubmit}>
                     <div className="p-fluid">
-                        <div className="p-field p-col-12">
+                        <div className="p-field">
                             <h4>Rol</h4>
                             <MultiSelect id="roles" value={inputData.roles ?? ["Error"]} placeholder="Rol seçin" options={usersListTypes.USER_ROLES_FOR_DROPDOWN} onChange={(e) => setInputData({...inputData, roles: e.value})}/>
                         </div>
-                        <div className="p-field p-col-12">
+                        <div className="p-field">
                             <h4>Ad</h4>
                             <InputText id="name" value={inputData.name} type="text" onChange={(e) => setInputData({...inputData, name: e.target.value})}/>
                         </div>
-                        <div className="p-field p-col-12">
+                        <div className="p-field">
                             <h4>E-Posta</h4>
                             <InputText id="email" value={inputData.email} type="text" onChange={(e) => setInputData({...inputData, email: e.target.value})}/>
                         </div>
-                        <div className="p-field p-col-12">
+                        <div className="p-field">
                             <h4>Telefon</h4>
                             <InputText id="phone" value={inputData.phone} type="text" onChange={(e) => setInputData({...inputData, phone: e.target.value})}/>
                         </div>
                         {!updating && 
-                            <div className="p-field p-col-12">
+                            <div className="p-field">
                             <h4>Şifre</h4>
                             <InputText id="password" type="password" value={inputData.password} onChange={(e) => setInputData({...inputData, password: e.target.value})}></InputText>
                         </div>
                         }
+                        <div className="p-field">
+                            <h4>Aktif</h4>
+                            <InputSwitch checked={true}></InputSwitch>
+                        </div>
                     </div>
                     <Button type="submit" label={updating ? "Düzenle" : "Oluştur"}></Button>
                 </form>
