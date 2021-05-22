@@ -37,7 +37,7 @@ import { classNames } from 'primereact/utils';
     
 //use selectors for setting dispatch to variable.
 
-    const resOwnersList = useSelector((state:RootState) => state.listRestaurantOwners);
+    const resOwnersList = useSelector((state:RootState) => state.listResOwners);
     const resDetails = useSelector((state:RootState) => state.findRestaurant);
     const updatedRestaurant = useSelector((state:RootState) => state.updateRestaurant);
     
@@ -145,7 +145,7 @@ import { classNames } from 'primereact/utils';
             }
             else
             {
-                let selectedResOwners = resOwnersList.restaurantOwners.items.filter(data  => {return data.name.localeCompare(formik.values.owner.name)==0;});
+                let selectedResOwners = resOwnersList.restaurantOwners?.items.filter(data  => {return data.name.localeCompare(formik.values.owner.name)==0;});
                 formik.values.owner_id = selectedResOwners[0]?._id;
                 formik.values.owner_name = formik.values.owner.name;
 
@@ -247,7 +247,8 @@ import { classNames } from 'primereact/utils';
                     formik.values.is_veg = restaurant.is_veg;
                     formik.values.active = restaurant.active;
                     formik.values.featured = restaurant.featured;
-    }
+                    console.log("setting formik data");
+                }
     }, [resOnwersSuccess,resSuccess])
 
     const cities = [
@@ -342,8 +343,11 @@ import { classNames } from 'primereact/utils';
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
-
+    
+    console.log("checking successes", resSuccess,resOnwersSuccess);
     console.log(formik.values);
+    console.log("checking resOwners list", resOwnersList);
+    console.log("res details", resDetails);
     console.log(restaurant);
     return (
         <div>
