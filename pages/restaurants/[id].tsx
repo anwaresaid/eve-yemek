@@ -188,9 +188,6 @@ import { classNames } from 'primereact/utils';
             return errors;
         },
         onSubmit: (data:any) => {
-            console.log("data", data);
-            // setFormData(data);
-            // setShowMessage(true);
             dispatch(updateRestaurant(router.query.id,data));
             
         }
@@ -247,7 +244,6 @@ import { classNames } from 'primereact/utils';
                     formik.values.is_veg = restaurant.is_veg;
                     formik.values.active = restaurant.active;
                     formik.values.featured = restaurant.featured;
-                    console.log("setting formik data");
                 }
     }, [resOnwersSuccess,resSuccess])
 
@@ -343,12 +339,6 @@ import { classNames } from 'primereact/utils';
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
-    
-    console.log("checking successes", resSuccess,resOnwersSuccess);
-    console.log(formik.values);
-    console.log("checking resOwners list", resOwnersList);
-    console.log("res details", resDetails);
-    console.log(restaurant);
     return (
         <div>
             <h1>Oluştur</h1>

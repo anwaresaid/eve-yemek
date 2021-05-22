@@ -19,13 +19,13 @@ export const customerListReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
               } 
-        // case usersListTypes.CUSTOMER_LIST_UPDATE_ROW:
-        //     const index = state.customers.items.findIndex(item => item._id === action.payload.id); 
-        //     const newArray = [...state.customers.items]
-        //     newArray[index] = action.payload
-        //     return {
-        //         ...state, customers: {...state.customers, items: newArray}
-        //     }
+        case usersListTypes.CUSTOMER_LIST_UPDATE_ROW:
+            const index = state.customers.items.findIndex(item => item._id === action.payload.id); 
+            const newArray = [...state.customers.items]
+            newArray[index] = action.payload
+            return {
+                ...state, customers: {...state.customers, items: newArray}
+            }
         default:
             return state;
     }
@@ -49,13 +49,13 @@ export const restaurantOwnerListReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
               } 
-        // case usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW:
-        //     const index = state.restaurantOwners.items.findIndex(item => item._id === action.payload.id); 
-        //     const tempResOwners = [...state.restaurantOwners.items]
-        //     tempResOwners[index] = action.payload
-        //     return {
-        //         ...state, restaurantOwners: {...state.restaurantOwners, items: tempResOwners}
-        //     }
+        case usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW:
+            const index = state.restaurantOwners.items.findIndex(item => item._id === action.payload.id); 
+            const tempResOwners = [...state.restaurantOwners.items]
+            tempResOwners[index] = action.payload
+            return {
+                ...state, restaurantOwners: {...state.restaurantOwners, items: tempResOwners}
+            }
         default:
             return state;
     }
