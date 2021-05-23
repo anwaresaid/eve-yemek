@@ -11,12 +11,12 @@ import {useRouter} from 'next/router';
 import { listFood } from '../../store/actions/foods.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { RootState } from "typesafe-actions";
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 
 const FoodsList =  () => {
     const [foods, setFoods] = useState([]);
     const [first1, setFirst1] = useState(0);
-    const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
@@ -28,8 +28,8 @@ const FoodsList =  () => {
     const {loading, success, foods: foodList} = res;
 
 
+
      useEffect( () => {
-        //  foodService.getFood().then(data => setFoods(data.items));
         if(!success)
             dispatch(listFood());
         if(success)
@@ -128,21 +128,25 @@ const FoodsList =  () => {
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
     }
-    
     return(
-        <S.Table value={foods} removableSort paginator
-        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
-        header={header} className="p-datatable-restaurants"
-        globalFilter={globalFilter} emptyMessage="No Food found.">
-                        <Column field="_id" header="ID" sortable></Column>
-                        <Column body={imageBodyTemplate} header="Resim" sortable></Column>
-                        <Column field="name" header="Ad" sortable></Column>
-                        <Column field="food_category_id" header="Kategori" sortable></Column>
-                        <Column field="price" header="Fiyat" body={priceBodyTemplate} sortable></Column>
-                        <Column body={statusBodyTemplate} header="aktif" sortable></Column>
-                        <Column header= "Islemler" body={actionBodyTemplate}></Column>
-        </S.Table>
+        <div>
+
+            {loading ? <ProgressSpinner/> :  
+            <S.Table value={foods} removableSort paginator
+            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
+            header={header} className="p-datatable-restaurants"
+            globalFilter={globalFilter} emptyMessage="No Food found.">
+                            <Column field="_id" header="ID" sortable></Column>
+                            <Column body={imageBodyTemplate} header="Resim" sortable></Column>
+                            <Column field="name" header="Ad" sortable></Column>
+                            <Column field="food_category_id" header="Kategori" sortable></Column>
+                            <Column field="price" header="Fiyat" body={priceBodyTemplate} sortable></Column>
+                            <Column body={statusBodyTemplate} header="aktif" sortable></Column>
+                            <Column header= "Islemler" body={actionBodyTemplate}></Column>
+            </S.Table>
+}
+        </div>
     )
 
 }

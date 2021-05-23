@@ -22,6 +22,7 @@ export default combineReducers({
     listRestaurant: listRestaurantReducer,
     findRestaurant: findRestaurantReducer,
     createRestaurant: createRestaurantReducer,
+    listResOwners: listRestaurantOwnersReducer,
 
     createFood: createFoodReducer,
     updateFood: updateFoodReducer,

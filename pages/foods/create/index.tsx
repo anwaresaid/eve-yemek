@@ -16,32 +16,19 @@ import {listRestaurant} from '../../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
+import { useFormik } from 'formik';
+import { classNames } from 'primereact/utils';
+
 
 export const Index = () => {
 
     const [totalSize, setTotalSize] = useState(0);
-    const [files, setFile] = useState(null);
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
-    const [price, setPrice] = useState(0);
     const [addonsName, setAddonsName] = useState(null);
-    const [discountPrice, setDiscountPrice] = useState(0);
-    const [vegi, setVegi] = useState(false);
-    const [featured, setFeatured] = useState(false);
-    const [active, setActive] = useState(false);
-    const [foodName, setFoodName] = useState(null);
-    const [description, setDescription] = useState();
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
     const dispatch = useDispatch();
-
-//setting dropdown selected items
-    const [selectedAddon, setSelectedAddon] = useState(null);
-    const [selectedAddonName, setSelectedAddonName] = useState(null);
-    const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-    const [selectedRestaurantName, setSelectedRestaurantName] = useState(null);
-    const [selectedFoodCategory, setSelectedFoodCategory] = useState(null);
-    const [selectedFoodCategoryName, setSelectedFoodCategoryName] = useState(null);
     
 //use selectors for setting dispatch to variable.
     const addonList = useSelector((state:RootState) => state.listAddons);
@@ -49,11 +36,77 @@ export const Index = () => {
     const resFoodCat = useSelector((state:RootState) => state.listFoodCategory);
     const { loading: foodCatLoading, success: foodCatSuccess, foodCat: foodCatlist } = resFoodCat;
     const resRestaurants = useSelector((state:RootState) => state.listRestaurant);
+    
+    const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants } = resRestaurants;
 
-    const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants: restaurants } = resRestaurants;
+    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+    const getFormErrorMessage = (name) => {
+        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+    };
 
+    const formik = useFormik({
+        initialValues:{
+            resName: '',
+            name: '',
+            description: '',
+            file: '',
+            categoryName: '',
+            restaurant_id:'',
+            food_category_id: '',
+            addons: '',
+            image: 'imageurl',
+            price: 0,
+            discount_price: 0,
+            is_veg: false,
+            featured: false,
+            active: false
+        },
+        validate: (data)=>{
+            let errors:any = {}
+
+            if (!data.resName) {
+                errors.resName = 'restaurant is required.';
+            }else{
+                let selectedRestaurants = restaurants.items.filter(data  => {return data.name.localeCompare(formik.values.resName.name)==0;});
+                if(selectedRestaurants!=null)
+                    formik.values.restaurant_id = selectedRestaurants[0]?._id;
+
+            }
+
+            if (!data.name) {
+                errors.name = 'name is required.';
+            }
+            if (!data.description) {
+                errors.description = 'description is required.';
+            }
+            if (!data.file) {
+                errors.file = 'Image is required.';
+            }
+
+            if (!data.categoryName) {
+                errors.categoryName = 'categoryName is required.';
+            }
+            else{
+                let selectedCategory:any = foodCatlist.items.filter(data  => {return data.name.localeCompare(formik.values.categoryName.name)==0;});
+                if(selectedCategory)
+                    formik.values.food_category_id = selectedCategory[0]?._id;
+            }
+            if (!data.addons) {
+                errors.addons = 'addons required.';
+            }
+
+            return errors;
+        },
+        onSubmit: (data:any) => {
+            // setFormData(data);
+            // setShowMessage(true);
+            dispatch(createFood(data));
+
+        }
+    });
 //setting names for dropdowns.
     const settingDropDownNames= () => {
+        var res = restaurants.items
         const addonsNames = addonslist.items.map(addon => {return{name: addon.name}});
         setAddonsName(addonsNames);
 
@@ -80,32 +133,17 @@ export const Index = () => {
     }, [addonSuccess,foodCatSuccess,restaurantsSuccess]);
   
 
-    const filterByReference = (selectedAddons) => {
-        let res = [];
-        res =  addonslist.items.filter(addon => {
-           return selectedAddons.find(sAddon => {
-              return sAddon.name === addon.name;
-           });
-        });
-        return res;
-     }
-    const onCategoryChange= (e:any) => {
-        let selectedCategory = foodCatlist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        setSelectedFoodCategory(selectedCategory[0]);
-        setSelectedFoodCategoryName(e.value);
-    }
-    const onRestaurantChange= (e:any) => {
-        let selectedRestaurants = restaurants.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        setSelectedRestaurant(selectedRestaurants[0]);
-        setSelectedRestaurantName(e.value);
+    // const filterByReference = (selectedAddons) => {
+    //     let res = [];
+    //     res =  addonslist.items.filter(addon => {
+    //        return selectedAddons.find(sAddon => {
+    //           return sAddon.name === addon.name;
+    //        });
+    //     });
+    //     return res;
+    //  }
 
-    }
-    const onNameChange= (e:any) => {
-        setFoodName((e?.target as any)?.value)
-    }
-    const onDescriptionChange= (e:any) => {
-        setDescription((e?.target as any)?.value)
-    }
+
 
 //image upload functions    
     const onTemplateSelect = (e:any) => {
@@ -123,7 +161,8 @@ export const Index = () => {
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
-        setFile(e.files[0]);
+        // setFile(e.files[0]);
+        formik.values.file=e.files[0];
         e.files.forEach(file => {
             _totalSize += (file.size || 0);
         });
@@ -187,102 +226,87 @@ export const Index = () => {
         if(addonsName != null)
             return(
                 <div>
-                <MultiSelect value={selectedAddonName} options={addonsName} onChange={(e) => {setSelectedAddonName(e.value); 
-                var selectedaddons; 
-                if(selectedAddonName)
-                    selectedaddons = filterByReference(selectedAddonName);
-                if(selectedaddons){
-                    let addonsId = selectedaddons.map(addon=> addon._id);
-                    setSelectedAddon(addonsId);
-                }
-                }} optionLabel="name" placeholder="Select addons" display="addons" />
+                <MultiSelect id="addons" name="addons" value={formik.values.addons} options={addonsName} onChange={formik.handleChange} optionLabel="name" placeholder="Select addons" display="addons" className={classNames({ 'p-invalid': isFormFieldValid('addons') })}/>
                 </div>
 
             )
     }
-    // on submit function    
-    const onSubmit = (e:any) => {
-        e.preventDefault();
-       const creatingFood = { 
-                name: foodName, 
-                image: files.objectURL, 
-                price: price,
-                discount_price: discountPrice , 
-                restaurant_id: selectedRestaurant._id, 
-                food_category_id: selectedFoodCategory._id, 
-                add_on_id: selectedAddon._id,
-                is_veg: vegi,
-                featured: featured,
-                active: active,
-                description: description,
-               }
-               dispatch(createFood(creatingFood))     
-       };
     return (
         <div>
             <h1>Oluştur</h1>
             <Toast ref={toast}></Toast>
-             <S.ContainerCard>
-                 <form onSubmit = {onSubmit} >
+            <S.ContainerCard>
+                 <form onSubmit={formik.handleSubmit}  >
                     <div className="p-fluid">
                         <div className="p-field">
-                        <h4>Restauran</h4>
-                <Dropdown value={selectedRestaurantName} options={restaurantName} onChange={onRestaurantChange} optionLabel="name" placeholder="Select a Restaurant" />
+                            <h4>Restauran</h4>
+                            <Dropdown id="resName" name="resName" value={formik.values.resName} options={restaurantName} onChange={formik.handleChange} optionLabel="name" placeholder="Select a Restaurant" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('resName') })} />
+                            <label htmlFor="resName" className={classNames({ 'p-error': isFormFieldValid('resName') })}></label>
+                            {getFormErrorMessage('resName')}
                         </div>
                         <div className="p-field">
                             <h4>Yemek Adı</h4>
-                            <InputText id="foodName "  onChange={onNameChange} type="text"/>
+                            <InputText id="name" name="name" value={formik.values.name}  onChange={formik.handleChange} type="text"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
+                            <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+                            {getFormErrorMessage('name')}
                         </div>
                         <div className="p-field">
                             <h4>Yemek Açıklaması</h4>
-                            <InputText id="description" onChange={onDescriptionChange} type="text"/>
+                            <InputText id="description" name="description" onChange={formik.handleChange} type="text"    autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })}/>
+                            <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
+                            {getFormErrorMessage('description')}
                         </div>
                     </div>
-            <FileUpload ref={fileUploadRef} name="image" url="./" multiple accept="image/*" maxFileSize={1000000}
-                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
-                uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
-                <div className="p-fluid">
+                    <FileUpload ref={fileUploadRef} id="file" name="file" url="./" multiple accept="image/*" maxFileSize={1000000}
+                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                        headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
+                        uploadOptions={uploadOptions} cancelOptions={cancelOptions} className={classNames({ 'p-invalid': isFormFieldValid('file') })} />
+                          <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
+                                        {getFormErrorMessage('file')}
+                    <div className="p-fluid">
                         <div className="card">
-                <h4>Yemek Kategorisi</h4>
-                <Dropdown value={selectedFoodCategoryName} options={foodCategoryName} onChange={onCategoryChange} optionLabel="name" placeholder="Yemek Kategorisi" />
-                <h4>Eklentileri Seç</h4>
-                {/* <Dropdown value={selectedAddonName} options={addonsName} onChange={onAddonChange} optionLabel="name" placeholder="Eklentileri Seç" /> */}
-                <div>
-                    {multiSelect()}
-                </div>
+                            <h4>Yemek Kategorisi</h4>
+                            <Dropdown id="categoryName" name="categoryName" value={formik.values.categoryName}
+                             options={foodCategoryName} onChange={formik.handleChange} optionLabel="name"
+                              placeholder="Yemek Kategorisi" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
+                            <label htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
+                                        {getFormErrorMessage('categoryName')}
+                            <h4>Eklentileri Seç</h4>
+                            <div>
+                                {multiSelect()}
+                                <label htmlFor="addons" className={classNames({ 'p-error': isFormFieldValid('addons') })}></label>
+                                        {getFormErrorMessage('addons')}
+                            </div>
 
-                </div>
-            </div>
-            <div className="p-grid p-fluid">
-                    <div className="p-field p-col-12 p-md-3">
-                        <h4> Fiyat</h4>
-                        <InputNumber id="stacked" value={price} onValueChange={(e) => setPrice(e.value)} showButtons mode="currency" currency="TRY" />
+                        </div>
                     </div>
-                    <div className="p-field p-col-12 p-md-3">
-                        <h4> İndirimli Fiyat</h4>
-                        <InputNumber id="stacked" value={discountPrice} onValueChange={(e) => setDiscountPrice(e.value)} showButtons mode="currency" currency="TRY" />
+                    <div className="p-grid p-fluid">
+                        <div className="p-field p-col-12 p-md-3">
+                            <h4> Fiyat</h4>
+                            <InputNumber id="price" name="price" value={formik.values.price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
+                        </div>
+                        <div className="p-field p-col-12 p-md-3">
+                            <h4> İndirimli Fiyat</h4>
+                            <InputNumber id="discount_price" name="discount_price" value={formik.values.discount_price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
+                        </div>
                     </div>
-            </div>
-            <div>
-                
-                <h4>Saf Sebze Mi</h4>
-                <InputSwitch checked={vegi} onChange={(e) => setVegi(e.value)} />
-                
-                <h4>Öne Çıkma</h4>
-                <InputSwitch checked={featured} onChange={(e) => setFeatured(e.value)} />
+                    <div>
+                    
+                        <h4>Saf Sebze Mi</h4>
+                        <InputSwitch checked={formik.values.vegi} name="vegi" id="vegi"  onChange={formik.handleChange} />
+                        
+                        <h4>Öne Çıkma</h4>
+                        <InputSwitch checked={formik.values.featured} name="featured" id="featured" onChange={formik.handleChange} />
 
-                <h4>Aktif</h4>
-                <InputSwitch checked={active} onChange={(e) => setActive(e.value)} />
-            </div>
-
-            <S.SubmitBtn>
-
-                <Button type="submit" label="Submit"/>
-            </S.SubmitBtn>
-            </form>
+                        <h4>Aktif</h4>
+                        <InputSwitch checked={formik.values.active} name="active" id="active" onChange={formik.handleChange} />
+                    </div>
+                    <S.SubmitBtn>
+                        <Button type="submit" label="Submit"/>
+                    </S.SubmitBtn>
+                </form>
             </S.ContainerCard>
-        </div>
+    </div>
     )
 }
 
