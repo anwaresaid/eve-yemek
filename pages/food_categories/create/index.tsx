@@ -12,20 +12,47 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import { foodCategoryTypes } from '../../../store/types/foodCategory.type';
 import { useRouter } from 'next/router';
+import { useFormik } from 'formik';
+import { classNames } from 'primereact/utils';
 
 export const Index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const [totalSize, setTotalSize] = useState(0);
-  const [files, setFile] = useState(null);
   const toast = useRef(null);
   const fileUploadRef = useRef(null);
-  const [isActive, setIsActive] = useState(false);
-  const [categoryName, setCategoryName] = useState(null);
-
   const foodCategoryCreate = useSelector((state:RootState) => state.createFoodCategory);
   const { success } = foodCategoryCreate;
+
+  const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+  const getFormErrorMessage = (name) => {
+      return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+  };
+  const formik = useFormik({
+    initialValues:{
+        name: '',
+        image:'',
+        active:false,
+    },
+    validate: (data)=>{
+        let errors:any = {};
+
+        if (!data.name) {
+            errors.name = 'user name is required.';
+        }
+        if (!data.image) {
+            errors.image = 'image is required.';
+        }
+        return errors;
+    },
+    onSubmit: (data:any) => {
+        // setFormData(data);
+        // setShowMessage(true);
+        dispatch(createFoodCategory(data));
+        
+    }
+});
 
   useEffect(() => {
     if(success){
@@ -34,9 +61,6 @@ export const Index = () => {
     }
   }, [success]);
 
-  const onCategoryNameChange = (e: any) => {
-    setCategoryName((e?.target as any)?.value);
-  };
  
   const onTemplateSelect = (e: any) => {
     let _totalSize = totalSize;
@@ -51,7 +75,7 @@ export const Index = () => {
 
   const onTemplateUpload = (e) => {
     let _totalSize = 0;
-    setFile(e.files[0]);
+    formik.values.image = e.files[0]?.objectURL;
     e.files.forEach((file) => {
       _totalSize += file.size || 0;
     });
@@ -173,28 +197,18 @@ export const Index = () => {
     className:
       'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined',
   };
-  
-  // on submit function
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-    
-    dispatch(createFoodCategory({
-      name: categoryName,
-      image: files.objectURL,
-      active: isActive
-    }))
-  };
-
   return (
     <div>
       <h1>Kategori Oluştur</h1>
       <Toast ref={toast}></Toast>
       <S.ContainerCard>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className='p-fluid'>
             <div className='p-field'>
               <h4>Kategori Adı</h4>
-              <InputText id='categoryName ' onChange={onCategoryNameChange} type='text' />
+              <InputText id='name' name='name' onChange={formik.handleChange} type='text' className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
+              <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+              {getFormErrorMessage('name')}
             </div>
           </div>
           <FileUpload
@@ -214,11 +228,14 @@ export const Index = () => {
             chooseOptions={chooseOptions}
             uploadOptions={uploadOptions}
             cancelOptions={cancelOptions}
+            className={classNames({ 'p-invalid': isFormFieldValid('image') })}
           />
+           <label htmlFor="image" className={classNames({ 'p-error': isFormFieldValid('image') })}></label>
+          {getFormErrorMessage('image')}
 
           <div>
             <h4>Aktif Mi</h4>
-            <InputSwitch checked={isActive} onChange={(e) => setIsActive(e.value)} />
+            <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
           </div>
 
           <S.SubmitBtn>

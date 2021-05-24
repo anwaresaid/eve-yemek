@@ -18,7 +18,6 @@ const Order = () => {
     useEffect(()=>{
         setFirstRun(true);
         if(typeof router.query?.id === "string"){
-            console.log("Setted Id");
            setOrderId(router.query.id);
         }else{
             if(firstRun !== false)

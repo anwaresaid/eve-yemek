@@ -40,6 +40,9 @@ export const createRestaurantReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       } 
+
+    case restaurantsTypes.RESTAURAT_CREATE_RESET:
+      return {} 
       
     default:
       return state;
@@ -63,6 +66,8 @@ export const updateRestaurantReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       } 
+    case restaurantsTypes.RESTAURAT_UPDATE_RESET:
+      return {} 
       
     default:
       return state;
@@ -85,6 +90,9 @@ export const listRestaurantReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       } 
+    case restaurantsTypes.RESTAURAT_LIST_RESET:
+      return {} 
+
       
     default:
       return state;
@@ -107,6 +115,8 @@ export const findRestaurantReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       } 
+    case restaurantsTypes.RESTAURAT_FIND_RESET:
+      return {} 
       
     default:
       return state;

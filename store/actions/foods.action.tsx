@@ -10,9 +10,9 @@ export const createFood = (
         discount_price,
         restaurant_id,
         food_category_id, 
-        add_on_id,
         is_veg,
         featured,
+        addon_id,
         active,
         description,} 
      ) => async dispatch => {
@@ -31,7 +31,7 @@ export const createFood = (
             discount_price,
             restaurant_id,
             food_category_id,
-            add_on_id,
+            addon_id,
             is_veg,
             featured,
             active

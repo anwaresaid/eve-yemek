@@ -15,7 +15,10 @@ import {findRestaurant} from '../../store/actions/restaurant.action';
 import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import { InputMask } from 'primereact/inputmask';
+import { restaurantsTypes } from '../../store/types/restaurants.type';
 import {useRouter} from 'next/router';
+import { useFormik } from 'formik';
+import { classNames } from 'primereact/utils';
 
 
     const UpdateRestaurants = () => {
@@ -25,37 +28,20 @@ import {useRouter} from 'next/router';
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
     const [resOwnersName, setResOwnersName] = useState([" "]);
-    const [vegi, setVegi] = useState(false);
-    const [featured, setFeatured] = useState(false);
-    const [active, setActive] = useState(false);
-    const [restaurantName, setRestaurantName] = useState([""]);
-    const [description, setDescription] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState(null);
-    const [email, setEmail] = useState("");
-    const [rating, setRating] = useState(0);
-    const [deliveryTime, setDeliveryTime] = useState(0);
-    const [address, setAddress] = useState("");
-    const [postalCode, setPostalCode] = useState("");
-    const [lat, setLat] = useState(null);
-    const [long, setLong] = useState(null);
-    const [commission, setCommission] = useState(0);
-    const [license, setLicense] = useState("");
-    const [resCharge, setResCharge] = useState(null);
-    const [deliveryRad, setDeliveryRad] = useState(0);
-    const [minAmount, setMinAmount] = useState(0);
+
     const dispatch = useDispatch();
     const router = useRouter();
 //setting dropdown selected items
     const [selectedResOwner, setSelectedResOwner] = useState(null);
-    const [selectedResOwnerName, setSelectedResOwnerName] = useState(null);
-    const [selectedCity, setSelectedCity] = useState(null);
-    const [selectedCounty, setSelectedCounty] = useState(null);
-    const [selectedRestaurantName, setSelectedRestaurantName] = useState("");
-    
+    const [reloadCheck, setReloadCheck] = useState(false);
     
 //use selectors for setting dispatch to variable.
-    const resOwnersList = useSelector((state:RootState) => state.listRestaurantOwners);
+
+    const resOwnersList = useSelector((state:RootState) => state.listResOwners);
     const resDetails = useSelector((state:RootState) => state.findRestaurant);
+    const updatedRestaurant = useSelector((state:RootState) => state.updateRestaurant);
+    
+    const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success:resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
     const { loading: resLoading, success:resSuccess, restaurant} = resDetails;
 
@@ -66,41 +52,200 @@ import {useRouter} from 'next/router';
         setResOwnersName(restOnwersName);
        }
 
-    
-    useEffect(() =>{
-        if(!resOnwersSuccess)
-            dispatch(listRestaurantOwners());
-        if(!resSuccess)
-            dispatch(findRestaurant(router.query.id));
-        if(resOnwersSuccess && resSuccess){
-            settingDropDownNames();
-            setSelectedResOwner(()=>{
-                let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(restaurant.name)==0;});
-                return selectedResOwners[0];
-         })
-            setSelectedResOwnerName({name: restaurant.owner_name});
-            setPhoneNumber(restaurant.phone);
-            setSelectedRestaurantName(restaurant.name);
-            setDescription(restaurant.description);
-            setEmail(restaurant.email);
-            setSelectedCity({name: restaurant.city_id});
-            setSelectedCounty({name: restaurant.town_id});
-            setRating(restaurant.rating);
-            setDeliveryTime(restaurant.delivery_time);
-            setLat(restaurant.latitude);
-            setLong(restaurant.longitude);
-            setCommission(restaurant.commission_rate);
-            setLicense(restaurant.license_code);
-            setResCharge(restaurant.restaurant_charges);
-            setDeliveryRad(restaurant.delivery_radius);
-            setMinAmount(restaurant.minimum_order_amount);
-            setVegi(restaurant.is_veg);
-            setFeatured(restaurant.featured);
-            setActive(restaurant.active);
+       const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+       const getFormErrorMessage = (name) => {
+           return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+       };
 
+       const formik = useFormik({
+        initialValues:{
+            owner_id: '',
+            for_two: 10,
+            name : '',
+            description : '',
+            image : 'image url',
+            phone : '',
+            email : '',
+            rating : '',
+            delivery_time : '',
+            commission_rate : '',
+            license_code : '',
+            file:'',
+            restaurant_charges : '',
+            delivery_radius : '',
+            is_veg : false,
+            featured : false,
+            active : false,
+            owner : '',
+            owner_name : '',
+            city : '',
+            town : '',
+            is_agreement : false,
+            minimum_order_amount: '',
+            latitudeInt: '',
+            longtitudeInt: '',
+            city_id:'',
+            town_id:'',
+            longtitude: '',
+            latitude: '',
+            is_open: false,
+
+        },
+        validate: (data)=>{
+            let errors:any = {};
+
+            if (!data.owner_id) {
+                errors.owner_id = 'restaurant owner is required.';
+            }
+
+            if (!data.name) {
+                errors.name = 'restaurant name is required.';
+            }
+            if (!data.description) {
+                errors.description = 'description is required.';
+            }
+            if (!data.file) {
+                errors.file = 'Image is required.';
+            }
+
+            if (!data.phone) {
+                errors.phone = 'phone number is required.';
+            }
+            
+            if (!data.email) {
+                errors.email = 'email is required.';
+            }
+            
+            if (!data.rating) {
+                errors.rating = 'rating is required.';
+            }
+            
+            if (!data.delivery_time) {
+                errors.delivery_time = 'delivery time is required.';
+            }
+            
+            if (!data.commission_rate) {
+                errors.commission_rate = 'commission rate is required.';
+            }
+            
+            if (!data.license_code) {
+                errors.license_code = 'license code is required.';
+            }
+            
+            if (!data.restaurant_charges) {
+                errors.restaurant_charges = 'charges are required.';
+            }
+            
+            if (!data.delivery_radius) {
+                errors.delivery_radius = 'delivery radius is required.';
+            }
+            
+            if (!data.owner) {
+                errors.owner = 'owner name is required.';
+            }
+            else
+            {
+                let selectedResOwners = resOwnersList.restaurantOwners?.items.filter(data  => {return data.name.localeCompare(formik.values.owner.name)==0;});
+                formik.values.owner_id = selectedResOwners[0]?._id;
+                formik.values.owner_name = formik.values.owner.name;
+
+            }
+              
+            if (!data.city) {
+                errors.city = 'city is required.';
+            }
+            else
+            {
+                formik.values.city_id = data.city.name;
+            }
+              
+            if (!data.town) {
+                errors.town = 'town is required.';
+            }
+            else
+            {
+                formik.values.town_id = data.town.name;
+            }
+              
+            if (!data.minimum_order_amount) {
+                errors.minimum_order_amount = 'minimum order amount is required.';
+            }
+              
+            if (!data.latitudeInt) {
+                errors.latitudeInt = 'latitude is required.';
+            }
+            else
+            {
+                formik.values.longtitude = formik.values.longtitudeInt?.toString(); 
+            }
+            if (!data.longtitudeInt) {
+                errors.longtitudeInt = 'longtitude is required.';
+            }
+            else
+            {
+                formik.values.latitude = formik.values.latitudeInt?.toString();
+            }
+            return errors;
+        },
+        onSubmit: (data:any) => {
+            dispatch(updateRestaurant(router.query.id,data));
+            
         }
-       
-    }, [resOnwersSuccess,resSuccess]);
+    });
+    
+
+    
+  
+    useEffect( () => {
+        if(resOnwersSuccess&&resSuccess){
+        if(restaurant.id === router.query.id){
+            setReloadCheck(true);
+        }
+        else{
+            setReloadCheck(false);
+        }
+    }
+        if(!reloadCheck)
+        // if(!resOwnerslist)
+        {
+            dispatch(listRestaurantOwners());
+        // if(!restaurant)
+            dispatch(findRestaurant(router.query.id));
+        }
+        if(successUpdate){
+            dispatch({type:restaurantsTypes.RESTAURAT_UPDATE_RESET});
+            dispatch({type:restaurantsTypes.RESTAURAT_FIND_RESET});
+            //router.push('/restaurants');
+        }
+     }, [dispatch,router.query.id,successUpdate]);
+
+    useEffect(() => {
+        if(resOnwersSuccess&&resSuccess){
+        settingDropDownNames();
+        setSelectedResOwner(()=>{
+            let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(restaurant.name)==0;});
+            return selectedResOwners[0];
+     })
+                    formik.values.owner = {name : restaurant.owner_name};
+                    formik.values.name = restaurant.name;
+                    formik.values.description = restaurant.description;
+                    formik.values.email = restaurant.email;
+                    formik.values.city_id = restaurant.city_id;
+                    formik.values.town_id = restaurant.town_id;
+                    formik.values.rating = restaurant.rating;
+                    formik.values.delivery_time = restaurant.delivery_time;
+                    formik.values.latitude = restaurant.latitude;
+                    formik.values.longitude = restaurant.longitude;
+                    formik.values.commission_rate = restaurant.commission_rate;
+                    formik.values.license_code = restaurant.license_code;
+                    formik.values.restaurant_charges = restaurant.restaurant_charges;
+                    formik.values.delivery_radius = restaurant.delivery_radius;
+                    formik.values.minimum_order_amount = restaurant.minimum_order_amount;
+                    formik.values.is_veg = restaurant.is_veg;
+                    formik.values.active = restaurant.active;
+                    formik.values.featured = restaurant.featured;
+                }
+    }, [resOnwersSuccess,resSuccess])
 
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -116,26 +261,7 @@ import {useRouter} from 'next/router';
         { name: 'London', code: 'LDN' },
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
-    ];
-//on change functions    
-    const onResOwnerChange= (e:any) => {
-        let selectedResOwners = resOwnerslist.items.filter(data  => {return data.name.localeCompare(e.value.name)==0;});
-        setSelectedResOwner(selectedResOwners[0]);
-        setSelectedResOwnerName(e.value);
-    }
-    const onCityChange = (e) => {
-        setSelectedCity(e.value);
-    }
-    const onCountyChange = (e) => {
-        setSelectedCounty(e.value);
-    }
-    const onNameChange= (e:any) => {
-        setRestaurantName((e?.target as any)?.value);
-        setSelectedRestaurantName((e?.target as any)?.value);
-    }
-    const onDescriptionChange= (e:any) => {
-        setDescription((e?.target as any)?.value)
-    }
+    ];   
 
 //image upload functions    
     const onTemplateSelect = (e:any) => {
@@ -153,7 +279,7 @@ import {useRouter} from 'next/router';
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
-        setFile(e.files[0]);
+        formik.values.file = e.files[0];
         e.files.forEach(file => {
             _totalSize += (file.size || 0);
         });
@@ -213,56 +339,31 @@ import {useRouter} from 'next/router';
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
-
-    // on submit function    
-    const onSubmit = (e:any) => {
-        e.preventDefault();
-       const updatingRestaurant = { 
-        owner_id: selectedResOwner._id,
-        name : selectedRestaurantName,
-        description : description,
-        image : restaurant.image,
-        phone : phoneNumber,
-        email : email,
-        rating : rating,
-        for_two:10,
-        delivery_time : deliveryTime,
-        commission_rate : commission,
-        license_code : license,
-        restaurant_charges : resCharge,
-        delivery_radius : deliveryRad,
-        is_veg : vegi,
-        featured : featured,
-        active : active,
-        owner_name : selectedResOwner.name,
-        city_id : selectedCity.name,
-        town_id : selectedCounty.name,
-        is_agreement : true,
-        minimum_order_amount: minAmount,
-        latitude: lat.toString(),
-        longtitude: long.toString(),            
-               }
-               dispatch(updateRestaurant(router.query.id,updatingRestaurant));     
-       };
     return (
         <div>
             <h1>Oluştur</h1>
             <Toast ref={toast}></Toast>
-             <S.ContainerCard>
-                 <form onSubmit = {onSubmit} >
+            <S.ContainerCard>
+                 <form onSubmit = {formik.handleSubmit} >
                      
                     <div className="p-fluid">
                         <div className="p-field p-col-12">
                             <h4>Ad</h4>
-                            <InputText id="restaurantName " value={selectedRestaurantName} onChange={onNameChange} type="text"/>
+                            <InputText id="name " name="name" value={formik.values.name} onChange={formik.handleChange} type="text" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })}/>
+                            <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+                            {getFormErrorMessage('name')}
                         </div>
                         <div className="p-field p-col-12">
                             <h4>Açıklama</h4>
-                            <InputText id="description" value={description} onChange={onDescriptionChange} type="text"/>
+                            <InputText id="description" name="description" value={formik.values.description} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })} onChange={formik.handleChange} type="text"/>
+                            <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
+                            {getFormErrorMessage('description')}
                         </div>
                         <div className="p-field p-col-12">
                             <h4>Restoran Sahibi </h4>
-                                <Dropdown value={selectedResOwnerName} options={resOwnersName} onChange={onResOwnerChange} optionLabel="name" placeholder="Select an Owner" />
+                            <Dropdown  id="owner " name="owner"  value={formik.values.owner} options={resOwnersName} onChange={formik.handleChange} optionLabel="name" placeholder="Select an Owner" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('owner') })} />
+                            <label htmlFor="owner" className={classNames({ 'p-error': isFormFieldValid('owner') })}></label>
+                            {getFormErrorMessage('owner')}
                         </div>
                     </div>
                     <div className="p-field p-col-12">
@@ -270,76 +371,113 @@ import {useRouter} from 'next/router';
                             onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
                             headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
                             uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                                <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
+                            {getFormErrorMessage('file')}
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Telefon</h4>
-                        <InputMask id="phone" mask="(999) 999-9999" value={phoneNumber} placeholder="(999) 999-9999" onChange={(e) => setPhoneNumber(e.value)}></InputMask>
+                        <InputMask  id="phone " name="phone"  mask="(999) 999-9999" value={formik.values.phone} placeholder="(999) 999-9999" onChange={formik.handleChange}  className={classNames({ 'p-invalid': isFormFieldValid('phone') })}></InputMask>
+                        <label htmlFor="phone" className={classNames({ 'p-error': isFormFieldValid('phone') })}></label>
+                            {getFormErrorMessage('phone')}
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Email</h4>
-                        <InputText id="inputtext" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <InputText  id="email " name="email"  value={formik.values.email} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('email') })} />
+                        <label htmlFor="email" className={classNames({ 'p-error': isFormFieldValid('email') })}></label>
+                            {getFormErrorMessage('email')}
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Şehir</h4>
-                        <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Yemek Kategorisi" />
+                        <Dropdown  id="city " name="city"  value={formik.values.city} options={cities} onChange={formik.handleChange} optionLabel="name" placeholder="Şehir" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('city') })} />
+                        <label htmlFor="city" className={classNames({ 'p-error': isFormFieldValid('city') })}></label>
+                            {getFormErrorMessage('city')}
                         <h4>İlçe</h4>
-                        <Dropdown value={selectedCounty} options={counties} onChange={onCountyChange} optionLabel="name" placeholder="Eklentileri Seç" />
+                        <Dropdown  id="town " name="town"  value={formik.values.town} options={counties} onChange={formik.handleChange} optionLabel="name" placeholder="İlçe"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('town') })}/>
+                        <label htmlFor="town" className={classNames({ 'p-error': isFormFieldValid('town') })}></label>
+                            {getFormErrorMessage('town')}
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Derece</h4>
-                        <InputNumber id="stacked" value={rating} onValueChange={(e) => setRating(e.value)} showButtons/>
+                        <InputNumber  id="rating " name="rating"  value={formik.values.rating} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('rating') })}/>
+                        <label htmlFor="rating" className={classNames({ 'p-error': isFormFieldValid('rating') })}></label>
+                            {getFormErrorMessage('rating')}
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4> Tahmini Teslim Süresi (dakika)</h4>
-                        <InputNumber id="stacked" value={deliveryTime} onValueChange={(e) => setDeliveryTime(e.value)} showButtons/>
+                        <InputNumber  id="delivery_time " name="delivery_time"  value={formik.values.delivery_time} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })}/>
+                        <label htmlFor="delivery_time" className={classNames({ 'p-error': isFormFieldValid('delivery_time') })}></label>
+                            {getFormErrorMessage('delivery_time')}
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Açık Adres</h4>
-                        <InputText id="inputtext" value={address} onChange={(e) => setAddress(e.target.value)} />
+                        <InputText  id="address " name="address"  value={formik.values.address} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('address') })}/>
+                        <label htmlFor="address" className={classNames({ 'p-error': isFormFieldValid('address') })}></label>
+                            {getFormErrorMessage('address')}
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Posta kodu</h4>
-                        <InputText id="inputtext" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
+                        <InputText  id="postal_code " name="postal_code"  value={formik.values.postal_code} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('postal_code') })}/>
+                        <label htmlFor="postal_code" className={classNames({ 'p-error': isFormFieldValid('postal_code') })}></label>
+                            {getFormErrorMessage('postal_code')}
                     </div>
                     <div className="p-field p-col-12 p-md-3">
                         <h4>Enlem</h4>
-                        <InputNumber id="stacked" value={lat} onValueChange={(e) => setLat(e.value)} showButtons/>
+                        <InputNumber  id="latitudeInt " name="latitudeInt"  value={formik.values.latitudeInt} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('latitudeInt') })}/>
+                        <label htmlFor="latitudeInt" className={classNames({ 'p-error': isFormFieldValid('latitudeInt') })}></label>
+                            {getFormErrorMessage('latitudeInt')}
                     </div>
                     <div className="p-field p-col-12 p-md-3">
                         <h4>Boylam</h4>
-                        <InputNumber id="stacked" value={long} onValueChange={(e) => setLong(e.value)} showButtons />
+                        <InputNumber id="longtitudeInt " name="longtitudeInt"  value={formik.values.longtitudeInt} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('longtitudeInt') })}/>
+                        <label htmlFor="longtitudeInt" className={classNames({ 'p-error': isFormFieldValid('longtitudeInt') })}></label>
+                            {getFormErrorMessage('longtitudeInt')}
                     </div>
                     <div className="p-field p-col-12 p-md-3">
                         <h4>Komisyon Oranı %</h4>
-                        <InputNumber id="stacked" value={commission} onValueChange={(e) => setCommission(e.value)} showButtons/>
+                        <InputNumber  id="commission_rate " name="commission_rate"   value={formik.values.commission_rate} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('commission_rate') })}/>
+                        <label htmlFor="commission_rate" className={classNames({ 'p-error': isFormFieldValid('commission_rate') })}></label>
+                            {getFormErrorMessage('commission_rate')}
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Lisans Kodu</h4>
-                        <InputText id="inputtext" value={license} onChange={(e) => setLicense(e.target.value)} />
+                        <InputText  id="license_code " name="license_code"  value={formik.values.license_code} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('license_code') })}/>
+                        <label htmlFor="license_code" className={classNames({ 'p-error': isFormFieldValid('license_code') })}></label>
+                            {getFormErrorMessage('license_code')}
                     </div>
                     <div className="p-field p-col-12 p-md-3">
                         <h4>Restoran Ücreti</h4>
-                        <InputNumber id="stacked" value={resCharge} onValueChange={(e) => setResCharge(e.value)} showButtons/>
+                        <InputNumber  id="restaurant_charges " name="restaurant_charges"  value={formik.values.charges} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('restaurant_charges') })}/>
+                        <label htmlFor="restaurant_charges" className={classNames({ 'p-error': isFormFieldValid('restaurant_charges') })}></label>
+                            {getFormErrorMessage('restaurant_charges')}
                     </div>
                     <div className="p-field p-col-12 p-md-3">
                         <h4>Teslimat Yarıçapı (km)</h4>
-                        <InputNumber id="stacked" value={deliveryRad} onValueChange={(e) => setDeliveryRad(e.value)} showButtons/>
+                        <InputNumber  id="delivery_radius " name="delivery_radius"  value={formik.values.delivery_radius} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('delivery_radius') })}/>
+                        <label htmlFor="delivery_radius" className={classNames({ 'p-error': isFormFieldValid('delivery_radius') })}></label>
+                            {getFormErrorMessage('delivery_radius')}
                     </div>
                     <div className="p-field p-col-12 p-md-3">
                         <h4>Minimum amount</h4>
-                        <InputNumber id="stacked" value={minAmount} onValueChange={(e) => setMinAmount(e.value)} showButtons/>
+                        <InputNumber  id="minimum_order_amount " name="minimum_order_amount"  value={formik.values.minimum_order_amount} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('minimum_order_amount') })}/>
+                        <label htmlFor="minimum_order_amount" className={classNames({ 'p-error': isFormFieldValid('minimum_order_amount') })}></label>
+                            {getFormErrorMessage('minimum_order_amount')}
                     </div>
                 <div className="p-fluid">
             </div>
             <div className="p-field p-col-12 p-md-3">
                 <h4>Saf Sebze Mi</h4>
-                <InputSwitch checked={vegi} onChange={(e) => setVegi(e.value)} />
-                
+                <InputSwitch  id="is_vegi " name="is_vegi"  checked={formik.values.is_vegi} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('is_vegi') })}/>
+                <label htmlFor="is_vegi" className={classNames({ 'p-error': isFormFieldValid('is_vegi') })}></label>
+                            {getFormErrorMessage('is_vegi')}
                 <h4>Öne Çıkma</h4>
-                <InputSwitch checked={featured} onChange={(e) => setFeatured(e.value)} />
-
+                <InputSwitch  id="featured " name="featured"  checked={formik.values.featured} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('featured') })}/>
+                <label htmlFor="featured" className={classNames({ 'p-error': isFormFieldValid('featured') })}></label>
+                            {getFormErrorMessage('featured')}
                 <h4>Açık?</h4>
-                <InputSwitch checked={active} onChange={(e) => setActive(e.value)} />
+                <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}  
+                 className={classNames({ 'p-invalid': isFormFieldValid('active') })}/>
+                <label htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
+                            {getFormErrorMessage('active')}
             </div>
 
             <S.SubmitBtn>

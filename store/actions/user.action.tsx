@@ -23,7 +23,6 @@ const login = (email: string, password: string, remember: boolean) => async disp
         }
 
     } catch (err) {
-        console.log(err);
         dispatch({ type:userTypes.LOGIN_FAILED, payload:{ login_error_msg:"Something went wrong while logging in" } });
     }
 }
