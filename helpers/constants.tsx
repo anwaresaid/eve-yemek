@@ -24,6 +24,8 @@ export const allMenuItems:any = [
     { label:"Hesap Ayarları", expanded: true, items: [
         { label:"Müşteriler",  url:"/users/customers", roles:["admin"] },
         { label:"Restoran Sahipleri",  url:"/users/restaurant_owners", roles:["admin"] },
+        { label:"Kargocular",  url:"/users/delivery_scouts", roles:["admin"] },
+        { separator:true },
         { label:"Kullanıcı Oluştur", url:"/users/add",  roles:["admin"] },
     ] },
     { separator:true },

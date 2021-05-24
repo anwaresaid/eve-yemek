@@ -21,10 +21,10 @@ export const customerListReducer = (state = initialState, action) => {
               } 
         case usersListTypes.CUSTOMER_LIST_UPDATE_ROW:
             const index = state.customers.items.findIndex(item => item._id === action.payload.id); 
-            const newArray = [...state.customers.items]
-            newArray[index] = action.payload
+            const tempCustomers = [...state.customers.items]
+            tempCustomers[index] = action.payload
             return {
-                ...state, customers: {...state.customers, items: newArray}
+                ...state, customers: {...state.customers, items: tempCustomers}
             }
         default:
             return state;
@@ -55,6 +55,36 @@ export const restaurantOwnerListReducer = (state = initialState, action) => {
             tempResOwners[index] = action.payload
             return {
                 ...state, restaurantOwners: {...state.restaurantOwners, items: tempResOwners}
+            }
+        default:
+            return state;
+    }
+
+}
+
+export const deliveryScoutListReducer = (state = initialState, action) => {
+    const { type, payload } = action;
+
+    switch (action.type) {
+        case usersListTypes.DELIVERY_SCOUT_LIST_REQUEST:
+            return {loading: true}
+        case usersListTypes.DELIVERY_SCOUT_LIST_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                deliveryScouts: action.payload
+            }
+        case usersListTypes.DELIVERY_SCOUT_LIST_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+              } 
+        case usersListTypes.DELIVERY_SCOUT_LIST_UPDATE_ROW:
+            const index = state.deliveryScouts.items.findIndex(item => item._id === action.payload.id); 
+            const tempDelScouts = [...state.deliveryScouts.items]
+            tempDelScouts[index] = action.payload
+            return {
+                ...state, deliveryScouts: {...state.deliveryScouts, items: tempDelScouts}
             }
         default:
             return state;

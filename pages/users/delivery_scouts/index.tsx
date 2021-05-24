@@ -1,34 +1,34 @@
 import React, { useState,useEffect } from "react"
 import UsersTable from "../../../components/UsersTable/index"
-import { listRestaurantOwners } from "../../../store/actions/userslists.action"
+import { listDeliveryScouts } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
 import { ProgressSpinner } from 'primereact/progressspinner'
 
-const restaurantOwnerList = () => {
+const deliveryScoutList = () => {
     const [users, setUsers] = useState([])
 
     const dispatch = useDispatch();
-    const res = useSelector((state:RootState) => state.listRestaurantOwners)
-    const {loading, success, restaurantOwners} = res
+    const res = useSelector((state:RootState) => state.listDeliveryScouts)
+    const {loading, success, deliveryScouts} = res
 
     useEffect( () => {
-        if (!restaurantOwners)
-            dispatch(listRestaurantOwners());
+        if (!deliveryScouts)
+            dispatch(listDeliveryScouts());
      }, [dispatch]);
 
     useEffect(() => {
         if(success){
-            setUsers(restaurantOwners.items);
+            setUsers(deliveryScouts.items);
         }
     }, [success])
 
     return (
         <div>
-            {!loading && <UsersTable users={users} editPath="restaurant_owners"></UsersTable>}
+            {!loading && <UsersTable users={users} editPath="delivery_scouts"></UsersTable>}
             {loading && <ProgressSpinner/>}
         </div>
     )
 }
 
-export default restaurantOwnerList;
+export default deliveryScoutList;
