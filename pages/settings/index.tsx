@@ -36,6 +36,10 @@ const index = () => {
       fcm_web_api_key: '',
       fcm_web_server_key: '',
       is_active: false,
+      otp_verification_on_registration: false,
+      twilio_sid: '',
+      twilio_access_token: '',
+      twilio_service_id: '',
     },
     validate: (data) => {
       let errors: any = {};
@@ -69,6 +73,15 @@ const index = () => {
       }
       if (!data.fcm_web_server_key) {
         errors.fcm_web_server_key = 'FCM Web Server Key is required.';
+      }
+      if (!data.twilio_sid) {
+        errors.twilio_sid = 'Twilio SID is required.';
+      }
+      if (!data.twilio_access_token) {
+        errors.twilio_access_token = 'Twilio Access Token is required.';
+      }
+      if (!data.twilio_service_id) {
+        errors.twilio_service_id = 'Twilio Service is required.';
       }
       return errors;
     },
@@ -108,6 +121,11 @@ const index = () => {
       formik.values.fcm_web_api_key = settings.fcm_web_api_key;
       formik.values.fcm_web_server_key = settings.fcm_web_server_key;
       formik.values.is_active = settings.is_active;
+
+      formik.values.otp_verification_on_registration = settings.otp_verification_on_registration;
+      formik.values.twilio_sid = settings.twilio_sid;
+      formik.values.twilio_access_token = settings.twilio_access_token;
+      formik.values.twilio_service_id = settings.twilio_service_id;
     } else {
       dispatch(listSettings());
     }
@@ -398,7 +416,83 @@ const index = () => {
   };
 
   const SMSGatewaySettings = () => {
-    return <h2>SMS Gateway Settings Here</h2>;
+    return (
+      <>
+        <div className='p-field'>
+          <h4>OTP Verification on Registration</h4>
+          <InputSwitch
+            id='otp_verification_on_registration '
+            name='otp_verification_on_registration'
+            checked={formik.values.otp_verification_on_registration}
+            onChange={formik.handleChange}
+          ></InputSwitch>
+          <label
+            htmlFor='otp_verification_on_registration'
+            className={classNames({
+              'p-error': isFormFieldValid('otp_verification_on_registration'),
+            })}
+          ></label>
+          {getFormErrorMessage('otp_verification_on_registration')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>Twilio SID</h4>
+          <InputText
+            id='twilio_sid'
+            value={formik.values.twilio_sid}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('twilio_sid'),
+            })}
+          />
+          <label
+            htmlFor='twilio_sid'
+            className={classNames({
+              'p-error': isFormFieldValid('twilio_sid'),
+            })}
+          ></label>
+          {getFormErrorMessage('twilio_sid')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>Twilio Access Token</h4>
+          <InputText
+            id='twilio_access_token'
+            value={formik.values.twilio_access_token}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('twilio_access_token'),
+            })}
+          />
+          <label
+            htmlFor='twilio_access_token'
+            className={classNames({
+              'p-error': isFormFieldValid('twilio_access_token'),
+            })}
+          ></label>
+          {getFormErrorMessage('twilio_access_token')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>Twilio Service ID</h4>
+          <InputText
+            id='twilio_service_id'
+            value={formik.values.twilio_service_id}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('twilio_service_id'),
+            })}
+          />
+          <label
+            htmlFor='twilio_service_id'
+            className={classNames({
+              'p-error': isFormFieldValid('twilio_service_id'),
+            })}
+          ></label>
+          {getFormErrorMessage('twilio_service_id')}
+        </div>
+      </>
+    );
   };
 
   const GoogleMapsSettings = () => {
