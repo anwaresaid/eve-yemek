@@ -92,6 +92,36 @@ export const deliveryScoutListReducer = (state = initialState, action) => {
 
 }
 
+export const customerServiceListReducer = (state = initialState, action) => {
+    const { type, payload } = action;
+
+    switch (action.type) {
+        case usersListTypes.CUSTOMER_SERVICE_LIST_REQUEST:
+            return {loading: true}
+        case usersListTypes.CUSTOMER_SERVICE_LIST_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                customerService: action.payload
+            }
+        case usersListTypes.CUSTOMER_SERVICE_LIST_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+              } 
+        case usersListTypes.CUSTOMER_SERVICE_LIST_UPDATE_ROW:
+            const index = state.customerService.items.findIndex(item => item._id === action.payload.id); 
+            const tempCusService = [...state.customerService.items]
+            tempCusService[index] = action.payload
+            return {
+                ...state, customerService: {...state.customerService, items: tempCusService}
+            }
+        default:
+            return state;
+    }
+
+}
+
 export const singleUserReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
