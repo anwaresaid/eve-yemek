@@ -27,6 +27,7 @@ import {
   customerListReducer,
   restaurantOwnerListReducer,
   deliveryScoutListReducer,
+  customerServiceListReducer,
 } from './userslists.reducer';
 import { listSettingsReducer } from './settings.reducer';
 
@@ -43,10 +44,11 @@ export default combineReducers({
   updateFood: updateFoodReducer,
   findFood: findFoodReducer,
   listFood: listFoodReducer,
-  
+
   listCustomers: customerListReducer,
   listRestaurantOwners: restaurantOwnerListReducer,
   listDeliveryScouts: deliveryScoutListReducer,
+  listCustomerService: customerServiceListReducer,
 
   singleUser: singleUserReducer,
   updateUser: updateUserReducer,
