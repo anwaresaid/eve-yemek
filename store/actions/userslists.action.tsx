@@ -60,6 +60,33 @@ export const listRestaurantOwners = () => async (dispatch, getState) => {
 
 }
 
+export const listDeliveryScouts = () => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: usersListTypes.DELIVERY_SCOUT_LIST_REQUEST,
+        });
+
+        const usersListsService = new UsersListsService;
+        const result = await usersListsService.getUsersByRole('delivery_scout');
+
+        dispatch({
+            type: usersListTypes.DELIVERY_SCOUT_LIST_SUCCESS,
+            payload: parseDateInAllRows(result),
+        });
+
+    } catch (error){
+        dispatch({
+            type: usersListTypes.DELIVERY_SCOUT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        })
+    }
+
+}
+
 export const getSingleUser = (id) => async (dispatch, getState) => {
 
     try {
@@ -146,6 +173,7 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
             payload: result,
         })
         var tempRoles = [...data.roles, ...result.roles]
+        tempRoles = tempRoles.filter(onlyUnique)
         
         dispatch({
             type: usersListTypes.UPDATE_USER_END
@@ -174,7 +202,12 @@ function parseDateInAllRows(rows){
     return rows
 }
 
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }  
+
 function updateEditedRowInStore(roles, result, dispatch){
+    debugger;
     for (let role of roles){
         switch (role) {
             case "customer":
@@ -187,6 +220,13 @@ function updateEditedRowInStore(roles, result, dispatch){
                     type: usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW,
                     payload: result
                 })
+            case "delivery_scout":
+                dispatch({
+                    type: usersListTypes.DELIVERY_SCOUT_LIST_UPDATE_ROW,
+                    payload: result
+                })
+            default:
+                console.log("Unimplemented")
         }
     }
 }
