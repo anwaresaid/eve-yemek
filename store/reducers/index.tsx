@@ -13,7 +13,7 @@ import {
     findFoodReducer,
     listFoodReducer,
  } from "./foods.reducer";
-import {addUserReducer, singleUserReducer, updateUserReducer, customerListReducer, restaurantOwnerListReducer, deliveryScoutListReducer} from "./userslists.reducer"
+import {addUserReducer, singleUserReducer, updateUserReducer, customerListReducer, restaurantOwnerListReducer, deliveryScoutListReducer, customerServiceListReducer} from "./userslists.reducer"
 
 export default combineReducers({
     user,
@@ -31,6 +31,7 @@ export default combineReducers({
     listCustomers: customerListReducer,
     listRestaurantOwners: restaurantOwnerListReducer,
     listDeliveryScouts: deliveryScoutListReducer,
+    listCustomerService: customerServiceListReducer,
     
     singleUser: singleUserReducer,
     updateUser: updateUserReducer,

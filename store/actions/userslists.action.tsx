@@ -87,6 +87,33 @@ export const listDeliveryScouts = () => async (dispatch, getState) => {
 
 }
 
+export const listCustomerService = () => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: usersListTypes.CUSTOMER_SERVICE_LIST_REQUEST,
+        });
+
+        const usersListsService = new UsersListsService;
+        const result = await usersListsService.getUsersByRole('customer_service');
+
+        dispatch({
+            type: usersListTypes.CUSTOMER_SERVICE_LIST_SUCCESS,
+            payload: parseDateInAllRows(result),
+        });
+
+    } catch (error){
+        dispatch({
+            type: usersListTypes.CUSTOMER_SERVICE_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        })
+    }
+
+}
+
 export const getSingleUser = (id) => async (dispatch, getState) => {
 
     try {
@@ -225,8 +252,13 @@ function updateEditedRowInStore(roles, result, dispatch){
                     type: usersListTypes.DELIVERY_SCOUT_LIST_UPDATE_ROW,
                     payload: result
                 })
+            case "customer_service":
+                dispatch({
+                    type: usersListTypes.CUSTOMER_SERVICE_LIST_UPDATE_ROW,
+                    payload: result
+                })
             default:
-                console.log("Unimplemented")
+                console.log("Unavailable")
         }
     }
 }
