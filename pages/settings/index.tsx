@@ -40,6 +40,7 @@ const index = () => {
       twilio_sid: '',
       twilio_access_token: '',
       twilio_service_id: '',
+      google_api_key: '',
     },
     validate: (data) => {
       let errors: any = {};
@@ -82,6 +83,9 @@ const index = () => {
       }
       if (!data.twilio_service_id) {
         errors.twilio_service_id = 'Twilio Service is required.';
+      }
+      if (!data.google_api_key) {
+        errors.google_api_key = 'Google API Key is required.';
       }
       return errors;
     },
@@ -126,6 +130,8 @@ const index = () => {
       formik.values.twilio_sid = settings.twilio_sid;
       formik.values.twilio_access_token = settings.twilio_access_token;
       formik.values.twilio_service_id = settings.twilio_service_id;
+
+      formik.values.google_api_key = settings.google_api_key;
     } else {
       dispatch(listSettings());
     }
@@ -496,7 +502,29 @@ const index = () => {
   };
 
   const GoogleMapsSettings = () => {
-    return <h2>Google Maps Settings Here</h2>;
+    return (
+      <>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>Google API Key</h4>
+          <InputText
+            id='google_api_key'
+            value={formik.values.google_api_key}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('google_api_key'),
+            })}
+          />
+          <label
+            htmlFor='google_api_key'
+            className={classNames({
+              'p-error': isFormFieldValid('google_api_key'),
+            })}
+          ></label>
+          {getFormErrorMessage('google_api_key')}
+        </div>
+      </>
+    );
   };
 
   const PaymentSettings = () => {
