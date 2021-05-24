@@ -26,7 +26,7 @@ const customerList = () => {
      
     return (
         <div>
-            {!loading && <UsersTable users={users} role="customers"></UsersTable>}
+            {!loading && <UsersTable users={users} editPath="customers"></UsersTable>}
             {loading && <ProgressSpinner/>}
         </div>
     );
