@@ -29,6 +29,13 @@ const index = () => {
       tax_rate: 0,
       is_delivery_charged: false,
       delivery_charge: 0,
+      fcm_project_id: '',
+      fcm_app_id: '',
+      fcm_sender_id: '',
+      fcm_web_certificate: '',
+      fcm_web_api_key: '',
+      fcm_web_server_key: '',
+      is_active: false,
     },
     validate: (data) => {
       let errors: any = {};
@@ -44,6 +51,24 @@ const index = () => {
       }
       if (!data.currency_symbol) {
         errors.currency_symbol = 'Currency Symbol is required.';
+      }
+      if (!data.fcm_project_id) {
+        errors.fcm_project_id = 'FCM Project ID is required.';
+      }
+      if (!data.fcm_app_id) {
+        errors.fcm_app_id = 'FCM APP ID is required.';
+      }
+      if (!data.fcm_sender_id) {
+        errors.fcm_sender_id = 'FCM Sender ID is required.';
+      }
+      if (!data.fcm_web_certificate) {
+        errors.fcm_web_certificate = 'FCM Web Certificate is required.';
+      }
+      if (!data.fcm_web_api_key) {
+        errors.fcm_web_api_key = 'FCM Web API Key is required.';
+      }
+      if (!data.fcm_web_server_key) {
+        errors.fcm_web_server_key = 'FCM Web Server Key is required.';
       }
       return errors;
     },
@@ -75,6 +100,14 @@ const index = () => {
       formik.values.tax_rate = settings.tax_rate;
       formik.values.is_delivery_charged = settings.is_delivery_charged;
       formik.values.delivery_charge = settings.delivery_charge;
+
+      formik.values.fcm_project_id = settings.fcm_project_id;
+      formik.values.fcm_app_id = settings.fcm_app_id;
+      formik.values.fcm_sender_id = settings.fcm_sender_id;
+      formik.values.fcm_web_certificate = settings.fcm_web_certificate;
+      formik.values.fcm_web_api_key = settings.fcm_web_api_key;
+      formik.values.fcm_web_server_key = settings.fcm_web_server_key;
+      formik.values.is_active = settings.is_active;
     } else {
       dispatch(listSettings());
     }
@@ -197,7 +230,9 @@ const index = () => {
           ></InputSwitch>
           <label
             htmlFor='is_delivery_charged'
-            className={classNames({ 'p-error': isFormFieldValid('is_delivery_charged') })}
+            className={classNames({
+              'p-error': isFormFieldValid('is_delivery_charged'),
+            })}
           ></label>
           {getFormErrorMessage('is_delivery_charged')}
         </div>
@@ -215,7 +250,9 @@ const index = () => {
           />
           <label
             htmlFor='delivery_charge'
-            className={classNames({ 'p-error': isFormFieldValid('delivery_charge') })}
+            className={classNames({
+              'p-error': isFormFieldValid('delivery_charge'),
+            })}
           ></label>
           {getFormErrorMessage('delivery_charge')}
         </div>
@@ -224,7 +261,140 @@ const index = () => {
   };
 
   const NotificationSettings = () => {
-    return <h2>Notification Settings Here</h2>;
+    return (
+      <>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>FCM Project ID</h4>
+          <InputText
+            id='fcm_project_id'
+            value={formik.values.fcm_project_id}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('fcm_project_id'),
+            })}
+          />
+          <label
+            htmlFor='fcm_project_id'
+            className={classNames({
+              'p-error': isFormFieldValid('fcm_project_id'),
+            })}
+          ></label>
+          {getFormErrorMessage('fcm_project_id')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>FCM APP ID</h4>
+          <InputText
+            id='fcm_app_id'
+            value={formik.values.fcm_app_id}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('fcm_app_id'),
+            })}
+          />
+          <label
+            htmlFor='fcm_app_id'
+            className={classNames({
+              'p-error': isFormFieldValid('fcm_app_id'),
+            })}
+          ></label>
+          {getFormErrorMessage('fcm_app_id')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>FCM Sender ID</h4>
+          <InputText
+            id='fcm_sender_id'
+            value={formik.values.fcm_sender_id}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('fcm_sender_id'),
+            })}
+          />
+          <label
+            htmlFor='fcm_sender_id'
+            className={classNames({
+              'p-error': isFormFieldValid('fcm_sender_id'),
+            })}
+          ></label>
+          {getFormErrorMessage('fcm_sender_id')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>FCM Web Certificate</h4>
+          <InputText
+            id='fcm_web_certificate'
+            value={formik.values.fcm_web_certificate}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('fcm_web_certificate'),
+            })}
+          />
+          <label
+            htmlFor='fcm_web_certificate'
+            className={classNames({
+              'p-error': isFormFieldValid('fcm_web_certificate'),
+            })}
+          ></label>
+          {getFormErrorMessage('fcm_web_certificate')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>FCM Web API Key</h4>
+          <InputText
+            id='fcm_web_api_key'
+            value={formik.values.fcm_web_api_key}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('fcm_web_api_key'),
+            })}
+          />
+          <label
+            htmlFor='fcm_web_api_key'
+            className={classNames({
+              'p-error': isFormFieldValid('fcm_web_api_key'),
+            })}
+          ></label>
+          {getFormErrorMessage('fcm_web_api_key')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+          <h4>FCM Server Key</h4>
+          <InputText
+            id='fcm_web_server_key'
+            value={formik.values.fcm_web_server_key}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('fcm_web_server_key'),
+            })}
+          />
+          <label
+            htmlFor='fcm_web_server_key'
+            className={classNames({
+              'p-error': isFormFieldValid('fcm_web_server_key'),
+            })}
+          ></label>
+          {getFormErrorMessage('fcm_web_server_key')}
+        </div>
+        <div className='p-field'>
+          <h4>Aktif</h4>
+          <InputSwitch
+            id='is_active '
+            name='is_active'
+            checked={formik.values.is_active}
+            onChange={formik.handleChange}
+          ></InputSwitch>
+          <label
+            htmlFor='is_active'
+            className={classNames({
+              'p-error': isFormFieldValid('is_active'),
+            })}
+          ></label>
+          {getFormErrorMessage('is_active')}
+        </div>
+      </>
+    );
   };
 
   const SMSGatewaySettings = () => {
