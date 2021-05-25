@@ -20,7 +20,7 @@ export const customerListReducer = (state = {customers:{items:[]}}, action) => {
                 error: action.payload
               } 
         case usersListTypes.CUSTOMER_LIST_UPDATE_ROW:
-            const index = state.customers.items.findIndex(item => item._id === action.payload.id); 
+            const index = state.customers.items.findIndex(item => (item._id ?? item.id) === action.payload.id); 
             const tempCustomers = [...state.customers.items]
             tempCustomers[index] = action.payload
             return {
@@ -50,8 +50,10 @@ export const restaurantOwnerListReducer = (state = {restaurantOwners:{items:[]}}
                 error: action.payload
               } 
         case usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW:
-            const index = state.restaurantOwners.items.findIndex(item => item._id === action.payload.id); 
+            const index = state.restaurantOwners.items.findIndex(item => (item._id ?? item.id) === action.payload.id) // amend after backend is fixed 
             const tempResOwners = [...state.restaurantOwners.items]
+            console.log(action.payload)
+            console.log(tempResOwners[index])
             tempResOwners[index] = action.payload
             return {
                 ...state, restaurantOwners: {...state.restaurantOwners, items: tempResOwners}
@@ -80,7 +82,7 @@ export const deliveryScoutListReducer = (state = {deliveryScouts:{items:[]}}, ac
                 error: action.payload
               } 
         case usersListTypes.DELIVERY_SCOUT_LIST_UPDATE_ROW:
-            const index = state.deliveryScouts.items.findIndex(item => item._id === action.payload.id); 
+            const index = state.deliveryScouts.items.findIndex(item => (item._id ?? item.id) === action.payload.id); 
             const tempDelScouts = [...state.deliveryScouts.items]
             tempDelScouts[index] = action.payload
             return {
@@ -110,7 +112,7 @@ export const customerServiceListReducer = (state = {customerService:{items:[]}},
                 error: action.payload
               } 
         case usersListTypes.CUSTOMER_SERVICE_LIST_UPDATE_ROW:
-            const index = state.customerService.items.findIndex(item => item._id === action.payload.id); 
+            const index = state.customerService.items.findIndex(item => (item._id ?? item.id) === action.payload.id); 
             const tempCusService = [...state.customerService.items]
             tempCusService[index] = action.payload
             return {
