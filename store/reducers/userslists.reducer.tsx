@@ -52,8 +52,6 @@ export const restaurantOwnerListReducer = (state = {restaurantOwners:{items:[]}}
         case usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW:
             const index = state.restaurantOwners.items.findIndex(item => (item._id ?? item.id) === action.payload.id) // amend after backend is fixed 
             const tempResOwners = [...state.restaurantOwners.items]
-            console.log(action.payload)
-            console.log(tempResOwners[index])
             tempResOwners[index] = action.payload
             return {
                 ...state, restaurantOwners: {...state.restaurantOwners, items: tempResOwners}

@@ -206,7 +206,7 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
             type: usersListTypes.UPDATE_USER_END
         })
         
-        updateEditedRowInStore(tempRoles, result, dispatch)
+        updateEditedRowInStore(tempRoles, parseDateInOneRow(result), dispatch)
         
         
         return result
@@ -224,9 +224,14 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
 
 function parseDateInAllRows(rows){
     for (let row of rows.items){
-        row.howLongAgo = Math.round(((new Date()).getTime() - (new Date(row.createdAt)).getTime() ) / (1000*60*60*24)) + " gün önce"
+        row = parseDateInOneRow(row)
     }
     return rows
+}
+
+function parseDateInOneRow(row){
+    row.howLongAgo = Math.round(((new Date()).getTime() - (new Date(row.createdAt)).getTime() ) / (1000*60*60*24)) + " gün önce"
+    return row
 }
 
 function onlyUnique(value, index, self) {
