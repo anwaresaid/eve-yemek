@@ -8,6 +8,7 @@ import {
   listRestaurantOwnersReducer,
 } from './restaurants.reducer';
 import { listAddonsReducer } from './addons.reducer';
+import { listOrdersReducer, findOrderReducer } from './orders.reducer';
 import { listRestaurantReducer } from './restaurants.reducer';
 import {
   listFoodCategoryReducer,
@@ -20,6 +21,7 @@ import {
   findFoodReducer,
   listFoodReducer,
 } from './foods.reducer';
+
 import {
   addUserReducer,
   singleUserReducer,
@@ -56,11 +58,14 @@ export default combineReducers({
 
   listAddons: listAddonsReducer,
 
+  listOrders: listOrdersReducer,
+  findOrder: findOrderReducer,
+
   listFoodCategory: listFoodCategoryReducer,
   foodCategoryDetails: foodCategoryDetailsReducer,
   createFoodCategory: createFoodCategoryReducer,
   updateFoodCategory: updateFoodCategoryReducer,
 
   listSettings: listSettingsReducer,
-  updateSettings:updateSettingsReducer,
+  updateSettings: updateSettingsReducer,
 });
