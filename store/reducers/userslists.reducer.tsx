@@ -32,7 +32,7 @@ export const customerListReducer = (state = {customers:{items:[]}}, action) => {
 
 }
 
-export const restaurantOwnerListReducer = (state = initialState, action) => {
+export const restaurantOwnerListReducer = (state = {restaurantOwners:{items:[]}}, action) => {
     const { type, payload } = action;
 
     switch (action.type) {
@@ -62,7 +62,7 @@ export const restaurantOwnerListReducer = (state = initialState, action) => {
 
 }
 
-export const deliveryScoutListReducer = (state = initialState, action) => {
+export const deliveryScoutListReducer = (state = {deliveryScouts:{items:[]}}, action) => {
     const { type, payload } = action;
 
     switch (action.type) {
@@ -92,7 +92,7 @@ export const deliveryScoutListReducer = (state = initialState, action) => {
 
 }
 
-export const customerServiceListReducer = (state = initialState, action) => {
+export const customerServiceListReducer = (state = {customerService:{items:[]}}, action) => {
     const { type, payload } = action;
 
     switch (action.type) {
