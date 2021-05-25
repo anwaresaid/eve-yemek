@@ -41,6 +41,12 @@ const index = () => {
       twilio_access_token: '',
       twilio_service_id: '',
       google_api_key: '',
+      is_cod_active: false,
+      is_paypal_active: false,
+      paypal_api_key: '',
+      is_razorpay_active: false,
+      razorpay_client_key: '',
+      razorpay_secret_key: '',
     },
     validate: (data) => {
       let errors: any = {};
@@ -87,6 +93,15 @@ const index = () => {
       if (!data.google_api_key) {
         errors.google_api_key = 'Google API Key is required.';
       }
+      if (!data.paypal_api_key) {
+        errors.paypal_api_key = 'Paypal API Key is required.';
+      }
+      if (!data.razorpay_client_key) {
+        errors.razorpay_client_key = 'Razorpay Client Key is required.';
+      }
+      if (!data.razorpay_secret_key) {
+        errors.razorpay_secret_key = 'Razorpay Secret Key is required.';
+      }
       return errors;
     },
     onSubmit: (data: any) => {
@@ -126,12 +141,20 @@ const index = () => {
       formik.values.fcm_web_server_key = settings.fcm_web_server_key;
       formik.values.is_active = settings.is_active;
 
-      formik.values.otp_verification_on_registration = settings.otp_verification_on_registration;
+      formik.values.otp_verification_on_registration =
+        settings.otp_verification_on_registration;
       formik.values.twilio_sid = settings.twilio_sid;
       formik.values.twilio_access_token = settings.twilio_access_token;
       formik.values.twilio_service_id = settings.twilio_service_id;
 
       formik.values.google_api_key = settings.google_api_key;
+
+      formik.values.is_cod_active = settings.is_cod_active;
+      formik.values.is_paypal_active = settings.is_paypal_active;
+      formik.values.paypal_api_key = settings.paypal_api_key;
+      formik.values.is_razorpay_active = settings.is_razorpay_active;
+      formik.values.razorpay_client_key = settings.razorpay_client_key;
+      formik.values.razorpay_secret_key = settings.razorpay_secret_key;
     } else {
       dispatch(listSettings());
     }
@@ -528,7 +551,118 @@ const index = () => {
   };
 
   const PaymentSettings = () => {
-    return <h2>Payment Settings Here</h2>;
+    return (
+      <>
+        <div className='p-field'>
+          <h4>COD Ative</h4>
+          <InputSwitch
+            id='is_cod_active '
+            name='is_cod_active'
+            checked={formik.values.is_cod_active}
+            onChange={formik.handleChange}
+          ></InputSwitch>
+          <label
+            htmlFor='is_cod_active'
+            className={classNames({
+              'p-error': isFormFieldValid('is_cod_active'),
+            })}
+          ></label>
+          {getFormErrorMessage('is_cod_active')}
+        </div>
+        <div>
+          <h4>Paypal Active</h4>
+          <InputSwitch
+            id='is_paypal_active '
+            name='is_paypal_active'
+            checked={formik.values.is_paypal_active}
+            onChange={formik.handleChange}
+          ></InputSwitch>
+          <label
+            htmlFor='is_paypal_active'
+            className={classNames({
+              'p-error': isFormFieldValid('is_paypal_active'),
+            })}
+          ></label>
+          {getFormErrorMessage('is_paypal_active')}
+        </div>
+        <div className='p-field'>
+          <h4>Paypal API Key</h4>
+          <InputText
+          disabled={formik.values.is_paypal_active ? false : true}
+            id='paypal_api_key'
+            value={formik.values.paypal_api_key}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('paypal_api_key'),
+            })}
+          />
+          <label
+            htmlFor='paypal_api_key'
+            className={classNames({
+              'p-error': isFormFieldValid('paypal_api_key'),
+            })}
+          ></label>
+          {getFormErrorMessage('paypal_api_key')}
+        </div>
+        <div>
+          <h4>RazorPay Active</h4>
+          <InputSwitch
+            id='is_razorpay_active '
+            name='is_razorpay_active'
+            checked={formik.values.is_razorpay_active}
+            onChange={formik.handleChange}
+          ></InputSwitch>
+          <label
+            htmlFor='is_razorpay_active'
+            className={classNames({
+              'p-error': isFormFieldValid('is_razorpay_active'),
+            })}
+          ></label>
+          {getFormErrorMessage('is_razorpay_active')}
+        </div>
+        <div className='p-field'>
+          <h4>Razorpay Client Key</h4>
+          <InputText
+          disabled={formik.values.is_razorpay_active ? false : true}
+            id='razorpay_client_key'
+            value={formik.values.razorpay_client_key}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('razorpay_client_key'),
+            })}
+          />
+          <label
+            htmlFor='razorpay_client_key'
+            className={classNames({
+              'p-error': isFormFieldValid('razorpay_client_key'),
+            })}
+          ></label>
+          {getFormErrorMessage('razorpay_client_key')}
+        </div>
+        <div className='p-field'>
+          <h4>Razorpay Secret Key</h4>
+          <InputText
+          disabled={formik.values.is_razorpay_active ? false : true}
+            id='razorpay_secret_key'
+            value={formik.values.razorpay_secret_key}
+            type='text'
+            onChange={formik.handleChange}
+            className={classNames({
+              'p-invalid': isFormFieldValid('razorpay_secret_key'),
+            })}
+          />
+          <label
+            htmlFor='razorpay_secret_key'
+            className={classNames({
+              'p-error': isFormFieldValid('razorpay_secret_key'),
+            })}
+          ></label>
+          {getFormErrorMessage('razorpay_secret_key')}
+        </div>
+      </>
+    );
   };
 
   return (
