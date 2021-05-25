@@ -18,6 +18,7 @@ export default class UsersListsService {
     }
 
     async updateUser(id, userData){
+        
         const {data} = await axios.put(`https://dev.eve-yemek.com/users/${id}`,{...userData});
         return data;
     }

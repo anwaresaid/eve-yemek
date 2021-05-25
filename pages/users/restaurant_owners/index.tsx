@@ -13,12 +13,13 @@ const restaurantOwnerList = () => {
     const {loading, success, restaurantOwners} = res
 
     useEffect( () => {
-        if (!restaurantOwners)
+        if (restaurantOwners.items.length === 0)
             dispatch(listRestaurantOwners());
      }, [dispatch]);
 
     useEffect(() => {
         if(success){
+            console.log(restaurantOwners.items)
             setUsers(restaurantOwners.items);
         }
     }, [success])

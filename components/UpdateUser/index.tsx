@@ -4,6 +4,7 @@ import {RootState} from 'typesafe-actions'
 import {useDispatch,useSelector} from 'react-redux'
 import {getSingleUser, updateUser} from '../../store/actions/userslists.action'
 import UserDataInput from '../../components/UserDataInput/UserDataInput'
+import { ProgressSpinner } from 'primereact/progressspinner'
 
 
 
@@ -12,7 +13,7 @@ const UpdateUser = (props) => {
     const dispatch = useDispatch()
     const [id, setID] = useState(props.id)
 
-    const [data, setData] = useState({name:'', email:'', phone:'', roles:[]})
+    const [data, setData] = useState({})
 
     const userDetails = useSelector((state:RootState) => state.singleUser)
     const { loading, success:getUserSuccess, userData} = userDetails
@@ -34,19 +35,22 @@ const UpdateUser = (props) => {
         if(!updating && updateUserSuccess)
             setTimeout(() => {  router.push(props.returnTo) }, 2000)
     }, [updating])
+    
 
+    
     return (
         <UserDataInput 
+            
             updateProps={{
                 id: id, 
-                loading:loading, 
                 updating:updating,
                 getUserSuccess:getUserSuccess, 
                 updateUserSuccess:updateUserSuccess,
                 error:error,
                 data:data, 
+                loading: loading,
                 setData:setData}} 
-        />
+            ></UserDataInput>
     )
 }
 
