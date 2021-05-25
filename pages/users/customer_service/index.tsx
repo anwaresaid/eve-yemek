@@ -13,13 +13,13 @@ const restaurantOwnerList = () => {
     const {loading, success, customerService} = res
 
     useEffect( () => {
-        if (!customerService)
-            dispatch(listCustomerService());
+        if (customerService.items.length === 0)
+            dispatch(listCustomerService())
      }, [dispatch]);
 
     useEffect(() => {
         if(success){
-            setUsers(customerService.items);
+            setUsers(customerService.items)
         }
     }, [success])
 
