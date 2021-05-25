@@ -32,7 +32,6 @@ const OrdersTable = (props) => {
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-                {console.log("props", props)}
             </span>
         </div>
     )

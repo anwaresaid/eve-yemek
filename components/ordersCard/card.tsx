@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import OrdersService from "../../store/services/orders.service";
-import { useRouter } from 'next/router';
+
 import { Card } from 'primereact/card';
 import { Tag } from 'primereact/tag';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Divider } from 'primereact/divider';
 import CardDate from "./cardDate";
 import OrderDivider from "./orderDivider";
 
 
 
 const OrdersCard = (props) => {
-    console.log("checking props",props);
+
   
     
     return (

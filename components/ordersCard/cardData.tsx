@@ -38,7 +38,6 @@ const cardData = () => {
     useEffect(() => {
         if(order)
         {
-            console.log("checking inside if statment")
             dispatch(getSingleUser("608b258be7e283c02975b095"));
             dispatch(findRestaurant(order.restaurant_id));
         }

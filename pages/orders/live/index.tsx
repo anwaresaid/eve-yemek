@@ -4,29 +4,36 @@ import { listOrders } from "../../../store/actions/orders.action"
 import {useDispatch,useSelector} from 'react-redux';
 import { RootState } from "typesafe-actions";
 import { ProgressSpinner } from 'primereact/progressspinner';
-import OrdersCard from "../../../components/ordersCard/cardData"
 
 const liveOrdersList = () => {
 
-    // const [users, setUsers] = useState([]);
+
     const [ordersItems, setOrdersItems] = useState([]);
-    // const [first1, setFirst1] = useState(0);
+    const [liveOrders, setLiveOrders] = useState();
+    
     const dispatch = useDispatch();
-    // const res = useSelector((state:RootState) => state.listCustomers);
-    // const {loading, success, customers} = res;
+
     const res = useSelector((state:RootState) => state.listOrders);
     const {loading, success, orders} = res;
 
     useEffect( () => {
-        // if (!customers)
-        //     dispatch(listCustomers());
+
         if(!orders)
             dispatch(listOrders());
+    
      }, [dispatch]);
 
     useEffect(() => {
         if(success)
         setOrdersItems(orders.items);
+        //to filter the live orders
+        // if(orders)
+        // {
+        //     setLiveOrders(()=>{
+        //         let live= orders.items.filter(data  => {return data.status.localeCompare("Teslim Edildi")==0;});
+        //         return live;
+        //  })
+        // }
     }, [success])
 
      

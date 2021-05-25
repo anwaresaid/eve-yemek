@@ -11,7 +11,6 @@ const dropDown = (props) => {
 const onChangeStatus = (e) =>{
     setCurrentStatus(e.value);
 }
-console.log(currentStatus);
     return (
         
         <div>
