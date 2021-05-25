@@ -205,7 +205,7 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
         dispatch({
             type: usersListTypes.UPDATE_USER_END
         })
-        
+        console.log(result)
         updateEditedRowInStore(tempRoles, result, dispatch)
         
         
@@ -234,6 +234,7 @@ function onlyUnique(value, index, self) {
   }  
 
 function updateEditedRowInStore(roles, result, dispatch){
+    debugger
     for (let role of roles){
         switch (role) {
             case "customer":
@@ -241,21 +242,25 @@ function updateEditedRowInStore(roles, result, dispatch){
                     type: usersListTypes.CUSTOMER_LIST_UPDATE_ROW,
                     payload: result
                 })
+                break
             case "restaurant_owner":
                 dispatch({
                     type: usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW,
                     payload: result
                 })
+                break
             case "delivery_scout":
                 dispatch({
                     type: usersListTypes.DELIVERY_SCOUT_LIST_UPDATE_ROW,
                     payload: result
                 })
+                break
             case "customer_service":
                 dispatch({
                     type: usersListTypes.CUSTOMER_SERVICE_LIST_UPDATE_ROW,
                     payload: result
                 })
+                break
             default:
                 console.log("Unavailable")
         }

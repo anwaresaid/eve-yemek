@@ -19,6 +19,7 @@ const restaurantOwnerList = () => {
 
     useEffect(() => {
         if(success){
+            console.log(restaurantOwners.items)
             setUsers(restaurantOwners.items);
         }
     }, [success])
