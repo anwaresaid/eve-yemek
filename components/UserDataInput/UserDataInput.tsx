@@ -55,7 +55,6 @@ const UserDataInput = (props) => {
             return errors
         },
         onSubmit: (data:any) => {
-            console.log(data)
             if(props.updateProps)
                 dispatch(updateUser(props.updateProps.id, data))
             else
@@ -85,7 +84,6 @@ const UserDataInput = (props) => {
     }, [formik.values])
 
     let mySubmit = (data) => {
-        console.log(formik.errors)
         formik.handleSubmit(data)
     }
 

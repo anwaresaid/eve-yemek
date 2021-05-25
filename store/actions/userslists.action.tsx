@@ -205,7 +205,7 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
         dispatch({
             type: usersListTypes.UPDATE_USER_END
         })
-        console.log(result)
+        
         updateEditedRowInStore(tempRoles, result, dispatch)
         
         
