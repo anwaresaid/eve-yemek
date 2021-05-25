@@ -29,7 +29,7 @@ import {
   deliveryScoutListReducer,
   customerServiceListReducer,
 } from './userslists.reducer';
-import { listSettingsReducer } from './settings.reducer';
+import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
 
 export default combineReducers({
   user,
@@ -62,4 +62,5 @@ export default combineReducers({
   updateFoodCategory: updateFoodCategoryReducer,
 
   listSettings: listSettingsReducer,
+  updateSettings:updateSettingsReducer,
 });

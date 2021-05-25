@@ -25,3 +25,28 @@ export const listSettings = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const updateSettings = (data: any) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: settingsTypes.SETTINGS_UPDATE_REQUEST,
+    });
+
+    const settingsService = new SettingsService();
+
+    const res = await settingsService.updateSettings(data);
+
+    dispatch({
+      type: settingsTypes.SETTINGS_UPDATE_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: settingsTypes.SETTINGS_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

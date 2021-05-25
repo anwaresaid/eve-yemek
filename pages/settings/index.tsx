@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import { listSettings } from '../../store/actions/settings.action';
+import { listSettings, updateSettings } from '../../store/actions/settings.action';
 import { TabView, TabPanel } from 'primereact/tabview';
 import * as S from '../../styles/food/create-food/food.create.style';
 import { Button } from 'primereact/button';
@@ -10,14 +10,20 @@ import { InputText } from 'primereact/inputtext';
 import { InputSwitch } from 'primereact/inputswitch';
 import classNames from 'classnames';
 import { InputNumber } from 'primereact/inputnumber';
+import { Toast } from 'primereact/toast';
+import { settingsTypes } from '../../store/types/settings.type';
 
 const index = () => {
   const dispatch = useDispatch();
-
+  const toast = useRef(null);
+  
   const [activeIndex, setActiveIndex] = useState(0);
 
   const res = useSelector((state: RootState) => state.listSettings);
   const { loading, success, settings } = res;
+
+  const updateRes = useSelector((state: RootState) => state.updateSettings);
+  const { success: successUpdate } = updateRes;
 
   const formik = useFormik({
     initialValues: {
@@ -105,10 +111,8 @@ const index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
-      console.log(settings);
-      console.log(data);
-      console.log('formik submitted');
-      // dispatch(addUser(data));
+      dispatch(updateSettings(data));
+      dispatch({type:settingsTypes.SETTINGS_UPDATE_RESET})
     },
   });
 
@@ -155,10 +159,14 @@ const index = () => {
       formik.values.is_razorpay_active = settings.is_razorpay_active;
       formik.values.razorpay_client_key = settings.razorpay_client_key;
       formik.values.razorpay_secret_key = settings.razorpay_secret_key;
+
+      if(successUpdate){
+        toast.current.show({severity: 'success', summary: 'Success', detail: 'Settings Updated Successfully'});
+      }
     } else {
       dispatch(listSettings());
     }
-  }, [dispatch, settings, success, loading]);
+  }, [dispatch, settings, success, loading, successUpdate]);
 
   const GeneralSettings = () => {
     return (
@@ -668,6 +676,7 @@ const index = () => {
   return (
     <div>
       <h2>Eve Yemek Ayarlari</h2>
+      <Toast ref={toast}></Toast>
       {loading ? (
         <h2>Loading</h2>
       ) : (
