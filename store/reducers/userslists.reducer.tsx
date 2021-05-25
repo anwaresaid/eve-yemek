@@ -2,7 +2,7 @@ import {usersListTypes} from "../types/userslists.type"
 
 const initialState = [];
 
-export const customerListReducer = (state = initialState, action) => {
+export const customerListReducer = (state = {customers:{items:[]}}, action) => {
     const { type, payload } = action;
 
     switch (action.type) {

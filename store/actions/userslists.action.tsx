@@ -184,6 +184,7 @@ export const addUser = (data) => async (dispatch, getState) => {
 }
 
 export const updateUser = (id, data) => async (dispatch, getState) => {
+    
     try {
         dispatch({
             type: usersListTypes.UPDATE_USER_REQUEST,
@@ -233,7 +234,6 @@ function onlyUnique(value, index, self) {
   }  
 
 function updateEditedRowInStore(roles, result, dispatch){
-    debugger;
     for (let role of roles){
         switch (role) {
             case "customer":
