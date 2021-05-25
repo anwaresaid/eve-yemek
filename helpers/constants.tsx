@@ -30,5 +30,6 @@ export const allMenuItems:any = [
         { label:"Kullanıcı Oluştur", url:"/users/add",  roles:["admin"] },
     ] },
     { separator:true },
+    { label:"Ayarlar",                 url:"/settings",   roles:["admin"] },
     { label:"Çıkış yap",               url:"/auth/logout",   roles:["admin", "restaurant_owner"] }
 ];
