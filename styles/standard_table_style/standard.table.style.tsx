@@ -37,3 +37,14 @@ export const activeTagTemplate = (activeStatus) => {
         </Tag>
     )
 }
+
+export const durumTagTemplate = (activeStatus) => {
+    return (
+        <Tag 
+            value={activeStatus==="ACTIVE" ? "Onaylandi" : "Onaylanmadı"} 
+            severity={activeStatus === "ACTIVE" ? "primary" : "warning"}
+            icon={activeStatus === "ACTIVE" ? "pi pi-check" : "pi pi-exclamation-triangle"}
+        >
+        </Tag>
+    )
+}
