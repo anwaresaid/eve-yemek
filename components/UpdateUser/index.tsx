@@ -6,8 +6,6 @@ import {getSingleUser, updateUser} from '../../store/actions/userslists.action'
 import UserDataInput from '../../components/UserDataInput/UserDataInput'
 import { ProgressSpinner } from 'primereact/progressspinner'
 
-
-
 const UpdateUser = (props) => {
     const router = useRouter()
     const dispatch = useDispatch()
@@ -30,26 +28,26 @@ const UpdateUser = (props) => {
             setData({name: userData.name ?? "", email: userData.email ?? "", phone: userData.phone ?? "", roles: userData.roles ?? []})
         }
     }, [getUserSuccess]);
-    
+
     useEffect(() => {
         if(!updating && updateUserSuccess)
             setTimeout(() => {  router.push(props.returnTo) }, 2000)
     }, [updating])
-    
 
-    
+
+
     return (
-        <UserDataInput 
-            
+        <UserDataInput
+
             updateProps={{
-                id: id, 
+                id: id,
                 updating:updating,
-                getUserSuccess:getUserSuccess, 
+                getUserSuccess:getUserSuccess,
                 updateUserSuccess:updateUserSuccess,
                 error:error,
-                data:data, 
+                data:data,
                 loading: loading,
-                setData:setData}} 
+                setData:setData}}
             ></UserDataInput>
     )
 }

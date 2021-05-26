@@ -18,7 +18,7 @@ import { InputMask } from 'primereact/inputmask';
 import { restaurantsTypes } from '../../store/types/restaurants.type';
 import {useRouter} from 'next/router';
 import { useFormik } from 'formik';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames'
 
 
     const UpdateRestaurants = () => {
@@ -34,13 +34,13 @@ import { classNames } from 'primereact/utils';
 //setting dropdown selected items
     const [selectedResOwner, setSelectedResOwner] = useState(null);
     const [reloadCheck, setReloadCheck] = useState(false);
-    
+
 //use selectors for setting dispatch to variable.
 
     const resOwnersList = useSelector((state:RootState) => state.listResOwners);
     const resDetails = useSelector((state:RootState) => state.findRestaurant);
     const updatedRestaurant = useSelector((state:RootState) => state.updateRestaurant);
-    
+
     const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success:resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
     const { loading: resLoading, success:resSuccess, restaurant} = resDetails;
@@ -111,35 +111,35 @@ import { classNames } from 'primereact/utils';
             if (!data.phone) {
                 errors.phone = 'phone number is required.';
             }
-            
+
             if (!data.email) {
                 errors.email = 'email is required.';
             }
-            
+
             if (!data.rating) {
                 errors.rating = 'rating is required.';
             }
-            
+
             if (!data.delivery_time) {
                 errors.delivery_time = 'delivery time is required.';
             }
-            
+
             if (!data.commission_rate) {
                 errors.commission_rate = 'commission rate is required.';
             }
-            
+
             if (!data.license_code) {
                 errors.license_code = 'license code is required.';
             }
-            
+
             if (!data.restaurant_charges) {
                 errors.restaurant_charges = 'charges are required.';
             }
-            
+
             if (!data.delivery_radius) {
                 errors.delivery_radius = 'delivery radius is required.';
             }
-            
+
             if (!data.owner) {
                 errors.owner = 'owner name is required.';
             }
@@ -150,7 +150,7 @@ import { classNames } from 'primereact/utils';
                 formik.values.owner_name = formik.values.owner.name;
 
             }
-              
+
             if (!data.city) {
                 errors.city = 'city is required.';
             }
@@ -158,7 +158,7 @@ import { classNames } from 'primereact/utils';
             {
                 formik.values.city_id = data.city.name;
             }
-              
+
             if (!data.town) {
                 errors.town = 'town is required.';
             }
@@ -166,17 +166,17 @@ import { classNames } from 'primereact/utils';
             {
                 formik.values.town_id = data.town.name;
             }
-              
+
             if (!data.minimum_order_amount) {
                 errors.minimum_order_amount = 'minimum order amount is required.';
             }
-              
+
             if (!data.latitudeInt) {
                 errors.latitudeInt = 'latitude is required.';
             }
             else
             {
-                formik.values.longtitude = formik.values.longtitudeInt?.toString(); 
+                formik.values.longtitude = formik.values.longtitudeInt?.toString();
             }
             if (!data.longtitudeInt) {
                 errors.longtitudeInt = 'longtitude is required.';
@@ -189,13 +189,13 @@ import { classNames } from 'primereact/utils';
         },
         onSubmit: (data:any) => {
             dispatch(updateRestaurant(router.query.id,data));
-            
+
         }
     });
-    
 
-    
-  
+
+
+
     useEffect( () => {
         if(resOnwersSuccess&&resSuccess){
         if(restaurant.id === router.query.id){
@@ -261,9 +261,9 @@ import { classNames } from 'primereact/utils';
         { name: 'London', code: 'LDN' },
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
-    ];   
+    ];
 
-//image upload functions    
+//image upload functions
     const onTemplateSelect = (e:any) => {
         let _totalSize = totalSize;
         // e.files.map(file => {
@@ -345,7 +345,7 @@ import { classNames } from 'primereact/utils';
             <Toast ref={toast}></Toast>
             <S.ContainerCard>
                  <form onSubmit = {formik.handleSubmit} >
-                     
+
                     <div className="p-fluid">
                         <div className="p-field p-col-12">
                             <h4>Ad</h4>
@@ -369,7 +369,7 @@ import { classNames } from 'primereact/utils';
                     <div className="p-field p-col-12">
                         <FileUpload ref={fileUploadRef} name="image" url="./" multiple accept="image/*" maxFileSize={1000000}
                             onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
+                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions}
                             uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
                                 <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
                             {getFormErrorMessage('file')}
@@ -474,7 +474,7 @@ import { classNames } from 'primereact/utils';
                 <label htmlFor="featured" className={classNames({ 'p-error': isFormFieldValid('featured') })}></label>
                             {getFormErrorMessage('featured')}
                 <h4>Açık?</h4>
-                <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}  
+                <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}
                  className={classNames({ 'p-invalid': isFormFieldValid('active') })}/>
                 <label htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
                             {getFormErrorMessage('active')}

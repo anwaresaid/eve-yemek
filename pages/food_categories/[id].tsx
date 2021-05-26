@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import { getFoodCategoryDetails, updateFoodCategory } from '../../store/actions/foodCategory.action';
 import { foodCategoryTypes } from '../../store/types/foodCategory.type';
 import { useFormik } from 'formik';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames'
 
 export const FoodCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ export const FoodCategoryEdit = () => {
         // setFormData(data);
         // setShowMessage(true);
         dispatch(updateFoodCategory(foodCategory.id,data));
-        
+
     }
 });
 
@@ -79,7 +79,7 @@ export const FoodCategoryEdit = () => {
   const onCategoryNameChange = (e: any) => {
     setCategoryName((e?.target as any)?.value);
   };
- 
+
   const onTemplateSelect = (e: any) => {
     let _totalSize = totalSize;
     // e.files.map(file => {
@@ -215,7 +215,7 @@ export const FoodCategoryEdit = () => {
     className:
       'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined',
   };
-  
+
   return (
     <div>
       <h1>Kategori Detayi</h1>
