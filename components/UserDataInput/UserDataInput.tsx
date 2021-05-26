@@ -10,8 +10,9 @@ import { ProgressSpinner } from 'primereact/progressspinner'
 import {usersListTypes} from '../../store/types/userslists.type'
 import {Toast} from 'primereact/toast'
 import { useFormik } from 'formik'
-import { classNames } from 'primereact/utils'
- 
+import classNames from 'classnames'
+
+
 
 const UserDataInput = (props) => {
 
@@ -19,7 +20,7 @@ const UserDataInput = (props) => {
     const router = useRouter();
     const dispatch = useDispatch()
 
-    
+
 
     const [loading, setLoading] = useState(true)
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name])
@@ -61,7 +62,7 @@ const UserDataInput = (props) => {
                 dispatch(addUser(data))
         }
     })
-    
+
 
     useEffect(() => {
         if (props.updateProps){
@@ -77,7 +78,7 @@ const UserDataInput = (props) => {
         }
     }, [props.updateProps?.data])
 
-    
+
     useEffect(()=>{
         if (props.updateProps)
             props.updateProps.setData(formik.values)
@@ -92,7 +93,7 @@ const UserDataInput = (props) => {
             toast.current.show({severity: 'success', summary: 'Updated User', detail: 'Updated user '})
         else if (!props.updateProps?.updating && props.updateProps?.error)
             toast.current.show({severity: 'warn', summary: 'Error', detail: 'Server: ' + props.updateProps.error});
-            
+
     },[props.updateProps?.updateUserSuccess, props.updateProps?.updating])
     const body = (updating) => {
         return (
@@ -124,7 +125,7 @@ const UserDataInput = (props) => {
                             <label htmlFor="phone" className={classNames({ 'p-error': isFormFieldValid('phone') })}></label>
                             {getFormErrorMessage('phone')}
                         </div>
-                        {!updating && 
+                        {!updating &&
                             <div className="p-field">
                             <h4>Şifre</h4>
                             <InputText id="password" type="password" value={formik.values.password} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('password') })}></InputText>
@@ -144,7 +145,7 @@ const UserDataInput = (props) => {
             </div>
         )
     }
-    
+
     return (
         <div>
             <Toast ref={toast}></Toast>
