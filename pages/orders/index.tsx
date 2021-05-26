@@ -55,7 +55,7 @@ const Orders = () => {
         {field: 'name', header: 'Restoran'},
         {field: 'status', header: 'Durum'},
         {field: 'total_amount', header: 'Toplam Miktar'}, 
-        {field: 'createdAt', header: 'Sipariş Zamanı'},
+        {field: 'howLongAgo', header: 'Sipariş Zamanı'},
         {field: 'ops', header: 'İşlemler', body: actionBodyTemplate}
     ]
 
