@@ -1,4 +1,4 @@
-export const baseUrl = "https://dev.eve-yemek.com";
+export const baseUrl = 'https://dev.eve-yemek.com';
 
 // prettier-ignore
 export const allMenuItems:any = [
@@ -16,6 +16,10 @@ export const allMenuItems:any = [
     { label:"Yemek Kategorileri", expanded: true, items: [
         { label:"Kategori Listesi",       url:"/food_categories",        roles:["admin", "restaurant_owner"] },
         { label:"Kategori Oluştur",       url:"/food_categories/create", roles:["admin", "restaurant_owner"] }
+    ] },
+    { label:"Eklentiler Kategorileri", expanded: true, items: [
+        { label:"Eklenti Kategorisi Listesi",  url:"/addon_categories",        roles:["admin", "restaurant_owner"] },
+        { label:"Eklenti Kategorisi Oluştur",  url:"/addon_categories/create", roles:["admin", "restaurant_owner"] }
     ] },
     { label:"Eklentiler",           expanded: true, items: [
         { label:"Eklentiler Listesi",             url:"/addons",   roles:["admin"]                     },
