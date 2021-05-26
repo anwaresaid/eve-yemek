@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import * as S from '../../styles/restaurants/restaurants.style';
-import { Column } from 'primereact/column';
+import React, { useState, useEffect } from 'react'
+import * as S from '../../styles/restaurants/restaurants.style'
+import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { useRouter } from 'next/router'
 import StandardTable from '../../components/StandardTable'
 import { RootState } from 'typesafe-actions'
 import { useDispatch, useSelector } from 'react-redux'
-import { listOrders } from '../../store/actions/orders.action';
+import { listOrders } from '../../store/actions/orders.action'
+import {ProgressSpinner} from 'primereact/progressspinner'
 
 const Orders = () => {
 
@@ -60,6 +61,7 @@ const Orders = () => {
 
     return (
         <div>
+            {loading ? <ProgressSpinner /> : 
             <div className="card">
                 <h1>Siparişler</h1>
                 <StandardTable 
@@ -69,7 +71,7 @@ const Orders = () => {
                     globalFilter={globalFilter} 
                     emptyMessage="No orders found" >     
                 </StandardTable>
-            </div>
+            </div>}
         </div>
     );
 }
