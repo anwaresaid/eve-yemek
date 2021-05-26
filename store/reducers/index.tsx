@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux';
 import { createFoodReducer } from './foods.reducer';
-import { listAddonCategoryReducer } from './addon-category.reducer';
+import {
+  listAddonCategoryReducer,
+  addonCategoryDetailsReducer,
+  createAddonCategoryReducer,
+  updateAddonCategoryReducer,
+} from './addon-category.reducer';
 import user from './user.reducer';
 import {
   createRestaurantReducer,
@@ -33,12 +38,6 @@ import {
   customerServiceListReducer,
 } from './userslists.reducer';
 import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
-import {
-  addonCategoryDetailsReducer,
-  createAddonCategoryReducer,
-  listAddonCategoriesReducer,
-  updateAddonCategoryReducer,
-} from './addonCategories.reducer';
 
 export default combineReducers({
   user,
@@ -65,8 +64,6 @@ export default combineReducers({
 
   listAddons: listAddonsReducer,
 
-  listAddonCategory: listAddonCategoryReducer,
-
   listOrders: listOrdersReducer,
   findOrder: findOrderReducer,
 
@@ -78,7 +75,7 @@ export default combineReducers({
   listSettings: listSettingsReducer,
   updateSettings: updateSettingsReducer,
 
-  listAddonCategories: listAddonCategoriesReducer,
+  listAddonCategory: listAddonCategoryReducer,
   addonCategoryDetails: addonCategoryDetailsReducer,
   updateAddonCategory: updateAddonCategoryReducer,
   createAddonCategory: createAddonCategoryReducer,

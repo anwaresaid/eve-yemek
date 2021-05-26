@@ -5,7 +5,7 @@ import { InputText } from 'primereact/inputtext';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import { listAddonCategories } from '../../store/actions/addonCategories.action';
+import { listAddonCategory } from '../../store/actions/addon-category.action';
 import * as S from '../../styles/food/food.list.style';
 
 const AddonCategoriesList = () => {
@@ -13,11 +13,11 @@ const AddonCategoriesList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const res = useSelector((state: RootState) => state.listAddonCategories);
-  const { loading, success, addonCategories } = res;
+  const res = useSelector((state: RootState) => state.listAddonCategory);
+  const { loading, success, addonCat: addonCategories } = res;
 
   useEffect(() => {
-    dispatch(listAddonCategories());
+    dispatch(listAddonCategory());
   }, [dispatch]);
 
   const actionBodyTemplate = (rowData) => {

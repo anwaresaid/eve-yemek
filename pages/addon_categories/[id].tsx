@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import {
   getAddonCategoryDetails,
   updateAddonCategory,
-} from '../../store/actions/addonCategories.action';
+} from '../../store/actions/addon-category.action';
 
 export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();

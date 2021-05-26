@@ -8,8 +8,8 @@ import { RootState } from 'typesafe-actions';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
-import { createAddonCategory } from '../../../store/actions/addonCategories.action';
-import { addonCategoriesTypes } from '../../../store/types/addon_categories.type';
+import { createAddonCategory } from '../../../store/actions/addon-category.action';
+import { addonCategoryTypes } from '../../../store/types/addon-category.type';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ export const Index = () => {
   useEffect(() => {
     if (success) {
       router.push('/addon_categories');
-      dispatch({ type: addonCategoriesTypes.ADDON_CATEGORY_UPDATE_RESET });
+      dispatch({ type: addonCategoryTypes.ADDON_CATEGORY_UPDATE_RESET });
     }
   }, [success]);
 
