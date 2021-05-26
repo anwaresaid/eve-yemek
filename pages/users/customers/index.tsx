@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import UsersTable from "../../../components/tables/usersTable"
+import UsersTable from "../../../components/tables/usersTable";
 import { listCustomers } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux';
 import { RootState } from "typesafe-actions";
@@ -14,7 +14,7 @@ const customerList = () => {
     const {loading, success, customers} = res;
 
     useEffect( () => {
-        if (customers.items.length === 0)
+        if (!customers)
             dispatch(listCustomers());
      }, [dispatch]);
 

@@ -21,9 +21,9 @@ export const allMenuItems:any = [
         { label:"Eklenti Kategorisi Listesi",  url:"/addon_categories",        roles:["admin", "restaurant_owner"] },
         { label:"Eklenti Kategorisi Oluştur",  url:"/addon_categories/create", roles:["admin", "restaurant_owner"] }
     ] },
-    { label:"Eklentiler", expanded: true, items: [
-        { label:"Eklentiler Listesi",  url:"/addons",        roles:["admin", "restaurant_owner"] },
-        { label:"Eklentiler Oluştur",  url:"/addons/create", roles:["admin", "restaurant_owner"] }
+    { label:"Eklentiler",           expanded: true, items: [
+        { label:"Eklentiler Listesi",             url:"/addons",   roles:["admin"]                     },
+        { label:"Eklentiler Oluştur",             url:"/addons/create",   roles:["admin"]              },
     ] },
     { label:"Hesap Ayarları", expanded: true, items: [
         { label:"Müşteriler",  url:"/users/customers", roles:["admin"] },

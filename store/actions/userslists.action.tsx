@@ -1,24 +1,25 @@
-import restaurantOwnerList from "../../pages/users/restaurant_owners";
-import UsersListsService from "../services/userslists.service";
-import { usersListTypes } from "../types/userslists.type";
+import restaurantOwnerList from "../../pages/users/restaurant_owners"
+import UsersListsService from "../services/userslists.service"
+import { usersListTypes } from "../types/userslists.type"
 import {useDispatch} from 'react-redux'
+import { parseDateInAllRows, parseDateInOneRow } from "../../helpers/dateFunctions"
 
 export const listCustomers = () => async (dispatch, getState) => {
     try {
 
         dispatch({
             type: usersListTypes.CUSTOMER_LIST_REQUEST,
-        });
+        })
 
-        const usersListsService = new UsersListsService;
-        const result = await usersListsService.getUsersByRole('customer');
+        const usersListsService = new UsersListsService
+        const result = await usersListsService.getUsersByRole('customer')
 
 
 
         dispatch({
             type: usersListTypes.CUSTOMER_LIST_SUCCESS,
             payload: parseDateInAllRows(result),
-        });
+        })
         
 
     } catch (error){
@@ -38,15 +39,15 @@ export const listRestaurantOwners = () => async (dispatch, getState) => {
 
         dispatch({
             type: usersListTypes.RESTAURANT_OWNER_LIST_REQUEST,
-        });
+        })
 
-        const usersListsService = new UsersListsService;
-        const result = await usersListsService.getUsersByRole('restaurant_owner');
+        const usersListsService = new UsersListsService
+        const result = await usersListsService.getUsersByRole('restaurant_owner')
 
         dispatch({
             type: usersListTypes.RESTAURANT_OWNER_LIST_SUCCESS,
             payload: parseDateInAllRows(result),
-        });
+        })
 
     } catch (error){
         dispatch({
@@ -65,10 +66,10 @@ export const listDeliveryScouts = () => async (dispatch, getState) => {
 
         dispatch({
             type: usersListTypes.DELIVERY_SCOUT_LIST_REQUEST,
-        });
+        })
 
-        const usersListsService = new UsersListsService;
-        const result = await usersListsService.getUsersByRole('delivery_scout');
+        const usersListsService = new UsersListsService
+        const result = await usersListsService.getUsersByRole('delivery_scout')
 
         dispatch({
             type: usersListTypes.DELIVERY_SCOUT_LIST_SUCCESS,
@@ -92,15 +93,15 @@ export const listCustomerService = () => async (dispatch, getState) => {
 
         dispatch({
             type: usersListTypes.CUSTOMER_SERVICE_LIST_REQUEST,
-        });
+        })
 
         const usersListsService = new UsersListsService;
-        const result = await usersListsService.getUsersByRole('customer_service');
+        const result = await usersListsService.getUsersByRole('customer_service')
 
         dispatch({
             type: usersListTypes.CUSTOMER_SERVICE_LIST_SUCCESS,
             payload: parseDateInAllRows(result),
-        });
+        })
 
     } catch (error){
         dispatch({
@@ -120,17 +121,17 @@ export const getSingleUser = (id) => async (dispatch, getState) => {
 
         dispatch({
             type: usersListTypes.GET_USER_REQUEST,
-        });
+        })
 
-        const usersListsService = new UsersListsService;
+        const usersListsService = new UsersListsService
 
         
-        const result = await usersListsService.getSingleUser(id);
+        const result = await usersListsService.getSingleUser(id)
 
         dispatch({
             type: usersListTypes.GET_USER_SUCCESS,
             payload: result,
-        });
+        })
 
         return result
 
@@ -151,17 +152,17 @@ export const addUser = (data) => async (dispatch, getState) => {
 
         dispatch({
             type: usersListTypes.ADD_USER_REQUEST,
-        });
+        })
 
-        const usersListsService = new UsersListsService;
+        const usersListsService = new UsersListsService
 
         
-        const result = await usersListsService.addUser(data);
+        const result = await usersListsService.addUser(data)
 
         dispatch({
             type: usersListTypes.ADD_USER_SUCCESS,
             payload: result,
-        });
+        })
 
         
         return result
@@ -190,10 +191,10 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
             type: usersListTypes.UPDATE_USER_REQUEST,
         });
 
-        const usersListsService = new UsersListsService;
+        const usersListsService = new UsersListsService
 
         
-        const result = await usersListsService.updateUser(id, data);
+        const result = await usersListsService.updateUser(id, data)
         
         dispatch({
             type: usersListTypes.UPDATE_USER_SUCCESS,
@@ -222,20 +223,8 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
 
 }
 
-function parseDateInAllRows(rows){
-    for (let row of rows.items){
-        row = parseDateInOneRow(row)
-    }
-    return rows
-}
-
-function parseDateInOneRow(row){
-    row.howLongAgo = Math.round(((new Date()).getTime() - (new Date(row.createdAt)).getTime() ) / (1000*60*60*24)) + " gün önce"
-    return row
-}
-
 function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
+    return self.indexOf(value) === index
   }  
 
 function updateEditedRowInStore(roles, result, dispatch){
