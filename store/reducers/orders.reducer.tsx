@@ -6,7 +6,7 @@ export const listOrdersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ordersTypes.ORDER_LIST_REQUEST:
       return { loading: true}
-    case ordersTypes.ORDER_LIST_SUCCESS:
+    case ordersTypes.ORDER_LIST_SUCCESS: 
       return {
         loading: false,
         success: true,
