@@ -24,3 +24,53 @@ export const listAddonCategories = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const getAddonCategoryDetails = (id: any) => async (dispatch) => {
+  try {
+    dispatch({
+      type: addonCategoriesTypes.ADDON_CATEGORY_DETAILS_REQUEST,
+    });
+
+    const addonCategoriesService = new AddonCategoriesService();
+    const res = await addonCategoriesService.getAddonCategoryDetails(id);
+    dispatch({
+      type: addonCategoriesTypes.ADDON_CATEGORY_DETAILS_SUCCESS,
+      payload: res,
+    });
+  } catch (err) {
+    dispatch({
+      type: addonCategoriesTypes.ADDON_CATEGORY_DETAILS_RESET,
+      payload:
+        err.response && err.response.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+export const updateAddonCategory =
+  (id: string, data: any) => async (dispatch) => {
+    try {
+      dispatch({
+        type: addonCategoriesTypes.ADDON_CATEGORY_UPDATE_REQUEST,
+      });
+
+      const addonCategoriesService = new AddonCategoriesService();
+      const res = await addonCategoriesService.updateAddonCategory(id, {
+        ...data,
+        addons: [],
+      });
+      dispatch({
+        type: addonCategoriesTypes.ADDON_CATEGORY_UPDATE_SUCCESS,
+        payload: res,
+      });
+    } catch (err) {
+      dispatch({
+        type: addonCategoriesTypes.ADDON_CATEGORY_UPDATE_RESET,
+        payload:
+          err.response && err.response.response.data.message
+            ? err.response.data.message
+            : err.message,
+      });
+    }
+  };

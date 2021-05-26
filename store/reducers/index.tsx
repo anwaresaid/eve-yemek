@@ -32,7 +32,11 @@ import {
   customerServiceListReducer,
 } from './userslists.reducer';
 import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
-import { listAddonCategoriesReducer } from './addonCategories.reduced';
+import {
+  addonCategoryDetailsReducer,
+  listAddonCategoriesReducer,
+  updateAddonCategoryReducer,
+} from './addonCategories.reduced';
 
 export default combineReducers({
   user,
@@ -71,4 +75,6 @@ export default combineReducers({
   updateSettings: updateSettingsReducer,
 
   listAddonCategories: listAddonCategoriesReducer,
+  addonCategoryDetails: addonCategoryDetailsReducer,
+  updateAddonCategory: updateAddonCategoryReducer,
 });

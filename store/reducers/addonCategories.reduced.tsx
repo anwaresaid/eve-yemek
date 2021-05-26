@@ -22,3 +22,55 @@ export const listAddonCategoriesReducer = (state = [], action) => {
       return state;
   }
 };
+
+export const addonCategoryDetailsReducer = (state = [], action) => {
+  switch (action.type) {
+    case addonCategoriesTypes.ADDON_CATEGORY_DETAILS_REQUEST:
+      return { loading: true };
+
+    case addonCategoriesTypes.ADDON_CATEGORY_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        addonCategory: action.payload,
+      };
+
+    case addonCategoriesTypes.ADDON_CATEGORY_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case addonCategoriesTypes.ADDON_CATEGORY_DETAILS_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const updateAddonCategoryReducer = (state = [], action) => {
+  switch (action.type) {
+    case addonCategoriesTypes.ADDON_CATEGORY_UPDATE_REQUEST:
+      return { loading: true };
+
+    case addonCategoriesTypes.ADDON_CATEGORY_UPDATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        updatedAddonCategory: action.payload,
+      };
+
+    case addonCategoriesTypes.ADDON_CATEGORY_UPDATE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case addonCategoriesTypes.ADDON_CATEGORY_UPDATE_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
