@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react"
-import AddonsTable from "../../components/Tables/addonsTable"
+import AddonsTable from "../../components/tables/addonsTable"
 import { listAddons } from "../../store/actions/addons.action"
 import { listAddonCategory } from "../../store/actions/addon-category.action"
 import {useDispatch,useSelector} from 'react-redux'

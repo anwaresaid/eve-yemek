@@ -1,9 +1,5 @@
 import React, { useState,useEffect } from "react"
-<<<<<<< HEAD
-import UsersTable from "../../../components/Tables/usersTable"
-=======
 import UsersTable from "../../../components/tables/usersTable"
->>>>>>> b065b01fb0857a2439668ecb507912b801ce9c1c
 import { listCustomerService } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
