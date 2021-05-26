@@ -17,7 +17,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
 import { useFormik } from 'formik';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames'
 
 
 export const Index = () => {
@@ -29,14 +29,14 @@ export const Index = () => {
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
     const dispatch = useDispatch();
-    
+
 //use selectors for setting dispatch to variable.
     const addonList = useSelector((state:RootState) => state.listAddons);
     const { loading: addonsLoading, success:addonSuccess, addons: addonslist } = addonList;
     const resFoodCat = useSelector((state:RootState) => state.listFoodCategory);
     const { loading: foodCatLoading, success: foodCatSuccess, foodCat: foodCatlist } = resFoodCat;
     const resRestaurants = useSelector((state:RootState) => state.listRestaurant);
-    
+
     const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants } = resRestaurants;
 
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
@@ -114,14 +114,14 @@ export const Index = () => {
         setFoodCategoryName(foodCategoryNames);
 
         const restaurantNames =  restaurants.items.map(res => {return{name: res.name}});
-        setRestaurantName(restaurantNames);   
+        setRestaurantName(restaurantNames);
        }
 
-    
+
     useEffect(() =>{
         if(!addonSuccess)
             dispatch(listAddons());
-        
+
         if(!foodCatSuccess)
             dispatch(listFoodCategory());
 
@@ -131,7 +131,7 @@ export const Index = () => {
         if(addonSuccess && restaurantsSuccess && foodCatSuccess)
                 settingDropDownNames();
     }, [addonSuccess,foodCatSuccess,restaurantsSuccess]);
-  
+
 
     // const filterByReference = (selectedAddons) => {
     //     let res = [];
@@ -145,7 +145,7 @@ export const Index = () => {
 
 
 
-//image upload functions    
+//image upload functions
     const onTemplateSelect = (e:any) => {
         let _totalSize = totalSize;
         // e.files.map(file => {
@@ -259,7 +259,7 @@ export const Index = () => {
                     </div>
                     <FileUpload ref={fileUploadRef} id="file" name="file" url="./" multiple accept="image/*" maxFileSize={1000000}
                         onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                        headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
+                        headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions}
                         uploadOptions={uploadOptions} cancelOptions={cancelOptions} className={classNames({ 'p-invalid': isFormFieldValid('file') })} />
                           <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
                                         {getFormErrorMessage('file')}
@@ -291,10 +291,10 @@ export const Index = () => {
                         </div>
                     </div>
                     <div>
-                    
+
                         <h4>Saf Sebze Mi</h4>
                         <InputSwitch checked={formik.values.vegi} name="vegi" id="vegi"  onChange={formik.handleChange} />
-                        
+
                         <h4>Öne Çıkma</h4>
                         <InputSwitch checked={formik.values.featured} name="featured" id="featured" onChange={formik.handleChange} />
 

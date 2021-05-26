@@ -19,7 +19,7 @@ import { MultiSelect } from 'primereact/multiselect';
 import {RootState} from 'typesafe-actions';
 import {useRouter} from 'next/router';
 import { useFormik } from 'formik';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames'
 
 export const EditFoods = () => {
 
@@ -40,7 +40,7 @@ export const EditFoods = () => {
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
 
-    
+
 //use selectors for setting dispatch to variable.
     const addonList = useSelector((state:RootState) => state.listAddons);
     const { loading: addonsLoading, success:addonSuccess, addons: addonslist } = addonList;
@@ -60,7 +60,7 @@ export const EditFoods = () => {
         setFoodCategoryName(foodCategoryNames);
 
         const restaurantNames =  restaurants.items.map(res => {return{name: res.name}});
-        setRestaurantName(restaurantNames);   
+        setRestaurantName(restaurantNames);
        }
 
        const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
@@ -112,7 +112,7 @@ export const EditFoods = () => {
                 let selectedCategory = foodCatlist.items.filter(data  => {return data.name.localeCompare(formik.values.categoryName.name)==0;});
                 formik.values.food_category_id = selectedCategory[0]._id;
             }
-            
+
             if (!data.addons) {
                 errors.addons = 'addons required.';
             }
@@ -122,27 +122,27 @@ export const EditFoods = () => {
             // setFormData(data);
             // setShowMessage(true);
             dispatch(updateFood(router.query.id,data));
-            
+
         }
     });
-    
+
     useEffect(() =>{
         if(!addonSuccess)
             dispatch(listAddons());
-        
+
         if(!foodCatSuccess)
             dispatch(listFoodCategory());
 
         if(!restaurantsSuccess)
             dispatch(listRestaurant());
-        
+
         if(!foodSuccess)
-           {    
+           {
              dispatch( findFood(router.query.id));
            }
-    
-        
-           
+
+
+
         if(addonSuccess && restaurantsSuccess && foodCatSuccess && foodSuccess)
         {
                 settingDropDownNames();
@@ -152,7 +152,7 @@ export const EditFoods = () => {
                 });
                 if(selectedRestaurant && !setIsDone)
                 {
-                  
+
                     formik.values.resName = {name : selectedRestaurant.name};
                     formik.values.categoryName = {name : foods.food_category_id.name};
                     formik.values.name = foods.name;
@@ -164,15 +164,15 @@ export const EditFoods = () => {
                     formik.values.featured = foods.featured;
                     setSetIsDone(true);
             }
-                
+
 
 
         }
     }, [addonSuccess,foodCatSuccess,restaurantsSuccess,foodSuccess,selectedRestaurant, router.query.id]);
-  
 
 
-//image upload functions    
+
+//image upload functions
     const onTemplateSelect = (e:any) => {
         let _totalSize = totalSize;
         // e.files.map(file => {
@@ -258,7 +258,7 @@ export const EditFoods = () => {
 
             )
     }
-   
+
     return (
 
         <div>
@@ -288,7 +288,7 @@ export const EditFoods = () => {
                 </div>
                 <FileUpload ref={fileUploadRef} id="file" name="file" url="./" multiple accept="image/*" maxFileSize={1000000}
                     onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                    headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
+                    headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions}
                     uploadOptions={uploadOptions} cancelOptions={cancelOptions} className={classNames({ 'p-invalid': isFormFieldValid('file') })} />
                       <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
                                     {getFormErrorMessage('file')}
@@ -318,10 +318,10 @@ export const EditFoods = () => {
                     </div>
                 </div>
                 <div>
-                
+
                     <h4>Saf Sebze Mi</h4>
                     <InputSwitch checked={formik.values.is_veg} name="is_veg" id="is_veg"  onChange={formik.handleChange} />
-                    
+
                     <h4>Öne Çıkma</h4>
                     <InputSwitch checked={formik.values.featured} name="featured" id="featured" onChange={formik.handleChange} />
 

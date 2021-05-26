@@ -16,7 +16,7 @@ import {RootState} from 'typesafe-actions';
 import { InputMask } from 'primereact/inputmask';
 import { useFormik } from 'formik';
 import { restaurantsTypes } from "../../../store/types/restaurants.type";
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames'
 import { useRouter } from 'next/router';
 
 
@@ -28,10 +28,10 @@ import { useRouter } from 'next/router';
     const [resOwnersName, setResOwnersName] = useState([" "]);
     const restaurantCreate = useSelector((state:RootState) => state.createRestaurant);
   const { success } = restaurantCreate;
-    
+
     const dispatch = useDispatch();
     const router = useRouter();
-    
+
 //use selectors for setting dispatch to variable.
     const resOwnersList = useSelector((state:RootState) => state.listRestaurantOwners);
 
@@ -48,7 +48,7 @@ import { useRouter } from 'next/router';
        const getFormErrorMessage = (name) => {
            return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
        };
-   
+
        const formik = useFormik({
         initialValues:{
             owner_id: '',
@@ -102,35 +102,35 @@ import { useRouter } from 'next/router';
             if (!data.phone) {
                 errors.phone = 'phone number is required.';
             }
-            
+
             if (!data.email) {
                 errors.email = 'email is required.';
             }
-            
+
             if (!data.rating) {
                 errors.rating = 'rating is required.';
             }
-            
+
             if (!data.delivery_time) {
                 errors.delivery_time = 'delivery time is required.';
             }
-            
+
             if (!data.commission_rate) {
                 errors.commission_rate = 'commission rate is required.';
             }
-            
+
             if (!data.license_code) {
                 errors.license_code = 'license code is required.';
             }
-            
+
             if (!data.restaurant_charges) {
                 errors.restaurant_charges = 'charges are required.';
             }
-            
+
             if (!data.delivery_radius) {
                 errors.delivery_radius = 'delivery radius is required.';
             }
-            
+
             if (!data.owner) {
                 errors.owner = 'owner name is required.';
             }
@@ -140,7 +140,7 @@ import { useRouter } from 'next/router';
                 formik.values.owner_id = selectedResOwners[0]?._id;
                 formik.values.owner_name = formik.values.owner?.name;
             }
-              
+
             if (!data.city) {
                 errors.city = 'city is required.';
             }
@@ -148,7 +148,7 @@ import { useRouter } from 'next/router';
             {
                 formik.values.city_id = data.city.name;
             }
-              
+
             if (!data.town) {
                 errors.town = 'town is required.';
             }
@@ -156,11 +156,11 @@ import { useRouter } from 'next/router';
             {
                 formik.values.town_id = data.town.name;
             }
-              
+
             if (!data.minimum_order_amount) {
                 errors.minimum_order_amount = 'minimum order amount is required.';
             }
-              
+
             if (!data.latitudeInt) {
                 errors.latitudeInt = 'latitude is required.';
             }
@@ -173,7 +173,7 @@ import { useRouter } from 'next/router';
             }
             else
             {
-                formik.values.longtitude = formik.values.longtitudeInt?.toString(); 
+                formik.values.longtitude = formik.values.longtitudeInt?.toString();
             }
             return errors;
         },
@@ -181,26 +181,26 @@ import { useRouter } from 'next/router';
             // setFormData(data);
             // setShowMessage(true);
             dispatch(createRestaurant(data));
-            
+
         }
     });
-    
-    
+
+
     useEffect(() =>{
         if(!resOnwersSuccess)
             dispatch(listRestaurantOwners());
         if(resOnwersSuccess)
         {
             settingDropDownNames();
-        } 
+        }
         if(success){
             router.push('/restaurants');
             dispatch({type: restaurantsTypes.RESTAURAT_CREATE_RESET});
         }
 
-       
+
     }, [resOnwersSuccess,success]);
-  
+
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -218,7 +218,7 @@ import { useRouter } from 'next/router';
     ];
 
 
-//image upload functions    
+//image upload functions
     const onTemplateSelect = (e:any) => {
         let _totalSize = totalSize;
         // e.files.map(file => {
@@ -300,7 +300,7 @@ import { useRouter } from 'next/router';
             <Toast ref={toast}></Toast>
              <S.ContainerCard>
                  <form onSubmit = {formik.handleSubmit} >
-                     
+
                     <div className="p-fluid">
                         <div className="p-field p-col-12">
                             <h4>Ad</h4>
@@ -324,7 +324,7 @@ import { useRouter } from 'next/router';
                     <div className="p-field p-col-12">
                         <FileUpload ref={fileUploadRef} name="image" url="./" multiple accept="image/*" maxFileSize={1000000}
                             onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions} 
+                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate} chooseOptions={chooseOptions}
                             uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
                                 <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
                             {getFormErrorMessage('file')}
@@ -429,7 +429,7 @@ import { useRouter } from 'next/router';
                 <label htmlFor="featured" className={classNames({ 'p-error': isFormFieldValid('featured') })}></label>
                             {getFormErrorMessage('featured')}
                 <h4>Açık?</h4>
-                <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}  
+                <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}
                  className={classNames({ 'p-invalid': isFormFieldValid('active') })}/>
                 <label htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
                             {getFormErrorMessage('active')}

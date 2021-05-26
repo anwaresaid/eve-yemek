@@ -12,15 +12,11 @@ import {Toast} from 'primereact/toast'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
 
-
-
 const UserDataInput = (props) => {
 
     const toast = useRef(null);
     const router = useRouter();
     const dispatch = useDispatch()
-
-
 
     const [loading, setLoading] = useState(true)
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name])

@@ -13,7 +13,7 @@ import { RootState } from 'typesafe-actions';
 import { foodCategoryTypes } from '../../../store/types/foodCategory.type';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import { classNames } from 'primereact/utils';
+import classNames from 'classnames'
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export const Index = () => {
         // setFormData(data);
         // setShowMessage(true);
         dispatch(createFoodCategory(data));
-        
+
     }
 });
 
@@ -61,7 +61,7 @@ export const Index = () => {
     }
   }, [success]);
 
- 
+
   const onTemplateSelect = (e: any) => {
     let _totalSize = totalSize;
     // e.files.map(file => {
