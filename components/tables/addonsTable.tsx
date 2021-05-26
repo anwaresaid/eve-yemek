@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 import StandardTable from '../StandardTable'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
+import {activeTagTemplate} from '../../styles/standard_table_style/standard.table.style'
+import { Button } from "primereact/button";
 
-import {editTagTemplate, activeTagTemplate} from '../../styles/standard_table_style/standard.table.style'
-import addons from "../../pages/addons";
-
-const UsersTable = (props) => {
+const AddonsTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
@@ -15,10 +14,13 @@ const UsersTable = (props) => {
     
     const router = useRouter();
 
-    const editButton = (rowData) => {
+    const actionBodyTemplate = (rowData) => {
+
         return (
-            editTagTemplate(()=>{router.push({pathname: '/users/'+props.editPath+'/'+rowData._id})}, "pi-user-edit")
-        )
+            <React.Fragment>
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/addons/${rowData._id}`)}}/>
+            </React.Fragment>
+        );
     }
 
     const activeTag = (rowData) => {
@@ -36,10 +38,7 @@ const UsersTable = (props) => {
 
     const CategoryBodyTemplate = (rowData)  => {
         let categoryName = props.addonCat.filter(cat => {return cat._id.localeCompare(rowData.addOn_category_id)==0;})
-        console.log("checking name", categoryName);
-        console.log("checking rowData", rowData.addOn_category_id);
-
-        return 
+        return categoryName;
          }
 
     const header =(
@@ -58,10 +57,9 @@ const UsersTable = (props) => {
         {field: 'addOn_category_id', header: 'Kategori', body: CategoryBodyTemplate},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
         {field: 'active', header: 'Aktif', body: activeTag},
-        {field: 'ops', header: 'İşlemler', body: editButton}
+        {field: 'ops', header: 'İşlemler', body: actionBodyTemplate}
     ]
-    console.log(props.addons);
-    console.log(props.addonCat);
+
     return (
         <StandardTable 
             header={header}
@@ -73,4 +71,4 @@ const UsersTable = (props) => {
     )
 }
 
-export default UsersTable;
+export default AddonsTable;

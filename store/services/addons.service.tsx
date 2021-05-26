@@ -11,4 +11,12 @@ export default class AddonService{
        const {data} = await axios.post('https://dev.eve-yemek.com/add-ons',{...addons});
         return data
     }
+    async findAddons(id){
+       const {data} = await axios.get(`https://dev.eve-yemek.com/add-ons/${id}`);
+        return data
+    }
+    async updateAddons(id,addons){
+       const {data} = await axios.put(`https://dev.eve-yemek.com/add-ons/${id}`,{...addons});
+        return data
+    }
 }
