@@ -56,10 +56,7 @@ export const updateAddonCategory =
       });
 
       const addonCategoriesService = new AddonCategoriesService();
-      const res = await addonCategoriesService.updateAddonCategory(id, {
-        ...data,
-        addons: [],
-      });
+      const res = await addonCategoriesService.updateAddonCategory(id, data);
       dispatch({
         type: addonCategoriesTypes.ADDON_CATEGORY_UPDATE_SUCCESS,
         payload: res,
