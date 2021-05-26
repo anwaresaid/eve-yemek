@@ -13,7 +13,7 @@ const deliveryScoutList = () => {
     const {loading, success, deliveryScouts} = res
 
     useEffect( () => {
-        if (deliveryScouts.items.length === 0)
+        if (!deliveryScouts)
             dispatch(listDeliveryScouts());
      }, [dispatch]);
 

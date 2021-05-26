@@ -30,7 +30,7 @@ export const editTagTemplate = (onClick, icon='pi-pencil') => {
 export const activeTagTemplate = (activeStatus) => {
     return (
         <Tag 
-            value={activeStatus ? "Onaylandi" : "Onaylanmadı"} 
+            value={activeStatus ? "Aktif" : "engelli"} 
             severity={activeStatus ? "primary" : "warning"}
             icon={activeStatus ? "pi pi-check" : "pi pi-exclamation-triangle"}
         >

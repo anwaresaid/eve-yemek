@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { createFoodReducer } from './foods.reducer';
+import { listAddonCategoryReducer } from './addon-category.reducer';
 import user from './user.reducer';
 import {
   createRestaurantReducer,
@@ -57,6 +58,8 @@ export default combineReducers({
   addUser: addUserReducer,
 
   listAddons: listAddonsReducer,
+
+  listAddonCategory: listAddonCategoryReducer,
 
   listOrders: listOrdersReducer,
   findOrder: findOrderReducer,
