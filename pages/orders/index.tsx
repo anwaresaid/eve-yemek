@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '../../styles/restaurants/restaurants.style';
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import OrdersService from "../../store/services/orders.service";
-import { useRouter } from 'next/router';
+import { Button } from 'primereact/button'
+import { InputText } from 'primereact/inputtext'
+import { useRouter } from 'next/router'
+import StandardTable from '../../components/StandardTable'
+import { RootState } from 'typesafe-actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { listOrders } from '../../store/actions/orders.action';
 
 const Orders = () => {
 
-    const router = useRouter();
-
-    const [orders, setOrders] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState(null);
-    const ordersService = new OrdersService();
+    const router = useRouter()
+    const [rows, setRows] = useState([])
+    const [globalFilter, setGlobalFilter] = useState(null)
+    const res = useSelector((state:RootState) => state.listOrders)
+    const {loading, success, orders} = res
+    const dispatch = useDispatch()
     
     useEffect(() => {
-        ordersService.getOrders().then(data => setOrders(data.items));
-    }, []);
+        if (!orders)
+            dispatch(listOrders())
+        else if (success)
+            setRows(orders.items)
+    },[dispatch, success])
 
     const header =(
         <div className="table-header">
@@ -42,22 +49,26 @@ const Orders = () => {
         );
     }
 
+    const columns = [
+        {field: '_id', header: 'ID'},
+        {field: 'name', header: 'Restoran'},
+        {field: 'status', header: 'Durum'},
+        {field: 'total_amount', header: 'Toplam Miktar'}, 
+        {field: 'createdAt', header: 'Sipariş Zamanı'},
+        {field: 'ops', header: 'İşlemler', body: actionBodyTemplate}
+    ]
+
     return (
         <div>
             <div className="card">
                 <h1>Siparişler</h1>
-                    <S.Table value={orders} removableSort paginator
-                    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                    currentPageReportTemplate="{totalRecords} kayıttan {first} - {last} arasındaki kayıtlar gösteriliyor" rows={10} rowsPerPageOptions={[10,20,50]}
-                    header={header} className="p-datatable-restaurants"
-                    globalFilter={globalFilter} emptyMessage="No Restaurants found.">
-                        <Column field="_id" header="Id" sortable></Column>
-                        <Column field="name" header="Restoran" sortable></Column>
-                        <Column field="status" header="Durum"  sortable></Column>
-                        <Column field="total_amount" header="Toplam Miktar" sortable></Column>
-                        <Column field="createdAt" header="Sipariş Zamanı" sortable></Column>
-                        <Column header="İşlemler" body={actionBodyTemplate}></Column>
-                    </S.Table>
+                <StandardTable 
+                    header={header}
+                    columns={columns} 
+                    value={rows}  
+                    globalFilter={globalFilter} 
+                    emptyMessage="No orders found" >     
+                </StandardTable>
             </div>
         </div>
     );
