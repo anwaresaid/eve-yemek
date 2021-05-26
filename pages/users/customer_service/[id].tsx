@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import {useRouter} from 'next/router'
-import UpdateUser from '../../../components/UpdateUser'
+import React, { useState, useEffect } from 'react';
+import {useRouter} from 'next/router';
+import UpdateUser from '../../../components/UpdateUser';
 
 const UpdateCustomerService = () => {
    

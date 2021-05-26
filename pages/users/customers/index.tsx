@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import UsersTable from "../../../components/UsersTable/index"
+import UsersTable from "../../../components/Tables/usersTable";
 import { listCustomers } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux';
 import { RootState } from "typesafe-actions";

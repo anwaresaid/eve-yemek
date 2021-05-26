@@ -21,10 +21,6 @@ export const allMenuItems:any = [
         { label:"Eklentiler Listesi",             url:"/addons",   roles:["admin"]                     },
         { label:"Eklentiler Oluştur",             url:"/addons/create",   roles:["admin"]              },
     ] },
-    { label:"Eklentiler", expanded: true, items: [
-        { label:"Eklentiler Listesi",  url:"/addons",        roles:["admin", "restaurant_owner"] },
-        { label:"Eklentiler Oluştur",  url:"/addons/create", roles:["admin", "restaurant_owner"] }
-    ] },
     { label:"Hesap Ayarları", expanded: true, items: [
         { label:"Müşteriler",  url:"/users/customers", roles:["admin"] },
         { label:"Restoran Sahipleri",  url:"/users/restaurant_owners", roles:["admin"] },
