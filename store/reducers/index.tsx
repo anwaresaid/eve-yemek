@@ -34,9 +34,10 @@ import {
 import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
 import {
   addonCategoryDetailsReducer,
+  createAddonCategoryReducer,
   listAddonCategoriesReducer,
   updateAddonCategoryReducer,
-} from './addonCategories.reduced';
+} from './addonCategories.reducer';
 
 export default combineReducers({
   user,
@@ -77,4 +78,5 @@ export default combineReducers({
   listAddonCategories: listAddonCategoriesReducer,
   addonCategoryDetails: addonCategoryDetailsReducer,
   updateAddonCategory: updateAddonCategoryReducer,
+  createAddonCategory: createAddonCategoryReducer,
 });

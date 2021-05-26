@@ -22,4 +22,12 @@ export default class AddonCategoriesService {
     );
     return data;
   }
+
+  public async createAddonCategory(createAddonCategoryDTO: any) {
+    const { data } = await axios.post(
+      `https://dev.eve-yemek.com/add-on-category`,
+      createAddonCategoryDTO
+    );
+    return data;
+  }
 }

@@ -39,7 +39,7 @@ export const getAddonCategoryDetails = (id: any) => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      type: addonCategoriesTypes.ADDON_CATEGORY_DETAILS_RESET,
+      type: addonCategoriesTypes.ADDON_CATEGORY_DETAILS_FAIL,
       payload:
         err.response && err.response.response.data.message
           ? err.response.data.message
@@ -63,7 +63,7 @@ export const updateAddonCategory =
       });
     } catch (err) {
       dispatch({
-        type: addonCategoriesTypes.ADDON_CATEGORY_UPDATE_RESET,
+        type: addonCategoriesTypes.ADDON_CATEGORY_UPDATE_FAIL,
         payload:
           err.response && err.response.response.data.message
             ? err.response.data.message
@@ -71,3 +71,26 @@ export const updateAddonCategory =
       });
     }
   };
+
+export const createAddonCategory = (data: any) => async (dispatch) => {
+  try {
+    dispatch({
+      type: addonCategoriesTypes.ADDON_CATEGORY_CREATE_REQUEST,
+    });
+
+    const addonCategoriesService = new AddonCategoriesService();
+    const res = await addonCategoriesService.createAddonCategory(data);
+    dispatch({
+      type: addonCategoriesTypes.ADDON_CATEGORY_CREATE_SUCCESS,
+      payload: res,
+    });
+  } catch (err) {
+    dispatch({
+      type: addonCategoriesTypes.ADDON_CATEGORY_CREATE_FAIL,
+      payload:
+        err.response && err.response.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
