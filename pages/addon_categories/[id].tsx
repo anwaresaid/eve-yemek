@@ -66,6 +66,9 @@ export const AddonCategoryEdit = () => {
   });
 
   useEffect(() => {
+    if (!detailsSuccess || router.query.id !== addonCategory.id) {
+      dispatch(getAddonCategoryDetails(router.query.id));
+    }
     if (detailsSuccess) {
       formik.values.name = addonCategory.name;
       formik.values.enum = addonCategory.enum;
@@ -83,10 +86,8 @@ export const AddonCategoryEdit = () => {
         });
         router.push('/addon_categories');
       }
-    } else {
-      dispatch(getAddonCategoryDetails(router.query.id));
     }
-  }, [dispatch, detailsSuccess, loading, addonCategory, successUpdate]);
+  }, [dispatch, detailsSuccess, addonCategory, successUpdate]);
 
   return (
     <div>
