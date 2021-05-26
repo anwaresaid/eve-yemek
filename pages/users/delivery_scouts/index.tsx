@@ -1,5 +1,9 @@
 import React, { useState,useEffect } from "react"
+<<<<<<< HEAD
 import UsersTable from "../../../components/Tables/usersTable"
+=======
+import UsersTable from "../../../components/tables/usersTable"
+>>>>>>> b065b01fb0857a2439668ecb507912b801ce9c1c
 import { listDeliveryScouts } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
@@ -13,7 +17,7 @@ const deliveryScoutList = () => {
     const {loading, success, deliveryScouts} = res
 
     useEffect( () => {
-        if (!deliveryScouts)
+        if (deliveryScouts.items.length === 0)
             dispatch(listDeliveryScouts());
      }, [dispatch]);
 

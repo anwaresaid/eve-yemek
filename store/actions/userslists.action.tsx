@@ -184,6 +184,7 @@ export const addUser = (data) => async (dispatch, getState) => {
 }
 
 export const updateUser = (id, data) => async (dispatch, getState) => {
+    
     try {
         dispatch({
             type: usersListTypes.UPDATE_USER_REQUEST,
@@ -205,7 +206,7 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
             type: usersListTypes.UPDATE_USER_END
         })
         
-        updateEditedRowInStore(tempRoles, result, dispatch)
+        updateEditedRowInStore(tempRoles, parseDateInOneRow(result), dispatch)
         
         
         return result
@@ -223,9 +224,14 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
 
 function parseDateInAllRows(rows){
     for (let row of rows.items){
-        row.howLongAgo = Math.round(((new Date()).getTime() - (new Date(row.createdAt)).getTime() ) / (1000*60*60*24)) + " gün önce"
+        row = parseDateInOneRow(row)
     }
     return rows
+}
+
+function parseDateInOneRow(row){
+    row.howLongAgo = Math.round(((new Date()).getTime() - (new Date(row.createdAt)).getTime() ) / (1000*60*60*24)) + " gün önce"
+    return row
 }
 
 function onlyUnique(value, index, self) {
@@ -233,7 +239,7 @@ function onlyUnique(value, index, self) {
   }  
 
 function updateEditedRowInStore(roles, result, dispatch){
-    debugger;
+    
     for (let role of roles){
         switch (role) {
             case "customer":
@@ -241,21 +247,25 @@ function updateEditedRowInStore(roles, result, dispatch){
                     type: usersListTypes.CUSTOMER_LIST_UPDATE_ROW,
                     payload: result
                 })
+                break
             case "restaurant_owner":
                 dispatch({
                     type: usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW,
                     payload: result
                 })
+                break
             case "delivery_scout":
                 dispatch({
                     type: usersListTypes.DELIVERY_SCOUT_LIST_UPDATE_ROW,
                     payload: result
                 })
+                break
             case "customer_service":
                 dispatch({
                     type: usersListTypes.CUSTOMER_SERVICE_LIST_UPDATE_ROW,
                     payload: result
                 })
+                break
             default:
                 console.log("Unavailable")
         }

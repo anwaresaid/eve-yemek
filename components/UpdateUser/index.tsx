@@ -4,15 +4,14 @@ import {RootState} from 'typesafe-actions'
 import {useDispatch,useSelector} from 'react-redux'
 import {getSingleUser, updateUser} from '../../store/actions/userslists.action'
 import UserDataInput from '../../components/UserDataInput/UserDataInput'
-
-
+import { ProgressSpinner } from 'primereact/progressspinner'
 
 const UpdateUser = (props) => {
     const router = useRouter()
     const dispatch = useDispatch()
     const [id, setID] = useState(props.id)
 
-    const [data, setData] = useState({name:'', email:'', phone:'', roles:[]})
+    const [data, setData] = useState({})
 
     const userDetails = useSelector((state:RootState) => state.singleUser)
     const { loading, success:getUserSuccess, userData} = userDetails
@@ -29,24 +28,27 @@ const UpdateUser = (props) => {
             setData({name: userData.name ?? "", email: userData.email ?? "", phone: userData.phone ?? "", roles: userData.roles ?? []})
         }
     }, [getUserSuccess]);
-    
+
     useEffect(() => {
         if(!updating && updateUserSuccess)
             setTimeout(() => {  router.push(props.returnTo) }, 2000)
     }, [updating])
 
+
+
     return (
-        <UserDataInput 
+        <UserDataInput
+
             updateProps={{
-                id: id, 
-                loading:loading, 
+                id: id,
                 updating:updating,
-                getUserSuccess:getUserSuccess, 
+                getUserSuccess:getUserSuccess,
                 updateUserSuccess:updateUserSuccess,
                 error:error,
-                data:data, 
-                setData:setData}} 
-        />
+                data:data,
+                loading: loading,
+                setData:setData}}
+            ></UserDataInput>
     )
 }
 

@@ -1,5 +1,9 @@
 import React, { useState,useEffect } from "react"
+<<<<<<< HEAD
 import UsersTable from "../../../components/Tables/usersTable"
+=======
+import UsersTable from "../../../components/tables/usersTable"
+>>>>>>> b065b01fb0857a2439668ecb507912b801ce9c1c
 import { listCustomerService } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
@@ -13,13 +17,13 @@ const restaurantOwnerList = () => {
     const {loading, success, customerService} = res
 
     useEffect( () => {
-        if (!customerService)
-            dispatch(listCustomerService());
+        if (customerService.items.length === 0)
+            dispatch(listCustomerService())
      }, [dispatch]);
 
     useEffect(() => {
         if(success){
-            setUsers(customerService.items);
+            setUsers(customerService.items)
         }
     }, [success])
 

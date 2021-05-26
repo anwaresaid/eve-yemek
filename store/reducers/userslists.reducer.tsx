@@ -2,7 +2,7 @@ import {usersListTypes} from "../types/userslists.type"
 
 const initialState = [];
 
-export const customerListReducer = (state = initialState, action) => {
+export const customerListReducer = (state = {customers:{items:[]}}, action) => {
     const { type, payload } = action;
 
     switch (action.type) {
@@ -20,7 +20,7 @@ export const customerListReducer = (state = initialState, action) => {
                 error: action.payload
               } 
         case usersListTypes.CUSTOMER_LIST_UPDATE_ROW:
-            const index = state.customers.items.findIndex(item => item._id === action.payload.id); 
+            const index = state.customers.items.findIndex(item => (item._id ?? item.id) === action.payload.id); 
             const tempCustomers = [...state.customers.items]
             tempCustomers[index] = action.payload
             return {
@@ -32,7 +32,7 @@ export const customerListReducer = (state = initialState, action) => {
 
 }
 
-export const restaurantOwnerListReducer = (state = initialState, action) => {
+export const restaurantOwnerListReducer = (state = {restaurantOwners:{items:[]}}, action) => {
     const { type, payload } = action;
 
     switch (action.type) {
@@ -50,7 +50,7 @@ export const restaurantOwnerListReducer = (state = initialState, action) => {
                 error: action.payload
               } 
         case usersListTypes.RESTAURANT_OWNER_LIST_UPDATE_ROW:
-            const index = state.restaurantOwners.items.findIndex(item => item._id === action.payload.id); 
+            const index = state.restaurantOwners.items.findIndex(item => (item._id ?? item.id) === action.payload.id) // amend after backend is fixed 
             const tempResOwners = [...state.restaurantOwners.items]
             tempResOwners[index] = action.payload
             return {
@@ -62,7 +62,7 @@ export const restaurantOwnerListReducer = (state = initialState, action) => {
 
 }
 
-export const deliveryScoutListReducer = (state = initialState, action) => {
+export const deliveryScoutListReducer = (state = {deliveryScouts:{items:[]}}, action) => {
     const { type, payload } = action;
 
     switch (action.type) {
@@ -80,7 +80,7 @@ export const deliveryScoutListReducer = (state = initialState, action) => {
                 error: action.payload
               } 
         case usersListTypes.DELIVERY_SCOUT_LIST_UPDATE_ROW:
-            const index = state.deliveryScouts.items.findIndex(item => item._id === action.payload.id); 
+            const index = state.deliveryScouts.items.findIndex(item => (item._id ?? item.id) === action.payload.id); 
             const tempDelScouts = [...state.deliveryScouts.items]
             tempDelScouts[index] = action.payload
             return {
@@ -92,7 +92,7 @@ export const deliveryScoutListReducer = (state = initialState, action) => {
 
 }
 
-export const customerServiceListReducer = (state = initialState, action) => {
+export const customerServiceListReducer = (state = {customerService:{items:[]}}, action) => {
     const { type, payload } = action;
 
     switch (action.type) {
@@ -110,7 +110,7 @@ export const customerServiceListReducer = (state = initialState, action) => {
                 error: action.payload
               } 
         case usersListTypes.CUSTOMER_SERVICE_LIST_UPDATE_ROW:
-            const index = state.customerService.items.findIndex(item => item._id === action.payload.id); 
+            const index = state.customerService.items.findIndex(item => (item._id ?? item.id) === action.payload.id); 
             const tempCusService = [...state.customerService.items]
             tempCusService[index] = action.payload
             return {
