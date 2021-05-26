@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import * as S from '../../styles/restaurants/restaurants.style'
 import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
@@ -9,6 +8,7 @@ import { RootState } from 'typesafe-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { listOrders } from '../../store/actions/orders.action'
 import {ProgressSpinner} from 'primereact/progressspinner'
+import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style'
 
 const Orders = () => {
 
@@ -38,16 +38,14 @@ const Orders = () => {
 
     const handleViewButtonClick = (id) => {
         if(id){
-            router.push(`/orders/${id}`);
+            router.push(`/orders/${id}`)
         }
     }
 
-    const actionBodyTemplate = (rowData:any) => {
+    const editButton = (rowData) => {
         return (
-            <React.Fragment>
-                <Button label="Görüntüle" className="p-button-sm p-button-info" onClick={()=>handleViewButtonClick(rowData?._id)}/>
-            </React.Fragment>
-        );
+            editTagTemplate(()=>handleViewButtonClick(rowData?._id), "pi-info")
+        )
     }
 
     const columns = [
@@ -56,7 +54,7 @@ const Orders = () => {
         {field: 'status', header: 'Durum'},
         {field: 'total_amount', header: 'Toplam Miktar'}, 
         {field: 'howLongAgo', header: 'Sipariş Zamanı'},
-        {field: 'ops', header: 'İşlemler', body: actionBodyTemplate}
+        {field: 'ops', header: 'Detaylar', body: editButton}
     ]
 
     return (
@@ -76,4 +74,4 @@ const Orders = () => {
     );
 }
 
-export default Orders;
+export default Orders
