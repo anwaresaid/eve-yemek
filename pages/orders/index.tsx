@@ -44,7 +44,7 @@ const Orders = () => {
 
     const editButton = (rowData) => {
         return (
-            editTagTemplate(()=>handleViewButtonClick(rowData?._id), "pi-info")
+            editTagTemplate(()=>handleViewButtonClick(rowData?._id))
         )
     }
 
