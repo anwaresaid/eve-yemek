@@ -13,7 +13,7 @@ const restaurantOwnerList = () => {
     const {loading, success, restaurantOwners} = res
 
     useEffect( () => {
-        if (!restaurantOwners)
+        if (restaurantOwners.items.length === 0)
             dispatch(listRestaurantOwners());
      }, [dispatch]);
 
