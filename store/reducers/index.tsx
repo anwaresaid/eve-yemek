@@ -43,9 +43,12 @@ import {
   customerServiceListReducer,
 } from './userslists.reducer';
 import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
+import { dailyOrderListReducer } from './dashboard.reducer';
 
 export default combineReducers({
   user,
+
+  countDailyOrders: dailyOrderListReducer,
 
   updateRestaurant: updateRestaurantReducer,
   listRestaurant: listRestaurantReducer,

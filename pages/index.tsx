@@ -1,9 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import * as S from "../styles/index.style";
 import { Card } from "primereact/card";
 import { Line } from "react-chartjs-2";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "typesafe-actions";
+import { listDailyOrders } from "../store/actions/dashboard.action";
 
 const Index = (props) => {
+
+    const res = useSelector((state:RootState) => state.countDailyOrders)
+    const {loading, success, dailyOrdersCount} = res
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!dailyOrdersCount)
+            dispatch(listDailyOrders())
+        
+    },[dispatch])
 
     const lineChartData = {
         labels: ["28", "30", "1", "2", "3", "4", "5"],
@@ -26,7 +39,7 @@ const Index = (props) => {
                 <div className='p-col-6 p-md-6 p-lg-2'>
                     <div className='box' style={{ backgroundColor: "#17a2b8" }}>
                         <div className='box__info'>
-                            <span>0</span>
+                            <span>{dailyOrdersCount}</span>
                             <p>Günlük Siparişler</p>
                         </div>
                         <div className='box__icons'>
