@@ -14,7 +14,7 @@ const customerList = () => {
     const {loading, success, customers} = res;
 
     useEffect( () => {
-        if (!customers)
+        if (customers.items.length === 0)
             dispatch(listCustomers());
      }, [dispatch]);
 
