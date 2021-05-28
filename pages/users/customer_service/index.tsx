@@ -15,13 +15,9 @@ const restaurantOwnerList = () => {
     useEffect( () => {
         if (customerService.items.length === 0)
             dispatch(listCustomerService())
-     }, [dispatch]);
-
-    useEffect(() => {
-        if(success){
+        else if (success)
             setUsers(customerService.items)
-        }
-    }, [success])
+     }, [dispatch, success]);
 
     return (
         <div>

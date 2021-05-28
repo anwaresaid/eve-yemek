@@ -16,13 +16,9 @@ const customerList = () => {
     useEffect( () => {
         if (customers.items.length === 0)
             dispatch(listCustomers());
-     }, [dispatch]);
-
-    useEffect(() => {
-        if(success)
+        else if (success)
             setUsers(customers.items);
-    }, [success])
-
+     }, [dispatch, success]);
      
     return (
         <div>

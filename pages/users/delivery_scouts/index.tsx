@@ -15,13 +15,9 @@ const deliveryScoutList = () => {
     useEffect( () => {
         if (deliveryScouts.items.length === 0)
             dispatch(listDeliveryScouts());
-     }, [dispatch]);
-
-    useEffect(() => {
-        if(success){
+        else if (success)
             setUsers(deliveryScouts.items);
-        }
-    }, [success])
+     }, [dispatch, success]);
 
     return (
         <div>
