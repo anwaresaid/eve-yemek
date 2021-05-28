@@ -33,6 +33,9 @@ export const allMenuItems:any = [
         { separator:true },
         { label:"Kullanıcı Oluştur", url:"/users/add",  roles:["admin"] },
     ] },
+    { label:"Ekstra", expanded: true, items: [
+        { label:"FCM Bildirim Gonder",  url:"/send_notifications", roles:["admin"] },
+    ] },
     { separator:true },
     { label:"Ayarlar",                 url:"/settings",   roles:["admin"] },
     { label:"Çıkış yap",               url:"/auth/logout",   roles:["admin", "restaurant_owner"] }
