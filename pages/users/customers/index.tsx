@@ -7,8 +7,6 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 
 const customerList = () => {
 
-    const [users, setUsers] = useState([]);
-    const [first1, setFirst1] = useState(0);
     const dispatch = useDispatch();
     const res = useSelector((state:RootState) => state.listCustomers);
     const {loading, success, customers} = res;
@@ -16,13 +14,12 @@ const customerList = () => {
     useEffect( () => {
         if (customers.items.length === 0)
             dispatch(listCustomers());
-        else if (success)
-            setUsers(customers.items);
-     }, [dispatch, success]);
+     }, [dispatch]);
      
     return (
         <div>
-            {!loading && <UsersTable users={users} editPath="customers"></UsersTable>}
+            {!loading && success && <UsersTable users={customers.items} editPath="customers"></UsersTable>}
+            {!loading && !success && <h4>Müşterilerin verileri alınamadı!</h4>}
             {loading && <ProgressSpinner/>}
         </div>
     );

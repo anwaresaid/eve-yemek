@@ -6,7 +6,6 @@ import { RootState } from "typesafe-actions"
 import { ProgressSpinner } from 'primereact/progressspinner'
 
 const restaurantOwnerList = () => {
-    const [users, setUsers] = useState([])
 
     const dispatch = useDispatch();
     const res = useSelector((state:RootState) => state.listRestaurantOwners)
@@ -15,13 +14,12 @@ const restaurantOwnerList = () => {
     useEffect( () => {
         if (restaurantOwners.items.length === 0)
             dispatch(listRestaurantOwners());
-        else if (success)
-            setUsers(restaurantOwners.items);
-     }, [dispatch, success]);
+     }, [dispatch]);
 
     return (
         <div>
-            {!loading && <UsersTable users={users} editPath="restaurant_owners"></UsersTable>}
+            {!loading && success && <UsersTable users={restaurantOwners.items} editPath="restaurant_owners"></UsersTable>}
+            {!loading && !success && <h4>Restoran sahiplerinin verileri alınamadı!</h4>}
             {loading && <ProgressSpinner/>}
         </div>
     )
