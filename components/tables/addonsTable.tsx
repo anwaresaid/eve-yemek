@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import StandardTable from '../StandardTable'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
-import {activeTagTemplate} from '../../styles/standard_table_style/standard.table.style'
-import { Button } from "primereact/button";
-import editButton from "../Table/editButton";
+import editButton from "../InTableComponents/editButton";
+import activeTag from "../InTableComponents/activeTag";
 
 const AddonsTable = (props) => {
     
@@ -16,11 +15,6 @@ const AddonsTable = (props) => {
     
     const router = useRouter();
 
-    const activeTag = (rowData) => {
-        return (
-            activeTagTemplate(rowData.active)
-        )
-    }
     const formatCurrency = (value) => {
         return value.toLocaleString('tr-TR', {style: 'currency', currency: 'TRY'});
     }
@@ -49,7 +43,7 @@ const AddonsTable = (props) => {
         {field: 'name', header: 'Ad'},
         {field: 'addOn_category_id', header: 'Kategori', body: CategoryBodyTemplate},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
-        {field: 'active', header: 'Aktif', body: activeTag},
+        {field: 'active', header: 'Aktif', body: (rowData)=>activeTag(rowData.status === "active")},
         {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
 

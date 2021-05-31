@@ -9,7 +9,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import {useRouter} from 'next/router';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import EditBtn  from '../../components/Table/editButton/index';
+import EditBtn  from '../../components/InTableComponents/editButton/index';
 
 const Index = () => {
 

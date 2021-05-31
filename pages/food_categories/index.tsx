@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { listFoodCategory } from '../../store/actions/foodCategory.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import editButton from '../../components/Table/editButton';
+import editButton from '../../components/InTableComponents/editButton';
 
 const FoodCategoriesList = () => {
   const [globalFilter, setGlobalFilter] = useState(null);

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import StandardTable from '../StandardTable'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
-import {editTagTemplate, activeTagTemplate} from '../../styles/standard_table_style/standard.table.style';
-import { Button } from 'primereact/button';
-import editButton from "../Table/editButton";
+import editButton from "../InTableComponents/editButton";
+import activeTag from "../InTableComponents/activeTag";
 
 const OrdersTable = (props) => {
     
@@ -13,12 +12,6 @@ const OrdersTable = (props) => {
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const router = useRouter();
     const path = 'orders'; 
-
-    const activeTag = (rowData) => {
-        return (
-            activeTagTemplate(rowData.status)
-        )
-    }
 
     const header =(
         <div className="table-header">
@@ -33,7 +26,7 @@ const OrdersTable = (props) => {
     const columns = [
         {field: '_id', header: '#'},
         {field: 'restaurant_id.name', header: 'Restoran'},
-        {field: 'status', header: 'Durum', body: activeTag},
+        {field: 'status', header: 'Durum', body: (rowData)=>activeTag(rowData.status === "ACTIVE")},
         {field: 'total_amount', header: 'Toplam'},
         {field: 'createdAt', header: 'Sipariş Zamanı'}, // in days
         {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}

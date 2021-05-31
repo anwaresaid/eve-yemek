@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import StandardTable from '../StandardTable'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
-import { Button } from 'primereact/button';
-import {editTagTemplate, activeTagTemplate} from '../../styles/standard_table_style/standard.table.style'
-import editButton from "../Table/editButton";
+
+import editButton from "../InTableComponents/editButton";
+import activeTag from "../InTableComponents/activeTag";
 
 
 const UsersTable = (props) => {
@@ -15,17 +15,6 @@ const UsersTable = (props) => {
     
     const router = useRouter();
     var path;
-    // const editButton = (rowData) => {
-    //     return (
-    //         editTagTemplate(()=>{router.push({pathname: '/users/'+props.editPath+'/'})})
-    //     )
-    // }
-
-    const activeTag = () => {
-        return (
-            activeTagTemplate(true)
-        )
-    }
 
     const header =(
         <div className="table-header">
@@ -42,7 +31,7 @@ const UsersTable = (props) => {
         {field: 'email', header: 'E-Posta'},
         {field: 'phone', header: 'Telefon'},
         {field: 'howLongAgo', header: 'Oluşturma'}, // in days
-        {field: 'active', header: 'Aktif', body: activeTag},
+        {field: 'active', header: 'Aktif', body: ()=>activeTag(true)}, // change after BE supports active status for users
         {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path='users/'+props.editPath)}
     ]
     return (

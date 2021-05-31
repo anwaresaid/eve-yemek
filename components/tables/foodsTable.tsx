@@ -5,7 +5,8 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
-import editButton from "../Table/editButton";
+import editButton from "../InTableComponents/editButton";
+import activeTag from "../InTableComponents/activeTag";
 
 const FoodsTable = (props) => {
     
@@ -18,18 +19,7 @@ const FoodsTable = (props) => {
     const imageBodyTemplate = (rowData) => {
         return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
    }
-   const statusBodyTemplate = (rowData) => {
-    if(rowData.active == true)
-    {
-        return <Tag className="p-mr-2" severity="success" value="True" rounded></Tag>;
-
-    }
-    else
-    { 
-        return <Tag severity="danger" value="False" rounded></Tag>;
-    }
-}
-// global filter
+ 
     const header =(
         <div className="table-header">
             List of Food
@@ -53,7 +43,7 @@ const FoodsTable = (props) => {
         {field: 'name', header: 'Ad'},
         {field: 'food_category.name', header: 'Kategory'},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
-        {field: 'ops', header: 'aktif', body: statusBodyTemplate},
+        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.status === "active")},
         {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
