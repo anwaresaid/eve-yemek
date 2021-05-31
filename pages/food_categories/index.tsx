@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { listFoodCategory } from '../../store/actions/foodCategory.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import editButton from '../../components/Buttons/editButton';
+import editButton from '../../components/Table/editButton';
 
 const FoodCategoriesList = () => {
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -18,7 +18,7 @@ const FoodCategoriesList = () => {
   const router = useRouter();
   const res = useSelector((state: RootState) => state.listFoodCategory);
   const { loading, success, foodCat: foodCategoriesList } = res;
-
+  const path = 'food_categories';
   useEffect(() => {
     dispatch(listFoodCategory());
   }, [dispatch]);
@@ -84,7 +84,7 @@ const FoodCategoriesList = () => {
           <Column body={imageBodyTemplate} header='Resim' sortable></Column>
           <Column field='name' header='Ad' sortable></Column>
           <Column body={statusBodyTemplate} header='Aktif' sortable></Column>
-          <Column header='Islemler' body={(rowData)=>editButton(rowData,router)}></Column>
+          <Column header='Islemler' body={(rowData)=>editButton(rowData,router,path)}></Column>
         </S.Table>
       ) : (
           <h2>Loading</h2>

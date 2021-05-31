@@ -5,13 +5,14 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import {activeTagTemplate} from '../../styles/standard_table_style/standard.table.style'
 import { Button } from "primereact/button";
-import editButton from "../Buttons/editButton";
+import editButton from "../Table/editButton";
 
 const AddonsTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
+    const path= 'addons';
     
     const router = useRouter();
 
@@ -49,7 +50,7 @@ const AddonsTable = (props) => {
         {field: 'addOn_category_id', header: 'Kategori', body: CategoryBodyTemplate},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
         {field: 'active', header: 'Aktif', body: activeTag},
-        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router)}
+        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
 
     return (

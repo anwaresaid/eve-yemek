@@ -9,16 +9,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listOrders } from '../../store/actions/orders.action'
 import {ProgressSpinner} from 'primereact/progressspinner'
 import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style';
-import EditBtn from '../../components/Buttons/editButton/index';
+import EditBtn from '../../components/Table/editButton/index';
 
 const Orders = () => {
 
-    const router = useRouter()
-    const [rows, setRows] = useState([])
-    const [globalFilter, setGlobalFilter] = useState(null)
-    const res = useSelector((state:RootState) => state.listOrders)
-    const {loading, success, orders} = res
-    const dispatch = useDispatch()
+    const router = useRouter();
+    const [rows, setRows] = useState([]);
+    const [globalFilter, setGlobalFilter] = useState(null);
+    const res = useSelector((state:RootState) => state.listOrders);
+    const {loading, success, orders} = res;
+    const dispatch = useDispatch();
+    const path = 'orders';
     
     useEffect(() => {
         if (!orders)
@@ -49,7 +50,7 @@ const Orders = () => {
         {field: 'status', header: 'Durum'},
         {field: 'total_amount', header: 'Toplam Miktar'}, 
         {field: 'howLongAgo', header: 'Sipariş Zamanı'},
-        {field: 'ops', header: 'Detaylar', body: (rowData) =>EditBtn(rowData,router)}
+        {field: 'ops', header: 'Detaylar', body: (rowData) =>EditBtn(rowData,router,path)}
     ]
 
     return (

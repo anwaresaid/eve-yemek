@@ -4,15 +4,15 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import {editTagTemplate, activeTagTemplate} from '../../styles/standard_table_style/standard.table.style';
 import { Button } from 'primereact/button';
-import editButton from "../Buttons/editButton";
+import editButton from "../Table/editButton";
 
 const OrdersTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
-    
     const router = useRouter();
+    const path = 'orders'; 
 
     const activeTag = (rowData) => {
         return (
@@ -36,7 +36,7 @@ const OrdersTable = (props) => {
         {field: 'status', header: 'Durum', body: activeTag},
         {field: 'total_amount', header: 'Toplam'},
         {field: 'createdAt', header: 'Sipariş Zamanı'}, // in days
-        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router)}
+        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
     return (

@@ -5,7 +5,7 @@ import { InputText } from 'primereact/inputtext';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import editButton from '../../components/Buttons/editButton';
+import editButton from '../../components/Table/editButton/index';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
 import * as S from '../../styles/food/food.list.style';
 
@@ -16,24 +16,10 @@ const AddonCategoriesList = () => {
 
   const res = useSelector((state: RootState) => state.listAddonCategory);
   const { loading, success, addonCat: addonCategories } = res;
-
+  const path = 'addon_categories';
   useEffect(() => {
     dispatch(listAddonCategory());
   }, [dispatch]);
-
-  const actionBodyTemplate = (rowData) => {
-    return (
-      <React.Fragment>
-        <Button
-          icon='pi pi-pencil'
-          className='p-button-rounded p-button-success p-mr-2'
-          onClick={() => {
-            router.push(`/addon_categories/${rowData._id}`);
-          }}
-        />
-      </React.Fragment>
-    );
-  };
 
   // global filter
   const header = (
@@ -70,7 +56,7 @@ const AddonCategoriesList = () => {
           <Column field='_id' header='ID' sortable></Column>
           <Column field='name' header='Ad' sortable></Column>
           <Column field='enum' header='Tur' sortable></Column>
-          <Column header='Islemler' body={(rowData)=> editButton(rowData,router)}></Column>
+          <Column header='Islemler' body={(rowData)=> editButton(rowData,router,path)}></Column>
         </S.Table>
       ) : (
         <h2>Loading</h2>

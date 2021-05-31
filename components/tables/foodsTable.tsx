@@ -5,15 +5,15 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
-import editButton from "../Buttons/editButton";
+import editButton from "../Table/editButton";
 
 const FoodsTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
-    
     const router = useRouter();
+    const path = 'foods';
 
     const imageBodyTemplate = (rowData) => {
         return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
@@ -54,7 +54,7 @@ const FoodsTable = (props) => {
         {field: 'food_category.name', header: 'Kategory'},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
         {field: 'ops', header: 'aktif', body: statusBodyTemplate},
-        {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router)}
+        {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
     return(
