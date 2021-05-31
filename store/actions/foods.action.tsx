@@ -123,3 +123,27 @@ export const listFood = () => async dispatch => {
         });
   }
 }
+export const listFoodByRestaurant = (id) => async dispatch => {
+    try{
+        
+        dispatch({
+          type: foodsTypes.FOOD_LIST_BY_RESTAURANT_REQUEST
+        });
+        
+        const foodService = new FoodsService;
+        const res = await foodService.getFoodByRestaurant(id);
+
+        dispatch({
+            type: foodsTypes.FOOD_LIST_BY_RESTAURANT_SUCCESS,
+            payload: res,
+          });
+        }catch (error) {
+        dispatch({
+          type: foodsTypes.FOOD_LIST_BY_RESTAURANT_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+  }
+}

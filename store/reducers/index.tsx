@@ -31,6 +31,7 @@ import {
   updateFoodReducer,
   findFoodReducer,
   listFoodReducer,
+  listFoodByRestaurantReducer,
 } from './foods.reducer';
 
 import {
@@ -61,6 +62,7 @@ export default combineReducers({
   updateFood: updateFoodReducer,
   findFood: findFoodReducer,
   listFood: listFoodReducer,
+  listFoodByRestaurant: listFoodByRestaurantReducer,
 
   listCustomers: customerListReducer,
   listRestaurantOwners: restaurantOwnerListReducer,
