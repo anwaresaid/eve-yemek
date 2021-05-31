@@ -47,7 +47,6 @@ export const Index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
-      console.log('submitted: ', data);
       dispatch(createAddonCategory(data));
     },
   });

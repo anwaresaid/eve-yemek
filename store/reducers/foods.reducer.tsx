@@ -44,6 +44,8 @@ export const updateFoodReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       } 
+    case foodsTypes.FOOD_UPDATE_RESET:
+      return{}
       
     default:
       return state;
@@ -68,6 +70,8 @@ export const findFoodReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       } 
+    case foodsTypes.FOOD_FIND_RESET:
+      return{}
       
     default:
       return state;
@@ -88,6 +92,29 @@ export const listFoodReducer = (state = initialState, action) => {
       }
 
     case foodsTypes.FOOD_LIST_SUCCESS:
+      return {
+        loading: false,
+        error: action.payload
+      } 
+      
+    default:
+      return state;
+  }
+};
+export const listFoodByRestaurantReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (action.type) {
+    case foodsTypes.FOOD_LIST_BY_RESTAURANT_REQUEST:
+      return { loading: true}
+    case foodsTypes.FOOD_LIST_BY_RESTAURANT_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        foods: action.payload
+      }
+
+    case foodsTypes.FOOD_LIST_BY_RESTAURANT_SUCCESS:
       return {
         loading: false,
         error: action.payload

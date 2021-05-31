@@ -5,6 +5,10 @@ export default class FoodsService{
         const {data} = await axios.get('https://dev.eve-yemek.com/foods');
         return data;
     }
+    async getFoodByRestaurant(id) {
+        const {data} = await axios.get(`https://dev.eve-yemek.com/foods/byrestaurant/${id}`);
+        return data;
+    }
 
     async createFood(
         name: string,
