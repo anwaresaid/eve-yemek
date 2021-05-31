@@ -9,7 +9,6 @@ const StandardFileUpload = (props) => {
 
     const fileUploadRef = useRef(null);
 
-    //upload functions
     const onTemplateSelect = (e:any) => {
         let _totalSize = props.totalSize;
         // e.files.map(file => {
@@ -21,7 +20,6 @@ const StandardFileUpload = (props) => {
         props.setTotalSize(_totalSize);
 
     }
-
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
@@ -88,7 +86,6 @@ const StandardFileUpload = (props) => {
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
     
-
     return (
         <>
             <FileUpload ref={fileUploadRef} id="file" name="file" url="./" multiple accept="image/*" maxFileSize={1000000}
