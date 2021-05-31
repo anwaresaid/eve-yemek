@@ -19,6 +19,9 @@ import { restaurantsTypes } from '../../store/types/restaurants.type';
 import {useRouter} from 'next/router';
 import { useFormik } from 'formik';
 import classNames from 'classnames'
+import { TabPanel, TabView } from 'primereact/tabview';
+import FoodsTable from '../../components/tables/foodsTable';
+import { listFoodByRestaurant } from '../../store/actions/foods.action';
 
 
     const UpdateRestaurants = () => {
@@ -40,10 +43,12 @@ import classNames from 'classnames'
     const resOwnersList = useSelector((state:RootState) => state.listResOwners);
     const resDetails = useSelector((state:RootState) => state.findRestaurant);
     const updatedRestaurant = useSelector((state:RootState) => state.updateRestaurant);
+    const listFood = useSelector((state:RootState) => state.listFoodByRestaurant);
 
     const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success:resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
     const { loading: resLoading, success:resSuccess, restaurant} = resDetails;
+    const { loading: foodLoading, success:foodSuccess, foods} = listFood;
 
 //setting names for dropdowns.
     const settingDropDownNames= () => {
@@ -209,6 +214,7 @@ import classNames from 'classnames'
         // if(!resOwnerslist)
         {
             dispatch(listRestaurantOwners());
+            dispatch(listFoodByRestaurant(router.query.id));
         // if(!restaurant)
             dispatch(findRestaurant(router.query.id));
         }
@@ -343,6 +349,8 @@ import classNames from 'classnames'
         <div>
             <h1>Oluştur</h1>
             <Toast ref={toast}></Toast>
+            <TabView>
+                <TabPanel header="Restoran Duzenle">
             <S.ContainerCard>
                  <form onSubmit = {formik.handleSubmit} >
 
@@ -482,10 +490,15 @@ import classNames from 'classnames'
 
             <S.SubmitBtn>
 
-                <Button type="submit" label="Create"/>
+                <Button type="submit" label="Gönder"/>
             </S.SubmitBtn>
             </form>
             </S.ContainerCard>
+            </TabPanel>
+            <TabPanel header="Restoran Yemekleri">
+                <FoodsTable foods={foods} resid={router.query.id} />
+        </TabPanel>
+        </TabView>
         </div>
     )
 }
