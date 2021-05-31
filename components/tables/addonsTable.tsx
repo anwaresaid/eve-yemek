@@ -5,23 +5,16 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import {activeTagTemplate} from '../../styles/standard_table_style/standard.table.style'
 import { Button } from "primereact/button";
+import editButton from "../Table/editButton";
 
 const AddonsTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
+    const path= 'addons';
     
     const router = useRouter();
-
-    const actionBodyTemplate = (rowData) => {
-
-        return (
-            <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/addons/${rowData._id}`)}}/>
-            </React.Fragment>
-        );
-    }
 
     const activeTag = (rowData) => {
         return (
@@ -57,7 +50,7 @@ const AddonsTable = (props) => {
         {field: 'addOn_category_id', header: 'Kategori', body: CategoryBodyTemplate},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
         {field: 'active', header: 'Aktif', body: activeTag},
-        {field: 'ops', header: 'İşlemler', body: actionBodyTemplate}
+        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
 
     return (
