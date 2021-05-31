@@ -3,8 +3,6 @@ import StandardTable from '../StandardTable';
 import * as S from '../../styles/food/food.list.style'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
-import { Button } from 'primereact/button';
-import { Tag } from 'primereact/tag';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 
