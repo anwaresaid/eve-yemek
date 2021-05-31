@@ -19,6 +19,7 @@ import {RootState} from 'typesafe-actions';
 import { useFormik } from 'formik';
 import classNames from 'classnames'
 import StandardFileUpload from '../../../components/inputs/fileUpload';
+import InputContainer from '../../../components/inputs/inputContainer';
 
 
 export const Index = () => {
@@ -179,15 +180,15 @@ export const Index = () => {
                             {getFormErrorMessage('description')}
                         </div>
                     </div>
-                        <StandardFileUpload 
-                            totalSize={totalSize} 
-                            setTotalSize={setTotalSize} 
-                            setFile={(file)=>{formik.values.file=file}}
-                            showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                            >   
-                        </StandardFileUpload>
-                        <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
-                                        {getFormErrorMessage('file')}
+                       <InputContainer name="file" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
+                            <StandardFileUpload 
+                                    totalSize={totalSize} 
+                                    setTotalSize={setTotalSize} 
+                                    setFile={(file)=>{formik.values.file=file}}
+                                    showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
+                                    >   
+                            </StandardFileUpload>
+                       </InputContainer>
                     <div className="p-fluid">
                         <div className="card">
                             <h4>Yemek Kategorisi</h4>

@@ -19,6 +19,7 @@ import { restaurantsTypes } from "../../../store/types/restaurants.type";
 import classNames from 'classnames'
 import { useRouter } from 'next/router';
 import StandardFileUpload from '../../../components/inputs/fileUpload';
+import InputContainer from '../../../components/inputs/inputContainer';
 
 
     const CreateRestaurants = () => {
@@ -247,15 +248,15 @@ import StandardFileUpload from '../../../components/inputs/fileUpload';
                         </div>
                     </div>
                     <div className="p-field p-col-12">
-                    <StandardFileUpload
-                         totalSize={totalSize} 
-                         setTotalSize={setTotalSize} 
-                         setFile={(file)=>{formik.values.file=file}}
-                         showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                        >
-                    </StandardFileUpload>
-                    <label htmlFor="file" className={classNames({ 'p-error': isFormFieldValid('file') })}></label>
-                            {getFormErrorMessage('file')}
+                        <InputContainer name="file" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
+                                <StandardFileUpload 
+                                        totalSize={totalSize} 
+                                        setTotalSize={setTotalSize} 
+                                        setFile={(file)=>{formik.values.file=file}}
+                                        showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
+                                        >   
+                                </StandardFileUpload>
+                        </InputContainer>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Telefon</h4>
