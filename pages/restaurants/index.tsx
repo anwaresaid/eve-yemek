@@ -10,6 +10,8 @@ import {RootState} from 'typesafe-actions';
 import {useRouter} from 'next/router';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import EditBtn  from '../../components/Table/editButton/index';
+import imageBodyTemplate from '../../components/Table/Image/index';
+
 
 const Index = () => {
 
@@ -63,9 +65,6 @@ const Index = () => {
         </div>
     )
 
-    const imageBodyTemplate = (rowData) => {
-         return <img src={`${rowData.image}`}  alt={rowData.image} className="restaurant-image" />
-    }
     const statusBodyTemplate = (rowData) => {
         if(rowData.active == true)
         {
