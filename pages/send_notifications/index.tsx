@@ -8,16 +8,16 @@ import { RootState } from 'typesafe-actions';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
+import { listAllUsers } from '../../store/actions/userslists.action';
+import { MultiSelect } from 'primereact/multiselect';
 
 export const Index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const toast = useRef(null);
 
-  const addonCategoryCreate = useSelector(
-    (state: RootState) => state.createAddonCategory
-  );
-  const { success } = addonCategoryCreate;
+  const allUsersList = useSelector((state: RootState) => state.allUsersList);
+  const { success, loading, users } = allUsersList;
 
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -30,17 +30,18 @@ export const Index = () => {
   };
   const formik = useFormik({
     initialValues: {
-      name: '',
-      enum: '',
+      users: [],
+      title: '',
+      body: '',
     },
     validate: (data) => {
       let errors: any = {};
 
-      if (!data.name) {
-        errors.name = 'user name is required.';
+      if (!data.title) {
+        errors.title = 'title is required.';
       }
-      if (!data.enum) {
-        errors.enum = 'enum is required.';
+      if (!data.body) {
+        errors.body = 'body is required.';
       }
       return errors;
     },
@@ -50,55 +51,86 @@ export const Index = () => {
     },
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!success) {
+      dispatch(listAllUsers());
+    }
+    if (success) {
+      console.log(users);
+      // formik.values.users = users.items
+    }
+  }, [success]);
 
   return (
     <div>
       <h1>FCM Bildirim gonder</h1>
       <Toast ref={toast}></Toast>
-      <S.ContainerCard>
-        <form onSubmit={formik.handleSubmit}>
-          <div className='p-fluid'>
-            <div className='p-field'>
-              <h4>Kategori Adı</h4>
-              <InputText
-                id='name'
-                name='name'
+      {success && !loading && users ? (
+        <S.ContainerCard>
+          <form onSubmit={formik.handleSubmit}>
+            <div>
+              <MultiSelect
+                id='users'
+                name='users'
+                value={formik.values.users}
+                options={[]}
                 onChange={formik.handleChange}
-                type='text'
+                optionLabel='name'
+                placeholder='Select users'
+                display='users'
                 className={classNames({
-                  'p-invalid': isFormFieldValid('name'),
+                  'p-invalid': isFormFieldValid('users'),
                 })}
               />
-              <label
-                htmlFor='name'
-                className={classNames({ 'p-error': isFormFieldValid('name') })}
-              ></label>
-              {getFormErrorMessage('name')}
             </div>
-            <div className='p-field'>
-              <h4>Tur</h4>
-              <InputText
-                id='enum'
-                name='enum'
-                onChange={formik.handleChange}
-                type='text'
-                className={classNames({
-                  'p-invalid': isFormFieldValid('enum'),
-                })}
-              />
-              <label
-                htmlFor='enum'
-                className={classNames({ 'p-error': isFormFieldValid('enum') })}
-              ></label>
-              {getFormErrorMessage('enum')}
+            <div className='p-fluid'>
+              <div className='p-field'>
+                <h4>Bildirim Başlığı</h4>
+                <InputText
+                  id='title'
+                  name='title'
+                  onChange={formik.handleChange}
+                  type='text'
+                  className={classNames({
+                    'p-invalid': isFormFieldValid('title'),
+                  })}
+                />
+                <label
+                  htmlFor='title'
+                  className={classNames({
+                    'p-error': isFormFieldValid('title'),
+                  })}
+                ></label>
+                {getFormErrorMessage('title')}
+              </div>
+              <div className='p-field'>
+                <h4>Bildirim Mesajı</h4>
+                <InputText
+                  id='body'
+                  name='body'
+                  onChange={formik.handleChange}
+                  type='text'
+                  className={classNames({
+                    'p-invalid': isFormFieldValid('body'),
+                  })}
+                />
+                <label
+                  htmlFor='body'
+                  className={classNames({
+                    'p-error': isFormFieldValid('body'),
+                  })}
+                ></label>
+                {getFormErrorMessage('body')}
+              </div>
             </div>
-          </div>
-          <S.SubmitBtn>
-            <Button type='submit' label='Submit' />
-          </S.SubmitBtn>
-        </form>
-      </S.ContainerCard>
+            <S.SubmitBtn>
+              <Button type='submit' label='Submit' />
+            </S.SubmitBtn>
+          </form>
+        </S.ContainerCard>
+      ) : (
+        <h2>Loading</h2>
+      )}
     </div>
   );
 };
