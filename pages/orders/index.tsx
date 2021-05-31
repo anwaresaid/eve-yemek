@@ -8,7 +8,8 @@ import { RootState } from 'typesafe-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { listOrders } from '../../store/actions/orders.action'
 import {ProgressSpinner} from 'primereact/progressspinner'
-import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style'
+import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style';
+import EditBtn from '../../components/Buttons/editButton/index';
 
 const Orders = () => {
 
@@ -42,19 +43,13 @@ const Orders = () => {
         }
     }
 
-    const editButton = (rowData) => {
-        return (
-            editTagTemplate(()=>handleViewButtonClick(rowData?._id))
-        )
-    }
-
     const columns = [
         {field: '_id', header: 'ID'},
         {field: 'name', header: 'Restoran'},
         {field: 'status', header: 'Durum'},
         {field: 'total_amount', header: 'Toplam Miktar'}, 
         {field: 'howLongAgo', header: 'Sipariş Zamanı'},
-        {field: 'ops', header: 'Detaylar', body: editButton}
+        {field: 'ops', header: 'Detaylar', body: (rowData) =>EditBtn(rowData,router)}
     ]
 
     return (

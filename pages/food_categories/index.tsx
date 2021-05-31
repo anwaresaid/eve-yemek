@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { listFoodCategory } from '../../store/actions/foodCategory.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
+import editButton from '../../components/Buttons/editButton';
 
 const FoodCategoriesList = () => {
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -40,21 +41,6 @@ const FoodCategoriesList = () => {
       return <Tag severity='danger' value='False' rounded></Tag>;
     }
   };
-
-  const actionBodyTemplate = (rowData) => {
-    return (
-      <React.Fragment>
-        <Button
-          icon='pi pi-pencil'
-          className='p-button-rounded p-button-success p-mr-2'
-          onClick={() => {
-            router.push(`/food_categories/${rowData._id}`);
-          }}
-        />
-      </React.Fragment>
-    );
-  };
-
   // global filter
   const header = (
     <div className='table-header'>
@@ -98,7 +84,7 @@ const FoodCategoriesList = () => {
           <Column body={imageBodyTemplate} header='Resim' sortable></Column>
           <Column field='name' header='Ad' sortable></Column>
           <Column body={statusBodyTemplate} header='Aktif' sortable></Column>
-          <Column header='Islemler' body={actionBodyTemplate}></Column>
+          <Column header='Islemler' body={(rowData)=>editButton(rowData,router)}></Column>
         </S.Table>
       ) : (
           <h2>Loading</h2>

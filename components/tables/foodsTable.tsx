@@ -5,6 +5,7 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
+import editButton from "../Buttons/editButton";
 
 const FoodsTable = (props) => {
     
@@ -28,15 +29,6 @@ const FoodsTable = (props) => {
         return <Tag severity="danger" value="False" rounded></Tag>;
     }
 }
-
-    const actionBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push({pathname:`/foods/${rowData.id}`,query:{resId:router.query.id}})}} />
-            </React.Fragment>
-        );
-    }
-
 // global filter
     const header =(
         <div className="table-header">
@@ -62,7 +54,7 @@ const FoodsTable = (props) => {
         {field: 'food_category.name', header: 'Kategory'},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
         {field: 'ops', header: 'aktif', body: statusBodyTemplate},
-        {field: '', header: 'Islemler', body: actionBodyTemplate}
+        {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router)}
     ]
     
     return(

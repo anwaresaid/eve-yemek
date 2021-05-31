@@ -5,6 +5,7 @@ import { InputText } from 'primereact/inputtext';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
+import editButton from '../../components/Buttons/editButton';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
 import * as S from '../../styles/food/food.list.style';
 
@@ -69,7 +70,7 @@ const AddonCategoriesList = () => {
           <Column field='_id' header='ID' sortable></Column>
           <Column field='name' header='Ad' sortable></Column>
           <Column field='enum' header='Tur' sortable></Column>
-          <Column header='Islemler' body={actionBodyTemplate}></Column>
+          <Column header='Islemler' body={(rowData)=> editButton(rowData,router)}></Column>
         </S.Table>
       ) : (
         <h2>Loading</h2>

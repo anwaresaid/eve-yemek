@@ -3,6 +3,7 @@ import StandardTable from '../StandardTable'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import { Button } from 'primereact/button';
+import editButton from'../../components/Buttons/editButton/index'
 import {editTagTemplate, activeTagTemplate} from '../../styles/standard_table_style/standard.table.style'
 
 const UsersTable = (props) => {
@@ -13,11 +14,7 @@ const UsersTable = (props) => {
     
     const router = useRouter();
 
-    const editButton = (rowData) => {
-        return (
-            editTagTemplate(()=>{router.push({pathname: '/users/'+props.editPath+'/'+(rowData._id ?? rowData.id)})})
-        )
-    }
+
 
     const activeTag = () => {
         return (
@@ -41,7 +38,7 @@ const UsersTable = (props) => {
         {field: 'phone', header: 'Telefon'},
         {field: 'howLongAgo', header: 'Oluşturma'}, // in days
         {field: 'active', header: 'Aktif', body: activeTag},
-        {field: 'ops', header: 'İşlemler', body: editButton}
+        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router)}
     ]
     return (
         <StandardTable 

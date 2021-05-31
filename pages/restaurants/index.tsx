@@ -9,6 +9,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import {useRouter} from 'next/router';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import EditBtn  from '../../components/Buttons/editButton/index';
 
 const Index = () => {
 
@@ -75,14 +76,6 @@ const Index = () => {
             return <Tag severity="danger" value="False" rounded></Tag>;
         }
     }
-    const actionBodyTemplate = (rowData) => {
-
-        return (
-            <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={()=>{router.push(`/restaurants/${rowData._id}`)}}/>
-            </React.Fragment>
-        );
-    }
     return (
         <div>
             {loading ? <ProgressSpinner/> :success && 
@@ -98,7 +91,7 @@ const Index = () => {
                         <Column field="name" header="Restaurant Name" sortable></Column>
                         <Column field="owner_name" header="Restaurant owner"  sortable></Column>
                         <Column field="active" header="Active" body={statusBodyTemplate} sortable></Column>
-                        <Column header= "Edit" body={actionBodyTemplate} ></Column>
+                        <Column header= "Edit" body={(rowData) =>EditBtn(rowData,router)} sortable></Column>
                     </S.Table>
             </div>
 }
