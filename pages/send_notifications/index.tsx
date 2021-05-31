@@ -53,7 +53,7 @@ export const Index = () => {
         body: formik.values.body,
         users: [...formik.values.users],
       });
-      // dispatch(createAddonCategory(data));
+      // send notification here instead of console log after FCM is integrated
     },
   });
 
