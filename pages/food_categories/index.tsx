@@ -11,6 +11,9 @@ import { listFoodCategory } from '../../store/actions/foodCategory.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import editButton from '../../components/Table/editButton';
+import imageBodyTemplate from '../../components/Table/Image/index';
+
+
 
 const FoodCategoriesList = () => {
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -23,15 +26,6 @@ const FoodCategoriesList = () => {
     dispatch(listFoodCategory());
   }, [dispatch]);
 
-  const imageBodyTemplate = (rowData) => {
-    return (
-      <img
-        src={`${rowData.image}`}
-        alt={rowData.image}
-        className='food-image'
-      />
-    );
-  };
   const statusBodyTemplate = (rowData) => {
     if (rowData.active == true) {
       return (

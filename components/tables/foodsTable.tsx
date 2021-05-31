@@ -6,6 +6,7 @@ import {useRouter} from 'next/router';
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
 import editButton from "../Table/editButton";
+import imageBodyTemplate from '../../components/Table/Image/index';
 
 const FoodsTable = (props) => {
     
@@ -15,9 +16,6 @@ const FoodsTable = (props) => {
     const router = useRouter();
     const path = 'foods';
 
-    const imageBodyTemplate = (rowData) => {
-        return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
-   }
    const statusBodyTemplate = (rowData) => {
     if(rowData.active == true)
     {
