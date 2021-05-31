@@ -83,7 +83,6 @@ const Index = () => {
             </React.Fragment>
         );
     }
-
     return (
         <div>
             {loading ? <ProgressSpinner/> :success && 
