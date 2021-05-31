@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import io from 'socket.io-client';
+import { Button } from 'primereact/button';
 
 const liveOrdersList = () => {
   const [ordersItems, setOrdersItems] = useState([]);
   const [liveOrders, setLiveOrders] = useState();
+  const [socket, setSocket] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -32,22 +34,31 @@ const liveOrdersList = () => {
   }, [success]);
 
   useEffect(() => {
-    const socket = io('http://127.0.0.1:3000', { transports: ['websocket'] });
+    const sockett = io('http://127.0.0.1:3000', { transports: ['websocket'] });
+    setSocket(sockett);
     console.log('hello socket connection');
-    socket.on('messageToClient', (payload) => {
+    sockett.on('messageToClient', (payload) => {
       console.log('anything?');
       console.log(payload);
     });
-    return () => {
-      socket.disconnect();
-    };
+    // return () => {
+    //   sockett.disconnect();
+    // };
   }, []);
+
+  const emitToSocket = () => {
+    console.log('trying to click');
+    console.log(socket);
+    socket.emit('orderStatus', { message: 'trying to reach you' });
+  };
+
   return (
     <div>
       {!loading && (
         <OrdersTable orders={ordersItems} role='restaurant_owner'></OrdersTable>
       )}
       {loading && <ProgressSpinner />}
+      <Button onClick={emitToSocket}>Click me</Button>
     </div>
   );
 };
