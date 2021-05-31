@@ -16,6 +16,8 @@ export const Index = () => {
   const router = useRouter();
   const toast = useRef(null);
 
+  const [userNames, setUserNames] = useState(null);
+
   const allUsersList = useSelector((state: RootState) => state.allUsersList);
   const { success, loading, users } = allUsersList;
 
@@ -30,7 +32,7 @@ export const Index = () => {
   };
   const formik = useFormik({
     initialValues: {
-      users: [],
+      users: '',
       title: '',
       body: '',
     },
@@ -46,7 +48,11 @@ export const Index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
-      console.log('submitted: ', data);
+      console.log('submitted: ', {
+        title: formik.values.title,
+        body: formik.values.body,
+        users: [...formik.values.users],
+      });
       // dispatch(createAddonCategory(data));
     },
   });
@@ -57,9 +63,37 @@ export const Index = () => {
     }
     if (success) {
       console.log(users);
-      // formik.values.users = users.items
+      settingDropDownNames();
     }
   }, [success]);
+
+  const settingDropDownNames = () => {
+    console.log('here');
+    const usersNames = users.items.map((user) => {
+      return { name: user.name, id: user._id };
+    });
+    setUserNames(usersNames);
+  };
+
+  function multiSelect() {
+    if (userNames != null)
+      return (
+        <div>
+          <MultiSelect
+            id='users'
+            name='users'
+            value={formik.values.users}
+            options={userNames}
+            optionValue='id'
+            onChange={formik.handleChange}
+            optionLabel='name'
+            placeholder='Select users'
+            display='users'
+            className={classNames({ 'p-invalid': isFormFieldValid('users') })}
+          />
+        </div>
+      );
+  }
 
   return (
     <div>
@@ -68,22 +102,8 @@ export const Index = () => {
       {success && !loading && users ? (
         <S.ContainerCard>
           <form onSubmit={formik.handleSubmit}>
-            <div>
-              <MultiSelect
-                id='users'
-                name='users'
-                value={formik.values.users}
-                options={[]}
-                onChange={formik.handleChange}
-                optionLabel='name'
-                placeholder='Select users'
-                display='users'
-                className={classNames({
-                  'p-invalid': isFormFieldValid('users'),
-                })}
-              />
-            </div>
             <div className='p-fluid'>
+              {multiSelect()}
               <div className='p-field'>
                 <h4>Bildirim Başlığı</h4>
                 <InputText
