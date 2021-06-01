@@ -11,8 +11,6 @@ import {useRouter} from 'next/router';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import EditBtn  from '../../components/Table/editButton/index';
 import imageBodyTemplate from '../../components/Table/Image/index';
-
-
 const Index = () => {
 
 

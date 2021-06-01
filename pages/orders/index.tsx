@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listOrders } from '../../store/actions/orders.action'
 import {ProgressSpinner} from 'primereact/progressspinner'
 import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style';
-import EditBtn from '../../components/Table/editButton/index';
+import EditBtn from '../../components/InTableComponents/editButton/index';
 
 const Orders = () => {
 

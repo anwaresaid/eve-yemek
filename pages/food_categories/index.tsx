@@ -14,7 +14,6 @@ import editButton from '../../components/Table/editButton';
 import imageBodyTemplate from '../../components/Table/Image/index';
 
 
-
 const FoodCategoriesList = () => {
   const [globalFilter, setGlobalFilter] = useState(null);
   const dispatch = useDispatch();

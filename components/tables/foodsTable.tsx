@@ -16,18 +16,11 @@ const FoodsTable = (props) => {
     const router = useRouter();
     const path = 'foods';
 
-   const statusBodyTemplate = (rowData) => {
-    if(rowData.active == true)
-    {
-        return <Tag className="p-mr-2" severity="success" value="True" rounded></Tag>;
 
-    }
-    else
-    { 
-        return <Tag severity="danger" value="False" rounded></Tag>;
-    }
-}
-// global filter
+    const imageBodyTemplate = (rowData) => {
+        return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
+   }
+ 
     const header =(
         <div className="table-header">
             List of Food
@@ -51,7 +44,7 @@ const FoodsTable = (props) => {
         {field: 'name', header: 'Ad'},
         {field: 'food_category.name', header: 'Kategory'},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
-        {field: 'ops', header: 'aktif', body: statusBodyTemplate},
+        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.status === "active")},
         {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     

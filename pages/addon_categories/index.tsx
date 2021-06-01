@@ -5,7 +5,7 @@ import { InputText } from 'primereact/inputtext';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import editButton from '../../components/Table/editButton/index';
+import editButton from '../../components/InTableComponents/editButton/index';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
 import * as S from '../../styles/food/food.list.style';
 
