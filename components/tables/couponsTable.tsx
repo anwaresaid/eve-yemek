@@ -4,30 +4,13 @@ import { InputText } from 'primereact/inputtext';
 import { useRouter } from 'next/router';
 import editButton from '../InTableComponents/editButton';
 import activeTag from '../InTableComponents/activeTag';
+import Header from '../InTableComponents/Header';
 
 const CouponsTable = (props) => {
-  const [currentPage, setCurrentPage] = useState(1);
   const [globalFilter, setGlobalFilter] = useState(null);
-  const [pageInputTooltip, setPageInputTooltip] = useState(
-    "Press 'Enter' key to go to this page."
-  );
   const path = 'coupons';
 
   const router = useRouter();
-
-  const header = (
-    <div className='table-header'>
-      List of Addons
-      <span className='p-input-icon-left'>
-        <i className='pi pi-search' />
-        <InputText
-          type='search'
-          onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)}
-          placeholder='Search'
-        />
-      </span>
-    </div>
-  );
 
   const columns = [
     { field: '_id', header: 'ID' },
@@ -52,7 +35,7 @@ const CouponsTable = (props) => {
 
   return (
     <StandardTable
-      header={header}
+      header={Header(setGlobalFilter, 'Kupon')}
       columns={columns}
       value={props.coupons}
       globalFilter={globalFilter}
