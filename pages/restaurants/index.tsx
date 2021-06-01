@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '../../styles/restaurants/restaurants.style'
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { listRestaurant } from "../../store/actions/restaurant.action";
@@ -9,8 +8,9 @@ import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import {useRouter} from 'next/router';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import EditBtn  from '../../components/Table/editButton/index';
-import imageBodyTemplate from '../../components/Table/Image/index';
+import EditBtn  from '../../components/InTableComponents/editButton/index';
+import imageBodyTemplate from '../../components/InTableComponents/Image/index';
+
 const Index = () => {
 
 
