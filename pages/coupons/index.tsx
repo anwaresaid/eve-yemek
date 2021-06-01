@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { listCoupons } from '../../store/actions/coupons.action';
+import CouponsTable from '../../components/tables/couponsTable';
 
 const index = () => {
   const dispatch = useDispatch();
 
   const res = useSelector((state: RootState) => state.listCoupons);
-  const { loading, success, coupons } = res;
+  const { loading, coupons } = res;
 
   useEffect(() => {
     if (!coupons) dispatch(listCoupons());
@@ -17,7 +18,7 @@ const index = () => {
 
   return (
     <div>
-      {!loading && <h2>Table should be here</h2>}
+      {!loading && coupons && <CouponsTable coupons={coupons.items} />}
       {loading && <ProgressSpinner />}
     </div>
   );

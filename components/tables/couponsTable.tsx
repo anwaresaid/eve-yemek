@@ -32,16 +32,22 @@ const CouponsTable = (props) => {
   const columns = [
     { field: '_id', header: 'ID' },
     { field: 'coupon_code', header: 'Kupon Kodu' },
-    // {
-    //   field: 'active',
-    //   header: 'Aktif',
-    //   body: (rowData) => activeTag(rowData.status === 'active'),
-    // },
-    // {
-    //   field: 'ops',
-    //   header: 'İşlemler',
-    //   body: (rowData) => editButton(rowData, router, path),
-    // },
+    { field: 'name', header: 'Adi' },
+    { field: 'description', header: 'Aciklama' },
+    { field: 'expire_date', header: 'ُExpiration' },
+    { field: 'discount_type', header: 'Kupon Turu' },
+    { field: 'discount', header: 'Indirim' },
+    { field: 'max_usage', header: 'Maximum Kullanma' },
+    {
+      field: 'active',
+      header: 'Aktif',
+      body: (rowData) => activeTag(rowData.active === true),
+    },
+    {
+      field: 'ops',
+      header: 'İşlemler',
+      body: (rowData) => editButton(rowData, router, path),
+    },
   ];
 
   return (
