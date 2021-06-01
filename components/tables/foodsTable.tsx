@@ -3,10 +3,10 @@ import StandardTable from '../StandardTable';
 import * as S from '../../styles/food/food.list.style'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
-import { Button } from 'primereact/button';
-import { Tag } from 'primereact/tag';
-import editButton from "../Table/editButton";
-import imageBodyTemplate from '../../components/Table/Image/index';
+import editButton from "../InTableComponents/editButton";
+import activeTag from "../InTableComponents/activeTag";
+import { priceBodyTemplate } from "../InTableComponents/price";
+import Header from '../InTableComponents/Header';
 
 const FoodsTable = (props) => {
     
@@ -16,18 +16,11 @@ const FoodsTable = (props) => {
     const router = useRouter();
     const path = 'foods';
 
-   const statusBodyTemplate = (rowData) => {
-    if(rowData.active == true)
-    {
-        return <Tag className="p-mr-2" severity="success" value="True" rounded></Tag>;
 
-    }
-    else
-    { 
-        return <Tag severity="danger" value="False" rounded></Tag>;
-    }
-}
-// global filter
+    const imageBodyTemplate = (rowData) => {
+        return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
+   }
+ 
     const header =(
         <div className="table-header">
             List of Food
@@ -38,26 +31,21 @@ const FoodsTable = (props) => {
         </div>
     )
 
-    const formatCurrency = (value) => {
-        return value.toLocaleString('tr-TR', {style: 'currency', currency: 'TRY'});
-    }
-
-    const priceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.price);
-    }
+   
     const columns = [
         {field: 'id', header: "ID"},
         {field: 'image', header: "Resim", body: imageBodyTemplate},
         {field: 'name', header: 'Ad'},
         {field: 'food_category.name', header: 'Kategory'},
-        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
-        {field: 'ops', header: 'aktif', body: statusBodyTemplate},
+        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
+        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
         {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
     return(
+        
         <StandardTable
-                    header={header}
+                    header={Header(setGlobalFilter,"Food")}
                     columns={columns} 
                     value={props.foods}  
                     globalFilter={globalFilter} 
