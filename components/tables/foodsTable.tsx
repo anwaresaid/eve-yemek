@@ -37,11 +37,12 @@ const FoodsTable = (props) => {
         {field: 'name', header: 'Ad'},
         {field: 'food_category.name', header: 'Kategory'},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
-        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.status === "active")},
+        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
         {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
-    
+    console.log(props.foods)
     return(
+        
         <StandardTable
                     header={header}
                     columns={columns} 
