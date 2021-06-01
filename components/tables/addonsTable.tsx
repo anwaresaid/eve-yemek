@@ -5,6 +5,7 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
+import { priceBodyTemplate } from "../InTableComponents/price";
 
 const AddonsTable = (props) => {
     
@@ -14,14 +15,6 @@ const AddonsTable = (props) => {
     const path= 'addons';
     
     const router = useRouter();
-
-    const formatCurrency = (value) => {
-        return value.toLocaleString('tr-TR', {style: 'currency', currency: 'TRY'});
-    }
-
-    const priceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.price);
-    }
 
     const CategoryBodyTemplate = (rowData)  => {
         let categoryName = props.addonCat.filter(cat => {return cat._id.localeCompare(rowData.addOn_category_id)==0;})
@@ -42,7 +35,7 @@ const AddonsTable = (props) => {
         {field: '_id', header: 'ID'},
         {field: 'name', header: 'Ad'},
         {field: 'addOn_category_id', header: 'Kategori', body: CategoryBodyTemplate},
-        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
+        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
         {field: 'active', header: 'Aktif', body: (rowData)=>activeTag(rowData.status === "active")},
         {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
