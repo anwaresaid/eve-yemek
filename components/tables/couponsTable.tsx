@@ -24,7 +24,7 @@ const CouponsTable = (props) => {
     {
       field: 'active',
       header: 'Aktif',
-      body: (rowData) => activeTag(rowData.active === true),
+      body: (rowData) => activeTag(rowData.active),
     },
     {
       field: 'ops',
