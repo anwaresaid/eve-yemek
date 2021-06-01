@@ -30,16 +30,16 @@ const AddonsTable = (props) => {
             </span>
         </div>
     )
-
+    
     const columns = [
         {field: '_id', header: 'ID'},
         {field: 'name', header: 'Ad'},
         {field: 'addOn_category_id', header: 'Kategori', body: CategoryBodyTemplate},
         {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
-        {field: 'active', header: 'Aktif', body: (rowData)=>activeTag(rowData.status === "active")},
+        {field: 'active', header: 'Aktif', body: (rowData)=>activeTag(rowData.active)},
         {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
-
+    
     return (
         <StandardTable 
             header={header}
