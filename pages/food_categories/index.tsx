@@ -10,6 +10,9 @@ import { useRouter } from 'next/router';
 import { listFoodCategory } from '../../store/actions/foodCategory.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
+import editButton from '../../components/InTableComponents/editButton';
+import imageBodyTemplate from '../../components/InTableComponents/Image/index';
+
 
 const FoodCategoriesList = () => {
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -17,20 +20,11 @@ const FoodCategoriesList = () => {
   const router = useRouter();
   const res = useSelector((state: RootState) => state.listFoodCategory);
   const { loading, success, foodCat: foodCategoriesList } = res;
-
+  const path = 'food_categories';
   useEffect(() => {
     dispatch(listFoodCategory());
   }, [dispatch]);
 
-  const imageBodyTemplate = (rowData) => {
-    return (
-      <img
-        src={`${rowData.image}`}
-        alt={rowData.image}
-        className='food-image'
-      />
-    );
-  };
   const statusBodyTemplate = (rowData) => {
     if (rowData.active == true) {
       return (
@@ -40,21 +34,6 @@ const FoodCategoriesList = () => {
       return <Tag severity='danger' value='False' rounded></Tag>;
     }
   };
-
-  const actionBodyTemplate = (rowData) => {
-    return (
-      <React.Fragment>
-        <Button
-          icon='pi pi-pencil'
-          className='p-button-rounded p-button-success p-mr-2'
-          onClick={() => {
-            router.push(`/food_categories/${rowData._id}`);
-          }}
-        />
-      </React.Fragment>
-    );
-  };
-
   // global filter
   const header = (
     <div className='table-header'>
@@ -69,13 +48,6 @@ const FoodCategoriesList = () => {
       </span>
     </div>
   );
-
-  const formatCurrency = (value) => {
-    return value.toLocaleString('tr-TR', {
-      style: 'currency',
-      currency: 'TRY',
-    });
-  };
 
   return (
     <>
@@ -98,7 +70,7 @@ const FoodCategoriesList = () => {
           <Column body={imageBodyTemplate} header='Resim' sortable></Column>
           <Column field='name' header='Ad' sortable></Column>
           <Column body={statusBodyTemplate} header='Aktif' sortable></Column>
-          <Column header='Islemler' body={actionBodyTemplate}></Column>
+          <Column header='Islemler' body={(rowData)=>editButton(rowData,router,path)}></Column>
         </S.Table>
       ) : (
           <h2>Loading</h2>

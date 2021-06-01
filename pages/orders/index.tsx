@@ -8,16 +8,19 @@ import { RootState } from 'typesafe-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { listOrders } from '../../store/actions/orders.action'
 import {ProgressSpinner} from 'primereact/progressspinner'
-import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style'
+import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style';
+import EditBtn from '../../components/InTableComponents/editButton/index';
+import Header from '../../components/InTableComponents/Header/index';
 
 const Orders = () => {
 
-    const router = useRouter()
-    const [rows, setRows] = useState([])
-    const [globalFilter, setGlobalFilter] = useState(null)
-    const res = useSelector((state:RootState) => state.listOrders)
-    const {loading, success, orders} = res
-    const dispatch = useDispatch()
+    const router = useRouter();
+    const [rows, setRows] = useState([]);
+    const [globalFilter, setGlobalFilter] = useState(null);
+    const res = useSelector((state:RootState) => state.listOrders);
+    const {loading, success, orders} = res;
+    const dispatch = useDispatch();
+    const path = 'orders';
     
     useEffect(() => {
         if (!orders)
@@ -26,26 +29,10 @@ const Orders = () => {
             setRows(orders.items)
     },[dispatch, success])
 
-    const header =(
-        <div className="table-header">
-            Siparişler Listesi
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-            </span>
-        </div>
-    )
-
     const handleViewButtonClick = (id) => {
         if(id){
             router.push(`/orders/${id}`)
         }
-    }
-
-    const editButton = (rowData) => {
-        return (
-            editTagTemplate(()=>handleViewButtonClick(rowData?._id))
-        )
     }
 
     const columns = [
@@ -54,7 +41,7 @@ const Orders = () => {
         {field: 'status', header: 'Durum'},
         {field: 'total_amount', header: 'Toplam Miktar'}, 
         {field: 'howLongAgo', header: 'Sipariş Zamanı'},
-        {field: 'ops', header: 'Detaylar', body: editButton}
+        {field: 'ops', header: 'Detaylar', body: (rowData) =>EditBtn(rowData,router,path)}
     ]
 
     return (
@@ -63,7 +50,7 @@ const Orders = () => {
             <div className="card">
                 <h1>Siparişler</h1>
                 <StandardTable 
-                    header={header}
+                    header={Header(setGlobalFilter,"orders")}
                     columns={columns} 
                     value={rows}  
                     globalFilter={globalFilter} 
