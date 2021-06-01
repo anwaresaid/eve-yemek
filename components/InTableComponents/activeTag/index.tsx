@@ -1,7 +1,7 @@
 import { Tag } from "primereact/tag"
 import React, { useEffect, useState } from "react"
 
-export default (activeStatus) => {
+const activeTag = (activeStatus) => {
     return (
         <Tag 
             value={activeStatus ? "Aktif" : "engelli"} 
@@ -11,3 +11,5 @@ export default (activeStatus) => {
         </Tag>
     )
 }
+
+export default activeTag;
