@@ -5,6 +5,8 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
+import { priceBodyTemplate } from "../InTableComponents/price";
+import Header from '../InTableComponents/Header';
 
 const FoodsTable = (props) => {
     
@@ -29,26 +31,21 @@ const FoodsTable = (props) => {
         </div>
     )
 
-    const formatCurrency = (value) => {
-        return value.toLocaleString('tr-TR', {style: 'currency', currency: 'TRY'});
-    }
-
-    const priceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.price);
-    }
+   
     const columns = [
         {field: 'id', header: "ID"},
         {field: 'image', header: "Resim", body: imageBodyTemplate},
         {field: 'name', header: 'Ad'},
         {field: 'food_category.name', header: 'Kategory'},
-        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, // in days
-        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.status === "active")},
+        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
+        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
         {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
     return(
+        
         <StandardTable
-                    header={header}
+                    header={Header(setGlobalFilter,"Food")}
                     columns={columns} 
                     value={props.foods}  
                     globalFilter={globalFilter} 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import StandardTable from '../StandardTable'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
-
+import Header from '../InTableComponents/Header';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 
@@ -36,7 +36,7 @@ const UsersTable = (props) => {
     ]
     return (
         <StandardTable 
-            header={header}
+            header={Header(setGlobalFilter,"Users")}
             columns={columns} 
             value={props.users}  
             globalFilter={globalFilter} 
