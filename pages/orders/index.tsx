@@ -11,6 +11,7 @@ import {ProgressSpinner} from 'primereact/progressspinner'
 import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style';
 import EditBtn from '../../components/InTableComponents/editButton/index';
 import Header from '../../components/InTableComponents/Header/index';
+import OrderStatus from '../../components/InTableComponents/orderStatusTag'
 
 const Orders = () => {
 
@@ -38,7 +39,7 @@ const Orders = () => {
     const columns = [
         {field: '_id', header: 'ID'},
         {field: 'name', header: 'Restoran'},
-        {field: 'status', header: 'Durum'},
+        {field: 'status', header: 'Durum', body: (rowData) => OrderStatus(rowData.status_id ?? 1)},
         {field: 'total_amount', header: 'Toplam Miktar'}, 
         {field: 'howLongAgo', header: 'Sipariş Zamanı'},
         {field: 'ops', header: 'Detaylar', body: (rowData) =>EditBtn(rowData,router,path)}
