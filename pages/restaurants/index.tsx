@@ -82,7 +82,7 @@ const Index = () => {
                     <S.Table value={restaurants.items} removableSort paginator
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="{totalRecords} kayıttan {first} - {last} arasındaki kayıtlar gösteriliyor" rows={10} rowsPerPageOptions={[10,20,50]}
-                    header={()=> Header(setGlobalFilter,"restaurants")} className="p-datatable-restaurants"
+                    header={Header(setGlobalFilter,"restaurants")} className="p-datatable-restaurants"
                     globalFilter={globalFilter} emptyMessage="No Restaurants found.">
                         <Column field="_id" header="Id" sortable></Column>
                         <Column header="Image" body={imageBodyTemplate}></Column>

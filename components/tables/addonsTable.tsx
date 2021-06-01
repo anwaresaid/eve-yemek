@@ -1,11 +1,12 @@
 
 import React, { useEffect, useState } from "react";
-import StandardTable from '../StandardTable'
+import StandardTable from '../StandardTable';
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
+import Header from '../InTableComponents/Header';
 
 const AddonsTable = (props) => {
     
@@ -42,7 +43,7 @@ const AddonsTable = (props) => {
 
     return (
         <StandardTable 
-            header={header}
+            header={Header(setGlobalFilter,"Addons")}
             columns={columns} 
             value={props.addons}  
             globalFilter={globalFilter} 

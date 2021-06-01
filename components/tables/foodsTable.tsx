@@ -6,8 +6,7 @@ import {useRouter} from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
-import { Button } from 'primereact/button';
-import { Tag } from 'primereact/tag';
+import Header from '../InTableComponents/Header';
 
 const FoodsTable = (props) => {
     
@@ -46,7 +45,7 @@ const FoodsTable = (props) => {
     return(
         
         <StandardTable
-                    header={header}
+                    header={Header(setGlobalFilter,"Food")}
                     columns={columns} 
                     value={props.foods}  
                     globalFilter={globalFilter} 
