@@ -6,6 +6,8 @@ import {useRouter} from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
+import { Button } from 'primereact/button';
+import { Tag } from 'primereact/tag';
 
 const FoodsTable = (props) => {
     
