@@ -4,6 +4,7 @@ import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
+import Header from "../InTableComponents/Header";
 
 const OrdersTable = (props) => {
     
@@ -34,7 +35,7 @@ const OrdersTable = (props) => {
     
     return (
         <StandardTable 
-            header={header}
+            header={Header(setGlobalFilter,"live orders")}
             columns={columns} 
             value={props.orders}  
             globalFilter={globalFilter} 
