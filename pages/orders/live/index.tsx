@@ -34,16 +34,17 @@ const liveOrdersList = () => {
   }, [success]);
 
   useEffect(() => {
-    const sockett = io('http://127.0.0.1:3000', { transports: ['websocket'] });
+    const sockett = io('https://dev.eve-yemek.com', {
+      transports: ['websocket'],
+    });
     setSocket(sockett);
     console.log('hello socket connection');
     sockett.on('messageToClient', (payload) => {
-      console.log('anything?');
       console.log(payload);
     });
-    // return () => {
-    //   sockett.disconnect();
-    // };
+    return () => {
+      sockett.disconnect();
+    };
   }, []);
 
   const emitToSocket = () => {
