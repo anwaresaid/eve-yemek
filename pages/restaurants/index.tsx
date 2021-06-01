@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '../../styles/restaurants/restaurants.style'
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { listRestaurant } from "../../store/actions/restaurant.action";
@@ -9,10 +8,9 @@ import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import {useRouter} from 'next/router';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import EditBtn  from '../../components/Table/editButton/index';
-import imageBodyTemplate from '../../components/Table/Image/index';
-
-
+import EditBtn  from '../../components/InTableComponents/editButton/index';
+import imageBodyTemplate from '../../components/InTableComponents/Image/index';
+import Header from '../../components/InTableComponents/Header/index';
 const Index = () => {
 
 
@@ -53,18 +51,6 @@ const Index = () => {
     const onPageInputChange = (event) => {
         setCurrentPage(event.target.value);
     }
-
-
-    const header =(
-        <div className="table-header">
-            List of Restaurants
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-            </span>
-        </div>
-    )
-
     const statusBodyTemplate = (rowData) => {
         if(rowData.active == true)
         {
@@ -84,7 +70,7 @@ const Index = () => {
                     <S.Table value={restaurants.items} removableSort paginator
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="{totalRecords} kayıttan {first} - {last} arasındaki kayıtlar gösteriliyor" rows={10} rowsPerPageOptions={[10,20,50]}
-                    header={header} className="p-datatable-restaurants"
+                    header={Header(setGlobalFilter,"restaurants")} className="p-datatable-restaurants"
                     globalFilter={globalFilter} emptyMessage="No Restaurants found.">
                         <Column field="_id" header="Id" sortable></Column>
                         <Column header="Image" body={imageBodyTemplate}></Column>

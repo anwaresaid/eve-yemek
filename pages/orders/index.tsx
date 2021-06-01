@@ -9,7 +9,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listOrders } from '../../store/actions/orders.action'
 import {ProgressSpinner} from 'primereact/progressspinner'
 import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style';
-import EditBtn from '../../components/Table/editButton/index';
+import EditBtn from '../../components/InTableComponents/editButton/index';
+import Header from '../../components/InTableComponents/Header/index';
 
 const Orders = () => {
 
@@ -27,16 +28,6 @@ const Orders = () => {
         else if (success)
             setRows(orders.items)
     },[dispatch, success])
-
-    const header =(
-        <div className="table-header">
-            Siparişler Listesi
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-            </span>
-        </div>
-    )
 
     const handleViewButtonClick = (id) => {
         if(id){
@@ -59,7 +50,7 @@ const Orders = () => {
             <div className="card">
                 <h1>Siparişler</h1>
                 <StandardTable 
-                    header={header}
+                    header={Header(setGlobalFilter,"orders")}
                     columns={columns} 
                     value={rows}  
                     globalFilter={globalFilter} 

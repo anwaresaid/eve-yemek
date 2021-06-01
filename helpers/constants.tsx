@@ -25,6 +25,9 @@ export const allMenuItems:any = [
         { label:"Eklentiler Listesi",             url:"/addons",   roles:["admin"]                     },
         { label:"Eklentiler Oluştur",             url:"/addons/create",   roles:["admin"]              },
     ] },
+    { label:"Kupon",                expanded: true, items: [
+        { label:"Kupon Listesi",             url:"/coupons",   roles:["admin"]       },
+    ] },
     { label:"Hesap Ayarları", expanded: true, items: [
         { label:"Müşteriler",  url:"/users/customers", roles:["admin"] },
         { label:"Restoran Sahipleri",  url:"/users/restaurant_owners", roles:["admin"] },

@@ -46,6 +46,7 @@ import {
 } from './userslists.reducer';
 import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
 import { dashboardReportReducer } from './dashboard.reducer';
+import { listCouponsReducer } from './coupons.reducer';
 
 export default combineReducers({
   user,
@@ -94,4 +95,6 @@ export default combineReducers({
   addonCategoryDetails: addonCategoryDetailsReducer,
   updateAddonCategory: updateAddonCategoryReducer,
   createAddonCategory: createAddonCategoryReducer,
+
+  listCoupons: listCouponsReducer,
 });
