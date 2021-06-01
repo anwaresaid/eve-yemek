@@ -4,62 +4,45 @@ import { listOrders } from '../../../store/actions/orders.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import io from 'socket.io-client';
-import { Button } from 'primereact/button';
+import { useSocket } from '../../../helpers/socket';
 
 const liveOrdersList = () => {
-  const [ordersItems, setOrdersItems] = useState([]);
-  const [liveOrders, setLiveOrders] = useState();
-  const [socket, setSocket] = useState(null);
-
   const dispatch = useDispatch();
+  const socket = useSocket();
 
   const res = useSelector((state: RootState) => state.listOrders);
   const { loading, success, orders } = res;
 
   useEffect(() => {
     if (!orders) dispatch(listOrders());
+    if (socket) {
+      socket.on('messageToClient', (payload) => {
+        //do something on listen
+      });
+    }
+
+    return () => {
+      socket.disconnect();
+    };
   }, [dispatch]);
 
-  useEffect(() => {
-    if (success) setOrdersItems(orders.items);
-    //to filter the live orders
-    // if(orders)
-    // {
-    //     setLiveOrders(()=>{
-    //         let live= orders.items.filter(data  => {return data.status.localeCompare("Teslim Edildi")==0;});
-    //         return live;
-    //  })
-    // }
-  }, [success]);
-
-  useEffect(() => {
-    const sockett = io('https://dev.eve-yemek.com', {
-      transports: ['websocket'],
-    });
-    setSocket(sockett);
-    console.log('hello socket connection');
-    sockett.on('messageToClient', (payload) => {
-      console.log(payload);
-    });
-    return () => {
-      sockett.disconnect();
-    };
-  }, []);
-
-  const emitToSocket = () => {
-    console.log('trying to click');
-    console.log(socket);
-    socket.emit('orderStatus', { message: 'trying to reach you' });
-  };
+  // example code to emit for future implementations
+  // const emitToSocket = () => {
+  //   const message = socket.emit('orderStatus', {
+  //     message: 'trying to reach you',
+  //   });
+  // };
 
   return (
     <div>
-      {!loading && (
-        <OrdersTable orders={ordersItems} role='restaurant_owner'></OrdersTable>
+      {!loading && orders && (
+        <OrdersTable
+          orders={orders.items}
+          role='restaurant_owner'
+        ></OrdersTable>
       )}
       {loading && <ProgressSpinner />}
-      <Button onClick={emitToSocket}>Click me</Button>
+      {/* <Button onClick={emitToSocket}>click</Button> */}
     </div>
   );
 };
