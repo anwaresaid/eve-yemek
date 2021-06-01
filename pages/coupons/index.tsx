@@ -6,9 +6,6 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { listCoupons } from '../../store/actions/coupons.action';
 
 const index = () => {
-  const [addon, setAddon] = useState(null);
-  const [addonCategory, setAddonCategory] = useState(null);
-
   const dispatch = useDispatch();
 
   const res = useSelector((state: RootState) => state.listCoupons);
@@ -20,9 +17,7 @@ const index = () => {
 
   return (
     <div>
-      {!loading && (
-        <AddonsTable addons={addon} addonCat={addonCategory}></AddonsTable>
-      )}
+      {!loading && <h2>Table should be here</h2>}
       {loading && <ProgressSpinner />}
     </div>
   );
