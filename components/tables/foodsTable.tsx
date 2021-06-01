@@ -40,7 +40,7 @@ const FoodsTable = (props) => {
         {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
         {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
-    console.log(props.foods)
+    
     return(
         
         <StandardTable
