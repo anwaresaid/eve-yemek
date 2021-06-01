@@ -10,8 +10,8 @@ import { useRouter } from 'next/router';
 import { listFoodCategory } from '../../store/actions/foodCategory.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import editButton from '../../components/Table/editButton';
-import imageBodyTemplate from '../../components/Table/Image/index';
+import editButton from '../../components/InTableComponents/editButton';
+import imageBodyTemplate from '../../components/InTableComponents/Image/index';
 
 
 const FoodCategoriesList = () => {
