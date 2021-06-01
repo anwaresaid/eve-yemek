@@ -51,18 +51,6 @@ const Index = () => {
     const onPageInputChange = (event) => {
         setCurrentPage(event.target.value);
     }
-
-
-    // const header =(
-    //     <div className="table-header">
-    //         List of Restaurants
-    //         <span className="p-input-icon-left">
-    //             <i className="pi pi-search" />
-    //             <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-    //         </span>
-    //     </div>
-    // )
-
     const statusBodyTemplate = (rowData) => {
         if(rowData.active == true)
         {
