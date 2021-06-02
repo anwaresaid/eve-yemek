@@ -147,9 +147,12 @@ export const translations = {
   isRequired: '{{input}} is required',
   phoneNumber: 'Phone Number',
   ownerName: 'Owner Name',
+  invalidEmailMessage: 'Invalid email address',
 
   // Toasts
   success: 'Success',
+  error: 'Error',
   fileUploaded: 'File Uploaded',
+  updatedUser: 'Updated User',
   userName: 'User Name'
 };

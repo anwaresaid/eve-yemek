@@ -33,22 +33,22 @@ const UserDataInput = (props) => {
             let errors:any = {}
 
             if (!data.name) {
-                errors.name = 'user name is required.';
+                errors.name = i18n.t('isRequired', {input: i18n.t('userName')});;
             }
             if (!data.email) {
-                errors.email = 'email is required.';
+                errors.email = i18n.t('isRequired', {input: i18n.t('email')});;
             }
             else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
-                errors.email = 'Invalid email address. E.g. example@email.com';
+                errors.email = i18n.t('invalidEmailMessage');
             }
             if (!data.phone) {
-                errors.phone = 'Phone Number is required.';
+                errors.phone = i18n.t('isRequired', {input: i18n.t('phoneNumber')});;
             }
             if (!data.roles) {
-                errors.roles = 'roles is required.';
+                errors.roles = i18n.t('isRequired', {input: i18n.t('role')});;
             }
             if (!data.password && !props.updateProps) {
-                errors.password = 'password is required.';
+                errors.password = i18n.t('isRequired', {input: i18n.t('password')});;
             }
             return errors
         },
@@ -87,9 +87,9 @@ const UserDataInput = (props) => {
 
     useEffect(()=>{
         if(props.updateProps?.updateUserSuccess)
-            toast.current.show({severity: 'success', summary: 'Updated User', detail: 'Updated user '})
+            toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedUser')})
         else if (!props.updateProps?.updating && props.updateProps?.error)
-            toast.current.show({severity: 'warn', summary: 'Error', detail: 'Server: ' + props.updateProps.error});
+            toast.current.show({severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + props.updateProps.error});
 
     },[props.updateProps?.updateUserSuccess, props.updateProps?.updating])
     const body = (updating) => {
