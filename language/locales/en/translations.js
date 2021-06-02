@@ -31,5 +31,12 @@ export const translations = {
 
   //On Dashboard
   dailyOrders: 'Daily Orders',
-  
+  dailyEarnings: 'Daily Earnings',
+  totalOrders: 'Total Orders',
+  failedOrders: 'Failed Orders',
+  totalEarnings: 'Total Earnings',
+  viewReport: 'View Report',
+  orders: 'Orders',
+  thisWeek: 'This Week',
+  ordersFromTheLast7Days: 'Orders from the last 7 days'
 };

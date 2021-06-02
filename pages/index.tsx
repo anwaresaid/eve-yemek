@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
 import { getDashboardReport } from "../store/actions/dashboard.action";
 import {ProgressSpinner} from 'primereact/progressspinner'
+import { i18n } from "../language";
 
 const Index = (props) => {
 
@@ -23,7 +24,7 @@ const Index = (props) => {
         labels: (reportData?.lastSevenDaysReport.order.days.length === 0) ? ["28(MockData)", "30", "1", "2", "3", "4", "5"] : reportData?.lastSevenDaysReport.order.days,
         datasets: [
             {
-                label: "Bu Hafta",
+                label: i18n.t('thisWeek'),
                 fill: false,
                 lineTension: 0.5,
                 backgroundColor: "rgba(75,192,192,1)",
@@ -37,13 +38,13 @@ const Index = (props) => {
         <div>
             {loading ? <ProgressSpinner /> :
             <S.DashboardWrapper>
-            <h1>Kontrol Paneli</h1>
+            <h1>{i18n.t('dashboard')}</h1>
             <div className='p-grid p-grid-container'>
                 <div className='p-col-6 p-md-6 p-lg-2'>
                     <div className='box' style={{ backgroundColor: "#17a2b8" }}>
                         <div className='box__info'>
                             <span>{reportData?.report.daily_orders.length}</span>
-                            <p>Günlük Siparişler</p>
+                            <p>{i18n.t('dailyOrders')}</p>
                         </div>
                         <div className='box__icons'>
                             <i className=' pi pi-shopping-cart'></i>
@@ -54,7 +55,7 @@ const Index = (props) => {
                     <div className='box' style={{ backgroundColor: "#28a745" }}>
                         <div className='box__info'>
                             <span>₺{reportData?.report.daily_income}</span>
-                            <p>Günlük Kazanç</p>
+                            <p>{i18n.t('dailyEarnings')}</p>
                         </div>
                         <div className='box__icons'>
                             <i className=' pi pi-money-bill'></i>
@@ -65,7 +66,7 @@ const Index = (props) => {
                     <div className='box' style={{ backgroundColor: "#ffc107" }}>
                         <div className='box__info'>
                             <span>{reportData?.report.total_orders.total}</span>
-                            <p>Toplam Siparişler</p>
+                            <p>{i18n.t('totalOrders')}</p>
                         </div>
                         <div className='box__icons'>
                             <i className=' pi pi-shopping-cart'></i>
@@ -76,7 +77,7 @@ const Index = (props) => {
                     <div className='box' style={{ backgroundColor: "#dc3545" }}>
                         <div className='box__info'>
                             <span>?</span>
-                            <p>Başarısız Siparişler</p>
+                            <p>{i18n.t('failedOrders')}</p>
                         </div>
                         <div className='box__icons'>
                             <i className='pi pi-info'></i>
@@ -87,7 +88,7 @@ const Index = (props) => {
                     <div className='box' style={{ backgroundColor: "#dc3545" }}>
                         <div className='box__info'>
                             <span>₺{reportData?.report.total_income}</span>
-                            <p>Toplam Kazanç</p>
+                            <p>{i18n.t('totalEarnings')}</p>
                         </div>
                         <div className='box__icons'>
                             <i className=' pi  pi-money-bill'></i>
@@ -96,12 +97,12 @@ const Index = (props) => {
                 </div>
             </div>
 
-            <Card subTitle='Son 7 günün siparişleri'>
+            <Card subTitle={i18n.t('ordersFromTheLast7Days')}>
                 <div className='view-report'>
-                    <a href="#">Raporu görüntüle</a>
+                    <a href="#">{i18n.t('viewReport')}</a>
                 </div>
                 <i className='pi pi-shopping-cart'>
-                    <span>0 Sipariş</span>
+                    <span>0 {i18n.t('orders')}</span>
                 </i>
                 <Line
                     type='number'
