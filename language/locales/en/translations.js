@@ -90,5 +90,11 @@ export const translations = {
   price: 'Price',
   active: 'Active',
 
+  // Create Meal page
+  itemName: 'Item Name',
+  itemDescription: 'Item Description',
+  mealCategory: 'Meal Category',
+  selectAddons: 'Select Add-Ons',
+  discountedPrice: 'Discounted Price',
   
 };

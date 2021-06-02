@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import editButton from '../../components/InTableComponents/editButton';
 import imageBodyTemplate from '../../components/InTableComponents/Image/index';
+import { i18n } from '../../language';
 
 
 const FoodCategoriesList = () => {
@@ -37,7 +38,7 @@ const FoodCategoriesList = () => {
   // global filter
   const header = (
     <div className='table-header'>
-      Yemek Kategorileri Listesi
+      {i18n.t('mealCategories')}
       <span className='p-input-icon-left'>
         <i className='pi pi-search' />
         <InputText
@@ -51,7 +52,7 @@ const FoodCategoriesList = () => {
 
   return (
     <>
-      <h1>Yemek Kategorileri</h1>
+      <h1>{i18n.t('mealCategories')}</h1>
       {foodCategoriesList ? (
           <S.Table
           value={foodCategoriesList.items}
@@ -67,10 +68,10 @@ const FoodCategoriesList = () => {
           emptyMessage='Yemek kategorileri bulunamadı'
         >
           <Column field='_id' header='ID' sortable></Column>
-          <Column body={imageBodyTemplate} header='Resim' sortable></Column>
-          <Column field='name' header='Ad' sortable></Column>
-          <Column body={statusBodyTemplate} header='Aktif' sortable></Column>
-          <Column header='Islemler' body={(rowData)=>editButton(rowData,router,path)}></Column>
+          <Column body={imageBodyTemplate} header={i18n.t('image')} sortable></Column>
+          <Column field='name' header={i18n.t('name')} sortable></Column>
+          <Column body={statusBodyTemplate} header={i18n.t('active')} sortable></Column>
+          <Column header={i18n.t('operations')} body={(rowData)=>editButton(rowData,router,path)}></Column>
         </S.Table>
       ) : (
           <h2>Loading</h2>
