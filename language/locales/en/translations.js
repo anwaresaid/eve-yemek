@@ -97,4 +97,7 @@ export const translations = {
   selectAddons: 'Select Add-Ons',
   discountedPrice: 'Discounted Price',
   
+
+  // Create Meal Category page
+  categoryName: 'Category Name'
 };

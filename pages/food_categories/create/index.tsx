@@ -14,6 +14,7 @@ import { foodCategoryTypes } from '../../../store/types/foodCategory.type';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import classNames from 'classnames'
+import { i18n } from '../../../language';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -199,13 +200,13 @@ export const Index = () => {
   };
   return (
     <div>
-      <h1>Kategori Oluştur</h1>
+      <h1>{i18n.t('createMealCategory')}</h1>
       <Toast ref={toast}></Toast>
       <S.ContainerCard>
         <form onSubmit={formik.handleSubmit}>
           <div className='p-fluid'>
             <div className='p-field'>
-              <h4>Kategori Adı</h4>
+              <h4>{i18n.t('categoryName')}</h4>
               <InputText id='name' name='name' onChange={formik.handleChange} type='text' className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
               <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
               {getFormErrorMessage('name')}
@@ -234,7 +235,7 @@ export const Index = () => {
           {getFormErrorMessage('image')}
 
           <div>
-            <h4>Aktif Mi</h4>
+            <h4>{i18n.t('active')}</h4>
             <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
           </div>
 
