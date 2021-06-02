@@ -1,0 +1,35 @@
+export const translations = {
+  //Sidebar
+  dashboard: 'Dashboard',
+  liveOrders: 'Live Orders',
+  orders: 'Orders',
+  restaurants: 'Restaurants',
+  restaurantList: 'Restaurant List',
+  createRestaurant: 'Create Restaurant',
+  meals: 'Meals',
+  mealList: 'Meal List',
+  createMeal: 'Create Meal',
+  mealCategories: 'Meal Categories',
+  categoryList: 'Category List',
+  createMealCategory: 'Create Meal Category',
+  addonCategories: 'Add-On Categories',
+  addonCategoryList: 'Add-On Category List',
+  createAddonCategory: 'Create Add-On Category',
+  addons: 'Add-Ons',
+  addonList: 'Add-On List',
+  createAddon: 'Create Add-On',
+  coupons: 'Coupons',
+  couponList: 'Coupon List',
+  accountSettings: 'Account Settings',
+  customers: 'Customers',
+  restaurantOwners: 'Restaurant Owners',
+  deliveryScouts: 'Delivery Scouts',
+  customerServiceReps: 'Service Representatives',
+  createUser: 'Create User',
+  settings: 'Settings',
+  logout: 'Logout',
+
+  //On Dashboard
+  dailyOrders: 'Daily Orders',
+  
+};
