@@ -38,5 +38,16 @@ export const translations = {
   viewReport: 'View Report',
   orders: 'Orders',
   thisWeek: 'This Week',
-  ordersFromTheLast7Days: 'Orders from the last 7 days'
+  ordersFromTheLast7Days: 'Orders from the last 7 days',
+
+  // Live Orders Page
+  liveOrders: 'Live Orders',
+  restaurant: 'Restaurant',
+  status: 'Status',
+  total: 'Total',
+  orderTime: 'Order Time',
+  operations: 'Operations',
+
+  // Orders Page
+  
 };
