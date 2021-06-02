@@ -154,5 +154,8 @@ export const translations = {
   error: 'Error',
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
-  userName: 'User Name'
+  userName: 'User Name',
+
+  // Table Pagination
+  showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}'
 };
