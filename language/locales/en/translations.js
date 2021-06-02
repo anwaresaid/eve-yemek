@@ -40,7 +40,19 @@ export const translations = {
   thisWeek: 'This Week',
   ordersFromTheLast7Days: 'Orders from the last 7 days',
 
-  // Live Orders Page
+  // Active Tag
+  active: 'Active',
+  inactive: 'Inactive',
+
+  // Order Status Tag
+  orderPlaced: 'Order Placed',
+  orderAccepted: 'Order Accepted',
+  orderPrepared: 'Order Prepared',
+  onTheWay: 'On The Way',
+  delivered: 'Delivered',
+  cancelled: 'Cancelled',
+
+  // Orders and Live Orders Pages
   liveOrders: 'Live Orders',
   restaurant: 'Restaurant',
   status: 'Status',
@@ -48,6 +60,28 @@ export const translations = {
   orderTime: 'Order Time',
   operations: 'Operations',
 
-  // Orders Page
-  
+  // Create Restaurant Page
+  name: 'Name',
+  description: 'Description',
+  restaurantOwner: 'Restaurant Owner',
+  images: 'Images',
+  telephone: 'Telephone',
+  email: 'Email',
+  city: 'City',
+  district: 'District',
+  rating: 'Rating',
+  approximateDeliveryTime: 'Approximate Delivery Time',
+  fullAddress: 'Full Address',
+  postalCode: 'Postal Code',
+  latitude: 'Latitude',
+  longitude: 'Longitude',
+  commissionRate: 'Commission Rate',
+  licenseCode: 'License Code',
+  restaurantFee: 'Restaurant Fee',
+  deliveryRadius: 'Delivery Radius',
+  minimumAmount: 'Minimum Amount',
+  vegetablesOnly: 'Vegetables Only',
+  prioritized: 'Prioritized',
+  open: 'Open'
+
 };
