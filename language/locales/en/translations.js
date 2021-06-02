@@ -64,6 +64,7 @@ export const translations = {
   name: 'Name',
   description: 'Description',
   restaurantOwner: 'Restaurant Owner',
+  restaurantName: 'restaurantName',
   images: 'Images',
   telephone: 'Telephone',
   email: 'Email',
@@ -141,4 +142,13 @@ export const translations = {
   googleMaps: 'Google Maps',
 
   paymentGateway: 'Payment Gateway',
+
+  // Inputs
+  isRequired: '{{input}} is required',
+  phoneNumber: 'Phone Number',
+  ownerName: 'Owner Name',
+
+  // Toasts
+  success: 'Success',
+  fileUploaded: 'File Uploaded'
 };

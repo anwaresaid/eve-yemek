@@ -88,53 +88,53 @@ import { i18n } from '../../../language';
             let errors:any = {};
 
             if (!data.owner_id) {
-                errors.owner_id = 'restaurant owner is required.';
+                errors.owner_id = i18n.t('isRequired', {input: i18n.t('restaurantOwner')});
             }
 
             if (!data.name) {
-                errors.name = 'restaurant name is required.';
+                errors.name = i18n.t('isRequired', {input: i18n.t('restaurantName')});
             }
             if (!data.description) {
-                errors.description = 'description is required.';
+                errors.description = i18n.t('isRequired', {input: i18n.t('description')});
             }
             if (!data.file) {
-                errors.file = 'Image is required.';
+                errors.file = i18n.t('isRequired', {input: i18n.t('image')});
             }
 
             if (!data.phone) {
-                errors.phone = 'phone number is required.';
+                errors.phone = i18n.t('isRequired', {input: i18n.t('phoneNumber')});
             }
 
             if (!data.email) {
-                errors.email = 'email is required.';
+                errors.email = i18n.t('isRequired', {input: i18n.t('email')});
             }
 
             if (!data.rating) {
-                errors.rating = 'rating is required.';
+                errors.rating = i18n.t('isRequired', {input: i18n.t('rating')});
             }
 
             if (!data.delivery_time) {
-                errors.delivery_time = 'delivery time is required.';
+                errors.delivery_time = i18n.t('isRequired', {input: i18n.t('approximateDeliveryTime')});
             }
 
             if (!data.commission_rate) {
-                errors.commission_rate = 'commission rate is required.';
+                errors.commission_rate = i18n.t('isRequired', {input: i18n.t('commissionRate')});
             }
 
             if (!data.license_code) {
-                errors.license_code = 'license code is required.';
+                errors.license_code = i18n.t('isRequired', {input: i18n.t('licenseCode')});
             }
 
             if (!data.restaurant_charges) {
-                errors.restaurant_charges = 'charges are required.';
+                errors.restaurant_charges = i18n.t('isRequired', {input: i18n.t('restaurantFee')});
             }
 
             if (!data.delivery_radius) {
-                errors.delivery_radius = 'delivery radius is required.';
+                errors.delivery_radius = i18n.t('isRequired', {input: i18n.t('deliveryRadius')});
             }
 
             if (!data.owner) {
-                errors.owner = 'owner name is required.';
+                errors.owner = i18n.t('isRequired', {input: i18n.t('ownerName')});
             }
             else
             {
@@ -144,7 +144,7 @@ import { i18n } from '../../../language';
             }
 
             if (!data.city) {
-                errors.city = 'city is required.';
+                errors.city = i18n.t('isRequired', {input: i18n.t('city')});
             }
             else
             {
@@ -152,7 +152,7 @@ import { i18n } from '../../../language';
             }
 
             if (!data.town) {
-                errors.town = 'town is required.';
+                errors.town = i18n.t('isRequired', {input: i18n.t('district')});
             }
             else
             {
@@ -160,18 +160,18 @@ import { i18n } from '../../../language';
             }
 
             if (!data.minimum_order_amount) {
-                errors.minimum_order_amount = 'minimum order amount is required.';
+                errors.minimum_order_amount = i18n.t('isRequired', {input: i18n.t('minimumAmount')});
             }
 
             if (!data.latitudeInt) {
-                errors.latitudeInt = 'latitude is required.';
+                errors.latitudeInt = i18n.t('isRequired', {input: i18n.t('latitude')});
             }
             else
             {
                 formik.values.latitude = formik.values.latitudeInt?.toString();
             }
             if (!data.longtitudeInt) {
-                errors.longtitudeInt = 'longtitude is required.';
+                errors.longtitudeInt = i18n.t('isRequired', {input: i18n.t('longitude')});
             }
             else
             {
@@ -254,7 +254,7 @@ import { i18n } from '../../../language';
                                         totalSize={totalSize} 
                                         setTotalSize={setTotalSize} 
                                         setFile={(file)=>{formik.values.file=file}}
-                                        showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
+                                        showSuccess={()=>{toast.current.show({severity: 'info', summary: i18n.t('success') , detail: i18n.t('File Uploaded')});}}
                                         >   
                                 </StandardFileUpload>
                         </InputContainer>

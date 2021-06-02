@@ -76,17 +76,17 @@ export const Index = () => {
             }
 
             if (!data.name) {
-                errors.name = 'name is required.';
+                errors.name = i18n.t('isRequired', {input: i18n.t('name')});
             }
             if (!data.description) {
-                errors.description = 'description is required.';
+                errors.description = i18n.t('isRequired', {input: i18n.t('description')});
             }
             if (!data.file) {
-                errors.file = 'Image is required.';
+                errors.file = i18n.t('isRequired', {input: i18n.t('image')});;
             }
 
             if (!data.categoryName) {
-                errors.categoryName = 'categoryName is required.';
+                errors.categoryName = i18n.t('isRequired', {input: i18n.t('categoryName')});;
             }
             else{
                 let selectedCategory:any = foodCatlist.items.filter(data  => {return data.name.localeCompare(formik.values.categoryName.name)==0;});
@@ -94,7 +94,7 @@ export const Index = () => {
                     formik.values.food_category_id = selectedCategory[0]?._id;
             }
             if (!data.addons) {
-                errors.addons = 'addons required.';
+                errors.addons = i18n.t('isRequired', {input: i18n.t('addons')});;
             }
 
             return errors;
@@ -186,7 +186,7 @@ export const Index = () => {
                                     totalSize={totalSize} 
                                     setTotalSize={setTotalSize} 
                                     setFile={(file)=>{formik.values.file=file}}
-                                    showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
+                                    showSuccess={()=>{toast.current.show({severity: 'info', summary: i18n.t('success'), detail: i18n.t('fileUploaded')});}}
                                     >   
                             </StandardFileUpload>
                        </InputContainer>
@@ -195,7 +195,7 @@ export const Index = () => {
                             <h4>{i18n.t('mealCategory')}</h4>
                             <Dropdown id="categoryName" name="categoryName" value={formik.values.categoryName}
                              options={foodCategoryName} onChange={formik.handleChange} optionLabel="name"
-                              placeholder="Yemek Kategorisi" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
+                              placeholder={i18n.t('mealCategory')} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
                             <label htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
                                         {getFormErrorMessage('categoryName')}
                             <h4>{i18n.t('selectAddons')}</h4>
