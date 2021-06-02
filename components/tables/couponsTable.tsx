@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import editButton from '../InTableComponents/editButton';
 import activeTag from '../InTableComponents/activeTag';
 import Header from '../InTableComponents/Header';
+import { i18n } from '../../language';
 
 const CouponsTable = (props) => {
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -14,21 +15,21 @@ const CouponsTable = (props) => {
 
   const columns = [
     { field: '_id', header: 'ID' },
-    { field: 'coupon_code', header: 'Kupon Kodu' },
-    { field: 'name', header: 'Adi' },
-    { field: 'description', header: 'Aciklama' },
-    { field: 'expire_date', header: 'ُExpiration' },
-    { field: 'discount_type', header: 'Kupon Turu' },
-    { field: 'discount', header: 'Indirim' },
-    { field: 'max_usage', header: 'Maximum Kullanma' },
+    { field: 'coupon_code', header: i18n.t('couponCode') },
+    { field: 'name', header: i18n.t('name') },
+    { field: 'description', header: i18n.t('description') },
+    { field: 'expire_date', header: i18n.t('expiration') },
+    { field: 'discount_type', header: i18n.t('couponType') },
+    { field: 'discount', header: i18n.t('discount') },
+    { field: 'max_usage', header: i18n.t('maximumUsage') },
     {
       field: 'active',
-      header: 'Aktif',
+      header: i18n.t('active'),
       body: (rowData) => activeTag(rowData.active),
     },
     {
       field: 'ops',
-      header: 'İşlemler',
+      header: i18n.t('operations'),
       body: (rowData) => editButton(rowData, router, path),
     },
   ];

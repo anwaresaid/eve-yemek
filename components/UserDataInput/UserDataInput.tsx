@@ -11,6 +11,7 @@ import {usersListTypes} from '../../store/types/userslists.type'
 import {Toast} from 'primereact/toast'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
+import { i18n } from '../../language'
 
 const UserDataInput = (props) => {
 
@@ -94,49 +95,49 @@ const UserDataInput = (props) => {
     const body = (updating) => {
         return (
             <div>
-                <h1>{updating ? "Kullanıcı Düzenle" : "Kullanıcı Oluştur"}</h1>
+                <h1>{updating ? i18n.t('updateUser') : i18n.t('createUser')}</h1>
                 <form onSubmit={mySubmit} >
                     <div className="p-fluid">
                         <div className="p-field">
-                            <h4>Rol</h4>
-                            <MultiSelect id="roles" value={formik.values.roles} placeholder="Rol seçin" options={usersListTypes.USER_ROLES_FOR_DROPDOWN} onChange={formik.handleChange}  className={classNames({ 'p-invalid': isFormFieldValid('roles') })}/>
+                            <h4>{i18n.t('role')}</h4>
+                            <MultiSelect id="roles" value={formik.values.roles} placeholder={i18n.t('selectRole')} options={usersListTypes.USER_ROLES_FOR_DROPDOWN} onChange={formik.handleChange}  className={classNames({ 'p-invalid': isFormFieldValid('roles') })}/>
                             <label htmlFor="roles" className={classNames({ 'p-error': isFormFieldValid('roles') })}></label>
                             {getFormErrorMessage('roles')}
                         </div>
                         <div className="p-field">
-                            <h4>Ad</h4>
+                            <h4>{i18n.t('name')}</h4>
                             <InputText id="name" name='name' value={formik.values.name} type="text" onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })}/>
                             <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
                             {getFormErrorMessage('name')}
                         </div>
                         <div className="p-field">
-                            <h4>E-Posta</h4>
+                            <h4>{i18n.t('email')}</h4>
                             <InputText id="email" value={formik.values.email} type="text" onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('email') })}/>
                             <label htmlFor="email" className={classNames({ 'p-error': isFormFieldValid('email') })}></label>
                             {getFormErrorMessage('email')}
                         </div>
                         <div className="p-field">
-                            <h4>Telefon</h4>
+                            <h4>{i18n.t('telephone')}</h4>
                             <InputText id="phone" value={formik.values.phone} type="text" onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('phone') })}/>
                             <label htmlFor="phone" className={classNames({ 'p-error': isFormFieldValid('phone') })}></label>
                             {getFormErrorMessage('phone')}
                         </div>
                         {!updating &&
                             <div className="p-field">
-                            <h4>Şifre</h4>
+                            <h4>{i18n.t('password')}</h4>
                             <InputText id="password" type="password" value={formik.values.password} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('password') })}></InputText>
                             <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}></label>
                             {getFormErrorMessage('password')}
                         </div>
                         }
                         <div className="p-field">
-                            <h4>Aktif</h4>
+                            <h4>{i18n.t('active')}</h4>
                             <InputSwitch id="active " name="active"  checked={true} onChange={formik.handleChange} ></InputSwitch>
                             <label htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
                             {getFormErrorMessage('active')}
                         </div>
                     </div>
-                    <Button type="submit" label={updating ? "Düzenle" : "Oluştur"}></Button>
+                    <Button type="submit" label={updating ? i18n.t('update'): i18n.t('create')}></Button>
                 </form>
             </div>
         )

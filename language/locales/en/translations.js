@@ -102,5 +102,22 @@ export const translations = {
   categoryName: 'Category Name',
   type: 'Type',
   addonName: 'Add-On Name',
-  addonCategory: 'Add-On Category'
+  addonCategory: 'Add-On Category',
+
+  // Coupon pages
+  couponCode: 'Coupon Code',
+  expiration: 'Expiration',
+  couponType: 'Coupon Type',
+  discount: 'Discount',
+  maximumUsage: 'Maximum Usage',
+
+  // User lists
+  created: 'Created',
+  createUser: 'Create User',
+  updateUser: 'Update User',
+  create: 'Create',
+  update: 'Update',
+  role: 'Role',
+  selectRole: 'Select Role',
+  password: 'Password'
 };
