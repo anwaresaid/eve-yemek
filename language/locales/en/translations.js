@@ -119,5 +119,26 @@ export const translations = {
   update: 'Update',
   role: 'Role',
   selectRole: 'Select Role',
-  password: 'Password'
+  password: 'Password',
+
+  // Settings
+  eveYemekSettings: 'Eve Yemek Settings',
+
+  general: 'General',
+  applicationName: 'Application Name',
+  timeZone: 'Time Zone',
+  currencyCode: 'Currency Code',
+  currencySymbol: 'Currency Symbol',
+  taxApplicable: 'Tax Applicable',
+  taxPercentage: 'Tax Percentage',
+  deliveryFeeApplicable: 'Delivery Fee Applicable',
+  deliveryFee: 'Delivery Fee',
+
+  notifications: 'Notifications',
+
+  smsGateway: 'SMS Gateway',
+
+  googleMaps: 'Google Maps',
+
+  paymentGateway: 'Payment Gateway',
 };

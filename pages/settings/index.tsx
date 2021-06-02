@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { InputNumber } from 'primereact/inputnumber';
 import { Toast } from 'primereact/toast';
 import { settingsTypes } from '../../store/types/settings.type';
+import { i18n } from '../../language';
 
 const index = () => {
   const dispatch = useDispatch();
@@ -172,7 +173,7 @@ const index = () => {
     return (
       <>
         <div className='p-field'>
-          <h4>Uygulama Adi</h4>
+          <h4>{i18n.t('applicationName')}</h4>
           <InputText
             id='app_name'
             value={formik.values.app_name}
@@ -189,7 +190,7 @@ const index = () => {
           {getFormErrorMessage('app_name')}
         </div>
         <div className='p-field'>
-          <h4>Zaman Dilimi</h4>
+          <h4>{i18n.t('timeZone')}</h4>
           <InputText
             id='time_zone'
             value={formik.values.time_zone}
@@ -206,7 +207,7 @@ const index = () => {
           {getFormErrorMessage('time_zone')}
         </div>
         <div className='p-field'>
-          <h4>Para Birimi Kodu</h4>
+          <h4>{i18n.t('currencyCode')}</h4>
           <InputText
             id='currency_code'
             value={formik.values.currency_code}
@@ -225,7 +226,7 @@ const index = () => {
           {getFormErrorMessage('currency_code')}
         </div>
         <div className='p-field'>
-          <h4>Para Birimi Sembolu</h4>
+          <h4>{i18n.t('currencySymbol')}</h4>
           <InputText
             id='currency_symbol'
             value={formik.values.currency_symbol}
@@ -244,7 +245,7 @@ const index = () => {
           {getFormErrorMessage('currency_symbol')}
         </div>
         <div className='p-field'>
-          <h4>Veri uygulanabilir</h4>
+          <h4>{i18n.t('taxApplicable')}</h4>
           <InputSwitch
             id='is_taxed '
             name='is_taxed'
@@ -258,7 +259,7 @@ const index = () => {
           {getFormErrorMessage('is_taxed')}
         </div>
         <div className='p-field p-col-12 p-md-4'>
-          <h4>Vergi Yuzdesi</h4>
+          <h4>{i18n.t('taxPercentage')}</h4>
           <InputNumber
             disabled={formik.values.is_taxed ? false : true}
             id='tax_rate '
@@ -276,7 +277,7 @@ const index = () => {
           {getFormErrorMessage('tax_rate')}
         </div>
         <div className='p-field'>
-          <h4>Kargo Ucreti uygulanabilir</h4>
+          <h4>{i18n.t('deliveryFeeApplicable')}</h4>
           <InputSwitch
             id='is_delivery_charged '
             name='is_delivery_charged'
@@ -292,7 +293,7 @@ const index = () => {
           {getFormErrorMessage('is_delivery_charged')}
         </div>
         <div className='p-field p-col-12 p-md-4'>
-          <h4>Kargo Ucreti</h4>
+          <h4>{i18n.t('deliveryFee')}</h4>
           <InputNumber
             disabled={formik.values.is_delivery_charged ? false : true}
             id='delivery_charge '
@@ -675,7 +676,7 @@ const index = () => {
 
   return (
     <div>
-      <h2>Eve Yemek Ayarlari</h2>
+      <h2>{i18n.t('eveYemekSettings')}</h2>
       <Toast ref={toast}></Toast>
       {loading ? (
         <h2>Loading</h2>
@@ -685,19 +686,19 @@ const index = () => {
             activeIndex={activeIndex}
             onTabChange={(e) => setActiveIndex(e.index)}
           >
-            <TabPanel header='Genel'>
+            <TabPanel header={i18n.t('general')}>
               <GeneralSettings />
             </TabPanel>
-            <TabPanel header='Bildirim Gonder'>
+            <TabPanel header={i18n.t('notifications')}>
               <NotificationSettings />
             </TabPanel>
-            <TabPanel header='SMS Gateway'>
+            <TabPanel header={i18n.t('smsGateway')}>
               <SMSGatewaySettings />
             </TabPanel>
-            <TabPanel header='Google Maps'>
+            <TabPanel header={i18n.t('googleMaps')}>
               <GoogleMapsSettings />
             </TabPanel>
-            <TabPanel header='Odeme Gateway'>
+            <TabPanel header={i18n.t('paymentGateway')}>
               <PaymentSettings />
             </TabPanel>
           </TabView>
