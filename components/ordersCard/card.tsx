@@ -6,6 +6,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import CardDate from "./cardDate";
 import OrderDivider from "./orderDivider";
+import OrderStatus from '../InTableComponents/orderStatusTag';
 
 
 
@@ -39,7 +40,7 @@ const OrdersCard = (props) => {
                             <br/>
                             <div><b>Sipariş ID: </b>{props.orderData.id}</div>
                             <div><b>Sipariş Verildi: </b><CardDate date = {props.orderData.createdAt}/></div>
-                            <div><b>Durum: </b><Tag value="Teslim Edildi" severity="success"/></div>
+                            {OrderStatus(props.orderData.status_id ?? 1)}
                         </div>
                     </div>
 
