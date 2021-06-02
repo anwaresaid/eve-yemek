@@ -82,6 +82,13 @@ export const translations = {
   minimumAmount: 'Minimum Amount',
   vegetablesOnly: 'Vegetables Only',
   prioritized: 'Prioritized',
-  open: 'Open'
+  open: 'Open',
 
+  // Meals List page
+  image: 'Image',
+  category: 'Category',
+  price: 'Price',
+  active: 'Active',
+
+  
 };
