@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import editButton from '../../components/InTableComponents/editButton/index';
+import { i18n } from '../../language';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
 import * as S from '../../styles/food/food.list.style';
 
@@ -24,7 +25,7 @@ const AddonCategoriesList = () => {
   // global filter
   const header = (
     <div className='table-header'>
-      Eklenti Kategorileri Listesi
+     {i18n.t('addonCategories')}
       <span className='p-input-icon-left'>
         <i className='pi pi-search' />
         <InputText
@@ -38,7 +39,7 @@ const AddonCategoriesList = () => {
 
   return (
     <>
-      <h1>Eklenti Kategorileri</h1>
+      <h1>{i18n.t('addonCategories')}</h1>
       {success && addonCategories ? (
         <S.Table
           value={addonCategories.items}
@@ -54,9 +55,9 @@ const AddonCategoriesList = () => {
           emptyMessage='Yemek kategorileri bulunamadı'
         >
           <Column field='_id' header='ID' sortable></Column>
-          <Column field='name' header='Ad' sortable></Column>
-          <Column field='enum' header='Tur' sortable></Column>
-          <Column header='Islemler' body={(rowData)=> editButton(rowData,router,path)}></Column>
+          <Column field='name' header={i18n.t('name')} sortable></Column>
+          <Column field='enum' header={i18n.t('type')} sortable></Column>
+          <Column header={i18n.t('operations')} body={(rowData)=> editButton(rowData,router,path)}></Column>
         </S.Table>
       ) : (
         <h2>Loading</h2>

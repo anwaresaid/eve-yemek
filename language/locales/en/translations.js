@@ -98,6 +98,9 @@ export const translations = {
   discountedPrice: 'Discounted Price',
   
 
-  // Create Meal Category page
-  categoryName: 'Category Name'
+  // Category pages and Add-on pages
+  categoryName: 'Category Name',
+  type: 'Type',
+  addonName: 'Add-On Name',
+  addonCategory: 'Add-On Category'
 };
