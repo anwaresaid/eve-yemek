@@ -12,6 +12,10 @@ export const Container = styled.div`
     padding:0 8px;
     display:flex;
     flex-direction: column;
+    transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
+    transition: all 0.5s linear;
+    transform-origin: 1px;
+
 
     .p-menu{
         width:100%;

@@ -20,12 +20,35 @@ const GlobalStyle = createGlobalStyle`
     .app{
         
     }
+    .main-context-card-showBar{
+        top:0;
+        left:0;
+        height: 87px;
+        margin-left:${vars.sidebar_left_margin}px;
+        transition-property: margin-left;
+        transition:  all 0.5s linear;
 
-    .main-context{
+    }
+    .main-context-card-hideBar{
+        top:0;
+        left:0;
+        height: 87px;
+        margin-left:0;
+        transition:  all 0.5s linear;
+    }
+
+    .main-context-showBar{
         min-height:100vh;
         background:#f4f4f4;
         margin-left:${vars.sidebar_left_margin}px;
         padding:25px;
+        transition:  all 0.5s linear;
+    }
+    .main-context-hideBar{
+        min-height:100vh;
+        background:#f4f4f4;
+        padding:25px;
+        transition:  all 0.5s linear;
     }
 
 
