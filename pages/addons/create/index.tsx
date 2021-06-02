@@ -43,11 +43,11 @@ export const Index = () => {
             let errors:any = {}
             if(!data.name){
 
-                errors.name = 'addon name is required.';
+                errors.name = i18n.t('isRequired', {input: i18n.t('addonName')});;
             }
             
             if (!data.addonCat) {
-                errors.name = 'addon category is required.';
+                errors.addonCat = i18n.t('isRequired', {input: i18n.t('addonCategory')});;
             }else{
                 let selectedAddons = addonCatlist.items.filter(data  => {return data.name.localeCompare(formik.values.addonCat.name)==0;});
                 if(selectedAddons!=null)

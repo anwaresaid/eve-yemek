@@ -40,10 +40,10 @@ export const Index = () => {
         let errors:any = {};
 
         if (!data.name) {
-            errors.name = 'user name is required.';
+            errors.name = i18n.t('isRequired', {input: i18n.t('userName')});;
         }
         if (!data.image) {
-            errors.image = 'image is required.';
+            errors.image = i18n.t('isRequired', {input: i18n.t('image')});;
         }
         return errors;
     },
@@ -84,8 +84,8 @@ export const Index = () => {
     setTotalSize(_totalSize);
     toast.current.show({
       severity: 'info',
-      summary: 'Success',
-      detail: 'File Uploaded',
+      summary: i18n.t('success'),
+      detail: i18n.t('fileUploaded'),
     });
   };
 

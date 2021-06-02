@@ -40,10 +40,10 @@ export const Index = () => {
       let errors: any = {};
 
       if (!data.name) {
-        errors.name = 'user name is required.';
+        errors.name = i18n.t('isRequired', {input: i18n.t('userName')});;
       }
       if (!data.enum) {
-        errors.enum = 'enum is required.';
+        errors.enum = i18n.t('isRequired', {input: i18n.t('type')});;
       }
       return errors;
     },

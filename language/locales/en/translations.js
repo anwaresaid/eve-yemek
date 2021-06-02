@@ -150,5 +150,6 @@ export const translations = {
 
   // Toasts
   success: 'Success',
-  fileUploaded: 'File Uploaded'
+  fileUploaded: 'File Uploaded',
+  userName: 'User Name'
 };
