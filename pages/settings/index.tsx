@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import { listSettings, updateSettings } from '../../store/actions/settings.action';
+import { listSettings, setAppLanguage, updateSettings } from '../../store/actions/settings.action';
 import { TabView, TabPanel } from 'primereact/tabview';
 import * as S from '../../styles/food/create-food/food.create.style';
 import { Button } from 'primereact/button';
@@ -13,13 +13,15 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Toast } from 'primereact/toast';
 import { settingsTypes } from '../../store/types/settings.type';
 import { i18n } from '../../language';
+import {useRouter} from 'next/router';
+import { Dropdown } from 'primereact/dropdown';
 
 const index = () => {
   const dispatch = useDispatch();
   const toast = useRef(null);
-  
+  const [lang, setLang] = useState('en');
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const router = useRouter();
   const res = useSelector((state: RootState) => state.listSettings);
   const { loading, success, settings } = res;
 
@@ -112,6 +114,7 @@ const index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
+      console.log(data)
       dispatch(updateSettings(data));
       dispatch({type:settingsTypes.SETTINGS_UPDATE_RESET})
     },
@@ -129,6 +132,7 @@ const index = () => {
 
   useEffect(() => {
     if (success && settings) {
+     
       formik.values.app_name = settings.app_name;
       formik.values.time_zone = settings.time_zone;
       formik.values.currency_code = settings.currency_code;
@@ -160,7 +164,6 @@ const index = () => {
       formik.values.is_razorpay_active = settings.is_razorpay_active;
       formik.values.razorpay_client_key = settings.razorpay_client_key;
       formik.values.razorpay_secret_key = settings.razorpay_secret_key;
-
       if(successUpdate){
         toast.current.show({severity: 'success', summary: 'Success', detail: 'Settings Updated Successfully'});
       }
@@ -168,6 +171,11 @@ const index = () => {
       dispatch(listSettings());
     }
   }, [dispatch, settings, success, loading, successUpdate]);
+
+  const setLanguage = (e) => {
+    dispatch(setAppLanguage(e.value))
+    router.reload()
+  }
 
   const GeneralSettings = () => {
     return (
@@ -311,6 +319,21 @@ const index = () => {
             })}
           ></label>
           {getFormErrorMessage('delivery_charge')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+            <h4>{i18n.t('selectLanguage')}</h4>
+            <Dropdown
+                id="language"
+                name="language"
+                options={[
+                  {value: 'en', label:'English'}, 
+                  {value: 'ar', label:'اَلْعَرَبِيَّةُ'}, 
+                  {value: 'ru', label:'русский'}
+                ]}
+                value={settings.language}
+                onChange={setLanguage}
+              >
+            </Dropdown>
         </div>
       </>
     );

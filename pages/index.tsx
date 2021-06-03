@@ -9,7 +9,6 @@ import {ProgressSpinner} from 'primereact/progressspinner'
 import { i18n } from "../language";
 
 const Index = (props) => {
-
     const res = useSelector((state:RootState) => state.dashboardReport)
     const {loading, success, reportData} = res
     const dispatch = useDispatch()

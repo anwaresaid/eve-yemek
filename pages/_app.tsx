@@ -11,8 +11,10 @@ import { Provider } from "react-redux";
 import store from "../store/store";
 import auth from "../helpers/core/auth";
 import Error from "next/error";
+import { i18n } from "../language";
 
 function MyApp(props) {
+    
     const [loggedIn, setLoggedIn] = useState(false);
     const [error, setError] = useState(false);
     const [authCheckFinish, setAuthCheckFinish] = useState(false);
