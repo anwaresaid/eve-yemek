@@ -13,7 +13,7 @@ export const Container = styled.div`
     display:flex;
     flex-direction: column;
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
-    transition: all 0.5s linear;
+    transition: all 0.25s ease-in-out;
     transform-origin: 1px;
     z-index: 3;
 /* 

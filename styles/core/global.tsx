@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         margin-left:${vars.sidebar_left_margin}px;
         transition-property: margin-left;
-        transition:  all 0.5s linear;
+        transition:  all 0.25s ease-in-out;
         z-index:2;
 
     }
@@ -52,7 +52,7 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         z-index: 1037;
         margin-left:0;
-        transition:  all 0.5s linear;
+        transition:  all 0.25s ease-in-out;
     }
 
     .main-context-showBar{
@@ -61,14 +61,14 @@ const GlobalStyle = createGlobalStyle`
         background:#f4f4f4;
         margin-left:${vars.sidebar_left_margin}px;
         padding:25px;
-        transition:  all 0.5s linear;
+        transition:  all 0.25s ease-in-out;
     }
     .main-context-hideBar{
         min-height:100vh;
         margin-top:65px;
         background:#f4f4f4;
         padding:25px;
-        transition:  all 0.5s linear;
+        transition:  all 0.25s ease-in-out;
     }
 
 
