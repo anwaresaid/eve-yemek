@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Menu } from "primereact/menu";
+import { PanelMenu } from "primereact/panelmenu";
 import Link from "next/link";
 import * as S from "./style";
 import auth from "../../helpers/core/auth";
@@ -13,12 +13,13 @@ const Sidebar = (props) => {
 
         const activeClass =
             window.location.pathname === item.url ? " p-menuitem-active" : "";
-
+        
         return (
-            <Link href={item.url || "#"}>
+            <Link href={item.url || "#"} >
                 <a
                     className={options.className + activeClass}
                     onClick={options.onClick}
+                    style={{background: 'white', boxShadow: 'none'}}
                 >
                     {options?.iconClassName !== "p-menuitem-icon" ? (
                         <span className={options.iconClassName}></span>
@@ -59,7 +60,7 @@ const Sidebar = (props) => {
                         <S.TopLogoContainer>
                             <img src="/images/logos/eve-yemek-05.png" />
                         </S.TopLogoContainer>
-                        <Menu model={initMenus} />
+                        <PanelMenu model={initMenus} />
                     </S.Container>
                 </>
             );
