@@ -133,6 +133,7 @@ export const translations = {
   taxPercentage: "النسبة الضريبية",
   deliveryFeeApplicable: "يوجد تكلفة توصيل",
   deliveryFee: "تكلفة التوصيل",
+  selectLanguage: "إختراللغة",
 
   notifications: "إشعارات",
 
