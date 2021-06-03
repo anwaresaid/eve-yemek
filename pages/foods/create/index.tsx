@@ -80,8 +80,8 @@ export const Index = () => {
             if (!data.description) {
                 errors.description = 'description is required.';
             }
-            if (!data.file) {
-                errors.file = 'Image is required.';
+            if (!data.image) {
+                errors.image = 'Image is required.';
             }
 
             if (!data.categoryName) {
@@ -184,7 +184,7 @@ export const Index = () => {
                             <StandardFileUpload 
                                     totalSize={totalSize} 
                                     setTotalSize={setTotalSize} 
-                                    setFile={(file)=>{formik.values.file=file}}
+                                    setFile={(image)=>{formik.values.image=image}}
                                     showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
                                     >   
                             </StandardFileUpload>

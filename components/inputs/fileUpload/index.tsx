@@ -23,7 +23,7 @@ const StandardFileUpload = (props) => {
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
-        props.setFile(e.files[0])
+        props.setFile(e.files[0]?.objectURL)
         
         e.files.forEach(file => {
             _totalSize += (file.size || 0);
