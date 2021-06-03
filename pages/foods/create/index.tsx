@@ -24,7 +24,6 @@ import InputContainer from '../../../components/inputs/inputContainer';
 
 export const Index = () => {
 
-    const [totalSize, setTotalSize] = useState(0);
     const toast = useRef(null);
     const [addonsName, setAddonsName] = useState(null);
     const [foodCategoryName, setFoodCategoryName] = useState(null);
@@ -80,8 +79,8 @@ export const Index = () => {
             if (!data.description) {
                 errors.description = 'description is required.';
             }
-            if (!data.file) {
-                errors.file = 'Image is required.';
+            if (!data.image) {
+                errors.image = 'Image is required.';
             }
 
             if (!data.categoryName) {
@@ -180,13 +179,11 @@ export const Index = () => {
                             {getFormErrorMessage('description')}
                         </div>
                     </div>
-                       <InputContainer name="file" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
+                       <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
                             <StandardFileUpload 
-                                    totalSize={totalSize} 
-                                    setTotalSize={setTotalSize} 
-                                    setFile={(file)=>{formik.values.file=file}}
+                                    setFile={(image)=>{formik.values.image=image}}
                                     showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                                    >   
+                                >   
                             </StandardFileUpload>
                        </InputContainer>
                     <div className="p-fluid">
