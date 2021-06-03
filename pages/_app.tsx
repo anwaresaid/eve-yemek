@@ -13,7 +13,6 @@ import auth from "../helpers/core/auth";
 import Error from "next/error";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import vars from "../styles/core/variables";
 
 function MyApp(props) {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -99,7 +98,6 @@ function MyApp(props) {
 
         return <props.Component {...props.pageProps} />;
     };
-    console.log(props);
     return (
         <>
             <Head>
