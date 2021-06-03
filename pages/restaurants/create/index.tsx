@@ -24,7 +24,6 @@ import InputContainer from '../../../components/inputs/inputContainer';
 
     const CreateRestaurants = () => {
 // settign variables
-    const [totalSize, setTotalSize] = useState(0);
     const toast = useRef(null);
     const [resOwnersName, setResOwnersName] = useState([" "]);
     const restaurantCreate = useSelector((state:RootState) => state.createRestaurant);
@@ -96,8 +95,8 @@ import InputContainer from '../../../components/inputs/inputContainer';
             if (!data.description) {
                 errors.description = 'description is required.';
             }
-            if (!data.file) {
-                errors.file = 'Image is required.';
+            if (!data.image) {
+                errors.image = 'Image is required.';
             }
 
             if (!data.phone) {
@@ -176,13 +175,12 @@ import InputContainer from '../../../components/inputs/inputContainer';
             {
                 formik.values.longtitude = formik.values.longtitudeInt?.toString();
             }
+            
             return errors;
         },
         onSubmit: (data:any) => {
-            // setFormData(data);
-            // setShowMessage(true);
+            console.log(data)
             dispatch(createRestaurant(data));
-
         }
     });
 
@@ -218,8 +216,6 @@ import InputContainer from '../../../components/inputs/inputContainer';
         { name: 'Paris', code: 'PRS' }
     ];
 
-
-//image upload functions
     return (
         <div>
             <h1>Oluştur</h1>
@@ -248,13 +244,11 @@ import InputContainer from '../../../components/inputs/inputContainer';
                         </div>
                     </div>
                     <div className="p-field p-col-12">
-                        <InputContainer name="file" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
+                        <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
                                 <StandardFileUpload 
-                                        totalSize={totalSize} 
-                                        setTotalSize={setTotalSize} 
-                                        setFile={(file)=>{formik.values.file=file}}
+                                        setFile={(image)=>{formik.values.image=image}}
                                         showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                                        >   
+                                    >   
                                 </StandardFileUpload>
                         </InputContainer>
                     </div>

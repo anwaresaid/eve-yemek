@@ -3,49 +3,50 @@ import { Button } from "primereact/button";
 import { FileUpload } from "primereact/fileupload";
 import { ProgressBar } from "primereact/progressbar";
 import { Tag } from "primereact/tag";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 const StandardFileUpload = (props) => {
 
+    const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef(null);
 
     const onTemplateSelect = (e:any) => {
-        let _totalSize = props.totalSize;
+        let _totalSize = totalSize;
         // e.files.map(file => {
         //     _totalSize += file.size;
         // });
         for(let i = 0 ; i<e.files.length;i++){
             _totalSize += e.files[i].size;
         }
-        props.setTotalSize(_totalSize);
+        setTotalSize(_totalSize);
 
     }
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
         props.setFile(e.files[0]?.objectURL)
-        
+
         e.files.forEach(file => {
             _totalSize += (file.size || 0);
         });
 
-        props.setTotalSize(_totalSize);
+        setTotalSize(_totalSize);
         props.showSuccess()
     }
 
     const onTemplateRemove = (file, callback) => {
-        props.setTotalSize(props.totalSize - file.size);
+        setTotalSize(totalSize - file.size);
         callback();
     }
 
     const onTemplateClear = () => {
-        props.setTotalSize(0);
+        setTotalSize(0);
     }
 
     const headerTemplate = (options) => {
         const { className, chooseButton, uploadButton, cancelButton } = options;
-        const value = props.totalSize/20000;
-        const formatedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(props.totalSize) : '0 B';
+        const value = totalSize/20000;
+        const formatedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
 
         return (
             <div className={className} style={{backgroundColor: 'transparent', display: 'flex', alignItems: 'center'}}>
@@ -86,6 +87,7 @@ const StandardFileUpload = (props) => {
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
     
+    console.log("Standard File Upload")
     return (
         <>
             <FileUpload ref={fileUploadRef} id="file" name="file" url="./" multiple accept="image/*" maxFileSize={1000000}
