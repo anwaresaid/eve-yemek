@@ -12,6 +12,17 @@ export const Container = styled.div`
     padding:0 8px;
     display:flex;
     flex-direction: column;
+    transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
+    transition: all 0.5s linear;
+    transform-origin: 1px;
+    z-index: 3;
+/* 
+    @media screen and (max-width: 760){
+      
+        
+    } */
+
+
 
     .p-menu{
         width:100%;
@@ -44,7 +55,7 @@ export const TopLogoContainer = styled.div`
     position:relative;
     padding:10px 35px;
     border-bottom:1px solid #ccc;
-
+  
     img{
         max-width:100%;
         max-height:100%;

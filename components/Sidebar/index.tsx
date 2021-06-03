@@ -5,7 +5,7 @@ import * as S from "./style";
 import auth from "../../helpers/core/auth";
 import { allMenuItems } from "../../helpers/constants";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
     const [initMenus, setInitMenus] = useState([]);
 
     const menuTemplate = (item, options) => {
@@ -55,7 +55,7 @@ const Sidebar = () => {
         if (initMenus.length > 0) {
             return (
                 <>
-                    <S.Container>
+                    <S.Container open = {props.open}>
                         <S.TopLogoContainer>
                             <img src="/images/logos/eve-yemek-05.png" />
                         </S.TopLogoContainer>
