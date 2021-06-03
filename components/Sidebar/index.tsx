@@ -60,7 +60,7 @@ const Sidebar = (props) => {
                         <S.TopLogoContainer>
                             <img src="/images/logos/eve-yemek-05.png" />
                         </S.TopLogoContainer>
-                        <PanelMenu className="panelMenu" model={initMenus} />
+                        <PanelMenu className="p-menu" model={initMenus} />
                     </S.Container>
                 </>
             );

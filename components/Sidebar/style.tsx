@@ -49,10 +49,6 @@ export const Container = styled.div`
             color:#fff!important;
         }
     }
-
-    .panelMenu{
-        overflow-y: auto;
-    }
 `;
 
 export const TopLogoContainer = styled.div`
