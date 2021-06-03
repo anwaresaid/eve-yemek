@@ -134,7 +134,6 @@ export const translations = {
   taxPercentage: 'Tax Percentage',
   deliveryFeeApplicable: 'Delivery Fee Applicable',
   deliveryFee: 'Delivery Fee',
-  selectLanguage: 'Select Language',
 
   notifications: 'Notifications',
 
