@@ -1,8 +1,8 @@
-import { mobileTranslate } from "./mobileTranslate";
+import { translations } from "./translations";
 
 const ru = {
   translations: {
-    ...mobileTranslate
+    ...translations
   },
 };
 
