@@ -60,7 +60,7 @@ const Sidebar = (props) => {
                         <S.TopLogoContainer>
                             <img src="/images/logos/eve-yemek-05.png" />
                         </S.TopLogoContainer>
-                        <PanelMenu model={initMenus} style={{overflowY:'auto'}} />
+                        <PanelMenu className="panelMenu" model={initMenus} />
                     </S.Container>
                 </>
             );
