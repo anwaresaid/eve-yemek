@@ -179,7 +179,6 @@ import InputContainer from '../../../components/inputs/inputContainer';
             return errors;
         },
         onSubmit: (data:any) => {
-            console.log(data)
             dispatch(createRestaurant(data));
         }
     });
