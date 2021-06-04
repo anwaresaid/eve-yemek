@@ -3,7 +3,7 @@ import { settingsTypes } from '../types/settings.type';
 
 const initialState = [];
 
-export const listSettingsReducer = (state = {settings:{language:i18n.language}}, action) => {
+export const listSettingsReducer = (state = {settings:{}}, action) => {
   switch (action.type) {
     case settingsTypes.SETTINGS_LIST_REQUEST:
       return {...state, loading: true };
@@ -20,11 +20,6 @@ export const listSettingsReducer = (state = {settings:{language:i18n.language}},
       return {
         loading: false,
         error: action.payload,
-      };
-
-    case settingsTypes.SET_LANGUAGE:
-      return {
-        settings: {...state.settings, language: action.payload}
       };
 
     default:

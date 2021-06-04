@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import { listSettings, setAppLanguage, updateSettings } from '../../store/actions/settings.action';
+import { listSettings, updateSettings } from '../../store/actions/settings.action';
 import { TabView, TabPanel } from 'primereact/tabview';
 import * as S from '../../styles/food/create-food/food.create.style';
 import { Button } from 'primereact/button';
@@ -19,7 +19,6 @@ import { Dropdown } from 'primereact/dropdown';
 const index = () => {
   const dispatch = useDispatch();
   const toast = useRef(null);
-  const [lang, setLang] = useState('en');
   const [activeIndex, setActiveIndex] = useState(0);
   const router = useRouter();
   const res = useSelector((state: RootState) => state.listSettings);
@@ -171,11 +170,6 @@ const index = () => {
       dispatch(listSettings());
     }
   }, [dispatch, settings, success, loading, successUpdate]);
-
-  const setLanguage = (e) => {
-    dispatch(setAppLanguage(e.value))
-    router.reload()
-  }
 
   const GeneralSettings = () => {
     return (
@@ -331,8 +325,8 @@ const index = () => {
                   {value: 'ru', label:'русский'},
                   {value: 'tr', label:'Türkçe'}
                 ]}
-                value={settings.language}
-                onChange={setLanguage}
+                value={i18n.language}
+                onChange={(e) => {i18n.changeLanguage(e.value); router.reload();}}
               >
             </Dropdown>
         </div>

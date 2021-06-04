@@ -52,12 +52,3 @@ export const updateSettings = (data: any) => async (dispatch, getState) => {
     });
   }
 };
-
-export const setAppLanguage = (lang) => async (dispatch, getState) => {
-  i18n.changeLanguage(lang)
-  dispatch({
-    type: settingsTypes.SET_LANGUAGE,
-    payload: lang
-  });
-  
-};
