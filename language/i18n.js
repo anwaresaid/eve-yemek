@@ -15,7 +15,7 @@ i18n.use(LanguageDetector).init({
   debug: NODE_ENV === 'development',
 
   // have a common namespace used around the full app
-  ns: ['translations'],
+  ns: 'translations',
   defaultNS: 'translations',
 
   keySeparator: false, // we use content as keys
