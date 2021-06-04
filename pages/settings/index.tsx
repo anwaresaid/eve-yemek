@@ -328,7 +328,8 @@ const index = () => {
                 options={[
                   {value: 'en', label:'English'}, 
                   {value: 'ar', label:'اَلْعَرَبِيَّةُ'}, 
-                  {value: 'ru', label:'русский'}
+                  {value: 'ru', label:'русский'},
+                  {value: 'tr', label:'Türkçe'}
                 ]}
                 value={settings.language}
                 onChange={setLanguage}
