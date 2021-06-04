@@ -25,7 +25,6 @@ import { i18n } from '../../../language';
 
 export const Index = () => {
 
-    const [totalSize, setTotalSize] = useState(0);
     const toast = useRef(null);
     const [addonsName, setAddonsName] = useState(null);
     const [foodCategoryName, setFoodCategoryName] = useState(null);
@@ -81,8 +80,9 @@ export const Index = () => {
             if (!data.description) {
                 errors.description = i18n.t('isRequired', {input: i18n.t('description')});
             }
-            if (!data.file) {
-                errors.file = i18n.t('isRequired', {input: i18n.t('image')});;
+
+            if (!data.image) {
+                errors.image = 'Image is required.';
             }
 
             if (!data.categoryName) {
@@ -181,13 +181,12 @@ export const Index = () => {
                             {getFormErrorMessage('description')}
                         </div>
                     </div>
-                       <InputContainer name="file" label={i18n.t('images')} getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
+
+                       <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
                             <StandardFileUpload 
-                                    totalSize={totalSize} 
-                                    setTotalSize={setTotalSize} 
-                                    setFile={(file)=>{formik.values.file=file}}
-                                    showSuccess={()=>{toast.current.show({severity: 'info', summary: i18n.t('success'), detail: i18n.t('fileUploaded')});}}
-                                    >   
+                                    setFile={(image)=>{formik.values.image=image}}
+                                    showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
+                                >   
                             </StandardFileUpload>
                        </InputContainer>
                     <div className="p-fluid">

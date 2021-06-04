@@ -12,12 +12,15 @@ import store from "../store/store";
 import auth from "../helpers/core/auth";
 import Error from "next/error";
 import { i18n } from "../language";
+import { Button } from "primereact/button";
+import { Card } from "primereact/card";
 
 function MyApp(props) {
     
     const [loggedIn, setLoggedIn] = useState(false);
     const [error, setError] = useState(false);
     const [authCheckFinish, setAuthCheckFinish] = useState(false);
+    const [hideBar, setHideBar] = useState(true);
 
     useEffect(() => {
         auth.init();
@@ -68,19 +71,35 @@ function MyApp(props) {
         }
 
         if (loggedIn) {
-            return (
-                <>
-                    <Sidebar />
-                    <div className="main-context">
-                        <props.Component {...props.pageProps} />
-                    </div>
-                </>
-            );
+                return (
+                    <>  
+                        <Sidebar open={hideBar} setOpen={setHideBar}  />
+                        
+                            {hideBar?
+                            <>
+                            <Card className="main-context-card-showBar">
+                                <Button icon="pi pi-bars" className=" p-button-secondary" onClick={()=> {setHideBar(!hideBar)}}/>
+                            </Card>
+                        <div className="main-context-showBar">
+                            <props.Component {...props.pageProps} />
+                        </div >
+                            </>
+                        :
+                        <>
+                         <Card className="main-context-card-hideBar">
+                                <Button icon="pi pi-bars" className=" p-button-secondary" onClick={()=> {setHideBar(!hideBar)}}/>
+                            </Card>
+                            <div className="main-context-hideBar">
+                            <props.Component {...props.pageProps} />
+                        </div >
+                        </>
+        }            
+                    </>
+                );
         }
 
         return <props.Component {...props.pageProps} />;
     };
-
     return (
         <>
             <Head>
@@ -95,7 +114,7 @@ function MyApp(props) {
             </Head>
             <Provider store={store}>
                 <div className="app">
-                    <GlobalStyle />
+                    <GlobalStyle open={hideBar} setOpen={setHideBar}/>
 
                     {renderComp()}
                 </div>

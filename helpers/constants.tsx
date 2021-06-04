@@ -29,6 +29,7 @@ export const allMenuItems:any = [
     ] },
     { label:i18n.t("coupons"),                expanded: true, items: [
         { label:i18n.t("couponList"),             url:"/coupons",   roles:["admin"]       },
+         { label:i18n.t("createCoupon"),             url:"/coupons/create",   roles:["admin"]       },
     ] },
     { label:i18n.t("accountSettings"), expanded: true, items: [
         { label:i18n.t("customers"),  url:"/users/customers", roles:["admin"] },
@@ -40,5 +41,7 @@ export const allMenuItems:any = [
     ] },
     { separator:true },
     { label:i18n.t("settings"),                 url:"/settings",   roles:["admin"] },
+    { label:i18n.t("transfers"), url:"/transfers",  roles:["admin"] },
     { label:i18n.t("logout"),               url:"/auth/logout",   roles:["admin", "restaurant_owner"] }
+
 ];
