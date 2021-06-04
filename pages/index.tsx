@@ -34,7 +34,7 @@ const Index = (props) => {
         ]
     };
     return (
-        <div>
+        <div className="ContainerPanel">
             {loading ? <ProgressSpinner /> :
             <S.DashboardWrapper>
             <h1>Kontrol Paneli</h1>

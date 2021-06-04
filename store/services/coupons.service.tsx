@@ -5,4 +5,8 @@ export default class CouponService {
     const { data } = await axios.get('https://dev.eve-yemek.com/coupon');
     return data;
   }
+  async createCoupon(coupon) {
+    const { data } = await axios.post('https://dev.eve-yemek.com/coupon', coupon);
+    return data;
+  }
 }

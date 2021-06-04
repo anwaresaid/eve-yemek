@@ -20,12 +20,55 @@ const GlobalStyle = createGlobalStyle`
     .app{
         
     }
+    .p-button-secondary{
+        margin-left:10px;
+    }
+    .main-context-card-showBar{
+        position:fixed ;
+        border-radius: 0px;
+        top:0;
+        width: 100%;
+        left:0;
+        height: 65px;
+        align-items: center;
+        display: flex;
+        margin-left:${vars.sidebar_left_margin}px;
+        transition-property: margin-left;
+        transition:  all 0.25s ease-in-out;
+        z-index:2;
 
-    .main-context{
+    }
+    .ContainerPanel{
+        margin-top:-30px;
+    }
+    .main-context-card-hideBar{
+        position:fixed ;
+        border-radius: 0px;
+        top:0;
+        width: 100%;
+        left:0;
+        height: 65px;
+        align-items: center;
+        display: flex;
+        z-index: 1037;
+        margin-left:0;
+        transition:  all 0.25s ease-in-out;
+    }
+
+    .main-context-showBar{
         min-height:100vh;
+        margin-top:65px;
         background:#f4f4f4;
         margin-left:${vars.sidebar_left_margin}px;
         padding:25px;
+        transition:  all 0.25s ease-in-out;
+    }
+    .main-context-hideBar{
+        min-height:100vh;
+        margin-top:65px;
+        background:#f4f4f4;
+        padding:25px;
+        transition:  all 0.25s ease-in-out;
     }
 
 
@@ -36,6 +79,10 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1.2;
         color: inherit;
     }
+/* 
+    @media screen and (max-width: 760px){
+
+    } */
 
 `;
 
