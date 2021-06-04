@@ -27,6 +27,7 @@ export const translations = {
   customerServiceReps: 'Service Representatives',
   createUser: 'Create User',
   settings: 'Settings',
+  transfers: 'Transfers',
   logout: 'Logout',
 
   //On Dashboard

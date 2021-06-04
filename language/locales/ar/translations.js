@@ -27,6 +27,7 @@ export const translations = {
   customerServiceReps: "مندوبي الخدمات",
   createUser: "إنشاء مستخدم",
   settings: "إعدادات",
+  transfers: "تحويل",
   logout: "تسجيل خروج",
 
   //On Dashboard

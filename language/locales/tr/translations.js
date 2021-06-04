@@ -27,6 +27,7 @@ export const translations = {
   customerServiceReps: 'Müşteri Sorumlusu',
   createUser: 'Kullanıcı Oluştur',
   settings: 'Ayarlar',
+  transfers: 'Transferler',
   logout: 'Çıkış Yap',
 
   //On Dashboard

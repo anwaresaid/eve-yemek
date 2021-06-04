@@ -12,6 +12,7 @@ import { Checkbox } from "primereact/checkbox";
 import { connect, useSelector } from "react-redux";
 
 import userActions from "../../store/actions/user.action";
+import { i18n } from "../../language";
 
 const Login = (props) => {
 	const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ const Login = (props) => {
 								<div className='p-field p-col-12 p-md-12'>
 									<InputText 
 										required 
-										placeholder='E-Mail' 
+										placeholder={i18n.t('email')}
 										name='email'
 										type="email"
 										value={email}
@@ -54,7 +55,7 @@ const Login = (props) => {
 									<Password
 										required
 										toggleMask
-										placeholder='Password'
+										placeholder={i18n.t('password')}
 										feedback={false}
 										name='password'
 										value={password}

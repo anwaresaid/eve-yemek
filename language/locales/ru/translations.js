@@ -27,6 +27,7 @@ export const translations = {
   customerServiceReps: 'Сервисные представители',
   createUser: 'Создать пользователя',
   settings: 'Настройки',
+  transfers: 'Переводы',
   logout: 'Выйти',
 
 
