@@ -17,6 +17,8 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
+
+
     .app{
         
     }
@@ -38,6 +40,19 @@ const GlobalStyle = createGlobalStyle`
         z-index:2;
 
     }
+        /* .ContainerPanel{
+            margin-left:-250px;
+        }
+        
+        .main-context-hideBar{
+            min-height:100vh;
+            margin-top:65px;
+            background:#f4f4f4;
+            padding:25px;
+            z-index: 1;
+            margin-left:0px;
+        } */
+        
     .ContainerPanel{
         margin-top:-30px;
     }
@@ -62,6 +77,16 @@ const GlobalStyle = createGlobalStyle`
         margin-left:${vars.sidebar_left_margin}px;
         padding:25px;
         transition:  all 0.25s ease-in-out;
+        transition-property: margin-left;
+        z-index: 1;
+
+    }
+    @media screen and (max-width:760px){
+        .main-context-showBar{
+            /* display:none; */
+            margin-left:0px;
+            transition:  all 0.5s ease-in-out;
+        }
     }
     .main-context-hideBar{
         min-height:100vh;
@@ -69,6 +94,15 @@ const GlobalStyle = createGlobalStyle`
         background:#f4f4f4;
         padding:25px;
         transition:  all 0.25s ease-in-out;
+        z-index: 1;
+
+    }
+
+    @media screen and (max-width:760px){
+        .main-context-hideBar{
+            /* display:none; */
+            transition:  all 0.25s ease-in-out;
+        }
     }
 
 
