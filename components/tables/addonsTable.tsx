@@ -22,15 +22,7 @@ const AddonsTable = (props) => {
         return categoryName;
          }
 
-    const header =(
-        <div className="table-header">
-            List of Addons
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-            </span>
-        </div>
-    )
+ 
     
     const columns = [
         {field: 'id', header: 'ID'},

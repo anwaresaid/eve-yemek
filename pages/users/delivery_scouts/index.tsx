@@ -17,7 +17,7 @@ const deliveryScoutList = () => {
      }, [dispatch]);
 
     return (
-        <div>
+        <div id="deliveryScoutsTable">
             {!loading && success && <UsersTable users={deliveryScouts.items} editPath="delivery_scouts"></UsersTable>}
             {!loading && !success && <h4>Kargocuların verileri alınamadı!</h4>}
             {loading && <ProgressSpinner/>}

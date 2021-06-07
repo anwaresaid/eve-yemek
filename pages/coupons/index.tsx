@@ -17,7 +17,7 @@ const index = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div id="couponsTabe">
       {!loading && coupons && <CouponsTable coupons={coupons.items} />}
       {loading && <ProgressSpinner />}
     </div>

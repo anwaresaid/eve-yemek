@@ -16,15 +16,6 @@ const AddOnCategoryTable = (props) => {
     const router = useRouter();
     const path = 'addon_categories';
 
-    const header =(
-        <div className="table-header">
-            List of Addon Categories
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-            </span>
-        </div>
-    )
 
    
     const columns = [

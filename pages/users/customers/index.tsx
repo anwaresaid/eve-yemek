@@ -17,7 +17,7 @@ const customerList = () => {
      }, [dispatch]);
      
     return (
-        <div>
+        <div id="customersTable">
             {!loading && success && <UsersTable users={customers.items} editPath="customers"></UsersTable>}
             {!loading && !success && <h4>Müşterilerin verileri alınamadı!</h4>}
             {loading && <ProgressSpinner/>}
