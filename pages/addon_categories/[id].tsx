@@ -112,14 +112,15 @@ export const AddonCategoryEdit = () => {
                 />
                 <label
                   htmlFor='name'
+                  id="errorName"
                   className={classNames({
                     'p-error': isFormFieldValid('name'),
                   })}
                 ></label>
                 {getFormErrorMessage('name')}
               </div>
-              <div className='p-field'>
-                <h4>Tur</h4>
+              <div id="enumDiv"className='p-field'>
+                <h4 id="enumHeader">Tur</h4>
                 <InputText
                   id='enum'
                   name='enum'
@@ -132,6 +133,7 @@ export const AddonCategoryEdit = () => {
                 />
                 <label
                   htmlFor='enum'
+                  id="errorEnum"
                   className={classNames({
                     'p-error': isFormFieldValid('enum'),
                   })}
@@ -140,7 +142,7 @@ export const AddonCategoryEdit = () => {
               </div>
             </div>
             <S.SubmitBtn>
-              <Button type='submit' label='Submit' />
+              <Button id="btnUpdate" type='submit' label='Update' />
             </S.SubmitBtn>
           </form>
         </S.ContainerCard>
