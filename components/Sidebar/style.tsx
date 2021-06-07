@@ -16,19 +16,13 @@ export const Container = styled.div`
     transition: all 0.25s ease-in-out;
     transform-origin: 1px;
     z-index: 3;
-/* 
-    @media screen and (max-width: 760){
-      
-        
-    } */
-
-
 
     .p-panelmenu{
         width:100%;
         height:100%;
         border:0!important;
         overflow-y:auto;
+        background:white;
     }
 
     .p-menuitem-link{
@@ -55,7 +49,7 @@ export const TopLogoContainer = styled.div`
     position:relative;
     padding:10px 35px;
     border-bottom:1px solid #ccc;
-  
+    background-color:white;
     img{
         max-width:100%;
         max-height:100%;
