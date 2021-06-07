@@ -1,6 +1,6 @@
-
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import StandardTable from '../StandardTable';
+import * as S from '../../styles/food/food.list.style'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import editButton from "../InTableComponents/editButton";
@@ -8,48 +8,53 @@ import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
 
-const AddonsTable = (props) => {
+const RestaurantsTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
-    const path= 'addons';
-    
     const router = useRouter();
+    const path = 'restaurants';
 
-    const CategoryBodyTemplate = (rowData)  => {
-        let categoryName = props.addonCat.filter(cat => {return cat.id.localeCompare(rowData.addOn_category_id)==0;})
-        return categoryName;
-         }
 
+    const imageBodyTemplate = (rowData) => {
+        return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
+   }
+ 
     const header =(
         <div className="table-header">
-            List of Addons
+            List of restaurants
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
             </span>
         </div>
     )
-    
+
+   
+   
     const columns = [
-        {field: 'id', header: 'ID'},
+        {field: 'id', header: "ID"},
+        {field: 'image', header: "Resim", body: imageBodyTemplate},
         {field: 'name', header: 'Ad'},
-        {field: 'add_on_category_id', header: 'Kategori', body: CategoryBodyTemplate},
-        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
-        {field: 'active', header: 'Aktif', body: (rowData)=>activeTag(rowData.active)},
-        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'owner.name', header: 'Sahibinin Adı'},
+        {field: '', header: 'Ulke'},
+        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
+        {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
-    
-    return (
-        <StandardTable 
-            header={Header(setGlobalFilter,"Addons")}
-            columns={columns} 
-            value={props.addons}  
-            globalFilter={globalFilter} 
-            emptyMessage="No users found" >     
+
+    return(
+        
+        <StandardTable
+
+                    header={Header(setGlobalFilter,"restaurants")}
+                    columns={columns} 
+                    value={props.restaurants}  
+                    globalFilter={globalFilter} 
+                    emptyMessage="No food found" >  
         </StandardTable>
     )
+
 }
 
-export default AddonsTable;
+export default RestaurantsTable;

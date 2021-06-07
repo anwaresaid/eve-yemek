@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import StandardTable from '../StandardTable'
+import StandardTable from '../StandardTable';
+import * as S from '../../styles/food/food.list.style'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
-import Header from "../InTableComponents/Header";
+import { priceBodyTemplate } from "../InTableComponents/price";
+import Header from '../InTableComponents/Header';
 
-const OrdersTable = (props) => {
+const AddOnCategoryTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const router = useRouter();
-    const path = 'orders'; 
+    const path = 'addon_categories';
 
     const header =(
         <div className="table-header">
-            List of Users
+            List of Addon Categories
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
@@ -24,24 +26,25 @@ const OrdersTable = (props) => {
         </div>
     )
 
+   
     const columns = [
-        {field: 'id', header: 'ID'},
-        {field: 'restaurant.name', header: 'Restoran'},
-        {field: 'status', header: 'Durum', body: (rowData)=>activeTag(rowData.status === "ACTIVE")},
-        {field: 'total_amount', header: 'Toplam'},
-        {field: 'createdAt', header: 'Sipariş Zamanı'}, // in days
-        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'id', header: "ID"},
+        {field: 'name', header: 'Ad'},
+        {field: 'enum', header: 'Tur'},
+        {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
-    return (
-        <StandardTable 
-            header={Header(setGlobalFilter,"live orders")}
-            columns={columns} 
-            value={props.orders}  
-            globalFilter={globalFilter} 
-            emptyMessage="No orders found" >     
+    return(
+        
+        <StandardTable
+                    header={Header(setGlobalFilter,"addon Category")}
+                    columns={columns} 
+                    value={props.addonCategories}  
+                    globalFilter={globalFilter} 
+                    emptyMessage="No addon Categories found" >  
         </StandardTable>
     )
+
 }
 
-export default OrdersTable;
+export default AddOnCategoryTable;

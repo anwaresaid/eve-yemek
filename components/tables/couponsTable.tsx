@@ -13,7 +13,7 @@ const CouponsTable = (props) => {
   const router = useRouter();
 
   const columns = [
-    { field: '_id', header: 'ID' },
+    { field: 'id', header: 'ID' },
     { field: 'coupon_code', header: 'Kupon Kodu' },
     { field: 'name', header: 'Adi' },
     { field: 'description', header: 'Aciklama' },

@@ -66,6 +66,7 @@ export const AddonCategoryEdit = () => {
   });
 
   useEffect(() => {
+    if(router.query.id){
     if (!detailsSuccess || router.query.id !== addonCategory.id) {
       dispatch(getAddonCategoryDetails(router.query.id));
     }
@@ -87,9 +88,9 @@ export const AddonCategoryEdit = () => {
         router.push('/addon_categories');
       }
     }
-  }, [dispatch, detailsSuccess, addonCategory, successUpdate]);
-
-  return (
+  }
+  }, [dispatch, detailsSuccess, addonCategory, successUpdate,router.query.id]);
+    return (
     <div>
       <h1>Kategori Detayi</h1>
       <Toast ref={toast}></Toast>
