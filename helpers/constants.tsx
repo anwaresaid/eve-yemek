@@ -17,7 +17,7 @@ export const allMenuItems:any = [
         { label:"Kategori Listesi",       url:"/food_categories",        roles:["admin", "restaurant_owner"] },
         { label:"Kategori Oluştur",       url:"/food_categories/create", roles:["admin", "restaurant_owner"] }
     ] },
-    { label:"Eklentiler Kategorileri", expanded: true, items: [
+    { label:"Eklenti Kategorileri", expanded: true, items: [
         { label:"Eklenti Kategorisi Listesi",  url:"/addon_categories",        roles:["admin", "restaurant_owner"] },
         { label:"Eklenti Kategorisi Oluştur",  url:"/addon_categories/create", roles:["admin", "restaurant_owner"] }
     ] },

@@ -29,7 +29,7 @@ const OrdersTable = (props) => {
         {field: 'restaurant.name', header: 'Restoran'},
         {field: 'status', header: 'Durum', body: (rowData)=>activeTag(rowData.status === "ACTIVE")},
         {field: 'total_amount', header: 'Toplam'},
-        {field: 'createdAt', header: 'Sipariş Zamanı'}, // in days
+        {field: 'howLongAgo', header: 'Sipariş Zamanı'}, // in days
         {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
