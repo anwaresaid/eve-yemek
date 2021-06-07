@@ -111,7 +111,7 @@ export const Index = () => {
     }, [dispatch,router.query.id]);
     useEffect(() =>{
         if(addonCatSuccess&&success){
-            let catName =  addonCatlist.items.filter(data  => {return data._id.localeCompare(addon.addOn_category_id)==0;})
+            let catName =  addonCatlist.items.filter(data  => {return data.id.localeCompare(addon.add_on_category_id)==0;})
             formik.values.name = addon.name; 
             formik.values.addonCat = {name: catName.name};
             formik.values.price = addon.price;
