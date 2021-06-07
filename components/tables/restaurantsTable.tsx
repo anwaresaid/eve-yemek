@@ -47,7 +47,7 @@ const RestaurantsTable = (props) => {
         
         <StandardTable
 
-                    header={Header(setGlobalFilter,"Food")}
+                    header={Header(setGlobalFilter,"restaurants")}
                     columns={columns} 
                     value={props.restaurants}  
                     globalFilter={globalFilter} 
