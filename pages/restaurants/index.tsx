@@ -30,7 +30,6 @@ const Index = () => {
 
         }, [dispatch]);
 
-        console.log(restaurants);
     return (
         <div>
             {!loading && restaurants &&<RestaurantsTable restaurants={restaurants.items}></RestaurantsTable> }

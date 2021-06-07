@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import editButton from '../../components/InTableComponents/editButton';
 import imageBodyTemplate from '../../components/InTableComponents/Image/index';
+import Food_CategoriesTable from '../../components/tables/foodCategoryTable';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 
 const FoodCategoriesList = () => {
@@ -25,56 +27,11 @@ const FoodCategoriesList = () => {
     dispatch(listFoodCategory());
   }, [dispatch]);
 
-  const statusBodyTemplate = (rowData) => {
-    if (rowData.active == true) {
-      return (
-        <Tag className='p-mr-2' severity='success' value='True' rounded></Tag>
-      );
-    } else {
-      return <Tag severity='danger' value='False' rounded></Tag>;
-    }
-  };
-  // global filter
-  const header = (
-    <div className='table-header'>
-      Yemek Kategorileri Listesi
-      <span className='p-input-icon-left'>
-        <i className='pi pi-search' />
-        <InputText
-          type='search'
-          onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)}
-          placeholder='Ara'
-        />
-      </span>
-    </div>
-  );
-
   return (
     <>
-      <h1>Yemek Kategorileri</h1>
-      {foodCategoriesList ? (
-          <S.Table
-          value={foodCategoriesList.items}
-          removableSort
-          paginator
-          paginatorTemplate='CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
-          currentPageReportTemplate='{totalRecords} kayıttan {first} - {last} arasındaki kayıtlar gösteriliyor'
-          rows={10}
-          rowsPerPageOptions={[10, 20, 50]}
-          header={header}
-          className='p-datatable-restaurants'
-          globalFilter={globalFilter}
-          emptyMessage='Yemek kategorileri bulunamadı'
-        >
-          <Column field='_id' header='ID' sortable></Column>
-          <Column body={imageBodyTemplate} header='Resim' sortable></Column>
-          <Column field='name' header='Ad' sortable></Column>
-          <Column body={statusBodyTemplate} header='Aktif' sortable></Column>
-          <Column header='Islemler' body={(rowData)=>editButton(rowData,router,path)}></Column>
-        </S.Table>
-      ) : (
-          <h2>Loading</h2>
-      )}
+      {!loading && foodCategoriesList && <Food_CategoriesTable foodCategories={foodCategoriesList.items}></Food_CategoriesTable>}
+      {loading && <ProgressSpinner/>}
+        
     </>
   );
 };
