@@ -108,9 +108,6 @@ const Index = (props) => {
             </div>
 
             <Card subTitle='Son 7 günün siparişleri'>
-                <div className='view-report'>
-                    <a href="#">Raporu görüntüle</a>
-                </div>
                 <i className='pi pi-shopping-cart'>
                     <span>0 Sipariş</span>
                 </i>
