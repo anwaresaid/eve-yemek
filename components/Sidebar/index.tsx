@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Menu } from "primereact/menu";
+import { PanelMenu } from "primereact/panelmenu";
 import Link from "next/link";
 import * as S from "./style";
 import auth from "../../helpers/core/auth";
 import { allMenuItems } from "../../helpers/constants";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
     const [initMenus, setInitMenus] = useState([]);
 
     const menuTemplate = (item, options) => {
@@ -13,12 +13,13 @@ const Sidebar = () => {
 
         const activeClass =
             window.location.pathname === item.url ? " p-menuitem-active" : "";
-
+        
         return (
-            <Link href={item.url || "#"}>
+            <Link href={item.url || "#"} >
                 <a
                     className={options.className + activeClass}
                     onClick={options.onClick}
+                    style={{background: 'white', boxShadow: 'none'}}
                 >
                     {options?.iconClassName !== "p-menuitem-icon" ? (
                         <span className={options.iconClassName}></span>
@@ -55,11 +56,11 @@ const Sidebar = () => {
         if (initMenus.length > 0) {
             return (
                 <>
-                    <S.Container>
+                    <S.Container open = {props.open}>
                         <S.TopLogoContainer>
                             <img src="/images/logos/eve-yemek-05.png" />
                         </S.TopLogoContainer>
-                        <Menu model={initMenus} />
+                        <PanelMenu model={initMenus} />
                     </S.Container>
                 </>
             );

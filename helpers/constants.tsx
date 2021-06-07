@@ -27,6 +27,8 @@ export const allMenuItems:any = [
     ] },
     { label:"Kupon",                expanded: true, items: [
         { label:"Kupon Listesi",             url:"/coupons",   roles:["admin"]       },
+        { label:"Kupon Oluştur",             url:"/coupons/create",   roles:["admin"]       },
+
     ] },
     { label:"Hesap Ayarları", expanded: true, items: [
         { label:"Müşteriler",  url:"/users/customers", roles:["admin"] },
@@ -38,5 +40,6 @@ export const allMenuItems:any = [
     ] },
     { separator:true },
     { label:"Ayarlar",                 url:"/settings",   roles:["admin"] },
+    { label:"Transferler", url:"/transfers",  roles:["admin"] },
     { label:"Çıkış yap",               url:"/auth/logout",   roles:["admin", "restaurant_owner"] }
 ];
