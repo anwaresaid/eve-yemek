@@ -19,8 +19,19 @@ const Index = (props) => {
         
     },[dispatch])
 
+    const parseCounts = (counts) => {
+        if(!counts)
+            return
+        let out = []
+        for (let i of counts){
+            out[i._id] = i.count
+        }
+        out = Array.from(out, item => item || 0);
+        return out
+    }
+
     const lineChartData = {
-        labels: (reportData?.lastSevenDaysReport.order.days.length === 0) ? ["28(MockData)", "30", "1", "2", "3", "4", "5"] : reportData?.lastSevenDaysReport.order.days,
+        labels: reportData?.lastSevenDaysReport.order.days,
         datasets: [
             {
                 label: "Bu Hafta",
@@ -29,7 +40,7 @@ const Index = (props) => {
                 backgroundColor: "rgba(75,192,192,1)",
                 borderColor: "rgb(75, 192, 192)",
                 borderWidth: 2,
-                data: (reportData?.lastSevenDaysReport.order.counts.length === 0) ? [16, 2, 4, 6, 8, 10, 12] : reportData?.lastSevenDaysReport.order.counts
+                data: parseCounts(reportData?.lastSevenDaysReport.order.counts)
             }
         ]
     };
