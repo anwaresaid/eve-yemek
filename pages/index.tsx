@@ -24,7 +24,7 @@ const Index = (props) => {
             return
         let out = []
         for (let i of counts){
-            out[i._id] = i.count
+            out[i._id - 1] = i.count
         }
         out = Array.from(out, item => item || 0);
         return out
@@ -109,7 +109,7 @@ const Index = (props) => {
 
             <Card subTitle='Son 7 günün siparişleri'>
                 <i className='pi pi-shopping-cart'>
-                    <span>0 Sipariş</span>
+                    <span>{parseCounts(reportData?.lastSevenDaysReport.order.counts)?.reduce((a, b) => a + b, 0)} Sipariş</span>
                 </i>
                 <Line
                     type='number'
