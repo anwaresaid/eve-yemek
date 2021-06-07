@@ -91,15 +91,15 @@ export const AddonCategoryEdit = () => {
   }
   }, [dispatch, detailsSuccess, addonCategory, successUpdate,router.query.id]);
     return (
-    <div>
-      <h1>Kategori Detayi</h1>
-      <Toast ref={toast}></Toast>
+    <div id="edit_Add_On_Category">
+      <h1 id="editHeader">Kategori Detayi</h1>
+      <Toast id="toastMessage" ref={toast}></Toast>
       {!loading && detailsSuccess ? (
-        <S.ContainerCard>
-          <form onSubmit={formik.handleSubmit}>
+        <S.ContainerCard id="container">
+          <form id="editForm" onSubmit={formik.handleSubmit}>
             <div className='p-fluid'>
-              <div className='p-field'>
-                <h4>Kategori Adı</h4>
+              <div id="nameDiv" className='p-field'>
+                <h4 id="nameHeader">Kategori Adı</h4>
                 <InputText
                   id='name'
                   name='name'
