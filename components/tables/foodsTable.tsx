@@ -7,6 +7,7 @@ import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
+import idColumn from "../InTableComponents/idColumn";
 
 const FoodsTable = (props) => {
     
@@ -33,7 +34,7 @@ const FoodsTable = (props) => {
 
    
     const columns = [
-        {field: 'id', header: "ID"},
+        {field: 'id', header: "ID", body:idColumn},
         {field: 'image', header: "Resim", body: imageBodyTemplate},
         {field: 'name', header: 'Ad'},
         {field: 'food_category.name', header: 'Kategory'},
