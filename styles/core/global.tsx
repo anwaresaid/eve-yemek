@@ -40,18 +40,6 @@ const GlobalStyle = createGlobalStyle`
         z-index:2;
 
     }
-        /* .ContainerPanel{
-            margin-left:-250px;
-        }
-        
-        .main-context-hideBar{
-            min-height:100vh;
-            margin-top:65px;
-            background:#f4f4f4;
-            padding:25px;
-            z-index: 1;
-            margin-left:0px;
-        } */
         
     .ContainerPanel{
         margin-top:-30px;
@@ -93,6 +81,8 @@ const GlobalStyle = createGlobalStyle`
         margin-top:65px;
         background:#f4f4f4;
         padding:25px;
+        transition-property: width;
+        transition-delay: 2s;
         transition:  all 0.25s ease-in-out;
         z-index: 1;
 
@@ -104,6 +94,19 @@ const GlobalStyle = createGlobalStyle`
             transition:  all 0.25s ease-in-out;
         }
     }
+    @media screen and (max-width:500px){
+        .main-context-hideBar{
+             /* display:none; */
+            width:600px;
+            transition:  all 0.25s ease-in-out;
+        }
+        .main-context-showBar{
+             /* display:none; */
+            width:600px;
+            transition:  all 0.25s ease-in-out;
+        }
+    }
+
 
 
     .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
