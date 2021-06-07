@@ -1,4 +1,5 @@
-export default (rowData, column) => {
-    console.log(rowData, column);
+const idColumn = (rowData, column) => {
     return column?.rowIndex + 1
-};
+}
+
+export default idColumn;
