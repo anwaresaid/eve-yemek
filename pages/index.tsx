@@ -86,7 +86,7 @@ const Index = (props) => {
                 <div className='p-col-6 p-md-4 p-lg-2'>
                     <div className='box' style={{ backgroundColor: "#dc3545" }}>
                         <div className='box__info'>
-                            <span>?</span>
+                            <span>{reportData?.report.failed_orders}</span>
                             <p>Başarısız Siparişler</p>
                         </div>
                         <div className='box__icons'>
