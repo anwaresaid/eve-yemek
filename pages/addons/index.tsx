@@ -29,7 +29,7 @@ const restaurantOwnerList = () => {
             setAddonCategory(addonCat.items);
         }
     }, [success,successCat])
-
+console.log(addon);
     return (
         <div>
             {!loading && <AddonsTable addons={addon} addonCat={addonCategory} ></AddonsTable>}
