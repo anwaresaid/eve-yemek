@@ -7,15 +7,14 @@ import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
-import idColumn from "../InTableComponents/idColumn";
 
-const FoodsTable = (props) => {
+const Food_CategoriesTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const router = useRouter();
-    const path = 'foods';
+    const path = 'food_categories';
 
 
     const imageBodyTemplate = (rowData) => {
@@ -24,7 +23,7 @@ const FoodsTable = (props) => {
  
     const header =(
         <div className="table-header">
-            List of Food
+            List of Food Categories
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
@@ -34,11 +33,9 @@ const FoodsTable = (props) => {
 
    
     const columns = [
-        {field: 'id', header: "ID", body:idColumn},
+        {field: 'id', header: "ID"},
         {field: 'image', header: "Resim", body: imageBodyTemplate},
         {field: 'name', header: 'Ad'},
-        {field: 'food_category.name', header: 'Kategory'},
-        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
         {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
         {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
@@ -46,14 +43,14 @@ const FoodsTable = (props) => {
     return(
         
         <StandardTable
-                    header={Header(setGlobalFilter,"Food")}
+                    header={Header(setGlobalFilter,"Food Categories")}
                     columns={columns} 
-                    value={props.foods}  
+                    value={props.foodCategories}  
                     globalFilter={globalFilter} 
-                    emptyMessage="No food found" >  
+                    emptyMessage="No food categories found" >  
         </StandardTable>
     )
 
 }
 
-export default FoodsTable;
+export default Food_CategoriesTable;

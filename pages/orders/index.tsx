@@ -37,8 +37,8 @@ const Orders = () => {
     }
 
     const columns = [
-        {field: '_id', header: 'ID'},
-        {field: 'name', header: 'Restoran'},
+        {field: 'id', header: 'ID'},
+        {field: 'restaurant.name', header: 'Restoran'},
         {field: 'status', header: 'Durum', body: (rowData) => OrderStatus(rowData.status_id ?? 1)},
         {field: 'total_amount', header: 'Toplam Miktar'}, 
         {field: 'howLongAgo', header: 'Sipariş Zamanı'},

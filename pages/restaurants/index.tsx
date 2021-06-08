@@ -8,9 +8,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import {useRouter} from 'next/router';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import EditBtn  from '../../components/InTableComponents/editButton/index';
-import imageBodyTemplate from '../../components/InTableComponents/Image/index';
-import Header from '../../components/InTableComponents/Header/index';
+import RestaurantsTable from '../../components/tables/restaurantsTable';
 const Index = () => {
 
 
@@ -32,57 +30,12 @@ const Index = () => {
 
         }, [dispatch]);
 
-//pagination
-
-    const onPageInputKeyDown = (event, options) => {
-        if (event.key === 'Enter') {
-            const page = currentPage;
-            if (page < 0 || page > options.totalPages) {
-                setPageInputTooltip(`Value must be between 1 and ${options.totalPages}.`);
-            }
-            else {
-                const first = currentPage ? options.rows * (page - 1) : 0;
-                setFirst1(first);
-                setPageInputTooltip('Press \'Enter\' key to go to this page.');
-            }
-        }
-    }
-
-    const onPageInputChange = (event) => {
-        setCurrentPage(event.target.value);
-    }
-    const statusBodyTemplate = (rowData) => {
-        if(rowData.active == true)
-        {
-            return <Tag className="p-mr-2" severity="success" value="True" rounded></Tag>;
-
-        }
-        else
-        { 
-            return <Tag severity="danger" value="False" rounded></Tag>;
-        }
-    }
     return (
         <div>
-            {loading ? <ProgressSpinner/> :success && 
-            <div className="card">
-                <h1>Restaurants</h1>
-                    <S.Table value={restaurants.items} removableSort paginator
-                    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                    currentPageReportTemplate="{totalRecords} kayıttan {first} - {last} arasındaki kayıtlar gösteriliyor" rows={10} rowsPerPageOptions={[10,20,50]}
-                    header={Header(setGlobalFilter,"restaurants")} className="p-datatable-restaurants"
-                    globalFilter={globalFilter} emptyMessage="No Restaurants found.">
-                        <Column field="_id" header="Id" sortable></Column>
-                        <Column header="Image" body={imageBodyTemplate}></Column>
-                        <Column field="name" header="Restaurant Name" sortable></Column>
-                        <Column field="owner_name" header="Restaurant owner"  sortable></Column>
-                        <Column field="active" header="Active" body={statusBodyTemplate} sortable></Column>
-                        <Column header= "Edit" body={(rowData) =>EditBtn(rowData,router,path)} sortable></Column>
-                    </S.Table>
-            </div>
-}
+            {!loading && restaurants &&<RestaurantsTable restaurants={restaurants.items}></RestaurantsTable> }
+            {loading&& <ProgressSpinner/>}
+
         </div>
     );
 }
-
 export default Index;

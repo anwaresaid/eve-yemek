@@ -7,24 +7,18 @@ import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
-import idColumn from "../InTableComponents/idColumn";
 
-const FoodsTable = (props) => {
+const AddOnCategoryTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const router = useRouter();
-    const path = 'foods';
+    const path = 'addon_categories';
 
-
-    const imageBodyTemplate = (rowData) => {
-        return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
-   }
- 
     const header =(
         <div className="table-header">
-            List of Food
+            List of Addon Categories
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
@@ -34,26 +28,23 @@ const FoodsTable = (props) => {
 
    
     const columns = [
-        {field: 'id', header: "ID", body:idColumn},
-        {field: 'image', header: "Resim", body: imageBodyTemplate},
+        {field: 'id', header: "ID"},
         {field: 'name', header: 'Ad'},
-        {field: 'food_category.name', header: 'Kategory'},
-        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
-        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
+        {field: 'enum', header: 'Tur'},
         {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
     return(
         
         <StandardTable
-                    header={Header(setGlobalFilter,"Food")}
+                    header={Header(setGlobalFilter,"addon Category")}
                     columns={columns} 
-                    value={props.foods}  
+                    value={props.addonCategories}  
                     globalFilter={globalFilter} 
-                    emptyMessage="No food found" >  
+                    emptyMessage="No addon Categories found" >  
         </StandardTable>
     )
 
 }
 
-export default FoodsTable;
+export default AddOnCategoryTable;
