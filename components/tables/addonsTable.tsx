@@ -7,6 +7,7 @@ import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
+import { i18n } from "../../language";
 
 const AddonsTable = (props) => {
     
@@ -21,24 +22,14 @@ const AddonsTable = (props) => {
         let categoryName = props.addonCat.filter(cat => {return cat.id.localeCompare(rowData.addOn_category_id)==0;})
         return categoryName;
          }
-
-    const header =(
-        <div className="table-header">
-            List of Addons
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-            </span>
-        </div>
-    )
     
     const columns = [
         {field: 'id', header: 'ID'},
-        {field: 'name', header: 'Ad'},
-        {field: 'add_on_category_id', header: 'Kategori', body: CategoryBodyTemplate},
-        {field: 'price', header: 'Fiyat', body: priceBodyTemplate}, 
-        {field: 'active', header: 'Aktif', body: (rowData)=>activeTag(rowData.active)},
-        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'name', header: i18n.t('name')},
+        {field: 'addOn_category_id', header: i18n.t('category'), body: CategoryBodyTemplate},
+        {field: 'price', header: i18n.t('price'), body: priceBodyTemplate}, 
+        {field: 'active', header: i18n.t('active'), body: (rowData)=>activeTag(rowData.active)},
+        {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
     ]
     
     return (

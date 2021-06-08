@@ -1,32 +1,33 @@
 import { Tag } from "primereact/tag";
 import React, { useEffect, useState } from "react";
+import { i18n } from "../../../language";
 
 const OrderStatus = (status:number) => {
     var severity, value
     switch (status){
         case 1: 
             severity = "secondary"
-            value = "Sipariş Verildi"
+            value = i18n.t('orderPlaced')
             break
         case 2:
             severity = "primary"
-            value = "Sipariş Kabul Edildi"
+            value = i18n.t('orderAccepted')
             break
         case 3:
             severity = "info"
-            value = "Sipariş Hazırlandı"
+            value = i18n.t('orderPrepared')
             break
         case 4: 
             severity = "warning"
-            value = "Yolda"
+            value = i18n.t('onTheWay')
             break
         case 5:
             severity = "success"
-            value = "Teslim Edildi"
+            value = i18n.t('delivered')
             break
         case 6: 
             severity = "danger"
-            value = "İptal Edildi"
+            value = i18n.t('cancelled')
             break
         default:
             return <div></div>

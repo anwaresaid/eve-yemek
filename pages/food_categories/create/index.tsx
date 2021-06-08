@@ -14,6 +14,7 @@ import { foodCategoryTypes } from '../../../store/types/foodCategory.type';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import classNames from 'classnames'
+import { i18n } from '../../../language';
 import InputContainer from '../../../components/inputs/inputContainer';
 import StandardFileUpload from '../../../components/inputs/fileUpload';
 
@@ -38,10 +39,10 @@ export const Index = () => {
         let errors:any = {};
 
         if (!data.name) {
-            errors.name = 'user name is required.';
+            errors.name = i18n.t('isRequired', {input: i18n.t('userName')});;
         }
         if (!data.image) {
-            errors.image = 'image is required.';
+            errors.image = i18n.t('isRequired', {input: i18n.t('image')});;
         }
         return errors;
     },
@@ -59,16 +60,16 @@ export const Index = () => {
       dispatch({type: foodCategoryTypes.FOOD_CATEGORY_CREATE_RESET})
     }
   }, [success]);
-  
+
   return (
     <div>
-      <h1>Kategori Oluştur</h1>
+      <h1>{i18n.t('createMealCategory')}</h1>
       <Toast ref={toast}></Toast>
       <S.ContainerCard>
         <form onSubmit={formik.handleSubmit}>
           <div className='p-fluid'>
             <div className='p-field'>
-              <h4>Kategori Adı</h4>
+              <h4>{i18n.t('categoryName')}</h4>
               <InputText id='name' name='name' onChange={formik.handleChange} type='text' className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
               <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
               {getFormErrorMessage('name')}
@@ -82,12 +83,12 @@ export const Index = () => {
                 </StandardFileUpload>
             </InputContainer>
           <div>
-            <h4>Aktif Mi</h4>
+            <h4>{i18n.t('active')}</h4>
             <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
           </div>
 
           <S.SubmitBtn>
-            <Button type='submit' label='Submit' />
+            <Button type='submit' label={i18n.t('submit')} />
           </S.SubmitBtn>
         </form>
       </S.ContainerCard>

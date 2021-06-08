@@ -11,10 +11,12 @@ import { Provider } from "react-redux";
 import store from "../store/store";
 import auth from "../helpers/core/auth";
 import Error from "next/error";
+import { i18n } from "../language";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 
 function MyApp(props) {
+    
     const [loggedIn, setLoggedIn] = useState(false);
     const [error, setError] = useState(false);
     const [authCheckFinish, setAuthCheckFinish] = useState(false);
@@ -24,6 +26,8 @@ function MyApp(props) {
         auth.init();
         authCheck();
         setLoggedIn(auth.loggedIn);
+        document?.documentElement?.setAttribute("lang", i18n.language);
+        document?.documentElement?.setAttribute("dir",i18n.dir());
     }, []);
 
     const authCheck = () => {

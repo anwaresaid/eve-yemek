@@ -12,6 +12,7 @@ import { editTagTemplate } from '../../styles/standard_table_style/standard.tabl
 import EditBtn from '../../components/InTableComponents/editButton/index';
 import Header from '../../components/InTableComponents/Header/index';
 import OrderStatus from '../../components/InTableComponents/orderStatusTag'
+import { i18n } from '../../language'
 
 const Orders = () => {
 
@@ -38,18 +39,18 @@ const Orders = () => {
 
     const columns = [
         {field: 'id', header: 'ID'},
-        {field: 'restaurant.name', header: 'Restoran'},
-        {field: 'status', header: 'Durum', body: (rowData) => OrderStatus(rowData.status_id ?? 1)},
-        {field: 'total_amount', header: 'Toplam Miktar'}, 
-        {field: 'howLongAgo', header: 'Sipariş Zamanı'},
-        {field: 'ops', header: 'Detaylar', body: (rowData) =>EditBtn(rowData,router,path)}
+        {field: 'name', header: i18n.t('restaurant')},
+        {field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status_id ?? 1)},
+        {field: 'total_amount', header: i18n.t('total')}, 
+        {field: 'howLongAgo', header: i18n.t('orderTime')},
+        {field: 'ops', header: i18n.t('operations'), body: (rowData) =>EditBtn(rowData,router,path)}
     ]
 
     return (
         <div>
             {loading ? <ProgressSpinner /> : 
             <div className="card">
-                <h1>Siparişler</h1>
+                <h1>{i18n.t('orders')}</h1>
                 <StandardTable 
                     header={Header(setGlobalFilter,"orders")}
                     columns={columns} 
