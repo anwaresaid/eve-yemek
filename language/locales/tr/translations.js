@@ -158,5 +158,6 @@ export const translations = {
   userName: 'Kullanıcı Adı',
 
   // Table Pagination
-  showingXtoYofZ: '{{z}} sonuç içinden {{x}} - {{y}} tanesi gösteriliyor'
+  showingXtoYofZ: '{{z}} sonuç içinden {{x}} - {{y}} tanesi gösteriliyor',
+  submit: 'Kaydet'
 };

@@ -158,4 +158,6 @@ export const translations = {
 
   // Table Pagination
   showingXtoYofZ: "عرض {{x}} الى {{y}} من {{z}}",
+
+  submit: "إعتماد "
 };

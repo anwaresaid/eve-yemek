@@ -159,5 +159,6 @@ export const translations = {
   userName: 'Имя пользователя',
 
   // Table Pagination
-  showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}'
+  showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}',
+  submit: 'Подтвердить'
 };

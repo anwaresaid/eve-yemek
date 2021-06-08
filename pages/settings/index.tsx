@@ -722,7 +722,7 @@ const index = () => {
           </TabView>
 
           <S.SubmitBtn>
-            <Button type='submit' label='Submit' />
+            <Button type='submit' label={i18n.t('submit')} />
           </S.SubmitBtn>
         </form>
       )}
