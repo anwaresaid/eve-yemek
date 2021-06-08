@@ -48,7 +48,7 @@ const cardData = () => {
     return (
         <>
             { order&&
-            <TabView>
+            <TabView id="tabView">
                 <TabPanel header="Siparis Detayi">
                     <OrdersCard 
                     orderData = {order} 
