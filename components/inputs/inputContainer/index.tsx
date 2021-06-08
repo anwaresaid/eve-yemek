@@ -15,7 +15,7 @@ type IProps = {
 
 const InputContainer = (props:IProps) => {
 
-    const sizeClass = "p-col-12" + (props.size ? " p-md-"+props.size : "");
+    const sizeClass = "p-col" + (props.size ? " p-md-"+props.size : "");
 
     return (
         <>

@@ -195,8 +195,8 @@ import InputGroup from '../../components/inputs/inputGroup';
             return errors;
         },
         onSubmit: (data:any) => {
+            console.log(data);
             dispatch(updateRestaurant(router.query.id,data));
-
         }
     });
 
@@ -282,189 +282,192 @@ import InputGroup from '../../components/inputs/inputGroup';
             <Toast ref={toast}></Toast>
             <TabView>
                 <TabPanel header="Restoran Düzenle">
-            <S.ContainerCard>
-                 <form onSubmit = {formik.handleSubmit} >
-                    <div className="p-grid">
-                        <FormColumn>
-                            <h2>Genel Bilgiler</h2>
+                    <S.ContainerCard>
+                    <form onSubmit = {formik.handleSubmit} >
+                        <div className="p-grid">
+                            <FormColumn>
+                                <h2>Genel Bilgiler</h2>
 
-                            <InputGroup>
-                                <InputContainer label="Ad" name="name" formiks={inputFormiks} component={InputText} iprops={{
-                                    value:formik.values.name,
-                                    onChange:formik.handleChange,
-                                }}/>
-                            </InputGroup>
-
-                            <InputGroup>
-                                <InputContainer label="Restoran Sahibi" name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
-                                    value:formik.values.owner,
-                                    onChange:formik.handleChange,
-                                    options:resOwnersName,
-                                    placeholder:"Select an Owner",
-                                    optionLabel:"name"
-                                }}/>
-                            </InputGroup>
-
-                            <InputGroup>
-                                <InputContainer label="Telefon" name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
-                                    value:formik.values.phone,
-                                    mask:"(999) 999-9999",
-                                    placeholder:"(999) 999-9999",
-                                    onChange:formik.handleChange,
-                                }}/>
-
-                                <InputContainer label="Email" name="email" formiks={inputFormiks} size={6} component={InputText} iprops={{
-                                    value:formik.values.email,
-                                    onChange:formik.handleChange,
-                                }}/>
-
-                            </InputGroup>
-
-                            <InputGroup>
-                                <InputContainer label="Açıklama" name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
-                                    value:formik.values.description,
-                                    onChange:formik.handleChange,
-                                    rows:3,
-                                    autoResize:true
-                                }}/>
-                            </InputGroup>
-
-                            <InputGroup>
-                                <InputContainer label="Resim" name="rating" formiks={inputFormiks} component={StandardFileUpload} iprops={{
-                                    setFile:(image)=>{ formik.values.image=image },
-                                    showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
-                                }}/>
-                            </InputGroup>
-                        </FormColumn>  
-                        <FormColumn>
-                            <h2>Adres bilgileri</h2>
-
-                            <InputGroup>
-                                <InputContainer label="Şehir" name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                    value:formik.values.city,
-                                    onChange:formik.handleChange,
-                                    options:cities,
-                                    placeholder:"Şehir",
-                                    optionLabel:"name"
-                                }}/>
-
-                                <InputContainer label="İlçe" name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                    value:formik.values.town,
-                                    onChange:formik.handleChange,
-                                    options:counties,
-                                    placeholder:"İlçe",
-                                    optionLabel:"name"
-                                }}/>
-                            </InputGroup>
-
-                            <InputGroup>
-                                <InputContainer label="Posta kodu" name="postal_code" formiks={inputFormiks} component={InputText} iprops={{
-                                        value:formik.values.postal_code,
+                                <InputGroup>
+                                    <InputContainer label="Ad" name="name" formiks={inputFormiks} component={InputText} iprops={{
+                                        value:formik.values.name,
                                         onChange:formik.handleChange,
-                                }}/>
-                            </InputGroup>
+                                    }}/>
+                                </InputGroup>
 
-                            <InputGroup>
-                                <InputContainer label="Enlem" name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                    value:formik.values.latitudeInt,
-                                    onValueChange:formik.handleChange,
-                                    showButtons:true,
-                                }}/>
-                                
-                                <InputContainer label="Boylam" name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                    value:formik.values.longtitudeInt,
-                                    onValueChange:formik.handleChange,
-                                    showButtons:true,
-                                }}/>
-                            </InputGroup>
+                                <InputGroup>
+                                    <InputContainer label="Restoran Sahibi" name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
+                                        value:formik.values.owner,
+                                        onChange:formik.handleChange,
+                                        options:resOwnersName,
+                                        placeholder:"Select an Owner",
+                                        optionLabel:"name"
+                                    }}/>
+                                </InputGroup>
 
-                            <InputGroup>
-                                <InputContainer label="Açık Adres" name="address" formiks={inputFormiks} component={InputTextarea} iprops={{
-                                    value:formik.values.address,
-                                    onChange:formik.handleChange,
-                                    rows:3,
-                                    autoResize:true
-                                }}/>
-                            </InputGroup>
-                        </FormColumn>
-                    </div>
-                    
+                                <InputGroup>
+                                    <InputContainer label="Telefon" name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
+                                        value:formik.values.phone,
+                                        mask:"(999) 999-9999",
+                                        placeholder:"(999) 999-9999",
+                                        onChange:formik.handleChange,
+                                    }}/>
 
-                    
+                                    <InputContainer label="Email" name="email" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                                        value:formik.values.email,
+                                        onChange:formik.handleChange,
+                                    }}/>
 
-                    <div className="p-fluid p-grid">
-                        <InputContainer label="Derece" name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                            value:formik.values.rating,
-                            onValueChange:formik.handleChange,
-                            showButtons:true,
-                        }}/>
-                        
-                        <InputContainer label="Tahmini Teslim Süresi (dakika)" name="delivery_time" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                            value:formik.values.delivery_time,
-                            onValueChange:formik.handleChange,
-                            showButtons:true,
-                        }}/>
-                    </div>
+                                </InputGroup>
 
+                                <InputGroup>
+                                    <InputContainer label="Açıklama" name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                        value:formik.values.description,
+                                        onChange:formik.handleChange,
+                                        rows:3,
+                                        autoResize:true
+                                    }}/>
+                                </InputGroup>
 
-                    <div className="p-field p-col-12 p-md-6">
-                        <h4>Komisyon Oranı %</h4>
-                        <InputNumber  id="commission_rate " name="commission_rate"   value={formik.values.commission_rate} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('commission_rate') })}/>
-                        <label htmlFor="commission_rate" className={classNames({ 'p-error': isFormFieldValid('commission_rate') })}></label>
-                            {getFormErrorMessage('commission_rate')}
-                    </div>
-                    <div className="p-field p-col-12 p-md-6">
-                        <h4>Lisans Kodu</h4>
-                        <InputText  id="license_code " name="license_code"  value={formik.values.license_code} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('license_code') })}/>
-                        <label htmlFor="license_code" className={classNames({ 'p-error': isFormFieldValid('license_code') })}></label>
-                            {getFormErrorMessage('license_code')}
-                    </div>
-                    <div className="p-field p-col-12 p-md-6">
-                        <h4>Restoran Ücreti</h4>
-                        <InputNumber  id="restaurant_charges " name="restaurant_charges"  value={formik.values.charges} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('restaurant_charges') })}/>
-                        <label htmlFor="restaurant_charges" className={classNames({ 'p-error': isFormFieldValid('restaurant_charges') })}></label>
-                            {getFormErrorMessage('restaurant_charges')}
-                    </div>
-                    <div className="p-field p-col-12 p-md-6">
-                        <h4>Teslimat Yarıçapı (km)</h4>
-                        <InputNumber  id="delivery_radius " name="delivery_radius"  value={formik.values.delivery_radius} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('delivery_radius') })}/>
-                        <label htmlFor="delivery_radius" className={classNames({ 'p-error': isFormFieldValid('delivery_radius') })}></label>
-                            {getFormErrorMessage('delivery_radius')}
-                    </div>
-                    <div className="p-field p-col-12 p-md-6">
-                        <h4>Minimum amount</h4>
-                        <InputNumber  id="minimum_order_amount " name="minimum_order_amount"  value={formik.values.minimum_order_amount} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('minimum_order_amount') })}/>
-                        <label htmlFor="minimum_order_amount" className={classNames({ 'p-error': isFormFieldValid('minimum_order_amount') })}></label>
-                            {getFormErrorMessage('minimum_order_amount')}
-                    </div>
-                <div className="p-fluid">
-            </div>
-            <div className="p-field p-col-12 p-md-3">
-                <h4>Saf Sebze Mi</h4>
-                <InputSwitch  id="is_vegi " name="is_vegi"  checked={formik.values.is_vegi} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('is_vegi') })}/>
-                <label htmlFor="is_vegi" className={classNames({ 'p-error': isFormFieldValid('is_vegi') })}></label>
-                            {getFormErrorMessage('is_vegi')}
-                <h4>Öne Çıkma</h4>
-                <InputSwitch  id="featured " name="featured"  checked={formik.values.featured} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('featured') })}/>
-                <label htmlFor="featured" className={classNames({ 'p-error': isFormFieldValid('featured') })}></label>
-                            {getFormErrorMessage('featured')}
-                <h4>Açık?</h4>
-                <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}
-                 className={classNames({ 'p-invalid': isFormFieldValid('active') })}/>
-                <label htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
-                            {getFormErrorMessage('active')}
-            </div>
+                                <InputGroup>
+                                    <InputContainer label="Resim" name="file" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
+                                        setFile:(image)=>{ formik.values.image=image },
+                                        showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                                    }}/>
+                                </InputGroup>
+                            </FormColumn>  
+                            <FormColumn>
+                                <h2>Adres bilgileri</h2>
 
-            <S.SubmitBtn>
+                                <InputGroup>
+                                    <InputContainer label="Şehir" name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value:formik.values.city,
+                                        onChange:formik.handleChange,
+                                        options:cities,
+                                        placeholder:"Şehir",
+                                        optionLabel:"name"
+                                    }}/>
 
-                <Button type="submit" label="Gönder"/>
-            </S.SubmitBtn>
-            </form>
-            </S.ContainerCard>
+                                    <InputContainer label="İlçe" name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value:formik.values.town,
+                                        onChange:formik.handleChange,
+                                        options:counties,
+                                        placeholder:"İlçe",
+                                        optionLabel:"name"
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label="Posta kodu" name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                                            value:formik.values.postal_code,
+                                            onChange:formik.handleChange,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label="Enlem" name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.latitudeInt,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                    
+                                    <InputContainer label="Boylam" name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.longtitudeInt,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label="Açık Adres" name="address" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                        value:formik.values.address,
+                                        onChange:formik.handleChange,
+                                        rows:3,
+                                        autoResize:true
+                                    }}/>
+                                </InputGroup>
+                            </FormColumn>
+                            <FormColumn>
+                                <h2>Restoran Ayarları</h2>
+
+                                <InputGroup>
+                                    <InputContainer label="Tahmini Teslim Süresi (dk)" name="delivery_time" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.delivery_time,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+
+                                    <InputContainer label="Teslimat Yarıçapı (km)" name="delivery_radius" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.delivery_radius,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label="Komisyon Oranı %" name="commission_rate" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.commission_rate,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                    
+                                    <InputContainer label="Restoran Ücreti" name="restaurant_charges" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.restaurant_charges,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label="Minimum amount" name="minimum_order_amount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.minimum_order_amount,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                    
+                                    <InputContainer label="Derece" name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.rating,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label="Lisans Kodu" name="license_code" formiks={inputFormiks} size={12} component={InputText} iprops={{
+                                        value:formik.values.license_code,
+                                        onChange:formik.handleChange
+                                    }}/>
+                            
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label="Saf Sebze Mi" name="is_vegi" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                        value:formik.values.is_vegi,
+                                        onChange:formik.handleChange
+                                    }}/>
+                                    
+                                    <InputContainer label="Öne Çıkma" name="featured" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                        value:formik.values.featured,
+                                        onChange:formik.handleChange
+                                    }}/>
+                                    
+                                    <InputContainer label="Açık?" name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                        value:formik.values.active,
+                                        onChange:formik.handleChange
+                                    }}/>
+                                </InputGroup>
+                            </FormColumn>
+                        </div>
+
+                        <S.SubmitBtn>
+                            <Button type="submit" label="Gönder"/>
+                        </S.SubmitBtn>
+                    </form>
+                </S.ContainerCard>
             </TabPanel>
             <TabPanel header="Restoran Yemekleri">
                 <FoodsTable foods={foods} resid={router.query.id} />
-        </TabPanel>
+            </TabPanel>
         </TabView>
         </div>
     )
