@@ -20,6 +20,7 @@ export const translations = {
   createAddon: "إنشاء إضافة",
   coupons: "كوبونات",
   couponList: "قائمة الكوبونات",
+  createCoupon: "إنشاء كوبون جديد",
   accountSettings: "إعدادات الحساب",
   customers: "الزبائن",
   restaurantOwners: "مالك المطعم",

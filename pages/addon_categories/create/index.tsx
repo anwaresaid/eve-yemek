@@ -102,7 +102,7 @@ export const Index = () => {
             </div>
           </div>
           <S.SubmitBtn>
-            <Button type='submit' label='Submit' />
+            <Button type='submit' label={i18n.t('submit')} />
           </S.SubmitBtn>
         </form>
       </S.ContainerCard>

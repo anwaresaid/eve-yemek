@@ -13,6 +13,7 @@ import { useFormik } from 'formik';
 import classNames from 'classnames'
 import InputContainer from '../../components/inputs/inputContainer';
 import StandardFileUpload from '../../components/inputs/fileUpload';
+import { i18n } from '../../language';
 
 export const FoodCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -102,7 +103,7 @@ export const FoodCategoryEdit = () => {
           </div>
 
           <S.SubmitBtn>
-            <Button type='submit' label='Submit' />
+            <Button type='submit' label={i18n.t('submit')}/>
           </S.SubmitBtn>
         </form>
       </S.ContainerCard>
