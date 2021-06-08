@@ -10,6 +10,7 @@ import { useFormik } from 'formik';
 import classNames from 'classnames';
 import { listAllUsers } from '../../store/actions/userslists.action';
 import { MultiSelect } from 'primereact/multiselect';
+import sendFCM from '../../helpers/sendFCM';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ export const Index = () => {
         body: formik.values.body,
         users: [...formik.values.users],
       });
+      sendFCM(formik.values.title, formik.values.body, formik.values.users)
       // send notification here instead of console log after FCM is integrated
     },
   });
@@ -68,7 +70,6 @@ export const Index = () => {
   }, [success]);
 
   const settingDropDownNames = () => {
-    console.log('here');
     const usersNames = users.items.map((user) => {
       return { name: user.name, id: user._id };
     });
