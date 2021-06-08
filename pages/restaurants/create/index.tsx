@@ -215,6 +215,11 @@ import InputContainer from '../../../components/inputs/inputContainer';
         { name: 'Paris', code: 'PRS' }
     ];
 
+    const inputFormiks = {
+        getFormErrorMessage,
+        isFormFieldValid
+    }
+
     return (
         <div>
             <h1>Oluştur</h1>
@@ -243,13 +248,10 @@ import InputContainer from '../../../components/inputs/inputContainer';
                         </div>
                     </div>
                     <div className="p-field p-col-12">
-                        <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
-                                <StandardFileUpload 
-                                        setFile={(image)=>{formik.values.image=image}}
-                                        showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                                    >   
-                                </StandardFileUpload>
-                        </InputContainer>
+                        <InputContainer label="Resim" name="rating" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                            setFile:(image)=>{ formik.values.image=image },
+                            showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                        }}/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h4>Telefon</h4>
