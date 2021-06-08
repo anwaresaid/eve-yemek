@@ -21,7 +21,7 @@ const Index = () => {
         }, [dispatch]);
 
     return (
-        <div id="restaurantsTabe">
+        <div id="restaurantsTable">
             {!loading && restaurants &&<RestaurantsTable restaurants={restaurants.items}></RestaurantsTable> }
             {loading&& <ProgressSpinner/>}
 
