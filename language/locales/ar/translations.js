@@ -30,6 +30,9 @@ export const translations = {
   transfers: "تحويل",
   logout: "تسجيل خروج",
 
+  login: "تسجيل دخول",
+  rememberMe: "تذكرني",
+
   //On Dashboard
   dailyOrders: "الطلبات اليومية",
   dailyEarnings: "الدخل اليومي",
@@ -159,5 +162,7 @@ export const translations = {
   // Table Pagination
   showingXtoYofZ: "عرض {{x}} الى {{y}} من {{z}}",
 
+
+  selectLanguage: "إختراللغة",
   submit: "إعتماد "
 };

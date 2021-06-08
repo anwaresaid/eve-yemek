@@ -315,7 +315,7 @@ const index = () => {
           {getFormErrorMessage('delivery_charge')}
         </div>
         <div className='p-field p-col-12 p-md-4'>
-            <h4>Select Language </h4>
+            <h4>{i18n.t('selectLanguage')}</h4>
             <Dropdown
                 id="language"
                 name="language"

@@ -20,6 +20,7 @@ export const translations = {
   createAddon: 'Eklenti Oluştur',
   coupons: 'Kuponlar',
   couponList: 'Kupon Listesi',
+  createCoupon: 'Kupon Oluştur',
   accountSettings: 'Hesap Ayarları',
   customers: 'Müşteriler',
   restaurantOwners: 'Restoran Sahipleri',
@@ -29,6 +30,9 @@ export const translations = {
   settings: 'Ayarlar',
   transfers: 'Transferler',
   logout: 'Çıkış Yap',
+
+  login: 'Giriş Yap',
+  rememberMe: 'Beni Hatırla',
 
   //On Dashboard
   dailyOrders: 'Günlük Siparişler',
@@ -159,5 +163,7 @@ export const translations = {
 
   // Table Pagination
   showingXtoYofZ: '{{z}} sonuç içinden {{x}} - {{y}} tanesi gösteriliyor',
+
+  selectLanguage: 'Dil seç',
   submit: 'Kaydet'
 };

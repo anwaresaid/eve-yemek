@@ -20,6 +20,7 @@ export const translations = {
   createAddon: 'Create Add-On',
   coupons: 'Coupons',
   couponList: 'Coupon List',
+  createCoupon: 'Create Coupon',
   accountSettings: 'Account Settings',
   customers: 'Customers',
   restaurantOwners: 'Restaurant Owners',
@@ -29,6 +30,9 @@ export const translations = {
   settings: 'Settings',
   transfers: 'Transfers',
   logout: 'Logout',
+
+  login: 'Login',
+  rememberMe: 'Remember me',
 
   //On Dashboard
   dailyOrders: 'Daily Orders',
@@ -160,5 +164,6 @@ export const translations = {
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
 
+  selectLanguage: 'Select Language',
   submit: "Submit"
 };
