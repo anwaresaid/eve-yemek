@@ -106,67 +106,67 @@ export const Index = () => {
     }, [restaurantsSuccess]);
     console.log(formik.values);
     return (
-        <div>
-            <h1>Oluştur</h1>
-            <Toast ref={toast}></Toast>
-            <S.ContainerCard>
-                 <form onSubmit={formik.handleSubmit}  >
+        <div id="create_coupons">
+            <h1 id="createHeader">Oluştur</h1>
+            <Toast id="toastMessage" ref={toast}></Toast>
+            <S.ContainerCard id="container">
+                 <form id="createForm" onSubmit={formik.handleSubmit}  >
                     <div className="p-fluid">
-                        <div className="p-field">
-                            <h4>Kupon Adı</h4>
+                        <div id="nameDiv" className="p-field">
+                            <h4 id="nameHeader">Kupon Adı</h4>
                             <InputText id="name" name="name" value={formik.values.name}  onChange={formik.handleChange} type="text"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-                            <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+                            <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
                             {getFormErrorMessage('name')}
                         </div>
-                        <div className="p-field">
-                            <h4>Kupon Açıklaması</h4>
+                        <div id="descriptionDiv"className="p-field">
+                            <h4 id="descriptionHeader">Kupon Açıklaması</h4>
                             <InputText id="description" name="description" onChange={formik.handleChange} type="text"    autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })}/>
-                            <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
+                            <label id="description" htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
                             {getFormErrorMessage('description')}
                         </div>
-                        <div className="p-field">
-                            <h4>Restauran</h4>
+                        <div id="restaurantDiv" className="p-field">
+                            <h4 id="restaurantHeader">Restauran</h4>
                             <Dropdown id="resName" name="resName" value={formik.values.resName} options={restaurantName} onChange={formik.handleChange} optionLabel="name" placeholder="Select a Restaurant" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('resName') })} />
-                            <label htmlFor="resName" className={classNames({ 'p-error': isFormFieldValid('resName') })}></label>
+                            <label id="errorDescription" htmlFor="resName" className={classNames({ 'p-error': isFormFieldValid('resName') })}></label>
                             {getFormErrorMessage('resName')}
                         </div>
-                        <div className="p-field">
-                            <h4>Kupon Kodu </h4>
+                        <div id="codeDiv" className="p-field">
+                            <h4 id="codeHeader">Kupon Kodu </h4>
                             <InputText id="coupon_code" name="coupon_code" onChange={formik.handleChange} type="text"    autoFocus className={classNames({ 'p-invalid': isFormFieldValid('coupon_code') })}/>
-                            <label htmlFor="coupon_code" className={classNames({ 'p-error': isFormFieldValid('coupon_code') })}></label>
+                            <label id="errorCode" htmlFor="coupon_code" className={classNames({ 'p-error': isFormFieldValid('coupon_code') })}></label>
                             {getFormErrorMessage('coupon_code')}
                         </div>
                     </div>
                     <div className="p-fluid">
-                        <div className="card">
-                            <h4>İndirim Türü </h4>
+                        <div id="discountTypeDiv" className="card">
+                            <h4 id="discountTypeHeader">İndirim Türü </h4>
                             <Dropdown id="discount_type" name="discount_type" value={formik.values.discount_type}
                              options={discount_types} onChange={formik.handleChange} optionLabel="title"
                               placeholder="İndirim Türü" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('discount_type') })}/>
-                            <label htmlFor="discount_type" className={classNames({ 'p-error': isFormFieldValid('discount_type') })}></label>
+                            <label id="errorDiscountType" htmlFor="discount_type" className={classNames({ 'p-error': isFormFieldValid('discount_type') })}></label>
                                         {getFormErrorMessage('discount_type')}
                         </div>
                     </div>
                     <div className="p-grid p-fluid">
-                    <div className="p-field p-col-12 p-md-3">
-                        <h4>Son Kullanma Tarihi</h4>
+                    <div id="expirationDiv" className="p-field p-col-12 p-md-3">
+                        <h4 id="expirationHeader">Son Kullanma Tarihi</h4>
                         <Calendar id="expire_date" name="expire_date" value={formik.values.date} onChange={formik.handleChange} />
                     </div>
-                        <div className="p-field p-col-12 p-md-3">
-                            <h4> İndirim </h4>
+                        <div id="discountDiv" className="p-field p-col-12 p-md-3">
+                            <h4 id="discountHeader"> İndirim </h4>
                             <InputNumber id="discount" name="discount" value={formik.values.discount} onValueChange={formik.handleChange} showButtons/>
                         </div>
-                        <div className="p-field p-col-12 p-md-3">
-                            <h4> Maksimum Kullanım</h4>
+                        <div id="max_usage_Div" className="p-field p-col-12 p-md-3">
+                            <h4 id="max_usage_Header"> Maksimum Kullanım</h4>
                             <InputNumber id="max_usage" name="max_usage" value={formik.values.max_usage} onValueChange={formik.handleChange} showButtons/>
                         </div>
                     </div>
-                    <div>
-                        <h4>Aktif</h4>
+                    <div id="activeDiv">
+                        <h4 id="activeHeader">Aktif</h4>
                         <InputSwitch checked={formik.values.active} name="active" id="active" onChange={formik.handleChange} />
                     </div>
-                    <S.SubmitBtn>
-                        <Button type="submit" label="Submit"/>
+                    <S.SubmitBtn id="createContainer">
+                        <Button id="createBtn" type="submit" label="Create"/>
                     </S.SubmitBtn>
                 </form>
             </S.ContainerCard>
