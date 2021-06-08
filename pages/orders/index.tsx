@@ -38,7 +38,7 @@ const Orders = () => {
     }
 
     const columns = [
-        {field: '_id', header: 'ID'},
+        {field: 'id', header: 'ID'},
         {field: 'name', header: i18n.t('restaurant')},
         {field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status_id ?? 1)},
         {field: 'total_amount', header: i18n.t('total')}, 

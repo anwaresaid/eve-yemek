@@ -7,7 +7,6 @@ export const dashboardReportReducer = (state={}, action) => {
         case dashboardTypes.DASHBOARD_REPORT_LIST_REQUEST:
             return {loading: true}
         case dashboardTypes.DASHBOARD_REPORT_LIST_SUCCESS:
-            console.log(action.payload)
             return {
                 loading: false,
                 success: true,

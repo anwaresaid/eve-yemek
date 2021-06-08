@@ -2,11 +2,13 @@ import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { ProgressSpinner } from 'primereact/progressspinner';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import editButton from '../../components/InTableComponents/editButton/index';
 import { i18n } from '../../language';
+import AddOnCategoryTable from '../../components/tables/addonCategoryTable';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
 import * as S from '../../styles/food/food.list.style';
 
@@ -39,29 +41,8 @@ const AddonCategoriesList = () => {
 
   return (
     <>
-      <h1>{i18n.t('addonCategories')}</h1>
-      {success && addonCategories ? (
-        <S.Table
-          value={addonCategories.items}
-          removableSort
-          paginator
-          paginatorTemplate='CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
-          currentPageReportTemplate='{totalRecords} kayıttan {first} - {last} arasındaki kayıtlar gösteriliyor'
-          rows={10}
-          rowsPerPageOptions={[10, 20, 50]}
-          header={header}
-          className='p-datatable-restaurants'
-          globalFilter={globalFilter}
-          emptyMessage='Yemek kategorileri bulunamadı'
-        >
-          <Column field='_id' header='ID' sortable></Column>
-          <Column field='name' header={i18n.t('name')} sortable></Column>
-          <Column field='enum' header={i18n.t('type')} sortable></Column>
-          <Column header={i18n.t('operations')} body={(rowData)=> editButton(rowData,router,path)}></Column>
-        </S.Table>
-      ) : (
-        <h2>Loading</h2>
-      )}
+      {!loading && addonCategories && <AddOnCategoryTable addonCategories={addonCategories.items}></AddOnCategoryTable>}
+      {loading && <ProgressSpinner/>}
     </>
   );
 };

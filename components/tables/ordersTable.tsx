@@ -26,7 +26,7 @@ const OrdersTable = (props) => {
     )
 
     const columns = [
-        {field: '_id', header: '#'},
+        {field: 'id', header: '#'},
         {field: 'restaurant_id.name', header: i18n.t('restaurant')},
         {field: 'status', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.status === "ACTIVE")},
         {field: 'total_amount', header: i18n.t('total')},

@@ -14,7 +14,7 @@ const CouponsTable = (props) => {
   const router = useRouter();
 
   const columns = [
-    { field: '_id', header: 'ID' },
+    { field: 'id', header: 'ID' },
     { field: 'coupon_code', header: i18n.t('couponCode') },
     { field: 'name', header: i18n.t('name') },
     { field: 'description', header: i18n.t('description') },

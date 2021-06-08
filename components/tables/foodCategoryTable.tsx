@@ -7,42 +7,50 @@ import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
-import { i18n } from "../../language";
-import idColumn from "../InTableComponents/idColumn";
 
-const FoodsTable = (props) => {
+const Food_CategoriesTable = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const router = useRouter();
-    const path = 'foods';
+    const path = 'food_categories';
+
 
     const imageBodyTemplate = (rowData) => {
         return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
-    }
+   }
+ 
+    const header =(
+        <div className="table-header">
+            List of Food Categories
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
+            </span>
+        </div>
+    )
+
    
     const columns = [
-        {field: 'id', header: "ID", body:idColumn},
-        {field: 'image', header: i18n.t('image'), body: imageBodyTemplate},
-        {field: 'name', header: i18n.t('name')},
-        {field: 'food_category.name', header: i18n.t('category')},
-        {field: 'price', header: i18n.t('price'), body: priceBodyTemplate}, 
-        {field: 'ops', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.active)},
-        {field: '', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'id', header: "ID"},
+        {field: 'image', header: "Resim", body: imageBodyTemplate},
+        {field: 'name', header: 'Ad'},
+        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
+        {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
     ]
     
     return(
         
         <StandardTable
-                    header={Header(setGlobalFilter,"Food")}
+                    header={Header(setGlobalFilter,"Food Categories")}
                     columns={columns} 
-                    value={props.foods}  
+                    value={props.foodCategories}  
                     globalFilter={globalFilter} 
-                    emptyMessage="No food found" >  
+                    emptyMessage="No food categories found" >  
         </StandardTable>
     )
 
 }
 
-export default FoodsTable;
+export default Food_CategoriesTable;

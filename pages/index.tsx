@@ -19,8 +19,19 @@ const Index = (props) => {
         
     },[dispatch])
 
+    const parseCounts = (counts) => {
+        if(!counts)
+            return
+        let out = []
+        for (let i of counts){
+            out[i._id - 1] = i.count
+        }
+        out = Array.from(out, item => item || 0);
+        return out
+    }
+
     const lineChartData = {
-        labels: (reportData?.lastSevenDaysReport.order.days.length === 0) ? ["28(MockData)", "30", "1", "2", "3", "4", "5"] : reportData?.lastSevenDaysReport.order.days,
+        labels: reportData?.lastSevenDaysReport.order.days,
         datasets: [
             {
                 label: i18n.t('thisWeek'),
@@ -29,7 +40,7 @@ const Index = (props) => {
                 backgroundColor: "rgba(75,192,192,1)",
                 borderColor: "rgb(75, 192, 192)",
                 borderWidth: 2,
-                data: (reportData?.lastSevenDaysReport.order.counts.length === 0) ? [16, 2, 4, 6, 8, 10, 12] : reportData?.lastSevenDaysReport.order.counts
+                data: parseCounts(reportData?.lastSevenDaysReport.order.counts)
             }
         ]
     };
@@ -75,7 +86,7 @@ const Index = (props) => {
                 <div className='p-col-6 p-md-4 p-lg-2'>
                     <div className='box' style={{ backgroundColor: "#dc3545" }}>
                         <div className='box__info'>
-                            <span>?</span>
+                            <span>{reportData?.report.failed_orders}</span>
                             <p>{i18n.t('failedOrders')}</p>
                         </div>
                         <div className='box__icons'>
@@ -97,11 +108,8 @@ const Index = (props) => {
             </div>
 
             <Card subTitle={i18n.t('ordersFromTheLast7Days')}>
-                <div className='view-report'>
-                    <a href="#">{i18n.t('viewReport')}</a>
-                </div>
                 <i className='pi pi-shopping-cart'>
-                    <span>0 {i18n.t('orders')}</span>
+                    <span>{parseCounts(reportData?.lastSevenDaysReport.order.counts)?.reduce((a, b) => a + b, 0)} {i18n.t('orders')}</span>
                 </i>
                 <Line
                     type='number'
