@@ -165,7 +165,7 @@ export const Index = () => {
                         <h4 id="activeHeader">Aktif</h4>
                         <InputSwitch checked={formik.values.active} name="active" id="active" onChange={formik.handleChange} />
                     </div>
-                    <S.SubmitBtn id="createContainer">
+                    <S.SubmitBtn id="btnContainer">
                         <Button id="createBtn" type="submit" label="Create"/>
                     </S.SubmitBtn>
                 </form>

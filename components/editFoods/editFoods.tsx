@@ -50,9 +50,6 @@ const settingDropDownNames= () => {
    const getFormErrorMessage = (name) => {
        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
    };
-   const handleHistory = () =>{
-       history.push('/restaurants')
-   }
 
    const formik = useFormik({
     initialValues:{
@@ -118,6 +115,7 @@ useEffect(() =>{
 
     if(props.addonSuccess && props.restaurantsSuccess && props.foodCatSuccess && props.foodSuccess)
     {
+
             settingDropDownNames();
             setSelectedRestaurant(()=>{
             let selectedRes = props.restaurants.items.filter(data  => {return data._id === props.foods.restaurant_id?._id});

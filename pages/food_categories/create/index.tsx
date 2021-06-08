@@ -61,33 +61,34 @@ export const Index = () => {
   }, [success]);
   
   return (
-    <div>
-      <h1>Kategori Oluştur</h1>
-      <Toast ref={toast}></Toast>
-      <S.ContainerCard>
-        <form onSubmit={formik.handleSubmit}>
+    <div id="create_food_categories">
+      <h1 id="createHeader">Kategori Oluştur</h1>
+      <Toast id="toastMessage" ref={toast}></Toast>
+      <S.ContainerCard id="container">
+        <form id="createForm" onSubmit={formik.handleSubmit}>
           <div className='p-fluid'>
-            <div className='p-field'>
-              <h4>Kategori Adı</h4>
+            <div id="nameDiv" className='p-field'>
+              <h4 id="name">Kategori Adı</h4>
               <InputText id='name' name='name' onChange={formik.handleChange} type='text' className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-              <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+              <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
               {getFormErrorMessage('name')}
             </div>
           </div>
-          <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
+          <InputContainer  name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
                 <StandardFileUpload 
+                        id="fileUpload"
                         setFile={(image)=>{formik.values.image=image}}
                         showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
                      >   
                 </StandardFileUpload>
             </InputContainer>
-          <div>
-            <h4>Aktif Mi</h4>
-            <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
+          <div id="activeDiv">
+            <h4 id="activeHeader">Aktif Mi</h4>
+            <InputSwitch id="activeSwitch" checked={formik.values.active} onChange={formik.handleChange} />
           </div>
 
-          <S.SubmitBtn>
-            <Button type='submit' label='Submit' />
+          <S.SubmitBtn id="btnContainer">
+            <Button type='submit' label='Create' />
           </S.SubmitBtn>
         </form>
       </S.ContainerCard>
