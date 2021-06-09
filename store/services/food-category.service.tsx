@@ -1,9 +1,10 @@
+import { baseUrl } from '../../helpers/constants';
 import axios from '../../helpers/_axios';
 
 export default class FoodCategorynService {
   public async getFoodCategory() {
     const { data } = await axios.get(
-      'https://api.eve-yemek.com/food-categories'
+      baseUrl + '/food-categories'
     );
 
     return data;
@@ -11,7 +12,7 @@ export default class FoodCategorynService {
 
   public async getFoodCategoryDetails(id: string) {
     const { data } = await axios.get(
-      `https://api.eve-yemek.com/food-categories/${id}`
+      baseUrl + `/food-categories/${id}`
     );
 
     return data;
@@ -19,7 +20,7 @@ export default class FoodCategorynService {
 
   public async createFoodCategory(createFoodCategoryDTO: any) {
     const { data } = await axios.post(
-      'https://api.eve-yemek.com/food-categories',
+      baseUrl + '/food-categories',
       createFoodCategoryDTO
     );
 
@@ -28,7 +29,7 @@ export default class FoodCategorynService {
 
   public async updateFoodCategory(id: string, updateFoodCategoryDTO: any) {
     const { data } = await axios.put(
-      `https://api.eve-yemek.com/food-categories/${id}`,
+      baseUrl + `/food-categories/${id}`,
       updateFoodCategoryDTO
     );
 
