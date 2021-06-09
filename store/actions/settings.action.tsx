@@ -1,5 +1,6 @@
 import { settingsTypes } from '../types/settings.type';
 import SettingsService from '../services/settings.service';
+import { i18n } from '../../language';
 
 export const listSettings = () => async (dispatch, getState) => {
   try {
@@ -27,6 +28,7 @@ export const listSettings = () => async (dispatch, getState) => {
 };
 
 export const updateSettings = (data: any) => async (dispatch, getState) => {
+  
   try {
     dispatch({
       type: settingsTypes.SETTINGS_UPDATE_REQUEST,

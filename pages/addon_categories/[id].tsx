@@ -13,6 +13,7 @@ import {
   getAddonCategoryDetails,
   updateAddonCategory,
 } from '../../store/actions/addon-category.action';
+import { i18n } from '../../language';
 
 export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -142,7 +143,7 @@ export const AddonCategoryEdit = () => {
               </div>
             </div>
             <S.SubmitBtn>
-              <Button id="btnUpdate" type='submit' label='Update' />
+              <Button id="btnUpdate" type='submit' label={i18n.t('submit')} />
             </S.SubmitBtn>
           </form>
         </S.ContainerCard>

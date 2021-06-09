@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
 import { getDashboardReport } from "../store/actions/dashboard.action";
 import {ProgressSpinner} from 'primereact/progressspinner'
+import { i18n } from "../language";
 
 const Index = (props) => {
-
     const res = useSelector((state:RootState) => state.dashboardReport)
     const {loading, success, reportData} = res
     const dispatch = useDispatch()
@@ -34,7 +34,7 @@ const Index = (props) => {
         labels: reportData?.lastSevenDaysReport.order.days,
         datasets: [
             {
-                label: "Bu Hafta",
+                label: i18n.t('thisWeek'),
                 fill: false,
                 lineTension: 0.5,
                 backgroundColor: "rgba(75,192,192,1)",
@@ -48,13 +48,13 @@ const Index = (props) => {
         <div id='containerPanel' className="ContainerPanel">
             {loading ? <ProgressSpinner /> :
             <S.DashboardWrapper id='dashBoard'>
-            <h1 id='controlPanelHeader'>Kontrol Paneli</h1>
+            <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
             <div className='p-grid p-grid-container'>
                 <div className='p-col-6 p-md-6 p-lg-2'>
                     <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
                         <div id='boxInfoDiv' className='box__info'>
                             <span id='dailyOrders'>{reportData?.report.daily_orders.length}</span>
-                            <p id='boxInfoP'>Günlük Siparişler</p>
+                            <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
                         </div>
                         <div className='box__icons'>
                             <i className=' pi pi-shopping-cart'></i>
@@ -62,10 +62,10 @@ const Index = (props) => {
                     </div>
                 </div>
                 <div className='p-col-6 p-md-6 p-lg-2'>
-                    <div id='boxDiv'className='box' style={{ backgroundColor: "#28a745" }}>
+                    <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
                         <div id='box_infoDiv' className='box__info'>
                             <span id='daily_income_report'>₺{reportData?.report.daily_income}</span>
-                            <p id='daily_incomeP'>Günlük Kazanç</p>
+                            <p id='daily_incomeP'>{i18n.t('dailyEarnings')}</p>
                         </div>
                         <div id='box_icons' className='box__icons'>
                             <i id='money_bill' className=' pi pi-money-bill'></i>
@@ -76,7 +76,7 @@ const Index = (props) => {
                     <div id='box' className='box' style={{ backgroundColor: "#ffc107" }}>
                         <div id='box_info' className='box__info'>
                             <span id='total_orders_report'>{reportData?.report.total_orders.total}</span>
-                            <p id='total_ordersP'>Toplam Siparişler</p>
+                            <p id='total_ordersP'>{i18n.t('totalOrders')}</p>
                         </div>
                         <div id='box_icons' className='box__icons'>
                             <i id='shopping_cartIcon' className=' pi pi-shopping-cart'></i>
@@ -87,7 +87,7 @@ const Index = (props) => {
                     <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
                         <div id='box_info' className='box__info'>
                             <span id='failed_orders_report'>{reportData?.report.failed_orders}</span>
-                            <p id='failed_ordersP'>Başarısız Siparişler</p>
+                            <p id='failed_ordersP'>{i18n.t('failedOrders')}</p>
                         </div>
                         <div id='box_icons' className='box__icons'>
                             <i id='infoIcon' className='pi pi-info'></i>
@@ -98,7 +98,7 @@ const Index = (props) => {
                     <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
                         <div id='box_info' className='box__info'>
                             <span id='total_income_report'>₺{reportData?.report.total_income}</span>
-                            <p id='total_incomeP'>Toplam Kazanç</p>
+                            <p id='total_incomeP'>{i18n.t('totalEarnings')}</p>
                         </div>
                         <div id='box_icons' className='box__icons'>
                             <i id='money_billIcon' className=' pi  pi-money-bill'></i>
@@ -106,10 +106,9 @@ const Index = (props) => {
                     </div>
                 </div>
             </div>
-
-            <Card id='last_7_days_orders' subTitle='Son 7 günün siparişleri'>
+            <Card id='last_7_days_orders' subTitle={i18n.t('ordersFromTheLast7Days')}>
                 <i id='shopping_cartIcon' className='pi pi-shopping-cart'>
-                    <span id='last_seven_days_report'>{parseCounts(reportData?.lastSevenDaysReport.order.counts)?.reduce((a, b) => a + b, 0)} Sipariş</span>
+                    <span id='last_seven_days_report'>{parseCounts(reportData?.lastSevenDaysReport.order.counts)?.reduce((a, b) => a + b, 0)} {i18n.t('orders')}</span>
                 </i>
                 <Line
                     type='number'

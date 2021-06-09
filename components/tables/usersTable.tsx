@@ -5,6 +5,7 @@ import {useRouter} from 'next/router';
 import Header from '../InTableComponents/Header';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
+import { i18n } from "../../language";
 
 
 const UsersTable = (props) => {
@@ -16,12 +17,12 @@ const UsersTable = (props) => {
     const router = useRouter();
     var path;
     const columns = [
-        {field: 'name', header: 'Ad'},
-        {field: 'email', header: 'E-Posta'},
-        {field: 'phone', header: 'Telefon'},
-        {field: 'howLongAgo', header: 'Oluşturma'}, // in days
-        {field: 'active', header: 'Aktif', body: ()=>activeTag(true)}, // change after BE supports active status for users
-        {field: 'ops', header: 'İşlemler', body: (rowData) =>editButton(rowData,router,path='users/'+props.editPath)}
+        {field: 'name', header: i18n.t('name')},
+        {field: 'email', header: i18n.t('email')},
+        {field: 'phone', header: i18n.t('telephone')},
+        {field: 'howLongAgo', header: i18n.t('created')}, // in days
+        {field: 'active', header: i18n.t('active'), body: ()=>activeTag(true)}, // change after BE supports active status for users
+        {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path='users/'+props.editPath)}
     ]
     return (
         <StandardTable 

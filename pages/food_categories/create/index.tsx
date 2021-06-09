@@ -1,10 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Toast } from 'primereact/toast';
-import { FileUpload } from 'primereact/fileupload';
-import { ProgressBar } from 'primereact/progressbar';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-import { Tag } from 'primereact/tag';
 import * as S from '../../../styles/food/create-food/food.create.style';
 import { InputSwitch } from 'primereact/inputswitch';
 import { createFoodCategory } from '../../../store/actions/foodCategory.action';
@@ -14,6 +11,7 @@ import { foodCategoryTypes } from '../../../store/types/foodCategory.type';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import classNames from 'classnames'
+import { i18n } from '../../../language';
 import InputContainer from '../../../components/inputs/inputContainer';
 import StandardFileUpload from '../../../components/inputs/fileUpload';
 
@@ -38,10 +36,10 @@ export const Index = () => {
         let errors:any = {};
 
         if (!data.name) {
-            errors.name = 'user name is required.';
+            errors.name = i18n.t('isRequired', {input: i18n.t('userName')});;
         }
         if (!data.image) {
-            errors.image = 'image is required.';
+            errors.image = i18n.t('isRequired', {input: i18n.t('image')});;
         }
         return errors;
     },
@@ -59,16 +57,16 @@ export const Index = () => {
       dispatch({type: foodCategoryTypes.FOOD_CATEGORY_CREATE_RESET})
     }
   }, [success]);
-  
+
   return (
     <div id="create_food_categories">
-      <h1 id="createHeader">Kategori Oluştur</h1>
+      <h1 id="createHeader">{i18n.t('createMealCategory')}</h1>
       <Toast id="toastMessage" ref={toast}></Toast>
       <S.ContainerCard id="container">
         <form id="createForm" onSubmit={formik.handleSubmit}>
           <div className='p-fluid'>
             <div id="nameDiv" className='p-field'>
-              <h4 id="name">Kategori Adı</h4>
+              <h4 id="nameHeader">{i18n.t('categoryName')}</h4>
               <InputText id='name' name='name' onChange={formik.handleChange} type='text' className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
               <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
               {getFormErrorMessage('name')}
@@ -83,12 +81,12 @@ export const Index = () => {
                 </StandardFileUpload>
             </InputContainer>
           <div id="activeDiv">
-            <h4 id="activeHeader">Aktif Mi</h4>
+            <h4 id="activeHeader">{i18n.t('active')}</h4>
             <InputSwitch id="activeSwitch" checked={formik.values.active} onChange={formik.handleChange} />
           </div>
 
           <S.SubmitBtn id="btnContainer">
-            <Button type='submit' label='Create' />
+            <Button id="createBtn" type='submit' label={i18n.t('submit')} />
           </S.SubmitBtn>
         </form>
       </S.ContainerCard>

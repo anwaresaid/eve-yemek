@@ -12,13 +12,15 @@ import classNames from 'classnames';
 import { InputNumber } from 'primereact/inputnumber';
 import { Toast } from 'primereact/toast';
 import { settingsTypes } from '../../store/types/settings.type';
+import { i18n } from '../../language';
+import {useRouter} from 'next/router';
+import { Dropdown } from 'primereact/dropdown';
 
 const index = () => {
   const dispatch = useDispatch();
   const toast = useRef(null);
-  
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const router = useRouter();
   const res = useSelector((state: RootState) => state.listSettings);
   const { loading, success, settings } = res;
 
@@ -111,6 +113,7 @@ const index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
+      console.log(data)
       dispatch(updateSettings(data));
       dispatch({type:settingsTypes.SETTINGS_UPDATE_RESET})
     },
@@ -128,6 +131,7 @@ const index = () => {
 
   useEffect(() => {
     if (success && settings) {
+     
       formik.values.app_name = settings.app_name;
       formik.values.time_zone = settings.time_zone;
       formik.values.currency_code = settings.currency_code;
@@ -159,7 +163,6 @@ const index = () => {
       formik.values.is_razorpay_active = settings.is_razorpay_active;
       formik.values.razorpay_client_key = settings.razorpay_client_key;
       formik.values.razorpay_secret_key = settings.razorpay_secret_key;
-
       if(successUpdate){
         toast.current.show({severity: 'success', summary: 'Success', detail: 'Settings Updated Successfully'});
       }
@@ -172,7 +175,7 @@ const index = () => {
     return (
       <>
         <div id="settingsDiv" className='p-field'>
-          <h4 id="settingsHeader">Uygulama Adi</h4>
+          <h4 id="settingsHeader">{i18n.t('applicationName')}</h4>
           <InputText
             id='app_name'
             value={formik.values.app_name}
@@ -190,7 +193,7 @@ const index = () => {
           {getFormErrorMessage('app_name')}
         </div>
         <div id="time_zoneDiv" className='p-field'>
-          <h4 id="time_zoneHeader">Zaman Dilimi</h4>
+          <h4 id="time_zoneHeader">{i18n.t('timeZone')}</h4>
           <InputText
             id='time_zone'
             value={formik.values.time_zone}
@@ -208,7 +211,7 @@ const index = () => {
           {getFormErrorMessage('time_zone')}
         </div>
         <div id="currnecy_codeDiv" className='p-field'>
-          <h4 id="currnecy_codeHeader" >Para Birimi Kodu</h4>
+          <h4 id="currnecy_codeHeader">{i18n.t('currencyCode')}</h4>
           <InputText
             id='currency_code'
             value={formik.values.currency_code}
@@ -228,7 +231,7 @@ const index = () => {
           {getFormErrorMessage('currency_code')}
         </div>
         <div id="currnecy_symbolDiv" className='p-field'>
-          <h4 id="currnecy_symbolHeader">Para Birimi Sembolu</h4>
+          <h4 id="currnecy_symbolHeader">{i18n.t('currencySymbol')}</h4>
           <InputText
             id='currency_symbol'
             value={formik.values.currency_symbol}
@@ -248,7 +251,7 @@ const index = () => {
           {getFormErrorMessage('currency_symbol')}
         </div>
         <div id="is_taxedDiv" className='p-field'>
-          <h4 id="is_taxedHeader">Veri uygulanabilir</h4>
+          <h4 id="is_taxedHeader">{i18n.t('taxApplicable')}</h4>
           <InputSwitch
             id='is_taxed '
             name='is_taxed'
@@ -263,7 +266,7 @@ const index = () => {
           {getFormErrorMessage('is_taxed')}
         </div>
         <div id="tax_rateDiv" className='p-field p-col-12 p-md-4'>
-          <h4 id="tax_rateHeader">Vergi Yuzdesi</h4>
+          <h4 id="tax_rateHeader">{i18n.t('taxPercentage')}</h4>
           <InputNumber
             disabled={formik.values.is_taxed ? false : true}
             id='tax_rate '
@@ -282,7 +285,7 @@ const index = () => {
           {getFormErrorMessage('tax_rate')}
         </div>
         <div id="is_delivery_chargedDiv" className='p-field'>
-          <h4 id="is_delivery_chargedHeader">Kargo Ucreti uygulanabilir</h4>
+          <h4 id="is_delivery_chargedHeader">{i18n.t('deliveryFeeApplicable')}</h4>
           <InputSwitch
             id='is_delivery_charged '
             name='is_delivery_charged'
@@ -299,7 +302,7 @@ const index = () => {
           {getFormErrorMessage('is_delivery_charged')}
         </div>
         <div id="delivery_chargeDiv" className='p-field p-col-12 p-md-4'>
-          <h4 id="delivery_chargeHeader">Kargo Ucreti</h4>
+          <h4 id="delivery_chargeHeader">{i18n.t('deliveryFee')}</h4>
           <InputNumber
             disabled={formik.values.is_delivery_charged ? false : true}
             id='delivery_charge '
@@ -318,6 +321,22 @@ const index = () => {
             })}
           ></label>
           {getFormErrorMessage('delivery_charge')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+            <h4>{i18n.t('selectLanguage')}</h4>
+            <Dropdown
+                id="language"
+                name="language"
+                options={[
+                  {value: 'en', label:'English'}, 
+                  {value: 'ar', label:'اَلْعَرَبِيَّةُ'}, 
+                  {value: 'ru', label:'русский'},
+                  {value: 'tr', label:'Türkçe'}
+                ]}
+                value={i18n.language}
+                onChange={(e) => {i18n.changeLanguage(e.value); router.reload();}}
+              >
+            </Dropdown>
         </div>
       </>
     );
@@ -700,8 +719,8 @@ const index = () => {
   };
 
   return (
-    <div id='settingsRenderDiv'>
-      <h2 id='settingsRenderHeader'>Eve Yemek Ayarlari</h2>
+    <div  id='settingsRenderDiv'>
+      <h2 id='settingsRenderHeader'>{i18n.t('eveYemekSettings')}</h2>
       <Toast id='toastMessage' ref={toast}></Toast>
       {loading ? (
         <h2 id='LoadingHeader'>Loading</h2>
@@ -712,25 +731,27 @@ const index = () => {
             activeIndex={activeIndex}
             onTabChange={(e) => setActiveIndex(e.index)}
           >
-            <TabPanel  header='Genel'>
+            <TabPanel header={i18n.t('general')}>
               <GeneralSettings />
             </TabPanel>
-            <TabPanel header='Bildirim Gonder'>
+            <TabPanel header={i18n.t('notifications')}>
               <NotificationSettings />
             </TabPanel>
-            <TabPanel header='SMS Gateway'>
+            <TabPanel header={i18n.t('smsGateway')}>
               <SMSGatewaySettings />
             </TabPanel>
-            <TabPanel header='Google Maps'>
+            <TabPanel header={i18n.t('googleMaps')}>
               <GoogleMapsSettings />
             </TabPanel>
-            <TabPanel header='Odeme Gateway'>
+            <TabPanel header={i18n.t('paymentGateway')}>
               <PaymentSettings />
             </TabPanel>
           </TabView>
 
-          <S.SubmitBtn id='submitBtn'>
-            <Button type='submit' label='Submit' />
+          {/* <S.SubmitBtn id='submitBtn'>
+            <Button type='submit' label='Submit' /> */}
+          <S.SubmitBtn id="btnContainer">
+            <Button id='createBtn' type='submit' label={i18n.t('submit')} />
           </S.SubmitBtn>
         </form>
       )}

@@ -13,6 +13,7 @@ import { useFormik } from 'formik';
 import classNames from 'classnames'
 import InputContainer from '../../components/inputs/inputContainer';
 import StandardFileUpload from '../../components/inputs/fileUpload';
+import { i18n } from '../../language';
 
 export const FoodCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -101,9 +102,8 @@ export const FoodCategoryEdit = () => {
             <h4 id="activeHeader">Aktif Mi</h4>
             <InputSwitch id="activeSwitch" checked={formik.values.active} onChange={formik.handleChange} />
           </div>
-
           <S.SubmitBtn id="btnContainer">
-            <Button id="editBtn" type='submit' label='Update' />
+            <Button id="editBtn" type='submit' label={i18n.t('submit')}/>
           </S.SubmitBtn>
         </form>
       </S.ContainerCard>
