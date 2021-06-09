@@ -1,5 +1,4 @@
 import Head from "next/head";
-import vars from "../styles/core/variables";
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -13,10 +12,7 @@ import store from "../store/store";
 import auth from "../helpers/core/auth";
 import Error from "next/error";
 import { i18n } from "../language";
-import { Button } from "primereact/button";
-import { Card } from "primereact/card";
-import { Dropdown } from "primereact/dropdown";
-import { useRouter } from "next/router";
+import TopBar from "../components/TopBar";
 
 function MyApp(props) {
     
@@ -24,7 +20,6 @@ function MyApp(props) {
     const [error, setError] = useState(false);
     const [authCheckFinish, setAuthCheckFinish] = useState(false);
     const [hideBar, setHideBar] = useState(true);
-    const router = useRouter();
 
     useEffect(() => {
         auth.init();
@@ -80,40 +75,11 @@ function MyApp(props) {
                 return (
                     <>  
                         <Sidebar open={hideBar} setOpen={setHideBar}  />
-                        
-                            {hideBar?
-                            <>
-                            <Card className="main-context-card-showBar" style={{display: 'block', height: '100px', maxWidth: (window.innerWidth - vars.sidebar_left_margin)+ 'px'}}>
-                                <Button icon="pi pi-bars" className=" p-button-secondary" onClick={()=> {setHideBar(!hideBar)}}/>
-                                <Dropdown style={{float: 'right', marginRight: '20px'}} 
-                                     id="language"
-                                     name="language"
-                                     placeholder="Language"
-                                     options={[
-                                       {value: 'en', label:'English'}, 
-                                       {value: 'ar', label:'اَلْعَرَبِيَّةُ'}, 
-                                       {value: 'ru', label:'русский'},
-                                       {value: 'tr', label:'Türkçe'}
-                                     ]}
-                                     value={i18n.language}
-                                     onChange={(e) => {i18n.changeLanguage(e.value); router.reload();}}
-                                ></Dropdown>
-                            </Card>
+                        <TopBar hideBar={hideBar} setHideBar={setHideBar} />
                            
-                        <div className="main-context-showBar">
+                        <div className={"main-context" + (hideBar ? "-showBar" : "-hideBar")}>
                             <props.Component {...props.pageProps} />
-                        </div >
-                            </>
-                        :
-                        <>
-                         <Card className="main-context-card-hideBar">
-                                <Button icon="pi pi-bars" className=" p-button-secondary" onClick={()=> {setHideBar(!hideBar)}}/>
-                            </Card>
-                            <div className="main-context-hideBar">
-                            <props.Component {...props.pageProps} />
-                        </div >
-                        </>
-        }            
+                        </div>
                     </>
                 );
         }

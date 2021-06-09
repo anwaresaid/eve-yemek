@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
         position:fixed ;
         border-radius: 0px;
         top:0;
-        width: 100%;
+        width: calc(100% - ${vars.sidebar_left_margin}px);
         left:0;
         height: 65px;
         align-items: center;
