@@ -1,6 +1,6 @@
 export const translations = {
   //Sidebar
-  dashboard: 'Kontrol Panel,',
+  dashboard: 'Kontrol Panel',
   liveOrders: 'Canlı Siparişler',
   orders: 'Siparişler',
   restaurants: 'Restoranlar',
