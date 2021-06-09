@@ -25,6 +25,7 @@ import StandardFileUpload from '../../components/inputs/fileUpload';
 import { Card } from 'primereact/card';
 import FormColumn from '../../components/inputs/formColumn';
 import InputGroup from '../../components/inputs/inputGroup';
+import { i18n } from '../../language';
 
 
     const UpdateRestaurants = () => {
@@ -289,14 +290,14 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 <h2>Genel Bilgiler</h2>
 
                                 <InputGroup>
-                                    <InputContainer label="Ad" name="name" formiks={inputFormiks} component={InputText} iprops={{
+                                    <InputContainer label={i18n.t('name')} name="name" formiks={inputFormiks} component={InputText} iprops={{
                                         value:formik.values.name,
                                         onChange:formik.handleChange,
                                     }}/>
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Restoran Sahibi" name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
+                                    <InputContainer label={i18n.t('restaurantOwner')} name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
                                         value:formik.values.owner,
                                         onChange:formik.handleChange,
                                         options:resOwnersName,
@@ -306,14 +307,14 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Telefon" name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
+                                    <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
                                         value:formik.values.phone,
                                         mask:"(999) 999-9999",
                                         placeholder:"(999) 999-9999",
                                         onChange:formik.handleChange,
                                     }}/>
 
-                                    <InputContainer label="Email" name="email" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                                    <InputContainer label={i18n.t('email')} name="email" formiks={inputFormiks} size={6} component={InputText} iprops={{
                                         value:formik.values.email,
                                         onChange:formik.handleChange,
                                     }}/>
@@ -321,7 +322,7 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Açıklama" name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                    <InputContainer label={i18n.t('description')} name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
                                         value:formik.values.description,
                                         onChange:formik.handleChange,
                                         rows:3,
@@ -330,7 +331,7 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Resim" name="file" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
+                                    <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
                                         setFile:(image)=>{ formik.values.image=image },
                                         showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
                                     }}/>
@@ -340,38 +341,38 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 <h2>Adres bilgileri</h2>
 
                                 <InputGroup>
-                                    <InputContainer label="Şehir" name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                    <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
                                         value:formik.values.city,
                                         onChange:formik.handleChange,
                                         options:cities,
-                                        placeholder:"Şehir",
+                                        placeholder:i18n.t('city'),
                                         optionLabel:"name"
                                     }}/>
 
-                                    <InputContainer label="İlçe" name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                    <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
                                         value:formik.values.town,
                                         onChange:formik.handleChange,
                                         options:counties,
-                                        placeholder:"İlçe",
+                                        placeholder:i18n.t('district'),
                                         optionLabel:"name"
                                     }}/>
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Posta kodu" name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                                    <InputContainer label={i18n.t('postalCode')} name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
                                             value:formik.values.postal_code,
                                             onChange:formik.handleChange,
                                     }}/>
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Enlem" name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                         value:formik.values.latitudeInt,
                                         onValueChange:formik.handleChange,
                                         showButtons:true,
                                     }}/>
                                     
-                                    <InputContainer label="Boylam" name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    <InputContainer label={i18n.t('longitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                         value:formik.values.longtitudeInt,
                                         onValueChange:formik.handleChange,
                                         showButtons:true,
@@ -379,7 +380,7 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Açık Adres" name="address" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                    <InputContainer label={i18n.t('fullAddress')} name="address" formiks={inputFormiks} component={InputTextarea} iprops={{
                                         value:formik.values.address,
                                         onChange:formik.handleChange,
                                         rows:3,
@@ -391,13 +392,13 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 <h2>Restoran Ayarları</h2>
 
                                 <InputGroup>
-                                    <InputContainer label="Tahmini Teslim Süresi (dk)" name="delivery_time" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    <InputContainer label={i18n.t('approximateDeliveryTime')} name="delivery_time" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                         value:formik.values.delivery_time,
                                         onValueChange:formik.handleChange,
                                         showButtons:true,
                                     }}/>
 
-                                    <InputContainer label="Teslimat Yarıçapı (km)" name="delivery_radius" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    <InputContainer label={i18n.t('deliveryRadius')} name="delivery_radius" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                         value:formik.values.delivery_radius,
                                         onValueChange:formik.handleChange,
                                         showButtons:true,
@@ -405,13 +406,13 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Komisyon Oranı %" name="commission_rate" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    <InputContainer label={i18n.t('commissionRate')} name="commission_rate" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                         value:formik.values.commission_rate,
                                         onValueChange:formik.handleChange,
                                         showButtons:true,
                                     }}/>
                                     
-                                    <InputContainer label="Restoran Ücreti" name="restaurant_charges" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    <InputContainer label={i18n.t('restaurantFee')} name="restaurant_charges" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                         value:formik.values.restaurant_charges,
                                         onValueChange:formik.handleChange,
                                         showButtons:true,
@@ -419,13 +420,13 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Minimum amount" name="minimum_order_amount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    <InputContainer label={i18n.t('minimumAmount')} name="minimum_order_amount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                         value:formik.values.minimum_order_amount,
                                         onValueChange:formik.handleChange,
                                         showButtons:true,
                                     }}/>
                                     
-                                    <InputContainer label="Derece" name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    <InputContainer label={i18n.t('rating')}name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                         value:formik.values.rating,
                                         onValueChange:formik.handleChange,
                                         showButtons:true,
@@ -433,7 +434,7 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Lisans Kodu" name="license_code" formiks={inputFormiks} size={12} component={InputText} iprops={{
+                                    <InputContainer label={i18n.t('licenseCode')} name="license_code" formiks={inputFormiks} size={12} component={InputText} iprops={{
                                         value:formik.values.license_code,
                                         onChange:formik.handleChange
                                     }}/>
@@ -441,17 +442,17 @@ import InputGroup from '../../components/inputs/inputGroup';
                                 </InputGroup>
 
                                 <InputGroup>
-                                    <InputContainer label="Saf Sebze Mi" name="is_vegi" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                    <InputContainer label={i18n.t('vegetablesOnly')} name="is_vegi" formiks={inputFormiks} component={InputSwitch} iprops={{
                                         value:formik.values.is_vegi,
                                         onChange:formik.handleChange
                                     }}/>
                                     
-                                    <InputContainer label="Öne Çıkma" name="featured" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                    <InputContainer label={i18n.t('prioritized')} name="featured" formiks={inputFormiks} component={InputSwitch} iprops={{
                                         value:formik.values.featured,
                                         onChange:formik.handleChange
                                     }}/>
                                     
-                                    <InputContainer label="Açık?" name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                    <InputContainer label={i18n.t('open')} name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
                                         value:formik.values.active,
                                         onChange:formik.handleChange
                                     }}/>
@@ -473,4 +474,4 @@ import InputGroup from '../../components/inputs/inputGroup';
     )
 }
 
- export default  (UpdateRestaurants);
+ export default UpdateRestaurants;

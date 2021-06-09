@@ -76,6 +76,12 @@ export const FoodCategoryEdit = () => {
       }
   }, [dispatch, detailsSuccess, foodCategory, successUpdate]);
 
+  const inputFormiks = {
+    getFormErrorMessage,
+    isFormFieldValid
+  }
+
+
   return (
     <div>
       <h1>Kategori Detayi</h1>
@@ -90,13 +96,12 @@ export const FoodCategoryEdit = () => {
               {getFormErrorMessage('name')}
             </div>
           </div>
-          <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
-                <StandardFileUpload 
-                        setFile={(image)=>{formik.values.image=image}}
-                        showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                     >   
-                </StandardFileUpload>
-          </InputContainer>
+          <div className="p-field p-col-12">
+              <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                  setFile:(image)=>{ formik.values.image=image },
+                  showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+              }}/>
+          </div>
           <div>
             <h4>Aktif Mi</h4>
             <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
