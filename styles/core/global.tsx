@@ -117,14 +117,9 @@ const GlobalStyle = createGlobalStyle`
         color: inherit;
     }
 
-    @media screen and (min-width: 1200px){
-        .p-lg-6 {
-            width: 50%!important;
-        }
-    }
-
-    @media screen and (min-width: 1500px){
-        .p-xl-4 {
+    
+    @media screen and (min-width: 1600px){
+        .p-xxl-4 {
             width: 33.33%!important;
         }
     }
