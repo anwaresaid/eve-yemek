@@ -1,30 +1,29 @@
-import { baseUrl } from "../../helpers/constants";
 import axios from "../../helpers/_axios";
 
 export default class RestaurantsService {
 
     async getRestaurants() {
-        const {data}  = await axios.get(baseUrl + '/restaurants')
+        const {data}  = await axios.get('/restaurants')
         return data;
     }
 
     async findRestaurant(id) {
-        const {data}  = await axios.get(baseUrl + `/restaurants/${id}`)
+        const {data}  = await axios.get(`/restaurants/${id}`)
         return data;
     }
 
     async getRestaurantOwners(){
-        const {data} = await axios.get(baseUrl + '/users?fields=roles&text=restaurant_owner');
+        const {data} = await axios.get('/users?fields=roles&text=restaurant_owner');
         return data
     }
 
     async createRestaurant(restaurantCreate){
-        const {data} = await axios.post(baseUrl + `/restaurants/`,{...restaurantCreate});
+        const {data} = await axios.post(`/restaurants/`,{...restaurantCreate});
         return data;
     }
 
     async updateRestaurant(id,restaurantUpdate){
-        const {data} = await axios.put(baseUrl + `/restaurants/${id}`,{...restaurantUpdate});
+        const {data} = await axios.put(`/restaurants/${id}`,{...restaurantUpdate});
         return data;
             }
     }
