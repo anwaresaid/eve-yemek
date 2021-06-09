@@ -49,7 +49,7 @@ const cardData = () => {
         <>
             { order&&
             <TabView id="tabView">
-                <TabPanel header="Siparis Detayi">
+                <TabPanel  header="Siparis Detayi">
                     <OrdersCard 
                     orderData = {order} 
                     id= {router.query.id} 

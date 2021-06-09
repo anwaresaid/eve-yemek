@@ -747,9 +747,6 @@ const index = () => {
               <PaymentSettings />
             </TabPanel>
           </TabView>
-
-          {/* <S.SubmitBtn id='submitBtn'>
-            <Button type='submit' label='Submit' /> */}
           <S.SubmitBtn id="btnContainer">
             <Button id='createBtn' type='submit' label={i18n.t('submit')} />
           </S.SubmitBtn>

@@ -4,11 +4,11 @@ import { Divider } from 'primereact/divider';
 const cardDate = (props) => {    
     return (
         <div>
-            <div>
-                <Divider/>
-                <div className="p-grid">
-                    <b className="p-col">{props.label}</b>
-                    <div className="p-col">
+            <div id='dividerDiv'>
+                <Divider />
+                <div id='cardDateDiv' className="p-grid">
+                    <b id='cardDateLabel' className="p-col">{props.label}</b>
+                    <div id='dateDiv' className="p-col">
                         {props.value}
                     </div>
                 </div>

@@ -34,7 +34,7 @@ const OrderStatus = (status:number) => {
     }
 
     return(
-        <div>
+        <div id='statusTag'>
            <Tag className="p-mr-2" value={value} severity={severity}></Tag>
         </div>
     )

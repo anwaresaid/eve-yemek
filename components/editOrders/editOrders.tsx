@@ -15,8 +15,9 @@ const onChangeStatus = (e) =>{
         
         <div>
             {currentStatus && 
-            <div>
+            <div id='dropDownDiv'>
                 <DropDown
+                    id='dropDown'
                     value={currentStatus}
                     options={status}
                     onChange={onChangeStatus}
@@ -24,10 +25,12 @@ const onChangeStatus = (e) =>{
                     label="Sipariş Durumu"
                     />
                 <DropDown
+                    id='dropDown'
                     placeHolder="Ödeme Durumu"
                     label="Ödeme Durumu"
                     />
                 <DropDown
+                    id='dropDown'
                     placeHolder="Kargocu Atama"
                     label="Kargocu Atama"
                     />      
