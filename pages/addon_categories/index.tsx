@@ -40,10 +40,10 @@ const AddonCategoriesList = () => {
   );
 
   return (
-    <>
+    <div id="addonCategoryTabe">
       {!loading && addonCategories && <AddOnCategoryTable addonCategories={addonCategories.items}></AddOnCategoryTable>}
       {loading && <ProgressSpinner/>}
-    </>
+    </div>
   );
 };
 

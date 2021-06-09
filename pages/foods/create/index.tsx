@@ -106,6 +106,7 @@ export const Index = () => {
 
         }
     });
+
 //setting names for dropdowns.
     const settingDropDownNames= () => {
         var res = restaurants.items
@@ -162,28 +163,28 @@ export const Index = () => {
     }
 
     return (
-        <div>
-            <h1>{i18n.t('createMeal')}</h1>
-            <Toast ref={toast}></Toast>
-            <S.ContainerCard>
-                 <form onSubmit={formik.handleSubmit}  >
+        <div id="create_foods">
+            <h1 id="createHeader">{i18n.t('createMeal')}</h1>
+            <Toast id="toastMessage" ref={toast}></Toast>
+            <S.ContainerCard id="container">
+                 <form id="createForm" onSubmit={formik.handleSubmit}  >
                     <div className="p-fluid">
-                        <div className="p-field">
-                            <h4>{i18n.t('restaurant')}</h4>
+                        <div id="restaurantNameDiv" className="p-field">
+                            <h4 id="restaurantNameHeader">{i18n.t('restaurant')}</h4>
                             <Dropdown id="resName" name="resName" value={formik.values.resName} options={restaurantName} onChange={formik.handleChange} optionLabel="name" placeholder="Select a Restaurant" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('resName') })} />
-                            <label htmlFor="resName" className={classNames({ 'p-error': isFormFieldValid('resName') })}></label>
+                            <label id="errorRestaurantName" htmlFor="resName" className={classNames({ 'p-error': isFormFieldValid('resName') })}></label>
                             {getFormErrorMessage('resName')}
                         </div>
-                        <div className="p-field">
-                            <h4>{i18n.t('itemName')}</h4>
+                        <div id="nameDiv" className="p-field">
+                            <h4 id="nameHeader">{i18n.t('itemName')}</h4>
                             <InputText id="name" name="name" value={formik.values.name}  onChange={formik.handleChange} type="text"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-                            <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+                            <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
                             {getFormErrorMessage('name')}
                         </div>
-                        <div className="p-field">
-                            <h4>{i18n.t('itemDescription')}</h4>
+                        <div id="descriptionDiv" className="p-field">
+                            <h4 id="descriptionHeader">{i18n.t('itemDescription')}</h4>
                             <InputText id="description" name="description" onChange={formik.handleChange} type="text"    autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })}/>
-                            <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
+                            <label id="errorDescription" htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
                             {getFormErrorMessage('description')}
                         </div>
                     </div>
@@ -195,17 +196,17 @@ export const Index = () => {
                         }}/>
                     </div>
                     <div className="p-fluid">
-                        <div className="card">
-                            <h4>{i18n.t('mealCategory')}</h4>
+                        <div id="foodCategoriesDiv" className="card">
+                            <h4 id="categoryNameHeader">{i18n.t('mealCategory')}</h4>
                             <Dropdown id="categoryName" name="categoryName" value={formik.values.categoryName}
                              options={foodCategoryName} onChange={formik.handleChange} optionLabel="name"
                               placeholder={i18n.t('mealCategory')} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
-                            <label htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
+                            <label id="errorCategoryName" htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
                                         {getFormErrorMessage('categoryName')}
-                            <h4>{i18n.t('selectAddons')}</h4>
-                            <div>
+                            <h4 id="addonsHeader">{i18n.t('selectAddons')}</h4>
+                            <div id="addonstDiv">
                                 {multiSelect()}
-                                <label htmlFor="addons" className={classNames({ 'p-error': isFormFieldValid('addons') })}></label>
+                                <label id="errorAddons" htmlFor="addons" className={classNames({ 'p-error': isFormFieldValid('addons') })}></label>
                                         {getFormErrorMessage('addons')}
                             </div>
 
@@ -213,27 +214,26 @@ export const Index = () => {
                     </div>
                     <div className="p-grid p-fluid">
                         <div className="p-field p-col-12 p-md-3">
-                            <h4>{i18n.t('price')}</h4>
+                            <h4 id="priceHeader">{i18n.t('price')}</h4>
                             <InputNumber id="price" name="price" value={formik.values.price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
                         </div>
-                        <div className="p-field p-col-12 p-md-3">
-                            <h4>{i18n.t('discountedPrice')}</h4>
+                        <div id="discountContainer" className="p-field p-col-12 p-md-3">
+                            <h4 id="discountHeader">{i18n.t('discountedPrice')}</h4>
                             <InputNumber id="discount_price" name="discount_price" value={formik.values.discount_price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
                         </div>
                     </div>
-                    <div>
-
-                        <h4>{i18n.t('vegetablesOnly')}</h4>
+                    <div id="inputSwitchContainer">
+                        <h4 id="vegiHeader">{i18n.t('vegetablesOnly')}</h4>
                         <InputSwitch checked={formik.values.vegi} name="vegi" id="vegi"  onChange={formik.handleChange} />
 
-                        <h4>{i18n.t('prioritized')}</h4>
+                        <h4 id="featuredHeader">{i18n.t('prioritized')}</h4>
                         <InputSwitch checked={formik.values.featured} name="featured" id="featured" onChange={formik.handleChange} />
 
-                        <h4>{i18n.t('active')}</h4>
+                        <h4 id="activeHeader">{i18n.t('active')}</h4>
                         <InputSwitch checked={formik.values.active} name="active" id="active" onChange={formik.handleChange} />
                     </div>
-                    <S.SubmitBtn>
-                        <Button type="submit" label="Submit"/>
+                    <S.SubmitBtn id="btnContainer">
+                        <Button id="createBtn" type="submit" label="Create"/>
                     </S.SubmitBtn>
                 </form>
             </S.ContainerCard>

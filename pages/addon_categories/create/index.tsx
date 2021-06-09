@@ -60,14 +60,14 @@ export const Index = () => {
   }, [success]);
 
   return (
-    <div>
-      <h1>{i18n.t('createAddonCategory')}</h1>
-      <Toast ref={toast}></Toast>
-      <S.ContainerCard>
-        <form onSubmit={formik.handleSubmit}>
+    <div id="create_Add_On_Category">
+      <h1 id="createHeader">{i18n.t('createAddonCategory')}</h1>
+      <Toast id="toastMessage" ref={toast}></Toast>
+      <S.ContainerCard id='container'>
+        <form id="createForm" onSubmit={formik.handleSubmit}>
           <div className='p-fluid'>
-            <div className='p-field'>
-              <h4>{i18n.t('categoryName')}</h4>
+            <div id="nameDiv" className='p-field'>
+              <h4 id="nameHeader">{i18n.t('categoryName')}</h4>
               <InputText
                 id='name'
                 name='name'
@@ -79,12 +79,13 @@ export const Index = () => {
               />
               <label
                 htmlFor='name'
+                id="errorName"
                 className={classNames({ 'p-error': isFormFieldValid('name') })}
               ></label>
               {getFormErrorMessage('name')}
             </div>
-            <div className='p-field'>
-              <h4>{i18n.t('type')}</h4>
+            <div id="enumDiv" className='p-field'>
+              <h4 id="enumHeader">{i18n.t('type')}</h4>
               <InputText
                 id='enum'
                 name='enum'
@@ -96,13 +97,14 @@ export const Index = () => {
               />
               <label
                 htmlFor='enum'
+                id="errorEnum"
                 className={classNames({ 'p-error': isFormFieldValid('enum') })}
               ></label>
               {getFormErrorMessage('enum')}
             </div>
           </div>
           <S.SubmitBtn>
-            <Button type='submit' label={i18n.t('submit')} />
+            <Button id="btnCreate" type='submit' label={i18n.t('submit')} />
           </S.SubmitBtn>
         </form>
       </S.ContainerCard>

@@ -15,36 +15,36 @@ const OrdersCard = (props) => {
   
     
     return (
-        <>
-            <h1>Sipariş {props.id}</h1>
+        <div id='ordersDiv'>
+            <h1 id='ordersHeader'>Sipariş {props.id}</h1>
             {props.orderData && props.userData&& props.restaurantData&&<>
-                <Card title="Alpuğan - Elçiboğa">
+                <Card id='ordersCard' title="Alpuğan - Elçiboğa">
                     <div className="p-grid">
-                        <div className="p-col">
-                            <div className="p-pb-2">Kimden</div>
-                            <div><b>{ props.userData.address[0][0]}</b></div>
+                        <div id='detailsDiv' className="p-col">
+                            <div id='nameDiv' className="p-pb-2">Kimden</div>
+                            <div id='addressDiv'><b>{ props.userData.address[0][0]}</b></div>
                             <div>{}</div>
-                            <div>Telefon: { props.userData.phone}</div>
-                            <div>E-Posta: { props.userData.email}</div>
+                            <div id='phoneDiv'>Telefon: { props.userData.phone}</div>
+                            <div id='emailDiv'>E-Posta: { props.userData.email}</div>
                         </div>
-                        <div className="p-col">
-                            <div className="p-pb-2">Kime</div>
-                            <div><b>{ props.restaurantData.name}</b></div>
-                            <div>{ props.restaurantData.address}</div>
-                            <div>Telefon: { props.restaurantData.phone}</div>
-                            <div>E-Posta: { props.restaurantData.email}</div>
+                        <div id='resInfoDiv' className="p-col">
+                            <div id='nameDiv' className="p-pb-2">Kime</div>
+                            <div id='nameInputDiv'><b>{ props.restaurantData.name}</b></div>
+                            <div id='addressDiv'>{ props.restaurantData.address}</div>
+                            <div id='phoneDiv'>Telefon: { props.restaurantData.phone}</div>
+                            <div id='emailDiv'>E-Posta: { props.restaurantData.email}</div>
                         </div>
-                        <div className="p-col">
-                            <div><b>Fatura:#04-29-934F2449-D88C</b></div>
-                            <div><b>2021-04-29 10:26:45</b></div>
+                        <div id='recieptDiv' className="p-col">
+                            <div id='reciepIdtDiv'><b>Fatura:#04-29-934F2449-D88C</b></div>
+                            <div id='recieptDateDiv'><b>2021-04-29 10:26:45</b></div>
                             <br/>
-                            <div><b>Sipariş ID: </b>{props.orderData.id}</div>
-                            <div><b>Sipariş Verildi: </b><CardDate date = {props.orderData.createdAt}/></div>
+                            <div id='orderIdDiv'><b>Sipariş ID: </b>{props.orderData.id}</div>
+                            <div id='createdAtDiv'><b>Sipariş Verildi: </b><CardDate date = {props.orderData.createdAt}/></div>
                             {OrderStatus(props.orderData.status_id ?? 1)}
                         </div>
                     </div>
 
-                    <DataTable resizableColumns columnResizeMode="fit" className="p-datatable-striped">
+                    <DataTable id='dataTable' resizableColumns columnResizeMode="fit" className="p-datatable-striped">
                         <Column field="name" header="Yemek Adı" style={{width:'50%'}}></Column>
                         <Column field="price" header="Tane Fiyatı"></Column>
                         <Column field="" header="Adet"></Column>
@@ -52,22 +52,22 @@ const OrdersCard = (props) => {
                     </DataTable>
 
                     <div className="p-grid">
-                        <div className="p-col">
-                            <OrderDivider label ="Ödeme Yöntemi:" value = {props.orderData.payment_type}/>
+                        <div id='dividerDiv' className="p-col">
+                            <OrderDivider id='orderDivider' label ="Ödeme Yöntemi:" value = {props.orderData.payment_type}/>
                         </div>
-                        <div className="p-col-5">
+                        <div id='orderDetailsDiv' className="p-col-5">
                             <div>
-                                <OrderDivider label ="Ara Toplam:" value = {props.orderData.restaurant_amount}/>
-                                <OrderDivider label ="Vergi (0%)" value = {props.orderData.tax}/>
-                                <OrderDivider label ="Kargo Ücreti:" value = {props.orderData.delivery_amount}/>
-                                <OrderDivider label ="Kupon İndirimi (-):" value = {props.orderData.coupon_discount}/>
-                                <OrderDivider label ="Toplam(-):" value = {props.orderData.total_amount}/>
+                                <OrderDivider id='restaurantAmount' label ="Ara Toplam:" value = {props.orderData.restaurant_amount}/>
+                                <OrderDivider id='tax' label ="Vergi (0%)" value = {props.orderData.tax}/>
+                                <OrderDivider id='deliveryAmount' label ="Kargo Ücreti:" value = {props.orderData.delivery_amount}/>
+                                <OrderDivider id='discountCoupon' label ="Kupon İndirimi (-):" value = {props.orderData.coupon_discount}/>
+                                <OrderDivider id='totalAmount' label ="Toplam(-):" value = {props.orderData.total_amount}/>
                             </div>
                         </div>
                     </div>
                 </Card>
             </>}
-        </>
+        </div>
         
     )
 }

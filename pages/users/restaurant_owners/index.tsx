@@ -17,9 +17,9 @@ const restaurantOwnerList = () => {
      }, [dispatch]);
 
     return (
-        <div>
+        <div id="restaurantOwnersTable">
             {!loading && success && <UsersTable users={restaurantOwners.items} editPath="restaurant_owners"></UsersTable>}
-            {!loading && !success && <h4>Restoran sahiplerinin verileri alınamadı!</h4>}
+            {!loading && !success && <h4 id='restaurantOwnersHeader'>Restoran sahiplerinin verileri alınamadı!</h4>}
             {loading && <ProgressSpinner/>}
         </div>
     )

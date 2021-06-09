@@ -83,16 +83,16 @@ export const FoodCategoryEdit = () => {
 
 
   return (
-    <div>
-      <h1>Kategori Detayi</h1>
-      <Toast ref={toast}></Toast>
-      <S.ContainerCard>
-        <form onSubmit={formik.handleSubmit}>
+    <div id="edit_food_categories">
+      <h1 id="editHeader">Kategori Detayi</h1>
+      <Toast id="toastMessage" ref={toast}></Toast>
+      <S.ContainerCard id="container">
+        <form id="editForm" onSubmit={formik.handleSubmit}>
           <div className='p-fluid'>
-            <div className='p-field'>
+            <div id="nameDiv" className='p-field'>
               <h4>Kategori Adı</h4>
               <InputText id='name' name='name' value={formik.values.name} onChange={formik.handleChange} type='text' className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-              <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+              <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
               {getFormErrorMessage('name')}
             </div>
           </div>
@@ -106,9 +106,8 @@ export const FoodCategoryEdit = () => {
             <h4>Aktif Mi</h4>
             <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
           </div>
-
-          <S.SubmitBtn>
-            <Button type='submit' label={i18n.t('submit')}/>
+          <S.SubmitBtn id="btnContainer">
+            <Button id="editBtn" type='submit' label={i18n.t('submit')}/>
           </S.SubmitBtn>
         </form>
       </S.ContainerCard>

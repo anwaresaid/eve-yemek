@@ -23,8 +23,8 @@ const AddUser = () => {
     }, [addUserSuccess, error])
 
     return (
-        <div>
-            <Toast ref={toast}></Toast>
+        <div id='createUserDiv'>
+            <Toast id='toastMessage' ref={toast}></Toast>
             <UserDataInput></UserDataInput>
         </div>
     )

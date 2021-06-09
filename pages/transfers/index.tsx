@@ -15,13 +15,15 @@ const Transfers = () => {
     ]
 
     return (
-        <StandardTable
-            header={Header(setGlobalFilter,"Transfers")}
-            columns={columns}
-            globalFilter={globalFilter} 
-            emptyMessage="No transfers found"
-            > 
-        </StandardTable>
+        <div id="transfersTable">
+            <StandardTable
+                header={Header(setGlobalFilter,"Transfers")}
+                columns={columns}
+                globalFilter={globalFilter} 
+                emptyMessage="No transfers found"
+                > 
+            </StandardTable>
+        </div>
     )
 }
 

@@ -278,9 +278,9 @@ import { i18n } from '../../language';
     }
 
     return (
-        <div>
-            <h1>Oluştur</h1>
-            <Toast ref={toast}></Toast>
+        <div id="edit_restaurant">
+            <h1 id="editHeader">Oluştur</h1>
+            <Toast id="toastMessage" ref={toast}></Toast>
             <TabView>
                 <TabPanel header="Restoran Düzenle">
                     <S.ContainerCard>

@@ -47,10 +47,10 @@ const Orders = () => {
     ]
 
     return (
-        <div>
+        <div id="ordersTable">
             {loading ? <ProgressSpinner /> : 
-            <div className="card">
-                <h1>{i18n.t('orders')}</h1>
+            <div id="ordersCard" className="card">
+                <h1 id="ordersHeader">{i18n.t('orders')}</h1>
                 <StandardTable 
                     header={Header(setGlobalFilter,"orders")}
                     columns={columns} 

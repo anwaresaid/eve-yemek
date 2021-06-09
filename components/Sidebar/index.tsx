@@ -56,11 +56,11 @@ const Sidebar = (props) => {
         if (initMenus.length > 0) {
             return (
                 <>
-                    <S.Container open = {props.open}>
-                        <S.TopLogoContainer>
-                            <img src="/images/logos/eve-yemek-05.png" />
+                    <S.Container id='sideBarContainer' open = {props.open}>
+                        <S.TopLogoContainer id='logoContainer'>
+                            <img id='image' src="/images/logos/eve-yemek-05.png" />
                         </S.TopLogoContainer>
-                        <PanelMenu model={initMenus} />
+                        <PanelMenu id='panelMenu' model={initMenus} />
                     </S.Container>
                 </>
             );

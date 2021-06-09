@@ -29,11 +29,11 @@ const FoodCategoriesList = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div id="foodsTable">
       {!loading && foodCategoriesList && <Food_CategoriesTable foodCategories={foodCategoriesList.items}></Food_CategoriesTable>}
       {loading && <ProgressSpinner/>}
         
-    </>
+    </div>
   );
 };
 export default FoodCategoriesList;

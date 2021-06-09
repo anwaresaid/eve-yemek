@@ -68,7 +68,7 @@ function MyApp(props) {
         }
 
         if (error) {
-            return <Error statusCode={404} />;
+            return <Error id='errorStatusCode' statusCode={404} />;
         }
 
         if (loggedIn) {
@@ -88,19 +88,19 @@ function MyApp(props) {
     };
     return (
         <>
-            <Head>
-                <link rel="shortcut icon" href="/images/logos/logo.png"></link>
-                <title>Eve Yemek - Admin Panel</title>
+            <Head >
+                <link id='logoLink' rel="shortcut icon" href="/images/logos/logo.png"></link>
+                <title id='adminPanelTitle'>Eve Yemek - Admin Panel</title>
                 <meta charSet="utf-8" />
                 <meta
                     name="viewport"
                     content="initial-scale=1.0, width=device-width"
                 />
-                <meta name="description" content="Eve yemek admin panel" />
+                <meta id='adminPanelDescription' name="description" content="Eve yemek admin panel" />
             </Head>
-            <Provider store={store}>
-                <div className="app">
-                    <GlobalStyle open={hideBar} setOpen={setHideBar}/>
+            <Provider  store={store}>
+                <div id='appDiv' className="app">
+                    <GlobalStyle id='globalStyle' open={hideBar} setOpen={setHideBar}/>
 
                     {renderComp()}
                 </div>

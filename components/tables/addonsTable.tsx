@@ -22,6 +22,8 @@ const AddonsTable = (props) => {
         let categoryName = props.addonCat.filter(cat => {return cat.id.localeCompare(rowData.addOn_category_id)==0;})
         return categoryName;
          }
+
+ 
     
     const columns = [
         {field: 'id', header: 'ID'},

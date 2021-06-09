@@ -20,7 +20,7 @@ const FoodsList =  () => {
      }, [success]);
     
      return (
-        <div>
+        <div id="foodsCategoryTable">
             {!loading && foods && <FoodsTable foods={foods.items}></FoodsTable>}
             {loading && <ProgressSpinner/>}
         </div>

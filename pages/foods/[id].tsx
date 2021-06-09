@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import {BrowserRouter as Router} from 'react-router-dom';
 import EditFoods from '../../components/editFoods/editFoods'
 import {listAddons} from '../../store/actions/addons.action';
 import {listFoodCategory} from '../../store/actions/foodCategory.action';
@@ -64,8 +63,6 @@ export const EditFood = () => {
 
 
     return (
-    <Router>
-
         <EditFoods 
             updatedFoodSuccess={updatedFoodSuccess}
             addonSuccess={addonSuccess}
@@ -80,8 +77,6 @@ export const EditFood = () => {
             foodCatlist={foodCatlist}
             page = {"foods"} 
             />
-            
-    </Router>
             )
 }
 
