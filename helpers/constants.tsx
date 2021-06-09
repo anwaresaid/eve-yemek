@@ -1,6 +1,6 @@
 import { i18n } from "../language";
 
-export const baseUrl = 'https://dev.eve-yemek.com';
+export const baseUrl = 'https://api.eve-yemek.com';
 
 // prettier-ignore
 export const allMenuItems:any = [
