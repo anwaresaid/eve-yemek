@@ -116,10 +116,13 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1.2;
         color: inherit;
     }
-/* 
-    @media screen and (max-width: 760px){
 
-    } */
+    
+    @media screen and (min-width: 1600px){
+        .p-xxl-4 {
+            width: 33.33%!important;
+        }
+    }
 
 `;
 

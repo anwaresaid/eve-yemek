@@ -61,6 +61,12 @@ export const Index = () => {
     }
   }, [success]);
 
+  const inputFormiks = {
+    getFormErrorMessage,
+    isFormFieldValid
+  }
+
+
   return (
     <div>
       <h1>{i18n.t('createMealCategory')}</h1>
@@ -75,13 +81,12 @@ export const Index = () => {
               {getFormErrorMessage('name')}
             </div>
           </div>
-          <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
-                <StandardFileUpload 
-                        setFile={(image)=>{formik.values.image=image}}
-                        showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                     >   
-                </StandardFileUpload>
-            </InputContainer>
+          <div className="p-field p-col-12">
+              <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                  setFile:(image)=>{ formik.values.image=image },
+                  showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+              }}/>
+          </div>
           <div>
             <h4>{i18n.t('active')}</h4>
             <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
