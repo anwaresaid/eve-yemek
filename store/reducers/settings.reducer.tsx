@@ -1,17 +1,19 @@
+import { i18n } from '../../language';
 import { settingsTypes } from '../types/settings.type';
 
 const initialState = [];
 
-export const listSettingsReducer = (state = initialState, action) => {
+export const listSettingsReducer = (state = {settings:{}}, action) => {
   switch (action.type) {
     case settingsTypes.SETTINGS_LIST_REQUEST:
-      return { loading: true };
+      return {...state, loading: true };
 
     case settingsTypes.SETTINGS_LIST_SUCCESS:
+     
       return {
         loading: false,
         success: true,
-        settings: action.payload,
+        settings: {...state.settings, ...action.payload},
       };
 
     case settingsTypes.SETTINGS_LIST_FAIL:

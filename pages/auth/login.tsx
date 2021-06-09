@@ -12,6 +12,7 @@ import { Checkbox } from "primereact/checkbox";
 import { connect, useSelector } from "react-redux";
 
 import userActions from "../../store/actions/user.action";
+import { i18n } from "../../language";
 
 const Login = (props) => {
 	const [email, setEmail] = useState("");
@@ -37,13 +38,13 @@ const Login = (props) => {
 				<S.LoginWrapper>
 					<Card className='p-shadow-5'>
 						<form onSubmit={(e)=>handleSubmit(e)}>
-							<S.Header className='p-text-center'>Login</S.Header>
+							<S.Header className='p-text-center'>{i18n.t('login')}</S.Header>
 
 							<div className='p-fluid p-formgrid p-grid'>
 								<div className='p-field p-col-12 p-md-12'>
 									<InputText 
 										required 
-										placeholder='E-Mail' 
+										placeholder={i18n.t('email')}
 										name='email'
 										type="email"
 										value={email}
@@ -54,7 +55,7 @@ const Login = (props) => {
 									<Password
 										required
 										toggleMask
-										placeholder='Password'
+										placeholder={i18n.t('password')}
 										feedback={false}
 										name='password'
 										value={password}
@@ -68,14 +69,14 @@ const Login = (props) => {
 									checked={remember}
 									onChange={(e) => setRemember(e.checked)}
 								/>
-								<label htmlFor='remember'>Remember me</label>
+								<label htmlFor='remember'>{i18n.t('rememberMe')}</label>
 							</div>
 							<div className="p-error">
 								{props?.user?.login_error_msg}
 							</div>
 							<Button
 								type="submit"
-								label='Login'
+								label={i18n.t('login')}
 								className='p-button-rounded p-button-danger'
 							/>
 						</form>

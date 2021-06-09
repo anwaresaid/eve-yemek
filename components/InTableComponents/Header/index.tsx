@@ -1,7 +1,5 @@
 import { InputText } from "primereact/inputtext";
 import React, { useEffect, useState } from "react";
-import * as S from '../../../styles/food/food.list.style';
-
 
 const Index = (setGlobalFilter,name) => {
     return (
