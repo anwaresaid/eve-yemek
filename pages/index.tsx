@@ -45,14 +45,14 @@ const Index = (props) => {
         ]
     };
     return (
-        <div className="ContainerPanel">
+        <div id='containerPanel' className="ContainerPanel">
             {loading ? <ProgressSpinner /> :
-            <S.DashboardWrapper>
-            <h1>Kontrol Paneli</h1>
+            <S.DashboardWrapper id='dashBoard'>
+            <h1 id='controlPanelHeader'>Kontrol Paneli</h1>
             <div className='p-grid p-grid-container'>
                 <div className='p-col-6 p-md-6 p-lg-2'>
-                    <div className='box' style={{ backgroundColor: "#17a2b8" }}>
-                        <div className='box__info'>
+                    <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
+                        <div id='boxInfoDiv' className='box__info'>
                             <span>{reportData?.report.daily_orders.length}</span>
                             <p>Günlük Siparişler</p>
                         </div>

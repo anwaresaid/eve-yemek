@@ -12,10 +12,12 @@ const UpdateCustomer = () => {
     },[router.query.id])
 
     return(
-        <UpdateUser 
-            id={id}
-            returnTo="/users/customers">
-        </UpdateUser>
+        <div id='updateCustomerUserDiv'>
+            <UpdateUser 
+                id={id}
+                returnTo="/users/customers">
+            </UpdateUser>
+        </div>
     )
 }
 

@@ -8,10 +8,12 @@ const UpdateRestaurantOwner = () => {
     const [id, setID] = useState(router.query.id)
 
     return(
-        <UpdateUser 
-            id={id}
-            returnTo="/users/restaurant_owners">
-        </UpdateUser>
+        <div id='restaurantOwnersDiv'>
+            <UpdateUser 
+                id={id}
+                returnTo="/users/restaurant_owners">
+            </UpdateUser>
+        </div>
     )
 }
 
