@@ -216,6 +216,11 @@ import { i18n } from '../../../language';
         { name: 'Paris', code: 'PRS' }
     ];
 
+    const inputFormiks = {
+        getFormErrorMessage,
+        isFormFieldValid
+    }
+
     return (
         <div id="create_restaurant">
             <h1 id="createHeader">{i18n.t('createRestaurant')}</h1>
@@ -243,15 +248,11 @@ import { i18n } from '../../../language';
                             {getFormErrorMessage('owner')}
                         </div>
                     </div>
-                    <div id="imageDiv" className="p-field p-col-12">
-                        <InputContainer  name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
-                                <StandardFileUpload 
-                                        id="fileUpload"
-                                        setFile={(image)=>{formik.values.image=image}}
-                                        showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                                    >   
-                                </StandardFileUpload>
-                        </InputContainer>
+                    <div className="p-field p-col-12">
+                        <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                            setFile:(image)=>{ formik.values.image=image },
+                            showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                        }}/>
                     </div>
                     <div id="phoneDiv" className="p-field p-col-12 p-md-4">
                         <h4 id="phoneHeader">{i18n.t('telephone')}</h4>
@@ -348,9 +349,9 @@ import { i18n } from '../../../language';
                 <InputSwitch  id="is_vegi " name="is_vegi"  checked={formik.values.is_vegi} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('is_vegi') })}/>
                 <label id="errorVegi" htmlFor="is_vegi" className={classNames({ 'p-error': isFormFieldValid('is_vegi') })}></label>
                             {getFormErrorMessage('is_vegi')}
-                <h4 id="featuredHeader">{i18n.t('prioritized')}</h4>
-                <InputSwitch  id="featured " name="featured"  checked={formik.values.featured} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('featured') })}/>
-                <label id="errorFeatured" htmlFor="featured" className={classNames({ 'p-error': isFormFieldValid('featured') })}></label>
+                <h4>{i18n.t('prioritized')}</h4>
+                <InputSwitch  id="featured" name="featured"  checked={formik.values.featured} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('featured') })}/>
+                <label htmlFor="featured" className={classNames({ 'p-error': isFormFieldValid('featured') })}></label>
                             {getFormErrorMessage('featured')}
                 <h4 id="activeHeader">{i18n.t('open')}</h4>
                 <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}

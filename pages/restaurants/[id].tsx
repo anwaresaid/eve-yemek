@@ -1,15 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import {InputText} from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { InputText } from 'primereact/inputtext';
 import * as S from '../../styles/restaurants/restaurants.create.style'
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
-import {updateRestaurant} from '../../store/actions/restaurant.action';
-import {listRestaurantOwners} from '../../store/actions/restaurant.action';
-import {findRestaurant} from '../../store/actions/restaurant.action';
-import {useDispatch,useSelector} from 'react-redux';
+import { updateRestaurant } from '../../store/actions/restaurant.action';
+import { listRestaurantOwners } from '../../store/actions/restaurant.action';
+import { findRestaurant } from '../../store/actions/restaurant.action';
+import { useDispatch,useSelector } from 'react-redux';
 import {RootState} from 'typesafe-actions';
 import { InputMask } from 'primereact/inputmask';
 import { restaurantsTypes } from '../../store/types/restaurants.type';
@@ -21,6 +22,10 @@ import FoodsTable from '../../components/tables/foodsTable';
 import { listFoodByRestaurant } from '../../store/actions/foods.action';
 import InputContainer from '../../components/inputs/inputContainer';
 import StandardFileUpload from '../../components/inputs/fileUpload';
+import { Card } from 'primereact/card';
+import FormColumn from '../../components/inputs/formColumn';
+import InputGroup from '../../components/inputs/inputGroup';
+import { i18n } from '../../language';
 
 
     const UpdateRestaurants = () => {
@@ -69,28 +74,28 @@ import StandardFileUpload from '../../components/inputs/fileUpload';
             image : 'image url',
             phone : '',
             email : '',
-            rating : '',
-            delivery_time : '',
-            commission_rate : '',
+            rating : 0,
+            delivery_time : 0,
+            commission_rate : 0,
             license_code : '',
             file:'',
-            restaurant_charges : '',
-            delivery_radius : '',
+            restaurant_charges : 0,
+            delivery_radius : 0,
             is_veg : false,
             featured : false,
             active : false,
             owner : '',
             owner_name : '',
-            city : '',
-            town : '',
+            city : 0,
+            town : 0,
             is_agreement : false,
-            minimum_order_amount: '',
-            latitudeInt: '',
-            longtitudeInt: '',
-            city_id:'',
-            town_id:'',
-            longtitude: '',
-            latitude: '',
+            minimum_order_amount:0,
+            latitudeInt: 0,
+            longtitudeInt: 0,
+            city_id:0,
+            town_id:0,
+            longtitude: 0,
+            latitude: 0,
             is_open: false,
 
         },
@@ -191,8 +196,8 @@ import StandardFileUpload from '../../components/inputs/fileUpload';
             return errors;
         },
         onSubmit: (data:any) => {
+            console.log(data);
             dispatch(updateRestaurant(router.query.id,data));
-
         }
     });
 
@@ -267,164 +272,206 @@ import StandardFileUpload from '../../components/inputs/fileUpload';
         { name: 'Paris', code: 'PRS' }
     ];
 
+    const inputFormiks = {
+        getFormErrorMessage,
+        isFormFieldValid
+    }
+
     return (
         <div id="edit_restaurant">
             <h1 id="editHeader">Oluştur</h1>
             <Toast id="toastMessage" ref={toast}></Toast>
             <TabView>
-                <TabPanel header="Restoran Duzenle">
-            <S.ContainerCard id="container">
-                 <form id="editForm" onSubmit = {formik.handleSubmit} >
+                <TabPanel header="Restoran Düzenle">
+                    <S.ContainerCard>
+                    <form onSubmit = {formik.handleSubmit} >
+                        <div className="p-grid">
+                            <FormColumn divideCount={3}>
+                                <h2>Genel Bilgiler</h2>
 
-                    <div className="p-fluid">
-                        <div id="nameDiv" className="p-field p-col-12">
-                            <h4 id="nameHeader">Ad</h4>
-                            <InputText id="name " name="name" value={formik.values.name} onChange={formik.handleChange} type="text" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })}/>
-                            <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
-                            {getFormErrorMessage('name')}
-                        </div>
-                        <div id="descritpionDiv" className="p-field p-col-12">
-                            <h4 id="descritpionHeader">Açıklama</h4>
-                            <InputText id="description" name="description" value={formik.values.description} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })} onChange={formik.handleChange} type="text"/>
-                            <label id="errorDescritpion" htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
-                            {getFormErrorMessage('description')}
-                        </div>
-                        <div id="ownerDiv" className="p-field p-col-12">
-                            <h4 id="ownerHeader">Restoran Sahibi </h4>
-                            <Dropdown  id="owner " name="owner"  value={formik.values.owner} options={resOwnersName} onChange={formik.handleChange} optionLabel="name" placeholder="Select an Owner" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('owner') })} />
-                            <label id="errorOwner"  htmlFor="owner" className={classNames({ 'p-error': isFormFieldValid('owner') })}></label>
-                            {getFormErrorMessage('owner')}
-                        </div>
-                    </div>
-                    <div id="imageDiv" className="p-field p-col-12">
-                    <InputContainer  name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
-                        <StandardFileUpload
-                                id="fileUpload" 
-                                setFile={(image)=>{formik.values.image=image}}
-                                showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                            >   
-                        </StandardFileUpload>
-                    </InputContainer>
-                    </div>
-                    <div id="phoneDiv" className="p-field p-col-12 p-md-4">
-                        <h4 id="phoneHeader">Telefon</h4>
-                        <InputMask  id="phone " name="phone"  mask="(999) 999-9999" value={formik.values.phone} placeholder="(999) 999-9999" onChange={formik.handleChange}  className={classNames({ 'p-invalid': isFormFieldValid('phone') })}></InputMask>
-                        <label id="errorPhone" htmlFor="phone" className={classNames({ 'p-error': isFormFieldValid('phone') })}></label>
-                            {getFormErrorMessage('phone')}
-                    </div>
-                    <div id="emailDiv" className="p-field p-col-12 p-md-4">
-                        <h4 id="emailHeader">Email</h4>
-                        <InputText  id="email " name="email"  value={formik.values.email} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('email') })} />
-                        <label id="errorEmail" htmlFor="email" className={classNames({ 'p-error': isFormFieldValid('email') })}></label>
-                            {getFormErrorMessage('email')}
-                    </div>
-                    <div id="cityDiv" className="p-field p-col-12 p-md-4">
-                        <h4 id="cityHeader">Şehir</h4>
-                        <Dropdown  id="city " name="city"  value={formik.values.city} options={cities} onChange={formik.handleChange} optionLabel="name" placeholder="Şehir" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('city') })} />
-                        <label id="errorCity" htmlFor="city" className={classNames({ 'p-error': isFormFieldValid('city') })}></label>
-                            {getFormErrorMessage('city')}
-                        <h4 id="townHeader">İlçe</h4>
-                        <Dropdown  id="town " name="town"  value={formik.values.town} options={counties} onChange={formik.handleChange} optionLabel="name" placeholder="İlçe"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('town') })}/>
-                        <label id="errorTown" htmlFor="town" className={classNames({ 'p-error': isFormFieldValid('town') })}></label>
-                            {getFormErrorMessage('town')}
-                    </div>
-                    <div id="ratingDiv" className="p-field p-col-12 p-md-4">
-                        <h4 id="ratingHeader">Derece</h4>
-                        <InputNumber  id="rating " name="rating"  value={formik.values.rating} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('rating') })}/>
-                        <label id="errorRating" htmlFor="rating" className={classNames({ 'p-error': isFormFieldValid('rating') })}></label>
-                            {getFormErrorMessage('rating')}
-                    </div>
-                    <div id="deliveryTimeDiv" className="p-field p-col-12 p-md-4">
-                        <h4 id="deliveryTimeHeader"> Tahmini Teslim Süresi (dakika)</h4>
-                        <InputNumber  id="delivery_time " name="delivery_time"  value={formik.values.delivery_time} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })}/>
-                        <label id="errorDeliveryTime" htmlFor="delivery_time" className={classNames({ 'p-error': isFormFieldValid('delivery_time') })}></label>
-                            {getFormErrorMessage('delivery_time')}
-                    </div>
-                    <div id="addressDiv" className="p-field p-col-12 p-md-4">
-                        <h4 id="addresHeader">Açık Adres</h4>
-                        <InputText  id="address " name="address"  value={formik.values.address} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('address') })}/>
-                        <label id="errorAddress" htmlFor="address" className={classNames({ 'p-error': isFormFieldValid('address') })}></label>
-                            {getFormErrorMessage('address')}
-                    </div>
-                    <div id="postalCodeDiv" className="p-field p-col-12 p-md-4">
-                        <h4 id="postalCodeHeader">Posta kodu</h4>
-                        <InputText  id="postal_code " name="postal_code"  value={formik.values.postal_code} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('postal_code') })}/>
-                        <label id="errorPostalCode" htmlFor="postal_code" className={classNames({ 'p-error': isFormFieldValid('postal_code') })}></label>
-                            {getFormErrorMessage('postal_code')}
-                    </div>
-                    <div id="latDiv" className="p-field p-col-12 p-md-3">
-                        <h4 id="latHeader">Enlem</h4>
-                        <InputNumber  id="latitudeInt " name="latitudeInt"  value={formik.values.latitudeInt} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('latitudeInt') })}/>
-                        <label id="errorLat" htmlFor="latitudeInt" className={classNames({ 'p-error': isFormFieldValid('latitudeInt') })}></label>
-                            {getFormErrorMessage('latitudeInt')}
-                    </div>
-                    <div id="longDiv" className="p-field p-col-12 p-md-3">
-                        <h4 id="longHeader">Boylam</h4>
-                        <InputNumber id="longtitudeInt " name="longtitudeInt"  value={formik.values.longtitudeInt} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('longtitudeInt') })}/>
-                        <label id="errorLong" htmlFor="longtitudeInt" className={classNames({ 'p-error': isFormFieldValid('longtitudeInt') })}></label>
-                            {getFormErrorMessage('longtitudeInt')}
-                    </div>
-                    <div id="commissionRateDiv" className="p-field p-col-12 p-md-3">
-                        <h4 id="commissionRateHeader">Komisyon Oranı %</h4>
-                        <InputNumber  id="commission_rate " name="commission_rate"   value={formik.values.commission_rate} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('commission_rate') })}/>
-                        <label id="errorCommissionRate" htmlFor="commission_rate" className={classNames({ 'p-error': isFormFieldValid('commission_rate') })}></label>
-                            {getFormErrorMessage('commission_rate')}
-                    </div>
-                    <div id="licenseCodeDiv" className="p-field p-col-12 p-md-4">
-                        <h4 id="licenseCodeHeader">Lisans Kodu</h4>
-                        <InputText  id="license_code " name="license_code"  value={formik.values.license_code} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('license_code') })}/>
-                        <label id="errorLicenseCode" htmlFor="license_code" className={classNames({ 'p-error': isFormFieldValid('license_code') })}></label>
-                            {getFormErrorMessage('license_code')}
-                    </div>
-                    <div id="chargesDiv" className="p-field p-col-12 p-md-3">
-                        <h4 id="chargesHeader">Restoran Ücreti</h4>
-                        <InputNumber  id="restaurant_charges " name="restaurant_charges"  value={formik.values.charges} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('restaurant_charges') })}/>
-                        <label id="errorCharges" htmlFor="restaurant_charges" className={classNames({ 'p-error': isFormFieldValid('restaurant_charges') })}></label>
-                            {getFormErrorMessage('restaurant_charges')}
-                    </div>
-                    <div id="deliveryRadiusDiv" className="p-field p-col-12 p-md-3">
-                        <h4 id="deliveryRadiusHeader">Teslimat Yarıçapı (km)</h4>
-                        <InputNumber  id="delivery_radius " name="delivery_radius"  value={formik.values.delivery_radius} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('delivery_radius') })}/>
-                        <label id="errorDeliveryRadius" htmlFor="delivery_radius" className={classNames({ 'p-error': isFormFieldValid('delivery_radius') })}></label>
-                            {getFormErrorMessage('delivery_radius')}
-                    </div>
-                    <div id="minimumOrderDiv" className="p-field p-col-12 p-md-3">
-                        <h4 id="minimumOrderHeader">Minimum amount</h4>
-                        <InputNumber  id="minimum_order_amount " name="minimum_order_amount"  value={formik.values.minimum_order_amount} onValueChange={formik.handleChange} showButtons autoFocus className={classNames({ 'p-invalid': isFormFieldValid('minimum_order_amount') })}/>
-                        <label id="errorMinimumOrder" htmlFor="minimum_order_amount" className={classNames({ 'p-error': isFormFieldValid('minimum_order_amount') })}></label>
-                            {getFormErrorMessage('minimum_order_amount')}
-                    </div>
-                <div className="p-fluid">
-            </div>
-            <div id="switchDiv" className="p-field p-col-12 p-md-3">
-                <h4 id="vegiHeader">Saf Sebze Mi</h4>
-                <InputSwitch  id="is_vegi " name="is_vegi"  checked={formik.values.is_vegi} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('is_vegi') })}/>
-                <label id="errorVegi" htmlFor="is_vegi" className={classNames({ 'p-error': isFormFieldValid('is_vegi') })}></label>
-                            {getFormErrorMessage('is_vegi')}
-                <h4 id="featuredHeader">Öne Çıkma</h4>
-                <InputSwitch  id="featured " name="featured"  checked={formik.values.featured} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('featured') })}/>
-                <label id="errorFeatured" htmlFor="featured" className={classNames({ 'p-error': isFormFieldValid('featured') })}></label>
-                            {getFormErrorMessage('featured')}
-                <h4 id="activeHeader">Aktif?</h4>
-                <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}
-                 className={classNames({ 'p-invalid': isFormFieldValid('active') })}/>
-                <label id="errorActive" htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
-                            {getFormErrorMessage('active')}
-            </div>
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('name')} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                                        value:formik.values.name,
+                                        onChange:formik.handleChange,
+                                    }}/>
+                                </InputGroup>
 
-            <S.SubmitBtn id="btnContainer">
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('restaurantOwner')} name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
+                                        value:formik.values.owner,
+                                        onChange:formik.handleChange,
+                                        options:resOwnersName,
+                                        placeholder:"Select an Owner",
+                                        optionLabel:"name"
+                                    }}/>
+                                </InputGroup>
 
-                <Button id="editBtn" type="submit" label="Gönder"/>
-            </S.SubmitBtn>
-            </form>
-            </S.ContainerCard>
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
+                                        value:formik.values.phone,
+                                        mask:"(999) 999-9999",
+                                        placeholder:"(999) 999-9999",
+                                        onChange:formik.handleChange,
+                                    }}/>
+
+                                    <InputContainer label={i18n.t('email')} name="email" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                                        value:formik.values.email,
+                                        onChange:formik.handleChange,
+                                    }}/>
+
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('description')} name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                        value:formik.values.description,
+                                        onChange:formik.handleChange,
+                                        rows:3,
+                                        autoResize:true
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
+                                        setFile:(image)=>{ formik.values.image=image },
+                                        showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                                    }}/>
+                                </InputGroup>
+                            </FormColumn>  
+                            <FormColumn divideCount={3}>
+                                <h2>Adres bilgileri</h2>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value:formik.values.city,
+                                        onChange:formik.handleChange,
+                                        options:cities,
+                                        placeholder:i18n.t('city'),
+                                        optionLabel:"name"
+                                    }}/>
+
+                                    <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value:formik.values.town,
+                                        onChange:formik.handleChange,
+                                        options:counties,
+                                        placeholder:i18n.t('district'),
+                                        optionLabel:"name"
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('postalCode')} name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                                            value:formik.values.postal_code,
+                                            onChange:formik.handleChange,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.latitudeInt,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                    
+                                    <InputContainer label={i18n.t('longitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.longtitudeInt,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('fullAddress')} name="address" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                        value:formik.values.address,
+                                        onChange:formik.handleChange,
+                                        rows:3,
+                                        autoResize:true
+                                    }}/>
+                                </InputGroup>
+                            </FormColumn>
+                            <FormColumn divideCount={3}>
+                                <h2>Restoran Ayarları</h2>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('approximateDeliveryTime')} name="delivery_time" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.delivery_time,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+
+                                    <InputContainer label={i18n.t('deliveryRadius')} name="delivery_radius" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.delivery_radius,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('commissionRate')} name="commission_rate" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.commission_rate,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                    
+                                    <InputContainer label={i18n.t('restaurantFee')} name="restaurant_charges" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.restaurant_charges,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('minimumAmount')} name="minimum_order_amount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.minimum_order_amount,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                    
+                                    <InputContainer label={i18n.t('rating')}name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                        value:formik.values.rating,
+                                        onValueChange:formik.handleChange,
+                                        showButtons:true,
+                                    }}/>
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('licenseCode')} name="license_code" formiks={inputFormiks} size={12} component={InputText} iprops={{
+                                        value:formik.values.license_code,
+                                        onChange:formik.handleChange
+                                    }}/>
+                            
+                                </InputGroup>
+
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('vegetablesOnly')} name="is_vegi" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                        value:formik.values.is_vegi,
+                                        onChange:formik.handleChange
+                                    }}/>
+                                    
+                                    <InputContainer label={i18n.t('prioritized')} name="featured" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                        value:formik.values.featured,
+                                        onChange:formik.handleChange
+                                    }}/>
+                                    
+                                    <InputContainer label={i18n.t('open')} name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                        value:formik.values.active,
+                                        onChange:formik.handleChange
+                                    }}/>
+                                </InputGroup>
+                            </FormColumn>
+                        </div>
+
+                        <S.SubmitBtn>
+                            <Button type="submit" label="Gönder"/>
+                        </S.SubmitBtn>
+                    </form>
+                </S.ContainerCard>
             </TabPanel>
             <TabPanel header="Restoran Yemekleri">
                 <FoodsTable foods={foods} resid={router.query.id} />
-        </TabPanel>
+            </TabPanel>
         </TabView>
         </div>
     )
 }
 
- export default  (UpdateRestaurants);
+ export default UpdateRestaurants;

@@ -76,6 +76,12 @@ export const FoodCategoryEdit = () => {
       }
   }, [dispatch, detailsSuccess, foodCategory, successUpdate]);
 
+  const inputFormiks = {
+    getFormErrorMessage,
+    isFormFieldValid
+  }
+
+
   return (
     <div id="edit_food_categories">
       <h1 id="editHeader">Kategori Detayi</h1>
@@ -90,17 +96,15 @@ export const FoodCategoryEdit = () => {
               {getFormErrorMessage('name')}
             </div>
           </div>
-          <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
-                <StandardFileUpload
-                        id="fileUpload" 
-                        setFile={(image)=>{formik.values.image=image}}
-                        showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                     >   
-                </StandardFileUpload>
-          </InputContainer>
-          <div id="activeDiv">
-            <h4 id="activeHeader">Aktif Mi</h4>
-            <InputSwitch id="activeSwitch" checked={formik.values.active} onChange={formik.handleChange} />
+          <div className="p-field p-col-12">
+              <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                  setFile:(image)=>{ formik.values.image=image },
+                  showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+              }}/>
+          </div>
+          <div>
+            <h4>Aktif Mi</h4>
+            <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
           </div>
           <S.SubmitBtn id="btnContainer">
             <Button id="editBtn" type='submit' label={i18n.t('submit')}/>
