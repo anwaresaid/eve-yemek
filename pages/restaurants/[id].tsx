@@ -286,7 +286,7 @@ import { i18n } from '../../language';
                     <S.ContainerCard>
                     <form onSubmit = {formik.handleSubmit} >
                         <div className="p-grid">
-                            <FormColumn>
+                            <FormColumn divideCount={3}>
                                 <h2>Genel Bilgiler</h2>
 
                                 <InputGroup>
@@ -337,7 +337,7 @@ import { i18n } from '../../language';
                                     }}/>
                                 </InputGroup>
                             </FormColumn>  
-                            <FormColumn>
+                            <FormColumn divideCount={3}>
                                 <h2>Adres bilgileri</h2>
 
                                 <InputGroup>
@@ -388,7 +388,7 @@ import { i18n } from '../../language';
                                     }}/>
                                 </InputGroup>
                             </FormColumn>
-                            <FormColumn>
+                            <FormColumn divideCount={3}>
                                 <h2>Restoran Ayarları</h2>
 
                                 <InputGroup>
