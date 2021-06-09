@@ -19,10 +19,10 @@ const InputContainer = (props:IProps) => {
 
     return (
         <>
-             <div className={sizeClass}>
-                <h4>{props.label}</h4>
+             <div className={sizeClass} id={"div_"+props.name}>
+                <h4 id={"header_"+props.name}>{props.label}</h4>
                 <props.component name={props.name} id={props.name} className={classNames({ 'p-invalid': props.formiks.isFormFieldValid(props.name) })} {...props.iprops}/>
-                <label htmlFor={props.name} className={classNames({ 'p-error': props.formiks.isFormFieldValid(props.name) })}>
+                <label id={"error_"+props.name} htmlFor={props.name} className={classNames({ 'p-error': props.formiks.isFormFieldValid(props.name) })}>
                     {props.formiks.getFormErrorMessage(props.name)}
                 </label>
             </div>
