@@ -17,9 +17,9 @@ const TopBar = (props:IProps) => {
 
     return (
         <>
-            <Card className={"main-context-card" + (props.hideBar  ? "-showBar" : "-hideBar")} >
-                <Button icon="pi pi-bars" className=" p-button-secondary" onClick={()=> { props.setHideBar(!props.hideBar) }}/>
-                <Dropdown style={{float: 'right', marginRight: '20px'}} 
+            <Card  id='main_context_card'className={"main-context-card" + (props.hideBar  ? "-showBar" : "-hideBar")} >
+                <Button id='main_context_burger_btn' icon="pi pi-bars" className=" p-button-secondary" onClick={()=> { props.setHideBar(!props.hideBar) }}/>
+                <Dropdown  style={{float: 'right', marginRight: '20px'}} 
                     id="language"
                     name="language"
                     placeholder="Language"
