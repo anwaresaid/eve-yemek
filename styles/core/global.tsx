@@ -39,6 +39,9 @@ const GlobalStyle = createGlobalStyle`
         transition:  all 0.25s ease-in-out;
         z-index:2;
 
+        .p-card-body{
+            flex:1;
+        }
     }
         
     .ContainerPanel{
@@ -56,6 +59,10 @@ const GlobalStyle = createGlobalStyle`
         z-index: 1037;
         margin-left:0;
         transition:  all 0.25s ease-in-out;
+
+        .p-card-body{
+            flex:1;
+        }
     }
 
     .main-context-showBar{
