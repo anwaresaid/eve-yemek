@@ -18,17 +18,15 @@ import { i18n } from '../../language';
 export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-
   const toast = useRef(null);
-
-  const addonCategoryDetails = useSelector(
+  const addonCategoryDetail = useSelector(
     (state: RootState) => state.addonCategoryDetails
   );
   const {
     addonCategory,
     loading,
     success: detailsSuccess,
-  } = addonCategoryDetails;
+  } = addonCategoryDetail;
 
   const updatedAddonCategory = useSelector(
     (state: RootState) => state.updateAddonCategory
@@ -46,6 +44,7 @@ export const AddonCategoryEdit = () => {
     );
   };
 
+  
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -65,13 +64,12 @@ export const AddonCategoryEdit = () => {
       dispatch(updateAddonCategory(addonCategory.id, data));
     },
   });
-
   useEffect(() => {
     if(router.query.id){
     if (!detailsSuccess || router.query.id !== addonCategory.id) {
       dispatch(getAddonCategoryDetails(router.query.id));
     }
-    if (detailsSuccess) {
+    if (detailsSuccess && addonCategory) {
       formik.values.name = addonCategory.name;
       formik.values.enum = addonCategory.enum;
       if (successUpdate) {
@@ -90,7 +88,8 @@ export const AddonCategoryEdit = () => {
       }
     }
   }
-  }, [dispatch, detailsSuccess, addonCategory, successUpdate,router.query.id]);
+  }, [dispatch, detailsSuccess, addonCategory,loading, successUpdate,router.query.id]);
+
     return (
     <div id="edit_Add_On_Category">
       <h1 id="editHeader">Kategori Detayi</h1>
