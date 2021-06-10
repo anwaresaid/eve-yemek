@@ -444,16 +444,19 @@ import { i18n } from '../../language';
                                 <InputGroup>
                                     <InputContainer label={i18n.t('vegetablesOnly')} name="is_vegi" formiks={inputFormiks} component={InputSwitch} iprops={{
                                         value:formik.values.is_vegi,
+                                        checked:formik.values.is_vegi,
                                         onChange:formik.handleChange
                                     }}/>
                                     
                                     <InputContainer label={i18n.t('prioritized')} name="featured" formiks={inputFormiks} component={InputSwitch} iprops={{
                                         value:formik.values.featured,
+                                        checked:formik.values.featured,
                                         onChange:formik.handleChange
                                     }}/>
                                     
                                     <InputContainer label={i18n.t('open')} name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
                                         value:formik.values.active,
+                                        checked:formik.values.active,
                                         onChange:formik.handleChange
                                     }}/>
                                 </InputGroup>
