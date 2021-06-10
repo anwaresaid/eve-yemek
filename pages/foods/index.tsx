@@ -21,7 +21,6 @@ const FoodsList =  () => {
     
      return (
         <div id="foodsCategoryTable">
-            {console.log(foods)}
             {!loading && foods && <><h1>Foods</h1><FoodsTable foods={foods.items}></FoodsTable></>}
             {loading && <ProgressSpinner/>}
         </div>
