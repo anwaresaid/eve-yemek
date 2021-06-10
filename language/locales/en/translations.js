@@ -114,6 +114,8 @@ export const translations = {
   addonCategory: 'Add-On Category',
 
   // Coupon pages
+  couponName: 'Coupon Name',
+  couponDescription: 'Coupon Description',
   couponCode: 'Coupon Code',
   expiration: 'Expiration',
   couponType: 'Coupon Type',

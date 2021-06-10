@@ -113,6 +113,8 @@ export const translations = {
   addonCategory: "صنف الإضافة",
 
   // Coupon pages
+  couponName: "اسم الكوبون",
+  couponDescription: "وصف الكوبون",
   couponCode: "رمز الكوبون",
   expiration: "إنتهاء الصلاحية",
   couponType: "نوع الكوبون",
@@ -133,7 +135,7 @@ export const translations = {
   eveYemekSettings: "إعدادات إيڤ يميك",
 
   //Transfers
-  totalAmount: 'المبلغ الإجمالي',
+  totalAmount: 'إجمالي',
 
   general: "عام",
   applicationName: "اسم التطبيق",

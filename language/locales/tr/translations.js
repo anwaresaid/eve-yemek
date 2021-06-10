@@ -114,6 +114,8 @@ export const translations = {
   addonCategory: 'Eklenti Kategorisi',
 
   // Coupon pages
+  couponName: 'Kupon Adı',
+  couponDescription: 'Kupon Açıklaması',
   couponCode: 'Kupon Kodu',
   expiration: 'Bitiş Tarihi',
   couponType: 'Kupon Türü',
