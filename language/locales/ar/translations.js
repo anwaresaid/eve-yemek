@@ -67,6 +67,9 @@ export const translations = {
   orderTime: 'وقت الطلب',
   operations: 'العمليات',
 
+  // Restaurant List
+  country: 'بلد',
+
   // Create Restaurant Page
   name: 'الإسم',
   description: 'الوصف',
@@ -112,6 +115,8 @@ export const translations = {
   addonCategory: 'صنف الإضافة',
 
   // Coupon pages
+  couponName: 'اسم الكوبون',
+  couponDescription: 'وصف الكوبون',
   couponCode: 'رمز الكوبون',
   expiration: 'إنتهاء الصلاحية',
   couponType: 'نوع الكوبون',
@@ -130,6 +135,9 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'إعدادات إيڤ يميك',
+
+  //Transfers
+  totalAmount: 'إجمالي',
 
   general: 'عام',
   applicationName: 'اسم التطبيق',

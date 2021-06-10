@@ -67,6 +67,9 @@ export const translations = {
   orderTime: 'Время заказа',
   operations: 'Операции',
 
+  // Restaurant List
+  country: 'страна',
+
   // Create Restaurant Page
   name: 'Имя',
   description: 'Описание',
@@ -112,6 +115,8 @@ export const translations = {
   addonCategory: 'Категория добавки',
 
   // Coupon pages
+  couponName: 'Название купона',
+  couponDescription: 'Описание купона',
   couponCode: 'Код купона',
   expiration: 'Cрок  Истечение',
   couponType: 'Тип купона',
@@ -130,6 +135,9 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Настройки Eve Yemek',
+
+  //Transfers
+  totalAmount: 'Общая сумма',
 
   general: 'Общие',
   applicationName: 'Имя приложения',

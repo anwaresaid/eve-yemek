@@ -144,10 +144,10 @@ const EditFoods = (props) => {
                 return selectedRes[0];
             });
             if (props.foods) {
-                formik.values.resName = { name: props.foods.restaurant.name };
+                formik.values.resName = { name: props.foods.restaurant };
                 formik.values.categoryName = {
-                    name: props.foods.food_category.name,
-                };
+                    name: props.foods.food_category,
+                 };
                 formik.values.name = props.foods.name;
                 formik.values.description = props.foods.description;
                 formik.values.price = props.foods.price;

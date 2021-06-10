@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import * as S from '../../styles/restaurants/restaurants.style'
-import { Column } from 'primereact/column';
-import { InputText } from 'primereact/inputtext';
-import { Tag } from 'primereact/tag';
 import { listRestaurant } from "../../store/actions/restaurant.action";
 import {useDispatch,useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
