@@ -27,6 +27,7 @@ export const translations = {
   deliveryScouts: 'Курьеры доставки',
   customerServiceReps: 'Сервисные представители',
   createUser: 'Создать пользователя',
+  extra: 'дополнительный',
   settings: 'Настройки',
   transfers: 'Переводы',
   logout: 'Выйти',
@@ -102,7 +103,6 @@ export const translations = {
   mealCategory: 'Категория питания',
   selectAddons: 'Выбрать надстройки',
   discountedPrice: 'Цена со скидкой',
-  
 
   // Category pages and Add-on pages
   categoryName: 'Название категории',
@@ -165,5 +165,5 @@ export const translations = {
   showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}',
 
   selectLanguage: 'Выберите язык',
-  submit: 'Подтвердить'
+  submit: 'Подтвердить',
 };

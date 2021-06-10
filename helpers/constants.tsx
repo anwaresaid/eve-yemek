@@ -1,6 +1,6 @@
-import { i18n } from "../language";
+import { i18n } from '../language';
 
-export const baseUrl = "https://api.eve-yemek.com";
+export const baseUrl = 'https://api.eve-yemek.com';
 
 // prettier-ignore
 export const allMenuItems:any = [
@@ -39,7 +39,7 @@ export const allMenuItems:any = [
         { separator:true },
         { label:i18n.t("createUser"), url:"/users/add",  roles:["admin"] },
     ] },
-    { label:"Ekstra", expanded: true, items: [
+    { label:i18n.t("extra"), expanded: true, items: [
         { label:"FCM Bildirim Gonder",  url:"/send_notifications", roles:["admin"] },
     ] },
     { separator:true },

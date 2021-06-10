@@ -14,7 +14,6 @@ import { sendNotifications } from '../../store/actions/send_notifications.action
 
 export const Index = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const toast = useRef(null);
 
   const [userNames, setUserNames] = useState(null);
