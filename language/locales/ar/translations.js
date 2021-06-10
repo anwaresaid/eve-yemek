@@ -65,6 +65,9 @@ export const translations = {
   orderTime: "وقت الطلب",
   operations: "العمليات",
 
+  // Restaurant List
+  country: 'بلد',
+
   // Create Restaurant Page
   name: "الإسم",
   description: "الوصف",

@@ -65,6 +65,9 @@ export const translations = {
   orderTime: 'Order Time',
   operations: 'Operations',
 
+  // Restaurant List
+  country: 'Country',
+
   // Create Restaurant Page
   name: 'Name',
   description: 'Description',
