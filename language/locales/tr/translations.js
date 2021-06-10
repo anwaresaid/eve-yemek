@@ -27,6 +27,8 @@ export const translations = {
   deliveryScouts: 'Kargocular',
   customerServiceReps: 'Müşteri Sorumlusu',
   createUser: 'Kullanıcı Oluştur',
+  extra: 'Ekstra',
+  send_fcm_notification: 'FCM Bildirim Gonder',
   settings: 'Ayarlar',
   transfers: 'Transferler',
   logout: 'Çıkış Yap',
@@ -105,7 +107,6 @@ export const translations = {
   mealCategory: 'Yemek Kategorisi',
   selectAddons: 'Eklentileri Seç',
   discountedPrice: 'İndirimli Fiyatı',
-  
 
   // Category pages and Add-on pages
   categoryName: 'Kategori Adı',
@@ -173,5 +174,5 @@ export const translations = {
   showingXtoYofZ: '{{z}} sonuç içinden {{x}} - {{y}} tanesi gösteriliyor',
 
   selectLanguage: 'Dil seç',
-  submit: 'Kaydet'
+  submit: 'Kaydet',
 };

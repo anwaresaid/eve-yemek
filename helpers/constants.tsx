@@ -1,6 +1,6 @@
-import { i18n } from "../language";
+import { i18n } from '../language';
 
-export const baseUrl = "https://api.eve-yemek.com";
+export const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 // prettier-ignore
 export const allMenuItems:any = [
@@ -38,6 +38,9 @@ export const allMenuItems:any = [
         { label:i18n.t("customerServiceReps"),  url:"/users/customer_service", roles:["admin"] },
         { separator:true },
         { label:i18n.t("createUser"), url:"/users/add",  roles:["admin"] },
+    ] },
+    { label:i18n.t("extra"), expanded: true, items: [
+        { label:i18n.t("send_fcm_notification"),  url:"/send_notifications", roles:["admin"] },
     ] },
     { separator:true },
     { label:i18n.t("settings"),                 url:"/settings",   roles:["admin"] },
