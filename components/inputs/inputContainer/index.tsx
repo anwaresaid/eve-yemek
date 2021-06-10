@@ -11,12 +11,13 @@ type IProps = {
     component:any,
     iprops:any,
     size?:2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
-    noErrorLabel?:boolean
+    noErrorLabel?:boolean,
+    noAutoCol12?:boolean
 }
 
 const InputContainer = (props:IProps) => {
 
-    const sizeClass = "p-col p-col-12" + (props.size ? " p-md-"+props.size : "");
+    const sizeClass = "p-col" + ( props.noAutoCol12 !== true ? " p-col-12" : "") + (props.size ? " p-md-"+props.size : "");
 
     const elmClass = props.noErrorLabel === true ? "" : classNames({ 'p-invalid': props.formiks.isFormFieldValid(props.name) });
 
