@@ -65,6 +65,9 @@ export const translations = {
   orderTime: 'Sipariş Zamanı',
   operations: 'Operasyonlar',
 
+  // Restaurant List
+  country: 'Ülke',
+
   // Create Restaurant Page
   name: 'Ad',
   description: 'Açıklama',
@@ -111,6 +114,8 @@ export const translations = {
   addonCategory: 'Eklenti Kategorisi',
 
   // Coupon pages
+  couponName: 'Kupon Adı',
+  couponDescription: 'Kupon Açıklaması',
   couponCode: 'Kupon Kodu',
   expiration: 'Bitiş Tarihi',
   couponType: 'Kupon Türü',
@@ -129,6 +134,9 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Ayarları',
+
+  //Transfers
+  totalAmount: 'Toplam Tutar',
 
   general: 'Genel',
   applicationName: 'Uygulama Adı',
