@@ -28,6 +28,7 @@ export const translations = {
   customerServiceReps: 'Service Representatives',
   createUser: 'Create User',
   extra: 'Extra',
+  send_fcm_notification: 'Send FCM Notification',
   settings: 'Settings',
   transfers: 'Transfers',
   logout: 'Logout',

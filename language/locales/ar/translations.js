@@ -28,6 +28,7 @@ export const translations = {
   customerServiceReps: 'مندوبي الخدمات',
   createUser: 'إنشاء مستخدم',
   extra: 'المزيد',
+  send_fcm_notification: 'إرسال إشعار FCM',
   settings: 'إعدادات',
   transfers: 'تحويل',
   logout: 'تسجيل خروج',

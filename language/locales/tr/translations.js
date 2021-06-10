@@ -28,6 +28,7 @@ export const translations = {
   customerServiceReps: 'Müşteri Sorumlusu',
   createUser: 'Kullanıcı Oluştur',
   extra: 'Ekstra',
+  send_fcm_notification: 'FCM Bildirim Gonder',
   settings: 'Ayarlar',
   transfers: 'Transferler',
   logout: 'Çıkış Yap',

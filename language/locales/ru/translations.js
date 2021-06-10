@@ -28,6 +28,7 @@ export const translations = {
   customerServiceReps: 'Сервисные представители',
   createUser: 'Создать пользователя',
   extra: 'дополнительный',
+  send_fcm_notification: 'отправить FCM уведомление',
   settings: 'Настройки',
   transfers: 'Переводы',
   logout: 'Выйти',
