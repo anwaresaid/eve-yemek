@@ -132,6 +132,9 @@ export const translations = {
   // Settings
   eveYemekSettings: "إعدادات إيڤ يميك",
 
+  //Transfers
+  totalAmount: 'المبلغ الإجمالي',
+
   general: "عام",
   applicationName: "اسم التطبيق",
   timeZone: "المنطقة الزمنية",

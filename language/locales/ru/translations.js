@@ -133,6 +133,9 @@ export const translations = {
   // Settings
   eveYemekSettings: 'Настройки Eve Yemek',
 
+  //Transfers
+  totalAmount: 'Общая сумма',
+
   general: 'Общие',
   applicationName: 'Имя приложения',
   timeZone: 'Часовой пояс',

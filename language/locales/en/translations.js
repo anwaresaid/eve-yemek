@@ -133,6 +133,9 @@ export const translations = {
   // Settings
   eveYemekSettings: 'Eve Yemek Settings',
 
+  // Transfers
+  totalAmount: 'Total Amount',
+
   general: 'General',
   applicationName: 'Application Name',
   timeZone: 'Time Zone',

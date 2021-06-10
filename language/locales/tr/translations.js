@@ -133,6 +133,9 @@ export const translations = {
   // Settings
   eveYemekSettings: 'Eve Yemek Ayarları',
 
+  //Transfers
+  totalAmount: 'Toplam Tutar',
+
   general: 'Genel',
   applicationName: 'Uygulama Adı',
   timeZone: 'Saat Dilimi',
