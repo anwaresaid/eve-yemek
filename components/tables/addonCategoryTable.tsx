@@ -7,6 +7,7 @@ import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
+import { i18n } from "../../language";
 
 const AddOnCategoryTable = (props) => {
     
@@ -20,9 +21,9 @@ const AddOnCategoryTable = (props) => {
    
     const columns = [
         {field: 'id', header: "ID"},
-        {field: 'name', header: 'Ad'},
-        {field: 'enum', header: 'Tur'},
-        {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'name', header: i18n.t('name')},
+        {field: 'enum', header: i18n.t('type')},
+        {field: '', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
     ]
     
     return(
