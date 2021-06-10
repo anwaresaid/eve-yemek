@@ -8,12 +8,9 @@ import { RootState } from 'typesafe-actions';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
-import {
-  getFcmTokensFromUserIds,
-  listAllUsers,
-} from '../../store/actions/userslists.action';
+import { listAllUsers } from '../../store/actions/userslists.action';
 import { MultiSelect } from 'primereact/multiselect';
-import sendFCM from '../../helpers/sendFCM';
+import { sendNotifications } from '../../store/actions/send_notifications.action';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -57,7 +54,13 @@ export const Index = () => {
         body: formik.values.body,
         users: [...formik.values.users],
       });
-      dispatch(getFcmTokensFromUserIds(formik.values.users));
+      dispatch(
+        sendNotifications(
+          formik.values.title,
+          formik.values.body,
+          formik.values.users
+        )
+      );
       // sendFCM(formik.values.title, formik.values.body, formik.values.users)
       // send notification here instead of console log after FCM is integrated
     },
@@ -68,7 +71,6 @@ export const Index = () => {
       dispatch(listAllUsers());
     }
     if (success) {
-      console.log(users);
       settingDropDownNames();
     }
   }, [success]);

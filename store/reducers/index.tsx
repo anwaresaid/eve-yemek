@@ -48,6 +48,7 @@ import {
 import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
 import { dashboardReportReducer } from './dashboard.reducer';
 import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
+import { sendNotificationReducer } from './send_notifications.reducer';
 
 export default combineReducers({
   user,
@@ -100,4 +101,6 @@ export default combineReducers({
 
   listCoupons: listCouponsReducer,
   createCoupons: createCouponsReducer,
+
+  sendNotification: sendNotificationReducer,
 });
