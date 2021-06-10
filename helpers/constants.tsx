@@ -1,6 +1,6 @@
 import { i18n } from '../language';
 
-export const baseUrl = 'https://api.eve-yemek.com';
+export const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 // prettier-ignore
 export const allMenuItems:any = [

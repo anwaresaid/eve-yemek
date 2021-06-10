@@ -16,12 +16,13 @@ export default class SendNotificationService {
 
   //prettier-ignore
   private async send(dto) {
+    console.log(process.env.FCM_REQUEST_KEY);
     const fcmUrl = 'https://fcm.googleapis.com/fcm/send';
     const config = {
       headers: {
         'Content-Type': 'application/json',
         'Authorization':
-          'key=AAAAVZiHLUQ:APA91bHhcjfRRvhY4JjcQL8Nea8xaJg6RN2oh3id4ta3qgwEmd-AmJweVMEjDVPiqk0lBtT0nWKefrscFqNltLrlZ03rOyg6Eud9cJW4SeNASbKweY-UupNtJFFSY_jEZkmjVMSXJLvo',
+          `key=${process.env.NEXT_PUBLIC_FCM_REQUEST_KEY}`,
       },
     };
 
