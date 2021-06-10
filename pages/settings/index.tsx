@@ -12,13 +12,15 @@ import classNames from 'classnames';
 import { InputNumber } from 'primereact/inputnumber';
 import { Toast } from 'primereact/toast';
 import { settingsTypes } from '../../store/types/settings.type';
+import { i18n } from '../../language';
+import {useRouter} from 'next/router';
+import { Dropdown } from 'primereact/dropdown';
 
 const index = () => {
   const dispatch = useDispatch();
   const toast = useRef(null);
-  
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const router = useRouter();
   const res = useSelector((state: RootState) => state.listSettings);
   const { loading, success, settings } = res;
 
@@ -111,6 +113,7 @@ const index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
+      console.log(data)
       dispatch(updateSettings(data));
       dispatch({type:settingsTypes.SETTINGS_UPDATE_RESET})
     },
@@ -128,6 +131,7 @@ const index = () => {
 
   useEffect(() => {
     if (success && settings) {
+     
       formik.values.app_name = settings.app_name;
       formik.values.time_zone = settings.time_zone;
       formik.values.currency_code = settings.currency_code;
@@ -159,7 +163,6 @@ const index = () => {
       formik.values.is_razorpay_active = settings.is_razorpay_active;
       formik.values.razorpay_client_key = settings.razorpay_client_key;
       formik.values.razorpay_secret_key = settings.razorpay_secret_key;
-
       if(successUpdate){
         toast.current.show({severity: 'success', summary: 'Success', detail: 'Settings Updated Successfully'});
       }
@@ -171,8 +174,8 @@ const index = () => {
   const GeneralSettings = () => {
     return (
       <>
-        <div className='p-field'>
-          <h4>Uygulama Adi</h4>
+        <div id="settingsDiv" className='p-field'>
+          <h4 id="settingsHeader">{i18n.t('applicationName')}</h4>
           <InputText
             id='app_name'
             value={formik.values.app_name}
@@ -183,13 +186,14 @@ const index = () => {
             })}
           />
           <label
+            id="errorApp_name"
             htmlFor='app_name'
             className={classNames({ 'p-error': isFormFieldValid('app_name') })}
           ></label>
           {getFormErrorMessage('app_name')}
         </div>
-        <div className='p-field'>
-          <h4>Zaman Dilimi</h4>
+        <div id="time_zoneDiv" className='p-field'>
+          <h4 id="time_zoneHeader">{i18n.t('timeZone')}</h4>
           <InputText
             id='time_zone'
             value={formik.values.time_zone}
@@ -200,13 +204,14 @@ const index = () => {
             })}
           />
           <label
+            id="errortime_zoneDiv"
             htmlFor='time_zone'
             className={classNames({ 'p-error': isFormFieldValid('time_zone') })}
           ></label>
           {getFormErrorMessage('time_zone')}
         </div>
-        <div className='p-field'>
-          <h4>Para Birimi Kodu</h4>
+        <div id="currnecy_codeDiv" className='p-field'>
+          <h4 id="currnecy_codeHeader">{i18n.t('currencyCode')}</h4>
           <InputText
             id='currency_code'
             value={formik.values.currency_code}
@@ -217,6 +222,7 @@ const index = () => {
             })}
           />
           <label
+            id="errorCurrnecy_code"
             htmlFor='currency_code'
             className={classNames({
               'p-error': isFormFieldValid('currency_code'),
@@ -224,8 +230,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('currency_code')}
         </div>
-        <div className='p-field'>
-          <h4>Para Birimi Sembolu</h4>
+        <div id="currnecy_symbolDiv" className='p-field'>
+          <h4 id="currnecy_symbolHeader">{i18n.t('currencySymbol')}</h4>
           <InputText
             id='currency_symbol'
             value={formik.values.currency_symbol}
@@ -236,6 +242,7 @@ const index = () => {
             })}
           />
           <label
+            id="errorCurrnecy_symbol"
             htmlFor='currency_symbol'
             className={classNames({
               'p-error': isFormFieldValid('currency_symbol'),
@@ -243,8 +250,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('currency_symbol')}
         </div>
-        <div className='p-field'>
-          <h4>Veri uygulanabilir</h4>
+        <div id="is_taxedDiv" className='p-field'>
+          <h4 id="is_taxedHeader">{i18n.t('taxApplicable')}</h4>
           <InputSwitch
             id='is_taxed '
             name='is_taxed'
@@ -252,13 +259,14 @@ const index = () => {
             onChange={formik.handleChange}
           ></InputSwitch>
           <label
+            id="errorIs_taxed"
             htmlFor='is_taxed'
             className={classNames({ 'p-error': isFormFieldValid('is_taxed') })}
           ></label>
           {getFormErrorMessage('is_taxed')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>Vergi Yuzdesi</h4>
+        <div id="tax_rateDiv" className='p-field p-col-12 p-md-4'>
+          <h4 id="tax_rateHeader">{i18n.t('taxPercentage')}</h4>
           <InputNumber
             disabled={formik.values.is_taxed ? false : true}
             id='tax_rate '
@@ -270,13 +278,14 @@ const index = () => {
             })}
           />
           <label
+            id="errorTax_rate"
             htmlFor='tax_rate'
             className={classNames({ 'p-error': isFormFieldValid('tax_rate') })}
           ></label>
           {getFormErrorMessage('tax_rate')}
         </div>
-        <div className='p-field'>
-          <h4>Kargo Ucreti uygulanabilir</h4>
+        <div id="is_delivery_chargedDiv" className='p-field'>
+          <h4 id="is_delivery_chargedHeader">{i18n.t('deliveryFeeApplicable')}</h4>
           <InputSwitch
             id='is_delivery_charged '
             name='is_delivery_charged'
@@ -284,6 +293,7 @@ const index = () => {
             onChange={formik.handleChange}
           ></InputSwitch>
           <label
+            id="errorIs_delivery_charged"
             htmlFor='is_delivery_charged'
             className={classNames({
               'p-error': isFormFieldValid('is_delivery_charged'),
@@ -291,8 +301,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('is_delivery_charged')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>Kargo Ucreti</h4>
+        <div id="delivery_chargeDiv" className='p-field p-col-12 p-md-4'>
+          <h4 id="delivery_chargeHeader">{i18n.t('deliveryFee')}</h4>
           <InputNumber
             disabled={formik.values.is_delivery_charged ? false : true}
             id='delivery_charge '
@@ -304,12 +314,29 @@ const index = () => {
             })}
           />
           <label
+            id="errorDelivery_charge"
             htmlFor='delivery_charge'
             className={classNames({
               'p-error': isFormFieldValid('delivery_charge'),
             })}
           ></label>
           {getFormErrorMessage('delivery_charge')}
+        </div>
+        <div className='p-field p-col-12 p-md-4'>
+            <h4>{i18n.t('selectLanguage')}</h4>
+            <Dropdown
+                id="language"
+                name="language"
+                options={[
+                  {value: 'en', label:'English'}, 
+                  {value: 'ar', label:'اَلْعَرَبِيَّةُ'}, 
+                  {value: 'ru', label:'русский'},
+                  {value: 'tr', label:'Türkçe'}
+                ]}
+                value={i18n.language}
+                onChange={(e) => {i18n.changeLanguage(e.value); router.reload();}}
+              >
+            </Dropdown>
         </div>
       </>
     );
@@ -318,8 +345,8 @@ const index = () => {
   const NotificationSettings = () => {
     return (
       <>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>FCM Project ID</h4>
+        <div id="fcm_project_idDiv" className='p-field p-col-12 p-md-4'>
+          <h4 id="fcm_project_idHeader">FCM Project ID</h4>
           <InputText
             id='fcm_project_id'
             value={formik.values.fcm_project_id}
@@ -330,6 +357,7 @@ const index = () => {
             })}
           />
           <label
+            id="errorFcm_project_id"
             htmlFor='fcm_project_id'
             className={classNames({
               'p-error': isFormFieldValid('fcm_project_id'),
@@ -337,8 +365,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('fcm_project_id')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>FCM APP ID</h4>
+        <div id="fcm_app_idDiv" className='p-field p-col-12 p-md-4'>
+          <h4 id="fcm_app_idHeader">FCM APP ID</h4>
           <InputText
             id='fcm_app_id'
             value={formik.values.fcm_app_id}
@@ -349,6 +377,7 @@ const index = () => {
             })}
           />
           <label
+            id="errorFcm_app_id"
             htmlFor='fcm_app_id'
             className={classNames({
               'p-error': isFormFieldValid('fcm_app_id'),
@@ -356,8 +385,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('fcm_app_id')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>FCM Sender ID</h4>
+        <div id="fcm_sender_idDiv" className='p-field p-col-12 p-md-4'>
+          <h4 id="fcm_sender_idHeader">FCM Sender ID</h4>
           <InputText
             id='fcm_sender_id'
             value={formik.values.fcm_sender_id}
@@ -368,6 +397,7 @@ const index = () => {
             })}
           />
           <label
+            id="errorFcm_sender_id"
             htmlFor='fcm_sender_id'
             className={classNames({
               'p-error': isFormFieldValid('fcm_sender_id'),
@@ -375,8 +405,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('fcm_sender_id')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>FCM Web Certificate</h4>
+        <div id="fcm_web_certificateDiv" className='p-field p-col-12 p-md-4'>
+          <h4 id="fcm_web_certificateHeader" >FCM Web Certificate</h4>
           <InputText
             id='fcm_web_certificate'
             value={formik.values.fcm_web_certificate}
@@ -387,6 +417,7 @@ const index = () => {
             })}
           />
           <label
+            id="fcm_web_certificateHeader"
             htmlFor='fcm_web_certificate'
             className={classNames({
               'p-error': isFormFieldValid('fcm_web_certificate'),
@@ -394,8 +425,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('fcm_web_certificate')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>FCM Web API Key</h4>
+        <div id="fcm_web_api_keyDiv" className='p-field p-col-12 p-md-4'>
+          <h4 id="fcm_web_api_keyHeader">FCM Web API Key</h4>
           <InputText
             id='fcm_web_api_key'
             value={formik.values.fcm_web_api_key}
@@ -406,6 +437,7 @@ const index = () => {
             })}
           />
           <label
+            id="errorFcm_web_api_key"
             htmlFor='fcm_web_api_key'
             className={classNames({
               'p-error': isFormFieldValid('fcm_web_api_key'),
@@ -413,8 +445,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('fcm_web_api_key')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>FCM Server Key</h4>
+        <div  id='fcm_web_server_keyDiv' className='p-field p-col-12 p-md-4'>
+          <h4 id='fcm_web_server_keyHeader'>FCM Server Key</h4>
           <InputText
             id='fcm_web_server_key'
             value={formik.values.fcm_web_server_key}
@@ -425,6 +457,7 @@ const index = () => {
             })}
           />
           <label
+            id='errorFcm_web_server_key'
             htmlFor='fcm_web_server_key'
             className={classNames({
               'p-error': isFormFieldValid('fcm_web_server_key'),
@@ -432,8 +465,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('fcm_web_server_key')}
         </div>
-        <div className='p-field'>
-          <h4>Aktif</h4>
+        <div id='is_activeDiv' className='p-field'>
+          <h4 id='is_activeHeader'>Aktif</h4>
           <InputSwitch
             id='is_active '
             name='is_active'
@@ -441,6 +474,7 @@ const index = () => {
             onChange={formik.handleChange}
           ></InputSwitch>
           <label
+            id='errorIs_active'
             htmlFor='is_active'
             className={classNames({
               'p-error': isFormFieldValid('is_active'),
@@ -455,8 +489,8 @@ const index = () => {
   const SMSGatewaySettings = () => {
     return (
       <>
-        <div className='p-field'>
-          <h4>OTP Verification on Registration</h4>
+        <div id='otp_verification_on_registrationDiv' className='p-field'>
+          <h4 id='otp_verification_on_registrationHeader'>OTP Verification on Registration</h4>
           <InputSwitch
             id='otp_verification_on_registration '
             name='otp_verification_on_registration'
@@ -464,6 +498,7 @@ const index = () => {
             onChange={formik.handleChange}
           ></InputSwitch>
           <label
+            id='errorOtp_verification_on_registration'
             htmlFor='otp_verification_on_registration'
             className={classNames({
               'p-error': isFormFieldValid('otp_verification_on_registration'),
@@ -471,8 +506,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('otp_verification_on_registration')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>Twilio SID</h4>
+        <div id='twilio_sidDiv' className='p-field p-col-12 p-md-4'>
+          <h4 id='twilio_sidHeader'>Twilio SID</h4>
           <InputText
             id='twilio_sid'
             value={formik.values.twilio_sid}
@@ -483,6 +518,7 @@ const index = () => {
             })}
           />
           <label
+            id='errorTwilio_sid'
             htmlFor='twilio_sid'
             className={classNames({
               'p-error': isFormFieldValid('twilio_sid'),
@@ -490,8 +526,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('twilio_sid')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>Twilio Access Token</h4>
+        <div id='twilio_access_tokenDiv' className='p-field p-col-12 p-md-4'>
+          <h4 id='twilio_access_tokenHeader'>Twilio Access Token</h4>
           <InputText
             id='twilio_access_token'
             value={formik.values.twilio_access_token}
@@ -502,6 +538,7 @@ const index = () => {
             })}
           />
           <label
+            id='errorTwilio_access_token'
             htmlFor='twilio_access_token'
             className={classNames({
               'p-error': isFormFieldValid('twilio_access_token'),
@@ -509,8 +546,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('twilio_access_token')}
         </div>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>Twilio Service ID</h4>
+        <div id='twilio_service_idDiv' className='p-field p-col-12 p-md-4'>
+          <h4 id='twilio_service_idHeader'>Twilio Service ID</h4>
           <InputText
             id='twilio_service_id'
             value={formik.values.twilio_service_id}
@@ -521,6 +558,7 @@ const index = () => {
             })}
           />
           <label
+            id='errorTwilio_service_id'
             htmlFor='twilio_service_id'
             className={classNames({
               'p-error': isFormFieldValid('twilio_service_id'),
@@ -535,8 +573,8 @@ const index = () => {
   const GoogleMapsSettings = () => {
     return (
       <>
-        <div className='p-field p-col-12 p-md-4'>
-          <h4>Google API Key</h4>
+        <div id='google_api_keyDiv' className='p-field p-col-12 p-md-4'>
+          <h4 id='google_api_keyHeader'>Google API Key</h4>
           <InputText
             id='google_api_key'
             value={formik.values.google_api_key}
@@ -547,6 +585,7 @@ const index = () => {
             })}
           />
           <label
+            id='errorGoogle_api_key'
             htmlFor='google_api_key'
             className={classNames({
               'p-error': isFormFieldValid('google_api_key'),
@@ -561,8 +600,8 @@ const index = () => {
   const PaymentSettings = () => {
     return (
       <>
-        <div className='p-field'>
-          <h4>COD Ative</h4>
+        <div id='is_cod_activeDiv' className='p-field'>
+          <h4 id='is_cod_activeHeader'>COD Ative</h4>
           <InputSwitch
             id='is_cod_active '
             name='is_cod_active'
@@ -570,6 +609,7 @@ const index = () => {
             onChange={formik.handleChange}
           ></InputSwitch>
           <label
+          id='errorIs_cod_active'
             htmlFor='is_cod_active'
             className={classNames({
               'p-error': isFormFieldValid('is_cod_active'),
@@ -577,8 +617,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('is_cod_active')}
         </div>
-        <div>
-          <h4>Paypal Active</h4>
+        <div id='is_paypal_activeDiv'>
+          <h4 id='is_paypal_activeDiv'>Paypal Active</h4>
           <InputSwitch
             id='is_paypal_active '
             name='is_paypal_active'
@@ -586,6 +626,7 @@ const index = () => {
             onChange={formik.handleChange}
           ></InputSwitch>
           <label
+            id='errorIs_paypal_active'
             htmlFor='is_paypal_active'
             className={classNames({
               'p-error': isFormFieldValid('is_paypal_active'),
@@ -593,8 +634,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('is_paypal_active')}
         </div>
-        <div className='p-field'>
-          <h4>Paypal API Key</h4>
+        <div id='paypal_api_keyDiv' className='p-field'>
+          <h4 id='paypal_api_keyHeader'>Paypal API Key</h4>
           <InputText
           disabled={formik.values.is_paypal_active ? false : true}
             id='paypal_api_key'
@@ -606,6 +647,7 @@ const index = () => {
             })}
           />
           <label
+            id='errorPaypal_api_key'
             htmlFor='paypal_api_key'
             className={classNames({
               'p-error': isFormFieldValid('paypal_api_key'),
@@ -613,8 +655,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('paypal_api_key')}
         </div>
-        <div>
-          <h4>RazorPay Active</h4>
+        <div id='is_razorpay_activeDiv '>
+          <h4 id='is_razorpay_activHeader '>RazorPay Active</h4>
           <InputSwitch
             id='is_razorpay_active '
             name='is_razorpay_active'
@@ -622,6 +664,7 @@ const index = () => {
             onChange={formik.handleChange}
           ></InputSwitch>
           <label
+            id='errorIs_razorpay_active '
             htmlFor='is_razorpay_active'
             className={classNames({
               'p-error': isFormFieldValid('is_razorpay_active'),
@@ -629,8 +672,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('is_razorpay_active')}
         </div>
-        <div className='p-field'>
-          <h4>Razorpay Client Key</h4>
+        <div id='razorpay_client_keyDiv' className='p-field'>
+          <h4 id='razorpay_client_keyHeader'>Razorpay Client Key</h4>
           <InputText
           disabled={formik.values.is_razorpay_active ? false : true}
             id='razorpay_client_key'
@@ -642,6 +685,7 @@ const index = () => {
             })}
           />
           <label
+            id='errorRazorpay_client_key'
             htmlFor='razorpay_client_key'
             className={classNames({
               'p-error': isFormFieldValid('razorpay_client_key'),
@@ -649,8 +693,8 @@ const index = () => {
           ></label>
           {getFormErrorMessage('razorpay_client_key')}
         </div>
-        <div className='p-field'>
-          <h4>Razorpay Secret Key</h4>
+        <div id='razorpay_secret_keyDiv' className='p-field'>
+          <h4 id='razorpay_secret_keyHeader'>Razorpay Secret Key</h4>
           <InputText
           disabled={formik.values.is_razorpay_active ? false : true}
             id='razorpay_secret_key'
@@ -662,6 +706,7 @@ const index = () => {
             })}
           />
           <label
+            id='errorRazorpay_secret_key'
             htmlFor='razorpay_secret_key'
             className={classNames({
               'p-error': isFormFieldValid('razorpay_secret_key'),
@@ -674,36 +719,36 @@ const index = () => {
   };
 
   return (
-    <div>
-      <h2>Eve Yemek Ayarlari</h2>
-      <Toast ref={toast}></Toast>
+    <div  id='settingsRenderDiv'>
+      <h2 id='settingsRenderHeader'>{i18n.t('eveYemekSettings')}</h2>
+      <Toast id='toastMessage' ref={toast}></Toast>
       {loading ? (
-        <h2>Loading</h2>
+        <h2 id='LoadingHeader'>Loading</h2>
       ) : (
-        <form onSubmit={formik.handleSubmit}>
+        <form id='settingsForum' onSubmit={formik.handleSubmit}>
           <TabView
+            id='tabPanelSettings'
             activeIndex={activeIndex}
             onTabChange={(e) => setActiveIndex(e.index)}
           >
-            <TabPanel header='Genel'>
+            <TabPanel header={i18n.t('general')}>
               <GeneralSettings />
             </TabPanel>
-            <TabPanel header='Bildirim Gonder'>
+            <TabPanel header={i18n.t('notifications')}>
               <NotificationSettings />
             </TabPanel>
-            <TabPanel header='SMS Gateway'>
+            <TabPanel header={i18n.t('smsGateway')}>
               <SMSGatewaySettings />
             </TabPanel>
-            <TabPanel header='Google Maps'>
+            <TabPanel header={i18n.t('googleMaps')}>
               <GoogleMapsSettings />
             </TabPanel>
-            <TabPanel header='Odeme Gateway'>
+            <TabPanel header={i18n.t('paymentGateway')}>
               <PaymentSettings />
             </TabPanel>
           </TabView>
-
-          <S.SubmitBtn>
-            <Button type='submit' label='Submit' />
+          <S.SubmitBtn id="btnContainer">
+            <Button id='createBtn' type='submit' label={i18n.t('submit')} />
           </S.SubmitBtn>
         </form>
       )}

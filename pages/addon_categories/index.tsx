@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import editButton from '../../components/InTableComponents/editButton/index';
+import { i18n } from '../../language';
 import AddOnCategoryTable from '../../components/tables/addonCategoryTable';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
 import * as S from '../../styles/food/food.list.style';
@@ -26,7 +27,7 @@ const AddonCategoriesList = () => {
   // global filter
   const header = (
     <div className='table-header'>
-      Eklenti Kategorileri Listesi
+     {i18n.t('addonCategories')}
       <span className='p-input-icon-left'>
         <i className='pi pi-search' />
         <InputText
@@ -39,10 +40,10 @@ const AddonCategoriesList = () => {
   );
 
   return (
-    <>
+    <div id="addonCategoryTabe">
       {!loading && addonCategories && <AddOnCategoryTable addonCategories={addonCategories.items}></AddOnCategoryTable>}
       {loading && <ProgressSpinner/>}
-    </>
+    </div>
   );
 };
 

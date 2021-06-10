@@ -3,7 +3,7 @@ import moment from "moment";
 
 const cardDate = (props) => {    
     return (
-        <div>
+        <div id='editDate'>
             {moment(props.date).fromNow()}
         </div>
     );

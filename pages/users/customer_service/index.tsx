@@ -17,9 +17,9 @@ const restaurantOwnerList = () => {
      }, [dispatch]);
 
     return (
-        <div>
+        <div id="customerServiceTable">
             {!loading && success && <UsersTable users={customerService.items} editPath="customer_service"></UsersTable>}
-            {!loading && !success && <h4>Müşteri hizmetlerinin verileri alınamadı!</h4>}
+            {!loading && !success && <h4 id='warning'>Müşteri hizmetlerinin verileri alınamadı!</h4>}
             {loading && <ProgressSpinner/>}
         </div>
     )

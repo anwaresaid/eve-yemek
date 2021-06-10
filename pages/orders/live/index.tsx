@@ -34,7 +34,7 @@ const liveOrdersList = () => {
   // };
 
   return (
-    <div>
+    <div id="liveOrdersTable">
       {!loading && orders && (
         <OrdersTable
           orders={orders.items}

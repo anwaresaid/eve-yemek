@@ -6,7 +6,7 @@ import * as S from '../../../styles/food/food.list.style';
     console.log(rowData)
     return (
       <S.Image
-       
+        id='image'
         src={`${rowData.image}`}
         alt={rowData.image}
       />

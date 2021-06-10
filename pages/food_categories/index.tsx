@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import editButton from '../../components/InTableComponents/editButton';
 import imageBodyTemplate from '../../components/InTableComponents/Image/index';
+import { i18n } from '../../language';
 import Food_CategoriesTable from '../../components/tables/foodCategoryTable';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
@@ -28,11 +29,11 @@ const FoodCategoriesList = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div id="foodsTable">
       {!loading && foodCategoriesList && <Food_CategoriesTable foodCategories={foodCategoriesList.items}></Food_CategoriesTable>}
       {loading && <ProgressSpinner/>}
         
-    </>
+    </div>
   );
 };
 export default FoodCategoriesList;

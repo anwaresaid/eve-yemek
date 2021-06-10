@@ -133,39 +133,39 @@ export const Index = () => {
 
 
     return (
-        <div>
-            <h1>{addon&& addon.name} Eklenti</h1>
-            <Toast ref={toast}></Toast>
-            <S.ContainerCard>
-                 <form onSubmit={formik.handleSubmit}  >
-                    <div className="p-fluid">
-                        <div className="p-field">
-                            <h4>Eklenti Adı </h4>
+        <div id="edit_add_ons">
+            <h1 id="editHeader">{addon&& addon.name} Eklenti</h1>
+            <Toast id="toastMessage" ref={toast}></Toast>
+            <S.ContainerCard id="container">
+                 <form id="editForm" onSubmit={formik.handleSubmit}  >
+                    <div  className="p-fluid">
+                        <div id="nameDiv" className="p-field">
+                            <h4 id="nameHeader">Eklenti Adı </h4>
                             <InputText id="name" name="name" value={formik.values.name}  onChange={formik.handleChange} type="text"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-                            <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+                            <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
                             {getFormErrorMessage('name')}
                         </div>
-                        <div className="p-field">
-                            <h4>Eklenti Kategorisi </h4>
+                        <div id="addonCatDiv" className="p-field">
+                            <h4 id="addonCatHeader">Eklenti Kategorisi </h4>
                             <Dropdown id="addonCat" name="addonCat" value={formik.values.addonCat} options={addonCategoryName} onChange={formik.handleChange} optionLabel="name" placeholder="Select an addon category" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('addonCat') })} />
-                            <label htmlFor="addonCat" className={classNames({ 'p-error': isFormFieldValid('addonCat') })}></label>
+                            <label id="addonCatError" htmlFor="addonCat" className={classNames({ 'p-error': isFormFieldValid('addonCat') })}></label>
                             {getFormErrorMessage('addonCat')}
                         </div>
                     </div>
                     <div className="p-grid p-fluid">
-                        <div className="p-field p-col-12 p-md-3">
-                            <h4> Fiyat</h4>
+                        <div id="priceDiv" className="p-field p-col-12 p-md-3">
+                            <h4 id="priceHeader"> Fiyat</h4>
                             <InputNumber id="price" name="price" value={formik.values.price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
                         </div>
                     </div>
-                    <div className="p-field p-col-12 p-md-3">
-                        <h4>Saf Sebze Mi</h4>
+                    <div id="activeDiv" className="p-field p-col-12 p-md-3">
+                        <h4 id="activeHeader">Saf Sebze Mi</h4>
                         <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('active') })}/>
-                        <label htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
+                        <label id="activeError" htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
                                     {getFormErrorMessage('active')}
                     </div>
-                    <S.SubmitBtn>
-                        <Button type="submit" label="Submit"/>
+                    <S.SubmitBtn id="createBtnContainer">
+                        <Button id="createBtn" type="submit" label="Submit"/>
                     </S.SubmitBtn>
                 </form>
             </S.ContainerCard>

@@ -20,6 +20,7 @@ import { useFormik } from 'formik';
 import classNames from 'classnames'
 import StandardFileUpload from '../../../components/inputs/fileUpload';
 import InputContainer from '../../../components/inputs/inputContainer';
+import { i18n } from '../../../language';
 
 
 export const Index = () => {
@@ -74,17 +75,18 @@ export const Index = () => {
             }
 
             if (!data.name) {
-                errors.name = 'name is required.';
+                errors.name = i18n.t('isRequired', {input: i18n.t('name')});
             }
             if (!data.description) {
-                errors.description = 'description is required.';
+                errors.description = i18n.t('isRequired', {input: i18n.t('description')});
             }
+
             if (!data.image) {
                 errors.image = 'Image is required.';
             }
 
             if (!data.categoryName) {
-                errors.categoryName = 'categoryName is required.';
+                errors.categoryName = i18n.t('isRequired', {input: i18n.t('categoryName')});;
             }
             else{
                 let selectedCategory:any = foodCatlist.items.filter(data  => {return data.name.localeCompare(formik.values.categoryName.name)==0;});
@@ -92,7 +94,7 @@ export const Index = () => {
                     formik.values.food_category_id = selectedCategory[0]?._id;
             }
             if (!data.addons) {
-                errors.addons = 'addons required.';
+                errors.addons = i18n.t('isRequired', {input: i18n.t('addons')});;
             }
 
             return errors;
@@ -104,6 +106,7 @@ export const Index = () => {
 
         }
     });
+
 //setting names for dropdowns.
     const settingDropDownNames= () => {
         var res = restaurants.items
@@ -153,51 +156,57 @@ export const Index = () => {
 
             )
     }
+
+    const inputFormiks = {
+        getFormErrorMessage,
+        isFormFieldValid
+    }
+
     return (
-        <div>
-            <h1>Oluştur</h1>
-            <Toast ref={toast}></Toast>
-            <S.ContainerCard>
-                 <form onSubmit={formik.handleSubmit}  >
+        <div id="create_foods">
+            <h1 id="createHeader">{i18n.t('createMeal')}</h1>
+            <Toast id="toastMessage" ref={toast}></Toast>
+            <S.ContainerCard id="container">
+                 <form id="createForm" onSubmit={formik.handleSubmit}  >
                     <div className="p-fluid">
-                        <div className="p-field">
-                            <h4>Restauran</h4>
+                        <div id="restaurantNameDiv" className="p-field">
+                            <h4 id="restaurantNameHeader">{i18n.t('restaurant')}</h4>
                             <Dropdown id="resName" name="resName" value={formik.values.resName} options={restaurantName} onChange={formik.handleChange} optionLabel="name" placeholder="Select a Restaurant" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('resName') })} />
-                            <label htmlFor="resName" className={classNames({ 'p-error': isFormFieldValid('resName') })}></label>
+                            <label id="errorRestaurantName" htmlFor="resName" className={classNames({ 'p-error': isFormFieldValid('resName') })}></label>
                             {getFormErrorMessage('resName')}
                         </div>
-                        <div className="p-field">
-                            <h4>Yemek Adı</h4>
+                        <div id="nameDiv" className="p-field">
+                            <h4 id="nameHeader">{i18n.t('itemName')}</h4>
                             <InputText id="name" name="name" value={formik.values.name}  onChange={formik.handleChange} type="text"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-                            <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
+                            <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
                             {getFormErrorMessage('name')}
                         </div>
-                        <div className="p-field">
-                            <h4>Yemek Açıklaması</h4>
+                        <div id="descriptionDiv" className="p-field">
+                            <h4 id="descriptionHeader">{i18n.t('itemDescription')}</h4>
                             <InputText id="description" name="description" onChange={formik.handleChange} type="text"    autoFocus className={classNames({ 'p-invalid': isFormFieldValid('description') })}/>
-                            <label htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
+                            <label id="errorDescription" htmlFor="description" className={classNames({ 'p-error': isFormFieldValid('description') })}></label>
                             {getFormErrorMessage('description')}
                         </div>
                     </div>
-                       <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
-                            <StandardFileUpload 
-                                    setFile={(image)=>{formik.values.image=image}}
-                                    showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                                >   
-                            </StandardFileUpload>
-                       </InputContainer>
+
+                    <div className="p-field p-col-12">
+                        <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                            setFile:(image)=>{ formik.values.image=image },
+                            showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                        }}/>
+                    </div>
                     <div className="p-fluid">
-                        <div className="card">
-                            <h4>Yemek Kategorisi</h4>
+                        <div id="foodCategoriesDiv" className="card">
+                            <h4 id="categoryNameHeader">{i18n.t('mealCategory')}</h4>
                             <Dropdown id="categoryName" name="categoryName" value={formik.values.categoryName}
                              options={foodCategoryName} onChange={formik.handleChange} optionLabel="name"
-                              placeholder="Yemek Kategorisi" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
-                            <label htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
+                              placeholder={i18n.t('mealCategory')} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
+                            <label id="errorCategoryName" htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
                                         {getFormErrorMessage('categoryName')}
-                            <h4>Eklentileri Seç</h4>
-                            <div>
+                            <h4 id="addonsHeader">{i18n.t('selectAddons')}</h4>
+                            <div id="addonstDiv">
                                 {multiSelect()}
-                                <label htmlFor="addons" className={classNames({ 'p-error': isFormFieldValid('addons') })}></label>
+                                <label id="errorAddons" htmlFor="addons" className={classNames({ 'p-error': isFormFieldValid('addons') })}></label>
                                         {getFormErrorMessage('addons')}
                             </div>
 
@@ -205,27 +214,26 @@ export const Index = () => {
                     </div>
                     <div className="p-grid p-fluid">
                         <div className="p-field p-col-12 p-md-3">
-                            <h4> Fiyat</h4>
+                            <h4 id="priceHeader">{i18n.t('price')}</h4>
                             <InputNumber id="price" name="price" value={formik.values.price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
                         </div>
-                        <div className="p-field p-col-12 p-md-3">
-                            <h4> İndirimli Fiyat</h4>
+                        <div id="discountContainer" className="p-field p-col-12 p-md-3">
+                            <h4 id="discountHeader">{i18n.t('discountedPrice')}</h4>
                             <InputNumber id="discount_price" name="discount_price" value={formik.values.discount_price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
                         </div>
                     </div>
-                    <div>
-
-                        <h4>Saf Sebze Mi</h4>
+                    <div id="inputSwitchContainer">
+                        <h4 id="vegiHeader">{i18n.t('vegetablesOnly')}</h4>
                         <InputSwitch checked={formik.values.vegi} name="vegi" id="vegi"  onChange={formik.handleChange} />
 
-                        <h4>Öne Çıkma</h4>
+                        <h4 id="featuredHeader">{i18n.t('prioritized')}</h4>
                         <InputSwitch checked={formik.values.featured} name="featured" id="featured" onChange={formik.handleChange} />
 
-                        <h4>Aktif</h4>
+                        <h4 id="activeHeader">{i18n.t('active')}</h4>
                         <InputSwitch checked={formik.values.active} name="active" id="active" onChange={formik.handleChange} />
                     </div>
-                    <S.SubmitBtn>
-                        <Button type="submit" label="Submit"/>
+                    <S.SubmitBtn id="btnContainer">
+                        <Button id="createBtn" type="submit" label="Create"/>
                     </S.SubmitBtn>
                 </form>
             </S.ContainerCard>

@@ -10,8 +10,8 @@ const index = ({ toastRef }) => {
   }, []);
 
   return (
-    <div>
-      <Toast ref={toastRef} position='top-right' />
+    <div id='soundToastDiv'>
+      <Toast id='sountToast' ref={toastRef} position='top-right' />
     </div>
   );
 };
