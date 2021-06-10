@@ -8,7 +8,7 @@ const InputGroup = (props:IProps) => {
 
     return (
         <>
-            <div className="p-fluid p-grid">
+            <div className="p-fluid p-grid p-align-end">
                 {props.children}
             </div>
         </>

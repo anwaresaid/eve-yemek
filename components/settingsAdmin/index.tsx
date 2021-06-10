@@ -174,7 +174,7 @@ const SettingsAdmin = () => {
         } else {
             dispatch(listSettings());
         }
-    }, [dispatch, settings, success, loading, successUpdate]);
+    }, [dispatch]);
 
     const inputFormiks = {
         getFormErrorMessage,
@@ -214,97 +214,53 @@ const SettingsAdmin = () => {
                     </FormColumn>
                     <FormColumn divideCount={2}>
                         <InputGroup>
-                            <InputContainer name="is_taxed" label={i18n.t("currencySymbol")} formiks={inputFormiks} size={6} component={InputSwitch} iprops={{
+                            <InputContainer name="is_taxed" label={i18n.t("taxApplicable")} formiks={inputFormiks} size={6} component={InputSwitch} iprops={{
                                 value:formik.values.is_taxed,
                                 checked:formik.values.is_taxed,
                                 onChange:formik.handleChange
                             }}/>
+                            
+                            <InputContainer name="tax_rate" label={i18n.t("taxPercentage")} formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value:formik.values.tax_rate,
+                                disabled:formik.values.is_taxed ? false : true,
+                                onValueChange:formik.handleChange,
+                                showButtons:true
+                            }}/>
                         </InputGroup>
                     </FormColumn>
-                </div>
-                <div id="tax_rateDiv" className="p-field p-col-12 p-md-4">
-                    <h4 id="tax_rateHeader">{i18n.t("taxPercentage")}</h4>
-                    <InputNumber
-                        disabled={formik.values.is_taxed ? false : true}
-                        id="tax_rate "
-                        name="tax_rate"
-                        value={formik.values.tax_rate}
-                        onValueChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("tax_rate"),
-                        })}
-                    />
-                    <label
-                        id="errorTax_rate"
-                        htmlFor="tax_rate"
-                        className={classNames({
-                            "p-error": isFormFieldValid("tax_rate"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("tax_rate")}
-                </div>
-                <div id="is_delivery_chargedDiv" className="p-field">
-                    <h4 id="is_delivery_chargedHeader">
-                        {i18n.t("deliveryFeeApplicable")}
-                    </h4>
-                    <InputSwitch
-                        id="is_delivery_charged "
-                        name="is_delivery_charged"
-                        checked={formik.values.is_delivery_charged}
-                        onChange={formik.handleChange}
-                    ></InputSwitch>
-                    <label
-                        id="errorIs_delivery_charged"
-                        htmlFor="is_delivery_charged"
-                        className={classNames({
-                            "p-error": isFormFieldValid("is_delivery_charged"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("is_delivery_charged")}
-                </div>
-                <div
-                    id="delivery_chargeDiv"
-                    className="p-field p-col-12 p-md-4"
-                >
-                    <h4 id="delivery_chargeHeader">{i18n.t("deliveryFee")}</h4>
-                    <InputNumber
-                        disabled={
-                            formik.values.is_delivery_charged ? false : true
-                        }
-                        id="delivery_charge "
-                        name="delivery_charge"
-                        value={formik.values.delivery_charge}
-                        onValueChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("delivery_charge"),
-                        })}
-                    />
-                    <label
-                        id="errorDelivery_charge"
-                        htmlFor="delivery_charge"
-                        className={classNames({
-                            "p-error": isFormFieldValid("delivery_charge"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("delivery_charge")}
-                </div>
-                <div className="p-field p-col-12 p-md-4">
-                    <h4>{i18n.t("selectLanguage")}</h4>
-                    <Dropdown
-                        id="language"
-                        name="language"
-                        options={[
-                            { value: "en", label: "English" },
-                            { value: "ar", label: "اَلْعَرَبِيَّةُ" },
-                            { value: "ru", label: "русский" },
-                            { value: "tr", label: "Türkçe" },
-                        ]}
-                        value={i18n.language}
-                        onChange={(e) => {
-                            i18n.changeLanguage(e.value);
-                            router.reload();
-                        }}
-                    ></Dropdown>
+                    <FormColumn divideCount={2}>
+                        <InputGroup>
+                            <InputContainer name="is_delivery_charged" label={i18n.t("deliveryFeeApplicable")} formiks={inputFormiks} size={6} component={InputSwitch} iprops={{
+                                value:formik.values.is_delivery_charged,
+                                checked:formik.values.is_delivery_charged,
+                                onChange:formik.handleChange
+                            }}/>
+                            
+                            <InputContainer name="tax_rate" label={i18n.t("deliveryFee")} formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value:formik.values.delivery_charge,
+                                disabled:formik.values.is_delivery_charged ? false : true,
+                                onValueChange:formik.handleChange,
+                                showButtons:true
+                            }}/>
+                        </InputGroup>
+                    </FormColumn>
+                    <FormColumn>
+                        <InputGroup>
+                            <InputContainer name="languageSelect" label={i18n.t("selectLanguage")} noErrorLabel={true} size={3} component={Dropdown} iprops={{
+                                value:i18n.language,
+                                options:[
+                                    { value: "en", label: "English" },
+                                    { value: "ar", label: "اَلْعَرَبِيَّةُ" },
+                                    { value: "ru", label: "русский" },
+                                    { value: "tr", label: "Türkçe" },
+                                ],
+                                onChange:(e) => {
+                                    i18n.changeLanguage(e.value);
+                                    router.reload();
+                                }
+                            }}/>
+                        </InputGroup>
+                    </FormColumn>
                 </div>
             </>
         );
