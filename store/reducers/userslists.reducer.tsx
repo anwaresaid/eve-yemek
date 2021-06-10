@@ -257,3 +257,27 @@ export const allUsersListReducer = (
       return state;
   }
 };
+
+export const usersFcmTokensListReducer = (state = [], action) => {
+  const { type, payload } = action;
+
+  switch (action.type) {
+    case usersListTypes.USERS_FCM_TOKEN_REQUEST:
+      return { adding: true };
+
+    case usersListTypes.USERS_FCM_TOKEN_SUCCESS:
+      return {
+        success: true,
+        fcm_tokens: action.payload,
+      };
+
+    case usersListTypes.USERS_FCM_TOKEN_FAIL:
+      return {
+        adding: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};

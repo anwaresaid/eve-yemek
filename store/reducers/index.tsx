@@ -43,13 +43,11 @@ import {
   deliveryScoutListReducer,
   customerServiceListReducer,
   allUsersListReducer,
+  usersFcmTokensListReducer,
 } from './userslists.reducer';
 import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
 import { dashboardReportReducer } from './dashboard.reducer';
-import { 
-  listCouponsReducer,
-  createCouponsReducer, 
-} from './coupons.reducer';
+import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
 
 export default combineReducers({
   user,
@@ -73,6 +71,7 @@ export default combineReducers({
   listDeliveryScouts: deliveryScoutListReducer,
   listCustomerService: customerServiceListReducer,
   allUsersList: allUsersListReducer,
+  usersFcmTokensList: usersFcmTokensListReducer,
 
   singleUser: singleUserReducer,
   updateUser: updateUserReducer,

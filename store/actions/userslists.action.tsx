@@ -256,3 +256,28 @@ export const listAllUsers = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const getFcmTokensFromUserIds =
+  (user_ids) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: usersListTypes.USERS_FCM_TOKEN_REQUEST,
+      });
+
+      const usersListsService = new UsersListsService();
+      const result = await usersListsService.getFcmTokensFromUserIds(user_ids);
+
+      dispatch({
+        type: usersListTypes.USERS_FCM_TOKEN_SUCCESS,
+        payload: result,
+      });
+    } catch (error) {
+      dispatch({
+        type: usersListTypes.USERS_FCM_TOKEN_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
