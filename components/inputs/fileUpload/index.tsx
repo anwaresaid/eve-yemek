@@ -1,3 +1,4 @@
+import axios from "../../../helpers/_axios";
 import classNames from "classnames";
 import { Button } from "primereact/button";
 import { FileUpload } from "primereact/fileupload";
@@ -24,14 +25,29 @@ const StandardFileUpload = (props) => {
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
-        props.setFile(e.files[0]?.objectURL)
+        console.log(e.files[0])
+        var formData = new FormData();
+        formData.append("file", e.files[0]);
+        axios.post('/upload', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        }).then(function (response) {
+            
+            props.setFile(response.data.file_path)
 
-        e.files.forEach(file => {
-            _totalSize += (file.size || 0);
-        });
-
-        setTotalSize(_totalSize);
-        props.showSuccess()
+            e.files.forEach(file => {
+                _totalSize += (file.size || 0);
+            });
+    
+            setTotalSize(_totalSize);
+            props.showSuccess()
+            console.log(response);
+          })
+          .catch(function (response) {
+            //handle error
+            console.log(response);
+          });
     }
 
     const onTemplateRemove = (file, callback) => {

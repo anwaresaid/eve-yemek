@@ -8,6 +8,7 @@ import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
 import { i18n } from "../../language";
+import { baseUrl } from "../../helpers/constants";
 
 const Food_CategoriesTable = (props) => {
     
@@ -19,7 +20,7 @@ const Food_CategoriesTable = (props) => {
 
 
     const imageBodyTemplate = (rowData) => {
-        return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
+        return <S.Image href={baseUrl+'/'+rowData.image}  alt={rowData.image}/>
    }
  
    
