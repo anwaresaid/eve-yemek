@@ -77,7 +77,7 @@ export const Index = () => {
             if (!data.max_usage) {
                 errors.max_usage = 'max usage is required.';
             }
-            console.log("errors",errors);
+
             return errors;
         },
         onSubmit: (data:any) => {
@@ -104,7 +104,6 @@ export const Index = () => {
         if(restaurantsSuccess)
                 settingDropDownNames();
     }, [restaurantsSuccess]);
-    console.log(formik.values);
     return (
         <div id="create_coupons">
             <h1 id="createHeader">Oluştur</h1>
