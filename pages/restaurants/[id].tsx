@@ -1,12 +1,12 @@
-import { useRouter } from "next/router";
 import RestaurantDataInput from "../../components/DataInputForms/RestaurantDataInput/RestaurantDataInput";
+import { getIdQuery } from "../../helpers/getIdQuery";
 
 const UpdateRestaurants = () => {
 
-    const router = useRouter();
+    const id = getIdQuery();
 
     return (
-        <RestaurantDataInput id={router.query.id} updating ></RestaurantDataInput>
+        id ? <RestaurantDataInput id={id} updating ></RestaurantDataInput> : ""
     )
     
 }
