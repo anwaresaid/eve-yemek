@@ -45,7 +45,6 @@ const SettingsAdmin = () => {
             fcm_web_certificate: "",
             fcm_web_api_key: "",
             fcm_web_server_key: "",
-            is_active: false,
             otp_verification_on_registration: false,
             twilio_sid: "",
             twilio_access_token: "",
@@ -148,7 +147,6 @@ const SettingsAdmin = () => {
             formik.values.fcm_web_certificate = settings.fcm_web_certificate;
             formik.values.fcm_web_api_key = settings.fcm_web_api_key;
             formik.values.fcm_web_server_key = settings.fcm_web_server_key;
-            formik.values.is_active = settings.is_active;
 
             formik.values.otp_verification_on_registration =
                 settings.otp_verification_on_registration;
@@ -174,7 +172,7 @@ const SettingsAdmin = () => {
         } else {
             dispatch(listSettings());
         }
-    }, [dispatch]);
+    }, [dispatch, success]);
 
     const inputFormiks = {
         getFormErrorMessage,
@@ -269,154 +267,47 @@ const SettingsAdmin = () => {
     const NotificationSettings = () => {
         return (
             <>
-                <div id="fcm_project_idDiv" className="p-field p-col-12 p-md-4">
-                    <h4 id="fcm_project_idHeader">FCM Project ID</h4>
-                    <InputText
-                        id="fcm_project_id"
-                        value={formik.values.fcm_project_id}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("fcm_project_id"),
-                        })}
-                    />
-                    <label
-                        id="errorFcm_project_id"
-                        htmlFor="fcm_project_id"
-                        className={classNames({
-                            "p-error": isFormFieldValid("fcm_project_id"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("fcm_project_id")}
-                </div>
-                <div id="fcm_app_idDiv" className="p-field p-col-12 p-md-4">
-                    <h4 id="fcm_app_idHeader">FCM APP ID</h4>
-                    <InputText
-                        id="fcm_app_id"
-                        value={formik.values.fcm_app_id}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("fcm_app_id"),
-                        })}
-                    />
-                    <label
-                        id="errorFcm_app_id"
-                        htmlFor="fcm_app_id"
-                        className={classNames({
-                            "p-error": isFormFieldValid("fcm_app_id"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("fcm_app_id")}
-                </div>
-                <div id="fcm_sender_idDiv" className="p-field p-col-12 p-md-4">
-                    <h4 id="fcm_sender_idHeader">FCM Sender ID</h4>
-                    <InputText
-                        id="fcm_sender_id"
-                        value={formik.values.fcm_sender_id}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("fcm_sender_id"),
-                        })}
-                    />
-                    <label
-                        id="errorFcm_sender_id"
-                        htmlFor="fcm_sender_id"
-                        className={classNames({
-                            "p-error": isFormFieldValid("fcm_sender_id"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("fcm_sender_id")}
-                </div>
-                <div
-                    id="fcm_web_certificateDiv"
-                    className="p-field p-col-12 p-md-4"
-                >
-                    <h4 id="fcm_web_certificateHeader">FCM Web Certificate</h4>
-                    <InputText
-                        id="fcm_web_certificate"
-                        value={formik.values.fcm_web_certificate}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid(
-                                "fcm_web_certificate"
-                            ),
-                        })}
-                    />
-                    <label
-                        id="fcm_web_certificateHeader"
-                        htmlFor="fcm_web_certificate"
-                        className={classNames({
-                            "p-error": isFormFieldValid("fcm_web_certificate"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("fcm_web_certificate")}
-                </div>
-                <div
-                    id="fcm_web_api_keyDiv"
-                    className="p-field p-col-12 p-md-4"
-                >
-                    <h4 id="fcm_web_api_keyHeader">FCM Web API Key</h4>
-                    <InputText
-                        id="fcm_web_api_key"
-                        value={formik.values.fcm_web_api_key}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("fcm_web_api_key"),
-                        })}
-                    />
-                    <label
-                        id="errorFcm_web_api_key"
-                        htmlFor="fcm_web_api_key"
-                        className={classNames({
-                            "p-error": isFormFieldValid("fcm_web_api_key"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("fcm_web_api_key")}
-                </div>
-                <div
-                    id="fcm_web_server_keyDiv"
-                    className="p-field p-col-12 p-md-4"
-                >
-                    <h4 id="fcm_web_server_keyHeader">FCM Server Key</h4>
-                    <InputText
-                        id="fcm_web_server_key"
-                        value={formik.values.fcm_web_server_key}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("fcm_web_server_key"),
-                        })}
-                    />
-                    <label
-                        id="errorFcm_web_server_key"
-                        htmlFor="fcm_web_server_key"
-                        className={classNames({
-                            "p-error": isFormFieldValid("fcm_web_server_key"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("fcm_web_server_key")}
-                </div>
-                <div id="is_activeDiv" className="p-field">
-                    <h4 id="is_activeHeader">Aktif</h4>
-                    <InputSwitch
-                        id="is_active "
-                        name="is_active"
-                        checked={formik.values.is_active}
-                        onChange={formik.handleChange}
-                    ></InputSwitch>
-                    <label
-                        id="errorIs_active"
-                        htmlFor="is_active"
-                        className={classNames({
-                            "p-error": isFormFieldValid("is_active"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("is_active")}
-                </div>
+                <FormColumn>
+                    <InputGroup>
+                        <InputContainer name="fcm_project_id" label="FCM Project ID" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.fcm_project_id,
+                            onChange:formik.handleChange
+                        }}/>
+
+                        <InputContainer name="fcm_app_id" label="FCM APP ID" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.fcm_app_id,
+                            onChange:formik.handleChange
+                        }}/>
+                    </InputGroup>
+                </FormColumn>
+
+                <FormColumn>
+                    <InputGroup>
+                        <InputContainer name="fcm_sender_id" label="FCM Sender ID" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.fcm_sender_id,
+                            onChange:formik.handleChange
+                        }}/>
+
+                        <InputContainer name="fcm_web_certificate" label="FCM Web Certificate" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.fcm_web_certificate,
+                            onChange:formik.handleChange
+                        }}/>
+                    </InputGroup>
+                </FormColumn>
+
+                <FormColumn>
+                    <InputGroup>
+                        <InputContainer name="fcm_web_api_key" label="FCM Web API Key" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.fcm_web_api_key,
+                            onChange:formik.handleChange
+                        }}/>
+
+                        <InputContainer name="fcm_web_server_key" label="FCM Server Key" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.fcm_web_server_key,
+                            onChange:formik.handleChange
+                        }}/>
+                    </InputGroup>
+                </FormColumn>
             </>
         );
     };
@@ -424,98 +315,45 @@ const SettingsAdmin = () => {
     const SMSGatewaySettings = () => {
         return (
             <>
-                <div
-                    id="otp_verification_on_registrationDiv"
-                    className="p-field"
-                >
-                    <h4 id="otp_verification_on_registrationHeader">
-                        OTP Verification on Registration
-                    </h4>
-                    <InputSwitch
-                        id="otp_verification_on_registration "
-                        name="otp_verification_on_registration"
-                        checked={formik.values.otp_verification_on_registration}
-                        onChange={formik.handleChange}
-                    ></InputSwitch>
-                    <label
-                        id="errorOtp_verification_on_registration"
-                        htmlFor="otp_verification_on_registration"
-                        className={classNames({
-                            "p-error": isFormFieldValid(
-                                "otp_verification_on_registration"
-                            ),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("otp_verification_on_registration")}
-                </div>
-                <div id="twilio_sidDiv" className="p-field p-col-12 p-md-4">
-                    <h4 id="twilio_sidHeader">Twilio SID</h4>
-                    <InputText
-                        id="twilio_sid"
-                        value={formik.values.twilio_sid}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("twilio_sid"),
-                        })}
-                    />
-                    <label
-                        id="errorTwilio_sid"
-                        htmlFor="twilio_sid"
-                        className={classNames({
-                            "p-error": isFormFieldValid("twilio_sid"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("twilio_sid")}
-                </div>
-                <div
-                    id="twilio_access_tokenDiv"
-                    className="p-field p-col-12 p-md-4"
-                >
-                    <h4 id="twilio_access_tokenHeader">Twilio Access Token</h4>
-                    <InputText
-                        id="twilio_access_token"
-                        value={formik.values.twilio_access_token}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid(
-                                "twilio_access_token"
-                            ),
-                        })}
-                    />
-                    <label
-                        id="errorTwilio_access_token"
-                        htmlFor="twilio_access_token"
-                        className={classNames({
-                            "p-error": isFormFieldValid("twilio_access_token"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("twilio_access_token")}
-                </div>
-                <div
-                    id="twilio_service_idDiv"
-                    className="p-field p-col-12 p-md-4"
-                >
-                    <h4 id="twilio_service_idHeader">Twilio Service ID</h4>
-                    <InputText
-                        id="twilio_service_id"
-                        value={formik.values.twilio_service_id}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("twilio_service_id"),
-                        })}
-                    />
-                    <label
-                        id="errorTwilio_service_id"
-                        htmlFor="twilio_service_id"
-                        className={classNames({
-                            "p-error": isFormFieldValid("twilio_service_id"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("twilio_service_id")}
-                </div>
+
+                <FormColumn>
+                    <InputGroup>
+                        <InputContainer name="twilio_service_id" label="Twilio Service ID" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.twilio_service_id,
+                            onChange:formik.handleChange
+                        }}/>
+
+                        <InputContainer name="fcm_web_server_key" label="FCM Server Key" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.fcm_web_server_key,
+                            onChange:formik.handleChange
+                        }}/>
+                    </InputGroup>
+                </FormColumn>
+
+                <FormColumn>
+                    <InputGroup>
+                        <InputContainer name="twilio_sid" label="Twilio SID" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.twilio_sid,
+                            onChange:formik.handleChange
+                        }}/>
+
+                        <InputContainer name="twilio_access_token" label="Twilio Access Token" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.twilio_access_token,
+                            onChange:formik.handleChange
+                        }}/>
+                    </InputGroup>
+                </FormColumn>
+
+                <FormColumn>
+                    <InputGroup>
+                        <InputContainer name="otp_verification_on_registration" label="OTP Verification on Registration" formiks={inputFormiks} size={6} component={InputSwitch} iprops={{
+                            value:formik.values.otp_verification_on_registration,
+                            onChange:formik.handleChange,
+                            checked:formik.values.otp_verification_on_registration
+                        }}/>
+                    </InputGroup>
+                </FormColumn>
+                
             </>
         );
     };
@@ -523,26 +361,14 @@ const SettingsAdmin = () => {
     const GoogleMapsSettings = () => {
         return (
             <>
-                <div id="google_api_keyDiv" className="p-field p-col-12 p-md-4">
-                    <h4 id="google_api_keyHeader">Google API Key</h4>
-                    <InputText
-                        id="google_api_key"
-                        value={formik.values.google_api_key}
-                        type="text"
-                        onChange={formik.handleChange}
-                        className={classNames({
-                            "p-invalid": isFormFieldValid("google_api_key"),
-                        })}
-                    />
-                    <label
-                        id="errorGoogle_api_key"
-                        htmlFor="google_api_key"
-                        className={classNames({
-                            "p-error": isFormFieldValid("google_api_key"),
-                        })}
-                    ></label>
-                    {getFormErrorMessage("google_api_key")}
-                </div>
+                <FormColumn>
+                    <InputGroup>
+                        <InputContainer name="google_api_key" label="Google API Key" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                            value:formik.values.google_api_key,
+                            onChange:formik.handleChange
+                        }}/>
+                    </InputGroup>
+                </FormColumn>
             </>
         );
     };
@@ -689,23 +515,23 @@ const SettingsAdmin = () => {
                         activeIndex={activeIndex}
                         onTabChange={(e) => setActiveIndex(e.index)}
                     >
-                    <TabPanel header={i18n.t('general')}>
-                        <GeneralSettings />
-                    </TabPanel>
-                    <TabPanel header={i18n.t('notifications')}>
-                        <NotificationSettings />
-                    </TabPanel>
-                    <TabPanel header={i18n.t('smsGateway')}>
-                        <SMSGatewaySettings />
-                    </TabPanel>
-                    <TabPanel header={i18n.t('googleMaps')}>
-                        <GoogleMapsSettings />
-                    </TabPanel>
-                    <TabPanel header={i18n.t('paymentGateway')}>
-                        <PaymentSettings />
-                    </TabPanel>
+                        <TabPanel header={i18n.t('general')}>
+                            <GeneralSettings />
+                        </TabPanel>
+                        <TabPanel header={i18n.t('notifications')}>
+                            <NotificationSettings />
+                        </TabPanel>
+                        <TabPanel header={i18n.t('smsGateway')}>
+                            <SMSGatewaySettings />
+                        </TabPanel>
+                        <TabPanel header={i18n.t('googleMaps')}>
+                            <GoogleMapsSettings />
+                        </TabPanel>
+                        <TabPanel header={i18n.t('paymentGateway')}>
+                            <PaymentSettings />
+                        </TabPanel>
                     </TabView>
-                    <Button id='createBtn' type='submit' label={i18n.t('submit')} />
+                    <Button id='createBtn' className="p-mt-3" type='submit' label={i18n.t('submit')} />
                 </form>
             )}
         </div>
