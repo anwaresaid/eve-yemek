@@ -22,10 +22,10 @@ import { InputTextarea } from "primereact/inputtextarea";
 import StandardFileUpload from "../../inputs/fileUpload";
 import { InputNumber } from "primereact/inputnumber";
 import { InputSwitch } from "primereact/inputswitch";
-import { ProgressSpinner } from "primereact/progressspinner";
 
 import jsonCities from "../../../public/data/il.json";
 import jsonDistricts from "../../../public/data/ilce.json";
+import Loading from "../../Loading";
 
 const RestaurantDataInput = (props) => {
 
@@ -469,7 +469,7 @@ const RestaurantDataInput = (props) => {
     }
 
     if (props.updating && resLoading)
-        return <ProgressSpinner></ProgressSpinner>
+        return <Loading/>
 
     return (
         <div id="edit_restaurant">

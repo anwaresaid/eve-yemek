@@ -3,7 +3,7 @@ import UsersTable from "../../../components/tables/usersTable"
 import { listCustomerService } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
-import { ProgressSpinner } from 'primereact/progressspinner'
+import Loading from "../../../components/Loading"
 
 const restaurantOwnerList = () => {
 
@@ -20,7 +20,7 @@ const restaurantOwnerList = () => {
         <div id="customerServiceTable">
             {!loading && success && <UsersTable users={customerService.items} editPath="customer_service"></UsersTable>}
             {!loading && !success && <h4 id='warning'>Müşteri hizmetlerinin verileri alınamadı!</h4>}
-            {loading && <ProgressSpinner/>}
+            {loading && <Loading />}
         </div>
     )
 }

@@ -14,7 +14,6 @@ import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import classNames from "classnames";
 import { foodsTypes } from "../../store/types/foods.type";
-import { ProgressSpinner } from "primereact/progressspinner";
 import InputContainer from "../inputs/inputContainer";
 import StandardFileUpload from "../inputs/fileUpload";
 
@@ -211,7 +210,7 @@ const EditFoods = (props) => {
             <h1>Yemek Oluştur</h1>
             <Toast ref={toast}></Toast>
             {!props.foods ? (
-                <ProgressSpinner />
+                <Loading />
             ) : (
                 <S.ContainerCard>
                     <form onSubmit={formik.handleSubmit}>
