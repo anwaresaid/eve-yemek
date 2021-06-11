@@ -63,7 +63,7 @@ export const translations = {
   liveOrders: 'Canlı Siparişler',
   restaurant: 'Restoran',
   status: 'Durum',
-  total: 'Toplam',
+  total: 'Toplam Miktar',
   orderTime: 'Sipariş Zamanı',
   operations: 'Operasyonlar',
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { useSocket } from '../../../helpers/socket';
+import { i18n } from '../../../language'
 
 const liveOrdersList = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const liveOrdersList = () => {
 
   return (
     <div id="liveOrdersTable">
+      <h1 id="ordersHeader">{i18n.t('liveOrders')}</h1>
       {!loading && orders && (
         <OrdersTable
           orders={orders.items}
