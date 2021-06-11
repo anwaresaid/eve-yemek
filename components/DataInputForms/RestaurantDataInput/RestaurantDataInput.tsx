@@ -234,7 +234,7 @@ const RestaurantDataInput = (props) => {
             settingDropDownNames();
         }
 
-        if (resOnwersSuccess && resSuccess) {
+        if (resOnwersSuccess && resSuccess && props.updating) {
             setSelectedResOwner(() => {
                 let selectedResOwners = resOwnerslist.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
