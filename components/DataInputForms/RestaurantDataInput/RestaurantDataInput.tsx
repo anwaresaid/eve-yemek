@@ -81,7 +81,6 @@ const RestaurantDataInput = (props) => {
         featured: false,
         active: false,
         owner: '',
-        owner_name: '',
         is_agreement: false,
         minimum_order_amount: 0,
         latitudeInt: 0,
@@ -142,14 +141,8 @@ const RestaurantDataInput = (props) => {
                 errors.delivery_radius = i18n.t('isRequired', {input: i18n.t('deliveryRadius')});
             }
 
-            if (!data.owner) {
+            if (!data.owner_id) {
                 errors.owner = i18n.t('isRequired', {input: i18n.t('restaurantOwner')});
-            }
-            else {
-                let selectedResOwners = resOwnersList.restaurantOwners?.items.filter(data => { return data.name.localeCompare(formik.values.owner.name) == 0; });
-                formik.values.owner_id = selectedResOwners[0]?.id;
-                formik.values.owner_name = formik.values.owner.name;
-
             }
 
             if (!data.city_id) {
@@ -232,7 +225,7 @@ const RestaurantDataInput = (props) => {
                 let selectedResOwners = resOwnerslist.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
-            formik.values.owner = { name: restaurant.owner_name };
+            formik.values.owner_id = restaurant.owner.id;
             formik.values.name = restaurant.name;
             formik.values.description = restaurant.description;
             formik.values.email = restaurant.email;
@@ -272,6 +265,8 @@ const RestaurantDataInput = (props) => {
         isFormFieldValid
     }
 
+    console.log(formik.values.owner_id);
+
     const generalTabPanel = () => {
         return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('updateRestaurant')}>
         <S.ContainerCard>
@@ -288,12 +283,15 @@ const RestaurantDataInput = (props) => {
                         </InputGroup>
 
                         <InputGroup>
-                            <InputContainer label={i18n.t('restaurantOwner')} name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
-                                value: formik.values.owner,
-                                onChange: formik.handleChange,
+                            <InputContainer label={i18n.t('restaurantOwner')} name="owner_id" formiks={inputFormiks} component={Dropdown} iprops={{
+                                value: formik.values.owner_id,
+                                onChange: (e) => { formik.values.owner_name = e.originalEvent.target.innerText; formik.handleChange(e); },
                                 options: resOwnersName,
+                                filter:true,
+                                filterBy:"name",
                                 placeholder: "Select an Owner",
-                                optionLabel: "name"
+                                optionLabel: "name",
+                                optionValue: "id",
                             }} />
                         </InputGroup>
 
