@@ -10,6 +10,7 @@ import { i18n } from '../../language';
 import AddOnCategoryTable from '../../components/tables/addonCategoryTable';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
 import * as S from '../../styles/food/food.list.style';
+import Loading from '../../components/Loading';
 
 const AddonCategoriesList = () => {
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -41,7 +42,7 @@ const AddonCategoriesList = () => {
   return (
     <div id="addonCategoryTabe">
       {!loading && addonCategories && <AddOnCategoryTable addonCategories={addonCategories.items}></AddOnCategoryTable>}
-      {loading && <ProgressSpinner/>}
+      {loading && <Loading />}
     </div>
   );
 };

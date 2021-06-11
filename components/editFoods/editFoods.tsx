@@ -16,6 +16,7 @@ import classNames from "classnames";
 import { foodsTypes } from "../../store/types/foods.type";
 import InputContainer from "../inputs/inputContainer";
 import StandardFileUpload from "../inputs/fileUpload";
+import Loading from "../Loading";
 
 const EditFoods = (props) => {
     //setting names for dropdowns.
