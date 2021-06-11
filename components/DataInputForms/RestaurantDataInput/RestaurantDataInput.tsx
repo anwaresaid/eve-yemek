@@ -281,6 +281,196 @@ const RestaurantDataInput = (props) => {
         isFormFieldValid
     }
 
+    const generalTabPanel = () => {
+        return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('updateRestaurant')}>
+        <S.ContainerCard>
+            <form onSubmit={formik.handleSubmit} >
+                <div className="p-grid">
+                    <FormColumn divideCount={3}>
+                        <h2>{i18n.t('general')}</h2>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('name')} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                                value: formik.values.name,
+                                onChange: formik.handleChange,
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('restaurantOwner')} name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
+                                value: formik.values.owner,
+                                onChange: formik.handleChange,
+                                options: resOwnersName,
+                                placeholder: "Select an Owner",
+                                optionLabel: "name"
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
+                                value: formik.values.phone,
+                                mask: "(999) 999-9999",
+                                placeholder: "(999) 999-9999",
+                                onChange: formik.handleChange,
+                            }} />
+
+                            <InputContainer label={i18n.t('email')} name="email" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                                value: formik.values.email,
+                                onChange: formik.handleChange,
+                            }} />
+
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('description')} name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                value: formik.values.description,
+                                onChange: formik.handleChange,
+                                rows: 3,
+                                autoResize: true
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
+                                setFile: (image) => { formik.values.image = image },
+                                showSuccess: () => { toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' }); }
+                            }} />
+                        </InputGroup>
+                    </FormColumn>
+                    <FormColumn divideCount={3}>
+                        <h2>{i18n.t('addressInformation')}</h2>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                value: formik.values.city,
+                                onChange: formik.handleChange,
+                                options: cities,
+                                placeholder: i18n.t('city'),
+                                optionLabel: "name"
+                            }} />
+
+                            <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                value: formik.values.town,
+                                onChange: formik.handleChange,
+                                options: counties,
+                                placeholder: i18n.t('district'),
+                                optionLabel: "name"
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('postalCode')} name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                                value: formik.values.postal_code,
+                                onChange: formik.handleChange,
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.latitudeInt,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                            }} />
+
+                            <InputContainer label={i18n.t('longitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.longtitudeInt,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('fullAddress')} name="address" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                value: formik.values.address,
+                                onChange: formik.handleChange,
+                                rows: 3,
+                                autoResize: true
+                            }} />
+                        </InputGroup>
+                    </FormColumn>
+                    <FormColumn divideCount={3}>
+                        <h2>Restoran Ayarları</h2>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('approximateDeliveryTime')} name="delivery_time" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.delivery_time,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                            }} />
+
+                            <InputContainer label={i18n.t('deliveryRadius')} name="delivery_radius" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.delivery_radius,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('commissionRate')} name="commission_rate" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.commission_rate,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                            }} />
+
+                            <InputContainer label={i18n.t('restaurantFee')} name="restaurant_charges" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.restaurant_charges,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('minimumAmount')} name="minimum_order_amount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.minimum_order_amount,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                            }} />
+
+                            <InputContainer label={i18n.t('rating')} name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.rating,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                            }} />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('licenseCode')} name="license_code" formiks={inputFormiks} size={12} component={InputText} iprops={{
+                                value: formik.values.license_code,
+                                onChange: formik.handleChange
+                            }} />
+
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputContainer label={i18n.t('vegetablesOnly')} name="is_vegi" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                value: formik.values.is_vegi,
+                                checked: formik.values.is_vegi,
+                                onChange: formik.handleChange
+                            }} />
+
+                            <InputContainer label={i18n.t('prioritized')} name="featured" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                value: formik.values.featured,
+                                checked: formik.values.featured,
+                                onChange: formik.handleChange
+                            }} />
+
+                            <InputContainer label={i18n.t('open')} name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
+                                value: formik.values.active,
+                                checked: formik.values.active,
+                                onChange: formik.handleChange
+                            }} />
+                        </InputGroup>
+                    </FormColumn>
+                </div>
+
+                <S.SubmitBtn>
+                    <Button type="submit" label="Gönder" />
+                </S.SubmitBtn>
+            </form>
+        </S.ContainerCard>
+    </TabPanel>
+    }
+
     if (props.updating && resLoading)
         return <ProgressSpinner></ProgressSpinner>
 
@@ -288,200 +478,19 @@ const RestaurantDataInput = (props) => {
         <div id="edit_restaurant">
             <h1 id="editHeader">{props.creating ? i18n.t('create') : i18n.t('update')}</h1>
             <Toast id="toastMessage" ref={toast}></Toast>
-            <TabView>
-                <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('updateRestaurant')}>
-                    <S.ContainerCard>
-                        <form onSubmit={formik.handleSubmit} >
-                            <div className="p-grid">
-                                <FormColumn divideCount={3}>
-                                    <h2>{i18n.t('general')}</h2>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('name')} name="name" formiks={inputFormiks} component={InputText} iprops={{
-                                            value: formik.values.name,
-                                            onChange: formik.handleChange,
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('restaurantOwner')} name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
-                                            value: formik.values.owner,
-                                            onChange: formik.handleChange,
-                                            options: resOwnersName,
-                                            placeholder: "Select an Owner",
-                                            optionLabel: "name"
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
-                                            value: formik.values.phone,
-                                            mask: "(999) 999-9999",
-                                            placeholder: "(999) 999-9999",
-                                            onChange: formik.handleChange,
-                                        }} />
-
-                                        <InputContainer label={i18n.t('email')} name="email" formiks={inputFormiks} size={6} component={InputText} iprops={{
-                                            value: formik.values.email,
-                                            onChange: formik.handleChange,
-                                        }} />
-
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('description')} name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
-                                            value: formik.values.description,
-                                            onChange: formik.handleChange,
-                                            rows: 3,
-                                            autoResize: true
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
-                                            setFile: (image) => { formik.values.image = image },
-                                            showSuccess: () => { toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' }); }
-                                        }} />
-                                    </InputGroup>
-                                </FormColumn>
-                                <FormColumn divideCount={3}>
-                                    <h2>{i18n.t('addressInformation')}</h2>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                            value: formik.values.city,
-                                            onChange: formik.handleChange,
-                                            options: cities,
-                                            placeholder: i18n.t('city'),
-                                            optionLabel: "name"
-                                        }} />
-
-                                        <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                            value: formik.values.town,
-                                            onChange: formik.handleChange,
-                                            options: counties,
-                                            placeholder: i18n.t('district'),
-                                            optionLabel: "name"
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('postalCode')} name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
-                                            value: formik.values.postal_code,
-                                            onChange: formik.handleChange,
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                            value: formik.values.latitudeInt,
-                                            onValueChange: formik.handleChange,
-                                            showButtons: true,
-                                        }} />
-
-                                        <InputContainer label={i18n.t('longitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                            value: formik.values.longtitudeInt,
-                                            onValueChange: formik.handleChange,
-                                            showButtons: true,
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('fullAddress')} name="address" formiks={inputFormiks} component={InputTextarea} iprops={{
-                                            value: formik.values.address,
-                                            onChange: formik.handleChange,
-                                            rows: 3,
-                                            autoResize: true
-                                        }} />
-                                    </InputGroup>
-                                </FormColumn>
-                                <FormColumn divideCount={3}>
-                                    <h2>Restoran Ayarları</h2>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('approximateDeliveryTime')} name="delivery_time" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                            value: formik.values.delivery_time,
-                                            onValueChange: formik.handleChange,
-                                            showButtons: true,
-                                        }} />
-
-                                        <InputContainer label={i18n.t('deliveryRadius')} name="delivery_radius" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                            value: formik.values.delivery_radius,
-                                            onValueChange: formik.handleChange,
-                                            showButtons: true,
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('commissionRate')} name="commission_rate" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                            value: formik.values.commission_rate,
-                                            onValueChange: formik.handleChange,
-                                            showButtons: true,
-                                        }} />
-
-                                        <InputContainer label={i18n.t('restaurantFee')} name="restaurant_charges" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                            value: formik.values.restaurant_charges,
-                                            onValueChange: formik.handleChange,
-                                            showButtons: true,
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('minimumAmount')} name="minimum_order_amount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                            value: formik.values.minimum_order_amount,
-                                            onValueChange: formik.handleChange,
-                                            showButtons: true,
-                                        }} />
-
-                                        <InputContainer label={i18n.t('rating')} name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                            value: formik.values.rating,
-                                            onValueChange: formik.handleChange,
-                                            showButtons: true,
-                                        }} />
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('licenseCode')} name="license_code" formiks={inputFormiks} size={12} component={InputText} iprops={{
-                                            value: formik.values.license_code,
-                                            onChange: formik.handleChange
-                                        }} />
-
-                                    </InputGroup>
-
-                                    <InputGroup>
-                                        <InputContainer label={i18n.t('vegetablesOnly')} name="is_vegi" formiks={inputFormiks} component={InputSwitch} iprops={{
-                                            value: formik.values.is_vegi,
-                                            checked: formik.values.is_vegi,
-                                            onChange: formik.handleChange
-                                        }} />
-
-                                        <InputContainer label={i18n.t('prioritized')} name="featured" formiks={inputFormiks} component={InputSwitch} iprops={{
-                                            value: formik.values.featured,
-                                            checked: formik.values.featured,
-                                            onChange: formik.handleChange
-                                        }} />
-
-                                        <InputContainer label={i18n.t('open')} name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
-                                            value: formik.values.active,
-                                            checked: formik.values.active,
-                                            onChange: formik.handleChange
-                                        }} />
-                                    </InputGroup>
-                                </FormColumn>
-                            </div>
-
-                            <S.SubmitBtn>
-                                <Button type="submit" label="Gönder" />
-                            </S.SubmitBtn>
-                        </form>
-                    </S.ContainerCard>
-                </TabPanel>
-                {
-                    props.updating ? <TabPanel header={i18n.t('restaurantMeals')}>
-                                        <FoodsTable foods={foods} resid={props.id} />
-                                    </TabPanel> : <br></br>
-                }
-            </TabView>
+            {
+                props.updating ? 
+                    <TabView>
+                        {generalTabPanel()}
+                        <TabPanel header={i18n.t('restaurantMeals')}>
+                            <FoodsTable foods={foods} resid={props.id} />
+                        </TabPanel>
+                    </TabView>
+                :
+                    <TabView>
+                        {generalTabPanel()}
+                    </TabView>
+            }
         </div>
     )
 }
