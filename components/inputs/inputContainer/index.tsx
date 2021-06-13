@@ -18,7 +18,7 @@ type IProps = {
 const InputContainer = (props:IProps) => {
 
     const sizeClass = "p-col" + ( props.noAutoCol12 !== true ? " p-col-12" : "") + (props.size ? " p-md-"+props.size : ""); 
-    const isFormFieldValid = props.formiks.isFormFieldValid(props.name);
+    const isFormFieldValid = props?.formiks?.isFormFieldValid(props.name);
     const elmClass = props.noErrorLabel === true ? "" : classNames({ 'p-invalid': isFormFieldValid });
 
     return (
