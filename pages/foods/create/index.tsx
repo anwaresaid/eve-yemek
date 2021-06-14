@@ -170,7 +170,7 @@ export const Index = () => {
             <Toast id="toastMessage" ref={toast}></Toast>
             <S.ContainerCard id="container">
                  <form id="createForm" onSubmit={formik.handleSubmit}  >
-                    <div className="p-fluid">
+                    <div className="p-grid">
                         <FormColumn divideCount={3}>
                             <InputGroup>
                                     <InputContainer label={i18n.t('restaurant')} name="resName" formiks={inputFormiks} component={Dropdown} iprops={{
@@ -191,37 +191,38 @@ export const Index = () => {
                                     }} />
                             </InputGroup>
                         </FormColumn>
+
+                        <FormColumn divideCount={3}>
+                            <div className="p-fluid">
+                                <div id="foodCategoriesDiv" className="card">
+                                    <h4 id="categoryNameHeader">{i18n.t('mealCategory')}</h4>
+                                    <Dropdown id="categoryName" name="categoryName" value={formik.values.categoryName}
+                                    options={foodCategoryName} onChange={formik.handleChange} optionLabel="name"
+                                    placeholder={i18n.t('mealCategory')} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
+                                    <label id="errorCategoryName" htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
+                                                {getFormErrorMessage('categoryName')}
+                                </div>
+                                <h4 id="addonsHeader">{i18n.t('selectAddons')}</h4>
+                                    <div id="addonstDiv">
+                                        {multiSelect()}
+                                        <label id="errorAddons" htmlFor="addons" className={classNames({ 'p-error': isFormFieldValid('addons') })}></label>
+                                                {getFormErrorMessage('addons')}
+                                    </div>
+
+                            </div>
+                            <div className="p-grid p-fluid">
+                                <div className="p-field p-col-12 p-md-3">
+                                    <h4 id="priceHeader">{i18n.t('price')}</h4>
+                                    <InputNumber id="price" name="price" value={formik.values.price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
+                                </div>
+                                <div id="discountContainer" className="p-field p-col-12 p-md-3">
+                                    <h4 id="discountHeader">{i18n.t('discountedPrice')}</h4>
+                                    <InputNumber id="discount_price" name="discount_price" value={formik.values.discount_price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
+                                </div>
+                            </div>
+                        </FormColumn>
                     </div>
 
-                    <FormColumn divideCount={3}>
-                        <div className="p-fluid">
-                            <div id="foodCategoriesDiv" className="card">
-                                <h4 id="categoryNameHeader">{i18n.t('mealCategory')}</h4>
-                                <Dropdown id="categoryName" name="categoryName" value={formik.values.categoryName}
-                                options={foodCategoryName} onChange={formik.handleChange} optionLabel="name"
-                                placeholder={i18n.t('mealCategory')} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('categoryName') })}/>
-                                <label id="errorCategoryName" htmlFor="categoryName" className={classNames({ 'p-error': isFormFieldValid('categoryName') })}></label>
-                                            {getFormErrorMessage('categoryName')}
-                               </div>
-                               <h4 id="addonsHeader">{i18n.t('selectAddons')}</h4>
-                                <div id="addonstDiv">
-                                    {multiSelect()}
-                                    <label id="errorAddons" htmlFor="addons" className={classNames({ 'p-error': isFormFieldValid('addons') })}></label>
-                                            {getFormErrorMessage('addons')}
-                                </div>
-
-                        </div>
-                        <div className="p-grid p-fluid">
-                            <div className="p-field p-col-12 p-md-3">
-                                <h4 id="priceHeader">{i18n.t('price')}</h4>
-                                <InputNumber id="price" name="price" value={formik.values.price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
-                            </div>
-                            <div id="discountContainer" className="p-field p-col-12 p-md-3">
-                                <h4 id="discountHeader">{i18n.t('discountedPrice')}</h4>
-                                <InputNumber id="discount_price" name="discount_price" value={formik.values.discount_price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
-                            </div>
-                        </div>
-                    </FormColumn>
 
                     <div className="p-field p-col-12">
                         <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
