@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { listAllUsers } from '../../store/actions/userslists.action';
 import { MultiSelect } from 'primereact/multiselect';
 import { sendNotifications } from '../../store/actions/send_notifications.action';
+import { i18n } from '../../language';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -151,7 +152,7 @@ export const Index = () => {
               </div>
             </div>
             <S.SubmitBtn>
-              <Button type='submit' label='Submit' />
+              <Button type='submit' label={i18n.t('submit')} />
             </S.SubmitBtn>
           </form>
         </S.ContainerCard>

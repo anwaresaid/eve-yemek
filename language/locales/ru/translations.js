@@ -177,5 +177,12 @@ export const translations = {
   submit: 'Подтвердить',
 
   updateMeal: 'Обновить информацию о еде',
-  selectRestaurant: 'Выбрать ресторан'
+  selectRestaurant: 'Выбрать ресторан',
+  dragAndDropImageHere: 'Перетащите изображение сюда',
+
+  fixed: 'Точный',
+  percentage: 'Процентный',
+  
+  addressInformation: 'информация об адресе',
+  selectAnOwner: 'Выберите владельца'
 };

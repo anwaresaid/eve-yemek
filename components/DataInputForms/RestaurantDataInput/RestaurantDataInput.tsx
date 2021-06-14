@@ -288,7 +288,7 @@ const RestaurantDataInput = (props) => {
                                 options: resOwnersName,
                                 filter:true,
                                 filterBy:"name",
-                                placeholder: "Select an Owner",
+                                placeholder: i18n.t('selectAnOwner'),
                                 optionLabel: "name",
                                 optionValue: "id",
                             }} />

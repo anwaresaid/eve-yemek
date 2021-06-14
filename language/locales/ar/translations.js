@@ -177,5 +177,12 @@ export const translations = {
   submit: 'إعتماد ',
 
   updateMeal: 'تحديث الوجبة',
-  selectRestaurant: 'اختر المطعم'
+  selectRestaurant: 'اختر المطعم',
+  dragAndDropImageHere: 'قم بسحب وإسقاط الصورة هنا',
+
+  fixed: 'ثابت',
+  percentage: 'النسبة المئوية',
+
+  addressInformation: 'معلومات العنوان',
+  selectAnOwner: 'حدد مالك'
 };
