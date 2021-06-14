@@ -175,4 +175,7 @@ export const translations = {
 
   selectLanguage: 'Dil seç',
   submit: 'Kaydet',
+
+  updateMeal: 'Yemek Güncelle',
+  selectRestaurant: 'Restoran Seçin'
 };

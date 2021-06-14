@@ -175,4 +175,7 @@ export const translations = {
 
   selectLanguage: 'Select Language',
   submit: 'Submit',
+
+  updateMeal: 'Update Meal',
+  selectRestaurant: 'Select Restaurant'
 };

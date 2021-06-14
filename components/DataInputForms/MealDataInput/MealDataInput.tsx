@@ -73,7 +73,7 @@ const MealDataInput = (props) => {
             let errors: any = {}
 
             if (!data.restaurant_id) {
-                errors.restaurant_id = 'restaurant is required.';
+                errors.restaurant_id = i18n.t('isRequired', { input: i18n.t('restaurant') });
             }
 
             if (!data.name) {
@@ -84,7 +84,7 @@ const MealDataInput = (props) => {
             }
 
             if (!data.image) {
-                errors.image = 'Image is required.';
+                errors.image = i18n.t('isRequired', { input: i18n.t('image') });
             }
 
             if (!data.food_category_id) {

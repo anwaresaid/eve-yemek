@@ -175,4 +175,7 @@ export const translations = {
 
   selectLanguage: 'Выберите язык',
   submit: 'Подтвердить',
+
+  updateMeal: 'Обновить информацию о еде',
+  selectRestaurant: 'Выбрать ресторан'
 };

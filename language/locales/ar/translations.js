@@ -175,4 +175,7 @@ export const translations = {
 
   selectLanguage: 'إختراللغة',
   submit: 'إعتماد ',
+
+  updateMeal: 'تحديث الوجبة',
+  selectRestaurant: 'اختر المطعم'
 };
