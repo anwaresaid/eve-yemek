@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Column } from 'primereact/column'
-import { Button } from 'primereact/button'
-import { InputText } from 'primereact/inputtext'
 import { useRouter } from 'next/router'
 import StandardTable from '../../components/StandardTable'
 import { RootState } from 'typesafe-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { listOrders } from '../../store/actions/orders.action'
-import {ProgressSpinner} from 'primereact/progressspinner'
-import { editTagTemplate } from '../../styles/standard_table_style/standard.table.style';
 import EditBtn from '../../components/InTableComponents/editButton/index';
 import Header from '../../components/InTableComponents/Header/index';
 import OrderStatus from '../../components/InTableComponents/orderStatusTag'
 import { i18n } from '../../language'
+import Loading from '../../components/Loading'
 
 const Orders = () => {
 
@@ -48,7 +44,7 @@ const Orders = () => {
 
     return (
         <div id="ordersTable">
-            {loading ? <ProgressSpinner /> : 
+            {loading ? <Loading  /> : 
             <div id="ordersCard" className="card">
                 <h1 id="ordersHeader">{i18n.t('orders')}</h1>
                 <StandardTable 

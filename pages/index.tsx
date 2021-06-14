@@ -5,8 +5,8 @@ import { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
 import { getDashboardReport } from "../store/actions/dashboard.action";
-import {ProgressSpinner} from 'primereact/progressspinner'
 import { i18n } from "../language";
+import Loading from "../components/Loading";
 
 const Index = (props) => {
     const res = useSelector((state:RootState) => state.dashboardReport)
@@ -46,7 +46,7 @@ const Index = (props) => {
     };
     return (
         <div id='containerPanel' className="ContainerPanel">
-            {loading ? <ProgressSpinner /> :
+            {loading ? <Loading /> :
             <S.DashboardWrapper id='dashBoard'>
             <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
             <div className='p-grid p-grid-container'>

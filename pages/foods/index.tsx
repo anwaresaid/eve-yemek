@@ -3,8 +3,7 @@ import FoodsTable from '../../components/tables/foodsTable'
 import { listFood } from '../../store/actions/foods.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { RootState } from "typesafe-actions";
-import { ProgressSpinner } from 'primereact/progressspinner';
-
+import Loading from "../../components/Loading";
 
 const FoodsList =  () => {
     const dispatch = useDispatch();
@@ -22,7 +21,7 @@ const FoodsList =  () => {
      return (
         <div id="foodsCategoryTable">
             {!loading && foods && <><h1>Foods</h1><FoodsTable foods={foods.items}></FoodsTable></>}
-            {loading && <ProgressSpinner/>}
+            {loading && <Loading />}
         </div>
     );
 

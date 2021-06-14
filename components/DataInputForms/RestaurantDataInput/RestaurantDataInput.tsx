@@ -22,7 +22,10 @@ import { InputTextarea } from "primereact/inputtextarea";
 import StandardFileUpload from "../../inputs/fileUpload";
 import { InputNumber } from "primereact/inputnumber";
 import { InputSwitch } from "primereact/inputswitch";
-import { ProgressSpinner } from "primereact/progressspinner";
+
+import jsonCities from "../../../public/data/il.json";
+import jsonDistricts from "../../../public/data/ilce.json";
+import Loading from "../../Loading";
 
 const RestaurantDataInput = (props) => {
 
@@ -78,9 +81,6 @@ const RestaurantDataInput = (props) => {
         featured: false,
         active: false,
         owner: '',
-        owner_name: '',
-        city: 0,
-        town: 0,
         is_agreement: false,
         minimum_order_amount: 0,
         latitudeInt: 0,
@@ -141,28 +141,16 @@ const RestaurantDataInput = (props) => {
                 errors.delivery_radius = i18n.t('isRequired', {input: i18n.t('deliveryRadius')});
             }
 
-            if (!data.owner) {
+            if (!data.owner_id) {
                 errors.owner = i18n.t('isRequired', {input: i18n.t('restaurantOwner')});
             }
-            else {
-                let selectedResOwners = resOwnersList.restaurantOwners?.items.filter(data => { return data.name.localeCompare(formik.values.owner.name) == 0; });
-                formik.values.owner_id = selectedResOwners[0]?.id;
-                formik.values.owner_name = formik.values.owner.name;
 
+            if (!data.city_id) {
+                errors.city_id = i18n.t('isRequired', {input: i18n.t('city')});
             }
 
-            if (!data.city) {
-                errors.city = i18n.t('isRequired', {input: i18n.t('city')});
-            }
-            else {
-                formik.values.city_id = data.city.name;
-            }
-
-            if (!data.town) {
-                errors.town = i18n.t('isRequired', {input: i18n.t('district')});
-            }
-            else {
-                formik.values.town_id = data.town.name;
+            if (!data.town_id) {
+                errors.town_id = i18n.t('isRequired', {input: i18n.t('district')});
             }
 
             if (!data.minimum_order_amount) {
@@ -185,7 +173,6 @@ const RestaurantDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
-            console.log(data)
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, data));
             } else if (props.creating) {
@@ -204,7 +191,6 @@ const RestaurantDataInput = (props) => {
             }
         }
         if (!reloadCheck || props.creating) {
-            console.log("here")
             formik.values = defaultInitialValues
             formik.resetForm()
             setReloadCheck(!reloadCheck)
@@ -239,7 +225,7 @@ const RestaurantDataInput = (props) => {
                 let selectedResOwners = resOwnerslist.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
-            formik.values.owner = { name: restaurant.owner_name };
+            formik.values.owner_id = restaurant.owner.id;
             formik.values.name = restaurant.name;
             formik.values.description = restaurant.description;
             formik.values.email = restaurant.email;
@@ -260,26 +246,26 @@ const RestaurantDataInput = (props) => {
         }
     }, [resOnwersSuccess, resSuccess])
 
-    const cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ];
 
-    const counties = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ];
+    const cities = jsonCities;
+
+    const [districts, setDistricts] = useState([]);
+
+    const handleCityUpdate = (cityId) => {
+        
+        formik.values.town_id = 0;
+
+        const filteredDistricts = jsonDistricts.filter((k)=> k.il_id === cityId )
+
+        setDistricts(filteredDistricts);
+    }
 
     const inputFormiks = {
         getFormErrorMessage,
         isFormFieldValid
     }
+
+    console.log(formik.values.owner_id);
 
     const generalTabPanel = () => {
         return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('updateRestaurant')}>
@@ -297,12 +283,15 @@ const RestaurantDataInput = (props) => {
                         </InputGroup>
 
                         <InputGroup>
-                            <InputContainer label={i18n.t('restaurantOwner')} name="owner" formiks={inputFormiks} component={Dropdown} iprops={{
-                                value: formik.values.owner,
-                                onChange: formik.handleChange,
+                            <InputContainer label={i18n.t('restaurantOwner')} name="owner_id" formiks={inputFormiks} component={Dropdown} iprops={{
+                                value: formik.values.owner_id,
+                                onChange: (e) => { formik.values.owner_name = e.originalEvent.target.innerText; formik.handleChange(e); },
                                 options: resOwnersName,
+                                filter:true,
+                                filterBy:"name",
                                 placeholder: "Select an Owner",
-                                optionLabel: "name"
+                                optionLabel: "name",
+                                optionValue: "id",
                             }} />
                         </InputGroup>
 
@@ -341,20 +330,26 @@ const RestaurantDataInput = (props) => {
                         <h2>{i18n.t('addressInformation')}</h2>
 
                         <InputGroup>
-                            <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                value: formik.values.city,
-                                onChange: formik.handleChange,
+                            <InputContainer label={i18n.t('city')} name="city_id" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                value: formik.values.city_id,
+                                onChange: (e)=> {handleCityUpdate(e.value); formik.handleChange(e);},
                                 options: cities,
                                 placeholder: i18n.t('city'),
-                                optionLabel: "name"
+                                filter:true,
+                                filterBy:"name",
+                                optionLabel: "name",
+                                optionValue:"id",
                             }} />
 
-                            <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                value: formik.values.town,
+                            <InputContainer label={i18n.t('district')} name="town_id" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                value: formik.values.town_id,
                                 onChange: formik.handleChange,
-                                options: counties,
+                                options: districts,
                                 placeholder: i18n.t('district'),
-                                optionLabel: "name"
+                                filter:true,
+                                filterBy:"name",
+                                optionLabel: "name",
+                                optionValue:"id"
                             }} />
                         </InputGroup>
 
@@ -442,19 +437,19 @@ const RestaurantDataInput = (props) => {
                         </InputGroup>
 
                         <InputGroup>
-                            <InputContainer label={i18n.t('vegetablesOnly')} name="is_vegi" formiks={inputFormiks} component={InputSwitch} iprops={{
+                            <InputContainer label={i18n.t('vegetablesOnly')} name="is_vegi" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
                                 value: formik.values.is_vegi,
                                 checked: formik.values.is_vegi,
                                 onChange: formik.handleChange
                             }} />
 
-                            <InputContainer label={i18n.t('prioritized')} name="featured" formiks={inputFormiks} component={InputSwitch} iprops={{
+                            <InputContainer label={i18n.t('prioritized')} name="featured" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
                                 value: formik.values.featured,
                                 checked: formik.values.featured,
                                 onChange: formik.handleChange
                             }} />
 
-                            <InputContainer label={i18n.t('open')} name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
+                            <InputContainer label={i18n.t('open')} name="active" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
                                 value: formik.values.active,
                                 checked: formik.values.active,
                                 onChange: formik.handleChange
@@ -472,7 +467,7 @@ const RestaurantDataInput = (props) => {
     }
 
     if (props.updating && resLoading)
-        return <ProgressSpinner></ProgressSpinner>
+        return <Loading/>
 
     return (
         <div id="edit_restaurant">

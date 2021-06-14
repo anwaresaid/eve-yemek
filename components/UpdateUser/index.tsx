@@ -4,7 +4,6 @@ import {RootState} from 'typesafe-actions'
 import {useDispatch,useSelector} from 'react-redux'
 import {getSingleUser, updateUser} from '../../store/actions/userslists.action'
 import UserDataInput from '../DataInputForms/UserDataInput/UserDataInput'
-import { ProgressSpinner } from 'primereact/progressspinner'
 
 const UpdateUser = (props) => {
     const router = useRouter()
