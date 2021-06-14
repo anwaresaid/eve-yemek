@@ -1,8 +1,32 @@
 import { i18n } from '../language';
 
-export const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+export const baseUrl = (()=> {
+    let baseUrl = "";
+    
+    if(!process.env.NEXT_PUBLIC_API_MODE){
+        baseUrl = process.env.NEXT_PUBLIC_API_DEV;
+    }
+    else if(process.env.NEXT_PUBLIC_API_MODE === "dev"){
+        baseUrl = process.env.NEXT_PUBLIC_API_DEV;
+    }
+    else if(process.env.NEXT_PUBLIC_API_MODE === "prod"){
+        baseUrl = process.env.NEXT_PUBLIC_API_PROD;
+    }
+    else if(process.env.NEXT_PUBLIC_API_MODE === "staging"){
+        baseUrl =  process.env.NEXT_PUBLIC_API_STAGING;
+    }
+    else if(process.env.NEXT_PUBLIC_API_MODE === "local"){
+        baseUrl = process.env.NEXT_PUBLIC_API_LOCAL;
+    }
+    else{
+        baseUrl = process.env.NEXT_PUBLIC_API_DEV;
+    }
+    
+    return baseUrl;
+})();
 
-// prettier-ignore
+console.log(baseUrl);
+
 export const allMenuItems:any = [
     { label:i18n.t("dashboard"),          url:"/",              roles:["admin", "restaurant_owner", "manager"] },
     { label:i18n.t("liveOrders"),        url:"/orders/live",   roles:["restaurant_owner","admin"]},
