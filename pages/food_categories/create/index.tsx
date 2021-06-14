@@ -79,7 +79,7 @@ export const Index = () => {
             </div>
           </div>
           <div className="p-field p-col-12">
-              <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+              <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
                   setFile:(image)=>{ formik.values.image=image },
                   showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
               }}/>

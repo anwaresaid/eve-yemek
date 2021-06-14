@@ -2,6 +2,7 @@ import React from 'react';
 import SettingsAdmin from '../../components/settingsAdmin';
 import SettingsOwner from '../../components/settingsOwner';
 import auth from '../../helpers/core/auth';
+import { i18n } from '../../language';
 
 const index = () => {
 
@@ -20,7 +21,7 @@ const index = () => {
 
   return (
     <>
-      <h2 id='settingsRenderHeader'>Ayarlar</h2>
+      <h2 id='settingsRenderHeader'>{i18n.t('settings')}</h2>
       {renderSettings()}
     </>
   )

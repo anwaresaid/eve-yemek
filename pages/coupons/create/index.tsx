@@ -33,8 +33,8 @@ export const Index = () => {
         return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
     };
     const discount_types = [
-        {title:'Fixed', value:'FIXED'},
-        {title:'Percentage', value:'PERCENTAGE'}
+        {title: i18n.t('fixed'), value:'FIXED'},
+        {title: i18n.t('percentage'), value:'PERCENTAGE'}
     ]
 
     const formik = useFormik({

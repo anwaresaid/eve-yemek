@@ -175,4 +175,9 @@ export const translations = {
 
   selectLanguage: 'Select Language',
   submit: 'Submit',
+
+  dragAndDropImageHere: 'Drag and drop image here',
+
+  fixed: 'Fixed',
+  percentage: 'Percentage'
 };

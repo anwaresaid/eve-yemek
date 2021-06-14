@@ -17,6 +17,7 @@ import { foodsTypes } from "../../store/types/foods.type";
 import InputContainer from "../inputs/inputContainer";
 import StandardFileUpload from "../inputs/fileUpload";
 import Loading from "../Loading";
+import { i18n } from "../../language";
 
 const EditFoods = (props) => {
     //setting names for dropdowns.
@@ -287,7 +288,7 @@ const EditFoods = (props) => {
                         </div>
                         <div className="p-field p-col-12">
                             <InputContainer
-                                label="Resim"
+                                label={i18n.t('image')}
                                 name="file"
                                 formiks={inputFormiks}
                                 component={StandardFileUpload}
