@@ -17,6 +17,7 @@ import { i18n } from '../../language';
 import FormColumn from '../../components/inputs/formColumn';
 import InputGroup from '../../components/inputs/inputGroup';
 import InputContainer from '../../components/inputs/inputContainer';
+import Loading from '../../components/Loading';
 
 export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -149,7 +150,7 @@ export const AddonCategoryEdit = () => {
           </form>
         </S.ContainerCard>
       ) : (
-        <h2>Loading</h2>
+        <Loading />
       )}
     </div>
   );
