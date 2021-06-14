@@ -67,7 +67,6 @@ export const Index = () => {
         onSubmit: (data:any) => {
             // setFormData(data);
             // setShowMessage(true);
-            console.log(data);
             dispatch(updateAddons(addon.id,data));
             
 

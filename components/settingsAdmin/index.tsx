@@ -114,7 +114,6 @@ const SettingsAdmin = () => {
             return errors;
         },
         onSubmit: (data: any) => {
-            console.log(data);
             dispatch(updateSettings(data));
             dispatch({ type: settingsTypes.SETTINGS_UPDATE_RESET });
         },
