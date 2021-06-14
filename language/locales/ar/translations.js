@@ -135,6 +135,8 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'إعدادات إيڤ يميك',
+  security:"حماية",
+  newPassword:"كلمة السر الجديدة",
 
   //Transfers
   totalAmount: 'إجمالي',

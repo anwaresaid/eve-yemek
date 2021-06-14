@@ -135,6 +135,8 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Ayarları',
+  security:"Güvenlik",
+  newPassword:"Yeni Şifre",
 
   //Transfers
   totalAmount: 'Toplam Tutar',
