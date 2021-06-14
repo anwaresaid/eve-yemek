@@ -51,7 +51,6 @@ export const Index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
-      console.log('hello');
       dispatch(createAddonCategory(data));
     },
   });
@@ -114,46 +113,3 @@ export const Index = () => {
 };
 
 export default Index;
-
-/*
-  <form id="createForm" onSubmit={formik.handleSubmit}>
-          <div className='p-fluid'>
-            <div id="nameDiv" className='p-field'>
-              <h4 id="nameHeader">{i18n.t('categoryName')}</h4>
-              <InputText
-                id='name'
-                name='name'
-                onChange={formik.handleChange}
-                type='text'
-                className={classNames({
-                  'p-invalid': isFormFieldValid('name'),
-                })}
-              />
-              <label
-                htmlFor='name'
-                id="errorName"
-                className={classNames({ 'p-error': isFormFieldValid('name') })}
-              ></label>
-              {getFormErrorMessage('name')}
-            </div>
-            <div id="enumDiv" className='p-field'>
-              <h4 id="enumHeader">{i18n.t('type')}</h4>
-              <InputText
-                id='enum'
-                name='enum'
-                onChange={formik.handleChange}
-                type='text'
-                className={classNames({
-                  'p-invalid': isFormFieldValid('enum'),
-                })}
-              />
-              <label
-                htmlFor='enum'
-                id="errorEnum"
-                className={classNames({ 'p-error': isFormFieldValid('enum') })}
-              ></label>
-              {getFormErrorMessage('enum')}
-            </div>
-          </div>
-        </form>
-*/
