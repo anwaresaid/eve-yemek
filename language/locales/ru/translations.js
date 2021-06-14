@@ -178,6 +178,6 @@ export const translations = {
 
   dragAndDropImageHere: 'Перетащите изображение сюда',
 
-  fixed: 'постоянный',
-  percentage: 'процент'
+  fixed: 'Точный',
+  percentage: 'Процентный'
 };
