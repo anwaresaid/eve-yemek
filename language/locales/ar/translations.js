@@ -175,4 +175,9 @@ export const translations = {
 
   selectLanguage: 'إختراللغة',
   submit: 'إعتماد ',
+
+  dragAndDropImageHere: 'قم بسحب وإسقاط الصورة هنا',
+
+  fixed: 'ثابت',
+  percentage: 'النسبة المئوية'
 };

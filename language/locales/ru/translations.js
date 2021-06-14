@@ -175,4 +175,9 @@ export const translations = {
 
   selectLanguage: 'Выберите язык',
   submit: 'Подтвердить',
+
+  dragAndDropImageHere: 'Перетащите изображение сюда',
+
+  fixed: 'постоянный',
+  percentage: 'процент'
 };

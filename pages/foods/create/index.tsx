@@ -224,7 +224,7 @@ export const Index = () => {
                     </FormColumn>
 
                     <div className="p-field p-col-12">
-                        <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                        <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
                             setFile:(image)=>{ formik.values.image=image },
                             showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
                         }}/>
@@ -241,7 +241,7 @@ export const Index = () => {
                         <InputSwitch checked={formik.values.active} name="active" id="active" onChange={formik.handleChange} />
                     </div>
                     <S.SubmitBtn id="btnContainer">
-                        <Button id="createBtn" type="submit" label="Create"/>
+                        <Button id="createBtn" type="submit" label={i18n.t('create')}/>
                     </S.SubmitBtn>
                 </form>
             </S.ContainerCard>

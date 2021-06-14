@@ -175,4 +175,9 @@ export const translations = {
 
   selectLanguage: 'Dil seç',
   submit: 'Kaydet',
+
+  dragAndDropImageHere: 'Resmi buraya sürükleyip bırakın',
+
+  fixed: 'Belli',
+  percentage: 'Yüzdesi'
 };
