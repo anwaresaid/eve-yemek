@@ -178,8 +178,13 @@ export const translations = {
   selectLanguage: 'Dil seç',
   submit: 'Kaydet',
 
+  updateMeal: 'Yemek Güncelle',
+  selectRestaurant: 'Restoran Seçin',
   dragAndDropImageHere: 'Resmi buraya sürükleyip bırakın',
 
   fixed: 'Belli',
-  percentage: 'Yüzdesi'
+  percentage: 'Yüzdesi',
+
+  addressInformation: 'Addres Bilgileri',
+  selectAnOwner: 'Restoran Sahibi Seçin'
 };

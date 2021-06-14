@@ -178,8 +178,13 @@ export const translations = {
   selectLanguage: 'Select Language',
   submit: 'Submit',
 
+  updateMeal: 'Update Meal',
+  selectRestaurant: 'Select Restaurant',
   dragAndDropImageHere: 'Drag and drop image here',
 
   fixed: 'Fixed',
-  percentage: 'Percentage'
+  percentage: 'Percentage',
+
+  addressInformation: 'Address Information',
+  selectAnOwner: 'Select An Owner'
 };

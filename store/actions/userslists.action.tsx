@@ -228,7 +228,7 @@ function updateEditedRowInStore(roles, result, dispatch) {
         });
         break;
       default:
-        console.log('Unavailable');
+  
     }
   }
 }
