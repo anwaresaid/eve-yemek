@@ -135,6 +135,8 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Settings',
+  security:"Security",
+  newPassword:"New Password",
 
   // Transfers
   totalAmount: 'Total Amount',
