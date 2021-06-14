@@ -104,6 +104,7 @@ export const findRestaurant = (id) => async (dispatch, getState) => {
     });
 
     const restaurantService = new RestaurantService;
+
     const res = await restaurantService.findRestaurant(id);
     dispatch({
       type: restaurantsTypes.RESTAURAT_FIND_SUCCESS,

@@ -2,16 +2,16 @@ import React, {useRef, useState, useEffect } from 'react'
 import {InputText} from 'primereact/inputtext'
 import {useRouter} from 'next/router'
 import {useDispatch,useSelector} from 'react-redux'
-import {addUser, updateUser} from '../../store/actions/userslists.action'
+import {addUser, updateUser} from '../../../store/actions/userslists.action'
 import {InputSwitch} from 'primereact/inputswitch'
 import { Button } from 'primereact/button'
 import { MultiSelect } from 'primereact/multiselect'
-import { ProgressSpinner } from 'primereact/progressspinner'
-import {usersListTypes} from '../../store/types/userslists.type'
+import {usersListTypes} from '../../../store/types/userslists.type'
 import {Toast} from 'primereact/toast'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
-import { i18n } from '../../language'
+import { i18n } from '../../../language'
+import Loading from '../../Loading'
 
 const UserDataInput = (props) => {
 
@@ -146,7 +146,7 @@ const UserDataInput = (props) => {
     return (
         <div>
             <Toast id='toastMessage' ref={toast}></Toast>
-            {loading ? <ProgressSpinner/> : (props.updateProps ? body(true) : body(false))}
+            {loading ? <Loading/> : (props.updateProps ? body(true) : body(false))}
         </div>
     )
 }

@@ -27,6 +27,8 @@ export const translations = {
   deliveryScouts: 'Delivery Scouts',
   customerServiceReps: 'Service Representatives',
   createUser: 'Create User',
+  extra: 'Extra',
+  send_fcm_notification: 'Send FCM Notification',
   settings: 'Settings',
   transfers: 'Transfers',
   logout: 'Logout',
@@ -105,7 +107,6 @@ export const translations = {
   mealCategory: 'Meal Category',
   selectAddons: 'Select Add-Ons',
   discountedPrice: 'Discounted Price',
-  
 
   // Category pages and Add-on pages
   categoryName: 'Category Name',
@@ -173,5 +174,5 @@ export const translations = {
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
 
   selectLanguage: 'Select Language',
-  submit: "Submit"
+  submit: 'Submit',
 };

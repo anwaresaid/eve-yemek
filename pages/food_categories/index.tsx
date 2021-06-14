@@ -14,7 +14,7 @@ import editButton from '../../components/InTableComponents/editButton';
 import imageBodyTemplate from '../../components/InTableComponents/Image/index';
 import { i18n } from '../../language';
 import Food_CategoriesTable from '../../components/tables/foodCategoryTable';
-import { ProgressSpinner } from 'primereact/progressspinner';
+import Loading from '../../components/Loading';
 
 
 const FoodCategoriesList = () => {
@@ -31,7 +31,7 @@ const FoodCategoriesList = () => {
   return (
     <div id="foodsTable">
       {!loading && foodCategoriesList && <Food_CategoriesTable foodCategories={foodCategoriesList.items}></Food_CategoriesTable>}
-      {loading && <ProgressSpinner/>}
+      {loading && <Loading />}
         
     </div>
   );

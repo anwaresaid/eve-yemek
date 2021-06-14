@@ -3,8 +3,7 @@ import {useRouter} from 'next/router'
 import {RootState} from 'typesafe-actions'
 import {useDispatch,useSelector} from 'react-redux'
 import {getSingleUser, updateUser} from '../../store/actions/userslists.action'
-import UserDataInput from '../../components/UserDataInput/UserDataInput'
-import { ProgressSpinner } from 'primereact/progressspinner'
+import UserDataInput from '../DataInputForms/UserDataInput/UserDataInput'
 
 const UpdateUser = (props) => {
     const router = useRouter()
