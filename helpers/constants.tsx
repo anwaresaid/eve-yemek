@@ -25,8 +25,6 @@ export const baseUrl = (()=> {
     return baseUrl;
 })();
 
-console.log(baseUrl);
-
 export const allMenuItems:any = [
     { label:i18n.t("dashboard"),          url:"/",              roles:["admin", "restaurant_owner", "manager"] },
     { label:i18n.t("liveOrders"),        url:"/orders/live",   roles:["restaurant_owner","admin"]},
