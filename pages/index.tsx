@@ -7,17 +7,28 @@ import { RootState } from "typesafe-actions";
 import { getDashboardReport } from "../store/actions/dashboard.action";
 import { i18n } from "../language";
 import Loading from "../components/Loading";
+import auth from "../helpers/core/auth";
+import StandardTable from "../components/StandardTable";
+import { listOwnedRestaurants } from "../store/actions/restaurant.action";
+import activeTag from "../components/InTableComponents/activeTag";
+import idColumn from "../components/InTableComponents/idColumn";
 
 const Index = (props) => {
     const res = useSelector((state:RootState) => state.dashboardReport)
     const {loading, success, reportData} = res
+
+    const ownedRestaurantsState = useSelector((state:RootState) => state.ownedRestaurants)
+    const {loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants} = ownedRestaurantsState
+
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (!reportData)
             dispatch(getDashboardReport())
-        
-    },[dispatch])
+        if (!ownedRestaurants)
+            dispatch(listOwnedRestaurants())
+        console.log(ownedRestaurants)
+    },[dispatch, ownedRestaurantsSuccess])
 
     const parseCounts = (counts) => {
         if(!counts)
@@ -44,11 +55,29 @@ const Index = (props) => {
             }
         ]
     };
+
+    const ownedRestaurantsTableColumns = [
+        {field: '#', header: '#', body: idColumn, style:{width:"25"}},
+        {field: 'name', header: i18n.t('restaurant')},
+        {field: 'is_open', header: i18n.t('status'), body: ()=>activeTag(true)}, // change after BE supports active status for users}
+    ]
+
     return (
         <div id='containerPanel' className="ContainerPanel">
             {loading ? <Loading /> :
             <S.DashboardWrapper id='dashBoard'>
             <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
+            {
+                auth.hasRoles(["restaurant_owner"]) && 
+                <StandardTable id='ownedRestaurants' 
+                    columns={ownedRestaurantsTableColumns}
+                    value={ownedRestaurants}
+                    noPaginator
+                    style={{tableLayout: "auto"}}
+                    >
+                
+                </StandardTable>
+            }
             <div className='p-grid p-grid-container'>
                 <div className='p-col-6 p-md-6 p-lg-2'>
                     <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
