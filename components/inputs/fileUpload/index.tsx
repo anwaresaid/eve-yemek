@@ -62,13 +62,12 @@ const StandardFileUpload = (props) => {
         const { className, chooseButton, uploadButton, cancelButton } = options;
         const value = totalSize/20000;
         const formatedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
-
         return (
-            <div className={className} style={{backgroundColor: 'transparent', display: 'flex', alignItems: 'center'}}>
+            <div id="fileUploadHeader" className={className} style={{backgroundColor: 'transparent', display: 'flex', alignItems: 'center'}}>
                 {chooseButton}
                 {uploadButton}
                 {cancelButton}
-                <ProgressBar value={value} displayValueTemplate={() => `${formatedValue} / 2 MB`} style={{width: '300px', height: '20px', marginLeft: 'auto'}}></ProgressBar>
+                <ProgressBar id="sizeBar" value={value} displayValueTemplate={() => `${formatedValue} / 2 MB`} style={{width: '20%', height: '20px', marginLeft: 'auto'}}></ProgressBar>
             </div>
         );
     }
@@ -92,15 +91,15 @@ const StandardFileUpload = (props) => {
     const emptyTemplate = () => {
         return (
             <div className="p-d-flex p-ai-center p-dir-col">
-                 <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
-                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="p-my-5">{i18n.t('dragAndDropImageHere')}</span>
+                 <i className="pi pi-image p-p-5" style={{'fontSize': '2em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
+                <span style={{'fontSize': '1em', color: 'var(--text-color-secondary)'}} className="p-my-2">{i18n.t('dragAndDropImageHere')}</span>
             </div>
         )
     }
 
-    const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
-    const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
-    const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
+    const chooseOptions = {className: 'p-button-secondary'};
+    const uploadOptions = {className: 'p-button-info'};
+    const cancelOptions = {className: 'p-button-danger'};
     
     return (
         <>
