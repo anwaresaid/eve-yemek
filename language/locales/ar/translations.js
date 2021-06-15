@@ -135,6 +135,8 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'إعدادات إيڤ يميك',
+  security:"حماية",
+  newPassword:"كلمة السر الجديدة",
 
   //Transfers
   totalAmount: 'إجمالي',
@@ -175,4 +177,14 @@ export const translations = {
 
   selectLanguage: 'إختراللغة',
   submit: 'إعتماد ',
+
+  updateMeal: 'تحديث الوجبة',
+  selectRestaurant: 'اختر المطعم',
+  dragAndDropImageHere: 'قم بسحب وإسقاط الصورة هنا',
+
+  fixed: 'ثابت',
+  percentage: 'النسبة المئوية',
+
+  addressInformation: 'معلومات العنوان',
+  selectAnOwner: 'حدد مالك'
 };

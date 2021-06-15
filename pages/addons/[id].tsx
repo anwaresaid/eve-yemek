@@ -15,6 +15,7 @@ import { useRouter } from 'next/router';
 import { InputSwitch } from 'primereact/inputswitch';
 import { addonsTypes } from '../../store/types/addons.type';
 import { Toast } from 'primereact/toast';
+import { i18n } from '../../language';
 
 export const Index = () => {
   const [addonCategoryName, setAddonCategoryName] = useState(null);

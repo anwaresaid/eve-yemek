@@ -4,6 +4,7 @@ import { FileUpload } from "primereact/fileupload";
 import { ProgressBar } from "primereact/progressbar";
 import { Tag } from "primereact/tag";
 import React, { useRef, useState } from "react";
+import { i18n } from "../../../language";
 
 const StandardFileUpload = (props) => {
 
@@ -78,7 +79,7 @@ const StandardFileUpload = (props) => {
         return (
             <div className="p-d-flex p-ai-center p-dir-col">
                  <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
-                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="p-my-5">Drag and Drop Image Here</span>
+                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="p-my-5">{i18n.t('dragAndDropImageHere')}</span>
             </div>
         )
     }

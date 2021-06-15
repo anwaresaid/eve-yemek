@@ -169,7 +169,6 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.latitude = formik.values.latitudeInt?.toString();
             }
-            console.log(errors);
             return errors;
         },
         onSubmit: (data: any) => {
@@ -225,6 +224,7 @@ const RestaurantDataInput = (props) => {
                 let selectedResOwners = resOwnerslist.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
+            
             formik.values.owner_id = restaurant.owner.id;
             formik.values.name = restaurant.name;
             formik.values.description = restaurant.description;
@@ -242,7 +242,8 @@ const RestaurantDataInput = (props) => {
             formik.values.minimum_order_amount = restaurant.minimum_order_amount;
             formik.values.is_veg = restaurant.is_veg;
             formik.values.active = restaurant.active;
-            formik.values.featured = restaurant.featured;
+            formik.values.featured = restaurant.featured; 
+            
         }
     }, [resOnwersSuccess, resSuccess])
 
@@ -264,8 +265,6 @@ const RestaurantDataInput = (props) => {
         getFormErrorMessage,
         isFormFieldValid
     }
-
-    console.log(formik.values.owner_id);
 
     const generalTabPanel = () => {
         return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('updateRestaurant')}>
@@ -289,7 +288,7 @@ const RestaurantDataInput = (props) => {
                                 options: resOwnersName,
                                 filter:true,
                                 filterBy:"name",
-                                placeholder: "Select an Owner",
+                                placeholder: i18n.t('selectAnOwner'),
                                 optionLabel: "name",
                                 optionValue: "id",
                             }} />
