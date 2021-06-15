@@ -1,5 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "./constants";
+import auth from "./core/auth";
 
 const axiosInstance = axios.create({
     baseURL: baseUrl,
@@ -12,13 +13,12 @@ const axiosInstance = axios.create({
 
 
 axiosInstance.interceptors.request.use(function (config) {
-    const auth_token = localStorage.getItem("access_token");
+    const auth_token = auth.token;
     if(window.location.pathname !== "/auth/login"){
         if(auth_token){
             config.headers['Authorization'] = 'Bearer ' + auth_token;
         }else{
-            localStorage.clear();
-            //console.log("request,,");
+            auth.logout();
             window.location.replace("/auth/login");
         }
     }
@@ -35,8 +35,7 @@ axiosInstance.interceptors.response.use(function (config) {
 }, async function (error) {
 
     if(window.location.pathname !== "/auth/login" && error?.response?.status === 401){
-        await localStorage.clear();
-        //console.log("response,,");
+        auth.logout();
         window.location.replace("/auth/login");
     }
 

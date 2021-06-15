@@ -30,3 +30,7 @@ yarn-error.log*
 .env.production.local
 
 /.idea/
+yarn.lock
+package-lock.json
+
+.vscode

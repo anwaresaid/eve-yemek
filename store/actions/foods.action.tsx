@@ -3,23 +3,159 @@ import FoodsService from "../services/foods.service";
 
 //Example flow
 
-const getAllFoods = () => async dispatch => {
-    try{
+export const createFood = (
+  { name,
+    image,
+    price,
+    discount_price,
+    restaurant_id,
+    food_category_id,
+    is_veg,
+    featured,
+    addon_id,
+    active,
+    description, }
+) => async dispatch => {
+  try {
 
-        const res = await FoodsService.getAllFoods();
+    dispatch({
+      type: foodsTypes.FOOD_CREATE_REQUEST
+    });
 
-        if(res?.error){
-            // Dispatch error
-            return;
-        }
+    const foodService = new FoodsService;
+    const res = await foodService.createFood(
+      name,
+      description,
+      image,
+      price,
+      discount_price,
+      restaurant_id,
+      food_category_id,
+      addon_id,
+      is_veg,
+      featured,
+      active
+    );
 
-        dispatch({type:foodsTypes.GET_ALL_FOODS, payload:res});
-
-    }catch(err){
-        return Promise.reject(err);
-    }
+    dispatch({
+      type: foodsTypes.FOOD_CREATE_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: foodsTypes.FOOD_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  } finally {
+    dispatch({
+      type: foodsTypes.FOOD_CREATE_RESET
+    });
+  }
 }
+export const updateFood = (id, updatedFood) => async dispatch => {
+  try {
 
-export default {
-    getAllFoods
+    dispatch({
+      type: foodsTypes.FOOD_UPDATE_REQUEST
+    });
+
+    const foodService = new FoodsService;
+    const res = await foodService.updateFood(id, { ...updatedFood });
+
+    dispatch({
+      type: foodsTypes.FOOD_UPDATE_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: foodsTypes.FOOD_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  } finally {
+    dispatch({
+      type: foodsTypes.FOOD_UPDATE_RESET,
+    });
+  }
+}
+export const findFood = (id) => async dispatch => {
+  try {
+
+    dispatch({
+      type: foodsTypes.FOOD_FIND_REQUEST
+    });
+
+    const foodService = new FoodsService;
+    const res = await foodService.findFood(id);
+
+    dispatch({
+      type: foodsTypes.FOOD_FIND_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: foodsTypes.FOOD_FIND_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  } finally {
+    dispatch({
+      type: foodsTypes.FOOD_FIND_RESET,
+    });
+  }
+}
+export const listFood = () => async dispatch => {
+  try {
+
+    dispatch({
+      type: foodsTypes.FOOD_LIST_REQUEST
+    });
+
+    const foodService = new FoodsService;
+    const res = await foodService.getFood();
+
+    dispatch({
+      type: foodsTypes.FOOD_LIST_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: foodsTypes.FOOD_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
+export const listFoodByRestaurant = (id) => async dispatch => {
+  try {
+
+    dispatch({
+      type: foodsTypes.FOOD_LIST_BY_RESTAURANT_REQUEST
+    });
+
+    const foodService = new FoodsService;
+    const res = await foodService.getFoodByRestaurant(id);
+
+    dispatch({
+      type: foodsTypes.FOOD_LIST_BY_RESTAURANT_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: foodsTypes.FOOD_LIST_BY_RESTAURANT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 }
