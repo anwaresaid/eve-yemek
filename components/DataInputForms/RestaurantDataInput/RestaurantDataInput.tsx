@@ -96,7 +96,7 @@ const RestaurantDataInput = (props) => {
     const formik = useFormik({
         initialValues: defaultInitialValues,
         validate: (data) => {
-            console.log(data)
+            
             let errors: any = {};
 
             if (!data.name) {
