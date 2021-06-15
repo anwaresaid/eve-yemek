@@ -120,3 +120,27 @@ export const findRestaurant = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const listOwnedRestaurants = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: restaurantsTypes.OWNED_RESTAURANTS_REQUEST,
+    });
+
+    const restaurantService = new RestaurantService;
+
+    const res = await restaurantService.listOwnedRestaurants();
+    dispatch({
+      type: restaurantsTypes.OWNED_RESTAURANTS_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: restaurantsTypes.OWNED_RESTAURANTS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

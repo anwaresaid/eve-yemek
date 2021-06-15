@@ -122,3 +122,25 @@ export const findRestaurantReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+
+export const ownedRestaurantsList = (state = initialState, action) => {
+  switch (action.type) {
+    case restaurantsTypes.OWNED_RESTAURANTS_REQUEST:
+      return { loading: true}
+    case restaurantsTypes.OWNED_RESTAURANTS_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        ownedRestaurants: action.payload
+      }
+    case restaurantsTypes.OWNED_RESTAURANTS_FAIL:
+      return {
+        loading: false,
+        error: action.payload
+      } 
+    default:
+      return state;
+  }
+};
+
