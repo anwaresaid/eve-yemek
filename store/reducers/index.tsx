@@ -45,7 +45,7 @@ import {
   allUsersListReducer,
   usersFcmTokensListReducer,
 } from './userslists.reducer';
-import { changePasswordReducer, listSettingsReducer, updateSettingsReducer } from './settings.reducer';
+import { forgotPasswordReducer, listSettingsReducer, updateSettingsReducer } from './settings.reducer';
 import { dashboardReportReducer } from './dashboard.reducer';
 import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
 import { sendNotificationReducer } from './send_notifications.reducer';
@@ -93,7 +93,7 @@ export default combineReducers({
 
   listSettings: listSettingsReducer,
   updateSettings: updateSettingsReducer,
-  changePassword: changePasswordReducer,
+  forgotPassword: forgotPasswordReducer,
 
   listAddonCategory: listAddonCategoryReducer,
   addonCategoryDetails: addonCategoryDetailsReducer,

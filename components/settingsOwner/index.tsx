@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
 import auth from "../../helpers/core/auth";
 import { i18n } from "../../language";
-import { changePasswordRequest } from "../../store/actions/settings.action";
 import FormColumn from "../inputs/formColumn";
 import InputContainer from "../inputs/inputContainer";
 import InputGroup from "../inputs/inputGroup";
@@ -20,7 +19,6 @@ const SettingsOwner = () => {
     const dispatch = useDispatch();
     const toast = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const changePasswordRequestState = useSelector((state: RootState) => state.changePassword);
 
     const formik = useFormik({
         initialValues: {
@@ -36,7 +34,7 @@ const SettingsOwner = () => {
             return errors;
         },
         onSubmit: (data: any) => {
-            dispatch(changePasswordRequest(auth.user.email));
+            
         },
     });
 
@@ -55,7 +53,7 @@ const SettingsOwner = () => {
         isFormFieldValid,
     };
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         if(changePasswordRequestState?.error){
             toast.current.show({
                 severity: "error",
@@ -71,7 +69,7 @@ const SettingsOwner = () => {
                 detail: i18n.t("passwordResetLinkIsSentToYourEmail")
             });
         }
-    }, [changePasswordRequestState])
+    }, [changePasswordRequestState])*/
 
     return (
         <>

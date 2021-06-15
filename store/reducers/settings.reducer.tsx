@@ -52,13 +52,13 @@ export const updateSettingsReducer = (state = initialState, action) => {
     }
 };
 
-export const changePasswordReducer = (state = initialState, action) => {
+export const forgotPasswordReducer = (state = initialState, action) => {
     switch (action.type) {
-        case settingsTypes.SETTINGS_CHANGE_PASSWORD_REQUEST:
+        case settingsTypes.SETTINGS_FORGOT_PASSWORD_REQUEST:
             return { loading: true };
-        case settingsTypes.SETTINGS_CHANGE_PASSWORD_FAIL:
+        case settingsTypes.SETTINGS_FORGOT_PASSWORD_FAIL:
             return { loading: false, error: action.payload };
-        case settingsTypes.SETTINGS_CHANGE_PASSWORD_SUCCESS:
+        case settingsTypes.SETTINGS_FORGOT_PASSWORD_SUCCESS:
             return { loading: false, success: true };
         default:
             return state;

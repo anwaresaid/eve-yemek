@@ -52,23 +52,23 @@ export const updateSettings = (data: any) => async (dispatch, getState) => {
     }
 };
 
-export const changePasswordRequest =
+export const forgotPasswordRequest =
     (email: string) => async (dispatch, getState) => {
         try {
             dispatch({
-                type: settingsTypes.SETTINGS_CHANGE_PASSWORD_REQUEST,
+                type: settingsTypes.SETTINGS_FORGOT_PASSWORD_REQUEST,
             });
 
             const settingsService = new SettingsService();
 
-            const res = await settingsService.changePasswordRequest(email);
+            const res = await settingsService.forgotPasswordRequest(email);
 
             dispatch({
-              type: settingsTypes.SETTINGS_CHANGE_PASSWORD_SUCCESS,
+              type: settingsTypes.SETTINGS_FORGOT_PASSWORD_SUCCESS,
             });
         } catch (error) {
           dispatch({
-            type: settingsTypes.SETTINGS_CHANGE_PASSWORD_FAIL,
+            type: settingsTypes.SETTINGS_FORGOT_PASSWORD_FAIL,
             payload:
                 error.response && error.response.data?.error?.message
                     ? error.response.data.error.message

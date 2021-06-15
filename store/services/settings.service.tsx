@@ -11,7 +11,7 @@ export default class SettingsService {
     return data;
   }
 
-  public async changePasswordRequest(email:string){
+  public async forgotPasswordRequest(email:string){
     const { data } = await axios.post("/users/resetPasswordRequest", { email });
     return data;
   }
