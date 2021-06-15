@@ -96,7 +96,7 @@ const RestaurantDataInput = (props) => {
     const formik = useFormik({
         initialValues: defaultInitialValues,
         validate: (data) => {
-            
+            console.log(data)
             let errors: any = {};
 
             if (!data.name) {
@@ -169,9 +169,11 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.latitude = formik.values.latitudeInt?.toString();
             }
+            //console.log(errors)
             return errors;
         },
         onSubmit: (data: any) => {
+            console.log(data)
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, data));
             } else if (props.creating) {
@@ -319,7 +321,7 @@ const RestaurantDataInput = (props) => {
                         </InputGroup>
 
                         <InputGroup>
-                            <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
+                            <InputContainer label={i18n.t('image')} name="image" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
                                 setFile: (image) => { formik.values.image = image },
                                 showSuccess: () => { toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' }); }
                             }} />

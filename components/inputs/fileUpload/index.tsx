@@ -34,8 +34,7 @@ const StandardFileUpload = (props) => {
               'Content-Type': 'multipart/form-data'
             }
         }).then(function (response) {
-            
-            props.setFile(response.data.file_path)
+            props.setFile(response.data.download_url)
 
             e.files.forEach(file => {
                 _totalSize += (file.size || 0);
@@ -43,7 +42,6 @@ const StandardFileUpload = (props) => {
     
             setTotalSize(_totalSize);
             props.showSuccess()
-            console.log(response);
           })
           .catch(function (response) {
             //handle error
