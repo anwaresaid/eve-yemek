@@ -12,6 +12,11 @@ import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { i18n } from '../../../language'
 import Loading from '../../Loading'
+import FormColumn from '../../inputs/formColumn'
+import InputContainer from "../../inputs/inputContainer";
+import InputGroup from "../../inputs/inputGroup";
+import { Password } from 'primereact/password'
+
 
 const UserDataInput = (props) => {
 
@@ -60,7 +65,10 @@ const UserDataInput = (props) => {
         }
     })
 
-
+    const inputFormiks = {
+        getFormErrorMessage,
+        isFormFieldValid
+      }
     useEffect(() => {
         if (props.updateProps){
             if (Object.keys(props.updateProps.data).length !== 0){
@@ -97,54 +105,93 @@ const UserDataInput = (props) => {
             <div id='editUsers'>
                 <h1 id='editHeader'>{updating ? i18n.t('updateUser') : i18n.t('createUser')}</h1>
                 <form id='editForm' onSubmit={mySubmit} >
-                    <div className="p-fluid">
-                        <div id='rolesDiv' className="p-field">
+                <div className="p-grid">
+                    <FormColumn divideCount={2}>
+                        {/* <div id='rolesDiv' className="p-field">
                             <h4 id='rolesHeader'>{i18n.t('role')}</h4>
                             <MultiSelect id="roles" value={formik.values.roles} placeholder={i18n.t('selectRole')} options={usersListTypes.USER_ROLES_FOR_DROPDOWN} onChange={formik.handleChange}  className={classNames({ 'p-invalid': isFormFieldValid('roles') })}/>
                             <label id='errorRoles' htmlFor="roles" className={classNames({ 'p-error': isFormFieldValid('roles') })}></label>
                             {getFormErrorMessage('roles')}
-                        </div>
-                        <div id='nameDiv' className="p-field">
+                        </div> */}
+                        <InputGroup>
+                            <InputContainer label={i18n.t('selectRole')} size={6} name="roles" formiks={inputFormiks} component={MultiSelect} iprops={{
+                                value: formik.values.roles,
+                                onChange: formik.handleChange,
+                                options: usersListTypes.USER_ROLES_FOR_DROPDOWN,
+                                autoResize: true,
+                                placeholder: i18n.t('selectRole'),
+                                filter:true,
+                                filterBy:"label",
+                                optionLabel: "label",
+                                optionValue:"value"
+                            }} />
+                        {/* <div id='nameDiv' className="p-field">
                             <h4 id='nameHeader'>{i18n.t('name')}</h4>
                             <InputText id="name" name='name' value={formik.values.name} type="text" onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })}/>
                             <label id='errorName' htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
                             {getFormErrorMessage('name')}
-                        </div>
-                        <div id='emailDiv' className="p-field">
-                            <h4 id='emailHeader'>{i18n.t('email')}</h4>
-                            <InputText id="email" value={formik.values.email} type="text" onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('email') })}/>
-                            <label id='errorEmail' htmlFor="email" className={classNames({ 'p-error': isFormFieldValid('email') })}></label>
-                            {getFormErrorMessage('email')}
-                        </div>
-                        <div id='phoneDiv' className="p-field">
-                            <h4 id='phoneHeader'>{i18n.t('telephone')}</h4>
-                            <InputText id="phone" value={formik.values.phone} type="text" onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('phone') })}/>
-                            <label id='errorPhone' htmlFor="phone" className={classNames({ 'p-error': isFormFieldValid('phone') })}></label>
-                            {getFormErrorMessage('phone')}
-                        </div>
-                        {!updating &&
-                            <div id='passwordDiv' className="p-field">
-                            <h4 id='passwordHeader'>{i18n.t('password')}</h4>
-                            <InputText id="password" type="password" value={formik.values.password} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('password') })}></InputText>
-                            <label id='errorPassword' htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}></label>
-                            {getFormErrorMessage('password')}
-                        </div>
-                        }
-                        <div id='activeDiv' className="p-field">
+                        </div> */}
+                                <InputContainer label={i18n.t('name')} size={6} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                                    value: formik.values.name,
+                                    onChange: formik.handleChange,
+
+                                }} />
+                          
+                            {/* <div id='emailDiv' className="p-field">
+                                <h4 id='emailHeader'>{i18n.t('email')}</h4>
+                                <InputText id="email" value={formik.values.email} type="text" onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('email') })}/>
+                                <label id='errorEmail' htmlFor="email" className={classNames({ 'p-error': isFormFieldValid('email') })}></label>
+                                {getFormErrorMessage('email')}
+                            </div> */}
+                            {!updating &&
+                           
+                            <InputContainer label={i18n.t('password')} name="password" size={6}  formiks={inputFormiks} component={Password } iprops={{
+                                value: formik.values.password,
+                                onChange: formik.handleChange,
+                                toggleMask:true
+                            }} />
+                            }
+                            </InputGroup>
+                            </FormColumn>
+                            <FormColumn divideCount={2}>
+                            <InputGroup>
+                                <InputContainer label={i18n.t('email')} size={6} name="email" formiks={inputFormiks} component={InputText} iprops={{
+                                value: formik.values.email,
+                                onChange: formik.handleChange,
+                            }} />
+
+                            <InputContainer label={i18n.t('telephone')} size={6} name="phone" formiks={inputFormiks} component={InputText} iprops={{
+                                value: formik.values.phone,
+                                onChange: formik.handleChange,
+                            }} />
+                            </InputGroup>
+                            </FormColumn>
+                        
+                        {/* <div id='activeDiv' className="p-field">
                             <h4 id='activeHeader'>{i18n.t('active')}</h4>
                             <InputSwitch id="active " name="active"  checked={true} onChange={formik.handleChange} ></InputSwitch>
                             <label id='errorActive' htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
                             {getFormErrorMessage('active')}
-                        </div>
+                        </div> */}
+                        <FormColumn divideCount={2}>
+
+                         <InputContainer label={i18n.t('active')} name="active"  formiks={inputFormiks} component={InputSwitch} iprops={{
+                             value: formik.values.active,
+                             checked: formik.values.active,
+                             onChange: formik.handleChange
+                            }} />
+                            <Button id='submitBtn' type="submit" label={updating ? i18n.t('update'): i18n.t('create')}></Button>
+                            </FormColumn>
                     </div>
-                    <Button id='submitBtn' type="submit" label={updating ? i18n.t('update'): i18n.t('create')}></Button>
                 </form>
             </div>
         )
     }
-
+    
+    console.log(usersListTypes.USER_ROLES_FOR_DROPDOWN);
     return (
         <div>
+
             <Toast id='toastMessage' ref={toast}></Toast>
             {loading ? <Loading/> : (props.updateProps ? body(true) : body(false))}
         </div>
