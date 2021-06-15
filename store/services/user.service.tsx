@@ -20,9 +20,15 @@ const UserService = function () {
             return { ok:false, err:err?.data || err?.response?.data }
         })
     };
+
+    const changePassword = async (new_password:string, password:string) => {
+        const {data} = await axios.post(`/users/change-password`,{ new_password, password });
+        return data;
+    }
   
     return Object.freeze({
-        login
+        login,
+        changePassword
     });
   };
   

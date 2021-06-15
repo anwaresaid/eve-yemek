@@ -6,7 +6,7 @@ import {
   createAddonCategoryReducer,
   updateAddonCategoryReducer,
 } from './addon-category.reducer';
-import user from './user.reducer';
+import { changePasswordReducer, loginReducer } from './user.reducer';
 import {
   createRestaurantReducer,
   findRestaurantReducer,
@@ -51,7 +51,8 @@ import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
 import { sendNotificationReducer } from './send_notifications.reducer';
 
 export default combineReducers({
-  user,
+  login: loginReducer,
+  changePassword: changePasswordReducer,
 
   dashboardReport: dashboardReportReducer,
 
