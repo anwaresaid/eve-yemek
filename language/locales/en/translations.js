@@ -168,6 +168,7 @@ export const translations = {
   // Toasts
   success: 'Success',
   error: 'Error',
+  anErrorOccurred: "An error occurred",
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',

@@ -168,6 +168,7 @@ export const translations = {
   // Toasts
   success: 'Успешно',
   error: 'Ошибка',
+  anErrorOccurred: "Произошла ошибка",
   fileUploaded: 'Файл загружен',
   updatedUser: 'Обновленный пользователь',
   userName: 'Имя пользователя',

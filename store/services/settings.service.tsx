@@ -10,4 +10,8 @@ export default class SettingsService {
     const { data } = await axios.put('/dashboard-settings', updateSettingsDTO);
     return data;
   }
+
+  public async changePasswordRequest(email:string){
+    await axios.post("/users/resetPasswordRequest", { email });
+  }
 }

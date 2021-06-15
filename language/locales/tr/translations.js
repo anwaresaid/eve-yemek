@@ -168,6 +168,7 @@ export const translations = {
   // Toasts
   success: 'Başarılı',
   error: 'Hata',
+  anErrorOccurred: "Bir hata oluştu",
   fileUploaded: 'Dosya Yüklendi',
   updatedUser: 'Kullanıcı Güncellendi',
   userName: 'Kullanıcı Adı',
