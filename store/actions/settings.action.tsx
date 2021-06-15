@@ -63,7 +63,9 @@ export const changePasswordRequest =
 
             const res = await settingsService.changePasswordRequest(email);
 
-            console.log(res);
+            dispatch({
+              type: settingsTypes.SETTINGS_CHANGE_PASSWORD_SUCCESS,
+            });
         } catch (error) {
           dispatch({
             type: settingsTypes.SETTINGS_CHANGE_PASSWORD_FAIL,

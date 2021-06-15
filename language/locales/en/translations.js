@@ -137,6 +137,7 @@ export const translations = {
   eveYemekSettings: 'Eve Yemek Settings',
   security:"Security",
   newPassword:"New Password",
+  passwordResetLinkIsSentToYourEmail:"Password reset link is sent to your email",
 
   // Transfers
   totalAmount: 'Total Amount',

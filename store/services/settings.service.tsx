@@ -12,6 +12,7 @@ export default class SettingsService {
   }
 
   public async changePasswordRequest(email:string){
-    await axios.post("/users/resetPasswordRequest", { email });
+    const { data } = await axios.post("/users/resetPasswordRequest", { email });
+    return data;
   }
 }

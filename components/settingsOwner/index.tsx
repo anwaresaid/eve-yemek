@@ -63,6 +63,14 @@ const SettingsOwner = () => {
                 detail: i18n.t("anErrorOccurred")
             });
         }
+
+        if(changePasswordRequestState?.success === true){
+            toast.current.show({
+                severity: "success",
+                summary: i18n.t("success"),
+                detail: i18n.t("passwordResetLinkIsSentToYourEmail")
+            });
+        }
     }, [changePasswordRequestState])
 
     return (
