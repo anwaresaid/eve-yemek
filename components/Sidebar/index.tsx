@@ -9,8 +9,6 @@ const Sidebar = (props) => {
     const [initMenus, setInitMenus] = useState([]);
 
     const menuTemplate = (item, options) => {
-        //console.log("menu template");
-
         const activeClass =
             window.location.pathname === item.url ? " p-menuitem-active" : "";
         

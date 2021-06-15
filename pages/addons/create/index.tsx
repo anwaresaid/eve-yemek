@@ -59,7 +59,6 @@ export const Index = () => {
         onSubmit: (data:any) => {
             // setFormData(data);
             // setShowMessage(true);
-            console.log(data);
             dispatch(createAddons(data));
             
 
@@ -123,7 +122,7 @@ export const Index = () => {
                         </div>
                     </div>
                     <S.SubmitBtn id="btnContainer">
-                        <Button id="createBtn" type="submit" label="Create"/>
+                        <Button id="createBtn" type="submit" label={i18n.t('create')}/>
                     </S.SubmitBtn>
                 </form>
             </S.ContainerCard>

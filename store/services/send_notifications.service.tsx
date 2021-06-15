@@ -16,7 +16,6 @@ export default class SendNotificationService {
 
   //prettier-ignore
   private async send(dto) {
-    console.log(process.env.FCM_REQUEST_KEY);
     const fcmUrl = 'https://fcm.googleapis.com/fcm/send';
     const config = {
       headers: {
