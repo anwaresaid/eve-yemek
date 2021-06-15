@@ -42,7 +42,7 @@ export const createFoodCategory = (data: any) => async (dispatch) => {
     dispatch({
       type: foodCategoryTypes.FOOD_CATEGORY_CREATE_FAIL,
       payload:
-        err.response && err.response.response.data.message
+        err.response && err.response.data.message
           ? err.response.data.message
           : err.message,
     });
