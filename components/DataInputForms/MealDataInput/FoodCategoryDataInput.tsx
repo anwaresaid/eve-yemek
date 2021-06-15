@@ -100,19 +100,17 @@ export const FoodCategoryDataInput = (props) => {
                 value: formik.values.name,
                 onChange: formik.handleChange,
                 }} />
-            </InputGroup>
                   <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
                       setFile:(image)=>{ formik.values.image=image },
                       showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
                     }}/>
-                    
                 <InputContainer label={i18n.t('active')} name="active" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
                   value: formik.values.active,
                   checked: formik.values.active,
                   onChange: formik.handleChange
                 }} />
-
-
+            </InputGroup>
+                    
                 <S.SubmitBtn id="btnContainer">
                   <Button id="editBtn" type='submit' label={i18n.t('submit')}/>
                 </S.SubmitBtn>
@@ -121,7 +119,6 @@ export const FoodCategoryDataInput = (props) => {
               </div>
             </form>
           </S.ContainerCard>
-
     </div>
   );
 };
