@@ -20,7 +20,7 @@ const UpdateUser = (props) => {
 
     useEffect( () => {
         dispatch(getSingleUser(id))
-     }, [dispatch,id,props.id]);
+     }, [dispatch]);
 
     useEffect( () => {
         if(getUserSuccess){
