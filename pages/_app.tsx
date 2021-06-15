@@ -89,7 +89,7 @@ function MyApp(props) {
     return (
         <>
             <Head >
-                <link id='logoLink' rel="shortcut icon" href="/images/logos/logo.png"></link>
+                <link id='logoLink' rel="shortcut icon" href="/images/logos/logo.jpg"></link>
                 <title id='adminPanelTitle'>Eve Yemek - Admin Panel</title>
                 <meta charSet="utf-8" />
                 <meta
