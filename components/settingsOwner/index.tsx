@@ -24,6 +24,7 @@ const SettingsOwner = () => {
 
     const formik = useFormik({
         initialValues: {
+            password:"",
             new_password: "",
         },
         validate: (data) => {
@@ -31,6 +32,10 @@ const SettingsOwner = () => {
 
             if(!data.new_password){
                 errors.new_password = i18n.t("isRequired", { input: i18n.t("newPassword") })
+            }
+
+            if(!data.password){
+                errors.password = i18n.t("isRequired", { input: i18n.t("password") })
             }
 
             return errors;
@@ -68,9 +73,11 @@ const SettingsOwner = () => {
         if(changePasswordStatus?.success === true){
             toast.current.show({
                 severity: "success",
-                summary: i18n.t("success"),
-                detail: i18n.t("passwordResetLinkIsSentToYourEmail")
+                summary: i18n.t("success")
             });
+
+            formik.values.password = "";
+            formik.values.new_password = "";
         }
     }, [changePasswordStatus])
 
@@ -81,6 +88,21 @@ const SettingsOwner = () => {
                 <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                     <TabPanel header={i18n.t("security")} >
                         <FormColumn>
+                            <InputGroup>
+                                <InputContainer
+                                    label={i18n.t("password")}
+                                    name="password"
+                                    formiks={inputFormiks}
+                                    iprops={{
+                                        value:formik.values.password,
+                                        onChange:formik.handleChange,
+                                        feedback:false,
+                                        toggleMask:true
+                                    }}
+                                    size={6}
+                                    component={Password}
+                                />
+                            </InputGroup>
                             <InputGroup>
                                 <InputContainer
                                     label={i18n.t("newPassword")}
