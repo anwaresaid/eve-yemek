@@ -8,6 +8,7 @@ import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
 import { i18n } from "../../language";
+import { baseUrl } from "../../helpers/constants";
 
 const Food_CategoriesTable = (props) => {
     
