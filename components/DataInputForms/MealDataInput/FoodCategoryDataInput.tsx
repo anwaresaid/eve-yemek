@@ -20,10 +20,10 @@ export const FoodCategoryDataInput = (props) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [totalSize, setTotalSize] = useState(0);
   const toast = useRef(null);
   const fileUploadRef = useRef(null);
   const [categoryName, setCategoryName] = useState('');
+  const [data, setData] = useState(false);
 
   const foodCategoryDetails = useSelector((state:RootState) => state.foodCategoryDetails);
   const { foodCategory, loading, success: detailsSuccess } = foodCategoryDetails;
@@ -63,7 +63,8 @@ export const FoodCategoryDataInput = (props) => {
 });
 
   useEffect(() => {
-      if(detailsSuccess && foodCategory.id === router.query.id){
+      if(detailsSuccess && foodCategory.id === router.query.id && foodCategory){
+        setData(true);
         formik.values.active = foodCategory.active;
         formik.values.name = foodCategory.name;
         if(successUpdate){
@@ -76,9 +77,10 @@ export const FoodCategoryDataInput = (props) => {
           router.push('/food_categories')
         }
       }else{
+        setData(false);
         dispatch(getFoodCategoryDetails(router.query.id))
       }
-  }, [dispatch, detailsSuccess, foodCategory, successUpdate]);
+  }, [dispatch, detailsSuccess, foodCategory, successUpdate,router.query.id]);
 
   const inputFormiks = {
     getFormErrorMessage,
