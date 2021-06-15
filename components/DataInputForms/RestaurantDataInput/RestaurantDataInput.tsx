@@ -169,11 +169,11 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.latitude = formik.values.latitudeInt?.toString();
             }
-            //console.log(errors)
+            
             return errors;
         },
         onSubmit: (data: any) => {
-            console.log(data)
+            
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, data));
             } else if (props.creating) {
