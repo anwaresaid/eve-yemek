@@ -20,7 +20,7 @@ const Food_CategoriesTable = (props) => {
 
 
     const imageBodyTemplate = (rowData) => {
-        return <S.Image href={baseUrl+'/'+rowData.image}  alt={rowData.image}/>
+        return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
    }
  
    
