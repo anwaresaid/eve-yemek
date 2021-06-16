@@ -9,32 +9,31 @@ import { i18n } from "../language";
 import Loading from "../components/Loading";
 import auth from "../helpers/core/auth";
 import StandardTable from "../components/StandardTable";
-import { listOwnedRestaurants } from "../store/actions/restaurant.action";
-import activeTag from "../components/InTableComponents/activeTag";
+import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/restaurant.action";
+import { SelectButton } from 'primereact/selectbutton';
 import idColumn from "../components/InTableComponents/idColumn";
 
 const Index = (props) => {
-    const res = useSelector((state:RootState) => state.dashboardReport)
-    const {loading, success, reportData} = res
+    const res = useSelector((state: RootState) => state.dashboardReport)
+    const { loading, success, reportData } = res
 
-    const ownedRestaurantsState = useSelector((state:RootState) => state.ownedRestaurants)
-    const {loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants} = ownedRestaurantsState
+    const ownedRestaurantsState = useSelector((state: RootState) => state.ownedRestaurants)
+    const { loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants } = ownedRestaurantsState
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (!reportData)
             dispatch(getDashboardReport())
-        if (!ownedRestaurants)
+        if (ownedRestaurants.length === 0)
             dispatch(listOwnedRestaurants())
-        console.log(ownedRestaurants)
-    },[dispatch, ownedRestaurantsSuccess])
+    }, [dispatch, ownedRestaurantsSuccess])
 
     const parseCounts = (counts) => {
-        if(!counts)
+        if (!counts)
             return
         let out = []
-        for (let i of counts){
+        for (let i of counts) {
             out[i._id - 1] = i.count
         }
         out = Array.from(out, item => item || 0);
@@ -56,27 +55,36 @@ const Index = (props) => {
         ]
     };
 
+    const openClosedTag = (rowData) => {
+        const setIsOpen = (isOpen) => {
+            dispatch(openCloseRestaurant(rowData.id, {is_open: isOpen}))
+        }
+        return <SelectButton value={rowData.is_open} options={[{label: 'Open', value: true}, {label: 'Closed', value: false}]} onChange={(e) => setIsOpen(e.value)}  />
+    }
+
     const ownedRestaurantsTableColumns = [
-        {field: '#', header: '#', body: idColumn, style:{width:"25"}},
-        {field: 'name', header: i18n.t('restaurant')},
-        {field: 'is_open', header: i18n.t('status'), body: ()=>activeTag(true)}, // change after BE supports active status for users}
+        { field: '#', header: '#', body: idColumn, style: {'width':'20px'} },
+        { field: 'name', header: i18n.t('restaurant') },
+        { field: 'is_open', header: i18n.t('status'), body: openClosedTag},
     ]
 
     return (
         <div id='containerPanel' className="ContainerPanel">
             {loading ? <Loading /> :
-            <S.DashboardWrapper id='dashBoard'>
-            <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
-            {
-                auth.hasRoles(["restaurant_owner"]) && 
-                <StandardTable id='ownedRestaurants' 
-                    columns={ownedRestaurantsTableColumns}
-                    value={ownedRestaurants}
-                    noPaginator
-                    style={{tableLayout: "auto"}}
-                    >
-                
-                </StandardTable>
+                <S.DashboardWrapper id='dashBoard'>
+                    <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
+                    {
+                        auth.hasRoles(["restaurant_owner"]) &&
+                        <div className="p-my-5">
+                            <StandardTable id='ownedRestaurants'
+                                columns={ownedRestaurantsTableColumns}
+                                value={ownedRestaurants}
+                                noPaginator
+                                style={{ tableLayout: "auto" }}
+                                resizableColumns
+                                columnResizeMode="expand" showGridlines
+                            ></StandardTable>
+                        </div>
             }
             <div className='p-grid p-grid-container'>
                 <div className='p-col-6 p-md-6 p-lg-2'>
@@ -153,7 +161,7 @@ const Index = (props) => {
                 />
             </Card>
         </S.DashboardWrapper>}
-        </div>
+        </div >
     );
 };
 

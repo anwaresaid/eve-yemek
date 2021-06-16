@@ -124,7 +124,7 @@ export const findRestaurantReducer = (state = initialState, action) => {
 };
 
 
-export const ownedRestaurantsList = (state = initialState, action) => {
+export const ownedRestaurantsList = (state = {ownedRestaurants: []}, action) => {
   switch (action.type) {
     case restaurantsTypes.OWNED_RESTAURANTS_REQUEST:
       return { loading: true}
@@ -139,8 +139,19 @@ export const ownedRestaurantsList = (state = initialState, action) => {
         loading: false,
         error: action.payload
       } 
+    case restaurantsTypes.OWNED_RESTAURANT_OPEN_CLOSE:
+      for (let i = 0; i < state.ownedRestaurants.length; i++){
+        if (state.ownedRestaurants[i].id === action.payload.id){
+          state.ownedRestaurants[i] = action.payload
+          return {
+            ownedRestaurants: state.ownedRestaurants
+          }
+        }
+      }
     default:
       return state;
   }
 };
+
+
 

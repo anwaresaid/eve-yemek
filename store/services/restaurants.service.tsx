@@ -31,4 +31,9 @@ export default class RestaurantsService {
         const { data } = await axios.get(`/restaurants/own`);
         return data;
     }
+
+    async openCloseOwnedRestaurant(restaurantID, statusBody){
+        const { data } = await axios.put('/restaurants/' + restaurantID + '/change-status', statusBody);
+        return data;
+    }
 }
