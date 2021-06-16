@@ -113,6 +113,7 @@ export const translations = {
   type: 'Tür',
   addonName: 'Eklenti Adı',
   addonCategory: 'Eklenti Kategorisi',
+  editAddon: 'Eklenti değiştir',
 
   // Coupon pages
   couponName: 'Kupon Adı',
@@ -135,8 +136,8 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Ayarları',
-  security:"Güvenlik",
-  newPassword:"Yeni Şifre",
+  security: 'Güvenlik',
+  newPassword: 'Yeni Şifre',
 
   //Transfers
   totalAmount: 'Toplam Tutar',
@@ -186,5 +187,5 @@ export const translations = {
   percentage: 'Yüzdesi',
 
   addressInformation: 'Addres Bilgileri',
-  selectAnOwner: 'Restoran Sahibi Seçin'
+  selectAnOwner: 'Restoran Sahibi Seçin',
 };

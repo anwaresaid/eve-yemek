@@ -113,6 +113,7 @@ export const translations = {
   type: 'النوع',
   addonName: 'إسم الإضافة',
   addonCategory: 'صنف الإضافة',
+  editAddon: 'تغيير الإضافة',
 
   // Coupon pages
   couponName: 'اسم الكوبون',
@@ -135,8 +136,8 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'إعدادات إيڤ يميك',
-  security:"حماية",
-  newPassword:"كلمة السر الجديدة",
+  security: 'حماية',
+  newPassword: 'كلمة السر الجديدة',
 
   //Transfers
   totalAmount: 'إجمالي',
@@ -186,5 +187,5 @@ export const translations = {
   percentage: 'النسبة المئوية',
 
   addressInformation: 'معلومات العنوان',
-  selectAnOwner: 'حدد مالك'
+  selectAnOwner: 'حدد مالك',
 };

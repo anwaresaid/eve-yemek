@@ -113,6 +113,7 @@ export const translations = {
   type: 'Type',
   addonName: 'Add-On Name',
   addonCategory: 'Add-On Category',
+  editAddon: 'Edit Add-On',
 
   // Coupon pages
   couponName: 'Coupon Name',
@@ -135,8 +136,8 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Settings',
-  security:"Security",
-  newPassword:"New Password",
+  security: 'Security',
+  newPassword: 'New Password',
 
   // Transfers
   totalAmount: 'Total Amount',
@@ -186,5 +187,5 @@ export const translations = {
   percentage: 'Percentage',
 
   addressInformation: 'Address Information',
-  selectAnOwner: 'Select An Owner'
+  selectAnOwner: 'Select An Owner',
 };
