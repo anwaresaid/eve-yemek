@@ -94,6 +94,7 @@ export const translations = {
   vegetablesOnly: 'Sadece Sebze',
   prioritized: 'Öne Çıkarma',
   open: 'Açık',
+  closed: 'Kapalı',
 
   // Meals List page
   image: 'Resim',

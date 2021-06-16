@@ -12,6 +12,7 @@ import {
   findRestaurantReducer,
   updateRestaurantReducer,
   listRestaurantOwnersReducer,
+  ownedRestaurantsList,
 } from './restaurants.reducer';
 import {
   listAddonsReducer,
@@ -61,6 +62,7 @@ export default combineReducers({
   findRestaurant: findRestaurantReducer,
   createRestaurant: createRestaurantReducer,
   listResOwners: listRestaurantOwnersReducer,
+  ownedRestaurants: ownedRestaurantsList,
 
   createFood: createFoodReducer,
   updateFood: updateFoodReducer,
