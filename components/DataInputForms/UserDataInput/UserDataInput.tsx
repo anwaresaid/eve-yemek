@@ -191,7 +191,6 @@ const UserDataInput = (props) => {
         )
     }
     
-    console.log(usersListTypes.USER_ROLES_FOR_DROPDOWN);
     return (
         <div>
 
