@@ -19,8 +19,11 @@ const UpdateUser = (props) => {
     var { updating, success:updateUserSuccess = false, response, error} = updateDetails
 
     useEffect( () => {
-        dispatch(getSingleUser(id))
-     }, [dispatch]);
+        if(router.query.id){
+            console.log("chekcing use effect", router.query.id);
+        dispatch(getSingleUser(router.query.id))
+        }
+     }, [dispatch,router.query.id]);
 
     useEffect( () => {
         if(getUserSuccess){
