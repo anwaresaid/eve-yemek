@@ -81,7 +81,7 @@ export const FoodCategoryEdit = () => {
           dispatch({
             type: foodCategoryTypes.FOOD_CATEGORY_DETAILS_RESET
           })
-          router.push('/food_categories')
+          setTimeout(()=>{router.push('/food_categories')}, 1000)
         }
       }else{
         setData(false);

@@ -55,7 +55,7 @@ export const Index = () => {
   useEffect(() => {
     if(success){
       toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('createdFoodCategory')})
-      router.push('/food_categories')
+      setTimeout(()=>{router.push('/food_categories')}, 1000)
       dispatch({type: foodCategoryTypes.FOOD_CATEGORY_CREATE_RESET})
     }
   }, [success]);
