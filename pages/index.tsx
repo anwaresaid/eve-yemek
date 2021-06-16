@@ -25,8 +25,10 @@ const Index = (props) => {
     useEffect(() => {
         if (!reportData)
             dispatch(getDashboardReport())
-        if (ownedRestaurants.length === 0)
-            dispatch(listOwnedRestaurants())
+        if (auth.hasRoles(['restaurant_owner'])){
+            if (ownedRestaurants.length === 0)
+                dispatch(listOwnedRestaurants())
+        }
     }, [dispatch, ownedRestaurantsSuccess])
 
     const parseCounts = (counts) => {
