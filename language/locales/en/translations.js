@@ -137,6 +137,10 @@ export const translations = {
   eveYemekSettings: 'Eve Yemek Settings',
   security:"Security",
   newPassword:"New Password",
+  newPasswordAgain:"Confirm New Password",
+  passwordsDoesntMatch:"Passwords do not match",
+  changeYourPassword:"Change Your Password",
+  redirectingToLoginPage:"Redirecting to the login page",
 
   // Transfers
   totalAmount: 'Total Amount',
@@ -168,6 +172,7 @@ export const translations = {
   // Toasts
   success: 'Success',
   error: 'Error',
+  anErrorOccurred: "An error occurred",
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',
