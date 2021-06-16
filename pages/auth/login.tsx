@@ -72,7 +72,7 @@ const Login = (props) => {
 								<label htmlFor='remember'>{i18n.t('rememberMe')}</label>
 							</div>
 							<div className="p-error">
-								{props?.user?.login_error_msg}
+								{props.error}
 							</div>
 							<Button
 								type="submit"
@@ -89,7 +89,7 @@ const Login = (props) => {
 
 
 function mapStateToProps(state) {
-	return { user:state?.user };
+	return { user:state?.user, error: state?.login.login_error_msg };
 }
 
 export default connect(mapStateToProps, userActions)(Login)

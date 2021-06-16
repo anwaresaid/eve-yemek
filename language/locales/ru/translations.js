@@ -36,6 +36,10 @@ export const translations = {
 
   login: 'Логин',
   rememberMe: 'Запомни меня',
+  takingYouToYourDashboard: 'Загружается личный кабинет...',
+  somethingWentWrongWhileLoggingIn: 'Что-то пошло не так при входе в систему',
+  invalidEmailOrPassword: 'Неправильный адрес электронной почты или пароль',
+  userNotFound: 'Пользователь не найден',
 
   //On Dashboard
   dailyOrders: 'Ежедневные заказы',

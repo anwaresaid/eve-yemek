@@ -36,6 +36,10 @@ export const translations = {
 
   login: 'Login',
   rememberMe: 'Remember me',
+  takingYouToYourDashboard: 'Taking you to your dashboard...',
+  somethingWentWrongWhileLoggingIn: 'Something went wrong while logging in',
+  invalidEmailOrPassword: 'Invalid Email or Password',
+  userNotFound: 'User not found',
 
   //On Dashboard
   dailyOrders: 'Daily Orders',
