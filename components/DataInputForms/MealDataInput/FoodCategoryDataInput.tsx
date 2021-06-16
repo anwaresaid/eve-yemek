@@ -22,8 +22,9 @@ export const FoodCategoryDataInput = (props) => {
 
   const toast = useRef(null);
   const fileUploadRef = useRef(null);
-  const [categoryName, setCategoryName] = useState('');
+
   const [data, setData] = useState(false);
+
 
   const foodCategoryDetails = useSelector((state:RootState) => state.foodCategoryDetails);
   const { foodCategory, loading, success: detailsSuccess } = foodCategoryDetails;
