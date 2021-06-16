@@ -105,7 +105,7 @@ export const FoodCategoryEdit = () => {
                 value: formik.values.name,
                 onChange: formik.handleChange,
                 }} />
-                  <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                  <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
                       setFile:(image)=>{ formik.values.image=image },
                       showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
                     }}/>
