@@ -94,6 +94,7 @@ export const translations = {
   vegetablesOnly: 'Только овощи',
   prioritized: 'Приоритетные',
   open: 'Открыть',
+  closed: 'закрыто',
 
   // Meals List page
   image: 'Изображение',
