@@ -40,9 +40,6 @@ const MealDataInput = (props) => {
     const resRestaurants = useSelector((state: RootState) => state.listRestaurant);
     const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants } = resRestaurants;
 
-    const [restaurantDropdownLoading, setRestaurantDropdownLoading] = useState(true)
-    const [categoryDropdownLoading, setCategoryDropdownLoading] = useState(true)
-
     const createFoodState = useSelector((state: RootState) => state.createFood)
     const { loading: creatingFood, success: createFoodSuccess, food } = createFoodState
 
@@ -106,19 +103,19 @@ const MealDataInput = (props) => {
         }
     });
 
-    //setting names for dropdowns.
-    const settingDropDownNames = () => {
-        var res = restaurants.items
-        const addonsNames = addonslist.items.map(addon => { return { name: addon.name } });
-        setAddonsName(addonsNames);
-
-        const foodCategoryNames = foodCatlist.items.map(res => { return { name: res.name, id: res.id } });
-        setFoodCategoryName(foodCategoryNames);
-        setCategoryDropdownLoading(false)
-
+    const setRestaurantsDropdownOptions = () => {
         const restaurantNames = restaurants.items.map(res => { return { name: res.name, id: res.id } });
         setRestaurantName(restaurantNames);
-        setRestaurantDropdownLoading(false)
+    }
+
+    const setAddonsDropdownOptions = () => {
+        const addonsNames = addonslist.items.map(addon => { return { name: addon.name } });
+        setAddonsName(addonsNames);
+    }
+
+    const setFoodCategoryDropdownOptions = () => {
+        const foodCategoryNames = foodCatlist.items.map(res => { return { name: res.name, id: res.id } });
+        setFoodCategoryName(foodCategoryNames);
     }
 
     useEffect(() => {
@@ -131,8 +128,17 @@ const MealDataInput = (props) => {
         if (!restaurantsSuccess)
             dispatch(listRestaurant());
 
-        if (addonSuccess && restaurantsSuccess && foodCatSuccess)
-            settingDropDownNames();
+        if (addonSuccess){
+            setAddonsDropdownOptions();
+        }
+
+        if (restaurantsSuccess){
+            setRestaurantsDropdownOptions();
+        }
+
+        if (foodCatSuccess){
+            setFoodCategoryDropdownOptions();
+        }
 
         if (createFoodSuccess) {
             toast.current.show({ severity: 'success', summary: 'Added Meal', detail: 'Successfully added meal' })
@@ -173,12 +179,12 @@ const MealDataInput = (props) => {
                 <form id="createForm" onSubmit={formik.handleSubmit}  >
                     <div className="p-grid">
                         <FormColumn divideCount={3}>
-                            {(restaurantDropdownLoading) ? <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} /> :
+                            {(restaurantsLoading) ? <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} /> :
                                 <InputGroup>
                                     <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
                                         value: formik.values.restaurant_id,
                                         onChange: formik.handleChange,
-                                        options: restaurantName,
+                                        options: restaurantName ?? [],
                                         placeholder: i18n.t('selectRestaurant'),
                                         optionLabel: "name",
                                         optionValue: "id"
@@ -199,29 +205,29 @@ const MealDataInput = (props) => {
                         </FormColumn>
 
                         <FormColumn divideCount={3}>
-                            {categoryDropdownLoading ? <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} /> :
+                            {foodCatLoading ? <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} /> :
                                 <InputGroup>
                                     <InputContainer label={i18n.t('mealCategory')} name="food_category_id" formiks={inputFormiks} component={Dropdown} iprops={{
                                         value: formik.values.food_category_id,
                                         onChange: formik.handleChange,
-                                        options: foodCategoryName,
+                                        options: foodCategoryName ?? [],
                                         placeholder: i18n.t('mealCategory'),
                                         optionLabel: 'name',
                                         optionValue: 'id'
                                     }} />
                                 </InputGroup>}
 
-                            {addonsName && <InputGroup>
+                            {!addonsLoading ? <InputGroup>
                                 <InputContainer label={i18n.t('selectAddons')} name="addons" formiks={inputFormiks} component={MultiSelect} iprops={{
                                     value: formik.values.addons,
-                                    options: addonsName,
+                                    options: addonsName ?? [],
                                     onChange: formik.handleChange,
                                     optionLabel: "name",
                                     placeholder: "Select addons",
                                     display: "addons",
 
                                 }} />
-                            </InputGroup>}
+                            </InputGroup> : <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} />}
 
                             <InputGroup>
                                 <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
