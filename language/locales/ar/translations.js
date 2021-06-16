@@ -176,6 +176,8 @@ export const translations = {
   fileUploaded: 'تحميل الملف',
   updatedUser: 'تحديث المستخدم',
   userName: 'إسم المستخدم',
+  updatedFoodCategory: 'تم تحديث صنف الطعام ',
+  createdFoodCategory: 'تم إنشاء صنف جديد',
 
   // Table Pagination
   showingXtoYofZ: 'عرض {{x}} الى {{y}} من {{z}}',

@@ -73,6 +73,7 @@ export const FoodCategoryEdit = () => {
         formik.values.active = foodCategory.active;
         formik.values.name = foodCategory.name;
         if(successUpdate){
+          toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedFoodCategory')})
           dispatch({
             type: foodCategoryTypes.FOOD_CATEGORY_UPDATE_RESET
           })

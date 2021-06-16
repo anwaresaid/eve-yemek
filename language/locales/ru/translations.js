@@ -176,6 +176,8 @@ export const translations = {
   fileUploaded: 'Файл загружен',
   updatedUser: 'Обновленный пользователь',
   userName: 'Имя пользователя',
+  updatedFoodCategory: 'Категория еды обновлено',
+  createdFoodCategory: 'Категория еды создано',
 
   // Table Pagination
   showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}',
