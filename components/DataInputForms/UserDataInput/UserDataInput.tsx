@@ -94,8 +94,11 @@ const UserDataInput = (props) => {
     }
 
     useEffect(()=>{
-        if(props.updateProps?.updateUserSuccess)
+        if(props.updateProps?.updateUserSuccess){
             toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedUser')})
+            // dispatch({ type: usersListTypes.UPDATE_USER_RESET });
+            // dispatch({ type: usersListTypes.GET_USER_RESET });
+        }
         else if (!props.updateProps?.updating && props.updateProps?.error)
             toast.current.show({severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + props.updateProps.error});
 
