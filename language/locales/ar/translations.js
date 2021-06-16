@@ -136,7 +136,11 @@ export const translations = {
   // Settings
   eveYemekSettings: 'إعدادات إيڤ يميك',
   security:"حماية",
-  newPassword:"كلمة السر الجديدة",
+  newPassword:"كمة السر الجديدة",
+  newPasswordAgain:"كلمة مرور جديدة مرة أخرى",
+  passwordsDoesntMatch:"رمز المرور ليس متطابقا",
+  changeYourPassword:"تغيير الرمز السري",
+  redirectingToLoginPage:"يتم إعادة توجيهك إلى صفحة تسجيل الدخول",
 
   //Transfers
   totalAmount: 'إجمالي',
@@ -168,9 +172,12 @@ export const translations = {
   // Toasts
   success: 'نجاح',
   error: 'خطأ',
+  anErrorOccurred: "حدث خطأ",
   fileUploaded: 'تحميل الملف',
   updatedUser: 'تحديث المستخدم',
   userName: 'إسم المستخدم',
+  updatedFoodCategory: 'تم تحديث صنف الطعام ',
+  createdFoodCategory: 'تم إنشاء صنف جديد',
 
   // Table Pagination
   showingXtoYofZ: 'عرض {{x}} الى {{y}} من {{z}}',

@@ -10,10 +10,11 @@ import { RootState } from 'typesafe-actions';
 import { foodCategoryTypes } from '../../../store/types/foodCategory.type';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import classNames from 'classnames'
 import { i18n } from '../../../language';
 import InputContainer from '../../../components/inputs/inputContainer';
 import StandardFileUpload from '../../../components/inputs/fileUpload';
+import FormColumn from "../../../components/inputs/formColumn";
+import InputGroup from "../../../components/inputs/inputGroup";
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,8 @@ export const Index = () => {
 
   useEffect(() => {
     if(success){
-      router.push('/food_categories')
+      toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('createdFoodCategory')})
+      setTimeout(()=>{router.push('/food_categories')}, 1000)
       dispatch({type: foodCategoryTypes.FOOD_CATEGORY_CREATE_RESET})
     }
   }, [success]);
@@ -65,37 +67,41 @@ export const Index = () => {
 
 
   return (
-    <div id="create_food_categories">
-      <h1 id="createHeader">{i18n.t('createMealCategory')}</h1>
+    <div id="edit_food_categories">
+      <h1 id="editHeader">{i18n.t('create')}</h1>
       <Toast id="toastMessage" ref={toast}></Toast>
       <S.ContainerCard id="container">
-        <form id="createForm" onSubmit={formik.handleSubmit}>
-          <div className='p-fluid'>
-            <div id="nameDiv" className='p-field'>
-              <h4 id="nameHeader">{i18n.t('categoryName')}</h4>
-              <InputText id='name' name='name' onChange={formik.handleChange} type='text' className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-              <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
-              {getFormErrorMessage('name')}
-            </div>
-          </div>
-          <div className="p-field p-col-12">
-              <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
-                  setFile:(image)=>{ formik.values.image=image },
-                  showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
-              }}/>
-          </div>
-          <div>
-            <h4>{i18n.t('active')}</h4>
-            <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
-          </div>
+            <form id="editForm" onSubmit={formik.handleSubmit}>
+                <div className="p-grid">
+            <FormColumn divideCount={3}>
+            <InputGroup>
+            <InputContainer label={i18n.t('name')} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                value: formik.values.name,
+                onChange: formik.handleChange,
+                }} />
+                  <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                    setFile:(image)=>{ formik.values.image=image },
+                    showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                  }}/>
+                    
+                <InputContainer label={i18n.t('active')} name="active" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
+                  value: formik.values.active,
+                  checked: formik.values.active,
+                  onChange: formik.handleChange
+                }} />
 
-          <S.SubmitBtn id="btnContainer">
-            <Button id="createBtn" type='submit' label={i18n.t('submit')} />
-          </S.SubmitBtn>
-        </form>
-      </S.ContainerCard>
+
+                </InputGroup>
+                <S.SubmitBtn id="btnContainer">
+                  <Button id="editBtn" type='submit' label={i18n.t('submit')}/>
+                </S.SubmitBtn>
+
+              </FormColumn>
+              </div>
+            </form>
+          </S.ContainerCard>
+
     </div>
-  );
-};
+  )};
 
 export default Index;

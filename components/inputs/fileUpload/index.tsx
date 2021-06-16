@@ -26,7 +26,6 @@ const StandardFileUpload = (props) => {
 
     const onTemplateUpload = (e) => {
         let _totalSize = 0;
-        console.log(e.files[0])
         var formData = new FormData();
         formData.append("file", e.files[0]);
         axios.post('/upload', formData, {
