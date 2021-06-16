@@ -1,13 +1,14 @@
 import { userTypes } from "../types/user.type";
 import UserService from "../services/user.service";
 import auth from "../../helpers/core/auth";
+import { i18n } from "../../language";
 
 const login =
     (email: string, password: string, remember: boolean) =>
     async (dispatch) => {
         try {
             const res: any = await UserService.login(email, password, remember);
-
+            
             if (res?.ok) {
                 const user = {
                     id: res?.data?.id,
@@ -19,12 +20,21 @@ const login =
                 await dispatch({ type: userTypes.LOGIN, payload: user });
                 window.location.replace("/");
             } else {
+                var errorMessage
+                switch (res.err.errorCode){
+                    case 401:
+                        errorMessage = i18n.t('invalidEmailOrPassword')
+                        break
+                    case 404: 
+                        errorMessage = i18n.t('userNotFound')
+                        break
+                    default:
+                        errorMessage = res.err.error.message ?? i18n.t('somethingWentWrongWhileLoggingIn')
+                }
                 await dispatch({
                     type: userTypes.LOGIN_FAILED,
                     payload: {
-                        login_error_msg:
-                            res?.err?.message ||
-                            "Something went wrong while logging in",
+                        login_error_msg: errorMessage  
                     },
                 });
             }
@@ -32,7 +42,7 @@ const login =
             dispatch({
                 type: userTypes.LOGIN_FAILED,
                 payload: {
-                    login_error_msg: "Something went wrong while logging in",
+                    login_error_msg: i18n.t('somethingWentWrongWhileLoggingIn'),
                 },
             });
         }

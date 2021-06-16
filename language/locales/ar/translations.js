@@ -35,6 +35,10 @@ export const translations = {
 
   login: 'تسجيل دخول',
   rememberMe: 'تذكرني',
+  takingYouToYourDashboard: 'يتم الآن اصطحابك إلى لوحة التحكم',
+  somethingWentWrongWhileLoggingIn: 'حدث خلل ما عند القيام بتسجيل الدخول',
+  invalidEmailOrPassword: 'الحساب الالكتروني أو كلمة المرور خاطئة',
+  userNotFound: 'لم يتم العثور على أي حساب',
 
   //On Dashboard
   dailyOrders: 'الطلبات اليومية',

@@ -35,6 +35,10 @@ export const translations = {
 
   login: 'Giriş Yap',
   rememberMe: 'Beni Hatırla',
+  takingYouToYourDashboard: 'Kontrol panelinize götürülüyorsunuz...',
+  somethingWentWrongWhileLoggingIn: 'Giriş yaparken hata oluştu',
+  invalidEmailOrPassword: 'Geçersiz e-posta veya şifre',
+  userNotFound: 'Kullanıcı bulunamadı',
 
   //On Dashboard
   dailyOrders: 'Günlük Siparişler',
