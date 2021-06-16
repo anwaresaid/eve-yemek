@@ -19,7 +19,9 @@ const UpdateUser = (props) => {
     var { updating, success:updateUserSuccess = false, response, error} = updateDetails
 
     useEffect( () => {
+        if(router.query.id){
         dispatch(getSingleUser(id))
+        }
      }, [dispatch]);
 
     useEffect( () => {
