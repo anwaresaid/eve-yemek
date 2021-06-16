@@ -161,7 +161,7 @@ export const addUser = (data) => async (dispatch, getState) => {
   }
 };
 
-export const updateUser = (id, data) => async (dispatch, getState) => {
+export const updateUser = (id, data, noTableEdit?:boolean) => async (dispatch, getState) => {
   try {
     dispatch({
       type: usersListTypes.UPDATE_USER_REQUEST,
@@ -175,14 +175,17 @@ export const updateUser = (id, data) => async (dispatch, getState) => {
       type: usersListTypes.UPDATE_USER_SUCCESS,
       payload: result,
     });
-    var tempRoles = [...data.roles, ...result.roles];
-    tempRoles = tempRoles.filter(onlyUnique);
+
+    if(noTableEdit !== true){
+      var tempRoles = [...data.roles, ...result.roles];
+      tempRoles = tempRoles.filter(onlyUnique);
+
+      updateEditedRowInStore(tempRoles, parseDateInOneRow(result), dispatch);
+    }
 
     dispatch({
       type: usersListTypes.UPDATE_USER_END,
     });
-
-    updateEditedRowInStore(tempRoles, parseDateInOneRow(result), dispatch);
 
     return result;
   } catch (error) {
