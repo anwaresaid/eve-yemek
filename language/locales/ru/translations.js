@@ -98,6 +98,7 @@ export const translations = {
   vegetablesOnly: 'Только овощи',
   prioritized: 'Приоритетные',
   open: 'Открыть',
+  closed: 'закрыто',
 
   // Meals List page
   image: 'Изображение',
@@ -180,6 +181,8 @@ export const translations = {
   fileUploaded: 'Файл загружен',
   updatedUser: 'Обновленный пользователь',
   userName: 'Имя пользователя',
+  updatedFoodCategory: 'Категория еды обновлено',
+  createdFoodCategory: 'Категория еды создано',
 
   // Table Pagination
   showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}',

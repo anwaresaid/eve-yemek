@@ -98,6 +98,7 @@ export const translations = {
   vegetablesOnly: 'خضراوات فقط',
   prioritized: 'أولوية',
   open: 'مفتوح',
+  closed: 'مغلق',
 
   // Meals List page
   image: 'صورة',
@@ -180,6 +181,8 @@ export const translations = {
   fileUploaded: 'تحميل الملف',
   updatedUser: 'تحديث المستخدم',
   userName: 'إسم المستخدم',
+  updatedFoodCategory: 'تم تحديث صنف الطعام ',
+  createdFoodCategory: 'تم إنشاء صنف جديد',
 
   // Table Pagination
   showingXtoYofZ: 'عرض {{x}} الى {{y}} من {{z}}',

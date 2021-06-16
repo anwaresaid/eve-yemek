@@ -98,6 +98,7 @@ export const translations = {
   vegetablesOnly: 'Vegetables Only',
   prioritized: 'Prioritized',
   open: 'Open',
+  closed: 'Closed',
 
   // Meals List page
   image: 'Image',
@@ -180,6 +181,8 @@ export const translations = {
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',
+  updatedFoodCategory: 'Updated Food Category',
+  createdFoodCategory: 'Created Food Category',
 
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',

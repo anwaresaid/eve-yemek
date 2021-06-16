@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev -p 5001",
-        "dev:local": " env NEXT_PUBLIC_API_MODE=local next dev -p 5001",
+        "dev:local": " set NEXT_PUBLIC_API_MODE=local && next dev -p 5001",
         "build": "next build",
         "start": "next start -p 16500",
         "start:prod": "next NEXT_PUBLIC_API_MODE=prod start -p 16500",

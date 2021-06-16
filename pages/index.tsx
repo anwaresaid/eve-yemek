@@ -8,19 +8,31 @@ import { getDashboardReport } from "../store/actions/dashboard.action";
 import _ from 'lodash';
 import { i18n } from "../language";
 import Loading from "../components/Loading";
+import auth from "../helpers/core/auth";
+import StandardTable from "../components/StandardTable";
+import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/restaurant.action";
+import { SelectButton } from 'primereact/selectbutton';
+import idColumn from "../components/InTableComponents/idColumn";
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
     const { loading, success, reportData } = res
+
+    const ownedRestaurantsState = useSelector((state: RootState) => state.ownedRestaurants)
+    const { loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants } = ownedRestaurantsState
+
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (!reportData)
             dispatch(getDashboardReport())
+        if (auth.hasRoles(['restaurant_owner'])){
+            if (ownedRestaurants.length === 0)
+                dispatch(listOwnedRestaurants())
+        }
+    }, [dispatch, ownedRestaurantsSuccess])
 
-    }, [dispatch])
-
-    const parseCounts = (data) => {
+const parseCounts = (data) => {
         if (!data)
             return
         if (!data.days)
@@ -53,22 +65,60 @@ const Index = (props) => {
             }
         ]
     };
+
+    const openClosedTag = (rowData) => {
+        const setIsOpen = (isOpen) => {
+            if (isOpen === null)
+                return
+            dispatch(openCloseRestaurant(rowData.id, {is_open: isOpen}))
+        }
+        return <SelectButton value={rowData.is_open} options={[{label: i18n.t('open'), value: true}, {label: i18n.t('closed'), value: false}]} onChange={(e) => setIsOpen(e.value)}  />
+    }
+
+    const ownedRestaurantsTableColumns = [
+        { field: '#', header: '#', body: idColumn, style: {'width':'20px'} },
+        { field: 'name', header: i18n.t('restaurant') },
+        { field: 'is_open', header: i18n.t('status'), body: openClosedTag},
+    ]
+
     return (
         <div id='containerPanel' className="ContainerPanel">
             {loading ? <Loading /> :
                 <S.DashboardWrapper id='dashBoard'>
                     <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
-                    <div className='p-grid p-grid-container'>
-                        <div className='p-col-6 p-md-6 p-lg-2'>
-                            <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
-                                <div id='boxInfoDiv' className='box__info'>
-                                    <span id='dailyOrders'>{reportData?.report.daily_orders.length}</span>
-                                    <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
-                                </div>
-                                <div className='box__icons'>
-                                    <i className=' pi pi-shopping-cart'></i>
-                                </div>
-                            </div>
+                    {
+                        auth.hasRoles(["restaurant_owner"]) &&
+                        <div className="p-my-5">
+                            <StandardTable id='ownedRestaurants'
+                                columns={ownedRestaurantsTableColumns}
+                                value={ownedRestaurants}
+                                noPaginator
+                                style={{ tableLayout: "auto" }}
+                                resizableColumns
+                                columnResizeMode="expand" showGridlines
+                            ></StandardTable>
+                        </div>
+                    }
+            <div className='p-grid p-grid-container'>
+                <div className='p-col-6 p-md-6 p-lg-2'>
+                    <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
+                        <div id='boxInfoDiv' className='box__info'>
+                            <span id='dailyOrders'>{reportData?.report.daily_orders.length}</span>
+                            <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
+                        </div>
+                        <div className='box__icons'>
+                            <i className=' pi pi-shopping-cart'></i>
+                        </div>
+                    </div>
+                </div>
+                <div className='p-col-6 p-md-6 p-lg-2'>
+                    <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
+                        <div id='box_infoDiv' className='box__info'>
+                            <span id='daily_income_report'>₺{reportData?.report.daily_income}</span>
+                            <p id='daily_incomeP'>{i18n.t('dailyEarnings')}</p>
+                        </div>
+                        <div id='box_icons' className='box__icons'>
+                            <i id='money_bill' className=' pi pi-money-bill'></i>
                         </div>
                         <div className='p-col-6 p-md-6 p-lg-2'>
                             <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
@@ -115,6 +165,7 @@ const Index = (props) => {
                             </div>
                         </div>
                     </div>
+
                     <Card id='last_7_days_orders' subTitle={i18n.t('ordersFromTheLast7Days')}>
                         <i id='shopping_cartIcon' className='pi pi-shopping-cart'>
                             <span id='last_seven_days_report'>{getTotalOrdersWeekly()} {i18n.t('orders')}</span>
