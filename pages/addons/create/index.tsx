@@ -15,15 +15,22 @@ import { i18n } from '../../../language';
 import FormColumn from '../../../components/inputs/formColumn';
 import InputGroup from '../../../components/inputs/inputGroup';
 import InputContainer from '../../../components/inputs/inputContainer';
+import { useRouter } from 'next/dist/client/router';
+import { addonsTypes } from '../../../store/types/addons.type';
 
 export const Index = () => {
-  const [addonCategoryName, setAddonCategoryName] = useState(null);
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  const [addonCategoryName, setAddonCategoryName] = useState(null);
 
   const resAddonCat = useSelector(
     (state: RootState) => state.listAddonCategory
   );
   const { success: addonCatSuccess, addonCat: addonCatlist } = resAddonCat;
+
+  const createAddon = useSelector((state: RootState) => state.createAddons);
+  const { success } = createAddon;
 
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -39,7 +46,6 @@ export const Index = () => {
     initialValues: {
       name: '',
       addonCat: '',
-      addOn_category_id: '',
       price: 0,
       active: true,
     },
@@ -64,14 +70,19 @@ export const Index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
-      console.log(data);
-      dispatch(createAddons(data));
+      const addonCreateDto = {
+        add_on_category_id: data.addonCat,
+        name: data.name,
+        price: data.price,
+        active: data.active,
+      };
+      dispatch(createAddons(addonCreateDto));
     },
   });
   //setting names for dropdowns.
   const settingDropDownNames = () => {
     const addonCatName = addonCatlist.items.map((res) => {
-      return { name: res.name };
+      return { id: res.id, name: res.name };
     });
     setAddonCategoryName(addonCatName);
   };
@@ -80,7 +91,12 @@ export const Index = () => {
     if (!addonCatSuccess) dispatch(listAddonCategory());
 
     if (addonCatSuccess) settingDropDownNames();
-  }, [addonCatSuccess]);
+
+    if (success) {
+      router.push('/addons');
+      dispatch({ type: addonsTypes.ADDON_CREATE_RESET });
+    }
+  }, [addonCatSuccess, success]);
 
   const inputFormiks = {
     getFormErrorMessage,
@@ -112,6 +128,7 @@ export const Index = () => {
                 name='addonCat'
                 value={formik.values.addonCat}
                 options={addonCategoryName}
+                optionValue='id'
                 onChange={formik.handleChange}
                 optionLabel='name'
                 placeholder='Select an addon category'
@@ -135,14 +152,19 @@ export const Index = () => {
                   label={i18n.t('price')}
                   name='price'
                   formiks={inputFormiks}
+                  size={6}
                   component={InputNumber}
                   iprops={{
                     value: formik.values.price,
-                    onChange: formik.handleChange,
+                    onValueChange: formik.handleChange,
+                    showButtons: true,
                   }}
                 />
               </InputGroup>
             </FormColumn>
+            <S.SubmitBtn>
+              <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
+            </S.SubmitBtn>
           </div>
         </S.ContainerCard>
       </form>
