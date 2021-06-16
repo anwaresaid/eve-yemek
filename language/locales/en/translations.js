@@ -94,6 +94,7 @@ export const translations = {
   vegetablesOnly: 'Vegetables Only',
   prioritized: 'Prioritized',
   open: 'Open',
+  closed: 'Closed',
 
   // Meals List page
   image: 'Image',

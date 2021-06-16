@@ -94,6 +94,7 @@ export const translations = {
   vegetablesOnly: 'خضراوات فقط',
   prioritized: 'أولوية',
   open: 'مفتوح',
+  closed: 'مغلق',
 
   // Meals List page
   image: 'صورة',

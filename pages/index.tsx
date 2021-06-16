@@ -57,9 +57,11 @@ const Index = (props) => {
 
     const openClosedTag = (rowData) => {
         const setIsOpen = (isOpen) => {
+            if (isOpen === null)
+                return
             dispatch(openCloseRestaurant(rowData.id, {is_open: isOpen}))
         }
-        return <SelectButton value={rowData.is_open} options={[{label: 'Open', value: true}, {label: 'Closed', value: false}]} onChange={(e) => setIsOpen(e.value)}  />
+        return <SelectButton value={rowData.is_open} options={[{label: i18n.t('open'), value: true}, {label: i18n.t('closed'), value: false}]} onChange={(e) => setIsOpen(e.value)}  />
     }
 
     const ownedRestaurantsTableColumns = [
