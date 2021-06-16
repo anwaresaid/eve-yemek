@@ -137,6 +137,10 @@ export const translations = {
   eveYemekSettings: 'Настройки Eve Yemek',
   security:"Безопасность",
   newPassword:"Новый пароль",
+  newPasswordAgain:"Новый пароль еще раз",
+  passwordsDoesntMatch:"Несовпадение паролей",
+  changeYourPassword:"Изменить пароль",
+  redirectingToLoginPage:"Вы будете перенаправлены на страницу входа",
 
   //Transfers
   totalAmount: 'Общая сумма',

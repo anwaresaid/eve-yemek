@@ -26,23 +26,32 @@ const SettingsOwner = () => {
         initialValues: {
             password:"",
             new_password: "",
+            new_password_again:""
         },
         validate: (data) => {
             let errors:any = {}; 
+
+            if(!data.password){
+                errors.password = i18n.t("isRequired", { input: i18n.t("password") })
+            }
 
             if(!data.new_password){
                 errors.new_password = i18n.t("isRequired", { input: i18n.t("newPassword") })
             }
 
-            if(!data.password){
-                errors.password = i18n.t("isRequired", { input: i18n.t("password") })
+            if(!data.new_password_again){
+                errors.new_password_again = i18n.t("isRequired", { input: i18n.t("newPasswordAgain") })
+            }
+
+            if(data.new_password !== data.new_password_again){
+                errors.new_password_again = i18n.t("passwordsDoesntMatch");
             }
 
             return errors;
         },
         onSubmit: (data: any) => {
             console.log(data);
-            dispatch(changePassword("new_password", "password"));
+            dispatch(changePassword(data.new_password, data.password));
         },
     });
 
@@ -73,11 +82,19 @@ const SettingsOwner = () => {
         if(changePasswordStatus?.success === true){
             toast.current.show({
                 severity: "success",
-                summary: i18n.t("success")
+                summary: i18n.t("success"),
+                detail:i18n.t("redirectingToLoginPage")
             });
 
             formik.values.password = "";
             formik.values.new_password = "";
+            formik.values.new_password_again = "";
+
+            auth.logout();
+
+            setTimeout(()=>{
+                window.location.replace("/auth/login");
+            },1000);
         }
     }, [changePasswordStatus])
 
@@ -88,6 +105,7 @@ const SettingsOwner = () => {
                 <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                     <TabPanel header={i18n.t("security")} >
                         <FormColumn>
+                            <h2>{i18n.t("changeYourPassword")}</h2>
                             <InputGroup>
                                 <InputContainer
                                     label={i18n.t("password")}
@@ -110,6 +128,20 @@ const SettingsOwner = () => {
                                     formiks={inputFormiks}
                                     iprops={{
                                         value:formik.values.new_password,
+                                        onChange:formik.handleChange,
+                                        feedback:false,
+                                        toggleMask:true
+                                    }}
+                                    size={6}
+                                    component={Password}
+                                />
+
+                                <InputContainer
+                                    label={i18n.t("newPasswordAgain")}
+                                    name="new_password_again"
+                                    formiks={inputFormiks}
+                                    iprops={{
+                                        value:formik.values.new_password_again,
                                         onChange:formik.handleChange,
                                         feedback:false,
                                         toggleMask:true

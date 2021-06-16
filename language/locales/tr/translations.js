@@ -137,6 +137,10 @@ export const translations = {
   eveYemekSettings: 'Eve Yemek Ayarları',
   security:"Güvenlik",
   newPassword:"Yeni Şifre",
+  newPasswordAgain:"Yeni Şifre Tekrar",
+  passwordsDoesntMatch:"Şifreler eşleşmiyor",
+  changeYourPassword:"Şifreni Değiştir",
+  redirectingToLoginPage:"Giriş yap sayfasına yönlendiriliyorsunuz",
 
   //Transfers
   totalAmount: 'Toplam Tutar',

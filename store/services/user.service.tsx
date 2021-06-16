@@ -22,7 +22,7 @@ const UserService = function () {
     };
 
     const changePassword = async (new_password:string, password:string) => {
-        const {data} = await axios.post(`/users/change-password`,{ new_password, password });
+        const {data} = await axios.put(`/users/change-password`,{ new_password, password });
         return data;
     }
   
