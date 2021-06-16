@@ -68,6 +68,7 @@ export const FoodCategoryEdit = () => {
 });
 
   useEffect(() => {
+    if(router.query.id){
       if(detailsSuccess && foodCategory.id === router.query.id && foodCategory){
         setData(true);
         formik.values.active = foodCategory.active;
@@ -86,6 +87,7 @@ export const FoodCategoryEdit = () => {
         setData(false);
         dispatch(getFoodCategoryDetails(router.query.id))
       }
+    }
   }, [dispatch, detailsSuccess, foodCategory, successUpdate,router.query.id]);
 
   const inputFormiks = {
