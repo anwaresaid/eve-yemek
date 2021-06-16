@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 import { getIdQuery } from '../../helpers/getIdQuery';
-import FoodCategoryDataInput from '../../components/DataInputForms/MealDataInput/FoodCategoryDataInput'
+import FoodCategoryDataInput from '../../components/DataInputForms/MealDataInput/FoodDataInput'
 import Loading from '../../components/Loading';
 
 export const FoodCategoryEdit = () => {
