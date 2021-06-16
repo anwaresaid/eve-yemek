@@ -50,7 +50,6 @@ const SettingsOwner = () => {
             return errors;
         },
         onSubmit: (data: any) => {
-            console.log(data);
             dispatch(changePassword(data.new_password, data.password));
         },
     });
