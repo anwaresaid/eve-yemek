@@ -54,17 +54,10 @@ export const allMenuItems:any = [
         { label:i18n.t("couponList"),               url:"/coupons",                 roles:["admin", "manager"] },
         { label:i18n.t("createCoupon"),             url:"/coupons/create",          roles:["admin", "manager"] },
     ] },
-    { label:i18n.t("accountSettings"), expanded: true, items: [
-        { label:i18n.t("customers"),                url:"/users/customers",         roles:["admin"] },
-        { label:i18n.t("restaurantOwners"),         url:"/users/restaurant_owners", roles:["admin"] },
-        { label:i18n.t("deliveryScouts"),           url:"/users/delivery_scouts",   roles:["admin"] },
-        { label:i18n.t("customerServiceReps"),      url:"/users/customer_service",  roles:["admin"] },
-        { separator:true },
-        { label:i18n.t("createUser"),               url:"/users/add",               roles:["admin"] },
-    ] },
     { label:i18n.t("extra"),           expanded: true, items: [
         { label:i18n.t("send_fcm_notification"),    url:"/send_notifications",      roles:["admin"] },
     ] },
+    { label:i18n.t("users"), url:"/users",  roles:["admin"]},
     { separator:true },
     { label:i18n.t("settings"),                     url:"/settings",                roles:["admin", "restaurant_owner"] },
     { label:i18n.t("transfers"),                    url:"/transfers",               roles:["admin"] },

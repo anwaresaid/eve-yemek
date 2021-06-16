@@ -30,6 +30,7 @@ export const translations = {
   extra: 'المزيد',
   send_fcm_notification: 'إرسال إشعار FCM',
   settings: 'إعدادات',
+  users: 'المستخدمين',
   transfers: 'تحويل',
   logout: 'تسجيل خروج',
 

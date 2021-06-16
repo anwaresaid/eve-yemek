@@ -5,7 +5,7 @@ import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
 import Loading from "../../../components/Loading"
 
-const restaurantOwnerList = () => {
+const customerServiceList = () => {
 
     const dispatch = useDispatch();
     const res = useSelector((state:RootState) => state.listCustomerService)
@@ -25,4 +25,4 @@ const restaurantOwnerList = () => {
     )
 }
 
-export default restaurantOwnerList;
+export default customerServiceList;
