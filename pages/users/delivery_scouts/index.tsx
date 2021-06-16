@@ -18,7 +18,7 @@ const deliveryScoutList = () => {
 
     return (
         <div id="deliveryScoutsTable">
-            {!loading && success && <UsersTable users={deliveryScouts.items} editPath="delivery_scouts"></UsersTable>}
+            {!loading && success && deliveryScouts && <UsersTable users={deliveryScouts.items} editPath="delivery_scouts"></UsersTable>}
             {!loading && !success && <h4 id='deliveryScoutsHeader'>Kargocuların verileri alınamadı!</h4>}
             {loading && <Loading />}
         </div>

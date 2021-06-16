@@ -30,11 +30,16 @@ export const translations = {
   extra: 'Extra',
   send_fcm_notification: 'Send FCM Notification',
   settings: 'Settings',
+  users: 'Users',
   transfers: 'Transfers',
   logout: 'Logout',
 
   login: 'Login',
   rememberMe: 'Remember me',
+  takingYouToYourDashboard: 'Taking you to your dashboard...',
+  somethingWentWrongWhileLoggingIn: 'Something went wrong while logging in',
+  invalidEmailOrPassword: 'Invalid Email or Password',
+  userNotFound: 'User not found',
 
   //On Dashboard
   dailyOrders: 'Daily Orders',
@@ -94,6 +99,7 @@ export const translations = {
   vegetablesOnly: 'Vegetables Only',
   prioritized: 'Prioritized',
   open: 'Open',
+  closed: 'Closed',
 
   // Meals List page
   image: 'Image',
@@ -138,6 +144,10 @@ export const translations = {
   eveYemekSettings: 'Eve Yemek Settings',
   security: 'Security',
   newPassword: 'New Password',
+  newPasswordAgain: 'Confirm New Password',
+  passwordsDoesntMatch: 'Passwords do not match',
+  changeYourPassword: 'Change Your Password',
+  redirectingToLoginPage: 'Redirecting to the login page',
 
   // Transfers
   totalAmount: 'Total Amount',
@@ -169,9 +179,12 @@ export const translations = {
   // Toasts
   success: 'Success',
   error: 'Error',
+  anErrorOccurred: 'An error occurred',
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',
+  updatedFoodCategory: 'Updated Food Category',
+  createdFoodCategory: 'Created Food Category',
 
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',

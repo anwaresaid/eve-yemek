@@ -30,11 +30,16 @@ export const translations = {
   extra: 'المزيد',
   send_fcm_notification: 'إرسال إشعار FCM',
   settings: 'إعدادات',
+  users: 'المستخدمين',
   transfers: 'تحويل',
   logout: 'تسجيل خروج',
 
   login: 'تسجيل دخول',
   rememberMe: 'تذكرني',
+  takingYouToYourDashboard: 'يتم الآن اصطحابك إلى لوحة التحكم',
+  somethingWentWrongWhileLoggingIn: 'حدث خلل ما عند القيام بتسجيل الدخول',
+  invalidEmailOrPassword: 'الحساب الالكتروني أو كلمة المرور خاطئة',
+  userNotFound: 'لم يتم العثور على أي حساب',
 
   //On Dashboard
   dailyOrders: 'الطلبات اليومية',
@@ -94,6 +99,7 @@ export const translations = {
   vegetablesOnly: 'خضراوات فقط',
   prioritized: 'أولوية',
   open: 'مفتوح',
+  closed: 'مغلق',
 
   // Meals List page
   image: 'صورة',
@@ -137,7 +143,11 @@ export const translations = {
   // Settings
   eveYemekSettings: 'إعدادات إيڤ يميك',
   security: 'حماية',
-  newPassword: 'كلمة السر الجديدة',
+  newPassword: 'كمة السر الجديدة',
+  newPasswordAgain: 'كلمة مرور جديدة مرة أخرى',
+  passwordsDoesntMatch: 'رمز المرور ليس متطابقا',
+  changeYourPassword: 'تغيير الرمز السري',
+  redirectingToLoginPage: 'يتم إعادة توجيهك إلى صفحة تسجيل الدخول',
 
   //Transfers
   totalAmount: 'إجمالي',
@@ -169,9 +179,12 @@ export const translations = {
   // Toasts
   success: 'نجاح',
   error: 'خطأ',
+  anErrorOccurred: 'حدث خطأ',
   fileUploaded: 'تحميل الملف',
   updatedUser: 'تحديث المستخدم',
   userName: 'إسم المستخدم',
+  updatedFoodCategory: 'تم تحديث صنف الطعام ',
+  createdFoodCategory: 'تم إنشاء صنف جديد',
 
   // Table Pagination
   showingXtoYofZ: 'عرض {{x}} الى {{y}} من {{z}}',

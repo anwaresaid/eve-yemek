@@ -30,11 +30,16 @@ export const translations = {
   extra: 'Ekstra',
   send_fcm_notification: 'FCM Bildirim Gonder',
   settings: 'Ayarlar',
+  users: 'Kullanıcılar',
   transfers: 'Transferler',
   logout: 'Çıkış Yap',
 
   login: 'Giriş Yap',
   rememberMe: 'Beni Hatırla',
+  takingYouToYourDashboard: 'Kontrol panelinize götürülüyorsunuz...',
+  somethingWentWrongWhileLoggingIn: 'Giriş yaparken hata oluştu',
+  invalidEmailOrPassword: 'Geçersiz e-posta veya şifre',
+  userNotFound: 'Kullanıcı bulunamadı',
 
   //On Dashboard
   dailyOrders: 'Günlük Siparişler',
@@ -94,6 +99,7 @@ export const translations = {
   vegetablesOnly: 'Sadece Sebze',
   prioritized: 'Öne Çıkarma',
   open: 'Açık',
+  closed: 'Kapalı',
 
   // Meals List page
   image: 'Resim',
@@ -138,6 +144,10 @@ export const translations = {
   eveYemekSettings: 'Eve Yemek Ayarları',
   security: 'Güvenlik',
   newPassword: 'Yeni Şifre',
+  newPasswordAgain: 'Yeni Şifre Tekrar',
+  passwordsDoesntMatch: 'Şifreler eşleşmiyor',
+  changeYourPassword: 'Şifreni Değiştir',
+  redirectingToLoginPage: 'Giriş yap sayfasına yönlendiriliyorsunuz',
 
   //Transfers
   totalAmount: 'Toplam Tutar',
@@ -169,6 +179,7 @@ export const translations = {
   // Toasts
   success: 'Başarılı',
   error: 'Hata',
+  anErrorOccurred: 'Bir hata oluştu',
   fileUploaded: 'Dosya Yüklendi',
   updatedUser: 'Kullanıcı Güncellendi',
   userName: 'Kullanıcı Adı',

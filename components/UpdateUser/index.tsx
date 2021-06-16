@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import {useRouter} from 'next/router'
-import {RootState} from 'typesafe-actions'
-import {useDispatch,useSelector} from 'react-redux'
-import {getSingleUser, updateUser} from '../../store/actions/userslists.action'
+import { useRouter } from 'next/router'
+import { RootState } from 'typesafe-actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSingleUser, updateUser } from '../../store/actions/userslists.action'
 import UserDataInput from '../DataInputForms/UserDataInput/UserDataInput'
 
 const UpdateUser = (props) => {
@@ -12,25 +12,27 @@ const UpdateUser = (props) => {
 
     const [data, setData] = useState({})
 
-    const userDetails = useSelector((state:RootState) => state.singleUser)
-    const { loading, success:getUserSuccess, userData} = userDetails
+    const userDetails = useSelector((state: RootState) => state.singleUser)
+    const { loading, success: getUserSuccess, userData } = userDetails
 
-    const updateDetails = useSelector((state:RootState) => state.updateUser)
-    var { updating, success:updateUserSuccess = false, response, error} = updateDetails
+    const updateDetails = useSelector((state: RootState) => state.updateUser)
+    var { updating, success: updateUserSuccess = false, response, error } = updateDetails
 
-    useEffect( () => {
-        dispatch(getSingleUser(id))
-     }, [dispatch]);
+    useEffect(() => {
+        if (router.query.id) {
+            dispatch(getSingleUser(router.query.id))
+        }
+    }, [dispatch, router.query.id]);
 
-    useEffect( () => {
-        if(getUserSuccess){
-            setData({name: userData.name ?? "", email: userData.email ?? "", phone: userData.phone ?? "", roles: userData.roles ?? []})
+    useEffect(() => {
+        if (getUserSuccess) {
+            setData({ name: userData.name ?? "", email: userData.email ?? "", phone: userData.phone ?? "", roles: userData.roles ?? [] })
         }
     }, [getUserSuccess]);
 
     useEffect(() => {
-        if(!updating && updateUserSuccess)
-            setTimeout(() => {  router.push(props.returnTo) }, 2000)
+        if (!updating && updateUserSuccess)
+            setTimeout(() => { router.push(props.returnTo) }, 2000)
     }, [updating])
 
 
@@ -40,14 +42,15 @@ const UpdateUser = (props) => {
 
             updateProps={{
                 id: id,
-                updating:updating,
-                getUserSuccess:getUserSuccess,
-                updateUserSuccess:updateUserSuccess,
-                error:error,
-                data:data,
+                updating: updating,
+                getUserSuccess: getUserSuccess,
+                updateUserSuccess: updateUserSuccess,
+                error: error,
+                data: data,
                 loading: loading,
-                setData:setData}}
-            ></UserDataInput>
+                setData: setData
+            }}
+        ></UserDataInput>
     )
 }
 

@@ -30,11 +30,16 @@ export const translations = {
   extra: 'дополнительный',
   send_fcm_notification: 'отправить FCM уведомление',
   settings: 'Настройки',
+  users: 'пользователи',
   transfers: 'Переводы',
   logout: 'Выйти',
 
   login: 'Логин',
   rememberMe: 'Запомни меня',
+  takingYouToYourDashboard: 'Загружается личный кабинет...',
+  somethingWentWrongWhileLoggingIn: 'Что-то пошло не так при входе в систему',
+  invalidEmailOrPassword: 'Неправильный адрес электронной почты или пароль',
+  userNotFound: 'Пользователь не найден',
 
   //On Dashboard
   dailyOrders: 'Ежедневные заказы',
@@ -94,6 +99,7 @@ export const translations = {
   vegetablesOnly: 'Только овощи',
   prioritized: 'Приоритетные',
   open: 'Открыть',
+  closed: 'закрыто',
 
   // Meals List page
   image: 'Изображение',
@@ -138,6 +144,10 @@ export const translations = {
   eveYemekSettings: 'Настройки Eve Yemek',
   security: 'Безопасность',
   newPassword: 'Новый пароль',
+  newPasswordAgain: 'Новый пароль еще раз',
+  passwordsDoesntMatch: 'Несовпадение паролей',
+  changeYourPassword: 'Изменить пароль',
+  redirectingToLoginPage: 'Вы будете перенаправлены на страницу входа',
 
   //Transfers
   totalAmount: 'Общая сумма',
@@ -169,9 +179,12 @@ export const translations = {
   // Toasts
   success: 'Успешно',
   error: 'Ошибка',
+  anErrorOccurred: 'Произошла ошибка',
   fileUploaded: 'Файл загружен',
   updatedUser: 'Обновленный пользователь',
   userName: 'Имя пользователя',
+  updatedFoodCategory: 'Категория еды обновлено',
+  createdFoodCategory: 'Категория еды создано',
 
   // Table Pagination
   showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}',

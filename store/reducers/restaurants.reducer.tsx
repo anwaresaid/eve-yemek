@@ -122,3 +122,36 @@ export const findRestaurantReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+
+export const ownedRestaurantsList = (state = {ownedRestaurants: []}, action) => {
+  switch (action.type) {
+    case restaurantsTypes.OWNED_RESTAURANTS_REQUEST:
+      return { loading: true}
+    case restaurantsTypes.OWNED_RESTAURANTS_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        ownedRestaurants: action.payload
+      }
+    case restaurantsTypes.OWNED_RESTAURANTS_FAIL:
+      return {
+        loading: false,
+        error: action.payload
+      } 
+    case restaurantsTypes.OWNED_RESTAURANT_OPEN_CLOSE:
+      for (let i = 0; i < state.ownedRestaurants.length; i++){
+        if (state.ownedRestaurants[i].id === action.payload.id){
+          state.ownedRestaurants[i] = action.payload
+          return {
+            ownedRestaurants: state.ownedRestaurants
+          }
+        }
+      }
+    default:
+      return state;
+  }
+};
+
+
+
