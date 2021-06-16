@@ -137,10 +137,10 @@ export const translations = {
   eveYemekSettings: 'Eve Yemek Settings',
   security:"Security",
   newPassword:"New Password",
-  newPasswordAgain:"New Password Again",
-  passwordsDoesntMatch:"Passwords doesn't match",
+  newPasswordAgain:"Confirm New Password",
+  passwordsDoesntMatch:"Passwords do not match",
   changeYourPassword:"Change Your Password",
-  redirectingToLoginPage:"Redirecting to login page",
+  redirectingToLoginPage:"Redirecting to the login page",
 
   // Transfers
   totalAmount: 'Total Amount',
