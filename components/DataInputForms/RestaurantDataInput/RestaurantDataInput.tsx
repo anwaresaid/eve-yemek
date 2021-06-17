@@ -367,8 +367,8 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.latitudeInt,
                                     onValueChange: formik.handleChange,
                                     mode:"decimal",
-                                    minFractionDigits:2,
-                                    maxFractionDigits:6,
+                                    minFractionDigits:4,
+                                    maxFractionDigits:8,
                                     showButtons: true,
                                 }} />
 
@@ -376,8 +376,8 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.longtitudeInt,
                                     onValueChange: formik.handleChange,
                                     mode:"decimal",
-                                    minFractionDigits:2,
-                                    maxFractionDigits:6,
+                                    minFractionDigits:4,
+                                    maxFractionDigits:8,
                                     showButtons: true,
                                 }} />
                             </InputGroup>
