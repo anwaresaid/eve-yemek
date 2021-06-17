@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import StandardTable from '../StandardTable'
-import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import Header from '../InTableComponents/Header';
 import editButton from "../InTableComponents/editButton";
@@ -25,13 +24,20 @@ const UsersTable = (props) => {
         {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path='users/'+props.editPath)}
     ]
     return (
-        <StandardTable 
-            header={Header(setGlobalFilter,"Users")}
-            columns={columns} 
-            value={props.users}  
-            globalFilter={globalFilter} 
-            emptyMessage="No users found" >     
-        </StandardTable>
+        <div id='usersTable'>
+            {
+                props.users.lenght ===0?
+                <h1>no user was found</h1>
+                : 
+            <StandardTable 
+                header={Header(setGlobalFilter,"Users")}
+                columns={columns} 
+                value={props.users}  
+                globalFilter={globalFilter} 
+                emptyMessage="No users found" >     
+            </StandardTable>
+}
+        </div>
     )
 }
 
