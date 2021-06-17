@@ -8,6 +8,7 @@ import EditBtn from '../../components/InTableComponents/editButton/index';
 import Header from '../../components/InTableComponents/Header/index';
 import OrderStatus from '../../components/InTableComponents/orderStatusTag'
 import { i18n } from '../../language'
+import _ from 'lodash';
 import Loading from '../../components/Loading'
 
 const Orders = () => {
@@ -50,7 +51,7 @@ const Orders = () => {
                 <StandardTable 
                     header={Header(setGlobalFilter,"orders")}
                     columns={columns} 
-                    value={rows}  
+                    value={_.without(_.map(rows, (item) => {if (!item.is_deleted) return item}), undefined)}  
                     globalFilter={globalFilter} 
                     emptyMessage="No orders found" >     
                 </StandardTable>
