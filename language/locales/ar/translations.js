@@ -114,6 +114,9 @@ export const translations = {
   selectAddons: 'إختر الاضافات',
   discountedPrice: 'السعر بعد التخفيض',
 
+  //edit restaurant
+  editRestaurant: 'تعديل المطعم',
+
   // Category pages and Add-on pages
   categoryName: 'إسم العنصر',
   type: 'النوع',
@@ -195,6 +198,7 @@ export const translations = {
   updateMeal: 'تحديث الوجبة',
   selectRestaurant: 'اختر المطعم',
   dragAndDropImageHere: 'قم بسحب وإسقاط الصورة هنا',
+
 
   fixed: 'ثابت',
   percentage: 'النسبة المئوية',
