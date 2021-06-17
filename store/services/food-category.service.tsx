@@ -2,7 +2,7 @@ import axios from '../../helpers/_axios';
 
 export default class FoodCategorynService {
   public async getFoodCategory() {
-    const { data } = await axios.get(
+    const { data:{data} } = await axios.get(
       '/food-categories'
     );
 
@@ -10,7 +10,7 @@ export default class FoodCategorynService {
   }
 
   public async getFoodCategoryDetails(id: string) {
-    const { data } = await axios.get(
+    const { data:{data} } = await axios.get(
       `/food-categories/${id}`
     );
 
@@ -18,7 +18,7 @@ export default class FoodCategorynService {
   }
 
   public async createFoodCategory(createFoodCategoryDTO: any) {
-    const { data } = await axios.post(
+    const { data:{data} } = await axios.post(
       '/food-categories',
       createFoodCategoryDTO
     );
@@ -27,7 +27,7 @@ export default class FoodCategorynService {
   }
 
   public async updateFoodCategory(id: string, updateFoodCategoryDTO: any) {
-    const { data } = await axios.put(
+    const { data:{data} } = await axios.put(
       `/food-categories/${id}`,
       updateFoodCategoryDTO
     );
