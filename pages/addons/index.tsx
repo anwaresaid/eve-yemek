@@ -4,6 +4,7 @@ import { listAddons } from "../../store/actions/addons.action"
 import { listAddonCategory } from "../../store/actions/addon-category.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
+import _ from 'lodash'
 import Loading from "../../components/Loading"
 import { i18n } from "../../language"
 
@@ -26,8 +27,8 @@ const restaurantOwnerList = () => {
     <div id='addonsTabe'>
       {!loading && success && successCat && (
         <AddonsTable
-          addons={addons.items}
-          addonCat={addonCat.items}
+          addons={_.without(_.map(addons.items, (item) => {if (!item.is_deleted) return item}), undefined)}
+          addonCat={_.without(_.map(addonCat.items, (item) => {if (!item.is_deleted) return item}), undefined)}
         ></AddonsTable>
       )}
       {loading && <Loading />}
