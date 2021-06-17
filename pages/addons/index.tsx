@@ -5,6 +5,7 @@ import { listAddonCategory } from "../../store/actions/addon-category.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
 import Loading from "../../components/Loading"
+import { i18n } from "../../language"
 
 
 const restaurantOwnerList = () => {
@@ -32,7 +33,7 @@ const restaurantOwnerList = () => {
     }, [success,successCat])
     return (
         <div id="addonsTabe">
-            {!loading && <AddonsTable addons={addon} addonCat={addonCategory} ></AddonsTable>}
+            {!loading &&<><h1 id="foodsHeader">{i18n.t('addons')}</h1> <AddonsTable addons={addon} addonCat={addonCategory} ></AddonsTable></>}
             {loading && <Loading />}
         </div>
     )
