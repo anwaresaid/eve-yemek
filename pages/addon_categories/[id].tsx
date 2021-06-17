@@ -23,6 +23,9 @@ export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const toast = useRef(null);
+
+  const [data, setData] = useState(false);
+
   const addonCategoryDetail = useSelector(
     (state: RootState) => state.addonCategoryDetails
   );
@@ -69,10 +72,12 @@ export const AddonCategoryEdit = () => {
   });
   useEffect(() => {
     if (router.query.id) {
-      if (!detailsSuccess || router.query.id !== addonCategory.id) {
-        dispatch(getAddonCategoryDetails(router.query.id));
-      }
-      if (detailsSuccess && addonCategory) {
+      if (
+        detailsSuccess &&
+        addonCategory &&
+        router.query.id === addonCategory.id
+      ) {
+        setData(true);
         formik.values.name = addonCategory.name;
         formik.values.enum = addonCategory.enum;
         if (successUpdate) {
@@ -89,6 +94,9 @@ export const AddonCategoryEdit = () => {
           });
           router.push('/addon_categories');
         }
+      } else {
+        setData(false);
+        dispatch(getAddonCategoryDetails(router.query.id));
       }
     }
   }, [

@@ -26,6 +26,8 @@ export const Index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const [data, setData] = useState(false);
+
   const listAddonCategories = useSelector(
     (state: RootState) => state.listAddonCategory
   );
@@ -81,6 +83,7 @@ export const Index = () => {
     }
 
     if (successFind && addon.id === router.query.id) {
+      setData(true);
       const match = addonCategoryList.items.filter(
         (addonCategory) => addonCategory.id === addon.add_on_category
       );
@@ -90,6 +93,7 @@ export const Index = () => {
     }
 
     if (successUpdate) {
+      setData(false);
       router.push('/addons');
       dispatch({ type: addonsTypes.ADDON_UPDATE_RESET });
       dispatch({ type: addonsTypes.ADDON_FIND_RESET });
