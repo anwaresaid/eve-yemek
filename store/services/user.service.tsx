@@ -14,7 +14,8 @@ const UserService = function () {
             remember
         })
         .then(res=>{
-            return { ok:true, data: res.data };
+            console.log('data from service:', res.data.data)
+            return { ok:true, data: res.data.data };
         })
         .catch(err=>{
             return { ok:false, err:err?.data || err?.response?.data }

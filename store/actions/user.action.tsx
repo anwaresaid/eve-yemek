@@ -9,12 +9,13 @@ const login =
         try {
             const res: any = await UserService.login(email, password, remember);
             
+            console.log('data in action after login',res);
             if (res?.ok) {
                 const user = {
-                    id: res?.data?.id,
-                    email: res?.data?.email,
-                    roles: res?.data?.roles,
-                    access_token: res?.data?.access_token,
+                    id: res?.data.user?.id,
+                    email: res?.data.user?.email,
+                    roles: res?.data.user?.roles,
+                    access_token: res?.data.access_token,
                 };
                 auth.login(user);
                 await dispatch({ type: userTypes.LOGIN, payload: user });
