@@ -23,12 +23,7 @@ const UsersTable = (props) => {
         {field: 'active', header: i18n.t('active'), body: ()=>activeTag(true)}, // change after BE supports active status for users
         {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path='users/'+props.editPath)}
     ]
-    return (
-        <div id='usersTable'>
-            {
-                props.users.lenght ===0?
-                <h1>no user was found</h1>
-                : 
+    return ( 
             <StandardTable 
                 header={Header(setGlobalFilter,"Users")}
                 columns={columns} 
@@ -36,8 +31,7 @@ const UsersTable = (props) => {
                 globalFilter={globalFilter} 
                 emptyMessage="No users found" >     
             </StandardTable>
-}
-        </div>
+
     )
 }
 

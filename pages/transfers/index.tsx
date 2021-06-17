@@ -17,6 +17,7 @@ const Transfers = () => {
 
     return (
         <div id="transfersTable">
+            <h1 id="transfersHeader">{i18n.t('transfers')}</h1>
             <StandardTable
                 header={Header(setGlobalFilter,"Transfers")}
                 columns={columns}

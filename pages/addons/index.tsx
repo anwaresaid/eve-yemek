@@ -33,7 +33,7 @@ const restaurantOwnerList = () => {
     }, [success,successCat])
     return (
         <div id="addonsTabe">
-            {!loading &&<><h1 id="foodsHeader">{i18n.t('addons')}</h1> <AddonsTable addons={addon} addonCat={addonCategory} ></AddonsTable></>}
+            {!loading &&<><h1 id="addonsHeader">{i18n.t('addons')}</h1> <AddonsTable addons={addon} addonCat={addonCategory} ></AddonsTable></>}
             {loading && <Loading />}
         </div>
     )
