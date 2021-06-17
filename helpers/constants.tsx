@@ -39,8 +39,8 @@ export const allMenuItems:any = [
         { label:i18n.t("createMeal"),               url:"/foods/create",            roles:["admin", "restaurant_owner", "manager"] }
     ] },
     { label:i18n.t("mealCategories"),  expanded: true, items: [
-        { label:i18n.t("categoryList"),             url:"/food_categories",         roles:["admin", "restaurant_owner", "manager"] },
-        { label:i18n.t("createMealCategory"),       url:"/food_categories/create",  roles:["admin", "restaurant_owner", "manager"] }
+        { label:i18n.t("categoryList"),             url:"/food_categories",         roles:["admin", "manager"] },
+        { label:i18n.t("createMealCategory"),       url:"/food_categories/create",  roles:["admin", "manager"] }
     ] },
     { label:i18n.t("addonCategories"), expanded: true, items: [
         { label:i18n.t("addonCategoryList"),        url:"/addon_categories",        roles:["admin", "restaurant_owner"] },
