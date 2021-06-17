@@ -16,17 +16,6 @@ const UsersTable = (props) => {
     
     const router = useRouter();
     var path;
-
-    const header =(
-        <div className="table-header">
-            List of Users
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-            </span>
-        </div>
-    )
-
     const columns = [
         {field: 'name', header: i18n.t('name')},
         {field: 'email', header: i18n.t('email')},

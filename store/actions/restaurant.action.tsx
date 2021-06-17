@@ -4,76 +4,76 @@ import RestaurantService from "../services/restaurants.service";
 
 
 export const listRestaurantOwners = () => async (dispatch, getState) => {
-    try {
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_OWNER_LIST_REQUEST,
-      });
-  
-      const restaurantService = new RestaurantService;
-      const res = await restaurantService.getRestaurantOwners();
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_OWNER_LIST_SUCCESS,
-        payload: res,
-      });
-    } catch (error) {
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_OWNER_LIST_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
+  try {
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_OWNER_LIST_REQUEST,
+    });
+
+    const restaurantService = new RestaurantService;
+    const res = await restaurantService.getRestaurantOwners();
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_OWNER_LIST_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_OWNER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 export const createRestaurant = (restaurantCreate) => async (dispatch, getState) => {
-    try {
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_CREATE_REQUEST,
-      });
-  
-      const restaurantService = new RestaurantService;
-      const res = await restaurantService.createRestaurant(restaurantCreate);
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_CREATE_SUCCESS,
-        payload: res,
-      });
-    } catch (error) {
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_CREATE_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
+  try {
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_CREATE_REQUEST,
+    });
 
-  export const updateRestaurant = (id,restaurantUpdate) => async (dispatch, getState) => {
-    try {
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_UPDATE_REQUEST,
-      });
-  
-      const restaurantService = new RestaurantService;
-      const res = await restaurantService.updateRestaurant(id,restaurantUpdate);
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_UPDATE_SUCCESS,
-        payload: res,
-      });
-    } catch (error) {
-      dispatch({
-        type: restaurantsTypes.RESTAURAT_UPDATE_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
+    const restaurantService = new RestaurantService;
+    const res = await restaurantService.createRestaurant(restaurantCreate);
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_CREATE_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateRestaurant = (id, restaurantUpdate) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_UPDATE_REQUEST,
+    });
+
+    const restaurantService = new RestaurantService;
+    const res = await restaurantService.updateRestaurant(id, restaurantUpdate);
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_UPDATE_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: restaurantsTypes.RESTAURAT_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 
-  
+
 export const listRestaurant = () => async (dispatch, getState) => {
   try {
     dispatch({
@@ -104,6 +104,7 @@ export const findRestaurant = (id) => async (dispatch, getState) => {
     });
 
     const restaurantService = new RestaurantService;
+
     const res = await restaurantService.findRestaurant(id);
     dispatch({
       type: restaurantsTypes.RESTAURAT_FIND_SUCCESS,
@@ -117,5 +118,42 @@ export const findRestaurant = (id) => async (dispatch, getState) => {
           ? error.response.data.message
           : error.message,
     });
+  }
+};
+
+export const listOwnedRestaurants = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: restaurantsTypes.OWNED_RESTAURANTS_REQUEST,
+    });
+
+    const restaurantService = new RestaurantService;
+
+    const res = await restaurantService.listOwnedRestaurants();
+    dispatch({
+      type: restaurantsTypes.OWNED_RESTAURANTS_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: restaurantsTypes.OWNED_RESTAURANTS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const openCloseRestaurant = (id, statusBody) => async (dispatch, getState) => {
+  try {
+    const restaurantService = new RestaurantService;
+    const res = await restaurantService.openCloseOwnedRestaurant(id, statusBody);
+    dispatch({
+      type: restaurantsTypes.OWNED_RESTAURANT_OPEN_CLOSE,
+      payload: res,
+    });
+  } catch (error) {
+    console.log(error)
   }
 };

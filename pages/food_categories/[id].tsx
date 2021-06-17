@@ -4,25 +4,31 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import * as S from '../../styles/food/create-food/food.create.style';
 import { InputSwitch } from 'primereact/inputswitch';
+import { getIdQuery } from '../../helpers/getIdQuery';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import { useRouter } from 'next/router';
-import { getFoodCategoryDetails, updateFoodCategory } from '../../store/actions/foodCategory.action';
 import { foodCategoryTypes } from '../../store/types/foodCategory.type';
+import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-import classNames from 'classnames'
+import { i18n } from '../../language';
 import InputContainer from '../../components/inputs/inputContainer';
 import StandardFileUpload from '../../components/inputs/fileUpload';
-import { i18n } from '../../language';
+import FormColumn from "../../components/inputs/formColumn";
+import InputGroup from "../../components/inputs/inputGroup";
+import { getFoodCategoryDetails, updateFoodCategory } from '../../store/actions/foodCategory.action';
+
 
 export const FoodCategoryEdit = () => {
+ 
+  const id = getIdQuery();
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [totalSize, setTotalSize] = useState(0);
   const toast = useRef(null);
   const fileUploadRef = useRef(null);
-  const [categoryName, setCategoryName] = useState('');
+
+  const [data, setData] = useState(false);
+
 
   const foodCategoryDetails = useSelector((state:RootState) => state.foodCategoryDetails);
   const { foodCategory, loading, success: detailsSuccess } = foodCategoryDetails;
@@ -34,6 +40,9 @@ export const FoodCategoryEdit = () => {
   const getFormErrorMessage = (name) => {
       return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
   };
+   const foodCategoryCreate = useSelector((state:RootState) => state.createFoodCategory);
+  const { success } = foodCategoryCreate;
+
   const formik = useFormik({
     initialValues:{
         name: '',
@@ -59,54 +68,65 @@ export const FoodCategoryEdit = () => {
 });
 
   useEffect(() => {
-      if(detailsSuccess && foodCategory.id === router.query.id){
+    if(router.query.id){
+      if(detailsSuccess && foodCategory.id === router.query.id && foodCategory){
+        setData(true);
         formik.values.active = foodCategory.active;
         formik.values.name = foodCategory.name;
         if(successUpdate){
+          toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedFoodCategory')})
           dispatch({
             type: foodCategoryTypes.FOOD_CATEGORY_UPDATE_RESET
           })
           dispatch({
             type: foodCategoryTypes.FOOD_CATEGORY_DETAILS_RESET
           })
-          router.push('/food_categories')
+          setTimeout(()=>{router.push('/food_categories')}, 1000)
         }
       }else{
+        setData(false);
         dispatch(getFoodCategoryDetails(router.query.id))
       }
-  }, [dispatch, detailsSuccess, foodCategory, successUpdate]);
+    }
+  }, [dispatch, detailsSuccess, foodCategory, successUpdate,router.query.id]);
+
+  const inputFormiks = {
+    getFormErrorMessage,
+    isFormFieldValid
+  }
 
   return (
-    <div>
-      <h1>Kategori Detayi</h1>
-      <Toast ref={toast}></Toast>
-      <S.ContainerCard>
-        <form onSubmit={formik.handleSubmit}>
-          <div className='p-fluid'>
-            <div className='p-field'>
-              <h4>Kategori Adı</h4>
-              <InputText id='name' name='name' value={formik.values.name} onChange={formik.handleChange} type='text' className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-              <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
-              {getFormErrorMessage('name')}
-            </div>
-          </div>
-          <InputContainer name="image" label="Görseller" getFormErrorMessage={getFormErrorMessage} isFormFieldValid={isFormFieldValid}>
-                <StandardFileUpload 
-                        setFile={(image)=>{formik.values.image=image}}
-                        showSuccess={()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}}
-                     >   
-                </StandardFileUpload>
-          </InputContainer>
-          <div>
-            <h4>Aktif Mi</h4>
-            <InputSwitch checked={formik.values.active} onChange={formik.handleChange} />
-          </div>
+    <div id="edit_food_categories">
+      <h1 id="editHeader">{i18n.t('update')}</h1>
+      <Toast id="toastMessage" ref={toast}></Toast>
+      <S.ContainerCard id="container">
+            <form id="editForm" onSubmit={formik.handleSubmit}>
+                <div className="p-grid">
+            <FormColumn divideCount={3}>
+            <InputGroup>
+            <InputContainer label={i18n.t('name')} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                value: formik.values.name,
+                onChange: formik.handleChange,
+                }} />
+                  <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                      setFile:(image)=>{ formik.values.image=image },
+                      showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                    }}/>
+                <InputContainer label={i18n.t('active')} name="active" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
+                  value: formik.values.active,
+                  checked: formik.values.active,
+                  onChange: formik.handleChange
+                }} />
+            </InputGroup>
+                    
+                <S.SubmitBtn id="btnContainer">
+                  <Button id="editBtn" type='submit' label={i18n.t('submit')}/>
+                </S.SubmitBtn>
 
-          <S.SubmitBtn>
-            <Button type='submit' label={i18n.t('submit')}/>
-          </S.SubmitBtn>
-        </form>
-      </S.ContainerCard>
+              </FormColumn>
+              </div>
+            </form>
+          </S.ContainerCard>
     </div>
   );
 };

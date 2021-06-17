@@ -1,27 +1,30 @@
 import { useState } from "react";
 import Header from "../../components/InTableComponents/Header";
 import StandardTable from "../../components/StandardTable";
+import { i18n } from "../../language";
 
 const Transfers = () => {
 
     const [globalFilter, setGlobalFilter] = useState(null);
 
     let columns = [
-        {field: 'id', header: 'Order ID'},
-        {field: 'restaurant', header: 'Restaurant'},
-        {field: 'totalAmount', header: 'Total Amount'},
-        {field: 'orderTime', header: 'Created'},
-        {field: 'ops', header: 'Operations'}
+        {field: 'id', header: 'ID'},
+        {field: 'restaurant', header: i18n.t('restaurant')},
+        {field: 'totalAmount', header: i18n.t('totalAmount')},
+        {field: 'orderTime', header: i18n.t('created')},
+        {field: 'ops', header: i18n.t('operations')}
     ]
 
     return (
-        <StandardTable
-            header={Header(setGlobalFilter,"Transfers")}
-            columns={columns}
-            globalFilter={globalFilter} 
-            emptyMessage="No transfers found"
-            > 
-        </StandardTable>
+        <div id="transfersTable">
+            <StandardTable
+                header={Header(setGlobalFilter,"Transfers")}
+                columns={columns}
+                globalFilter={globalFilter} 
+                emptyMessage="No transfers found"
+                > 
+            </StandardTable>
+        </div>
     )
 }
 

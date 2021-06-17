@@ -3,9 +3,9 @@ import UsersTable from "../../../components/tables/usersTable"
 import { listCustomerService } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
-import { ProgressSpinner } from 'primereact/progressspinner'
+import Loading from "../../../components/Loading"
 
-const restaurantOwnerList = () => {
+const customerServiceList = () => {
 
     const dispatch = useDispatch();
     const res = useSelector((state:RootState) => state.listCustomerService)
@@ -17,12 +17,12 @@ const restaurantOwnerList = () => {
      }, [dispatch]);
 
     return (
-        <div>
+        <div id="customerServiceTable">
             {!loading && success && <UsersTable users={customerService.items} editPath="customer_service"></UsersTable>}
-            {!loading && !success && <h4>Müşteri hizmetlerinin verileri alınamadı!</h4>}
-            {loading && <ProgressSpinner/>}
+            {!loading && !success && <h4 id='warning'>Müşteri hizmetlerinin verileri alınamadı!</h4>}
+            {loading && <Loading />}
         </div>
     )
 }
 
-export default restaurantOwnerList;
+export default customerServiceList;

@@ -3,8 +3,9 @@ import OrdersTable from '../../../components/tables/ordersTable';
 import { listOrders } from '../../../store/actions/orders.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import { ProgressSpinner } from 'primereact/progressspinner';
 import { useSocket } from '../../../helpers/socket';
+import { i18n } from '../../../language'
+import Loading from '../../../components/Loading';
 
 const liveOrdersList = () => {
   const dispatch = useDispatch();
@@ -34,14 +35,15 @@ const liveOrdersList = () => {
   // };
 
   return (
-    <div>
+    <div id="liveOrdersTable">
+      <h1 id="ordersHeader">{i18n.t('liveOrders')}</h1>
       {!loading && orders && (
         <OrdersTable
           orders={orders.items}
           role='restaurant_owner'
         ></OrdersTable>
       )}
-      {loading && <ProgressSpinner />}
+      {loading && <Loading />}
       {/* <Button onClick={emitToSocket}>click</Button> */}
     </div>
   );

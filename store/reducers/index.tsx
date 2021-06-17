@@ -6,12 +6,13 @@ import {
   createAddonCategoryReducer,
   updateAddonCategoryReducer,
 } from './addon-category.reducer';
-import user from './user.reducer';
+import { changePasswordReducer, loginReducer } from './user.reducer';
 import {
   createRestaurantReducer,
   findRestaurantReducer,
   updateRestaurantReducer,
   listRestaurantOwnersReducer,
+  ownedRestaurantsList,
 } from './restaurants.reducer';
 import {
   listAddonsReducer,
@@ -42,16 +43,17 @@ import {
   restaurantOwnerListReducer,
   deliveryScoutListReducer,
   customerServiceListReducer,
+  allUsersListReducer,
+  usersFcmTokensListReducer,
 } from './userslists.reducer';
-import { listSettingsReducer, updateSettingsReducer } from './settings.reducer';
+import { forgotPasswordReducer, listSettingsReducer, updateSettingsReducer } from './settings.reducer';
 import { dashboardReportReducer } from './dashboard.reducer';
-import { 
-  listCouponsReducer,
-  createCouponsReducer, 
-} from './coupons.reducer';
+import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
+import { sendNotificationReducer } from './send_notifications.reducer';
 
 export default combineReducers({
-  user,
+  login: loginReducer,
+  changePassword: changePasswordReducer,
 
   dashboardReport: dashboardReportReducer,
 
@@ -60,6 +62,7 @@ export default combineReducers({
   findRestaurant: findRestaurantReducer,
   createRestaurant: createRestaurantReducer,
   listResOwners: listRestaurantOwnersReducer,
+  ownedRestaurants: ownedRestaurantsList,
 
   createFood: createFoodReducer,
   updateFood: updateFoodReducer,
@@ -71,6 +74,8 @@ export default combineReducers({
   listRestaurantOwners: restaurantOwnerListReducer,
   listDeliveryScouts: deliveryScoutListReducer,
   listCustomerService: customerServiceListReducer,
+  allUsersList: allUsersListReducer,
+  usersFcmTokensList: usersFcmTokensListReducer,
 
   singleUser: singleUserReducer,
   updateUser: updateUserReducer,
@@ -91,6 +96,7 @@ export default combineReducers({
 
   listSettings: listSettingsReducer,
   updateSettings: updateSettingsReducer,
+  forgotPassword: forgotPasswordReducer,
 
   listAddonCategory: listAddonCategoryReducer,
   addonCategoryDetails: addonCategoryDetailsReducer,
@@ -99,4 +105,6 @@ export default combineReducers({
 
   listCoupons: listCouponsReducer,
   createCoupons: createCouponsReducer,
+
+  sendNotification: sendNotificationReducer,
 });

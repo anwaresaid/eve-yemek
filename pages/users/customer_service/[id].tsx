@@ -5,13 +5,15 @@ import UpdateUser from '../../../components/UpdateUser';
 const UpdateCustomerService = () => {
    
     const router = useRouter()
-    const [id, setID] = useState(router.query.id)
 
     return(
-        <UpdateUser 
-            id={id}
-            returnTo="/users/customer_service">
-        </UpdateUser>
+        <div id='updateUserDiv'>
+
+            <UpdateUser 
+                id={router.query.id}
+                returnTo="/users/customer_service">
+            </UpdateUser>
+        </div>
     )
 }
 

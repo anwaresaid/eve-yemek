@@ -3,8 +3,8 @@ import FoodsTable from '../../components/tables/foodsTable'
 import { listFood } from '../../store/actions/foods.action';
 import {useDispatch,useSelector} from 'react-redux';
 import { RootState } from "typesafe-actions";
-import { ProgressSpinner } from 'primereact/progressspinner';
-
+import Loading from "../../components/Loading";
+import { i18n } from "../../language";
 
 const FoodsList =  () => {
     const dispatch = useDispatch();
@@ -20,9 +20,9 @@ const FoodsList =  () => {
      }, [success]);
     
      return (
-        <div>
-            {!loading && foods && <FoodsTable foods={foods.items}></FoodsTable>}
-            {loading && <ProgressSpinner/>}
+        <div id="foodsCategoryTable">
+            {!loading && foods && <><h1>{i18n.t('meals')}</h1><FoodsTable foods={foods.items}></FoodsTable></>}
+            {loading && <Loading />}
         </div>
     );
 

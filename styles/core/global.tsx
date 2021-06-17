@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
         position:fixed ;
         border-radius: 0px;
         top:0;
-        width: 100%;
+        width: calc(100% - ${vars.sidebar_left_margin}px);
         left:0;
         height: 65px;
         align-items: center;
@@ -39,6 +39,9 @@ const GlobalStyle = createGlobalStyle`
         transition:  all 0.25s ease-in-out;
         z-index:2;
 
+        .p-card-body{
+            flex:1;
+        }
     }
         
     .ContainerPanel{
@@ -56,6 +59,10 @@ const GlobalStyle = createGlobalStyle`
         z-index: 1037;
         margin-left:0;
         transition:  all 0.25s ease-in-out;
+
+        .p-card-body{
+            flex:1;
+        }
     }
 
     .main-context-showBar{
@@ -97,12 +104,10 @@ const GlobalStyle = createGlobalStyle`
     @media screen and (max-width:500px){
         .main-context-hideBar{
              /* display:none; */
-            width:600px;
             transition:  all 0.25s ease-in-out;
         }
         .main-context-showBar{
              /* display:none; */
-            width:600px;
             transition:  all 0.25s ease-in-out;
         }
     }
@@ -116,10 +121,13 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1.2;
         color: inherit;
     }
-/* 
-    @media screen and (max-width: 760px){
 
-    } */
+    
+    @media screen and (min-width: 1600px){
+        .p-xxl-4 {
+            width: 33.33%!important;
+        }
+    }
 
 `;
 

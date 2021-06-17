@@ -12,8 +12,7 @@ import store from "../store/store";
 import auth from "../helpers/core/auth";
 import Error from "next/error";
 import { i18n } from "../language";
-import { Button } from "primereact/button";
-import { Card } from "primereact/card";
+import TopBar from "../components/TopBar";
 
 function MyApp(props) {
     
@@ -69,33 +68,18 @@ function MyApp(props) {
         }
 
         if (error) {
-            return <Error statusCode={404} />;
+            return <Error id='errorStatusCode' statusCode={404} />;
         }
 
         if (loggedIn) {
                 return (
                     <>  
                         <Sidebar open={hideBar} setOpen={setHideBar}  />
-                        
-                            {hideBar?
-                            <>
-                            <Card className="main-context-card-showBar">
-                                <Button icon="pi pi-bars" className=" p-button-secondary" onClick={()=> {setHideBar(!hideBar)}}/>
-                            </Card>
-                        <div className="main-context-showBar">
+                        <TopBar hideBar={hideBar} setHideBar={setHideBar} />
+                           
+                        <div className={"main-context" + (hideBar ? "-showBar" : "-hideBar")}>
                             <props.Component {...props.pageProps} />
-                        </div >
-                            </>
-                        :
-                        <>
-                         <Card className="main-context-card-hideBar">
-                                <Button icon="pi pi-bars" className=" p-button-secondary" onClick={()=> {setHideBar(!hideBar)}}/>
-                            </Card>
-                            <div className="main-context-hideBar">
-                            <props.Component {...props.pageProps} />
-                        </div >
-                        </>
-        }            
+                        </div>
                     </>
                 );
         }
@@ -104,19 +88,19 @@ function MyApp(props) {
     };
     return (
         <>
-            <Head>
-                <link rel="shortcut icon" href="/images/logos/logo.png"></link>
-                <title>Eve Yemek - Admin Panel</title>
+            <Head >
+                <link id='logoLink' rel="shortcut icon" href="/images/logos/logo.png"></link>
+                <title id='adminPanelTitle'>Eve Yemek - Admin Panel</title>
                 <meta charSet="utf-8" />
                 <meta
                     name="viewport"
                     content="initial-scale=1.0, width=device-width"
                 />
-                <meta name="description" content="Eve yemek admin panel" />
+                <meta id='adminPanelDescription' name="description" content="Eve yemek admin panel" />
             </Head>
-            <Provider store={store}>
-                <div className="app">
-                    <GlobalStyle open={hideBar} setOpen={setHideBar}/>
+            <Provider  store={store}>
+                <div id='appDiv' className="app">
+                    <GlobalStyle id='globalStyle' open={hideBar} setOpen={setHideBar}/>
 
                     {renderComp()}
                 </div>

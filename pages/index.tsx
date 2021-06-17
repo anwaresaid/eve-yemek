@@ -5,32 +5,53 @@ import { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
 import { getDashboardReport } from "../store/actions/dashboard.action";
-import {ProgressSpinner} from 'primereact/progressspinner'
 import { i18n } from "../language";
+import Loading from "../components/Loading";
+import auth from "../helpers/core/auth";
+import _ from 'lodash';
+import StandardTable from "../components/StandardTable";
+import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/restaurant.action";
+import { SelectButton } from 'primereact/selectbutton';
+import idColumn from "../components/InTableComponents/idColumn";
 
 const Index = (props) => {
-    const res = useSelector((state:RootState) => state.dashboardReport)
-    const {loading, success, reportData} = res
+    const res = useSelector((state: RootState) => state.dashboardReport)
+    const { loading, success, reportData } = res
+
+    const ownedRestaurantsState = useSelector((state: RootState) => state.ownedRestaurants)
+    const { loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants } = ownedRestaurantsState
+
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (!reportData)
             dispatch(getDashboardReport())
-        
-    },[dispatch])
-
-    const parseCounts = (counts) => {
-        if(!counts)
-            return
-        let out = []
-        for (let i of counts){
-            out[i._id - 1] = i.count
+        if (auth.hasRoles(['restaurant_owner'])) {
+            if (ownedRestaurants.length === 0)
+                dispatch(listOwnedRestaurants())
         }
-        out = Array.from(out, item => item || 0);
-        return out
+    }, [dispatch, ownedRestaurantsSuccess])
+
+    const parseCounts = (data) => {
+        if (!data)
+            return
+        if (!data.days)
+            return
+        let out = {}
+        for (let i of data.days) {
+            out[i + ''] = 0
+        }
+        for (let j of data.counts) {
+            out[j._id + ''] = j.count
+        }
+        return Object.values(out);
     }
 
+    const getTotalOrdersWeekly = () => {
+        return _.sum(parseCounts(reportData?.lastSevenDaysReport?.order))
+    }
     const lineChartData = {
+        
         labels: reportData?.lastSevenDaysReport.order.days,
         datasets: [
             {
@@ -40,92 +61,121 @@ const Index = (props) => {
                 backgroundColor: "rgba(75,192,192,1)",
                 borderColor: "rgb(75, 192, 192)",
                 borderWidth: 2,
-                data: parseCounts(reportData?.lastSevenDaysReport.order.counts)
+                data: parseCounts(reportData?.lastSevenDaysReport.order)
             }
         ]
     };
-    return (
-        <div className="ContainerPanel">
-            {loading ? <ProgressSpinner /> :
-            <S.DashboardWrapper>
-            <h1>{i18n.t('dashboard')}</h1>
-            <div className='p-grid p-grid-container'>
-                <div className='p-col-6 p-md-6 p-lg-2'>
-                    <div className='box' style={{ backgroundColor: "#17a2b8" }}>
-                        <div className='box__info'>
-                            <span>{reportData?.report.daily_orders.length}</span>
-                            <p>{i18n.t('dailyOrders')}</p>
-                        </div>
-                        <div className='box__icons'>
-                            <i className=' pi pi-shopping-cart'></i>
-                        </div>
-                    </div>
-                </div>
-                <div className='p-col-6 p-md-6 p-lg-2'>
-                    <div className='box' style={{ backgroundColor: "#28a745" }}>
-                        <div className='box__info'>
-                            <span>₺{reportData?.report.daily_income}</span>
-                            <p>{i18n.t('dailyEarnings')}</p>
-                        </div>
-                        <div className='box__icons'>
-                            <i className=' pi pi-money-bill'></i>
-                        </div>
-                    </div>
-                </div>
-                <div className='p-col-6 p-md-4 p-lg-2'>
-                    <div className='box' style={{ backgroundColor: "#ffc107" }}>
-                        <div className='box__info'>
-                            <span>{reportData?.report.total_orders.total}</span>
-                            <p>{i18n.t('totalOrders')}</p>
-                        </div>
-                        <div className='box__icons'>
-                            <i className=' pi pi-shopping-cart'></i>
-                        </div>
-                    </div>
-                </div>
-                <div className='p-col-6 p-md-4 p-lg-2'>
-                    <div className='box' style={{ backgroundColor: "#dc3545" }}>
-                        <div className='box__info'>
-                            <span>{reportData?.report.failed_orders}</span>
-                            <p>{i18n.t('failedOrders')}</p>
-                        </div>
-                        <div className='box__icons'>
-                            <i className='pi pi-info'></i>
-                        </div>
-                    </div>
-                </div>
-                <div className='p-col-6 p-md-4 p-lg-2'>
-                    <div className='box' style={{ backgroundColor: "#dc3545" }}>
-                        <div className='box__info'>
-                            <span>₺{reportData?.report.total_income}</span>
-                            <p>{i18n.t('totalEarnings')}</p>
-                        </div>
-                        <div className='box__icons'>
-                            <i className=' pi  pi-money-bill'></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <Card subTitle={i18n.t('ordersFromTheLast7Days')}>
-                <i className='pi pi-shopping-cart'>
-                    <span>{parseCounts(reportData?.lastSevenDaysReport.order.counts)?.reduce((a, b) => a + b, 0)} {i18n.t('orders')}</span>
-                </i>
-                <Line
-                    type='number'
-                    width={500}
-                    height={100}
-                    data={lineChartData}
-                    options={{
-                        legend: {
-                            display: false
-                        },
-                        responsive: true,
-                    }}
-                />
-            </Card>
-        </S.DashboardWrapper>}
-        </div>
+    const openClosedTag = (rowData) => {
+        const setIsOpen = (isOpen) => {
+            if (isOpen === null)
+                return
+            dispatch(openCloseRestaurant(rowData.id, { is_open: isOpen }))
+        }
+        return <SelectButton value={rowData.is_open} options={[{ label: i18n.t('open'), value: true }, { label: i18n.t('closed'), value: false }]} onChange={(e) => setIsOpen(e.value)} />
+    }
+
+    const ownedRestaurantsTableColumns = [
+        { field: '#', header: '#', body: idColumn, style: { 'width': '20px' } },
+        { field: 'name', header: i18n.t('restaurant') },
+        { field: 'is_open', header: i18n.t('status'), body: openClosedTag },
+    ]
+
+    return (
+        
+        <div id='containerPanel' className="ContainerPanel">
+            {loading ? <Loading /> :
+                <S.DashboardWrapper id='dashBoard'>
+                    <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
+                    {
+                        auth.hasRoles(["restaurant_owner"]) &&
+                        <div className="p-my-5">
+                            <StandardTable id='ownedRestaurants'
+                                columns={ownedRestaurantsTableColumns}
+                                value={ownedRestaurants}
+                                noPaginator
+                                style={{ tableLayout: "auto" }}
+                                resizableColumns
+                                columnResizeMode="expand" showGridlines
+                            ></StandardTable>
+                        </div>
+                    }
+                    <div className='p-grid p-grid-container'>
+                        <div className='p-col-6 p-md-6 p-lg-2'>
+                            <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
+                                <div id='boxInfoDiv' className='box__info'>
+                                    <span id='dailyOrders'>{reportData?.report.daily_orders.length}</span>
+                                    <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
+                                </div>
+                                <div className='box__icons'>
+                                    <i className=' pi pi-shopping-cart'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-6 p-lg-2'>
+                            <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
+                                <div id='box_infoDiv' className='box__info'>
+                                    <span id='daily_income_report'>₺{reportData?.report.daily_income}</span>
+                                    <p id='daily_incomeP'>{i18n.t('dailyEarnings')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='money_bill' className=' pi pi-money-bill'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-4 p-lg-2'>
+                            <div id='box' className='box' style={{ backgroundColor: "#ffc107" }}>
+                                <div id='box_info' className='box__info'>
+                                    <span id='total_orders_report'>{reportData?.report.total_orders.total}</span>
+                                    <p id='total_ordersP'>{i18n.t('totalOrders')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='shopping_cartIcon' className=' pi pi-shopping-cart'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-4 p-lg-2'>
+                            <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
+                                <div id='box_info' className='box__info'>
+                                    <span id='failed_orders_report'>{reportData?.report.failed_orders}</span>
+                                    <p id='failed_ordersP'>{i18n.t('failedOrders')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='infoIcon' className='pi pi-info'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-4 p-lg-2'>
+                            <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
+                                <div id='box_info' className='box__info'>
+                                    <span id='total_income_report'>₺{reportData?.report.total_income}</span>
+                                    <p id='total_incomeP'>{i18n.t('totalEarnings')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='money_billIcon' className=' pi  pi-money-bill'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <Card id='last_7_days_orders' subTitle={i18n.t('ordersFromTheLast7Days')}>
+                        <i id='shopping_cartIcon' className='pi pi-shopping-cart'>
+                            <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
+                        </i>
+                        <Line
+                            type='number'
+                            width={500}
+                            height={100}
+                            data={lineChartData}
+                            options={{
+                                legend: {
+                                    display: false
+                                },
+                                responsive: true,
+                            }}
+                        />
+                    </Card>
+                </S.DashboardWrapper>}
+        </div >
     );
 };
 

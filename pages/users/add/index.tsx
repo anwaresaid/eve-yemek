@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect } from 'react'
 import {useRouter} from 'next/router'
 import {RootState} from 'typesafe-actions'
 import {useDispatch,useSelector} from 'react-redux'
-import UserDataInput from '../../../components/UserDataInput/UserDataInput'
+import UserDataInput from '../../../components/DataInputForms/UserDataInput/UserDataInput'
 import {Toast} from 'primereact/toast'
 
 
@@ -23,8 +23,8 @@ const AddUser = () => {
     }, [addUserSuccess, error])
 
     return (
-        <div>
-            <Toast ref={toast}></Toast>
+        <div id='createUserDiv'>
+            <Toast id='toastMessage' ref={toast}></Toast>
             <UserDataInput></UserDataInput>
         </div>
     )

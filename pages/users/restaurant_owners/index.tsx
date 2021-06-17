@@ -3,7 +3,7 @@ import UsersTable from "../../../components/tables/usersTable"
 import { listRestaurantOwners } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
-import { ProgressSpinner } from 'primereact/progressspinner'
+import Loading from "../../../components/Loading"
 
 const restaurantOwnerList = () => {
 
@@ -17,10 +17,10 @@ const restaurantOwnerList = () => {
      }, [dispatch]);
 
     return (
-        <div>
+        <div id="restaurantOwnersTable">
             {!loading && success && <UsersTable users={restaurantOwners.items} editPath="restaurant_owners"></UsersTable>}
-            {!loading && !success && <h4>Restoran sahiplerinin verileri alınamadı!</h4>}
-            {loading && <ProgressSpinner/>}
+            {!loading && !success && <h4 id='restaurantOwnersHeader'>Restoran sahiplerinin verileri alınamadı!</h4>}
+            {loading && <Loading />}
         </div>
     )
 }

@@ -7,6 +7,7 @@ import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
+import { i18n } from "../../language";
 
 const RestaurantsTable = (props) => {
     
@@ -19,28 +20,16 @@ const RestaurantsTable = (props) => {
 
     const imageBodyTemplate = (rowData) => {
         return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
-   }
- 
-    const header =(
-        <div className="table-header">
-            List of restaurants
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Search" />
-            </span>
-        </div>
-    )
-
-   
+   }   
    
     const columns = [
         {field: 'id', header: "ID"},
-        {field: 'image', header: "Resim", body: imageBodyTemplate},
-        {field: 'name', header: 'Ad'},
-        {field: 'owner.name', header: 'Sahibinin Adı'},
-        {field: '', header: 'Ulke'},
-        {field: 'ops', header: 'aktif', body: (rowData)=>activeTag(rowData.active)},
-        {field: '', header: 'Islemler', body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'image', header: i18n.t('image'), body: imageBodyTemplate},
+        {field: 'name', header: i18n.t('name')},
+        {field: 'owner.name', header: i18n.t('restaurantOwner')},
+        {field: '', header: i18n.t('country')},
+        {field: 'ops', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.active)},
+        {field: '', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
     ]
 
     return(

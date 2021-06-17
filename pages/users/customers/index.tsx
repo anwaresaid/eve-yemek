@@ -3,7 +3,7 @@ import UsersTable from "../../../components/tables/usersTable";
 import { listCustomers } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux';
 import { RootState } from "typesafe-actions";
-import { ProgressSpinner } from 'primereact/progressspinner';
+import Loading from "../../../components/Loading";
 
 const customerList = () => {
 
@@ -17,10 +17,10 @@ const customerList = () => {
      }, [dispatch]);
      
     return (
-        <div>
+        <div id="customersTable">
             {!loading && success && <UsersTable users={customers.items} editPath="customers"></UsersTable>}
-            {!loading && !success && <h4>Müşterilerin verileri alınamadı!</h4>}
-            {loading && <ProgressSpinner/>}
+            {!loading && !success && <h4 id='customersTableHeader'>Müşterilerin verileri alınamadı!</h4>}
+            {loading && <Loading />}
         </div>
     );
 }

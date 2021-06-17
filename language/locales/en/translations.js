@@ -27,12 +27,19 @@ export const translations = {
   deliveryScouts: 'Delivery Scouts',
   customerServiceReps: 'Service Representatives',
   createUser: 'Create User',
+  extra: 'Extra',
+  send_fcm_notification: 'Send FCM Notification',
   settings: 'Settings',
+  users: 'Users',
   transfers: 'Transfers',
   logout: 'Logout',
 
   login: 'Login',
   rememberMe: 'Remember me',
+  takingYouToYourDashboard: 'Taking you to your dashboard...',
+  somethingWentWrongWhileLoggingIn: 'Something went wrong while logging in',
+  invalidEmailOrPassword: 'Invalid Email or Password',
+  userNotFound: 'User not found',
 
   //On Dashboard
   dailyOrders: 'Daily Orders',
@@ -65,6 +72,9 @@ export const translations = {
   orderTime: 'Order Time',
   operations: 'Operations',
 
+  // Restaurant List
+  country: 'Country',
+
   // Create Restaurant Page
   name: 'Name',
   description: 'Description',
@@ -89,6 +99,7 @@ export const translations = {
   vegetablesOnly: 'Vegetables Only',
   prioritized: 'Prioritized',
   open: 'Open',
+  closed: 'Closed',
 
   // Meals List page
   image: 'Image',
@@ -102,15 +113,17 @@ export const translations = {
   mealCategory: 'Meal Category',
   selectAddons: 'Select Add-Ons',
   discountedPrice: 'Discounted Price',
-  
 
   // Category pages and Add-on pages
   categoryName: 'Category Name',
   type: 'Type',
   addonName: 'Add-On Name',
   addonCategory: 'Add-On Category',
+  editAddon: 'Edit Add-On',
 
   // Coupon pages
+  couponName: 'Coupon Name',
+  couponDescription: 'Coupon Description',
   couponCode: 'Coupon Code',
   expiration: 'Expiration',
   couponType: 'Coupon Type',
@@ -129,6 +142,15 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Settings',
+  security: 'Security',
+  newPassword: 'New Password',
+  newPasswordAgain: 'Confirm New Password',
+  passwordsDoesntMatch: 'Passwords do not match',
+  changeYourPassword: 'Change Your Password',
+  redirectingToLoginPage: 'Redirecting to the login page',
+
+  // Transfers
+  totalAmount: 'Total Amount',
 
   general: 'General',
   applicationName: 'Application Name',
@@ -157,13 +179,27 @@ export const translations = {
   // Toasts
   success: 'Success',
   error: 'Error',
+  anErrorOccurred: 'An error occurred',
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',
+  updatedFoodCategory: 'Updated Food Category',
+  createdFoodCategory: 'Created Food Category',
 
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
 
   selectLanguage: 'Select Language',
-  submit: "Submit"
+  submit: 'Submit',
+
+  updateMeal: 'Update Meal',
+  selectRestaurant: 'Select Restaurant',
+  dragAndDropImageHere: 'Drag and drop image here',
+  editRestaurant:'Edit Restaurant',
+
+  fixed: 'Fixed',
+  percentage: 'Percentage',
+
+  addressInformation: 'Address Information',
+  selectAnOwner: 'Select An Owner',
 };

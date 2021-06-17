@@ -14,21 +14,26 @@ import {
   updateAddonCategory,
 } from '../../store/actions/addon-category.action';
 import { i18n } from '../../language';
+import FormColumn from '../../components/inputs/formColumn';
+import InputGroup from '../../components/inputs/inputGroup';
+import InputContainer from '../../components/inputs/inputContainer';
+import Loading from '../../components/Loading';
 
 export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-
   const toast = useRef(null);
 
-  const addonCategoryDetails = useSelector(
+  const [data, setData] = useState(false);
+
+  const addonCategoryDetail = useSelector(
     (state: RootState) => state.addonCategoryDetails
   );
   const {
     addonCategory,
     loading,
     success: detailsSuccess,
-  } = addonCategoryDetails;
+  } = addonCategoryDetail;
 
   const updatedAddonCategory = useSelector(
     (state: RootState) => state.updateAddonCategory
@@ -65,88 +70,95 @@ export const AddonCategoryEdit = () => {
       dispatch(updateAddonCategory(addonCategory.id, data));
     },
   });
-
   useEffect(() => {
-    if(router.query.id){
-    if (!detailsSuccess || router.query.id !== addonCategory.id) {
-      dispatch(getAddonCategoryDetails(router.query.id));
-    }
-    if (detailsSuccess) {
-      formik.values.name = addonCategory.name;
-      formik.values.enum = addonCategory.enum;
-      if (successUpdate) {
-        dispatch({
-          type: foodCategoryTypes.FOOD_CATEGORY_UPDATE_RESET,
-        });
-        dispatch({
-          type: foodCategoryTypes.FOOD_CATEGORY_DETAILS_RESET,
-        });
-        toast.current.show({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Addon Updated Successfully',
-        });
-        router.push('/addon_categories');
+    if (router.query.id) {
+      if (
+        detailsSuccess &&
+        addonCategory &&
+        router.query.id === addonCategory.id
+      ) {
+        setData(true);
+        formik.values.name = addonCategory.name;
+        formik.values.enum = addonCategory.enum;
+        if (successUpdate) {
+          dispatch({
+            type: foodCategoryTypes.FOOD_CATEGORY_UPDATE_RESET,
+          });
+          dispatch({
+            type: foodCategoryTypes.FOOD_CATEGORY_DETAILS_RESET,
+          });
+          toast.current.show({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Addon Updated Successfully',
+          });
+          router.push('/addon_categories');
+        }
+      } else {
+        setData(false);
+        dispatch(getAddonCategoryDetails(router.query.id));
       }
     }
-  }
-  }, [dispatch, detailsSuccess, addonCategory, successUpdate,router.query.id]);
-    return (
-    <div>
-      <h1>Kategori Detayi</h1>
-      <Toast ref={toast}></Toast>
+  }, [
+    dispatch,
+    detailsSuccess,
+    addonCategory,
+    loading,
+    successUpdate,
+    router.query.id,
+  ]);
+
+  const inputFormiks = {
+    getFormErrorMessage,
+    isFormFieldValid,
+  };
+
+  return (
+    <div id='edit_Add_On_Category'>
+      <h1 id='editHeader'>Kategori Detayi</h1>
+      <Toast id='toastMessage' ref={toast}></Toast>
       {!loading && detailsSuccess ? (
-        <S.ContainerCard>
+        <S.ContainerCard id='container'>
           <form onSubmit={formik.handleSubmit}>
-            <div className='p-fluid'>
-              <div className='p-field'>
-                <h4>Kategori Adı</h4>
-                <InputText
-                  id='name'
-                  name='name'
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  type='text'
-                  className={classNames({
-                    'p-invalid': isFormFieldValid('name'),
-                  })}
-                />
-                <label
-                  htmlFor='name'
-                  className={classNames({
-                    'p-error': isFormFieldValid('name'),
-                  })}
-                ></label>
-                {getFormErrorMessage('name')}
+            <S.ContainerCard id='container'>
+              <div className='p-grid'>
+                <FormColumn divideCount={3}>
+                  <InputGroup>
+                    <InputContainer
+                      label={i18n.t('name')}
+                      name='name'
+                      formiks={inputFormiks}
+                      component={InputText}
+                      iprops={{
+                        value: formik.values.name,
+                        onChange: formik.handleChange,
+                      }}
+                    />
+                  </InputGroup>
+                </FormColumn>
+                <FormColumn divideCount={3}>
+                  <InputGroup>
+                    <InputContainer
+                      label={i18n.t('enum')}
+                      name='enum'
+                      formiks={inputFormiks}
+                      component={InputText}
+                      iprops={{
+                        value: formik.values.enum,
+                        onChange: formik.handleChange,
+                      }}
+                    />
+                  </InputGroup>
+                </FormColumn>
               </div>
-              <div className='p-field'>
-                <h4>Tur</h4>
-                <InputText
-                  id='enum'
-                  name='enum'
-                  value={formik.values.enum}
-                  onChange={formik.handleChange}
-                  type='text'
-                  className={classNames({
-                    'p-invalid': isFormFieldValid('enum'),
-                  })}
-                />
-                <label
-                  htmlFor='enum'
-                  className={classNames({
-                    'p-error': isFormFieldValid('enum'),
-                  })}
-                ></label>
-                {getFormErrorMessage('enum')}
-              </div>
-            </div>
-            <S.SubmitBtn>
-              <Button type='submit' label={i18n.t('submit')} />
-            </S.SubmitBtn>
+              <S.SubmitBtn>
+                <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
+              </S.SubmitBtn>
+            </S.ContainerCard>
           </form>
         </S.ContainerCard>
       ) : (
-        <h2>Loading</h2>
+        <Loading />
       )}
     </div>
   );

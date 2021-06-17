@@ -5,17 +5,15 @@ import UpdateUser from '../../../components/UpdateUser'
 const UpdateCustomer = () => {
    
     const router = useRouter()
-    const [id, setID] = useState(router.query.id)
 
-    useEffect(() => {
-        setID(router.query.id)
-    },[router.query.id])
 
     return(
-        <UpdateUser 
-            id={id}
-            returnTo="/users/customers">
-        </UpdateUser>
+        <div id='updateCustomerUserDiv'>
+            <UpdateUser 
+                id={router.query.id}
+                returnTo="/users/customers">
+            </UpdateUser>
+        </div>
     )
 }
 
