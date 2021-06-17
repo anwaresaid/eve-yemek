@@ -18,6 +18,7 @@ import FormColumn from '../../components/inputs/formColumn';
 import InputGroup from '../../components/inputs/inputGroup';
 import InputContainer from '../../components/inputs/inputContainer';
 import Loading from '../../components/Loading';
+import { Dropdown } from 'primereact/dropdown';
 
 export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -113,6 +114,8 @@ export const AddonCategoryEdit = () => {
     isFormFieldValid,
   };
 
+  const enumerationTypes = ['SINGLE','MULTIPLE']
+
   return (
     <div id='edit_Add_On_Category'>
       <h1 id='editHeader'>Kategori Detayi</h1>
@@ -137,18 +140,27 @@ export const AddonCategoryEdit = () => {
                   </InputGroup>
                 </FormColumn>
                 <FormColumn divideCount={3}>
-                  <InputGroup>
-                    <InputContainer
-                      label={i18n.t('enum')}
-                      name='enum'
-                      formiks={inputFormiks}
-                      component={InputText}
-                      iprops={{
-                        value: formik.values.enum,
-                        onChange: formik.handleChange,
-                      }}
-                    />
-                  </InputGroup>
+                <h4 id='enum'>{i18n.t('enum')}</h4>
+              <Dropdown
+                id='enum'
+                name='enum'
+                value={formik.values.enum}
+                options={enumerationTypes}
+                onChange={formik.handleChange}
+                placeholder='Select Add-On Category Type'
+                autoFocus
+                className={classNames({
+                  'p-invalid': isFormFieldValid('enum'),
+                })}
+              />
+              <label
+                id='enumError'
+                htmlFor='enum'
+                className={classNames({
+                  'p-error': isFormFieldValid('enum'),
+                })}
+              ></label>
+              {getFormErrorMessage('enum')}
                 </FormColumn>
               </div>
               <S.SubmitBtn>
