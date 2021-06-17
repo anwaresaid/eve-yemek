@@ -119,6 +119,7 @@ export const translations = {
   type: 'Type',
   addonName: 'Add-On Name',
   addonCategory: 'Add-On Category',
+  editAddon: 'Edit Add-On',
 
   // Coupon pages
   couponName: 'Coupon Name',
@@ -141,12 +142,12 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Settings',
-  security:"Security",
-  newPassword:"New Password",
-  newPasswordAgain:"Confirm New Password",
-  passwordsDoesntMatch:"Passwords do not match",
-  changeYourPassword:"Change Your Password",
-  redirectingToLoginPage:"Redirecting to the login page",
+  security: 'Security',
+  newPassword: 'New Password',
+  newPasswordAgain: 'Confirm New Password',
+  passwordsDoesntMatch: 'Passwords do not match',
+  changeYourPassword: 'Change Your Password',
+  redirectingToLoginPage: 'Redirecting to the login page',
 
   // Transfers
   totalAmount: 'Total Amount',
@@ -178,7 +179,7 @@ export const translations = {
   // Toasts
   success: 'Success',
   error: 'Error',
-  anErrorOccurred: "An error occurred",
+  anErrorOccurred: 'An error occurred',
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',
@@ -194,10 +195,11 @@ export const translations = {
   updateMeal: 'Update Meal',
   selectRestaurant: 'Select Restaurant',
   dragAndDropImageHere: 'Drag and drop image here',
+  editRestaurant:'Edit Restaurant',
 
   fixed: 'Fixed',
   percentage: 'Percentage',
 
   addressInformation: 'Address Information',
-  selectAnOwner: 'Select An Owner'
+  selectAnOwner: 'Select An Owner',
 };

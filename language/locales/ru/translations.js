@@ -101,6 +101,9 @@ export const translations = {
   open: 'Открыть',
   closed: 'закрыто',
 
+  //edit restaurant
+  editRestaurant: 'Измени Pесторан',
+  
   // Meals List page
   image: 'Изображение',
   category: 'Категория',
@@ -119,6 +122,7 @@ export const translations = {
   type: 'Тип',
   addonName: 'Имя добавки',
   addonCategory: 'Категория добавки',
+  editAddon: 'Измени добавки',
 
   // Coupon pages
   couponName: 'Название купона',
@@ -141,12 +145,12 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Настройки Eve Yemek',
-  security:"Безопасность",
-  newPassword:"Новый пароль",
-  newPasswordAgain:"Новый пароль еще раз",
-  passwordsDoesntMatch:"Несовпадение паролей",
-  changeYourPassword:"Изменить пароль",
-  redirectingToLoginPage:"Вы будете перенаправлены на страницу входа",
+  security: 'Безопасность',
+  newPassword: 'Новый пароль',
+  newPasswordAgain: 'Новый пароль еще раз',
+  passwordsDoesntMatch: 'Несовпадение паролей',
+  changeYourPassword: 'Изменить пароль',
+  redirectingToLoginPage: 'Вы будете перенаправлены на страницу входа',
 
   //Transfers
   totalAmount: 'Общая сумма',
@@ -178,7 +182,7 @@ export const translations = {
   // Toasts
   success: 'Успешно',
   error: 'Ошибка',
-  anErrorOccurred: "Произошла ошибка",
+  anErrorOccurred: 'Произошла ошибка',
   fileUploaded: 'Файл загружен',
   updatedUser: 'Обновленный пользователь',
   userName: 'Имя пользователя',
@@ -197,7 +201,7 @@ export const translations = {
 
   fixed: 'Точный',
   percentage: 'Процентный',
-  
+
   addressInformation: 'информация об адресе',
-  selectAnOwner: 'Выберите владельца'
+  selectAnOwner: 'Выберите владельца',
 };
