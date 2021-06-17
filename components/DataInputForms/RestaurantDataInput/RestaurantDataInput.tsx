@@ -475,6 +475,7 @@ const RestaurantDataInput = (props) => {
             <h1 id="editHeader">{props.creating ? i18n.t('createRestaurant') : i18n.t('editRestaurant')}</h1>
             <Toast id="toastMessage" ref={toast}></Toast>
             {
+                
                 props.updating ? 
                     <TabView>
                         {generalTabPanel()}
