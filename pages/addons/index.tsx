@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import AddonsTable from '../../components/tables/addonsTable';
-import { listAddons } from '../../store/actions/addons.action';
-import { listAddonCategory } from '../../store/actions/addon-category.action';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'typesafe-actions';
-import Loading from '../../components/Loading';
+import React, { useState,useEffect } from "react"
+import AddonsTable from "../../components/tables/addonsTable"
+import { listAddons } from "../../store/actions/addons.action"
+import { listAddonCategory } from "../../store/actions/addon-category.action"
+import {useDispatch,useSelector} from 'react-redux'
+import { RootState } from "typesafe-actions"
+import Loading from "../../components/Loading"
+import { i18n } from "../../language"
+
 
 const restaurantOwnerList = () => {
   const dispatch = useDispatch();

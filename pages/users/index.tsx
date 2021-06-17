@@ -16,6 +16,8 @@ const Users = () =>{
 
 
     return(
+        <>
+        <h1 id="usersHeader">{i18n.t('users')}</h1>
         <TabView>
             <TabPanel header={i18n.t("customers")}>
                 <CustomerList/>
@@ -33,6 +35,7 @@ const Users = () =>{
                 <AddUser/>
             </TabPanel>
         </TabView>
+    </>
     );
 
 }

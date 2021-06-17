@@ -14,6 +14,7 @@ import { i18n } from '../../../language';
 import FormColumn from '../../../components/inputs/formColumn';
 import InputGroup from '../../../components/inputs/inputGroup';
 import InputContainer from '../../../components/inputs/inputContainer';
+import { Dropdown } from 'primereact/dropdown';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ export const Index = () => {
   useEffect(() => {
     if (success) {
       router.push('/addon_categories');
-      dispatch({ type: addonCategoryTypes.ADDON_CATEGORY_UPDATE_RESET });
+      dispatch({ type: addonCategoryTypes.ADDON_CATEGORY_CREATE_RESET });
     }
   }, [success]);
 
@@ -66,6 +67,8 @@ export const Index = () => {
     getFormErrorMessage,
     isFormFieldValid,
   };
+
+  const enumerationTypes = ['SINGLE','MULTIPLE']
 
   return (
     <div id='create_Add_On_Category'>
@@ -89,18 +92,27 @@ export const Index = () => {
               </InputGroup>
             </FormColumn>
             <FormColumn divideCount={3}>
-              <InputGroup>
-                <InputContainer
-                  label={i18n.t('enum')}
-                  name='enum'
-                  formiks={inputFormiks}
-                  component={InputText}
-                  iprops={{
-                    value: formik.values.enum,
-                    onChange: formik.handleChange,
-                  }}
-                />
-              </InputGroup>
+            <h4 id='enum'>{i18n.t('enum')}</h4>
+              <Dropdown
+                id='enum'
+                name='enum'
+                value={formik.values.enum}
+                options={enumerationTypes}
+                onChange={formik.handleChange}
+                placeholder='Select Add-On Category Type'
+                autoFocus
+                className={classNames({
+                  'p-invalid': isFormFieldValid('enum'),
+                })}
+              />
+              <label
+                id='enumError'
+                htmlFor='enum'
+                className={classNames({
+                  'p-error': isFormFieldValid('enum'),
+                })}
+              ></label>
+              {getFormErrorMessage('enum')}
             </FormColumn>
           </div>
           <S.SubmitBtn>
