@@ -94,6 +94,9 @@ export const createAddonCategoryReducer = (state = [], action) => {
         error: action.payload,
       };
 
+    case addonCategoryTypes.ADDON_CATEGORY_CREATE_RESET:
+      return {}
+
     default:
       return state;
   }
