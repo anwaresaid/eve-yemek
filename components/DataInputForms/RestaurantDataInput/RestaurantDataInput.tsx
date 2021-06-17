@@ -172,7 +172,6 @@ const RestaurantDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
-            console.log(data)
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, data));
             } else if (props.creating) {
