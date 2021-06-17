@@ -87,8 +87,8 @@ const RestaurantDataInput = (props) => {
         longtitudeInt: 0,
         city_id: 0,
         town_id: 0,
-        longtitude: 0,
-        latitude: 0,
+        longtitude: 0.0,
+        latitude: 0.0,
         is_open: false,
 
     }
@@ -365,6 +365,9 @@ const RestaurantDataInput = (props) => {
                             <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                 value: formik.values.latitudeInt,
                                 onValueChange: formik.handleChange,
+                                mode:"decimal",
+                                minFractionDigits:2,
+                                maxFractionDigits:7,
                                 showButtons: true,
                             }} />
 
