@@ -205,4 +205,7 @@ export const translations = {
 
   addressInformation: 'معلومات العنوان',
   selectAnOwner: 'حدد مالك',
+
+  iban: 'رقم الاي بان',
+  bankName: 'اسم البنك'
 };

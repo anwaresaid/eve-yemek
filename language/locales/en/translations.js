@@ -202,4 +202,7 @@ export const translations = {
 
   addressInformation: 'Address Information',
   selectAnOwner: 'Select An Owner',
+
+  iban: 'IBAN',
+  bankName: 'Bank Name'
 };

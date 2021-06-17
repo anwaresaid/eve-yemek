@@ -26,7 +26,7 @@ const UpdateUser = (props) => {
 
     useEffect(() => {
         if (getUserSuccess) {
-            setData({ name: userData.name ?? "", email: userData.email ?? "", phone: userData.phone ?? "", roles: userData.roles ?? [] })
+            setData({...userData})
         }
     }, [getUserSuccess]);
 

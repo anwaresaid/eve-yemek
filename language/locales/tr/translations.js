@@ -202,4 +202,7 @@ export const translations = {
 
   addressInformation: 'Addres Bilgileri',
   selectAnOwner: 'Restoran Sahibi Seçin',
+
+  iban: 'İBAN',
+  bankName: 'Banka'
 };
