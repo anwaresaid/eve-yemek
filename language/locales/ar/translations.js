@@ -119,6 +119,7 @@ export const translations = {
   type: 'النوع',
   addonName: 'إسم الإضافة',
   addonCategory: 'صنف الإضافة',
+  editAddon: 'تغيير الإضافة',
 
   // Coupon pages
   couponName: 'اسم الكوبون',
@@ -141,12 +142,12 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'إعدادات إيڤ يميك',
-  security:"حماية",
-  newPassword:"كمة السر الجديدة",
-  newPasswordAgain:"كلمة مرور جديدة مرة أخرى",
-  passwordsDoesntMatch:"رمز المرور ليس متطابقا",
-  changeYourPassword:"تغيير الرمز السري",
-  redirectingToLoginPage:"يتم إعادة توجيهك إلى صفحة تسجيل الدخول",
+  security: 'حماية',
+  newPassword: 'كمة السر الجديدة',
+  newPasswordAgain: 'كلمة مرور جديدة مرة أخرى',
+  passwordsDoesntMatch: 'رمز المرور ليس متطابقا',
+  changeYourPassword: 'تغيير الرمز السري',
+  redirectingToLoginPage: 'يتم إعادة توجيهك إلى صفحة تسجيل الدخول',
 
   //Transfers
   totalAmount: 'إجمالي',
@@ -178,7 +179,7 @@ export const translations = {
   // Toasts
   success: 'نجاح',
   error: 'خطأ',
-  anErrorOccurred: "حدث خطأ",
+  anErrorOccurred: 'حدث خطأ',
   fileUploaded: 'تحميل الملف',
   updatedUser: 'تحديث المستخدم',
   userName: 'إسم المستخدم',
@@ -199,5 +200,5 @@ export const translations = {
   percentage: 'النسبة المئوية',
 
   addressInformation: 'معلومات العنوان',
-  selectAnOwner: 'حدد مالك'
+  selectAnOwner: 'حدد مالك',
 };

@@ -119,6 +119,7 @@ export const translations = {
   type: 'Tür',
   addonName: 'Eklenti Adı',
   addonCategory: 'Eklenti Kategorisi',
+  editAddon: 'Eklenti değiştir',
 
   // Coupon pages
   couponName: 'Kupon Adı',
@@ -141,12 +142,12 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Ayarları',
-  security:"Güvenlik",
-  newPassword:"Yeni Şifre",
-  newPasswordAgain:"Yeni Şifre Tekrar",
-  passwordsDoesntMatch:"Şifreler eşleşmiyor",
-  changeYourPassword:"Şifreni Değiştir",
-  redirectingToLoginPage:"Giriş yap sayfasına yönlendiriliyorsunuz",
+  security: 'Güvenlik',
+  newPassword: 'Yeni Şifre',
+  newPasswordAgain: 'Yeni Şifre Tekrar',
+  passwordsDoesntMatch: 'Şifreler eşleşmiyor',
+  changeYourPassword: 'Şifreni Değiştir',
+  redirectingToLoginPage: 'Giriş yap sayfasına yönlendiriliyorsunuz',
 
   //Transfers
   totalAmount: 'Toplam Tutar',
@@ -178,7 +179,7 @@ export const translations = {
   // Toasts
   success: 'Başarılı',
   error: 'Hata',
-  anErrorOccurred: "Bir hata oluştu",
+  anErrorOccurred: 'Bir hata oluştu',
   fileUploaded: 'Dosya Yüklendi',
   updatedUser: 'Kullanıcı Güncellendi',
   userName: 'Kullanıcı Adı',
@@ -197,5 +198,5 @@ export const translations = {
   percentage: 'Yüzdesi',
 
   addressInformation: 'Addres Bilgileri',
-  selectAnOwner: 'Restoran Sahibi Seçin'
+  selectAnOwner: 'Restoran Sahibi Seçin',
 };
