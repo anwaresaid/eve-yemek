@@ -4,6 +4,7 @@ import {useRouter} from 'next/router';
 import Header from '../InTableComponents/Header';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
+import _ from 'lodash'
 import { i18n } from "../../language";
 
 
@@ -27,7 +28,7 @@ const UsersTable = (props) => {
             <StandardTable 
                 header={Header(setGlobalFilter,"Users")}
                 columns={columns} 
-                value={props.users}  
+                value={_.without(_.map(props.users, (item) => {if (!item.is_deleted) return item}), undefined)}  
                 globalFilter={globalFilter} 
                 emptyMessage="No users found" >     
             </StandardTable>
