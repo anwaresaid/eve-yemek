@@ -27,7 +27,7 @@ const Index = (props) => {
         if (!reportData)
             dispatch(getDashboardReport())
         if (auth.hasRoles(['restaurant_owner'])) {
-            if (ownedRestaurants.length === 0)
+            if (ownedRestaurants?.length === 0)
                 dispatch(listOwnedRestaurants())
         }
     }, [dispatch, ownedRestaurantsSuccess])
