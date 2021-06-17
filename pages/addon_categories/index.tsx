@@ -41,7 +41,7 @@ const AddonCategoriesList = () => {
 
   return (
     <div id="addonCategoryTabe">
-      {!loading && addonCategories && <AddOnCategoryTable addonCategories={addonCategories.items}></AddOnCategoryTable>}
+      {!loading && addonCategories &&<><h1 id="addonCatHeader">{i18n.t('addonCategories')}</h1> <AddOnCategoryTable addonCategories={addonCategories.items}></AddOnCategoryTable></>}
       {loading && <Loading />}
     </div>
   );
