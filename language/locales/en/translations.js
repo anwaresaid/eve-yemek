@@ -195,6 +195,7 @@ export const translations = {
   updateMeal: 'Update Meal',
   selectRestaurant: 'Select Restaurant',
   dragAndDropImageHere: 'Drag and drop image here',
+  editRestaurant:'Edit Restaurant',
 
   fixed: 'Fixed',
   percentage: 'Percentage',

@@ -101,6 +101,9 @@ export const translations = {
   open: 'Открыть',
   closed: 'закрыто',
 
+  //edit restaurant
+  editRestaurant: 'Измени Pесторан',
+  
   // Meals List page
   image: 'Изображение',
   category: 'Категория',

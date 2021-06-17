@@ -101,6 +101,9 @@ export const translations = {
   open: 'Açık',
   closed: 'Kapalı',
 
+  //edit restaurant
+  editRestaurant: 'restoran düzenleme',
+
   // Meals List page
   image: 'Resim',
   category: 'Kategori',
