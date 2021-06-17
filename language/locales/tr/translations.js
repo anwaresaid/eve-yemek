@@ -204,5 +204,7 @@ export const translations = {
   selectAnOwner: 'Restoran Sahibi Seçin',
 
   iban: 'İBAN',
-  bankName: 'Banka'
+  bankName: 'Banka',
+
+  xDaysAgo: '{{x}} gün önce'
 };

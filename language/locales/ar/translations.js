@@ -207,5 +207,7 @@ export const translations = {
   selectAnOwner: 'حدد مالك',
 
   iban: 'رقم الاي بان',
-  bankName: 'اسم البنك'
+  bankName: 'اسم البنك',
+
+  xDaysAgo: '{{x}} منذ أيام'
 };

@@ -204,5 +204,7 @@ export const translations = {
   selectAnOwner: 'Select An Owner',
 
   iban: 'IBAN',
-  bankName: 'Bank Name'
+  bankName: 'Bank Name',
+
+  xDaysAgo: '{{x}} days ago'
 };
