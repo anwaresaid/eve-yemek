@@ -168,7 +168,6 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.latitude = formik.values.latitudeInt?.toString();
             }
-
             return errors;
         },
         onSubmit: (data: any) => {
@@ -269,7 +268,7 @@ const RestaurantDataInput = (props) => {
     }
 
     const generalTabPanel = () => {
-        return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('updateRestaurant')}>
+        return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('editRestaurant')}>
             <S.ContainerCard>
                 <form onSubmit={formik.handleSubmit} >
                     <div className="p-grid">
@@ -322,7 +321,7 @@ const RestaurantDataInput = (props) => {
 
                             <InputGroup>
                                 <InputContainer label={i18n.t('image')} name="image" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
-                                    setFile: (image) => { formik.values.image = image },
+                                    setFile: (image) => {formik.values.image = image },
                                     showSuccess: () => { toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' }); }
                                 }} />
                             </InputGroup>
@@ -485,7 +484,7 @@ const RestaurantDataInput = (props) => {
                 props.updating ?
                     <TabView>
                         {generalTabPanel()}
-                        <TabPanel header={i18n.t('restaurantMeals')}>
+                        <TabPanel header={i18n.t('meals')}>
                             <FoodsTable foods={foods} resid={props.id} />
                         </TabPanel>
                     </TabView>

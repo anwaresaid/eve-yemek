@@ -102,7 +102,7 @@ export const translations = {
   closed: 'Kapalı',
 
   //edit restaurant
-  editRestaurant: 'restoran düzenleme',
+  editRestaurant: 'Restoran Düzenleme',
 
   // Meals List page
   image: 'Resim',
