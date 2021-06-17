@@ -116,6 +116,7 @@ export const Index = () => {
     const restaurantNames = restaurants.items.map((res) => {
       return { id: res.id, name: res.name };
     });
+    restaurantNames.unshift({id: '6666', name: 'All Restaurants'})
     setRestaurantName(restaurantNames);
   };
 
