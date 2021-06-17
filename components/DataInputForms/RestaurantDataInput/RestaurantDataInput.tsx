@@ -367,13 +367,16 @@ const RestaurantDataInput = (props) => {
                                 onValueChange: formik.handleChange,
                                 mode:"decimal",
                                 minFractionDigits:2,
-                                maxFractionDigits:7,
+                                maxFractionDigits:6,
                                 showButtons: true,
                             }} />
 
                             <InputContainer label={i18n.t('longitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                 value: formik.values.longtitudeInt,
                                 onValueChange: formik.handleChange,
+                                mode:"decimal",
+                                minFractionDigits:2,
+                                maxFractionDigits:6,
                                 showButtons: true,
                             }} />
                         </InputGroup>
