@@ -96,7 +96,6 @@ const RestaurantDataInput = (props) => {
     const formik = useFormik({
         initialValues: defaultInitialValues,
         validate: (data) => {
-
             let errors: any = {};
 
             if (!data.name) {
@@ -173,7 +172,7 @@ const RestaurantDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
-
+            console.log(data)
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, data));
             } else if (props.creating) {
@@ -226,11 +225,12 @@ const RestaurantDataInput = (props) => {
                 let selectedResOwners = resOwnerslist.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
-
+            
             formik.values.owner_id = restaurant.owner.id;
             formik.values.name = restaurant.name;
             formik.values.description = restaurant.description;
             formik.values.email = restaurant.email;
+            formik.values.phone = restaurant.phone;
             formik.values.city_id = restaurant.city_id;
             formik.values.town_id = restaurant.town_id;
             formik.values.rating = restaurant.rating;
@@ -451,7 +451,7 @@ const RestaurantDataInput = (props) => {
                                     onChange: formik.handleChange
                                 }} />
 
-                                <InputContainer label={i18n.t('open')} name="open" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
+                                <InputContainer label={i18n.t('open')} name="is_open" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
                                     value: formik.values.is_open,
                                     checked: formik.values.is_open,
                                     onChange: formik.handleChange
