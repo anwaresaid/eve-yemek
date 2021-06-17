@@ -41,6 +41,9 @@ export const createCouponsReducer = (state = [], action) => {
         error: action.payload,
       };
 
+    case couponsTypes.COUPON_CREATE_RESET:
+      return {};
+
     default:
       return state;
   }
