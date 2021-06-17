@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import StandardTable from '../StandardTable'
-import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
 import Header from '../InTableComponents/Header';
 import editButton from "../InTableComponents/editButton";
@@ -24,14 +23,15 @@ const UsersTable = (props) => {
         {field: 'active', header: i18n.t('active'), body: ()=>activeTag(true)}, // change after BE supports active status for users
         {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path='users/'+props.editPath)}
     ]
-    return (
-        <StandardTable 
-            header={Header(setGlobalFilter,"Users")}
-            columns={columns} 
-            value={props.users}  
-            globalFilter={globalFilter} 
-            emptyMessage="No users found" >     
-        </StandardTable>
+    return ( 
+            <StandardTable 
+                header={Header(setGlobalFilter,"Users")}
+                columns={columns} 
+                value={props.users}  
+                globalFilter={globalFilter} 
+                emptyMessage="No users found" >     
+            </StandardTable>
+
     )
 }
 

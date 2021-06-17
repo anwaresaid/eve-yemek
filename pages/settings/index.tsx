@@ -21,7 +21,7 @@ const index = () => {
 
   return (
     <>
-      <h2 id='settingsRenderHeader'>{i18n.t('settings')}</h2>
+      <h1 id='settingsRenderHeader'>{i18n.t('settings')}</h1>
       {renderSettings()}
     </>
   )
