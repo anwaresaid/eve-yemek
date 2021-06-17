@@ -2,7 +2,7 @@ import axios from '../../helpers/_axios';
 
 export default class UsersListsService {
   async getUsersByRole(role) {
-    const { data } = await axios.get('/users?fields=roles&text=' + role);
+    const { data:{data} } = await axios.get('/users?fields=roles&text=' + role);
     return data;
   }
 

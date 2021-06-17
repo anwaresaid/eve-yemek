@@ -9,7 +9,6 @@ const login =
         try {
             const res: any = await UserService.login(email, password, remember);
             
-            console.log('data in action after login',res);
             if (res?.ok) {
                 const user = {
                     id: res?.data.user?.id,
