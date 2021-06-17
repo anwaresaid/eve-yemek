@@ -59,7 +59,7 @@ export const Index = () => {
   useEffect(() => {
     if (success) {
       router.push('/addon_categories');
-      dispatch({ type: addonCategoryTypes.ADDON_CATEGORY_UPDATE_RESET });
+      dispatch({ type: addonCategoryTypes.ADDON_CATEGORY_CREATE_RESET });
     }
   }, [success]);
 
