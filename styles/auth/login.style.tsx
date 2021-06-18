@@ -56,7 +56,7 @@ export const Wrapper = styled.div`
     cursor: pointer;
   }
 `;
-export const Header = styled.h1`
+export const Header = styled.h4`
   margin-bottom: 30px;
   margin-top: 0px;
   text-transform: uppercase;

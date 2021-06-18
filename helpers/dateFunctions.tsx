@@ -1,3 +1,5 @@
+import { i18n } from "../language"
+
 export function parseDateInAllRows(rows){
     for (let row of rows.items){
         row = parseDateInOneRow(row)
@@ -7,6 +9,6 @@ export function parseDateInAllRows(rows){
 
 // parses createdAt to howLongAgo 
 export function parseDateInOneRow(row){
-    row.howLongAgo = Math.round(((new Date()).getTime() - (new Date(row.createdAt)).getTime() ) / (1000*60*60*24)) + " gün önce"
+    row.howLongAgo = i18n.t('xDaysAgo', {x: Math.round(((new Date()).getTime() - (new Date(row.createdAt)).getTime() ) / (1000*60*60*24))})
     return row
 }

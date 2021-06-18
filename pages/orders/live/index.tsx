@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import { useSocket } from '../../../helpers/socket';
 import { i18n } from '../../../language'
+import _ from 'lodash';
 import Loading from '../../../components/Loading';
 
 const liveOrdersList = () => {
@@ -39,12 +40,11 @@ const liveOrdersList = () => {
       <h1 id="ordersHeader">{i18n.t('liveOrders')}</h1>
       {!loading && orders && (
         <OrdersTable
-          orders={orders.items}
+          orders={_.without(_.map(orders?.items, (item) => {if (!item.is_deleted) return item}), undefined)}
           role='restaurant_owner'
         ></OrdersTable>
       )}
       {loading && <Loading />}
-      {/* <Button onClick={emitToSocket}>click</Button> */}
     </div>
   );
 };

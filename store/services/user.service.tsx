@@ -14,15 +14,21 @@ const UserService = function () {
             remember
         })
         .then(res=>{
-            return { ok:true, data: res.data };
+            return { ok:true, data: res.data.data };
         })
         .catch(err=>{
             return { ok:false, err:err?.data || err?.response?.data }
         })
     };
+
+    const changePassword = async (new_password:string, password:string) => {
+        const {data:{data}} = await axios.put(`/users/change-password`,{ new_password, password });
+        return data;
+    }
   
     return Object.freeze({
-        login
+        login,
+        changePassword
     });
   };
   

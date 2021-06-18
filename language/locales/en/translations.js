@@ -30,11 +30,17 @@ export const translations = {
   extra: 'Extra',
   send_fcm_notification: 'Send FCM Notification',
   settings: 'Settings',
+  users: 'Users',
   transfers: 'Transfers',
   logout: 'Logout',
 
+  loginTitle: 'You must be logged in to continue your session',
   login: 'Login',
   rememberMe: 'Remember me',
+  takingYouToYourDashboard: 'Taking you to your dashboard...',
+  somethingWentWrongWhileLoggingIn: 'Something went wrong while logging in',
+  invalidEmailOrPassword: 'Invalid Email or Password',
+  userNotFound: 'User not found',
 
   //On Dashboard
   dailyOrders: 'Daily Orders',
@@ -94,6 +100,7 @@ export const translations = {
   vegetablesOnly: 'Vegetables Only',
   prioritized: 'Prioritized',
   open: 'Open',
+  closed: 'Closed',
 
   // Meals List page
   image: 'Image',
@@ -113,6 +120,7 @@ export const translations = {
   type: 'Type',
   addonName: 'Add-On Name',
   addonCategory: 'Add-On Category',
+  editAddon: 'Edit Add-On',
 
   // Coupon pages
   couponName: 'Coupon Name',
@@ -135,8 +143,12 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Settings',
-  security:"Security",
-  newPassword:"New Password",
+  security: 'Security',
+  newPassword: 'New Password',
+  newPasswordAgain: 'Confirm New Password',
+  passwordsDoesntMatch: 'Passwords do not match',
+  changeYourPassword: 'Change Your Password',
+  redirectingToLoginPage: 'Redirecting to the login page',
 
   // Transfers
   totalAmount: 'Total Amount',
@@ -168,12 +180,19 @@ export const translations = {
   // Toasts
   success: 'Success',
   error: 'Error',
+  anErrorOccurred: 'An error occurred',
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',
+  updatedFoodCategory: 'Updated Food Category',
+  createdFoodCategory: 'Created Food Category',
 
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
+
+  //meal category
+  editFoodCategory: 'Edit Food Category',
+  createFoodCategory: 'Create Food Category',
 
   selectLanguage: 'Select Language',
   submit: 'Submit',
@@ -181,10 +200,21 @@ export const translations = {
   updateMeal: 'Update Meal',
   selectRestaurant: 'Select Restaurant',
   dragAndDropImageHere: 'Drag and drop image here',
+  editRestaurant:'Edit Restaurant',
 
   fixed: 'Fixed',
   percentage: 'Percentage',
 
   addressInformation: 'Address Information',
-  selectAnOwner: 'Select An Owner'
+  selectAnOwner: 'Select An Owner',
+
+  iban: 'IBAN',
+  bankName: 'Bank Name',
+
+  xDaysAgo: '{{x}} days ago',
+  enum:'Type',
+  single: 'Single',
+  multiple: 'Multiple',
+
+  listOfX: 'List of {{x}}'
 };

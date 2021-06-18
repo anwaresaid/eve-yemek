@@ -1,176 +1,186 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
-import {InputText} from 'primereact/inputtext';
-import * as S from '../../styles/food/create-food/food.create.style'
+import { InputText } from 'primereact/inputtext';
+import * as S from '../../styles/food/create-food/food.create.style';
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
-import {findAddons, updateAddons } from '../../store/actions/addons.action';
-import {listAddonCategory} from '../../store/actions/addon-category.action';
-import {createAddons} from '../../store/actions/addons.action';
-import {useDispatch,useSelector} from 'react-redux';
-import {RootState} from 'typesafe-actions';
+import {
+  findAddons,
+  listAddons,
+  updateAddons,
+} from '../../store/actions/addons.action';
+import { listAddonCategory } from '../../store/actions/addon-category.action';
+import { createAddons } from '../../store/actions/addons.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'typesafe-actions';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
-import { InputSwitch } from 'primereact/inputswitch';
+import { i18n } from '../../language';
+import FormColumn from '../../components/inputs/formColumn';
+import InputGroup from '../../components/inputs/inputGroup';
+import InputContainer from '../../components/inputs/inputContainer';
+import { useRouter } from 'next/dist/client/router';
 import { addonsTypes } from '../../store/types/addons.type';
 import { Toast } from 'primereact/toast';
-import { i18n } from '../../language';
-
-
 
 export const Index = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const toast = useRef(null);
 
-    const [addonCategoryName, setAddonCategoryName] = useState(null);
-    const [reloadCheck,setReloadCheck] = useState(false);
-    const dispatch = useDispatch();
-    const router = useRouter();
-    const toast = useRef(null);
-//use selectors for setting dispatch to variable.
-    const resAddon = useSelector((state:RootState) => state.findAddons);
-    const { loading, success, addon  } = resAddon;
-    const resAddonCat = useSelector((state:RootState) => state.listAddonCategory);
-    const { loading: addonCatLoading, success: addonCatSuccess, addonCat: addonCatlist } = resAddonCat;
-    const resAddonUpdate = useSelector((state:RootState) => state.updateAddons);
-    const { loading: addonsUpdateLoading, success: addonsUpdatedSuccess, addons: addonUpdate } = resAddonUpdate;
-   
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
-    const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
-    };
+  const [data, setData] = useState(false);
 
-    const formik = useFormik({
-        initialValues:{
-            name: '',
-            addonCat:'',
-            addOn_category_id:'',
-            price: 0,
-            active: ''
-           
-        },
-        validate: (data)=>{
-            let errors:any = {}
-            if(!data.name){
+  const listAddonCategories = useSelector(
+    (state: RootState) => state.listAddonCategory
+  );
+  const { success: addonCatSuccess, addonCat: addonCategoryList } =
+    listAddonCategories;
 
-                errors.name = 'addon name is required.';
-            }
-            
-            if (!data.addonCat) {
-                errors.name = 'addon category is required.';
-            }else{
-                let selectedAddons = addonCatlist.items.filter(data  => {return data.name.localeCompare(formik.values.addonCat.name)==0;});
-                if(selectedAddons!=null)
-                    formik.values.addOn_category_id = selectedAddons[0]?._id;
-            }
+  const findAddon = useSelector((state: RootState) => state.findAddons);
+  const { success: successFind, addon } = findAddon;
 
-            return errors;
-        },
-        onSubmit: (data:any) => {
-            // setFormData(data);
-            // setShowMessage(true);
-            dispatch(updateAddons(addon.id,data));
-            
+  const updateAddon = useSelector((state: RootState) => state.updateAddons);
+  const { success: successUpdate } = updateAddon;
 
-        }
-    });
-//setting names for dropdowns.
-    const settingDropDownNames= () => {
-        const addonCatName = addonCatlist.items.map(res => {return{name: res.name}});
-        setAddonCategoryName(addonCatName);
-       }
-
-
-    useEffect(() =>{
-    
-        if(addonCatSuccess&&success){
-            if(addon.id === router.query.id){
-                setReloadCheck(true);
-            }
-            else{
-                setReloadCheck(false);
-            }
-        }
-        if(!reloadCheck){
-            dispatch(listAddonCategory());
-            dispatch(findAddons(router.query.id));
-        }
-        if(addonsUpdatedSuccess){
-            dispatch({
-                type: addonsTypes.ADDON_UPDATE_RESET
-            });
-            dispatch({
-                type: addonsTypes.ADDON_FIND_RESET
-            });
-            toast.current.show({
-                severity: 'success',
-                summary: 'Success',
-                detail: 'Addon Updated Successfully',
-              });
-        }
-
-    }, [dispatch,router.query.id]);
-    useEffect(() =>{
-        if(addonCatSuccess&&success){
-            let catName =  addonCatlist.items.filter(data  => {return data.id.localeCompare(addon.add_on_category_id)==0;})
-            formik.values.name = addon.name; 
-            formik.values.addonCat = {name: catName.name};
-            formik.values.price = addon.price;
-            formik.values.active = addon.active;
-            settingDropDownNames();
-        }
-        
-    },[addonCatSuccess,success])
-
-    // const filterByReference = (selectedAddons) => {
-    //     let res = [];
-    //     res =  addonslist.items.filter(addon => {
-    //        return selectedAddons.find(sAddon => {
-    //           return sAddon.name === addon.name;
-    //        });
-    //     });
-    //     return res;
-    //  }
-
-
+  const isFormFieldValid = (name) =>
+    !!(formik.touched[name] && formik.errors[name]);
+  const getFormErrorMessage = (name) => {
     return (
-        <div id="edit_add_ons">
-            <h1 id="editHeader">{addon&& addon.name} Eklenti</h1>
-            <Toast id="toastMessage" ref={toast}></Toast>
-            <S.ContainerCard id="container">
-                 <form id="editForm" onSubmit={formik.handleSubmit}  >
-                    <div  className="p-fluid">
-                        <div id="nameDiv" className="p-field">
-                            <h4 id="nameHeader">Eklenti Adı </h4>
-                            <InputText id="name" name="name" value={formik.values.name}  onChange={formik.handleChange} type="text"  autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-                            <label id="errorName" htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}></label>
-                            {getFormErrorMessage('name')}
-                        </div>
-                        <div id="addonCatDiv" className="p-field">
-                            <h4 id="addonCatHeader">Eklenti Kategorisi </h4>
-                            <Dropdown id="addonCat" name="addonCat" value={formik.values.addonCat} options={addonCategoryName} onChange={formik.handleChange} optionLabel="name" placeholder="Select an addon category" autoFocus className={classNames({ 'p-invalid': isFormFieldValid('addonCat') })} />
-                            <label id="addonCatError" htmlFor="addonCat" className={classNames({ 'p-error': isFormFieldValid('addonCat') })}></label>
-                            {getFormErrorMessage('addonCat')}
-                        </div>
-                    </div>
-                    <div className="p-grid p-fluid">
-                        <div id="priceDiv" className="p-field p-col-12 p-md-3">
-                            <h4 id="priceHeader"> Fiyat</h4>
-                            <InputNumber id="price" name="price" value={formik.values.price} onValueChange={formik.handleChange} showButtons mode="currency" currency="TRY" />
-                        </div>
-                    </div>
-                    <div id="activeDiv" className="p-field p-col-12 p-md-3">
-                        <h4 id="activeHeader">Saf Sebze Mi</h4>
-                        <InputSwitch  id="active " name="active"  checked={formik.values.active} onChange={formik.handleChange}   className={classNames({ 'p-invalid': isFormFieldValid('active') })}/>
-                        <label id="activeError" htmlFor="active" className={classNames({ 'p-error': isFormFieldValid('active') })}></label>
-                                    {getFormErrorMessage('active')}
-                    </div>
-                    <S.SubmitBtn id="createBtnContainer">
-                        <Button id="createBtn" type="submit" label={i18n.t('submit')}/>
-                    </S.SubmitBtn>
-                </form>
-            </S.ContainerCard>
-    </div>
-    )
-}
+      isFormFieldValid(name) && (
+        <small className='p-error'>{formik.errors[name]}</small>
+      )
+    );
+  };
 
- export default  (Index);
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      addOn_category_id: '',
+      price: 0,
+      active: true,
+    },
+    validate: (data) => {
+      let errors: any = {};
+      if (!data.name) {
+        errors.name = i18n.t('isRequired', { input: i18n.t('addonName') });
+      }
+
+      if (!data.addOn_category_id) {
+        errors.addOn_category_id = i18n.t('isRequired', {
+          input: i18n.t('addonCategory'),
+        });
+      }
+      return errors;
+    },
+    onSubmit: (data: any) => {
+      dispatch(updateAddons(addon.id, data));
+    },
+  });
+
+  useEffect(() => {
+    if (!addonCatSuccess) dispatch(listAddonCategory());
+
+    if (!successFind || addon.id !== router.query.id) {
+      dispatch(findAddons(router.query.id));
+    }
+
+    if (successFind && addon.id === router.query.id) {
+      setData(true);
+      const match = addonCategoryList.items.filter(
+        (addonCategory) => addonCategory.id === addon.add_on_category
+      );
+      formik.values.addOn_category_id = match[0].id;
+      formik.values.name = addon.name;
+      formik.values.price = addon.price;
+    }
+
+    if (successUpdate) {
+      setData(false);
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: i18n.t('success'),
+      });
+      setTimeout(() => { router.push('/addons') }, 2000)
+      dispatch({ type: addonsTypes.ADDON_UPDATE_RESET });
+      dispatch({ type: addonsTypes.ADDON_FIND_RESET });
+    }
+  }, [dispatch, successUpdate, addonCatSuccess, successFind]);
+
+  const inputFormiks = {
+    getFormErrorMessage,
+    isFormFieldValid,
+  };
+  return (
+    <div id='create_Add_ons'>
+      <h1 id='createHeader'>{i18n.t('editAddon')}</h1>
+      <Toast id='toastMessage' ref={toast}></Toast>
+      {addonCatSuccess && addonCategoryList && successFind && (
+        <form onSubmit={formik.handleSubmit}>
+          <S.ContainerCard id='createContainer'>
+            <div className='p-grid'>
+              <FormColumn divideCount={3}>
+                <InputGroup>
+                  <InputContainer
+                    label={i18n.t('addonName')}
+                    name='name'
+                    formiks={inputFormiks}
+                    component={InputText}
+                    iprops={{
+                      value: formik.values.name,
+                      onChange: formik.handleChange,
+                    }}
+                  />
+                </InputGroup>
+                <h4 id='addonCatHeader'>{i18n.t('addonCategory')}</h4>
+                <Dropdown
+                  id='addOn_category_id'
+                  name='addOn_category_id'
+                  value={formik.values.addOn_category_id}
+                  options={addonCategoryList.items}
+                  optionValue='id'
+                  onChange={formik.handleChange}
+                  optionLabel='name'
+                  placeholder='Select an addon category'
+                  autoFocus
+                  className={classNames({
+                    'p-invalid': isFormFieldValid('addOn_category_id '),
+                  })}
+                />
+                <label
+                  id='addonCatError'
+                  htmlFor='addOn_category_id '
+                  className={classNames({
+                    'p-error': isFormFieldValid('addOn_category_id '),
+                  })}
+                ></label>
+                {getFormErrorMessage('addOn_category_id ')}
+              </FormColumn>
+              <FormColumn divideCount={3}>
+                <InputGroup>
+                  <InputContainer
+                    label={i18n.t('price')}
+                    name='price'
+                    formiks={inputFormiks}
+                    size={6}
+                    component={InputNumber}
+                    iprops={{
+                      value: formik.values.price,
+                      onValueChange: formik.handleChange,
+                      showButtons: true,
+                    }}
+                  />
+                </InputGroup>
+              </FormColumn>
+            </div>
+            <S.SubmitBtn>
+              <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
+            </S.SubmitBtn>
+          </S.ContainerCard>
+        </form>
+      )}
+    </div>
+  );
+};
+
+export default Index;

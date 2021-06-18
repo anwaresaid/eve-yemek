@@ -30,11 +30,17 @@ export const translations = {
   extra: 'Ekstra',
   send_fcm_notification: 'FCM Bildirim Gonder',
   settings: 'Ayarlar',
+  users: 'Kullanıcılar',
   transfers: 'Transferler',
   logout: 'Çıkış Yap',
 
+  loginTitle: 'Oturumunuzu devam etmek için giriş yapmalısınız',
   login: 'Giriş Yap',
   rememberMe: 'Beni Hatırla',
+  takingYouToYourDashboard: 'Kontrol panelinize yönlendiriliyorsunuz...',
+  somethingWentWrongWhileLoggingIn: 'Giriş yaparken hata oluştu',
+  invalidEmailOrPassword: 'Geçersiz e-posta veya şifre',
+  userNotFound: 'Kullanıcı bulunamadı',
 
   //On Dashboard
   dailyOrders: 'Günlük Siparişler',
@@ -94,6 +100,10 @@ export const translations = {
   vegetablesOnly: 'Sadece Sebze',
   prioritized: 'Öne Çıkarma',
   open: 'Açık',
+  closed: 'Kapalı',
+
+  //edit restaurant
+  editRestaurant: 'Restoran Düzenleme',
 
   // Meals List page
   image: 'Resim',
@@ -113,6 +123,7 @@ export const translations = {
   type: 'Tür',
   addonName: 'Eklenti Adı',
   addonCategory: 'Eklenti Kategorisi',
+  editAddon: 'Eklenti değiştir',
 
   // Coupon pages
   couponName: 'Kupon Adı',
@@ -135,8 +146,12 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'Eve Yemek Ayarları',
-  security:"Güvenlik",
-  newPassword:"Yeni Şifre",
+  security: 'Güvenlik',
+  newPassword: 'Yeni Şifre',
+  newPasswordAgain: 'Yeni Şifre Tekrar',
+  passwordsDoesntMatch: 'Şifreler eşleşmiyor',
+  changeYourPassword: 'Şifreni Değiştir',
+  redirectingToLoginPage: 'Giriş yap sayfasına yönlendiriliyorsunuz',
 
   //Transfers
   totalAmount: 'Toplam Tutar',
@@ -168,10 +183,14 @@ export const translations = {
   // Toasts
   success: 'Başarılı',
   error: 'Hata',
+  anErrorOccurred: 'Bir hata oluştu',
   fileUploaded: 'Dosya Yüklendi',
   updatedUser: 'Kullanıcı Güncellendi',
   userName: 'Kullanıcı Adı',
 
+  //food category
+  createFoodCategory:'Yemek kategorisi oluştur',
+  editFoodCategory:'Yemek Kategorisini düzenle',
   // Table Pagination
   showingXtoYofZ: '{{z}} sonuç içinden {{x}} - {{y}} tanesi gösteriliyor',
 
@@ -186,5 +205,15 @@ export const translations = {
   percentage: 'Yüzdesi',
 
   addressInformation: 'Addres Bilgileri',
-  selectAnOwner: 'Restoran Sahibi Seçin'
+  selectAnOwner: 'Restoran Sahibi Seçin',
+
+  iban: 'İBAN',
+  bankName: 'Banka',
+
+  xDaysAgo: '{{x}} gün önce',
+  enum: 'Tür',
+  single: 'Tek',
+  multiple: 'Çoklu',
+
+  listOfX: '{{x}} listesi'
 };

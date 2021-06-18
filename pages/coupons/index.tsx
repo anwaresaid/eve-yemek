@@ -5,6 +5,8 @@ import { RootState } from 'typesafe-actions';
 import { listCoupons } from '../../store/actions/coupons.action';
 import CouponsTable from '../../components/tables/couponsTable';
 import Loading from '../../components/Loading';
+import { i18n } from '../../language';
+import _ from 'lodash'
 
 const index = () => {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const index = () => {
 
   return (
     <div id="couponsTabe">
-      {!loading && coupons && <CouponsTable coupons={coupons.items} />}
+      {!loading && coupons &&<> <h1 id="couponsHeader">{i18n.t('coupons')}</h1> <CouponsTable coupons={_.without(_.map(coupons.items, (item) => {if (!item.is_deleted) return item}), undefined)}/></>}
       {loading && <Loading />}
     </div>
   );

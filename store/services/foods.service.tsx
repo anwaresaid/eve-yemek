@@ -2,11 +2,11 @@ import axios from "../../helpers/_axios";
 
 export default class FoodsService{
     async getFood() {
-        const {data} = await axios.get('/foods');
+        const {data:{data}} = await axios.get('/foods');
         return data;
     }
     async getFoodByRestaurant(id) {
-        const {data} = await axios.get(`/foods/byrestaurant/${id}`);
+        const {data:{data}} = await axios.get(`/foods/byrestaurant/${id}`);
         return data;
     }
 
@@ -22,7 +22,7 @@ export default class FoodsService{
         is_veg: boolean,
         featured: boolean,
         active: boolean){
-        const {data} = await axios.post('/foods',{
+        const {data:{data}} = await axios.post('/foods',{
             name,
             description,
             image,
@@ -39,12 +39,12 @@ export default class FoodsService{
     }
     
     async updateFood(id,foodUpdated){
-        const {data} = await axios.put(`/foods/${id}`,{...foodUpdated})
+        const {data:{data}} = await axios.put(`/foods/${id}`,{...foodUpdated})
         return data
     }
 
     async findFood(id){
-        const {data} = await axios.get(`/foods/${id}`)
+        const {data:{data}} = await axios.get(`/foods/${id}`)
         return data
     }
 }

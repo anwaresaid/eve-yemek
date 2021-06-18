@@ -159,7 +159,8 @@ export const singleUserReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-
+      case usersListTypes.GET_USER_RESET:
+        return {};
     default:
       return state;
   }
@@ -189,6 +190,8 @@ export const addUserReducer = (state = initialState, action) => {
         error: null,
         response: null,
       };
+      case usersListTypes.ADD_USER_RESET:
+        return {};
 
     default:
       return state;
@@ -217,6 +220,8 @@ export const updateUserReducer = (state = initialState, action) => {
         updating: false,
         error: action.payload,
       };
+      case usersListTypes.UPDATE_USER_RESET:
+        return {};
 
     default:
       return state;

@@ -30,11 +30,17 @@ export const translations = {
   extra: 'المزيد',
   send_fcm_notification: 'إرسال إشعار FCM',
   settings: 'إعدادات',
+  users: 'المستخدمين',
   transfers: 'تحويل',
   logout: 'تسجيل خروج',
 
+  loginTitle: 'عليك تسجيل الدخول للمواصلة',
   login: 'تسجيل دخول',
   rememberMe: 'تذكرني',
+  takingYouToYourDashboard: 'يتم الآن اصطحابك إلى لوحة التحكم',
+  somethingWentWrongWhileLoggingIn: 'حدث خلل ما عند القيام بتسجيل الدخول',
+  invalidEmailOrPassword: 'الحساب الالكتروني أو كلمة المرور خاطئة',
+  userNotFound: 'لم يتم العثور على أي حساب',
 
   //On Dashboard
   dailyOrders: 'الطلبات اليومية',
@@ -94,6 +100,7 @@ export const translations = {
   vegetablesOnly: 'خضراوات فقط',
   prioritized: 'أولوية',
   open: 'مفتوح',
+  closed: 'مغلق',
 
   // Meals List page
   image: 'صورة',
@@ -108,11 +115,15 @@ export const translations = {
   selectAddons: 'إختر الاضافات',
   discountedPrice: 'السعر بعد التخفيض',
 
+  //edit restaurant
+  editRestaurant: 'تعديل المطعم',
+
   // Category pages and Add-on pages
   categoryName: 'إسم العنصر',
   type: 'النوع',
   addonName: 'إسم الإضافة',
   addonCategory: 'صنف الإضافة',
+  editAddon: 'تغيير الإضافة',
 
   // Coupon pages
   couponName: 'اسم الكوبون',
@@ -135,8 +146,12 @@ export const translations = {
 
   // Settings
   eveYemekSettings: 'إعدادات إيڤ يميك',
-  security:"حماية",
-  newPassword:"كلمة السر الجديدة",
+  security: 'حماية',
+  newPassword: 'كمة السر الجديدة',
+  newPasswordAgain: 'كلمة مرور جديدة مرة أخرى',
+  passwordsDoesntMatch: 'رمز المرور ليس متطابقا',
+  changeYourPassword: 'تغيير الرمز السري',
+  redirectingToLoginPage: 'يتم إعادة توجيهك إلى صفحة تسجيل الدخول',
 
   //Transfers
   totalAmount: 'إجمالي',
@@ -168,9 +183,15 @@ export const translations = {
   // Toasts
   success: 'نجاح',
   error: 'خطأ',
+  anErrorOccurred: 'حدث خطأ',
   fileUploaded: 'تحميل الملف',
   updatedUser: 'تحديث المستخدم',
   userName: 'إسم المستخدم',
+  updatedFoodCategory: 'تم تحديث صنف الطعام ',
+  createdFoodCategory: 'تم إنشاء صنف جديد',
+//food category
+  editFoodCategory: 'تعديل صنف الطعام',
+  editFoodCategory: 'إنشاء صنف الطعام',
 
   // Table Pagination
   showingXtoYofZ: 'عرض {{x}} الى {{y}} من {{z}}',
@@ -182,9 +203,20 @@ export const translations = {
   selectRestaurant: 'اختر المطعم',
   dragAndDropImageHere: 'قم بسحب وإسقاط الصورة هنا',
 
+
   fixed: 'ثابت',
   percentage: 'النسبة المئوية',
 
   addressInformation: 'معلومات العنوان',
-  selectAnOwner: 'حدد مالك'
+  selectAnOwner: 'حدد مالك',
+
+  iban: 'رقم الاي بان',
+  bankName: 'اسم البنك',
+
+  xDaysAgo: '{{x}} منذ أيام',
+  enum: 'النوع',
+  single: 'مفرد',
+  multiple: 'متعدد',
+
+  listOfX: '{{x}} قائمة'
 };

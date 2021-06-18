@@ -347,7 +347,7 @@ const SettingsAdmin = () => {
                                                     },
                                                     {
                                                         value: "ru",
-                                                        label: "русский",
+                                                        label: "Русский ",
                                                     },
                                                     {
                                                         value: "tr",
