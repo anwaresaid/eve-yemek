@@ -111,8 +111,6 @@ export const Index = () => {
     getFormErrorMessage,
     isFormFieldValid,
   };
-
-  console.log(formik.values);
   return (
     <div id='create_Add_ons'>
       <h1 id='createHeader'>{i18n.t('editAddon')}</h1>
