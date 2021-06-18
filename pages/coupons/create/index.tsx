@@ -142,7 +142,6 @@ export const Index = () => {
         getFormErrorMessage,
         isFormFieldValid
     }
-    console.log(formik.values);
   return (
     <div id='create_coupons'>
       <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
