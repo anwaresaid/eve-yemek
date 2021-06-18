@@ -126,7 +126,12 @@ export const Index = () => {
     if (restaurantsSuccess) settingDropDownNames();
 
     if (success) {
-      router.push('/coupons');
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: i18n.t('success'),
+      });
+      setTimeout(() => { router.push('/coupons') }, 2000)
       dispatch({ type: couponsTypes.COUPON_CREATE_RESET });
     }
   }, [restaurantsSuccess, success]);

@@ -19,14 +19,14 @@ const TopBar = (props:IProps) => {
         <>
             <Card  id='main_context_card'className={"main-context-card" + (props.hideBar  ? "-showBar" : "-hideBar")} >
                 <Button id='main_context_burger_btn' icon="pi pi-bars" className=" p-button-secondary" onClick={()=> { props.setHideBar(!props.hideBar) }}/>
-                <Dropdown  style={{float: 'right', marginRight: '20px'}} 
+                <Dropdown  style={{float: 'right', marginRight: '20px'}}
                     id="language"
                     name="language"
                     placeholder="Language"
                     options={[
-                        {value: 'en', label:'English'}, 
-                        {value: 'ar', label:'اَلْعَرَبِيَّةُ'}, 
-                        {value: 'ru', label:'русский'},
+                        {value: 'en', label:'English'},
+                        {value: 'ar', label:'اَلْعَرَبِيَّةُ'},
+                        {value: 'ru', label:'Русский '},
                         {value: 'tr', label:'Türkçe'}
                     ]}
                     value={i18n.language}
