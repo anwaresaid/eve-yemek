@@ -91,9 +91,9 @@ export const AddonCategoryEdit = () => {
           toast.current.show({
             severity: 'success',
             summary: 'Success',
-            detail: 'Addon Updated Successfully',
+            detail: i18n.t('success'),
           });
-          router.push('/addon_categories');
+          setTimeout(() => { router.push('/addon_categories') }, 2000)
         }
       } else {
         setData(false);
