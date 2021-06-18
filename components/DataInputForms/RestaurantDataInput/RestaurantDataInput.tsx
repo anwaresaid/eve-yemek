@@ -87,8 +87,8 @@ const RestaurantDataInput = (props) => {
         longtitudeInt: 0,
         city_id: 0,
         town_id: 0,
-        longtitude: 0,
-        latitude: 0,
+        longtitude: 0.0,
+        latitude: 0.0,
         is_open: false,
 
     }
@@ -160,13 +160,13 @@ const RestaurantDataInput = (props) => {
                 errors.latitudeInt = i18n.t('isRequired', { input: i18n.t('latitude') });
             }
             else {
-                formik.values.longtitude = formik.values.longtitudeInt?.toString();
+                formik.values.latitude = formik.values.latitudeInt?.toString()
             }
             if (!data.longtitudeInt) {
-                errors.longtitudeInt = i18n.t('isRequired', { input: i18n.t('longitude') });
+                errors.longtitudeInt = i18n.t('isRequired', { input: i18n.t('longtitude') });
             }
             else {
-                formik.values.latitude = formik.values.latitudeInt?.toString();
+                formik.values.longtitude = formik.values.longtitudeInt?.toString();
             }
             return errors;
         },
@@ -234,7 +234,7 @@ const RestaurantDataInput = (props) => {
             formik.values.rating = restaurant.rating;
             formik.values.delivery_time = restaurant.delivery_time;
             formik.values.latitude = restaurant.latitude;
-            formik.values.longitude = restaurant.longitude;
+            formik.values.longtitude = restaurant.longtitude;
             formik.values.commission_rate = restaurant.commission_rate;
             formik.values.license_code = restaurant.license_code;
             formik.values.restaurant_charges = restaurant.restaurant_charges;
@@ -364,12 +364,18 @@ const RestaurantDataInput = (props) => {
                                 <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.latitudeInt,
                                     onValueChange: formik.handleChange,
+                                    mode:"decimal",
+                                    minFractionDigits:4,
+                                    maxFractionDigits:8,
                                     showButtons: true,
                                 }} />
 
-                                <InputContainer label={i18n.t('longitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                <InputContainer label={i18n.t('longtitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.longtitudeInt,
                                     onValueChange: formik.handleChange,
+                                    mode:"decimal",
+                                    minFractionDigits:4,
+                                    maxFractionDigits:8,
                                     showButtons: true,
                                 }} />
                             </InputGroup>
