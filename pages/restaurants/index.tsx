@@ -5,6 +5,7 @@ import {RootState} from 'typesafe-actions';
 import RestaurantsTable from '../../components/tables/restaurantsTable';
 import Loading from '../../components/Loading';
 import { i18n } from '../../language';
+import _ from 'lodash'
 const Index = () => {
     const dispatch = useDispatch();
     const resList = useSelector((state: RootState) =>  state.listRestaurant);
@@ -20,7 +21,7 @@ const Index = () => {
     return (
         <div id="restaurantsTable">
            
-            {!loading && restaurants &&<> <h1 id="restaurantsHeader">{i18n.t('restaurants')}</h1><RestaurantsTable restaurants={restaurants.items}></RestaurantsTable> </>}
+            {!loading && restaurants &&<> <h1 id="restaurantsHeader">{i18n.t('restaurants')}</h1><RestaurantsTable restaurants={_.without(_.map(restaurants.items, (item) => {if (!item.is_deleted) return item}), undefined)}></RestaurantsTable> </>}
             {loading&& <Loading />}
 
         </div>
