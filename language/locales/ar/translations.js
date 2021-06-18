@@ -203,6 +203,7 @@ export const translations = {
   selectRestaurant: 'اختر المطعم',
   dragAndDropImageHere: 'قم بسحب وإسقاط الصورة هنا',
 
+  noXfound:'لم يتم ايجاد {{x}}',
 
   fixed: 'ثابت',
   percentage: 'النسبة المئوية',

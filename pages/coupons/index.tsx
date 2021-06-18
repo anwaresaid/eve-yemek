@@ -20,7 +20,7 @@ const index = () => {
 
   return (
     <div id="couponsTabe">
-      {!loading && coupons &&<> <h1 id="couponsHeader">{i18n.t('coupons')}</h1> <CouponsTable coupons={_.without(_.map(coupons.items, (item) => {if (!item.is_deleted) return item}), undefined)}/></>}
+      {!loading && coupons && [coupons.items.length==0? <h1>No coupons found</h1>:<><h1 id="couponsHeader">{i18n.t('noXfound',{x:i18n.t('coupons')})}</h1> <CouponsTable coupons={_.without(_.map(coupons.items, (item) => {if (!item.is_deleted) return item}), undefined)}/></>]}
       {loading && <Loading />}
     </div>
   );

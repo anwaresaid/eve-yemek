@@ -21,7 +21,7 @@ const Index = () => {
     return (
         <div id="restaurantsTable">
            
-            {!loading && restaurants &&<> <h1 id="restaurantsHeader">{i18n.t('restaurants')}</h1><RestaurantsTable restaurants={_.without(_.map(restaurants.items, (item) => {if (!item.is_deleted) return item}), undefined)}></RestaurantsTable> </>}
+            {!loading && restaurants && [restaurants.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('restaurants')})}</h1>:<> <h1 id="restaurantsHeader">{i18n.t('restaurants')}</h1><RestaurantsTable restaurants={_.without(_.map(restaurants.items, (item) => {if (!item.is_deleted) return item}), undefined)}></RestaurantsTable> </>]}
             {loading&& <Loading />}
 
         </div>

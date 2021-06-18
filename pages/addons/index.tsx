@@ -25,13 +25,14 @@ const restaurantOwnerList = () => {
 
   return (
     <div id='addonsTabe'>
-      {!loading && success && successCat && <>
-      <h1 id="couponsHeader">{i18n.t('addons')}</h1>
+      {!loading && success && successCat &&[addons.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('addons')})}</h1>: <>
+      <h1 id="addonsHeader">{i18n.t('addons')}</h1>
         <AddonsTable
           addons={_.without(_.map(addons.items, (item) => {if (!item.is_deleted) return item}), undefined)}
           addonCat={_.without(_.map(addonCat.items, (item) => {if (!item.is_deleted) return item}), undefined)}
         ></AddonsTable>
         </>
+      ]
       }
       {loading && <Loading />}
     </div>

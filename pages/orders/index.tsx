@@ -45,17 +45,18 @@ const Orders = () => {
 
     return (
         <div id="ordersTable">
-            {loading ? <Loading  /> : 
-            <div id="ordersCard" className="card">
-                <h1 id="ordersHeader">{i18n.t('orders')}</h1>
-                <StandardTable 
-                    header={Header(setGlobalFilter,"orders")}
-                    columns={columns} 
-                    value={_.without(_.map(rows, (item) => {if (!item.is_deleted) return item}), undefined)}  
-                    globalFilter={globalFilter} 
-                    emptyMessage="No orders found" >     
-                </StandardTable>
-            </div>}
+            {loading ? <Loading  /> : [
+                orders.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('orders')})}</h1>:
+                    <div id="ordersCard" className="card">
+                        <h1 id="ordersHeader">{i18n.t('orders')}</h1>
+                        <StandardTable 
+                            header={Header(setGlobalFilter,"orders")}
+                            columns={columns} 
+                            value={_.without(_.map(rows, (item) => {if (!item.is_deleted) return item}), undefined)}  
+                            globalFilter={globalFilter} 
+                            emptyMessage="No orders found" >     
+                        </StandardTable>
+                    </div>]}
         </div>
     );
 }

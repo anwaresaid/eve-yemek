@@ -193,6 +193,7 @@ export const translations = {
   //meal category
   editFoodCategory: 'Edit Food Category',
   createFoodCategory: 'Create Food Category',
+  noXfound:'no {{x}} found',
 
   selectLanguage: 'Select Language',
   submit: 'Submit',

@@ -203,6 +203,8 @@ export const translations = {
   selectRestaurant: 'Выбрать ресторан',
   dragAndDropImageHere: 'Перетащите изображение сюда',
 
+  noXfound:'{{x}} не найден',
+
   fixed: 'Точный',
   percentage: 'Процентный',
 
