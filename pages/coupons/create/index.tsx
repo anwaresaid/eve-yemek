@@ -132,7 +132,7 @@ export const Index = () => {
   }, [restaurantsSuccess, success]);
   return (
     <div id='create_coupons'>
-      <h1 id='createHeader'>{i18n.t('create')}</h1>
+      <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
       <Toast id='toastMessage' ref={toast}></Toast>
       <S.ContainerCard id='container'>
         <form id='createForm' onSubmit={formik.handleSubmit}>

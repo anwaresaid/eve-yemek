@@ -188,7 +188,10 @@ export const translations = {
   userName: 'إسم المستخدم',
   updatedFoodCategory: 'تم تحديث صنف الطعام ',
   createdFoodCategory: 'تم إنشاء صنف جديد',
-
+//food category
+  editFoodCategory: 'تعديل صنف الطعام',
+  editFoodCategory: 'إنشاء صنف الطعام',
+  
   // Table Pagination
   showingXtoYofZ: 'عرض {{x}} الى {{y}} من {{z}}',
 
@@ -209,5 +212,8 @@ export const translations = {
   iban: 'رقم الاي بان',
   bankName: 'اسم البنك',
 
-  xDaysAgo: '{{x}} منذ أيام'
+  xDaysAgo: '{{x}} منذ أيام',
+  enum: 'النوع',
+  single: 'مفرد',
+  multiple: 'متعدد',
 };

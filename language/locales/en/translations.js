@@ -189,6 +189,10 @@ export const translations = {
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
 
+  //meal category
+  editFoodCategory: 'Edit Food Category',
+  createFoodCategory: 'Create Food Category',
+
   selectLanguage: 'Select Language',
   submit: 'Submit',
 
@@ -206,5 +210,8 @@ export const translations = {
   iban: 'IBAN',
   bankName: 'Bank Name',
 
-  xDaysAgo: '{{x}} days ago'
+  xDaysAgo: '{{x}} days ago',
+  enum:'Type',
+  single: 'Single',
+  multiple: 'Multiple',
 };
