@@ -112,6 +112,7 @@ export const Index = () => {
     isFormFieldValid,
   };
 
+  console.log(formik.values);
   return (
     <div id='create_Add_ons'>
       <h1 id='createHeader'>{i18n.t('editAddon')}</h1>
@@ -135,8 +136,8 @@ export const Index = () => {
                 </InputGroup>
                 <h4 id='addonCatHeader'>{i18n.t('addonCategory')}</h4>
                 <Dropdown
-                  id='addOn_category_id '
-                  name='addOn_category_id '
+                  id='addOn_category_id'
+                  name='addOn_category_id'
                   value={formik.values.addOn_category_id}
                   options={addonCategoryList.items}
                   optionValue='id'
