@@ -165,10 +165,10 @@ export const Index = () => {
                   />
                 </InputGroup>
               </FormColumn>
-              <S.SubmitBtn>
-                <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
-              </S.SubmitBtn>
             </div>
+            <S.SubmitBtn>
+              <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
+            </S.SubmitBtn>
           </S.ContainerCard>
         </form>
       )}
