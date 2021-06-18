@@ -23,8 +23,6 @@ export const baseUrl = (()=> {
     else{
         baseUrl = process.env.NEXT_PUBLIC_API_DEV;
     }
-
-    console.log(api_mode, baseUrl);
     
     return baseUrl;
 })();

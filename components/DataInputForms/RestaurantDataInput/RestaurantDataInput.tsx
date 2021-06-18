@@ -26,6 +26,7 @@ import { InputSwitch } from "primereact/inputswitch";
 import jsonCities from "../../../public/data/il.json";
 import jsonDistricts from "../../../public/data/ilce.json";
 import Loading from "../../Loading";
+import CouponsTable from "../../tables/couponsTable";
 
 const RestaurantDataInput = (props) => {
 
@@ -67,7 +68,9 @@ const RestaurantDataInput = (props) => {
         for_two: 10,
         name: '',
         description: '',
-        image: 'image url',
+        image: '',
+        address:'',
+        postal_code:'',
         phone: '',
         email: '',
         rating: 0,
@@ -90,7 +93,6 @@ const RestaurantDataInput = (props) => {
         longtitude: 0,
         latitude: 0,
         is_open: false,
-
     }
 
     const formik = useFormik({
@@ -104,12 +106,13 @@ const RestaurantDataInput = (props) => {
             if (!data.description) {
                 errors.description = i18n.t('isRequired', { input: i18n.t('description') });
             }
-            if (!data.image) {
-                errors.image = i18n.t('isRequired', { input: i18n.t('image') });
-            }
 
             if (!data.phone) {
                 errors.phone = i18n.t('isRequired', { input: i18n.t('phoneNumber') });
+            }
+
+            if (!data.address) {
+                errors.address = i18n.t('isRequired', { input: i18n.t('fullAddress') });
             }
 
             if (!data.email) {
@@ -171,6 +174,8 @@ const RestaurantDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
+            console.log(data);
+            return;
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, data));
             } else if (props.creating) {
