@@ -201,6 +201,8 @@ export const translations = {
   selectRestaurant: 'Restoran Seçin',
   dragAndDropImageHere: 'Resmi buraya sürükleyip bırakın',
 
+  noXfound:'{{x}} bulunmadı',
+
   fixed: 'Belli',
   percentage: 'Yüzdesi',
 

@@ -4,6 +4,7 @@ import { listDeliveryScouts } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
 import Loading from "../../../components/Loading"
+import { i18n } from "../../../language"
 
 const deliveryScoutList = () => {
 
@@ -18,7 +19,7 @@ const deliveryScoutList = () => {
 
     return (
         <div id="deliveryScoutsTable">
-            {!loading && success && deliveryScouts && <UsersTable users={deliveryScouts.items} editPath="delivery_scouts"></UsersTable>}
+            {!loading && success && deliveryScouts && [deliveryScouts.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('deliveryScouts')})}</h1>: <UsersTable users={deliveryScouts.items} editPath="delivery_scouts"></UsersTable>]}
             {!loading && !success && <h4 id='deliveryScoutsHeader'>Kargocuların verileri alınamadı!</h4>}
             {loading && <Loading />}
         </div>
