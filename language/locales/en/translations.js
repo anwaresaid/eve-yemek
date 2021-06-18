@@ -34,6 +34,7 @@ export const translations = {
   transfers: 'Transfers',
   logout: 'Logout',
 
+  loginTitle: 'You must be logged in to continue your session',
   login: 'Login',
   rememberMe: 'Remember me',
   takingYouToYourDashboard: 'Taking you to your dashboard...',

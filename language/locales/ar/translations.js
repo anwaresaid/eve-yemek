@@ -34,6 +34,7 @@ export const translations = {
   transfers: 'تحويل',
   logout: 'تسجيل خروج',
 
+  loginTitle: 'يجب عليك تسجيل الدخول لمواصلة الجلسة الخاصة بك',
   login: 'تسجيل دخول',
   rememberMe: 'تذكرني',
   takingYouToYourDashboard: 'يتم الآن اصطحابك إلى لوحة التحكم',
@@ -191,7 +192,7 @@ export const translations = {
 //food category
   editFoodCategory: 'تعديل صنف الطعام',
   editFoodCategory: 'إنشاء صنف الطعام',
-  
+
   // Table Pagination
   showingXtoYofZ: 'عرض {{x}} الى {{y}} من {{z}}',
 
