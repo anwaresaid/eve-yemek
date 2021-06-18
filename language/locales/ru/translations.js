@@ -34,6 +34,7 @@ export const translations = {
   transfers: 'Переводы',
   logout: 'Выйти',
 
+  loginTitle: 'Вы должны войти в систему чтобы продолжить сеанс',
   login: 'Логин',
   rememberMe: 'Запомни меня',
   takingYouToYourDashboard: 'Загружается личный кабинет...',
@@ -103,7 +104,7 @@ export const translations = {
 
   //edit restaurant
   editRestaurant: 'Измени Pесторан',
-  
+
   // Meals List page
   image: 'Изображение',
   category: 'Категория',

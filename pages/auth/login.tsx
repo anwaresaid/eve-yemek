@@ -20,7 +20,7 @@ const Login = (props) => {
 	const [remember, setRemember] = useState(false);
 
 	const handleSubmit = async (e) => {
-		
+
 		e?.preventDefault();
 
 		if(!email || !password){
@@ -38,12 +38,12 @@ const Login = (props) => {
 				<S.LoginWrapper>
 					<Card className='p-shadow-5'>
 						<form onSubmit={(e)=>handleSubmit(e)}>
-							<S.Header className='p-text-center'>{i18n.t('login')}</S.Header>
+							<S.Header className='p-text-center'>{i18n.t('loginTitle')}</S.Header>
 
 							<div className='p-fluid p-formgrid p-grid'>
 								<div className='p-field p-col-12 p-md-12'>
-									<InputText 
-										required 
+									<InputText
+										required
 										placeholder={i18n.t('email')}
 										name='email'
 										type="email"

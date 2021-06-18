@@ -34,9 +34,10 @@ export const translations = {
   transfers: 'Transferler',
   logout: 'Çıkış Yap',
 
+  loginTitle: 'Oturumunuzu devam etmek için giriş yapmalısınız',
   login: 'Giriş Yap',
   rememberMe: 'Beni Hatırla',
-  takingYouToYourDashboard: 'Kontrol panelinize götürülüyorsunuz...',
+  takingYouToYourDashboard: 'Kontrol panelinize yönlendiriliyorsunuz...',
   somethingWentWrongWhileLoggingIn: 'Giriş yaparken hata oluştu',
   invalidEmailOrPassword: 'Geçersiz e-posta veya şifre',
   userNotFound: 'Kullanıcı bulunamadı',
