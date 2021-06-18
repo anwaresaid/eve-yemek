@@ -460,6 +460,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.rating,
                                     onValueChange: formik.handleChange,
                                     min:0,
+                                    max:5,
                                     showButtons: true,
                                 }} />
                             </InputGroup>
