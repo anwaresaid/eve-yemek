@@ -189,6 +189,9 @@ export const translations = {
   updatedFoodCategory: 'Категория еды обновлено',
   createdFoodCategory: 'Категория еды создано',
 
+  // food category
+  editFoodCategory:'Измени Категорию еды ',
+  createFoodCategory:'Создать категорию еды',
   // Table Pagination
   showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}',
 
