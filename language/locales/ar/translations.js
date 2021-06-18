@@ -213,6 +213,7 @@ export const translations = {
   iban: 'رقم الاي بان',
   bankName: 'اسم البنك',
 
+  xDaysAgo: '{{x}} منذ أيام',
   enum: 'النوع',
   single: 'مفرد',
   multiple: 'متعدد',
