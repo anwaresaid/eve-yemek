@@ -185,6 +185,8 @@ const MealDataInput = (props) => {
                                         value: formik.values.restaurant_id,
                                         onChange: formik.handleChange,
                                         options: restaurantName ?? [],
+                                        filter: true,
+                                        filterBy: "name",
                                         placeholder: i18n.t('selectRestaurant'),
                                         optionLabel: "name",
                                         optionValue: "id"
