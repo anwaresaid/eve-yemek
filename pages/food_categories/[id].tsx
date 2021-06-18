@@ -97,7 +97,7 @@ export const FoodCategoryEdit = () => {
 
   return (
     <div id="edit_food_categories">
-      <h1 id="editHeader">{i18n.t('update')}</h1>
+      <h1 id="editHeader">{i18n.t('editFoodCategory')}</h1>
       <Toast id="toastMessage" ref={toast}></Toast>
       <S.ContainerCard id="container">
             <form id="editForm" onSubmit={formik.handleSubmit}>
