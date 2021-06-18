@@ -212,6 +212,7 @@ export const translations = {
   iban: 'İBAN',
   bankName: 'Banka',
 
+  xDaysAgo: '{{x}} gün önce',
   enum: 'Tür',
   single: 'Tek',
   multiple: 'Çoklu',

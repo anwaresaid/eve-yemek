@@ -47,7 +47,6 @@ const liveOrdersList = () => {
         ></OrdersTable>
        ]}
       {loading && <Loading />}
-      {/* <Button onClick={emitToSocket}>click</Button> */}
     </div>
   );
 };
