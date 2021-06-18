@@ -397,12 +397,14 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.delivery_time,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    suffix: ' min'
                                 }} />
 
                                 <InputContainer label={i18n.t('deliveryRadius')} name="delivery_radius" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.delivery_radius,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    suffix: ' km'
                                 }} />
                             </InputGroup>
 
@@ -411,12 +413,14 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.commission_rate,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    suffix: ' ₺'
                                 }} />
 
                                 <InputContainer label={i18n.t('restaurantFee')} name="restaurant_charges" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.restaurant_charges,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    suffix: ' ₺'
                                 }} />
                             </InputGroup>
 
@@ -425,6 +429,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.minimum_order_amount,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    suffix: ' ₺'
                                 }} />
 
                                 <InputContainer label={i18n.t('rating')} name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
