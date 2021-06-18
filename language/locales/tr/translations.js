@@ -187,6 +187,9 @@ export const translations = {
   updatedUser: 'Kullanıcı Güncellendi',
   userName: 'Kullanıcı Adı',
 
+  //food category
+  createFoodCategory:'Yemek kategorisi oluştur',
+  editFoodCategory:'Yemek Kategorisini düzenle',
   // Table Pagination
   showingXtoYofZ: '{{z}} sonuç içinden {{x}} - {{y}} tanesi gösteriliyor',
 
@@ -204,5 +207,9 @@ export const translations = {
   selectAnOwner: 'Restoran Sahibi Seçin',
 
   iban: 'İBAN',
-  bankName: 'Banka'
+  bankName: 'Banka',
+
+  enum: 'Tür',
+  single: 'Tek',
+  multiple: 'Çoklu',
 };

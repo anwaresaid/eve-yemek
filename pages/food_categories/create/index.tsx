@@ -68,7 +68,7 @@ export const Index = () => {
 
   return (
     <div id="edit_food_categories">
-      <h1 id="editHeader">{i18n.t('create')}</h1>
+      <h1 id="editHeader">{i18n.t('createFoodCategory')}</h1>
       <Toast id="toastMessage" ref={toast}></Toast>
       <S.ContainerCard id="container">
             <form id="editForm" onSubmit={formik.handleSubmit}>

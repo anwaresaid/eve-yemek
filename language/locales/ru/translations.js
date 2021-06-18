@@ -189,6 +189,9 @@ export const translations = {
   updatedFoodCategory: 'Категория еды обновлено',
   createdFoodCategory: 'Категория еды создано',
 
+  // food category
+  editFoodCategory:'Измени Категорию еды ',
+  createFoodCategory:'Создать категорию еды',
   // Table Pagination
   showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}',
 
@@ -206,5 +209,9 @@ export const translations = {
   selectAnOwner: 'Выберите владельца',
 
   iban: 'номер',
-  bankName: 'Название банка'
+  bankName: 'Название банка',
+
+  enum: 'Тип',
+  single: 'один',
+  multiple: 'несколько',
 };
