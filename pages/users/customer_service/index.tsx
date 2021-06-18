@@ -4,6 +4,7 @@ import { listCustomerService } from "../../../store/actions/userslists.action"
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from "typesafe-actions"
 import Loading from "../../../components/Loading"
+import { i18n } from "../../../language"
 
 const customerServiceList = () => {
 
@@ -18,7 +19,7 @@ const customerServiceList = () => {
 
     return (
         <div id="customerServiceTable">
-            {!loading && success && <UsersTable users={customerService.items} editPath="customer_service"></UsersTable>}
+            {!loading && success && <UsersTable users={customerService.items} editPath="customer_service" userType={i18n.t('customerServiceReps')}></UsersTable>}
             {!loading && !success && <h4 id='warning'>Müşteri hizmetlerinin verileri alınamadı!</h4>}
             {loading && <Loading />}
         </div>
