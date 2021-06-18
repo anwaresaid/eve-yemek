@@ -3,13 +3,17 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "dev:local": " set NEXT_PUBLIC_API_MODE=local && next dev",
-        "dev:staging": " set NEXT_PUBLIC_API_MODE=staging && next dev",
-        "dev:prod": " set NEXT_PUBLIC_API_MODE=prod && next dev",
+        "dev": "set NEXT_PUBLIC_API_MODE=dev && next dev -p 5001",
+        "dev:local": "set NEXT_PUBLIC_API_MODE=local && next dev -p 5001",
+        "dev:staging": "set NEXT_PUBLIC_API_MODE=staging && next dev -p 5001",
+        "dev:prod": "set NEXT_PUBLIC_API_MODE=prod && next dev -p 5001",
+        "start:local": "set NEXT_PUBLIC_API_MODE=local && next start -p 5001",
+        "start:dev": "set NEXT_PUBLIC_API_MODE=local && next start -p 5100",
+        "start:staging": "set NEXT_PUBLIC_API_MODE=staging && next start -p 5200",
+        "start:prod": "set NEXT_PUBLIC_API_MODE=prod && next start -p 5300",
         "build": "next build",
         "start": "next start",
-        "export": "next export"
+        "export": "next export" 
     },
     "dependencies": {
         "axios": "^0.21.1",
