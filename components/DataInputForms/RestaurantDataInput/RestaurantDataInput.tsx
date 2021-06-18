@@ -83,7 +83,6 @@ const RestaurantDataInput = (props) => {
         is_veg: false,
         featured: false,
         active: false,
-        owner: '',
         is_agreement: true,
         minimum_order_amount: 0,
         latitudeInt: 0,
@@ -131,20 +130,12 @@ const RestaurantDataInput = (props) => {
                 errors.commission_rate = i18n.t('isRequired', { input: i18n.t('commissionRate') });
             }
 
-            if (!data.license_code) {
-                errors.license_code = i18n.t('isRequired', { input: i18n.t('licenseCode') });
-            }
-
-            if (!data.restaurant_charges) {
-                errors.restaurant_charges = i18n.t('isRequired', { input: i18n.t('restaurantFee') });
-            }
-
             if (!data.delivery_radius) {
                 errors.delivery_radius = i18n.t('isRequired', { input: i18n.t('deliveryRadius') });
             }
 
             if (!data.owner_id) {
-                errors.owner = i18n.t('isRequired', { input: i18n.t('restaurantOwner') });
+                errors.owner_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') });
             }
 
             if (!data.city_id) {
@@ -174,8 +165,22 @@ const RestaurantDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
-            console.log(data);
-            return;
+
+            const address = {
+                full_address:data.address,
+                latitude: data.latitudeInt, 
+                longtitude: data.longtitudeInt,
+                city:data.city_id,
+                state:data.town_id
+            }
+
+            delete data.latitudeInt;
+            delete data.longtitudeInt;
+            delete data.city_id;
+            delete data.town_id;
+
+            data = {...data, address:{...address}};
+
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, data));
             } else if (props.creating) {
@@ -234,12 +239,17 @@ const RestaurantDataInput = (props) => {
             formik.values.description = restaurant.description;
             formik.values.email = restaurant.email;
             formik.values.phone = restaurant.phone;
-            formik.values.city_id = restaurant.city_id;
-            formik.values.town_id = restaurant.town_id;
+            formik.values.address = restaurant.address.full_address;
+            formik.values.city_id = restaurant.address.city;
+            handleCityUpdate(restaurant.address.city);
+            formik.values.town_id = restaurant.address.state;
             formik.values.rating = restaurant.rating;
             formik.values.delivery_time = restaurant.delivery_time;
-            formik.values.latitude = restaurant.latitude;
-            formik.values.longtitude = restaurant.longtitude;
+            formik.values.latitude = restaurant.address.latitude;
+            formik.values.longtitude = restaurant.address.longtitude;
+            formik.values.latitudeInt = restaurant.address.latitude;
+            formik.values.longtitudeInt = restaurant.address.longtitude;
+            formik.values.postal_code = restaurant.address.postal_code;
             formik.values.commission_rate = restaurant.commission_rate;
             formik.values.license_code = restaurant.license_code;
             formik.values.restaurant_charges = restaurant.restaurant_charges;
@@ -249,7 +259,7 @@ const RestaurantDataInput = (props) => {
             formik.values.active = restaurant.active;
             formik.values.is_open = restaurant.is_open;
             formik.values.featured = restaurant.featured;
-
+            
         }
     }, [resOnwersSuccess, resSuccess])
 
@@ -370,6 +380,8 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.latitudeInt,
                                     onValueChange: formik.handleChange,
                                     mode:"decimal",
+                                    min:-90,
+                                    max:90,
                                     minFractionDigits:4,
                                     maxFractionDigits:8,
                                     showButtons: true,
@@ -379,6 +391,8 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.longtitudeInt,
                                     onValueChange: formik.handleChange,
                                     mode:"decimal",
+                                    min:-180,
+                                    max:180,
                                     minFractionDigits:4,
                                     maxFractionDigits:8,
                                     showButtons: true,
@@ -402,6 +416,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.delivery_time,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    min:0,
                                     suffix: ' min'
                                 }} />
 
@@ -409,6 +424,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.delivery_radius,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    min:0,
                                     suffix: ' km'
                                 }} />
                             </InputGroup>
@@ -418,6 +434,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.commission_rate,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    min:0,
                                     suffix: ' ₺'
                                 }} />
 
@@ -425,6 +442,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.restaurant_charges,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    min:0,
                                     suffix: ' ₺'
                                 }} />
                             </InputGroup>
@@ -434,12 +452,14 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.minimum_order_amount,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
+                                    min:0,
                                     suffix: ' ₺'
                                 }} />
 
                                 <InputContainer label={i18n.t('rating')} name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.rating,
                                     onValueChange: formik.handleChange,
+                                    min:0,
                                     showButtons: true,
                                 }} />
                             </InputGroup>
