@@ -160,13 +160,13 @@ const RestaurantDataInput = (props) => {
                 errors.latitudeInt = i18n.t('isRequired', { input: i18n.t('latitude') });
             }
             else {
-                formik.values.longtitude = formik.values.longtitudeInt?.toString();
+                formik.values.latitude = formik.values.latitudeInt?.toString()
             }
             if (!data.longtitudeInt) {
-                errors.longtitudeInt = i18n.t('isRequired', { input: i18n.t('longitude') });
+                errors.longtitudeInt = i18n.t('isRequired', { input: i18n.t('longtitude') });
             }
             else {
-                formik.values.latitude = formik.values.latitudeInt?.toString();
+                formik.values.longtitude = formik.values.longtitudeInt?.toString();
             }
 
             return errors;
@@ -202,14 +202,14 @@ const RestaurantDataInput = (props) => {
         }
         if (successUpdate) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedRestaurant') })
-            dispatch({ type: restaurantsTypes.RESTAURAT_UPDATE_RESET });
-            dispatch({ type: restaurantsTypes.RESTAURAT_FIND_RESET });
-            setTimeout(() => { router.push('/restaurants') }, 1000)
+            // dispatch({ type: restaurantsTypes.RESTAURAT_UPDATE_RESET });
+            // dispatch({ type: restaurantsTypes.RESTAURAT_FIND_RESET });
+            // setTimeout(() => { router.push('/restaurants') }, 1000)
         }
         if (restaurantCreateSuccess) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('addedRestaurant') })
-            dispatch({ type: restaurantsTypes.RESTAURAT_CREATE_RESET });
-            setTimeout(() => { router.push('/restaurants') }, 1000)
+            // dispatch({ type: restaurantsTypes.RESTAURAT_CREATE_RESET });
+            // setTimeout(() => { router.push('/restaurants') }, 1000)
         }
 
     }, [dispatch, props, successUpdate, restaurantCreateSuccess]);
@@ -236,7 +236,7 @@ const RestaurantDataInput = (props) => {
             formik.values.rating = restaurant.rating;
             formik.values.delivery_time = restaurant.delivery_time;
             formik.values.latitude = restaurant.latitude;
-            formik.values.longitude = restaurant.longitude;
+            formik.values.longtitude = restaurant.longtitude;
             formik.values.commission_rate = restaurant.commission_rate;
             formik.values.license_code = restaurant.license_code;
             formik.values.restaurant_charges = restaurant.restaurant_charges;
@@ -268,7 +268,7 @@ const RestaurantDataInput = (props) => {
         getFormErrorMessage,
         isFormFieldValid
     }
-
+    console.log(formik.values);
     const generalTabPanel = () => {
         return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('updateRestaurant')}>
             <S.ContainerCard>
@@ -372,7 +372,7 @@ const RestaurantDataInput = (props) => {
                                     showButtons: true,
                                 }} />
 
-                                <InputContainer label={i18n.t('longitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                <InputContainer label={i18n.t('longtitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.longtitudeInt,
                                     onValueChange: formik.handleChange,
                                     mode:"decimal",
