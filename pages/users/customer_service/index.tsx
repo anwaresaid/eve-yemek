@@ -21,7 +21,7 @@ const customerServiceList = () => {
     return (
         <div id="customerServiceTable">
             
-            {!loading && success &&[customerService.items.length==0? <h1 id='noCustomerListFoundHeader'>{i18n.t('noXfound',{x:i18n.t('customerServiceReps')})}</h1>: <UsersTable users={customerService.items} editPath="customer_service"></UsersTable>]}
+            {!loading && success && [customerService.items.length==0? <h1 id='noCustomerListFoundHeader'>{i18n.t('noXfound',{x:i18n.t('customerServiceReps')})}</h1>: <UsersTable users={customerService.items} editPath="customer_service" userType={i18n.t('customerServiceReps')}></UsersTable>]}
             {!loading && !success && <h4 id='warning'>Müşteri hizmetlerinin verileri alınamadı!</h4>}
             {loading && <Loading />}
 

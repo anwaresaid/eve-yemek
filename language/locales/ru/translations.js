@@ -218,4 +218,6 @@ export const translations = {
   enum: 'Тип',
   single: 'один',
   multiple: 'несколько',
+
+  listOfX: 'Список из {{x}}'
 };

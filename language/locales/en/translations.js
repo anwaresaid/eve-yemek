@@ -216,4 +216,6 @@ export const translations = {
   enum:'Type',
   single: 'Single',
   multiple: 'Multiple',
+
+  listOfX: 'List of {{x}}'
 };

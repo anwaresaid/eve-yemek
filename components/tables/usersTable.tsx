@@ -27,11 +27,11 @@ const UsersTable = (props) => {
     return ( 
         <div>
             <StandardTable 
-                header={Header(setGlobalFilter,"Users")}
+                header={Header(setGlobalFilter, props.userType)}
                 columns={columns} 
                 value={_.without(_.map(props.users, (item) => {if (!item.is_deleted) return item}), undefined)}  
                 globalFilter={globalFilter} 
-                emptyMessage="No users found" >     
+                emptyMessage={"No " + props.userType + " found"}>     
             </StandardTable>
         </div>
 
