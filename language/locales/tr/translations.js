@@ -214,4 +214,6 @@ export const translations = {
   enum: 'Tür',
   single: 'Tek',
   multiple: 'Çoklu',
+
+  listOfX: '{{x}} listesi'
 };

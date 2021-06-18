@@ -217,4 +217,6 @@ export const translations = {
   enum: 'النوع',
   single: 'مفرد',
   multiple: 'متعدد',
+
+  listOfX: '{{x}} قائمة'
 };
