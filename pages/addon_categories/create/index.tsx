@@ -68,7 +68,10 @@ export const Index = () => {
     isFormFieldValid,
   };
 
-  const enumerationTypes = ['SINGLE','MULTIPLE']
+  const enumerationTypes = [
+    { id: 'SINGLE', name: i18n.t('single') },
+    { id: 'MULTIPLE', name: i18n.t('multiple') },
+  ];
 
   return (
     <div id='create_Add_On_Category'>
@@ -92,12 +95,14 @@ export const Index = () => {
               </InputGroup>
             </FormColumn>
             <FormColumn divideCount={3}>
-            <h4 id='enum'>{i18n.t('enum')}</h4>
+              <h4 id='enum'>{i18n.t('enum')}</h4>
               <Dropdown
                 id='enum'
                 name='enum'
                 value={formik.values.enum}
                 options={enumerationTypes}
+                optionValue='id'
+                optionLabel='name'
                 onChange={formik.handleChange}
                 placeholder='Select Add-On Category Type'
                 autoFocus

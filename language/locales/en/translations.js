@@ -208,5 +208,9 @@ export const translations = {
   selectAnOwner: 'Select An Owner',
 
   iban: 'IBAN',
-  bankName: 'Bank Name'
+  bankName: 'Bank Name',
+
+  enum:'Type',
+  single: 'Single',
+  multiple: 'Multiple',
 };
