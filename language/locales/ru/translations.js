@@ -204,4 +204,7 @@ export const translations = {
 
   addressInformation: 'информация об адресе',
   selectAnOwner: 'Выберите владельца',
+
+  iban: 'номер',
+  bankName: 'Название банка'
 };
