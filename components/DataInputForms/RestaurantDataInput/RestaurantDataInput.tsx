@@ -200,14 +200,14 @@ const RestaurantDataInput = (props) => {
         }
         if (successUpdate) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedRestaurant') })
-            // dispatch({ type: restaurantsTypes.RESTAURAT_UPDATE_RESET });
-            // dispatch({ type: restaurantsTypes.RESTAURAT_FIND_RESET });
-            // setTimeout(() => { router.push('/restaurants') }, 1000)
+            dispatch({ type: restaurantsTypes.RESTAURAT_UPDATE_RESET });
+            dispatch({ type: restaurantsTypes.RESTAURAT_FIND_RESET });
+            setTimeout(() => { router.push('/restaurants') }, 1000)
         }
         if (restaurantCreateSuccess) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('addedRestaurant') })
-            // dispatch({ type: restaurantsTypes.RESTAURAT_CREATE_RESET });
-            // setTimeout(() => { router.push('/restaurants') }, 1000)
+            dispatch({ type: restaurantsTypes.RESTAURAT_CREATE_RESET });
+            setTimeout(() => { router.push('/restaurants') }, 1000)
         }
 
     }, [dispatch, props, successUpdate, restaurantCreateSuccess]);
@@ -266,7 +266,7 @@ const RestaurantDataInput = (props) => {
         getFormErrorMessage,
         isFormFieldValid
     }
-    console.log(formik.values);
+
     const generalTabPanel = () => {
         return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('editRestaurant')}>
             <S.ContainerCard>
