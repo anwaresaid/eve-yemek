@@ -2,20 +2,22 @@ import { i18n } from '../language';
 
 export const baseUrl = (()=> {
     let baseUrl = "";
-    
-    if(!process.env.NEXT_PUBLIC_API_MODE){
+
+    const api_mode = process.env.NEXT_PUBLIC_API_MODE.trim();
+
+    if(!api_mode){
         baseUrl = process.env.NEXT_PUBLIC_API_DEV;
     }
-    else if(process.env.NEXT_PUBLIC_API_MODE === "dev"){
+    else if(api_mode === "dev"){
         baseUrl = process.env.NEXT_PUBLIC_API_DEV;
     }
-    else if(process.env.NEXT_PUBLIC_API_MODE === "prod"){
+    else if(api_mode === "prod"){
         baseUrl = process.env.NEXT_PUBLIC_API_PROD;
     }
-    else if(process.env.NEXT_PUBLIC_API_MODE === "staging"){
+    else if(api_mode === "staging"){
         baseUrl =  process.env.NEXT_PUBLIC_API_STAGING;
     }
-    else if(process.env.NEXT_PUBLIC_API_MODE === "local"){
+    else if(api_mode === "local"){
         baseUrl = process.env.NEXT_PUBLIC_API_LOCAL;
     }
     else{
