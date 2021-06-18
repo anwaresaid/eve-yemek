@@ -84,7 +84,7 @@ const RestaurantDataInput = (props) => {
         featured: false,
         active: false,
         owner: '',
-        is_agreement: false,
+        is_agreement: true,
         minimum_order_amount: 0,
         latitudeInt: 0,
         longtitudeInt: 0,
@@ -453,9 +453,9 @@ const RestaurantDataInput = (props) => {
                             </InputGroup>
 
                             <InputGroup>
-                                <InputContainer label={i18n.t('vegetablesOnly')} name="is_vegi" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
-                                    value: formik.values.is_vegi,
-                                    checked: formik.values.is_vegi,
+                                <InputContainer label={i18n.t('vegetablesOnly')} name="is_veg" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
+                                    value: formik.values.is_veg,
+                                    checked: formik.values.is_veg,
                                     onChange: formik.handleChange
                                 }} />
 
