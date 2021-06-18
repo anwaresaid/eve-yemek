@@ -58,7 +58,12 @@ export const Index = () => {
 
   useEffect(() => {
     if (success) {
-      router.push('/addon_categories');
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: i18n.t('success'),
+      });
+      setTimeout(() => { router.push('/addon_categories') }, 2000)
       dispatch({ type: addonCategoryTypes.ADDON_CATEGORY_CREATE_RESET });
     }
   }, [success]);
