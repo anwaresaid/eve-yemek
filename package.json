@@ -11,6 +11,7 @@
         "start:dev": "next start -p 5100",
         "start:staging": "next start -p 5200",
         "start:prod": "next start -p 5300",
+        "build:local": "env-cmd -f .env.local next build",
         "build:dev": "env-cmd -f .env.development next build",
         "build:staging": "env-cmd -f .env.staging next build",
         "build:prod": "env-cmd -f .env.prod next build",
