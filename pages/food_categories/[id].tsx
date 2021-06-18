@@ -72,6 +72,7 @@ export const FoodCategoryEdit = () => {
       if(detailsSuccess && foodCategory.id === router.query.id && foodCategory){
         setData(true);
         formik.values.active = foodCategory.active;
+        formik.values.image = foodCategory.image;
         formik.values.name = foodCategory.name;
         if(successUpdate){
           toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedFoodCategory')})
