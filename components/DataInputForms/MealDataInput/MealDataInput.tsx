@@ -56,7 +56,6 @@ const MealDataInput = (props) => {
             restaurant_id: '',
             name: '',
             description: '',
-            file: '',
             food_category_id: '',
             addons: '',
             image: '',
@@ -78,10 +77,6 @@ const MealDataInput = (props) => {
             }
             if (!data.description) {
                 errors.description = i18n.t('isRequired', { input: i18n.t('description') });
-            }
-
-            if (!data.image) {
-                errors.image = i18n.t('isRequired', { input: i18n.t('image') });
             }
 
             if (!data.food_category_id) {
@@ -252,7 +247,7 @@ const MealDataInput = (props) => {
                         <FormColumn divideCount={3}>
 
                             <InputGroup>
-                                <InputContainer label="Resim" name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                                <InputContainer label="Resim" name="image" formiks={inputFormiks} component={StandardFileUpload} iprops={{
                                     setFile: (image) => { formik.values.image = image },
                                     showSuccess: () => { toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' }); }
                                 }} />
