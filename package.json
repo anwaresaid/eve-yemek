@@ -5,9 +5,10 @@
     "scripts": {
         "dev": "next dev",
         "dev:local": " set NEXT_PUBLIC_API_MODE=local && next dev",
+        "dev:staging": " set NEXT_PUBLIC_API_MODE=staging && next dev",
+        "dev:prod": " set NEXT_PUBLIC_API_MODE=prod && next dev",
         "build": "next build",
         "start": "next start",
-        "start:prod": "next NEXT_PUBLIC_API_MODE=prod start",
         "export": "next export"
     },
     "dependencies": {
