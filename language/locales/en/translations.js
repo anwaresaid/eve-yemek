@@ -189,6 +189,10 @@ export const translations = {
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
 
+  //meal category
+  editFoodCategory: 'Edit Food Category',
+  createFoodCategory: 'Create Food Category',
+
   selectLanguage: 'Select Language',
   submit: 'Submit',
 
