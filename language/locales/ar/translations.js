@@ -34,7 +34,7 @@ export const translations = {
   transfers: 'تحويل',
   logout: 'تسجيل خروج',
 
-  loginTitle: 'يجب عليك تسجيل الدخول لمواصلة الجلسة الخاصة بك',
+  loginTitle: 'عليك تسجيل الدخول للمواصلة',
   login: 'تسجيل دخول',
   rememberMe: 'تذكرني',
   takingYouToYourDashboard: 'يتم الآن اصطحابك إلى لوحة التحكم',
