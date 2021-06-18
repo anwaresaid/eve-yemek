@@ -207,5 +207,9 @@ export const translations = {
   selectAnOwner: 'حدد مالك',
 
   iban: 'رقم الاي بان',
-  bankName: 'اسم البنك'
+  bankName: 'اسم البنك',
+
+  enum: 'النوع',
+  single: 'مفرد',
+  multiple: 'متعدد',
 };

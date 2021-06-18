@@ -206,5 +206,9 @@ export const translations = {
   selectAnOwner: 'Выберите владельца',
 
   iban: 'номер',
-  bankName: 'Название банка'
+  bankName: 'Название банка',
+
+  enum: 'Тип',
+  single: 'один',
+  multiple: 'несколько',
 };

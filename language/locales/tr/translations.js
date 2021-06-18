@@ -204,5 +204,9 @@ export const translations = {
   selectAnOwner: 'Restoran Sahibi Seçin',
 
   iban: 'İBAN',
-  bankName: 'Banka'
+  bankName: 'Banka',
+
+  enum: 'Tür',
+  single: 'Tek',
+  multiple: 'Çoklu',
 };
