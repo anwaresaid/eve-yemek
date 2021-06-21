@@ -192,7 +192,6 @@ const RestaurantDataInput = (props) => {
             setReloadCheck(!reloadCheck)
             dispatch(listRestaurantOwners());
             if (props.updating) {
-                dispatch(listFoodByRestaurant(props.id));
                 dispatch(findRestaurant(props.id));
             }
         }
