@@ -84,12 +84,13 @@ const RestaurantDataInput = (props) => {
         is_agreement: true,
         minimum_order_amount: 0,
         latitudeInt: 0,
-        longtitudeInt: 0,
+        longitudeInt: 0,
         city_id: 0,
         town_id: 0,
-        longtitude: 0.0,
+        longitude: 0.0,
         latitude: 0.0,
         is_open: false,
+        currency_type:'TL',
     }
 
     const formik = useFormik({
@@ -154,11 +155,11 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.latitude = formik.values.latitudeInt?.toString()
             }
-            if (!data.longtitudeInt) {
-                errors.longtitudeInt = i18n.t('isRequired', { input: i18n.t('longtitude') });
+            if (!data.longitudeInt) {
+                errors.longitudeInt = i18n.t('isRequired', { input: i18n.t('longitude') });
             }
             else {
-                formik.values.longtitude = formik.values.longtitudeInt?.toString();
+                formik.values.longitude = formik.values.longitudeInt?.toString();
             }
             return errors;
         },
@@ -166,14 +167,14 @@ const RestaurantDataInput = (props) => {
 
             const address = {
                 full_address:data.address,
-                latitude: data.latitudeInt,
-                longtitude: data.longtitudeInt,
+                latitude: data.latitude,
+                longitude: data.longitude,
                 city:data.city_id,
                 state:data.town_id
             }
 
             delete data.latitudeInt;
-            delete data.longtitudeInt;
+            delete data.longitudeInt;
             delete data.city_id;
             delete data.town_id;
 
@@ -243,9 +244,9 @@ const RestaurantDataInput = (props) => {
             formik.values.rating = restaurant.rating;
             formik.values.delivery_time = restaurant.delivery_time;
             formik.values.latitude = restaurant.address.latitude;
-            formik.values.longtitude = restaurant.address.longtitude;
+            formik.values.longitude = restaurant.address.longitude;
             formik.values.latitudeInt = restaurant.address.latitude;
-            formik.values.longtitudeInt = restaurant.address.longtitude;
+            formik.values.longitudeInt = restaurant.address.longitude;
             formik.values.postal_code = restaurant.address.postal_code;
             formik.values.commission_rate = restaurant.commission_rate;
             formik.values.license_code = restaurant.license_code;
@@ -385,8 +386,8 @@ const RestaurantDataInput = (props) => {
                                     showButtons: true,
                                 }} />
 
-                                <InputContainer label={i18n.t('longtitude')} name="longtitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                    value: formik.values.longtitudeInt,
+                                <InputContainer label={i18n.t('longitude')} name="longitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    value: formik.values.longitudeInt,
                                     onValueChange: formik.handleChange,
                                     mode:"decimal",
                                     min:-180,
@@ -510,6 +511,7 @@ const RestaurantDataInput = (props) => {
     if (props.updating && resLoading)
         return <Loading />
 
+        console.log(formik.values);
     return (
         <div id="edit_restaurant">
             <h1 id="editHeader">{props.creating ? i18n.t('createRestaurant') : i18n.t('editRestaurant')}</h1>
