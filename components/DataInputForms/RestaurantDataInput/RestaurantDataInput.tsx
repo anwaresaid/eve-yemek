@@ -230,7 +230,7 @@ const RestaurantDataInput = (props) => {
                 let selectedResOwners = resOwnerslist.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
-            console.log(restaurant)
+       
             formik.values.owner_id = restaurant.owner?.id;
             formik.values.name = restaurant.name;
             formik.values.description = restaurant.description;
