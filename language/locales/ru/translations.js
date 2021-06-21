@@ -219,5 +219,13 @@ export const translations = {
   single: 'один',
   multiple: 'несколько',
 
-  listOfX: 'Список из {{x}}'
+  listOfX: 'Список из {{x}}',
+
+  loading: 'загрузка ...',
+
+  orderStatus: 'статус заказа',
+  paymentStatus: 'статус платежа',
+  deliveryScoutAssignment: 'курьерская доставка',
+
+  notSupported: 'не поддерживается'
 };

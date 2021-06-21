@@ -217,5 +217,14 @@ export const translations = {
   single: 'Tek',
   multiple: 'Çoklu',
 
-  listOfX: '{{x}} listesi'
+  listOfX: '{{x}} listesi',
+
+  loading: 'Yükleniyor...',
+
+  orderStatus: 'Sipariş Durumu',
+  paymentStatus: 'Ödeme Durumu',
+  deliveryScoutAssignment: 'Kargocu Atama',
+
+  notSupported: 'Desteklenmiyor'
+
 };

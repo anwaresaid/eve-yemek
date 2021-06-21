@@ -26,6 +26,7 @@ const Orders = () => {
             dispatch(listOrders())
         else if (success)
             setRows(orders.items)
+            
     },[dispatch, success])
 
     const handleViewButtonClick = (id) => {
@@ -46,7 +47,7 @@ const Orders = () => {
     return (
         <div id="ordersTable">
             {loading ? <Loading  /> : [
-                orders.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('orders')})}</h1>:
+                orders?.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('orders')})}</h1>:
                     <div id="ordersCard" className="card">
                         <h1 id="ordersHeader">{i18n.t('orders')}</h1>
                         <StandardTable 

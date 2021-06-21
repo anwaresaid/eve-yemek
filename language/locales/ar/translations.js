@@ -219,5 +219,13 @@ export const translations = {
   single: 'مفرد',
   multiple: 'متعدد',
 
-  listOfX: '{{x}} قائمة'
+  listOfX: '{{x}} قائمة',
+
+  loading: '...جار التحميل',
+
+  orderStatus: 'حالة الطلب',
+  paymentStatus: 'حالة السداد',
+  deliveryScoutAssignment: 'تسليم مهمة الكشفية',
+
+  notSupported: 'غير مدعوم'
 };
