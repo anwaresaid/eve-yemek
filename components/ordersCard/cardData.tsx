@@ -8,6 +8,7 @@ import { RootState } from "typesafe-actions";
 import OrdersCard from "./card";
 import EditDate from '../editOrders/editOrders';
 import { TabView, TabPanel } from 'primereact/tabview';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 
 
@@ -16,7 +17,7 @@ import { TabView, TabPanel } from 'primereact/tabview';
 const cardData = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-    const [orderId, setOrderId] = useState("");
+    const [orderID, setOrderID] = useState(router.query.id);
 
     const res = useSelector((state: RootState) => state.findOrder);
     const { loading, success, order } = res;
@@ -26,9 +27,10 @@ const cardData = () => {
     const { loading: restaurantLoading, success: restaurantSuccess, restaurant } = resRestaurant;
 
     useEffect(() => {
-        if (!order) {
-            if (router.query.id)
+        if (router.query.id){
+            if (!order || router.query.id !== order.id) {
                 dispatch(findOrder(router.query.id));
+            }
         }
     }, [dispatch, router.query.id])
 
@@ -40,6 +42,8 @@ const cardData = () => {
 
     }, [success])
 
+    if (loading || userLoading || restaurantLoading)
+        return <ProgressSpinner></ProgressSpinner>
 
     return (
         <>
