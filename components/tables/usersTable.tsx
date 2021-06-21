@@ -25,6 +25,7 @@ const UsersTable = (props) => {
         {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path='users/'+props.editPath)}
     ]
     return ( 
+        <div>
             <StandardTable 
                 header={Header(setGlobalFilter, props.userType)}
                 columns={columns} 
@@ -32,6 +33,7 @@ const UsersTable = (props) => {
                 globalFilter={globalFilter} 
                 emptyMessage={"No " + props.userType + " found"}>     
             </StandardTable>
+        </div>
 
     )
 }

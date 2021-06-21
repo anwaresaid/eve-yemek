@@ -19,7 +19,7 @@ const customerList = () => {
      
     return (
         <div id="customersTable">
-            {!loading && success && <UsersTable users={customers.items} editPath="customers" userType={i18n.t('customers')}></UsersTable>}
+            {!loading && success && [customers.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('customers')})}</h1>: <UsersTable users={customers.items} editPath="customers" userType={i18n.t('customers')}></UsersTable>]}
             {!loading && !success && <h4 id='customersTableHeader'>Müşterilerin verileri alınamadı!</h4>}
             {loading && <Loading />}
         </div>

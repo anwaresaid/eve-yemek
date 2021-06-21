@@ -40,7 +40,7 @@ const AddonCategoriesList = () => {
 
   return (
     <div id="addonCategoryTabe">
-      {!loading && addonCategories &&<><h1 id="addonCatHeader">{i18n.t('addonCategories')}</h1> <AddOnCategoryTable addonCategories={_.without(_.map(addonCategories.items, (item) => {if (!item.is_deleted) return item}), undefined)}></AddOnCategoryTable></>}
+      {!loading && addonCategories &&[addonCategories.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('addonCategories')})}</h1>:<><h1 id="addonCatHeader">{i18n.t('addonCategories')}</h1> <AddOnCategoryTable addonCategories={_.without(_.map(addonCategories.items, (item) => {if (!item.is_deleted) return item}), undefined)}></AddOnCategoryTable></>]}
       {loading && <Loading />}
     </div>
   );
