@@ -44,13 +44,11 @@ const RestaurantDataInput = (props) => {
     const updatedRestaurant = useSelector((state: RootState) => state.updateRestaurant);
     const restaurantCreate = useSelector((state: RootState) => state.createRestaurant);
     const { success: restaurantCreateSuccess } = restaurantCreate;
-    const listFood = useSelector((state: RootState) => state.listFoodByRestaurant);
-
+   
     const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success: resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
     const { loading: resLoading, success: resSuccess, restaurant } = resDetails;
-    const { loading: foodLoading, success: foodSuccess, foods } = listFood;
-
+   
     //setting names for dropdowns.
     const settingDropDownNames = () => {
         const sortedResOwners = resOwnerslist.items.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0));
@@ -204,7 +202,6 @@ const RestaurantDataInput = (props) => {
             setReloadCheck(!reloadCheck)
             dispatch(listRestaurantOwners());
             if (props.updating) {
-                dispatch(listFoodByRestaurant(props.id));
                 dispatch(findRestaurant(props.id));
             }
         }
@@ -233,8 +230,8 @@ const RestaurantDataInput = (props) => {
                 let selectedResOwners = resOwnerslist.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
-
-            formik.values.owner_id = restaurant.owner.id;
+       
+            formik.values.owner_id = restaurant.owner?.id;
             formik.values.name = restaurant.name;
             formik.values.description = restaurant.description;
             formik.values.email = restaurant.email;
@@ -259,6 +256,7 @@ const RestaurantDataInput = (props) => {
             formik.values.active = restaurant.active;
             formik.values.is_open = restaurant.is_open;
             formik.values.featured = restaurant.featured;
+            formik.values.foods = restaurant.foods;
 
         }
     }, [resOnwersSuccess, resSuccess])
@@ -522,7 +520,7 @@ const RestaurantDataInput = (props) => {
                     <TabView>
                         {generalTabPanel()}
                         <TabPanel header={i18n.t('meals')}>
-                            <FoodsTable foods={foods} resid={props.id} />
+                            <FoodsTable foods={formik.values.foods} resid={props.id} />
                         </TabPanel>
                     </TabView>
                     :
