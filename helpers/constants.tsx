@@ -45,12 +45,12 @@ export const allMenuItems:any = [
         { label:i18n.t("createMealCategory"),       url:"/food_categories/create",  roles:["admin", "customer_service"] }
     ] },
     { label:i18n.t("addonCategories"), expanded: true, items: [
-        { label:i18n.t("addonCategoryList"),        url:"/addon_categories",        roles:["admin", "restaurant_owner"] },
-        { label:i18n.t("createAddonCategory"),      url:"/addon_categories/create", roles:["admin", "restaurant_owner"] }
+        { label:i18n.t("addonCategoryList"),        url:"/addon_categories",        roles:["admin", "restaurant_owner","customer_service"] },
+        { label:i18n.t("createAddonCategory"),      url:"/addon_categories/create", roles:["admin", "restaurant_owner","customer_service"] }
     ] },
     { label:i18n.t("addons"),          expanded: true, items: [
-        { label:i18n.t("addonList"),                url:"/addons",                  roles:["admin", "customer_service"] },
-        { label:i18n.t("createAddon"),              url:"/addons/create",           roles:["admin", "customer_service"] },
+        { label:i18n.t("addonList"),                url:"/addons",                  roles:["admin", "restaurant_owner","customer_service"] },
+        { label:i18n.t("createAddon"),              url:"/addons/create",           roles:["admin", "restaurant_owner","customer_service"] },
     ] },
     { label:i18n.t("coupons"),         expanded: true, items: [
         { label:i18n.t("couponList"),               url:"/coupons",                 roles:["admin", "customer_service"] },
