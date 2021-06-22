@@ -8,6 +8,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { useDispatch } from "react-redux";
 import { ordersTypes } from "../../store/types/orders.type";
 import { findOrder } from "../../store/actions/orders.action";
+import { parseDateInOneRow } from "../../helpers/dateFunctions";
 
 const EditOrderPage = (props) => {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const EditOrderPage = (props) => {
                 setCurrentStatus(e.value);
                 dispatch({
                     type: ordersTypes.ORDER_LIST_UPDATE,
-                    payload: res
+                    payload: parseDateInOneRow(res)
                 })
                 dispatch(findOrder(props.order.id))
             })
