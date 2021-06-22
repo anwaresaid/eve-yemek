@@ -20,7 +20,7 @@ import {
   findAddonsReducer,
   updateAddonsReducer,
 } from './addons.reducer';
-import { listOrdersReducer, findOrderReducer } from './orders.reducer';
+import { listOrdersReducer } from './orders.reducer';
 import { listRestaurantReducer } from './restaurants.reducer';
 import {
   listFoodCategoryReducer,
@@ -87,7 +87,6 @@ export default combineReducers({
   updateAddons: updateAddonsReducer,
 
   listOrders: listOrdersReducer,
-  findOrder: findOrderReducer,
 
   listFoodCategory: listFoodCategoryReducer,
   foodCategoryDetails: foodCategoryDetailsReducer,

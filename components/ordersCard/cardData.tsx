@@ -17,41 +17,41 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 const cardData = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-    const [orderID, setOrderID] = useState(router.query.id);
 
-    const res = useSelector((state: RootState) => state.findOrder);
-    const { loading, success, order } = res;
+    const res = useSelector((state: RootState) => state.listOrders);
+    const { orderToEdit } = res;
+
     const resUser = useSelector((state: RootState) => state.singleUser);
     const { loading: userLoading, success: userSuccess, userData } = resUser;
     const resRestaurant = useSelector((state: RootState) => state.findRestaurant);
     const { loading: restaurantLoading, success: restaurantSuccess, restaurant } = resRestaurant;
 
     useEffect(() => {
-        if (router.query.id){
-            if (!order || router.query.id !== order.id) {
+        if (router.query.id) {
+            if (!orderToEdit || router.query.id !== orderToEdit.id) {
                 dispatch(findOrder(router.query.id));
             }
         }
     }, [dispatch, router.query.id])
 
     useEffect(() => {
-        if (order?.restaurant?.id) {
+        if (orderToEdit?.restaurant?.id) {
             dispatch(getSingleUser("60cdb95dcd8dc29322218381"));
-            dispatch(findRestaurant(order.restaurant.id));
+            dispatch(findRestaurant(orderToEdit.restaurant.id));
         }
 
-    }, [success])
+    }, [orderToEdit])
 
-    if (loading || userLoading || restaurantLoading)
+    if (userLoading || restaurantLoading)
         return <ProgressSpinner></ProgressSpinner>
 
     return (
         <>
-            { order && userSuccess && restaurantSuccess &&
+            { orderToEdit && userSuccess && restaurantSuccess &&
                 <TabView id="tabView">
                     <TabPanel header="Siparis Detayi">
                         <OrdersCard
-                            orderData={order}
+                            orderData={orderToEdit}
                             id={router.query.id}
                             userData={userData}
                             restaurantData={restaurant}
@@ -59,7 +59,7 @@ const cardData = () => {
                     </TabPanel>
                     <TabPanel header="Siparis Durumunu Guncelle">
                         <EditDate
-                            order={order}
+                            order={orderToEdit}
                         />
                     </TabPanel>
                 </TabView>

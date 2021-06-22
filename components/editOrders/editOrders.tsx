@@ -7,6 +7,7 @@ import OrdersService from "../../store/services/orders.service";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useDispatch } from "react-redux";
 import { ordersTypes } from "../../store/types/orders.type";
+import { findOrder } from "../../store/actions/orders.action";
 
 const EditOrderPage = (props) => {
     const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const EditOrderPage = (props) => {
                     type: ordersTypes.ORDER_LIST_UPDATE,
                     payload: res
                 })
+                dispatch(findOrder(props.order.id))
             })
             .catch((err) => {
                 setCurrentStatus(oldStatus)

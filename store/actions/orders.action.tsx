@@ -29,7 +29,7 @@ export const listOrders = () => async (dispatch, getState) => {
   };
   
 export const findOrder = (id) => async (dispatch, getState) => {
-    try {
+    /*try {
       dispatch({
         type: ordersTypes.ORDER_FIND_REQUEST,
       });
@@ -48,5 +48,10 @@ export const findOrder = (id) => async (dispatch, getState) => {
             ? error.response.data.message
             : error.message,
       });
-    }
+    }*/
+
+    dispatch({
+      type: ordersTypes.FETCH_ORDER_FROM_STORE,
+      payload: {id: id}
+    })
   };
