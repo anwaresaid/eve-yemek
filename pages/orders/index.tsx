@@ -22,10 +22,11 @@ const Orders = () => {
     const path = 'orders';
     
     useEffect(() => {
-        if (!orders)
+        if (orders.items.length === 0)
             dispatch(listOrders())
         else if (success)
             setRows(orders.items)
+            
     },[dispatch, success])
 
     const handleViewButtonClick = (id) => {
@@ -37,7 +38,7 @@ const Orders = () => {
     const columns = [
         {field: 'id', header: 'ID'},
         {field: 'name', header: i18n.t('restaurant')},
-        {field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status_id ?? 1)},
+        {field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status)},
         {field: 'total_amount', header: i18n.t('total')}, 
         {field: 'howLongAgo', header: i18n.t('orderTime')},
         {field: 'ops', header: i18n.t('operations'), body: (rowData) =>EditBtn(rowData,router,path)}
@@ -46,7 +47,7 @@ const Orders = () => {
     return (
         <div id="ordersTable">
             {loading ? <Loading  /> : [
-                orders.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('orders')})}</h1>:
+                orders?.items?.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('orders')})}</h1>:
                     <div id="ordersCard" className="card">
                         <h1 id="ordersHeader">{i18n.t('orders')}</h1>
                         <StandardTable 

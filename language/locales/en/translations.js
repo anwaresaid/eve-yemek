@@ -217,5 +217,13 @@ export const translations = {
   single: 'Single',
   multiple: 'Multiple',
 
-  listOfX: 'List of {{x}}'
+  listOfX: 'List of {{x}}',
+
+  loading: 'Loading...',
+
+  orderStatus: 'Order Status',
+  paymentStatus: 'Payment Status',
+  deliveryScoutAssignment: 'Delivery Scout Assignment',
+
+  notSupported: 'Not Supported'
 };

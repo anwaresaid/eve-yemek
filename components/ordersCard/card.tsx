@@ -11,8 +11,6 @@ import OrderStatus from '../InTableComponents/orderStatusTag';
 
 
 const OrdersCard = (props) => {
-
-  
     
     return (
         <div id='ordersDiv'>
@@ -22,7 +20,7 @@ const OrdersCard = (props) => {
                     <div className="p-grid">
                         <div id='detailsDiv' className="p-col">
                             <div id='nameDiv' className="p-pb-2">Kimden</div>
-                            <div id='addressDiv'><b>{ props.userData.address[0][0]}</b></div>
+                            <div id='addressDiv'><b>{ props.userData.addresses[0]?.full_address}</b></div>
                             <div>{}</div>
                             <div id='phoneDiv'>Telefon: { props.userData.phone}</div>
                             <div id='emailDiv'>E-Posta: { props.userData.email}</div>
@@ -30,7 +28,7 @@ const OrdersCard = (props) => {
                         <div id='resInfoDiv' className="p-col">
                             <div id='nameDiv' className="p-pb-2">Kime</div>
                             <div id='nameInputDiv'><b>{ props.restaurantData.name}</b></div>
-                            <div id='addressDiv'>{ props.restaurantData.address}</div>
+                            <div id='addressDiv'>{props.restaurantData.address.full_address}</div>
                             <div id='phoneDiv'>Telefon: { props.restaurantData.phone}</div>
                             <div id='emailDiv'>E-Posta: { props.restaurantData.email}</div>
                         </div>

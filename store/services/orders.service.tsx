@@ -11,4 +11,8 @@ export default class OrdersService {
         return axios.get('/orders/'+id)
                 .then(res => res.data.data);
     }
+
+    updateStatus(id, status){
+        return axios.put('/orders/' + id, {'status': status}).then(res => res.data.data)
+    }
 }
