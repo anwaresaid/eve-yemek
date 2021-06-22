@@ -32,7 +32,7 @@ const UserDataInput = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "", email: "", phone: "", roles: [], address: props.updateProps ? '' : []
+            name: "", email: "", phone: "", roles: [],active:'' ,address: props.updateProps ? '' : []
         },
         validate: (data) => {
             let errors: any = {}
