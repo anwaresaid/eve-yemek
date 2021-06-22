@@ -434,7 +434,7 @@ const RestaurantDataInput = (props) => {
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
                                     min:0,
-                                    suffix: ' ₺'
+                                    suffix: ' %'
                                 }} />
 
                                 <InputContainer label={i18n.t('restaurantFee')} name="restaurant_charges" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
