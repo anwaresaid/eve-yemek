@@ -27,7 +27,7 @@ const OrderStatus = (status) => {
             break
         case 'cancelled': 
             severity = "danger"
-            value = i18n.t('cancelled')
+            value = i18n.t('canceled')
             break
         default:
             return <div></div>
