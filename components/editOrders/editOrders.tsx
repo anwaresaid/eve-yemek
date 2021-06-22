@@ -5,8 +5,11 @@ import { Button } from "primereact/button";
 import { i18n } from "../../language";
 import OrdersService from "../../store/services/orders.service";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { useDispatch } from "react-redux";
+import { ordersTypes } from "../../store/types/orders.type";
 
 const EditOrderPage = (props) => {
+    const dispatch = useDispatch();
     let ordersService = new OrdersService()
     const [currentStatus, setCurrentStatus] = useState(props.order?.status);
     const statusOptions = [
@@ -23,6 +26,10 @@ const EditOrderPage = (props) => {
         ordersService.updateStatus(props.order.id, e.value)
             .then((res) => {
                 setCurrentStatus(e.value);
+                dispatch({
+                    type: ordersTypes.ORDER_LIST_UPDATE,
+                    payload: res
+                })
             })
             .catch((err) => {
                 setCurrentStatus(oldStatus)

@@ -11,8 +11,6 @@ import OrderStatus from '../InTableComponents/orderStatusTag';
 
 
 const OrdersCard = (props) => {
-
-    console.log(props)
     
     return (
         <div id='ordersDiv'>
