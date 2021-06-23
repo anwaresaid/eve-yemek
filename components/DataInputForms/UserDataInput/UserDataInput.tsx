@@ -102,6 +102,7 @@ const UserDataInput = (props) => {
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + props.updateProps.error });
 
     }, [props.updateProps?.updateUserSuccess, props.updateProps?.updating])
+    console.log(formik.values);
     const body = (updating) => {
         return (
             <div id='editUsers'>
