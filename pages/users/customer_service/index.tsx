@@ -14,7 +14,6 @@ const customerServiceList = () => {
 
 
     useEffect( () => {
-        if (customerService.items.length === 0)
             dispatch(listCustomerService())
      }, [dispatch]);
 
