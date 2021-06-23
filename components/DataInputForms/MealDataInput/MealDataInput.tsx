@@ -59,7 +59,7 @@ const MealDataInput = (props) => {
             name: '',
             description: '',
             food_category_id: '',
-            addons: '',
+            addons: [{}],
             image: '',
             price: 0,
             discount_price: 0,
