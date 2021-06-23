@@ -73,6 +73,16 @@ export const translations = {
   total: 'المجموع',
   orderTime: 'وقت الطلب',
   operations: 'العمليات',
+  order: 'الطلب',
+  from: 'من',
+  to: 'إلى',
+  receipt: 'فاتورة',
+  mealName: 'إسم الوجبة',
+  price: 'السعر',
+  quantity: 'الكمية',
+  total: 'المجموع',
+  VAT: 'ضريبة القيمة المضافة',
+  discountCoupon: 'تخفيض الكوبون',
 
   // Restaurant List
   country: 'بلد',
