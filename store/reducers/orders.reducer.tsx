@@ -1,3 +1,4 @@
+import OrdersService from "../services/orders.service";
 import { ordersTypes } from "../types/orders.type";
 
 const initialState = [];
@@ -27,16 +28,27 @@ export const listOrdersReducer = (state = { orders: { items: [] } }, action) => 
           }
         }
       }
-    case ordersTypes.FETCH_ORDER_FROM_STORE:
-      for (let one of state.orders.items){
-        if (one.id === action.payload.id){
-          return {
-            ...state, orderToEdit: one
-          }
-        }
-      }
-
     default:
       return state;
   }
 };
+
+export const findOrderReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ordersTypes.FIND_ORDER_REQUEST:
+      return { loading: true }
+    case ordersTypes.FIND_ORDER_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        order: action.payload
+      }
+    case ordersTypes.FIND_ORDER_FAIL:
+      return {
+        loading: false,
+        error: action.payload
+      }
+    default:
+      return state;
+  }
+}
