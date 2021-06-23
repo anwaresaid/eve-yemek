@@ -72,6 +72,16 @@ export const translations = {
   total: 'Toplam Miktar',
   orderTime: 'Sipariş Zamanı',
   operations: 'Operasyonlar',
+  order: 'Sipariş',
+  from: 'Kimden',
+  to: 'kime',
+  receipt: 'Fatura',
+  mealName: 'Yemek adı',
+  price: 'Tane fiyatı',
+  quantity: 'Adet',
+  total: 'Ara toplama',
+  VAT: 'Vergi',
+  discountCoupon: 'Kupon indirimi',
 
   // Restaurant List
   country: 'Ülke',

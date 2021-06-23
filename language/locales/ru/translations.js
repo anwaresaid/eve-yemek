@@ -72,6 +72,16 @@ export const translations = {
   total: 'Итого',
   orderTime: 'Время заказа',
   operations: 'Операции',
+  order: 'Заказ',
+  from: 'От кого',
+  to: 'Кому',
+  receipt: 'Фактура',
+  mealName: 'Имя еды',
+  price: 'Цена за штуку',
+  quantity: 'Количество',
+  total: 'Общая цена',
+  VAT: 'Налог',
+  discountCoupon: 'Скидочный купон',
 
   // Restaurant List
   country: 'страна',
