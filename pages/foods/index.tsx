@@ -16,9 +16,8 @@ const FoodsList =  () => {
 
 
      useEffect( () => {
-        if(!success)
             dispatch(listFood());
-     }, [success]);
+     }, [dispatch]);
     
      return (
         <div id="foodsCategoryTable">

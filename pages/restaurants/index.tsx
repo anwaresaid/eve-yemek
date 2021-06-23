@@ -12,7 +12,6 @@ const Index = () => {
     const {loading, success, restaurants} = resList;
 
     useEffect(() => {
-        // restaurantService.getRestaurants().then(data => setRestaurants(data.items));
       
         dispatch(listRestaurant());
 
