@@ -10,6 +10,7 @@ import EditDate from '../editOrders/editOrders';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Toast } from 'primereact/toast';
+import { i18n } from '../../language';
 
 const cardData = () => {
     const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const cardData = () => {
 
     return (
         <>
+            <h2>{i18n.t('order') + " " + router.query.id}</h2>
             <Toast ref={toast}></Toast>
             { orderSuccess && userSuccess && restaurantSuccess &&
                 <TabView id="tabView">
