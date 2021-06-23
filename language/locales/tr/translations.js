@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Eklenti Kategorileri',
   addonCategoryList: 'Eklenti Kategorileri Listesi',
   createAddonCategory: 'Eklenti Kategorisi Oluştur',
+  selectAddonCategories: 'Eklenti Kategorileri Seçin',
   addons: 'Eklentiler',
   addonList: 'Eklentiler Listesi',
   createAddon: 'Eklenti Oluştur',
