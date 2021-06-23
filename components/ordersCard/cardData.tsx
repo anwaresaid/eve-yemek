@@ -36,7 +36,7 @@ const cardData = () => {
                 dispatch(getSingleUser("60cdb95dcd8dc29322218381"));
                 dispatch(findRestaurant(order.restaurant.id));
             } else {
-                toast.current.show({ severity: 'error', summary: 'Bad Data', detail: 'Data associated with this meal is old/deleted' });
+                toast.current.show({ severity: 'error', summary: 'Bad Data', detail: 'Data associated with this order is old/deleted' });
             }
         }
     }, [orderSuccess])
