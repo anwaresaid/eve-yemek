@@ -15,7 +15,6 @@ const OrdersCard = (props) => {
     
     return (
         <div id='ordersDiv'>
-            <h1 id='ordersHeader'>{i18n.t('order')} {props.id}</h1>
             {props.orderData && props.userData&& props.restaurantData&&<>
                 <Card id='ordersCard' title="Alpuğan - Elçiboğa">
                     <div className="p-grid">
