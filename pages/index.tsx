@@ -84,10 +84,10 @@ const Index = (props) => {
 
     const checkIfNoMeals = (ownedRestaurants) => {
         for (let one of ownedRestaurants){
-            if (one.foods.length === 0)
-                return true
+            if (one.foods.length > 0)
+                return false
         }
-        return false
+        return true
     }
 
     return (
