@@ -236,5 +236,7 @@ export const translations = {
   paymentStatus: 'Payment Status',
   deliveryScoutAssignment: 'Delivery Scout Assignment',
 
-  notSupported: 'Not Supported'
+  notSupported: 'Not Supported',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'None of your restaurants have any meals added'
 };
