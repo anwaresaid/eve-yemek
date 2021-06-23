@@ -21,18 +21,20 @@ import { InputSwitch } from "primereact/inputswitch";
 import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { listAddonCategory } from "../../../store/actions/addon-category.action";
 
 const MealDataInput = (props) => {
 
     const toast = useRef(null);
     const router = useRouter()
-    const [addonsName, setAddonsName] = useState(null);
+    const [addonCategoryNames, setAddonCategoryNames] = useState(null);
+    const [selectedAddOnCategories, setSelectedAddOnCategories] = useState([])
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [restaurantName, setRestaurantName] = useState(null);
     const dispatch = useDispatch();
 
-    const addonList = useSelector((state: RootState) => state.listAddons);
-    const { loading: addonsLoading, success: addonSuccess, addons: addonslist } = addonList;
+    const resAddOnCategories = useSelector((state: RootState) => state.listAddonCategory);
+    const { loading: addOnCategoriesLoading, success: addOnCategoriesSuccess, addonCat: addonCategories } = resAddOnCategories;
 
     const resFoodCat = useSelector((state: RootState) => state.listFoodCategory);
     const { loading: foodCatLoading, success: foodCatSuccess, foodCat: foodCatlist } = resFoodCat;
@@ -83,14 +85,17 @@ const MealDataInput = (props) => {
                 errors.food_category_id = i18n.t('isRequired', { input: i18n.t('categoryName') });;
             }
 
-            if (!data.addons) {
-                errors.addons = i18n.t('isRequired', { input: i18n.t('addons') });;
+            if (!selectedAddOnCategories) {
+                errors.add_on_categories = i18n.t('isRequired', { input: i18n.t('addonCategories') });;
+            } else {
+                data.add_on_categories = selectedAddOnCategories.map((ac) => {
+                    return ac.id
+                })
             }
-
             return errors;
         },
         onSubmit: (data: any) => {
-            if (props.creating){
+            if (props.creating) {
                 dispatch(createFood(data));
             } else if (props.updating) {
                 dispatch(updateFood(props.meal.id, data));
@@ -103,9 +108,9 @@ const MealDataInput = (props) => {
         setRestaurantName(restaurantNames);
     }
 
-    const setAddonsDropdownOptions = () => {
-        const addonsNames = addonslist.items.map(addon => { return { name: addon.name } });
-        setAddonsName(addonsNames);
+    const setAddonCategoryDropdownOptions = () => {
+        const addonCategoryNames = addonCategories.items.map(addonCategory => { return { id:addonCategory.id, name: addonCategory.name } });
+        setAddonCategoryNames(addonCategoryNames);
     }
 
     const setFoodCategoryDropdownOptions = () => {
@@ -114,8 +119,8 @@ const MealDataInput = (props) => {
     }
 
     useEffect(() => {
-        if (!addonSuccess)
-            dispatch(listAddons());
+        if (!addOnCategoriesSuccess)
+            dispatch(listAddonCategory());
 
         if (!foodCatSuccess)
             dispatch(listFoodCategory());
@@ -123,15 +128,15 @@ const MealDataInput = (props) => {
         if (!restaurantsSuccess)
             dispatch(listRestaurant());
 
-        if (addonSuccess){
-            setAddonsDropdownOptions();
+        if (addOnCategoriesSuccess) {
+            setAddonCategoryDropdownOptions();
         }
 
-        if (restaurantsSuccess){
+        if (restaurantsSuccess) {
             setRestaurantsDropdownOptions();
         }
 
-        if (foodCatSuccess){
+        if (foodCatSuccess) {
             setFoodCategoryDropdownOptions();
         }
 
@@ -144,7 +149,7 @@ const MealDataInput = (props) => {
             toast.current.show({ severity: 'success', summary: 'Updated Meal', detail: 'Successfully updated meal' })
             setTimeout(() => { router.push('/foods') }, 2000)
         }
-        
+
 
         if (props.updating && props.meal) {
             formik.values.restaurant_id = props.meal.restaurant
@@ -156,9 +161,10 @@ const MealDataInput = (props) => {
             formik.values.is_veg = props.meal.is_veg;
             formik.values.active = props.meal.active;
             formik.values.featured = props.meal.featured;
+            setSelectedAddOnCategories(props.meal.add_on_categories.map((aoc) => {return {id: aoc.id, name: aoc.name}}))
         }
 
-    }, [addonSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal]);
+    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal]);
 
 
     const inputFormiks = {
@@ -214,14 +220,14 @@ const MealDataInput = (props) => {
                                     }} />
                                 </InputGroup>}
 
-                            {!addonsLoading ? <InputGroup>
-                                <InputContainer label={i18n.t('selectAddons')} name="addons" formiks={inputFormiks} component={MultiSelect} iprops={{
-                                    value: formik.values.addons,
-                                    options: addonsName ?? [],
-                                    onChange: formik.handleChange,
+                            {!addOnCategoriesLoading ? <InputGroup>
+                                <InputContainer label={i18n.t('selectAddonCategories')} name="add_on_categories" formiks={inputFormiks} component={MultiSelect} iprops={{
+                                    value: selectedAddOnCategories,
+                                    options: addonCategoryNames ?? [],
+                                    onChange: (e)=>setSelectedAddOnCategories(e.target.value),
                                     optionLabel: "name",
-                                    placeholder: "Select addons",
-                                    display: "addons",
+                                    placeholder: i18n.t('selectAddonCategories'),
+                                    display: "addonCategories",
 
                                 }} />
                             </InputGroup> : <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} />}

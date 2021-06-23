@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Категории добавки еды',
   addonCategoryList: 'Список категорий добавки еды',
   createAddonCategory: 'Создать категорию добавки еды',
+  selectAddonCategories: 'Выбрать Категории добавки еды',
   addons: 'Добавки еды',
   addonList: 'Список добавки еды',
   createAddon: 'Создать добавки еды',

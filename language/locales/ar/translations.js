@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'أصناف الإضافات',
   addonCategoryList: 'قائمة أصناف الإضافات',
   createAddonCategory: 'إنشاء صنف الإضافة',
+  selectAddonCategories: 'حددأصناف الإضافات',
   addons: 'الإضافات',
   addonList: 'قائمة الإضافات',
   createAddon: 'إنشاء إضافة',
