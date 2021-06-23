@@ -14,7 +14,8 @@ export const createFood = (
     featured,
     addon_id,
     active,
-    description, }
+    description, 
+    add_on_categories}
 ) => async dispatch => {
   try {
 
@@ -34,7 +35,8 @@ export const createFood = (
       addon_id,
       is_veg,
       featured,
-      active
+      active,
+      add_on_categories
     );
 
     dispatch({

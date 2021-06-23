@@ -32,7 +32,7 @@ const EditOrderPage = (props) => {
                     type: ordersTypes.ORDER_LIST_UPDATE,
                     payload: parseDateInOneRow(res)
                 })
-                dispatch(findOrder(props.order.id))
+                
             })
             .catch((err) => {
                 setCurrentStatus(oldStatus)

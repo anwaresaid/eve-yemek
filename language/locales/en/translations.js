@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Add-On Categories',
   addonCategoryList: 'Add-On Category List',
   createAddonCategory: 'Create Add-On Category',
+  selectAddonCategories: 'Select Add-On Categories',
   addons: 'Add-Ons',
   addonList: 'Add-On List',
   createAddon: 'Create Add-On',

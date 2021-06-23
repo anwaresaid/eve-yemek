@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { findOrder } from "../../store/actions/orders.action";
 import { getSingleUser } from "../../store/actions/userslists.action";
@@ -9,17 +9,14 @@ import OrdersCard from "./card";
 import EditDate from '../editOrders/editOrders';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { ProgressSpinner } from 'primereact/progressspinner';
-
-
-
-
+import { Toast } from 'primereact/toast';
 
 const cardData = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-
-    const res = useSelector((state: RootState) => state.listOrders);
-    const { orderToEdit } = res;
+    let toast = useRef(null)
+    const res = useSelector((state: RootState) => state.findOrder);
+    const { loading: orderLoading, success: orderSuccess, order } = res;
 
     const resUser = useSelector((state: RootState) => state.singleUser);
     const { loading: userLoading, success: userSuccess, userData } = resUser;
@@ -27,31 +24,34 @@ const cardData = () => {
     const { loading: restaurantLoading, success: restaurantSuccess, restaurant } = resRestaurant;
 
     useEffect(() => {
-        if (router.query.id) {
-            if (!orderToEdit || router.query.id !== orderToEdit.id) {
-                dispatch(findOrder(router.query.id));
-            }
+        if (!router.isReady) return;
+        if (!order || router.query.id !== order.id) {
+            dispatch(findOrder(router.query.id));
         }
-    }, [dispatch, router.query.id])
+    }, [dispatch, router.isReady])
 
     useEffect(() => {
-        if (orderToEdit?.restaurant?.id) {
-            dispatch(getSingleUser("60cdb95dcd8dc29322218381"));
-            dispatch(findRestaurant(orderToEdit.restaurant.id));
+        if (orderSuccess) {
+            if (order?.restaurant?.id) {
+                dispatch(getSingleUser("60cdb95dcd8dc29322218381"));
+                dispatch(findRestaurant(order.restaurant.id));
+            } else {
+                toast.current.show({ severity: 'error', summary: 'Bad Data', detail: 'Data associated with this order is old/deleted' });
+            }
         }
-
-    }, [orderToEdit])
+    }, [orderSuccess])
 
     if (userLoading || restaurantLoading)
         return <ProgressSpinner></ProgressSpinner>
 
     return (
         <>
-            { orderToEdit && userSuccess && restaurantSuccess &&
+            <Toast ref={toast}></Toast>
+            { orderSuccess && userSuccess && restaurantSuccess &&
                 <TabView id="tabView">
                     <TabPanel header="Siparis Detayi">
                         <OrdersCard
-                            orderData={orderToEdit}
+                            orderData={order}
                             id={router.query.id}
                             userData={userData}
                             restaurantData={restaurant}
@@ -59,7 +59,7 @@ const cardData = () => {
                     </TabPanel>
                     <TabPanel header="Siparis Durumunu Guncelle">
                         <EditDate
-                            order={orderToEdit}
+                            order={order}
                         />
                     </TabPanel>
                 </TabView>
