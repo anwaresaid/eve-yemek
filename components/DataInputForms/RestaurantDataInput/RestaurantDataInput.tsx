@@ -163,7 +163,7 @@ const RestaurantDataInput = (props) => {
         },
         onSubmit: (data: any) => {
             
-            let tmpData = Object.create(data);
+            let tmpData = {...data};
 
             let address:any = {
                 full_address:tmpData.address,
@@ -188,7 +188,7 @@ const RestaurantDataInput = (props) => {
             tmpData = {...tmpData, address:{...address}};
 
             if (props.updating) {
-                dispatch(updateRestaurant(props.id, tmpData));
+                dispatch(updateRestaurant(props.id, tmpData));  
             } else if (props.creating) {
                 dispatch(createRestaurant(tmpData));
             }
