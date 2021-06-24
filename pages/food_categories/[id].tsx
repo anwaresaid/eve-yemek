@@ -72,6 +72,7 @@ export const FoodCategoryEdit = () => {
       if(detailsSuccess && foodCategory.id === router.query.id && foodCategory){
         setData(true);
         formik.values.active = foodCategory.active;
+        formik.values.image = foodCategory.image;
         formik.values.name = foodCategory.name;
         if(successUpdate){
           toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedFoodCategory')})
@@ -97,7 +98,7 @@ export const FoodCategoryEdit = () => {
 
   return (
     <div id="edit_food_categories">
-      <h1 id="editHeader">{i18n.t('update')}</h1>
+      <h1 id="editHeader">{i18n.t('editFoodCategory')}</h1>
       <Toast id="toastMessage" ref={toast}></Toast>
       <S.ContainerCard id="container">
             <form id="editForm" onSubmit={formik.handleSubmit}>

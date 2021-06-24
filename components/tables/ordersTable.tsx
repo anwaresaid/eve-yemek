@@ -6,6 +6,7 @@ import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import Header from "../InTableComponents/Header";
 import { i18n } from "../../language";
+import OrderStatus from "../InTableComponents/orderStatusTag";
 
 const OrdersTable = (props) => {
     
@@ -18,10 +19,10 @@ const OrdersTable = (props) => {
 
     const columns = [
         {field: 'id', header: '#'},
-        {field: 'restaurant_id.name', header: i18n.t('restaurant')},
-        {field: 'status', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.status === "ACTIVE")},
+        {field: 'restaurant.name', header: i18n.t('restaurant')},
+        {field: 'status', header: i18n.t('status'), body: (rowData)=>OrderStatus(rowData.status)},
         {field: 'total_amount', header: i18n.t('total')},
-        {field: 'createdAt', header: i18n.t('orderTime')}, 
+        {field: 'howLongAgo', header: i18n.t('orderTime')}, 
         {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
     ]
     

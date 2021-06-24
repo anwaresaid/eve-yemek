@@ -13,6 +13,7 @@ import StandardTable from "../components/StandardTable";
 import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/restaurant.action";
 import { SelectButton } from 'primereact/selectbutton';
 import idColumn from "../components/InTableComponents/idColumn";
+import { Tag } from "primereact/tag";
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
@@ -27,7 +28,7 @@ const Index = (props) => {
         if (!reportData)
             dispatch(getDashboardReport())
         if (auth.hasRoles(['restaurant_owner'])) {
-            if (ownedRestaurants.length === 0)
+            if (ownedRestaurants?.length === 0)
                 dispatch(listOwnedRestaurants())
         }
     }, [dispatch, ownedRestaurantsSuccess])
@@ -81,12 +82,23 @@ const Index = (props) => {
         { field: 'is_open', header: i18n.t('status'), body: openClosedTag },
     ]
 
+    const checkIfNoMeals = (ownedRestaurants) => {
+        for (let one of ownedRestaurants){
+            if (one.foods.length > 0)
+                return false
+        }
+        return true
+    }
+
     return (
         
         <div id='containerPanel' className="ContainerPanel">
             {loading ? <Loading /> :
                 <S.DashboardWrapper id='dashBoard'>
                     <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
+                    {
+                        auth.hasRoles(["restaurant_owner"]) && checkIfNoMeals(ownedRestaurants) && <Tag severity="danger" value={i18n.t('noneOfYourRestaurantsHaveAnyMealsAdded')}></Tag>
+                    }
                     {
                         auth.hasRoles(["restaurant_owner"]) &&
                         <div className="p-my-5">

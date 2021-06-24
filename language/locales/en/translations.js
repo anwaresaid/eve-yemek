@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Add-On Categories',
   addonCategoryList: 'Add-On Category List',
   createAddonCategory: 'Create Add-On Category',
+  selectAddonCategories: 'Select Add-On Categories',
   addons: 'Add-Ons',
   addonList: 'Add-On List',
   createAddon: 'Create Add-On',
@@ -34,6 +35,7 @@ export const translations = {
   transfers: 'Transfers',
   logout: 'Logout',
 
+  loginTitle: 'You must be logged in to continue your session',
   login: 'Login',
   rememberMe: 'Remember me',
   takingYouToYourDashboard: 'Taking you to your dashboard...',
@@ -71,6 +73,16 @@ export const translations = {
   total: 'Total',
   orderTime: 'Order Time',
   operations: 'Operations',
+  order: 'Order',
+  from: 'From',
+  to: 'To',
+  receipt: 'Receipt',
+  mealName: 'Meal Name',
+  price: 'Price',
+  quantity: 'Quantity',
+  total: 'Total',
+  VAT: 'VAT',
+  discountCoupon: 'Discount Coupon',
 
   // Restaurant List
   country: 'Country',
@@ -189,6 +201,11 @@ export const translations = {
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
 
+  //meal category
+  editFoodCategory: 'Edit Food Category',
+  createFoodCategory: 'Create Food Category',
+  noXfound:'no {{x}} found',
+
   selectLanguage: 'Select Language',
   submit: 'Submit',
 
@@ -202,4 +219,24 @@ export const translations = {
 
   addressInformation: 'Address Information',
   selectAnOwner: 'Select An Owner',
+
+  iban: 'IBAN',
+  bankName: 'Bank Name',
+
+  xDaysAgo: '{{x}} days ago',
+  enum:'Type',
+  single: 'Single',
+  multiple: 'Multiple',
+
+  listOfX: 'List of {{x}}',
+
+  loading: 'Loading...',
+
+  orderStatus: 'Order Status',
+  paymentStatus: 'Payment Status',
+  deliveryScoutAssignment: 'Delivery Scout Assignment',
+
+  notSupported: 'Not Supported',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'None of your restaurants have any meals added'
 };

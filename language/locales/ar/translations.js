@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'أصناف الإضافات',
   addonCategoryList: 'قائمة أصناف الإضافات',
   createAddonCategory: 'إنشاء صنف الإضافة',
+  selectAddonCategories: 'حددأصناف الإضافات',
   addons: 'الإضافات',
   addonList: 'قائمة الإضافات',
   createAddon: 'إنشاء إضافة',
@@ -34,6 +35,7 @@ export const translations = {
   transfers: 'تحويل',
   logout: 'تسجيل خروج',
 
+  loginTitle: 'عليك تسجيل الدخول للمواصلة',
   login: 'تسجيل دخول',
   rememberMe: 'تذكرني',
   takingYouToYourDashboard: 'يتم الآن اصطحابك إلى لوحة التحكم',
@@ -71,6 +73,16 @@ export const translations = {
   total: 'المجموع',
   orderTime: 'وقت الطلب',
   operations: 'العمليات',
+  order: 'الطلب',
+  from: 'من',
+  to: 'إلى',
+  receipt: 'فاتورة',
+  mealName: 'إسم الوجبة',
+  price: 'السعر',
+  quantity: 'الكمية',
+  total: 'المجموع',
+  VAT: 'ضريبة القيمة المضافة',
+  discountCoupon: 'تخفيض الكوبون',
 
   // Restaurant List
   country: 'بلد',
@@ -188,6 +200,9 @@ export const translations = {
   userName: 'إسم المستخدم',
   updatedFoodCategory: 'تم تحديث صنف الطعام ',
   createdFoodCategory: 'تم إنشاء صنف جديد',
+//food category
+  editFoodCategory: 'تعديل صنف الطعام',
+  editFoodCategory: 'إنشاء صنف الطعام',
 
   // Table Pagination
   showingXtoYofZ: 'عرض {{x}} الى {{y}} من {{z}}',
@@ -199,10 +214,31 @@ export const translations = {
   selectRestaurant: 'اختر المطعم',
   dragAndDropImageHere: 'قم بسحب وإسقاط الصورة هنا',
 
+  noXfound:'لم يتم ايجاد {{x}}',
 
   fixed: 'ثابت',
   percentage: 'النسبة المئوية',
 
   addressInformation: 'معلومات العنوان',
   selectAnOwner: 'حدد مالك',
+
+  iban: 'رقم الاي بان',
+  bankName: 'اسم البنك',
+
+  xDaysAgo: '{{x}} منذ أيام',
+  enum: 'النوع',
+  single: 'مفرد',
+  multiple: 'متعدد',
+
+  listOfX: '{{x}} قائمة',
+
+  loading: '...جار التحميل',
+
+  orderStatus: 'حالة الطلب',
+  paymentStatus: 'حالة السداد',
+  deliveryScoutAssignment: 'تسليم مهمة الكشفية',
+
+  notSupported: 'غير مدعوم',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'لا يوجد أي طبق في مطاعمكم'
 };

@@ -16,6 +16,7 @@ import classNames from 'classnames';
 import { i18n } from '../../../language';
 import { useRouter } from 'next/router';
 import { couponsTypes } from '../../../store/types/coupons.type';
+import InputContainer from '../../../components/inputs/inputContainer';
 
 export const Index = () => {
   const toast = useRef(null);
@@ -116,6 +117,7 @@ export const Index = () => {
     const restaurantNames = restaurants.items.map((res) => {
       return { id: res.id, name: res.name };
     });
+    restaurantNames.unshift({id: '6666', name: 'All Restaurants'})
     setRestaurantName(restaurantNames);
   };
 
@@ -125,13 +127,24 @@ export const Index = () => {
     if (restaurantsSuccess) settingDropDownNames();
 
     if (success) {
-      router.push('/coupons');
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: i18n.t('success'),
+      });
+      setTimeout(() => { router.push('/coupons') }, 2000)
       dispatch({ type: couponsTypes.COUPON_CREATE_RESET });
     }
   }, [restaurantsSuccess, success]);
+
+  
+    const inputFormiks = {
+        getFormErrorMessage,
+        isFormFieldValid
+    }
   return (
     <div id='create_coupons'>
-      <h1 id='createHeader'>{i18n.t('create')}</h1>
+      <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
       <Toast id='toastMessage' ref={toast}></Toast>
       <S.ContainerCard id='container'>
         <form id='createForm' onSubmit={formik.handleSubmit}>
@@ -260,7 +273,23 @@ export const Index = () => {
                 onChange={formik.handleChange}
               />
             </div>
-            <div id='discountDiv' className='p-field p-col-12 p-md-3'>
+            {formik.values.discount_type=='FIXED'?
+                              <InputContainer label={i18n.t('discount')} name="discount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.discount,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                                suffix: '₺'
+                                }} />
+                              : 
+                              <InputContainer label={i18n.t('discount')} name="discount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                value: formik.values.discount,
+                                onValueChange: formik.handleChange,
+                                showButtons: true,
+                                suffix: '%'
+                            }} />
+                              }
+                              
+            {/* <div id='discountDiv' className='p-field p-col-12 p-md-3'>
               <h4 id='discountHeader'>{i18n.t('discount')}</h4>
               <InputNumber
                 id='discount'
@@ -269,7 +298,7 @@ export const Index = () => {
                 onValueChange={formik.handleChange}
                 showButtons
               />
-            </div>
+            </div> */}
             <div id='max_usage_Div' className='p-field p-col-12 p-md-3'>
               <h4 id='max_usage_Header'>{i18n.t('maximumUsage')}</h4>
               <InputNumber

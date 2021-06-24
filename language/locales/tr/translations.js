@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Eklenti Kategorileri',
   addonCategoryList: 'Eklenti Kategorileri Listesi',
   createAddonCategory: 'Eklenti Kategorisi Oluştur',
+  selectAddonCategories: 'Eklenti Kategorileri Seçin',
   addons: 'Eklentiler',
   addonList: 'Eklentiler Listesi',
   createAddon: 'Eklenti Oluştur',
@@ -34,9 +35,10 @@ export const translations = {
   transfers: 'Transferler',
   logout: 'Çıkış Yap',
 
+  loginTitle: 'Oturumunuzu devam etmek için giriş yapmalısınız',
   login: 'Giriş Yap',
   rememberMe: 'Beni Hatırla',
-  takingYouToYourDashboard: 'Kontrol panelinize götürülüyorsunuz...',
+  takingYouToYourDashboard: 'Kontrol panelinize yönlendiriliyorsunuz...',
   somethingWentWrongWhileLoggingIn: 'Giriş yaparken hata oluştu',
   invalidEmailOrPassword: 'Geçersiz e-posta veya şifre',
   userNotFound: 'Kullanıcı bulunamadı',
@@ -71,6 +73,16 @@ export const translations = {
   total: 'Toplam Miktar',
   orderTime: 'Sipariş Zamanı',
   operations: 'Operasyonlar',
+  order: 'Sipariş',
+  from: 'Kimden',
+  to: 'kime',
+  receipt: 'Fatura',
+  mealName: 'Yemek adı',
+  price: 'Tane fiyatı',
+  quantity: 'Adet',
+  total: 'Ara toplama',
+  VAT: 'Vergi',
+  discountCoupon: 'Kupon indirimi',
 
   // Restaurant List
   country: 'Ülke',
@@ -102,7 +114,7 @@ export const translations = {
   closed: 'Kapalı',
 
   //edit restaurant
-  editRestaurant: 'restoran düzenleme',
+  editRestaurant: 'Restoran Düzenleme',
 
   // Meals List page
   image: 'Resim',
@@ -187,6 +199,9 @@ export const translations = {
   updatedUser: 'Kullanıcı Güncellendi',
   userName: 'Kullanıcı Adı',
 
+  //food category
+  createFoodCategory:'Yemek kategorisi oluştur',
+  editFoodCategory:'Yemek Kategorisini düzenle',
   // Table Pagination
   showingXtoYofZ: '{{z}} sonuç içinden {{x}} - {{y}} tanesi gösteriliyor',
 
@@ -197,9 +212,32 @@ export const translations = {
   selectRestaurant: 'Restoran Seçin',
   dragAndDropImageHere: 'Resmi buraya sürükleyip bırakın',
 
+  noXfound:'{{x}} bulunmadı',
+
   fixed: 'Belli',
   percentage: 'Yüzdesi',
 
   addressInformation: 'Addres Bilgileri',
   selectAnOwner: 'Restoran Sahibi Seçin',
+
+  iban: 'İBAN',
+  bankName: 'Banka',
+
+  xDaysAgo: '{{x}} gün önce',
+  enum: 'Tür',
+  single: 'Tek',
+  multiple: 'Çoklu',
+
+  listOfX: '{{x}} listesi',
+
+  loading: 'Yükleniyor...',
+
+  orderStatus: 'Sipariş Durumu',
+  paymentStatus: 'Ödeme Durumu',
+  deliveryScoutAssignment: 'Kargocu Atama',
+
+  notSupported: 'Desteklenmiyor',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'Restoranlarınızın hiçbirinde eklenmiş yemek yok'
+
 };

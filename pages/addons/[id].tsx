@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import * as S from '../../styles/food/create-food/food.create.style';
@@ -21,10 +21,12 @@ import InputGroup from '../../components/inputs/inputGroup';
 import InputContainer from '../../components/inputs/inputContainer';
 import { useRouter } from 'next/dist/client/router';
 import { addonsTypes } from '../../store/types/addons.type';
+import { Toast } from 'primereact/toast';
 
 export const Index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const toast = useRef(null);
 
   const [data, setData] = useState(false);
 
@@ -94,7 +96,12 @@ export const Index = () => {
 
     if (successUpdate) {
       setData(false);
-      router.push('/addons');
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: i18n.t('success'),
+      });
+      setTimeout(() => { router.push('/addons') }, 2000)
       dispatch({ type: addonsTypes.ADDON_UPDATE_RESET });
       dispatch({ type: addonsTypes.ADDON_FIND_RESET });
     }
@@ -104,10 +111,10 @@ export const Index = () => {
     getFormErrorMessage,
     isFormFieldValid,
   };
-
   return (
     <div id='create_Add_ons'>
       <h1 id='createHeader'>{i18n.t('editAddon')}</h1>
+      <Toast id='toastMessage' ref={toast}></Toast>
       {addonCatSuccess && addonCategoryList && successFind && (
         <form onSubmit={formik.handleSubmit}>
           <S.ContainerCard id='createContainer'>
@@ -127,8 +134,8 @@ export const Index = () => {
                 </InputGroup>
                 <h4 id='addonCatHeader'>{i18n.t('addonCategory')}</h4>
                 <Dropdown
-                  id='addOn_category_id '
-                  name='addOn_category_id '
+                  id='addOn_category_id'
+                  name='addOn_category_id'
                   value={formik.values.addOn_category_id}
                   options={addonCategoryList.items}
                   optionValue='id'
@@ -151,24 +158,20 @@ export const Index = () => {
               </FormColumn>
               <FormColumn divideCount={3}>
                 <InputGroup>
-                  <InputContainer
-                    label={i18n.t('price')}
-                    name='price'
-                    formiks={inputFormiks}
-                    size={6}
-                    component={InputNumber}
-                    iprops={{
-                      value: formik.values.price,
-                      onValueChange: formik.handleChange,
-                      showButtons: true,
-                    }}
+                  <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                    value: formik.values.price,
+                    onValueChange: formik.handleChange,
+                    mode: "currency",
+                    currency: "TRY",
+                    showButtons: true
+                  }}
                   />
                 </InputGroup>
               </FormColumn>
-              <S.SubmitBtn>
-                <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
-              </S.SubmitBtn>
             </div>
+            <S.SubmitBtn>
+              <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
+            </S.SubmitBtn>
           </S.ContainerCard>
         </form>
       )}

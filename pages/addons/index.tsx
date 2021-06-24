@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import AddonsTable from '../../components/tables/addonsTable';
-import { listAddons } from '../../store/actions/addons.action';
-import { listAddonCategory } from '../../store/actions/addon-category.action';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'typesafe-actions';
-import Loading from '../../components/Loading';
+import React, { useState,useEffect } from "react"
+import AddonsTable from "../../components/tables/addonsTable"
+import { listAddons } from "../../store/actions/addons.action"
+import { listAddonCategory } from "../../store/actions/addon-category.action"
+import {useDispatch,useSelector} from 'react-redux'
+import { RootState } from "typesafe-actions"
+import _ from 'lodash'
+import Loading from "../../components/Loading"
+import { i18n } from "../../language"
+
 
 const restaurantOwnerList = () => {
   const dispatch = useDispatch();
@@ -22,12 +25,15 @@ const restaurantOwnerList = () => {
 
   return (
     <div id='addonsTabe'>
-      {!loading && success && successCat && (
+      {!loading && success && successCat &&[addons.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('addons')})}</h1>: <>
+      <h1 id="addonsHeader">{i18n.t('addons')}</h1>
         <AddonsTable
-          addons={addons.items}
-          addonCat={addonCat.items}
+          addons={_.without(_.map(addons.items, (item) => {if (!item.is_deleted) return item}), undefined)}
+          addonCat={_.without(_.map(addonCat.items, (item) => {if (!item.is_deleted) return item}), undefined)}
         ></AddonsTable>
-      )}
+        </>
+      ]
+      }
       {loading && <Loading />}
     </div>
   );

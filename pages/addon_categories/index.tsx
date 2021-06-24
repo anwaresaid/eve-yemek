@@ -5,11 +5,10 @@ import { InputText } from 'primereact/inputtext';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import editButton from '../../components/InTableComponents/editButton/index';
 import { i18n } from '../../language';
 import AddOnCategoryTable from '../../components/tables/addonCategoryTable';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
-import * as S from '../../styles/food/food.list.style';
+import _ from 'lodash'
 import Loading from '../../components/Loading';
 
 const AddonCategoriesList = () => {
@@ -41,7 +40,7 @@ const AddonCategoriesList = () => {
 
   return (
     <div id="addonCategoryTabe">
-      {!loading && addonCategories && <AddOnCategoryTable addonCategories={addonCategories.items}></AddOnCategoryTable>}
+      {!loading && addonCategories &&[addonCategories.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('addonCategories')})}</h1>:<><h1 id="addonCatHeader">{i18n.t('addonCategories')}</h1> <AddOnCategoryTable addonCategories={_.without(_.map(addonCategories.items, (item) => {if (!item.is_deleted) return item}), undefined)}></AddOnCategoryTable></>]}
       {loading && <Loading />}
     </div>
   );

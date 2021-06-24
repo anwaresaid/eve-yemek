@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Категории добавки еды',
   addonCategoryList: 'Список категорий добавки еды',
   createAddonCategory: 'Создать категорию добавки еды',
+  selectAddonCategories: 'Выбрать Категории добавки еды',
   addons: 'Добавки еды',
   addonList: 'Список добавки еды',
   createAddon: 'Создать добавки еды',
@@ -34,6 +35,7 @@ export const translations = {
   transfers: 'Переводы',
   logout: 'Выйти',
 
+  loginTitle: 'Вы должны войти в систему чтобы продолжить сеанс',
   login: 'Логин',
   rememberMe: 'Запомни меня',
   takingYouToYourDashboard: 'Загружается личный кабинет...',
@@ -71,6 +73,16 @@ export const translations = {
   total: 'Итого',
   orderTime: 'Время заказа',
   operations: 'Операции',
+  order: 'Заказ',
+  from: 'От кого',
+  to: 'Кому',
+  receipt: 'Фактура',
+  mealName: 'Имя еды',
+  price: 'Цена за штуку',
+  quantity: 'Количество',
+  total: 'Общая цена',
+  VAT: 'Налог',
+  discountCoupon: 'Скидочный купон',
 
   // Restaurant List
   country: 'страна',
@@ -103,7 +115,7 @@ export const translations = {
 
   //edit restaurant
   editRestaurant: 'Измени Pесторан',
-  
+
   // Meals List page
   image: 'Изображение',
   category: 'Категория',
@@ -189,6 +201,9 @@ export const translations = {
   updatedFoodCategory: 'Категория еды обновлено',
   createdFoodCategory: 'Категория еды создано',
 
+  // food category
+  editFoodCategory:'Измени Категорию еды ',
+  createFoodCategory:'Создать категорию еды',
   // Table Pagination
   showingXtoYofZ: 'Показано с {{x}} по {{y}} из {{z}}',
 
@@ -199,9 +214,31 @@ export const translations = {
   selectRestaurant: 'Выбрать ресторан',
   dragAndDropImageHere: 'Перетащите изображение сюда',
 
+  noXfound:'{{x}} не найден',
+
   fixed: 'Точный',
   percentage: 'Процентный',
 
   addressInformation: 'информация об адресе',
   selectAnOwner: 'Выберите владельца',
+
+  iban: 'номер',
+  bankName: 'Название банка',
+
+  xDaysAgo: '{{x}} дня назад',
+  enum: 'Тип',
+  single: 'один',
+  multiple: 'несколько',
+
+  listOfX: 'Список из {{x}}',
+
+  loading: 'загрузка ...',
+
+  orderStatus: 'статус заказа',
+  paymentStatus: 'статус платежа',
+  deliveryScoutAssignment: 'курьерская доставка',
+
+  notSupported: 'не поддерживается',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'нет еды ни в одном из ваших ресторанов'
 };

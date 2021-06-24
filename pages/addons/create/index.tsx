@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import * as S from '../../../styles/food/create-food/food.create.style';
@@ -17,10 +17,12 @@ import InputGroup from '../../../components/inputs/inputGroup';
 import InputContainer from '../../../components/inputs/inputContainer';
 import { useRouter } from 'next/dist/client/router';
 import { addonsTypes } from '../../../store/types/addons.type';
+import { Toast } from 'primereact/toast';
 
 export const Index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const toast = useRef(null);
 
   const [addonCategoryName, setAddonCategoryName] = useState(null);
 
@@ -93,7 +95,12 @@ export const Index = () => {
     if (addonCatSuccess) settingDropDownNames();
 
     if (success) {
-      router.push('/addons');
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: i18n.t('success'),
+      });
+      setTimeout(() => { router.push('/addons') }, 2000)
       dispatch({ type: addonsTypes.ADDON_CREATE_RESET });
     }
   }, [addonCatSuccess, success]);
@@ -105,6 +112,7 @@ export const Index = () => {
 
   return (
     <div id='create_Add_ons'>
+      <Toast id='toastMessage' ref={toast}></Toast>
       <h1 id='createHeader'>{i18n.t('createAddon')}</h1>
       <form onSubmit={formik.handleSubmit}>
         <S.ContainerCard id='createContainer'>
@@ -148,18 +156,14 @@ export const Index = () => {
             </FormColumn>
             <FormColumn divideCount={3}>
               <InputGroup>
-                <InputContainer
-                  label={i18n.t('price')}
-                  name='price'
-                  formiks={inputFormiks}
-                  size={6}
-                  component={InputNumber}
-                  iprops={{
+                <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                     value: formik.values.price,
                     onValueChange: formik.handleChange,
-                    showButtons: true,
+                    mode: "currency",
+                    currency: "TRY",
+                    showButtons: true
                   }}
-                />
+                  />
               </InputGroup>
             </FormColumn>
             <S.SubmitBtn>
