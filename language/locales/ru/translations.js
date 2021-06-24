@@ -238,5 +238,7 @@ export const translations = {
   paymentStatus: 'статус платежа',
   deliveryScoutAssignment: 'курьерская доставка',
 
-  notSupported: 'не поддерживается'
+  notSupported: 'не поддерживается',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: ''
 };

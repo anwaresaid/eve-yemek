@@ -236,6 +236,8 @@ export const translations = {
   paymentStatus: 'Ödeme Durumu',
   deliveryScoutAssignment: 'Kargocu Atama',
 
-  notSupported: 'Desteklenmiyor'
+  notSupported: 'Desteklenmiyor',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'Restoranlarınızın hiçbirinde eklenmiş yemek yok'
 
 };

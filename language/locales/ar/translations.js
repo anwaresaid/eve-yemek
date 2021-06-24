@@ -238,5 +238,7 @@ export const translations = {
   paymentStatus: 'حالة السداد',
   deliveryScoutAssignment: 'تسليم مهمة الكشفية',
 
-  notSupported: 'غير مدعوم'
+  notSupported: 'غير مدعوم',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'لا يوجد أي طبق في مطاعمكم'
 };
