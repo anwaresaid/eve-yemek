@@ -148,10 +148,13 @@ const MealDataInput = (props) => {
         if (updatedFoodSuccess) {
             toast.current.show({ severity: 'success', summary: 'Updated Meal', detail: 'Successfully updated meal' })
             setTimeout(() => { router.push('/foods') }, 2000)
+            return
         }
 
 
         if (props.updating && props.meal) {
+            if (updatedFoodLoading || updatedFoodSuccess)
+                return
             formik.values.restaurant_id = props.meal.restaurant
             formik.values.food_category_id = props.meal.food_category
             formik.values.name = props.meal.name;
@@ -241,7 +244,7 @@ const MealDataInput = (props) => {
                                     showButtons: true
                                 }}
                                 />
-                                <InputContainer label={i18n.t('discountedPrice')} name="discountedPrice" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
+                                <InputContainer label={i18n.t('discountedPrice')} name="discount_price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.discount_price,
                                     onValueChange: formik.handleChange,
                                     mode: "currency",
