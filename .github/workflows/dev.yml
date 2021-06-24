@@ -2,7 +2,7 @@ name: Baklava Dev Build & Deploy
 
 on:
   push:
-    branches: [ Feras/SB-517 ]
+    branches: [ develop ]
 
 jobs:
   build:
@@ -36,5 +36,6 @@ jobs:
             cd /srv/dev.eve-yemek.com/
             git restore .
             git pull origin develop 
-            npm i
-            pm2 reload dev.baklava --update-env
+            yarn install
+            yarn build
+            pm2 reload dev.baklava
