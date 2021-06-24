@@ -25,6 +25,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+    steps:        
       - name: Box Box Box!
         uses: appleboy/ssh-action@master
         with:
