@@ -8,7 +8,7 @@ const dropDown = (props) => {
                 <h4 id='dropDownHeader'>{props.label}</h4>
             </div>
             <div id='dropDownDiv' className="p-col">
-                <Dropdown id='dropDown' value={props.value} options={props.options} onChange={props.onChange} optionLabel={props.optionLabel} placeholder={props.placeHolder} />
+                <Dropdown id='dropDown' value={props.value} options={props.options} onChange={props.onChange} optionLabel={props.optionLabel} placeholder={props.placeHolder} emptyMessage={props.emptyMessage}/>
             </div>
         </div>
     );

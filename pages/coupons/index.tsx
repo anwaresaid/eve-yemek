@@ -15,7 +15,7 @@ const index = () => {
   const { loading, coupons } = res;
 
   useEffect(() => {
-    if (!coupons) dispatch(listCoupons());
+     dispatch(listCoupons());
   }, [dispatch]);
 
   return (

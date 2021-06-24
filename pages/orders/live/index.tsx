@@ -16,7 +16,7 @@ const liveOrdersList = () => {
   const { loading, success, orders } = res;
 
   useEffect(() => {
-    if (!orders) dispatch(listOrders());
+    if (orders.items.length === 0) dispatch(listOrders());
     if (socket) {
       socket.on('messageToClient', (payload) => {
         //do something on listen

@@ -12,7 +12,6 @@ const restaurantOwnerList = () => {
     const res = useSelector((state:RootState) => state.listRestaurantOwners)
      const {loading, success, restaurantOwners} = res
     useEffect( () => {
-        if (restaurantOwners.items.length === 0)
             dispatch(listRestaurantOwners());
      }, [dispatch]);
 

@@ -19,10 +19,11 @@ const UpdateFood = () => {
     const { loading: foodLoading, success: foodSuccess, food: foodData } = resFood;
 
     useEffect(() => {
+        if(!router.isReady) return;
         if (!foodSuccess || id !== foodData?.id) {
             dispatch(findFood(router.query.id));
         }
-    }, [foodSuccess])
+    }, [foodSuccess, router.isReady])
 
     return foodLoading ? <ProgressSpinner/> : <MealDataInput updating meal={foodData}></MealDataInput>
 }

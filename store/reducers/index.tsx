@@ -20,7 +20,7 @@ import {
   findAddonsReducer,
   updateAddonsReducer,
 } from './addons.reducer';
-import { listOrdersReducer, findOrderReducer } from './orders.reducer';
+import { findOrderReducer, listOrdersReducer } from './orders.reducer';
 import { listRestaurantReducer } from './restaurants.reducer';
 import {
   listFoodCategoryReducer,

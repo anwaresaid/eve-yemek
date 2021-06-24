@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Add-On Categories',
   addonCategoryList: 'Add-On Category List',
   createAddonCategory: 'Create Add-On Category',
+  selectAddonCategories: 'Select Add-On Categories',
   addons: 'Add-Ons',
   addonList: 'Add-On List',
   createAddon: 'Create Add-On',
@@ -72,6 +73,16 @@ export const translations = {
   total: 'Total',
   orderTime: 'Order Time',
   operations: 'Operations',
+  order: 'Order',
+  from: 'From',
+  to: 'To',
+  receipt: 'Receipt',
+  mealName: 'Meal Name',
+  price: 'Price',
+  quantity: 'Quantity',
+  total: 'Total',
+  VAT: 'VAT',
+  discountCoupon: 'Discount Coupon',
 
   // Restaurant List
   country: 'Country',
@@ -217,5 +228,15 @@ export const translations = {
   single: 'Single',
   multiple: 'Multiple',
 
-  listOfX: 'List of {{x}}'
+  listOfX: 'List of {{x}}',
+
+  loading: 'Loading...',
+
+  orderStatus: 'Order Status',
+  paymentStatus: 'Payment Status',
+  deliveryScoutAssignment: 'Delivery Scout Assignment',
+
+  notSupported: 'Not Supported',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'None of your restaurants have any meals added'
 };

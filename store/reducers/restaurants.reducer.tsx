@@ -116,7 +116,9 @@ export const findRestaurantReducer = (state = initialState, action) => {
         error: action.payload
       } 
     case restaurantsTypes.RESTAURAT_FIND_RESET:
-      return {} 
+      return {
+        loading: false
+      } 
       
     default:
       return state;

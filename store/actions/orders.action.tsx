@@ -31,18 +31,18 @@ export const listOrders = () => async (dispatch, getState) => {
 export const findOrder = (id) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: ordersTypes.ORDER_FIND_REQUEST,
+        type: ordersTypes.FIND_ORDER_REQUEST,
       });
   
       const orderService = new OrdersService
       const res = await orderService.getOrder(id)
       dispatch({
-        type: ordersTypes.ORDER_FIND_SUCCESS,
+        type: ordersTypes.FIND_ORDER_SUCCESS,
         payload: res,
       });
     } catch (error) {
       dispatch({
-        type: ordersTypes.ORDER_FIND_FAIL,
+        type: ordersTypes.FIND_ORDER_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
