@@ -88,7 +88,7 @@ const RestaurantDataInput = (props) => {
         longitude: 0.0,
         latitude: 0.0,
         is_open: false,
-        currency_type:'tl'
+        // currency_type:'tl'
     }
 
     const formik = useFormik({
@@ -209,10 +209,10 @@ const RestaurantDataInput = (props) => {
             }
         }
         if (successUpdate) {
-            // toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedRestaurant') })
-            // dispatch({ type: restaurantsTypes.RESTAURAT_UPDATE_RESET });
-            // dispatch({ type: restaurantsTypes.RESTAURAT_FIND_RESET });
-            // setTimeout(() => { router.push('/restaurants') }, 1000)
+            toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedRestaurant') })
+            dispatch({ type: restaurantsTypes.RESTAURAT_UPDATE_RESET });
+            dispatch({ type: restaurantsTypes.RESTAURAT_FIND_RESET });
+            setTimeout(() => { router.push('/restaurants') }, 1000)
         }
         if (restaurantCreateSuccess) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('addedRestaurant') })
