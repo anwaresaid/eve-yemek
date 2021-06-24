@@ -1,0 +1,39 @@
+name: Baklava Dev Build & Deploy
+
+on:
+  push:
+    branches: [ Feras/SB-517 ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i
+      - run: npm run build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+      - name: Box Box Box!
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: root
+          key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}       
+          script: |
+            cd /srv/dev.eve-yemek.com/
+            git restore .
+            git pull origin develop 
+            npm i
+            pm2 reload dev.baklava
