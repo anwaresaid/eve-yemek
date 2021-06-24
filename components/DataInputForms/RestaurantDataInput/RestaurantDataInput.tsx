@@ -162,33 +162,35 @@ const RestaurantDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
+            
+            let tmpData = Object.create(data);
 
             let address:any = {
-                full_address:data.address,
-                latitude: data.latitude,
-                longitude: data.longitude,
-                city:data.city_id,
-                state:data.town_id
+                full_address:tmpData.address,
+                latitude: tmpData.latitude,
+                longitude: tmpData.longitude,
+                city:tmpData.city_id,
+                state:tmpData.town_id
             }
 
             if(props.updating){
                 address.id = restaurant.address.id;
             }
 
-            delete data.latitudeInt;
-            delete data.longitudeInt;
-            delete data.longitude;
-            delete data.latitude;
-            delete data.city_id;
-            delete data.town_id;
-            delete data.owner_name;
+            delete tmpData.latitudeInt;
+            delete tmpData.longitudeInt;
+            delete tmpData.longitude;
+            delete tmpData.latitude;
+            delete tmpData.city_id;
+            delete tmpData.town_id;
+            delete tmpData.owner_name;
 
-            data = {...data, address:{...address}};
+            tmpData = {...tmpData, address:{...address}};
 
             if (props.updating) {
-                dispatch(updateRestaurant(props.id, data));
+                dispatch(updateRestaurant(props.id, tmpData));
             } else if (props.creating) {
-                dispatch(createRestaurant(data));
+                dispatch(createRestaurant(tmpData));
             }
         }
     });
