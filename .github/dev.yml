@@ -36,4 +36,4 @@ jobs:
             git restore .
             git pull origin develop 
             npm i
-            pm2 reload dev.baklava
+            pm2 reload dev.baklava --update-env
