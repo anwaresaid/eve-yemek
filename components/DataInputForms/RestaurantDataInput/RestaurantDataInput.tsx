@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
 import { useFormik } from 'formik';
 import { createRestaurant, findRestaurant, listRestaurantOwners, updateRestaurant } from "../../../store/actions/restaurant.action";
-import { listFoodByRestaurant } from "../../../store/actions/foods.action";
 import { restaurantsTypes } from "../../../store/types/restaurants.type";
 import { TabPanel, TabView } from "primereact/tabview";
 import FoodsTable from "../../tables/foodsTable";
@@ -165,16 +164,17 @@ const RestaurantDataInput = (props) => {
         onSubmit: (data: any) => {
 
             const address = {
+                id: restaurant.address.id,
                 full_address:data.address,
-                latitude: data.latitudeInt,
-                longitude: data.longitudeInt,
+                latitude: data.latitude,
+                longitude: data.longitude,
                 city:data.city_id,
                 state:data.town_id
             }
 
             delete data.latitudeInt;
             delete data.longitudeInt;
-            delete data.longitude
+            delete data.longitude;
             delete data.latitude;
             delete data.city_id;
             delete data.town_id;
@@ -209,10 +209,10 @@ const RestaurantDataInput = (props) => {
             }
         }
         if (successUpdate) {
-            toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedRestaurant') })
-            dispatch({ type: restaurantsTypes.RESTAURAT_UPDATE_RESET });
-            dispatch({ type: restaurantsTypes.RESTAURAT_FIND_RESET });
-            setTimeout(() => { router.push('/restaurants') }, 1000)
+            // toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedRestaurant') })
+            // dispatch({ type: restaurantsTypes.RESTAURAT_UPDATE_RESET });
+            // dispatch({ type: restaurantsTypes.RESTAURAT_FIND_RESET });
+            // setTimeout(() => { router.push('/restaurants') }, 1000)
         }
         if (restaurantCreateSuccess) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('addedRestaurant') })
@@ -282,7 +282,6 @@ const RestaurantDataInput = (props) => {
         getFormErrorMessage,
         isFormFieldValid
     }
-
     const generalTabPanel = () => {
         return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('editRestaurant')}>
             <S.ContainerCard>
@@ -512,7 +511,6 @@ const RestaurantDataInput = (props) => {
 
     if (props.updating && resLoading)
         return <Loading />
-    console.log(formik.values);
     return (
         <div id="edit_restaurant">
             <h1 id="editHeader">{props.creating ? i18n.t('createRestaurant') : i18n.t('editRestaurant')}</h1>
