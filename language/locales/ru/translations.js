@@ -240,5 +240,5 @@ export const translations = {
 
   notSupported: 'не поддерживается',
 
-  noneOfYourRestaurantsHaveAnyMealsAdded: ''
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'нет еды ни в одном из ваших ресторанов'
 };

@@ -97,7 +97,7 @@ const Index = (props) => {
                 <S.DashboardWrapper id='dashBoard'>
                     <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
                     {
-                        checkIfNoMeals(ownedRestaurants) && <Tag severity="danger" value={i18n.t('noneOfYourRestaurantsHaveAnyMealsAdded')}></Tag>
+                        auth.hasRoles(["restaurant_owner"]) && checkIfNoMeals(ownedRestaurants) && <Tag severity="danger" value={i18n.t('noneOfYourRestaurantsHaveAnyMealsAdded')}></Tag>
                     }
                     {
                         auth.hasRoles(["restaurant_owner"]) &&
