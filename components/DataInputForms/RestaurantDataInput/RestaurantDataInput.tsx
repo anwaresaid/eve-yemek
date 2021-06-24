@@ -163,13 +163,16 @@ const RestaurantDataInput = (props) => {
         },
         onSubmit: (data: any) => {
 
-            const address = {
-                id: restaurant.address.id,
+            let address:any = {
                 full_address:data.address,
                 latitude: data.latitude,
                 longitude: data.longitude,
                 city:data.city_id,
                 state:data.town_id
+            }
+
+            if(props.updating){
+                address.id = restaurant.address.id;
             }
 
             delete data.latitudeInt;
