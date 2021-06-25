@@ -2,6 +2,7 @@ import { i18n } from '../language';
 
 export const baseUrl = (()=> {
     let baseUrl = process.env.NEST_API_URL
+    console.log(baseUrl)
     return baseUrl;
 })();
 
