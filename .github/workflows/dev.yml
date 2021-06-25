@@ -25,7 +25,23 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
-    steps:        
+    steps:       
+      - name: Create Env File
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_NODE_ENV: "development"
+          envkey_NEXT_PUBLIC_GOOGLE_FCM_AUTH_KEY: ${{ secrets.DEV_GOOGLE_FCM_AUTH_KEY }}                                              
+          envkey_NEXT_PUBLIC_API_URL: "https://devapi.eve-yemek.com"
+          envkey_NEXT_PUBLIC_API_MODE: "dev"
+          file_name: .env   
+      - name: Copy ENV To Box
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: root
+          key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
+          source: "./.env"
+          target: "/srv/dev.eve-yemek.com/"             
       - name: Box Box Box!
         uses: appleboy/ssh-action@master
         with:
@@ -38,4 +54,4 @@ jobs:
             git pull origin develop 
             yarn install
             yarn build
-            pm2 reload dev.baklava
+            pm2 reload dev.baklava --update-env
