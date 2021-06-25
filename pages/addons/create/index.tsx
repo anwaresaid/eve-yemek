@@ -97,7 +97,7 @@ export const Index = () => {
     if (success) {
       toast.current.show({
         severity: 'success',
-        summary: 'Success',
+        summary:  i18n.t('success'),
         detail: i18n.t('success'),
       });
       setTimeout(() => { router.push('/addons') }, 2000)

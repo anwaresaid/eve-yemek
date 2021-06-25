@@ -240,5 +240,10 @@ export const translations = {
 
   notSupported: 'غير مدعوم',
 
-  noneOfYourRestaurantsHaveAnyMealsAdded: 'لا يوجد أي طبق في مطاعمكم'
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'لا يوجد أي طبق في مطاعمكم',
+  successfullyAddedMeal: 'تمت إضافة الوجبة بنجاح',
+  successfullyUpdatedMeal: 'تم تحديث الوجبة بنجاح',
+
+  successfullyAddedUser: 'تمت إضافة المستخدم بنجاح',
+  successfullyUpdatedUser: 'تم تحديث المستخدم بنجاح'
 };

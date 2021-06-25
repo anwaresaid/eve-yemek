@@ -4,6 +4,7 @@ import {RootState} from 'typesafe-actions'
 import {useDispatch,useSelector} from 'react-redux'
 import UserDataInput from '../../../components/DataInputForms/UserDataInput/UserDataInput'
 import {Toast} from 'primereact/toast'
+import { i18n } from '../../../language'
 
 
 const AddUser = () => {
@@ -15,11 +16,11 @@ const AddUser = () => {
 
     useEffect(() => {
         if (addUserSuccess){
-            toast.current.show({severity: 'success', summary: 'Added User', detail: 'Successfully added user'})
+            toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('successfullyAddedUser')})
             setTimeout(() => {  router.push('/') }, 2000)
         } 
         else if (error)
-            toast.current.show({severity: 'warn', summary: 'Error', detail: 'Server: ' + error})
+            toast.current.show({severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + error})
     }, [addUserSuccess, error])
 
     return (
