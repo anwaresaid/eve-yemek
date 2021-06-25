@@ -28,7 +28,7 @@ export default class RestaurantsService {
     }
 
     async listOwnedRestaurants() {
-        const { data:{data} } = await axios.get(`/restaurants/own`);
+        const { data:{data} } = await axios.get(`/restaurants`);
         return data;
     }
 
