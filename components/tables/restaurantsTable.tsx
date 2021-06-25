@@ -19,17 +19,76 @@ const RestaurantsTable = (props) => {
 
 
     const imageBodyTemplate = (rowData) => {
-        return <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
+        return(
+            <React.Fragment>
+            <span className="p-column-title"> {i18n.t('image')}</span>
+            <S.Image className="imageCol" src={`${rowData.image}`}  alt={rowData.image}/>
+            </React.Fragment>
+            )   
    }   
+   const IdBodyTemplate = (rowData) => {
+    return (
+        <React.Fragment>
+            <span className="p-column-title">ID</span>
+            {rowData.id}
+        </React.Fragment>
+    );
+}
+   const NameBodyTemplate = (rowData) => {
+    return (
+        <React.Fragment>
+            <span className="p-column-title"> {i18n.t('name')}</span>
+            {rowData.name}
+        </React.Fragment>
+    );
+}
+   const OwnerBodyTemplate = (rowData) => {
+    return (
+        <React.Fragment>
+            <span className="p-column-title"> {i18n.t('restaurantOwner')}</span>
+            {rowData.owner && rowData.owner.name}
+        </React.Fragment>
+    );
+}
+   const CountryBodyTemplate = (rowData) => {
+    return (
+        <React.Fragment>
+            <span className="p-column-title"> {i18n.t('country')}</span>
+        </React.Fragment>
+    );
+}
+   const StatusBodyTemplate = (rowData) => {
+    return (
+        <div>
+
+            <React.Fragment>
+                <span className="p-column-title"> {i18n.t('status') } </span>
+                <span> {activeTag(rowData.active)}</span>
+            </React.Fragment>
+        </div>
+    );
+}
+   
+   const editBodyTemplate = (rowData) => {
+    return (
+        <div>
+
+            <React.Fragment>
+                <span className="p-column-title"> {i18n.t('operations') } </span>
+                <span> {editButton(rowData,router,path)}</span>
+            </React.Fragment>
+        </div>
+    );
+}
    
     const columns = [
-        {field: 'id', header: "ID"},
+        {field: 'id', header: "ID", body:IdBodyTemplate},
         {field: 'image', header: i18n.t('image'), body: imageBodyTemplate},
-        {field: 'name', header: i18n.t('name')},
-        {field: 'owner.name', header: i18n.t('restaurantOwner')},
-        {field: '', header: i18n.t('country')},
-        {field: 'ops', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.active)},
-        {field: '', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'name', header: i18n.t('name'), body:NameBodyTemplate},
+        {field: 'owner.name', header: i18n.t('restaurantOwner'), body:OwnerBodyTemplate},
+        {field: '', header: i18n.t('country'),body:CountryBodyTemplate},
+        {field: 'ops', header: i18n.t('status'), body: StatusBodyTemplate},
+        {field: '', header: i18n.t('operations'), body:editBodyTemplate}
     ]
 
     return(
