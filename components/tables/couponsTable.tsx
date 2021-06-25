@@ -36,11 +36,11 @@ const CouponsTable = (props) => {
 
   return (
     <StandardTable
-      header={Header(setGlobalFilter, 'Kupon')}
+      header={Header(setGlobalFilter, i18n.t('coupons'))}
       columns={columns}
       value={props.coupons}
       globalFilter={globalFilter}
-      emptyMessage='No coupons found'
+      emptyMessage={i18n.t('noXfound', {x: i18n.t('coupons')})}
     ></StandardTable>
   );
 };

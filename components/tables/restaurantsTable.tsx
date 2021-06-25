@@ -95,11 +95,11 @@ const RestaurantsTable = (props) => {
         
         <StandardTable
 
-                    header={Header(setGlobalFilter,"restaurants")}
+                    header={Header(setGlobalFilter, i18n.t('restaurants'))}
                     columns={columns} 
                     value={props.restaurants}  
                     globalFilter={globalFilter} 
-                    emptyMessage="No food found" >  
+                    emptyMessage={i18n.t('noXfound', {x: i18n.t('restaurants')})} >  
         </StandardTable>
     )
 

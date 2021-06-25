@@ -158,17 +158,13 @@ export const Index = () => {
               </FormColumn>
               <FormColumn divideCount={3}>
                 <InputGroup>
-                  <InputContainer
-                    label={i18n.t('price')}
-                    name='price'
-                    formiks={inputFormiks}
-                    size={6}
-                    component={InputNumber}
-                    iprops={{
-                      value: formik.values.price,
-                      onValueChange: formik.handleChange,
-                      showButtons: true,
-                    }}
+                  <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                    value: formik.values.price,
+                    onValueChange: formik.handleChange,
+                    mode: "currency",
+                    currency: "TRY",
+                    showButtons: true
+                  }}
                   />
                 </InputGroup>
               </FormColumn>

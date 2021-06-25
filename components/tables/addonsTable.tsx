@@ -37,11 +37,11 @@ const AddonsTable = (props) => {
 
   return (
     <StandardTable
-      header={Header(setGlobalFilter, 'Addons')}
+      header={Header(setGlobalFilter, i18n.t('addons'))}
       columns={columns}
       value={props.addons}
       globalFilter={globalFilter}
-      emptyMessage='No users found'
+      emptyMessage={i18n.t('noXfound', {x: i18n.t('addons')})}
     ></StandardTable>
   );
 };

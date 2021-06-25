@@ -16,47 +16,46 @@ const Orders = () => {
     const router = useRouter();
     const [rows, setRows] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
-    const res = useSelector((state:RootState) => state.listOrders);
-    const {loading, success, orders} = res;
+    const res = useSelector((state: RootState) => state.listOrders);
+    const { loading, success, orders } = res;
     const dispatch = useDispatch();
     const path = 'orders';
-    
+
     useEffect(() => {
-        if (!orders)
+        if (orders.items.length === 0 && !success)
             dispatch(listOrders())
         else if (success)
             setRows(orders.items)
-    },[dispatch, success])
+    }, [dispatch, success])
 
     const handleViewButtonClick = (id) => {
-        if(id){
+        if (id) {
             router.push(`/orders/${id}`)
         }
     }
 
     const columns = [
-        {field: 'id', header: 'ID'},
-        {field: 'name', header: i18n.t('restaurant')},
-        {field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status_id ?? 1)},
-        {field: 'total_amount', header: i18n.t('total')}, 
-        {field: 'howLongAgo', header: i18n.t('orderTime')},
-        {field: 'ops', header: i18n.t('operations'), body: (rowData) =>EditBtn(rowData,router,path)}
+        { field: 'id', header: 'ID' },
+        { field: 'restaurant.name', header: i18n.t('restaurant') },
+        { field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status) },
+        { field: 'total_amount', header: i18n.t('total') },
+        { field: 'howLongAgo', header: i18n.t('orderTime') },
+        { field: 'ops', header: i18n.t('operations'), body: (rowData) => EditBtn(rowData, router, path) }
     ]
 
     return (
         <div id="ordersTable">
-            {loading ? <Loading  /> : [
-                orders.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('orders')})}</h1>:
-                    <div id="ordersCard" className="card">
-                        <h1 id="ordersHeader">{i18n.t('orders')}</h1>
-                        <StandardTable 
-                            header={Header(setGlobalFilter,"orders")}
-                            columns={columns} 
-                            value={_.without(_.map(rows, (item) => {if (!item.is_deleted) return item}), undefined)}  
-                            globalFilter={globalFilter} 
-                            emptyMessage="No orders found" >     
-                        </StandardTable>
-                    </div>]}
+            {loading ? <Loading /> : 
+            <div id="ordersCard" className="card">
+                <h1 id="ordersHeader">{i18n.t('orders')}</h1>
+                <StandardTable
+                    header={Header(setGlobalFilter, i18n.t('orders'))}
+                    columns={columns}
+                    value={_.without(_.map(rows, (item) => { if (!item.is_deleted) return item }), undefined)}
+                    globalFilter={globalFilter}
+                    emptyMessage={i18n.t('noXfound', { x: i18n.t('orders') })} >
+                </StandardTable>
+            </div>}
         </div>
     );
 }

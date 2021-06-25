@@ -1,0 +1,57 @@
+name: Baklava Staging Build & Deploy
+
+on:
+  push:
+    branches: [ staging ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i
+      - run: npm run build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:       
+      - name: Create Env File
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_NODE_ENV: "staging"
+          envkey_NEXT_PUBLIC_GOOGLE_FCM_AUTH_KEY: ${{ secrets.DEV_GOOGLE_FCM_AUTH_KEY }}                                              
+          envkey_NEXT_PUBLIC_API_URL: "https://stagingapi.eve-yemek.com"
+          envkey_NEXT_PUBLIC_API_MODE: "staging"
+          file_name: .env   
+      - name: Copy ENV To Box
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: root
+          key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
+          source: "./.env"
+          target: "/srv/staging.eve-yemek.com/"        
+      - name: Box Box Box!
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: root
+          key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}       
+          script: |
+            cd /srv/staging.eve-yemek.com/
+            git restore .
+            git pull origin staging 
+            yarn install
+            yarn build
+            pm2 reload staging.baklava --update-env

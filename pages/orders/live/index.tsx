@@ -16,7 +16,7 @@ const liveOrdersList = () => {
   const { loading, success, orders } = res;
 
   useEffect(() => {
-    if (!orders) dispatch(listOrders());
+    if (orders.items.length === 0 && !success) dispatch(listOrders());
     if (socket) {
       socket.on('messageToClient', (payload) => {
         //do something on listen
@@ -38,14 +38,11 @@ const liveOrdersList = () => {
   return (
     <div id="liveOrdersTable">
       <h1 id="ordersHeader">{i18n.t('liveOrders')}</h1>
-      {!loading && orders && 
-       [
-        orders.items.length==0? <h1>{i18n.t('noXfound',{x:i18n.t('liveorders')})}</h1>:
+      {!loading && orders &&
         <OrdersTable
-          orders={_.without(_.map(orders?.items, (item) => {if (!item.is_deleted) return item}), undefined)}
+          orders={_.without(_.map(orders?.items, (item) => { if (!item.is_deleted) return item }), undefined)}
           role='restaurant_owner'
-        ></OrdersTable>
-       ]}
+        ></OrdersTable>}
       {loading && <Loading />}
     </div>
   );

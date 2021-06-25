@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
 import { useFormik } from 'formik';
 import { createRestaurant, findRestaurant, listRestaurantOwners, updateRestaurant } from "../../../store/actions/restaurant.action";
-import { listFoodByRestaurant } from "../../../store/actions/foods.action";
 import { restaurantsTypes } from "../../../store/types/restaurants.type";
 import { TabPanel, TabView } from "primereact/tabview";
 import FoodsTable from "../../tables/foodsTable";
@@ -75,7 +74,6 @@ const RestaurantDataInput = (props) => {
         delivery_time: 0,
         commission_rate: 0,
         license_code: '',
-        file: '',
         restaurant_charges: 0,
         delivery_radius: 0,
         is_veg: false,
@@ -90,7 +88,7 @@ const RestaurantDataInput = (props) => {
         longitude: 0.0,
         latitude: 0.0,
         is_open: false,
-        currency_type:'TL',
+        // currency_type:'tl'
     }
 
     const formik = useFormik({
@@ -164,26 +162,36 @@ const RestaurantDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
-
-            const address = {
-                full_address:data.address,
-                latitude: data.latitude,
-                longitude: data.longitude,
-                city:data.city_id,
-                state:data.town_id
+            
+            let tmpData = {...data};
+            if(tmpData.image.length==0){
+                delete tmpData.image;
+            }
+            let address:any = {
+                full_address:tmpData.address,
+                latitude: tmpData.latitude,
+                longitude: tmpData.longitude,
+                city:tmpData.city_id,
+                state:tmpData.town_id
             }
 
-            delete data.latitudeInt;
-            delete data.longitudeInt;
-            delete data.city_id;
-            delete data.town_id;
+            if(props.updating){
+                address.id = restaurant.address.id;
+            }
 
-            data = {...data, address:{...address}};
+            delete tmpData.latitudeInt;
+            delete tmpData.longitudeInt;
+            delete tmpData.longitude;
+            delete tmpData.latitude;
+            delete tmpData.city_id;
+            delete tmpData.town_id;
+            delete tmpData.owner_name;
 
+            tmpData = {...tmpData, address:{...address}};
             if (props.updating) {
-                dispatch(updateRestaurant(props.id, data));
+                dispatch(updateRestaurant(props.id, tmpData));  
             } else if (props.creating) {
-                dispatch(createRestaurant(data));
+                dispatch(createRestaurant(tmpData));
             }
         }
     });
@@ -280,7 +288,6 @@ const RestaurantDataInput = (props) => {
         getFormErrorMessage,
         isFormFieldValid
     }
-
     const generalTabPanel = () => {
         return <TabPanel header={props.creating ? i18n.t('createRestaurant') : i18n.t('editRestaurant')}>
             <S.ContainerCard>
@@ -510,8 +517,6 @@ const RestaurantDataInput = (props) => {
 
     if (props.updating && resLoading)
         return <Loading />
-
-        console.log(formik.values);
     return (
         <div id="edit_restaurant">
             <h1 id="editHeader">{props.creating ? i18n.t('createRestaurant') : i18n.t('editRestaurant')}</h1>
