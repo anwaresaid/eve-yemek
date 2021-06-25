@@ -1,7 +1,7 @@
 import { i18n } from '../language';
 
 export const baseUrl = (()=> {
-    return process.env.NEST_API_URL;
+    return process.env.NEXT_PUBLIC_API_URL;
 })();
 
 // prettier-ignore
