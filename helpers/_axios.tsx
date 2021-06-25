@@ -11,6 +11,8 @@ const axiosInstance = axios.create({
     }
 });
 
+console.log(axiosInstance)
+console.log(baseUrl)
 
 axiosInstance.interceptors.request.use(function (config) {
     const auth_token = auth.token;
