@@ -1,31 +1,7 @@
 import { i18n } from '../language';
 
 export const baseUrl = (()=> {
-    let baseUrl = "";
-    
-    const api_mode = process.env.NEXT_PUBLIC_API_MODE.trim();
-    console.log(api_mode)
-    if(!api_mode){
-        console.log("Not")
-        baseUrl = process.env.NEXT_PUBLIC_API_DEV;
-    }
-    else if(api_mode === "dev"){
-        console.log("dev")
-        baseUrl = process.env.NEXT_PUBLIC_API_DEV;
-    }
-    else if(api_mode === "prod"){
-        baseUrl = process.env.NEXT_PUBLIC_API_PROD;
-    }
-    else if(api_mode === "staging"){
-        baseUrl =  process.env.NEXT_PUBLIC_API_STAGING;
-    }
-    else if(api_mode === "local"){
-        baseUrl = process.env.NEXT_PUBLIC_API_LOCAL;
-    }
-    else{
-        baseUrl = process.env.NEXT_PUBLIC_API_DEV;
-    }
-    console.log(baseUrl)
+    let baseUrl = process.env.NEST_API_URL
     return baseUrl;
 })();
 
