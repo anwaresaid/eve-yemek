@@ -212,7 +212,7 @@ export const translations = {
   selectRestaurant: 'Restoran Seçin',
   dragAndDropImageHere: 'Resmi buraya sürükleyip bırakın',
 
-  noXfound:'{{x}} bulunmadı',
+  noXfound:'{{x}} bulunamadı',
 
   fixed: 'Belli',
   percentage: 'Yüzdesi',
@@ -228,7 +228,7 @@ export const translations = {
   single: 'Tek',
   multiple: 'Çoklu',
 
-  listOfX: '{{x}} listesi',
+  listOfX: '{{x}} Listesi',
 
   loading: 'Yükleniyor...',
 
