@@ -164,7 +164,10 @@ const RestaurantDataInput = (props) => {
         onSubmit: (data: any) => {
             
             let tmpData = {...data};
-
+            console.log(tmpData.image.length);
+            if(tmpData.image.length==0){
+                delete tmpData.image;
+            }
             let address:any = {
                 full_address:tmpData.address,
                 latitude: tmpData.latitude,
@@ -186,7 +189,6 @@ const RestaurantDataInput = (props) => {
             delete tmpData.owner_name;
 
             tmpData = {...tmpData, address:{...address}};
-
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, tmpData));  
             } else if (props.creating) {
