@@ -238,6 +238,10 @@ export const translations = {
 
   notSupported: 'Desteklenmiyor',
 
-  noneOfYourRestaurantsHaveAnyMealsAdded: 'Restoranlarınızın hiçbirinde eklenmiş yemek yok'
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'Restoranlarınızın hiçbirinde eklenmiş yemek yok',
+  successfullyAddedMeal: 'Yemek başarıyla eklendi',
+  successfullyUpdatedMeal: 'Yemek başarıyla güncellendi',
 
+  successfullyAddedUser: 'Kullanıcı başarıyla eklendi',
+  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi'
 };

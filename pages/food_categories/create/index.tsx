@@ -81,7 +81,7 @@ export const Index = () => {
                 }} />
                   <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
                     setFile:(image)=>{ formik.values.image=image },
-                    showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                    showSuccess:()=>{toast.current.show({severity: 'info', summary: i18n.t('success'), detail: i18n.t('fileUploaded')});}
                   }}/>
                     
                 <InputContainer label={i18n.t('active')} name="active" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
