@@ -32,7 +32,7 @@ const OrdersTable = (props) => {
             columns={columns} 
             value={props.orders}  
             globalFilter={globalFilter} 
-            emptyMessage="No orders found" >     
+            emptyMessage={i18n.t('noXfound',{x:i18n.t('orders')})} >     
         </StandardTable>
     )
 }
