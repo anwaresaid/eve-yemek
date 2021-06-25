@@ -2,9 +2,7 @@ import { i18n } from '../language';
 
 export const baseUrl = (()=> {
     let baseUrl = "";
-
     const api_mode = process.env.NEXT_PUBLIC_API_MODE.trim();
-
     if(!api_mode){
         baseUrl = process.env.NEXT_PUBLIC_API_DEV;
     }
@@ -23,7 +21,6 @@ export const baseUrl = (()=> {
     else{
         baseUrl = process.env.NEXT_PUBLIC_API_DEV;
     }
-    
     return baseUrl;
 })();
 

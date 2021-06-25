@@ -22,7 +22,7 @@ const RestaurantsTable = (props) => {
         return(
             <React.Fragment>
             <span className="p-column-title"> {i18n.t('image')}</span>
-            <S.Image src={`${rowData.image}`}  alt={rowData.image}/>
+            <S.Image className="imageCol" src={`${rowData.image}`}  alt={rowData.image}/>
             </React.Fragment>
             )   
    }   
@@ -57,6 +57,29 @@ const RestaurantsTable = (props) => {
         </React.Fragment>
     );
 }
+   const StatusBodyTemplate = (rowData) => {
+    return (
+        <div>
+
+            <React.Fragment>
+                <span className="p-column-title"> {i18n.t('status') } </span>
+                <span> {activeTag(rowData.active)}</span>
+            </React.Fragment>
+        </div>
+    );
+}
+   
+   const editBodyTemplate = (rowData) => {
+    return (
+        <div>
+
+            <React.Fragment>
+                <span className="p-column-title"> {i18n.t('operations') } </span>
+                <span> {editButton(rowData,router,path)}</span>
+            </React.Fragment>
+        </div>
+    );
+}
    
     const columns = [
         {field: 'id', header: "ID", body:IdBodyTemplate},
@@ -64,8 +87,8 @@ const RestaurantsTable = (props) => {
         {field: 'name', header: i18n.t('name'), body:NameBodyTemplate},
         {field: 'owner.name', header: i18n.t('restaurantOwner'), body:OwnerBodyTemplate},
         {field: '', header: i18n.t('country'),body:CountryBodyTemplate},
-        {field: 'ops', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.active)},
-        {field: '', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'ops', header: i18n.t('status'), body: StatusBodyTemplate},
+        {field: '', header: i18n.t('operations'), body:editBodyTemplate}
     ]
 
     return(

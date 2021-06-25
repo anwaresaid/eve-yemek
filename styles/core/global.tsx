@@ -121,6 +121,9 @@ const GlobalStyle = createGlobalStyle`
     .p-datatable.p-datatable-gridlines .p-datatable-tfoot > tr > td {
         display: none !important;
     }
+    .p-datatable-gridlines .p-datatable-tbody > tr > td .imageCol{
+        width:60px;
+    }
 
     .p-datatable.p-datatable-gridlines .p-datatable-tbody > tr > td {
         text-align: left;
