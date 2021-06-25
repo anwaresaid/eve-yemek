@@ -240,5 +240,10 @@ export const translations = {
 
   notSupported: 'не поддерживается',
 
-  noneOfYourRestaurantsHaveAnyMealsAdded: 'нет еды ни в одном из ваших ресторанов'
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'нет еды ни в одном из ваших ресторанов',
+  successfullyAddedMeal: 'Успешно добавлено блюдо',
+  successfullyUpdatedMeal: 'Успешно обновленное блюдо',
+
+  successfullyAddedUser: 'Пользователь успешно добавлен',
+  successfullyUpdatedUser: 'Успешно обновленный пользователь'
 };

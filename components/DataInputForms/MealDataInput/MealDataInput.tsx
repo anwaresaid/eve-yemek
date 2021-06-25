@@ -141,12 +141,12 @@ const MealDataInput = (props) => {
         }
 
         if (createFoodSuccess) {
-            toast.current.show({ severity: 'success', summary: 'Added Meal', detail: 'Successfully added meal' })
+            toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('successfullyAddedMeal') })
             setTimeout(() => { router.push('/foods') }, 2000)
         }
 
         if (updatedFoodSuccess) {
-            toast.current.show({ severity: 'success', summary: 'Updated Meal', detail: 'Successfully updated meal' })
+            toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('successfullyUpdatedMeal') })
             setTimeout(() => { router.push('/foods') }, 2000)
             return
         }

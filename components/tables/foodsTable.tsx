@@ -35,11 +35,11 @@ const FoodsTable = (props) => {
     return(
         
         <StandardTable
-                    header={Header(setGlobalFilter,"Food")}
+                    header={Header(setGlobalFilter, i18n.t('meals'))}
                     columns={columns} 
                     value={props.foods}  
                     globalFilter={globalFilter} 
-                    emptyMessage="No food found" >  
+                    emptyMessage={i18n.t('noXfound', {x: i18n.t('meals')})} >  
         </StandardTable>
     )
 

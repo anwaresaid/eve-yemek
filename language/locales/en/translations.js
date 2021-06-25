@@ -238,5 +238,10 @@ export const translations = {
 
   notSupported: 'Not Supported',
 
-  noneOfYourRestaurantsHaveAnyMealsAdded: 'None of your restaurants have any meals added'
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'None of your restaurants have any meals added',
+  successfullyAddedMeal: 'Successfully added meal',
+  successfullyUpdatedMeal: 'Successfully updated meal',
+  
+  successfullyAddedUser: 'Successfully added user',
+  successfullyUpdatedUser: 'Successfully updated user'
 };

@@ -212,7 +212,7 @@ export const translations = {
   selectRestaurant: 'Restoran Seçin',
   dragAndDropImageHere: 'Resmi buraya sürükleyip bırakın',
 
-  noXfound:'{{x}} bulunmadı',
+  noXfound:'{{x}} bulunamadı',
 
   fixed: 'Belli',
   percentage: 'Yüzdesi',
@@ -228,7 +228,7 @@ export const translations = {
   single: 'Tek',
   multiple: 'Çoklu',
 
-  listOfX: '{{x}} listesi',
+  listOfX: '{{x}} Listesi',
 
   loading: 'Yükleniyor...',
 
@@ -238,6 +238,10 @@ export const translations = {
 
   notSupported: 'Desteklenmiyor',
 
-  noneOfYourRestaurantsHaveAnyMealsAdded: 'Restoranlarınızın hiçbirinde eklenmiş yemek yok'
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'Restoranlarınızın hiçbirinde eklenmiş yemek yok',
+  successfullyAddedMeal: 'Yemek başarıyla eklendi',
+  successfullyUpdatedMeal: 'Yemek başarıyla güncellendi',
 
+  successfullyAddedUser: 'Kullanıcı başarıyla eklendi',
+  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi'
 };
