@@ -12,7 +12,7 @@ export const listOrders = () => async (dispatch, getState) => {
   
       const orderService = new OrdersService;
       const res = await orderService.getOrders()
-      
+      console.log(res)
       dispatch({
         type: ordersTypes.ORDER_LIST_SUCCESS,
         payload: parseDateInAllRows(res),

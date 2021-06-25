@@ -122,7 +122,6 @@ export const listFood = () => async dispatch => {
 
     const foodService = new FoodsService;
     const res = await foodService.getFood();
-
     dispatch({
       type: foodsTypes.FOOD_LIST_SUCCESS,
       payload: res,

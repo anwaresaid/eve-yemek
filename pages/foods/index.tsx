@@ -9,11 +9,8 @@ import { i18n } from "../../language";
 
 const FoodsList = () => {
     const dispatch = useDispatch();
-
     const res = useSelector((state: RootState) => state.listFood);
     const { loading, success, foods } = res;
-
-
 
     useEffect(() => {
         dispatch(listFood());

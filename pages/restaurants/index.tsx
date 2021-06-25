@@ -12,9 +12,7 @@ const Index = () => {
     const { loading, success, restaurants } = resList;
 
     useEffect(() => {
-
         dispatch(listRestaurant());
-
     }, [dispatch]);
 
     return (
