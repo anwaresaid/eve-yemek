@@ -49,6 +49,7 @@ const Index = (props) => {
     }
 
     const getTotalOrdersWeekly = () => {
+        console.log("last 7 days",reportData )
         return _.sum(parseCounts(reportData?.lastSevenDaysReport?.order))
     }
     const lineChartData = {
@@ -153,7 +154,7 @@ const Index = (props) => {
                                     <p id='failed_ordersP'>{i18n.t('failedOrders')}</p>
                                 </div>
                                 <div id='box_icons' className='box__icons'>
-                                    <i id='infoIcon' className='pi pi-info'></i>
+                                    <i id='infoIcon' className='pi pi-exclamation-triangle'></i>
                                 </div>
                             </div>
                         </div>

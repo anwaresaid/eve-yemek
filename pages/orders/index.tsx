@@ -22,12 +22,12 @@ const Orders = () => {
     const path = 'orders';
     
     useEffect(() => {
-        if (orders.items.length === 0)
+
             dispatch(listOrders())
-        else if (success)
+        if (orders)
             setRows(orders.items)
             
-    },[dispatch, success])
+    },[dispatch])
 
     const handleViewButtonClick = (id) => {
         if(id){
