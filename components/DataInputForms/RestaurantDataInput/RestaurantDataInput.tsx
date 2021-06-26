@@ -173,7 +173,7 @@ const RestaurantDataInput = (props) => {
             }
 
             tmpData.license_code = "";
-            tmpData.image = "";
+            // tmpData.image = "";
 
             tmpData.is_veg = tmpData.is_veg || false;
             tmpData.featured = tmpData.featured || false;
