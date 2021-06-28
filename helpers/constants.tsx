@@ -40,6 +40,6 @@ export const allMenuItems:any = [
     { separator:true },
     { label:i18n.t("settings"),                     url:"/settings",                roles:["admin", "restaurant_owner"] },
     { label:i18n.t("transfers"),                    url:"/transfers",               roles:["admin"] },
-    { label:i18n.t("logout"),                       url:"/auth/logout",             roles:["admin", "restaurant_owner"] }
+    { label:i18n.t("logout"),                       url:"/auth/logout",             roles:["admin", "restaurant_owner", "customer_service"] }
 
 ];
