@@ -41,7 +41,7 @@ export const findOrderReducer = (state = {}, action) => {
       return {
         loading: false,
         success: true,
-        order: action.payload
+        orderData: action.payload
       }
     case ordersTypes.FIND_ORDER_FAIL:
       return {

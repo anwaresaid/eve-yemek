@@ -75,7 +75,7 @@ export const translations = {
   operations: 'Operasyonlar',
   order: 'Sipariş',
   from: 'Kimden',
-  to: 'kime',
+  to: 'Kime',
   receipt: 'Fatura',
   mealName: 'Yemek adı',
   price: 'Tane fiyatı',

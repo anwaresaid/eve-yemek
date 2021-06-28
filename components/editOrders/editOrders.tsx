@@ -13,59 +13,84 @@ import { parseDateInOneRow } from "../../helpers/dateFunctions";
 const EditOrderPage = (props) => {
     const dispatch = useDispatch();
     let ordersService = new OrdersService()
-    const [currentStatus, setCurrentStatus] = useState(props.order?.status);
-    const statusOptions = [
+    const [currentOrderStatus, setCurrentOrderStatus] = useState(props.orderData?.status);
+    const [currentDeliveryStatus, setCurrentDeliveryStatus] = useState(props.orderData?.delivery_status);
+    const orderStatusOptions = [
         { label: i18n.t('orderPlaced'), value: 'placed' },
         { label: i18n.t('orderAccepted'), value: 'accepted' },
         { label: i18n.t('orderPrepared'), value: 'prepared' },
-        { label: i18n.t('onTheWay'), value: 'on-the-way' },
-        { label: i18n.t('delivered'), value: 'delivered' },
-        { label: i18n.t('cancelled'), value: 'canceled'}
+        { label: i18n.t('cancelled'), value: 'canceled' }
     ];
-    const onChangeStatus = (e) => {
-        let oldStatus = currentStatus
-        setCurrentStatus('loading')
-        ordersService.updateStatus(props.order.id, e.value)
+    const deliveryStatusOptions = [
+        { label: i18n.t('picked'), value: 'picked' },
+        { label: i18n.t('delivered'), value: 'delivered' },
+        { label: i18n.t('cancelled'), value: 'canceled' }
+    ]
+    const onChangeOrderStatus = (e) => {
+        let oldStatus = currentOrderStatus
+        setCurrentOrderStatus('loading')
+        ordersService.updateOrderStatus(props.orderData.order, e.value)
             .then((res) => {
-                setCurrentStatus(e.value);
+                setCurrentOrderStatus(e.value);
                 dispatch({
                     type: ordersTypes.ORDER_LIST_UPDATE,
                     payload: parseDateInOneRow(res)
                 })
-                
+
             })
             .catch((err) => {
-                setCurrentStatus(oldStatus)
+                setCurrentOrderStatus(oldStatus)
+            })
+
+    }
+    const onChangeDeliveryStatus = (e) => {
+        let oldStatus = currentDeliveryStatus
+        setCurrentDeliveryStatus('loading')
+        ordersService.updateDeliveryStatus(props.orderData.order, e.value)
+            .then((res) => {
+                setCurrentDeliveryStatus(e.value);
+            })
+            .catch((err) => {
+                setCurrentDeliveryStatus(oldStatus)
             })
 
     }
     return (
         <div>
-            {currentStatus &&
-                <div id='dropDownDiv'>
-                    <DropDown
-                            id='statusDropdown'
-                            value={currentStatus}
-                            options={statusOptions}
-                            onChange={onChangeStatus}
-                            placeHolder={currentStatus === 'loading' ? i18n.t('loading') : i18n.t('orderStatus')}
-                            label={i18n.t('orderStatus')}
-                        />
-
-                    <DropDown
-                        id='paymentStatusDropdown'
-                        placeHolder={i18n.t('paymentStatus')}
-                        label={i18n.t('paymentStatus')}
-                        emptyMessage={i18n.t('notSupported')}
-                    />
-                    <DropDown
-                        id='deliveryScoutAssignmentDropdown'
-                        placeHolder={i18n.t('deliveryScoutAssignment')}
-                        label={i18n.t('deliveryScoutAssignment')}
-                        emptyMessage={i18n.t('notSupported')}
-                    />
-                </div>
+            {
+                currentOrderStatus &&
+                <DropDown
+                    id='orderStatusDropdown'
+                    value={currentOrderStatus}
+                    options={orderStatusOptions}
+                    onChange={onChangeOrderStatus}
+                    placeHolder={currentOrderStatus === 'loading' ? i18n.t('loading') : i18n.t('orderStatus')}
+                    label={i18n.t('orderStatus')}
+                />
             }
+            {
+                currentDeliveryStatus &&
+                <DropDown
+                    id='deliveryStatusDropdown'
+                    value={currentDeliveryStatus}
+                    options={deliveryStatusOptions}
+                    onChange={onChangeDeliveryStatus}
+                    placeHolder={currentDeliveryStatus === 'loading' ? i18n.t('loading') : i18n.t('deliveryStatus')}
+                    label={i18n.t('deliveryStatus')}
+                />
+            }
+            <DropDown
+                id='paymentStatusDropdown'
+                placeHolder={i18n.t('paymentStatus')}
+                label={i18n.t('paymentStatus')}
+                emptyMessage={i18n.t('notSupported')}
+            />
+            <DropDown
+                id='deliveryScoutAssignmentDropdown'
+                placeHolder={i18n.t('deliveryScoutAssignment')}
+                label={i18n.t('deliveryScoutAssignment')}
+                emptyMessage={i18n.t('notSupported')}
+            />
         </div>
 
     );
