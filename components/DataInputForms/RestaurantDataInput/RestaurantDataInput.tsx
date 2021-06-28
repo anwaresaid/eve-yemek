@@ -144,11 +144,11 @@ const RestaurantDataInput = (props) => {
             }
              
             if (!data.restaurant_charges) {
-                errors.restaurant_charges = i18n.t('isRequired', { input: i18n.t('restaurantCharges') });
+                data.restaurant_charges = 0;
             }
 
             if (!data.minimum_order_amount) {
-                errors.minimum_order_amount = i18n.t('isRequired', { input: i18n.t('minimumAmount') });
+                data.minimum_order_amount = 0;
             }
 
             if (!data.latitudeInt) {
