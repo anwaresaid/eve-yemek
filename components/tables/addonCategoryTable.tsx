@@ -29,11 +29,11 @@ const AddOnCategoryTable = (props) => {
     return(
         
         <StandardTable
-                    header={Header(setGlobalFilter,"addon Category")}
+                    header={Header(setGlobalFilter, i18n.t('addonCategories'))}
                     columns={columns} 
                     value={props.addonCategories}  
                     globalFilter={globalFilter} 
-                    emptyMessage="No addon Categories found" >  
+                    emptyMessage={i18n.t('noXfound', {x: i18n.t('addonCategories')})} >  
         </StandardTable>
     )
 

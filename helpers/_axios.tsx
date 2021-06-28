@@ -2,6 +2,7 @@ import axios from "axios";
 import { baseUrl } from "./constants";
 import auth from "./core/auth";
 
+
 const axiosInstance = axios.create({
     baseURL: baseUrl,
     timeout: 5000,
@@ -10,7 +11,6 @@ const axiosInstance = axios.create({
         'accept': 'application/json'
     }
 });
-
 
 axiosInstance.interceptors.request.use(function (config) {
     const auth_token = auth.token;

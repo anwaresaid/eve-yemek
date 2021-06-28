@@ -57,6 +57,7 @@ export const Wrapper = styled.div`
   }
 `;
 export const Header = styled.h4`
+  font-size:26px;
   margin-bottom: 30px;
   margin-top: 0px;
   text-transform: uppercase;

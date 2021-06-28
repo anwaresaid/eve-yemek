@@ -142,6 +142,10 @@ const RestaurantDataInput = (props) => {
             if (!data.town_id) {
                 errors.town_id = i18n.t('isRequired', { input: i18n.t('district') });
             }
+             
+            if (!data.restaurant_charges) {
+                errors.restaurant_charges = i18n.t('isRequired', { input: i18n.t('restaurantCharges') });
+            }
 
             if (!data.minimum_order_amount) {
                 errors.minimum_order_amount = i18n.t('isRequired', { input: i18n.t('minimumAmount') });
@@ -164,6 +168,15 @@ const RestaurantDataInput = (props) => {
         onSubmit: (data: any) => {
             
             let tmpData = {...data};
+            if(tmpData.image.length==0){
+                delete tmpData.image;
+            }
+
+            tmpData.license_code = "";
+            tmpData.image = "";
+
+            tmpData.is_veg = tmpData.is_veg || false;
+            tmpData.featured = tmpData.featured || false;
 
             let address:any = {
                 full_address:tmpData.address,
@@ -186,7 +199,6 @@ const RestaurantDataInput = (props) => {
             delete tmpData.owner_name;
 
             tmpData = {...tmpData, address:{...address}};
-
             if (props.updating) {
                 dispatch(updateRestaurant(props.id, tmpData));  
             } else if (props.creating) {

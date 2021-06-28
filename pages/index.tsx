@@ -14,6 +14,7 @@ import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/rest
 import { SelectButton } from 'primereact/selectbutton';
 import idColumn from "../components/InTableComponents/idColumn";
 import { Tag } from "primereact/tag";
+import { changePassword } from "../store/actions/user.action";
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
@@ -83,11 +84,13 @@ const Index = (props) => {
         { field: 'is_open', header: i18n.t('status'), body: openClosedTag },
     ]
 
-    const checkIfNoMeals = (ownedRestaurants) => {
-        for (let one of ownedRestaurants){
-            if (one.foods.length > 0)
-                return false
-        }
+    const checkIfNoMeals = (ownedRestaurants:any) => {
+        if(ownedRestaurants?.items?.length > 0){
+            for (let one of ownedRestaurants.items){
+                if (one.foods.length > 0)
+                    return false
+            }
+        }   
         return true
     }
 
@@ -105,7 +108,7 @@ const Index = (props) => {
                         <div className="p-my-5">
                             <StandardTable id='ownedRestaurants'
                                 columns={ownedRestaurantsTableColumns}
-                                value={ownedRestaurants}
+                                value={ownedRestaurants.items}
                                 noPaginator
                                 style={{ tableLayout: "auto" }}
                                 resizableColumns
@@ -121,7 +124,7 @@ const Index = (props) => {
                                     <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
                                 </div>
                                 <div className='box__icons'>
-                                    <i className=' pi pi-shopping-cart'></i>
+                                    <i className='pi pi-shopping-cart'></i>
                                 </div>
                             </div>
                         </div>
