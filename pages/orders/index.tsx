@@ -10,6 +10,7 @@ import OrderStatus from '../../components/InTableComponents/orderStatusTag'
 import { i18n } from '../../language'
 import _ from 'lodash';
 import Loading from '../../components/Loading'
+import { Button } from 'primereact/button'
 
 const Orders = () => {
 
@@ -28,11 +29,15 @@ const Orders = () => {
             setRows(orders.items)
     }, [dispatch, success])
 
-    const handleViewButtonClick = (id) => {
-        if (id) {
-            router.push(`/orders/${id}`)
-        }
-    }
+    const editButton = (row) => {
+
+    
+        return (
+            <React.Fragment>
+                <Button id='editBtn' icon="pi pi-pencil" className="p-button-rounded p-button-info" onClick={()=>{router.push(`/${path}/${row.order}`)}}/>
+            </React.Fragment>
+        );
+}
 
     const columns = [
         { field: 'id', header: 'ID' },
@@ -40,7 +45,7 @@ const Orders = () => {
         { field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status) },
         { field: 'total_amount', header: i18n.t('total') },
         { field: 'howLongAgo', header: i18n.t('orderTime') },
-        { field: 'ops', header: i18n.t('operations'), body: (rowData) => EditBtn(rowData, router, path) }
+        { field: 'ops', header: i18n.t('operations'), body: (rowData) => editButton(rowData) }
     ]
 
     return (
