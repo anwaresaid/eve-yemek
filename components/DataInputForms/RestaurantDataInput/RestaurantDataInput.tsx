@@ -168,7 +168,7 @@ const RestaurantDataInput = (props) => {
         onSubmit: (data: any) => {
             
             let tmpData = {...data};
-            if(tmpData.image.length==0){
+            if(tmpData.image.length==0 && !restaurant?.image){
                 delete tmpData.image;
             }
 
@@ -253,6 +253,7 @@ const RestaurantDataInput = (props) => {
        
             formik.values.owner_id = restaurant.owner?.id;
             formik.values.name = restaurant.name;
+            formik.values.image = restaurant.image;
             formik.values.description = restaurant.description;
             formik.values.email = restaurant.email;
             formik.values.phone = restaurant.phone;
