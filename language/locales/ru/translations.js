@@ -250,5 +250,6 @@ export const translations = {
   orderDetail: 'деталь заказа',
   updateOrderStatus: 'обновить статус заказа',
   deliveryStatus: 'Статус доставки',
-  picked: ''
+  deliveryStatusUpdated: 'Обновленный статус доставки',
+  picked: 'отправлен'
 };

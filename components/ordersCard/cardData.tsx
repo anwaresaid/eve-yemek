@@ -31,11 +31,15 @@ const cardData = () => {
         }
     }, [dispatch, router.isReady])
 
+    const priceTag = (price) => {
+        return price + ' ' + orderData.currency_type
+    }
+
     const mealTableColumns = [
         {field: 'name', header: i18n.t('name')},
-        {field: 'price', header: i18n.t('price')},
+        {header: i18n.t('price'), body: (row) => priceTag(row.price)},
         {field: 'quantity', header: i18n.t('quantity')},
-        {header: i18n.t('total'), body: (row) => {return row.quantity * row.price}}
+        {header: i18n.t('total'), body: (row) => priceTag(row.quantity * row.price)}
     ].map((col, i) => {
         return <Column  key={col.field} field={col.field} header={col.header} body={col.body} sortable />;
     });
@@ -90,11 +94,11 @@ const cardData = () => {
                                 </div>
                                 <div id='orderDetailsDiv' className="p-col-5">
                                     <div>
-                                        <OrderDivider id='restaurantAmount' label={i18n.t('total') + ':'} value={orderData.restaurant_amount} />
-                                        <OrderDivider id='tax' label={i18n.t('VAT') + '(0%)'} value={orderData.tax} />
-                                        <OrderDivider id='deliveryAmount' label={i18n.t('deliveryFee')} value={orderData.delivery_amount} />
-                                        <OrderDivider id='discountCoupon' label={i18n.t('discountCoupon') + "(-):"} value={orderData.coupon_discount} />
-                                        <OrderDivider id='totalAmount' label={i18n.t('total') + "(-):"} value={orderData.total_amount} />
+                                        <OrderDivider id='restaurantAmount' label={i18n.t('total') + ':'} value={priceTag(orderData.total_amount)} />
+                                        <OrderDivider id='tax' label={i18n.t('VAT') + '(0%)'} value={priceTag(orderData.tax)} />
+                                        <OrderDivider id='deliveryAmount' label={i18n.t('deliveryFee')} value={priceTag(orderData.delivery_charge)} />
+                                        <OrderDivider id='discountCoupon' label={i18n.t('discountCoupon') + "(-):"} value={priceTag(orderData.coupon_discount)} />
+                                        <OrderDivider id='totalAmount' label={i18n.t('total') + "(-):"} value={priceTag(orderData.total_amount)} />
                                     </div>
                                 </div>
                             </div>

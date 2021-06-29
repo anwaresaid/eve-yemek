@@ -248,5 +248,6 @@ export const translations = {
   orderDetail: 'Sipariş Detayi',
   updateOrderStatus: 'Sipariş Durumunu Güncelle',
   deliveryStatus: 'Teslim durumu',
-  picked: 'Alındı'
+  deliveryStatusUpdated: 'Teslimat Durumu Güncellendi',
+  picked: 'Gönderildi'
 };

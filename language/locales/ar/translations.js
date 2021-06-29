@@ -250,6 +250,7 @@ export const translations = {
   orderDetail: 'تفاصيل الطلب',
   updateOrderStatus: 'تحديث حالة الطلب',
   deliveryStatus: 'حالة التسليم',
-  picked: ''
+  deliveryStatusUpdated: 'تم تحديث حالة التسليم',
+  picked: 'تم الإرسال'
 
 };

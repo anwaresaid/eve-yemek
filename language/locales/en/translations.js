@@ -248,5 +248,7 @@ export const translations = {
   orderDetail: 'Order Detail',
   updateOrderStatus: 'Update Order Status',
   deliveryStatus: 'Delivery Status',
-  picked: 'Picked'
+  deliveryStatusUpdated: 'Delivery status updated',
+  deliveryStatusUpdateFailed: 'Delivery status update failed',
+  picked: 'Dispatched'
 };
