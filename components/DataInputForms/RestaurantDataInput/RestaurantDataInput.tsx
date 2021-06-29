@@ -102,6 +102,9 @@ const RestaurantDataInput = (props) => {
             if (!data.description) {
                 errors.description = i18n.t('isRequired', { input: i18n.t('description') });
             }
+            if(/^\d+$/.test(data.description)){
+                errors.description = i18n.t('onlyNumberError');
+            }
 
             if (!data.phone) {
                 errors.phone = i18n.t('isRequired', { input: i18n.t('phoneNumber') });

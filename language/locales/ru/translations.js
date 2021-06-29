@@ -190,6 +190,7 @@ export const translations = {
   phoneNumber: 'Номер телефона',
   ownerName: 'Имя владельца',
   invalidEmailMessage: 'Недействительный адрес электронной почты',
+  onlyNumberError: 'этот ввод не может состоять только из чисел',
 
   // Toasts
   success: 'Успешно',

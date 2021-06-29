@@ -190,6 +190,7 @@ export const translations = {
   phoneNumber: 'Telefon Numarası',
   ownerName: 'Sahibinin Adı',
   invalidEmailMessage: 'Yanlış e-posta adresi',
+  onlyNumberError: 'Bu alan sadece rakamlar ile doldurulamaz',
 
   // Toasts
   success: 'Başarılı',

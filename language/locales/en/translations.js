@@ -187,6 +187,7 @@ export const translations = {
   phoneNumber: 'Phone Number',
   ownerName: 'Owner Name',
   invalidEmailMessage: 'Invalid email address',
+  onlyNumberError: 'Input cannot only contain numbers',
 
   // Toasts
   success: 'Success',
