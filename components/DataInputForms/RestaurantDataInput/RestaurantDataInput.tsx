@@ -50,8 +50,8 @@ const RestaurantDataInput = (props) => {
    
     //setting names for dropdowns.
     const settingDropDownNames = () => {
-        const sortedResOwners = resOwnerslist.items.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0));
-        const restOnwersName = sortedResOwners.map(resOwner => { return { id: resOwner.id, name: resOwner.name } });
+        const sortedResOwners = resOwnerslist?.items.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0));
+        const restOnwersName = sortedResOwners?.map(resOwner => { return { id: resOwner.id, name: resOwner.name } });
         setResOwnersName(restOnwersName);
     }
 
@@ -247,7 +247,7 @@ const RestaurantDataInput = (props) => {
 
         if (resOnwersSuccess && resSuccess && props.updating) {
             setSelectedResOwner(() => {
-                let selectedResOwners = resOwnerslist.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
+                let selectedResOwners = resOwnerslist?.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
        
@@ -291,7 +291,7 @@ const RestaurantDataInput = (props) => {
 
         formik.values.town_id = 0;
 
-        const filteredDistricts = jsonDistricts.filter((k) => k.il_id === cityId)
+        const filteredDistricts = jsonDistricts?.filter((k) => k.il_id === cityId)
 
         setDistricts(filteredDistricts);
     }

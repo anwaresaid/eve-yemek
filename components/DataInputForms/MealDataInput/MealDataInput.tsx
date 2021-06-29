@@ -88,7 +88,7 @@ const MealDataInput = (props) => {
             if (!selectedAddOnCategories) {
                 errors.add_on_categories = i18n.t('isRequired', { input: i18n.t('addonCategories') });;
             } else {
-                data.add_on_categories = selectedAddOnCategories.map((ac) => {
+                data.add_on_categories = selectedAddOnCategories?.map((ac) => {
                     return ac.id
                 })
             }
@@ -104,17 +104,17 @@ const MealDataInput = (props) => {
     });
 
     const setRestaurantsDropdownOptions = () => {
-        const restaurantNames = restaurants.items.map(res => { return { name: res.name, id: res.id } });
+        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id } });
         setRestaurantName(restaurantNames);
     }
 
     const setAddonCategoryDropdownOptions = () => {
-        const addonCategoryNames = addonCategories.items.map(addonCategory => { return { id:addonCategory.id, name: addonCategory.name } });
+        const addonCategoryNames = addonCategories?.items.map(addonCategory => { return { id:addonCategory.id, name: addonCategory.name } });
         setAddonCategoryNames(addonCategoryNames);
     }
 
     const setFoodCategoryDropdownOptions = () => {
-        const foodCategoryNames = foodCatlist.items.map(res => { return { name: res.name, id: res.id } });
+        const foodCategoryNames = foodCatlist?.items.map(res => { return { name: res.name, id: res.id } });
         setFoodCategoryName(foodCategoryNames);
     }
 
@@ -164,7 +164,7 @@ const MealDataInput = (props) => {
             formik.values.is_veg = props.meal.is_veg;
             formik.values.active = props.meal.active;
             formik.values.featured = props.meal.featured;
-            setSelectedAddOnCategories(props.meal.add_on_categories.map((aoc) => {return {id: aoc.id, name: aoc.name}}))
+            setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => {return {id: aoc.id, name: aoc.name}}))
         }
 
     }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal]);
