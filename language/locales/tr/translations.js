@@ -243,5 +243,10 @@ export const translations = {
   successfullyUpdatedMeal: 'Yemek başarıyla güncellendi',
 
   successfullyAddedUser: 'Kullanıcı başarıyla eklendi',
-  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi'
+  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi',
+
+  orderDetail: 'Sipariş Detayi',
+  updateOrderStatus: 'Sipariş Durumunu Güncelle',
+  deliveryStatus: 'Teslim durumu',
+  picked: 'Alındı'
 };

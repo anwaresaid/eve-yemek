@@ -245,5 +245,11 @@ export const translations = {
   successfullyUpdatedMeal: 'تم تحديث الوجبة بنجاح',
 
   successfullyAddedUser: 'تمت إضافة المستخدم بنجاح',
-  successfullyUpdatedUser: 'تم تحديث المستخدم بنجاح'
+  successfullyUpdatedUser: 'تم تحديث المستخدم بنجاح',
+
+  orderDetail: 'تفاصيل الطلب',
+  updateOrderStatus: 'تحديث حالة الطلب',
+  deliveryStatus: 'حالة التسليم',
+  picked: ''
+
 };
