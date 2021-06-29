@@ -168,7 +168,7 @@ const RestaurantDataInput = (props) => {
         onSubmit: (data: any) => {
             
             let tmpData = {...data};
-            if(tmpData.image.length==0 && !restaurant.image){
+            if(tmpData.image.length==0 && !restaurant?.image){
                 delete tmpData.image;
             }
 
