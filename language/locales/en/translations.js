@@ -195,15 +195,15 @@ export const translations = {
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',
-  updatedFoodCategory: 'Updated Food Category',
-  createdFoodCategory: 'Created Food Category',
+  updatedFoodCategory: 'Updated Meal Category',
+  createdFoodCategory: 'Created Meal Category',
 
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
 
   //meal category
-  editFoodCategory: 'Edit Food Category',
-  createFoodCategory: 'Create Food Category',
+  editFoodCategory: 'Edit Meal Category',
+  createFoodCategory: 'Create Meal Category',
   noXfound:'no {{x}} found',
 
   selectLanguage: 'Select Language',
@@ -243,5 +243,12 @@ export const translations = {
   successfullyUpdatedMeal: 'Successfully updated meal',
   
   successfullyAddedUser: 'Successfully added user',
-  successfullyUpdatedUser: 'Successfully updated user'
+  successfullyUpdatedUser: 'Successfully updated user',
+
+  orderDetail: 'Order Detail',
+  updateOrderStatus: 'Update Order Status',
+  deliveryStatus: 'Delivery Status',
+  deliveryStatusUpdated: 'Delivery status updated',
+  deliveryStatusUpdateFailed: 'Delivery status update failed',
+  picked: 'Dispatched'
 };

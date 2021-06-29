@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 import DropDown from '../editData/dropDown';
 import { Button } from "primereact/button";
@@ -9,9 +9,11 @@ import { useDispatch } from "react-redux";
 import { ordersTypes } from "../../store/types/orders.type";
 import { findOrder } from "../../store/actions/orders.action";
 import { parseDateInOneRow } from "../../helpers/dateFunctions";
+import { Toast } from "primereact/toast";
 
 const EditOrderPage = (props) => {
     const dispatch = useDispatch();
+    const toast = useRef(null);
     let ordersService = new OrdersService()
     const [currentOrderStatus, setCurrentOrderStatus] = useState(props.orderData?.status);
     const [currentDeliveryStatus, setCurrentDeliveryStatus] = useState(props.orderData?.delivery_status);
@@ -36,10 +38,11 @@ const EditOrderPage = (props) => {
                     type: ordersTypes.ORDER_LIST_UPDATE,
                     payload: parseDateInOneRow(res)
                 })
-
+                toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('updateOrderStatus')})
             })
             .catch((err) => {
                 setCurrentOrderStatus(oldStatus)
+                toast.current.show({severity: 'error', summary: i18n.t('error'), detail: i18n.t('updateOrderStatus')})
             })
 
     }
@@ -49,14 +52,17 @@ const EditOrderPage = (props) => {
         ordersService.updateDeliveryStatus(props.orderData.order, e.value)
             .then((res) => {
                 setCurrentDeliveryStatus(e.value);
+                toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('deliveryStatusUpdated')})
             })
             .catch((err) => {
                 setCurrentDeliveryStatus(oldStatus)
+                toast.current.show({severity: 'error', summary: i18n.t('error'), detail: i18n.t('updateDeliveryStatus')})
             })
 
     }
     return (
         <div>
+            <Toast id="toastMessage" ref={toast}></Toast>
             {
                 currentOrderStatus &&
                 <DropDown

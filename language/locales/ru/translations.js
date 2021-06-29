@@ -245,5 +245,11 @@ export const translations = {
   successfullyUpdatedMeal: 'Успешно обновленное блюдо',
 
   successfullyAddedUser: 'Пользователь успешно добавлен',
-  successfullyUpdatedUser: 'Успешно обновленный пользователь'
+  successfullyUpdatedUser: 'Успешно обновленный пользователь',
+
+  orderDetail: 'деталь заказа',
+  updateOrderStatus: 'обновить статус заказа',
+  deliveryStatus: 'Статус доставки',
+  deliveryStatusUpdated: 'Обновленный статус доставки',
+  picked: 'отправлен'
 };
