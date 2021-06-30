@@ -251,6 +251,6 @@ export const translations = {
   updateOrderStatus: 'تحديث حالة الطلب',
   deliveryStatus: 'حالة التسليم',
   deliveryStatusUpdated: 'تم تحديث حالة التسليم',
-  picked: 'تم الإرسال'
-
+  picked: 'تم الإرسال',
+  allRestaurants: 'كل المطاعم'
 };
