@@ -54,7 +54,7 @@ export const Index = () => {
 
   const formik = useFormik({
     initialValues: {
-      resName: '',
+      restaurant: '',
       name: '',
       description: '',
       coupon_code: '',
@@ -68,16 +68,9 @@ export const Index = () => {
     validate: (data) => {
       let errors: any = {};
 
-      if (!data.resName) {
-        errors.resName = 'restaurant is required.';
-      } else {
-        let selectedRestaurants = restaurants.items.filter((data) => {
-          return data.name.localeCompare(formik.values.resName.name) == 0;
-        });
-        if (selectedRestaurants != null)
-          formik.values.restaurant_id = selectedRestaurants[0]?._id;
-      }
-
+      if (!data.restaurant) {
+        errors.restaurant = 'restaurant is required.';
+      } 
       if (!data.name) {
         errors.name = 'name is required.';
       }
@@ -94,7 +87,7 @@ export const Index = () => {
       if (!data.max_usage) {
         errors.max_usage = 'max usage is required.';
       }
-
+     
       return errors;
     },
     onSubmit: (data: any) => {
@@ -102,7 +95,7 @@ export const Index = () => {
         name: data.name,
         description: data.description,
         coupon_code: data.coupon_code,
-        restaurant_id: data.resName,
+        restaurant_id: data.restaurant === '6666' ? null : data.restaurant,
         expire_date: data.expire_date,
         discount: data.discount,
         discount_type: data.discount_type,
@@ -117,7 +110,7 @@ export const Index = () => {
     const restaurantNames = restaurants.items.map((res) => {
       return { id: res.id, name: res.name };
     });
-    restaurantNames.unshift({id: null, name: 'All Restaurants'})
+    restaurantNames.unshift({id: '6666', name: 'All Restaurants'})
     setRestaurantName(restaurantNames);
   };
 
@@ -193,9 +186,9 @@ export const Index = () => {
             <div id='restaurantDiv' className='p-field'>
               <h4 id='restaurantHeader'>{i18n.t('restaurant')}</h4>
               <Dropdown
-                id='resName'
-                name='resName'
-                value={formik.values.resName}
+                id='restaurant'
+                name='restaurant'
+                value={formik.values.restaurant}
                 options={restaurantName}
                 onChange={formik.handleChange}
                 optionLabel='name'
@@ -203,17 +196,17 @@ export const Index = () => {
                 placeholder='Select a Restaurant'
                 autoFocus
                 className={classNames({
-                  'p-invalid': isFormFieldValid('resName'),
+                  'p-invalid': isFormFieldValid('restaurant'),
                 })}
               />
               <label
                 id='errorDescription'
-                htmlFor='resName'
+                htmlFor='restaurant'
                 className={classNames({
-                  'p-error': isFormFieldValid('resName'),
+                  'p-error': isFormFieldValid('restaurant'),
                 })}
               ></label>
-              {getFormErrorMessage('resName')}
+              {getFormErrorMessage('restaurant')}
             </div>
             <div id='codeDiv' className='p-field'>
               <h4 id='codeHeader'>{i18n.t('couponCode')}</h4>
