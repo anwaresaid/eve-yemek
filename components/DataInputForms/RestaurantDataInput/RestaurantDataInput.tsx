@@ -172,7 +172,7 @@ const RestaurantDataInput = (props) => {
                 delete tmpData.image;
             }
 
-            tmpData.license_code = "";
+            // tmpData.license_code = "";
             // tmpData.image = "";
 
             tmpData.is_veg = tmpData.is_veg || false;
@@ -183,7 +183,8 @@ const RestaurantDataInput = (props) => {
                 latitude: tmpData.latitude,
                 longitude: tmpData.longitude,
                 city:tmpData.city_id,
-                state:tmpData.town_id
+                state:tmpData.town_id,
+                postal_code:tmpData.postal_code
             }
 
             if(props.updating){
