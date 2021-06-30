@@ -43,7 +43,7 @@ const MealDataInput = (props) => {
     const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants } = resRestaurants;
 
     const createFoodState = useSelector((state: RootState) => state.createFood)
-    const { loading: creatingFood, success: createFoodSuccess, food } = createFoodState
+    const { loading: creatingFood, success: createFoodSuccess, food, error } = createFoodState
 
     const resUpdatedFood = useSelector((state: RootState) => state.updateFood);
     const { loading: updatedFoodLoading, success: updatedFoodSuccess, food: updatedFood } = resUpdatedFood;
@@ -155,6 +155,10 @@ const MealDataInput = (props) => {
             return
         }
 
+        if(error){
+            toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
+        }
+
 
         if (props.updating && props.meal) {
             if (updatedFoodLoading || updatedFoodSuccess)
@@ -171,7 +175,7 @@ const MealDataInput = (props) => {
             setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => {return {id: aoc.id, name: aoc.name}}))
         }
 
-    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal]);
+    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal, error]);
 
 
     const inputFormiks = {

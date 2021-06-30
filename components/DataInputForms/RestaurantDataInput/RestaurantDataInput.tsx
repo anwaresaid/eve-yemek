@@ -42,7 +42,7 @@ const RestaurantDataInput = (props) => {
     const resDetails = useSelector((state: RootState) => state.findRestaurant);
     const updatedRestaurant = useSelector((state: RootState) => state.updateRestaurant);
     const restaurantCreate = useSelector((state: RootState) => state.createRestaurant);
-    const { success: restaurantCreateSuccess } = restaurantCreate;
+    const { success: restaurantCreateSuccess, error } = restaurantCreate;
    
     const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success: resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
@@ -241,7 +241,11 @@ const RestaurantDataInput = (props) => {
             setTimeout(() => { router.push('/restaurants') }, 1000)
         }
 
-    }, [dispatch, props, successUpdate, restaurantCreateSuccess]);
+        if(error){
+            toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
+        }
+
+    }, [dispatch, props, successUpdate, restaurantCreateSuccess, error]);
 
     useEffect(() => {
 
