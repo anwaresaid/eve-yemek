@@ -40,7 +40,7 @@ const liveOrdersList = () => {
       <h1 id="ordersHeader">{i18n.t('liveOrders')}</h1>
       {!loading && orders &&
         <OrdersTable
-          orders={_.without(_.map(orders?.items, (item) => { if (!item.is_deleted) return item }), undefined)}
+          orders={_.without(_.map(orders?.items, (item) => {if (!item.is_deleted && item.delivery_status !== 'delivered') return item }), undefined)}
           role='restaurant_owner'
         ></OrdersTable>}
       {loading && <Loading />}
