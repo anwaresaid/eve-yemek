@@ -30,17 +30,15 @@ const Orders = () => {
     }, [dispatch, success])
 
     const editButton = (row) => {
-
-    
         return (
             <React.Fragment>
-                <Button id='editBtn' icon="pi pi-pencil" className="p-button-rounded p-button-info" onClick={()=>{router.push(`/${path}/${row.order}`)}}/>
+                <Button id='editBtn' icon="pi pi-pencil" className="p-button-rounded p-button-info" onClick={() => { router.push(`/${path}/${row.order}`) }} />
             </React.Fragment>
         );
-}
+    }
 
     const columns = [
-        { field: 'id', header: 'ID' },
+        { field: 'order', header: 'ID' },
         { field: 'restaurant.name', header: i18n.t('restaurant') },
         { field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status) },
         { field: 'total_amount', header: i18n.t('total') },
@@ -50,17 +48,17 @@ const Orders = () => {
 
     return (
         <div id="ordersTable">
-            {loading ? <Loading /> : 
-            <div id="ordersCard" className="card">
-                <h1 id="ordersHeader">{i18n.t('orders')}</h1>
-                <StandardTable
-                    header={Header(setGlobalFilter, i18n.t('orders'))}
-                    columns={columns}
-                    value={_.without(_.map(rows, (item) => { if (!item.is_deleted) return item }), undefined)}
-                    globalFilter={globalFilter}
-                    emptyMessage={i18n.t('noXfound', { x: i18n.t('orders') })} >
-                </StandardTable>
-            </div>}
+            {loading ? <Loading /> :
+                <div id="ordersCard" className="card">
+                    <h1 id="ordersHeader">{i18n.t('orders')}</h1>
+                    <StandardTable
+                        header={Header(setGlobalFilter, i18n.t('orders'))}
+                        columns={columns}
+                        value={_.without(_.map(rows, (item) => { if (!item.is_deleted) return item }), undefined)}
+                        globalFilter={globalFilter}
+                        emptyMessage={i18n.t('noXfound', { x: i18n.t('orders') })} >
+                    </StandardTable>
+                </div>}
         </div>
     );
 }

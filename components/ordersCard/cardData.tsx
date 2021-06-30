@@ -17,7 +17,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import CardDate from "./cardDate";
 
-const cardData = () => {
+const CardData = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     let toast = useRef(null)
@@ -130,4 +130,4 @@ const cardData = () => {
     )
 }
 
-export default cardData;
+export default CardData;
