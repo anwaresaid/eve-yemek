@@ -17,6 +17,9 @@ import { i18n } from '../../../language';
 import { useRouter } from 'next/router';
 import { couponsTypes } from '../../../store/types/coupons.type';
 import InputContainer from '../../../components/inputs/inputContainer';
+import InputGroup from '../../../components/inputs/inputGroup';
+import FormColumn from '../../../components/inputs/formColumn';
+import { InputTextarea } from 'primereact/inputtextarea';
 
 export const Index = () => {
   const toast = useRef(null);
@@ -54,7 +57,7 @@ export const Index = () => {
 
   const formik = useFormik({
     initialValues: {
-      resName: '',
+      restaurant: '',
       name: '',
       description: '',
       coupon_code: '',
@@ -63,38 +66,28 @@ export const Index = () => {
       discount: 0,
       discount_type: '',
       max_usage: 0,
-      active: false,
+      active: true,
     },
     validate: (data) => {
       let errors: any = {};
-
-      if (!data.resName) {
-        errors.resName = 'restaurant is required.';
-      } else {
-        let selectedRestaurants = restaurants.items.filter((data) => {
-          return data.name.localeCompare(formik.values.resName.name) == 0;
-        });
-        if (selectedRestaurants != null)
-          formik.values.restaurant_id = selectedRestaurants[0]?._id;
+      if (!data.restaurant_id) {
+        errors.restaurant_id = i18n.t('isRequired', {input: i18n.t('restaurant')});
       }
-
       if (!data.name) {
-        errors.name = 'name is required.';
+        errors.name = i18n.t('isRequired', {input: i18n.t('name')});
       }
       if (!data.description) {
-        errors.description = 'description is required.';
+        errors.description = i18n.t('isRequired', {input: i18n.t('description')});
       }
       if (!data.expire_date) {
-        errors.expire_date = 'expire date is required.';
+        errors.expire_date = i18n.t('isRequired', {input: i18n.t('expiration')});
       }
-
-      if (!data.discount_type) {
-        errors.discount_type = 'discount_type is required.';
+      if (!data.coupon_code) {
+        errors.coupon_code = i18n.t('isRequired', {input: i18n.t('couponCode')});
       }
       if (!data.max_usage) {
-        errors.max_usage = 'max usage is required.';
+        errors.max_usage = i18n.t('isRequired', {input: i18n.t('maximumUsage')});
       }
-
       return errors;
     },
     onSubmit: (data: any) => {
@@ -102,10 +95,10 @@ export const Index = () => {
         name: data.name,
         description: data.description,
         coupon_code: data.coupon_code,
-        restaurant_id: data.resName,
+        restaurant_id: data.restaurant_id === '6666' ? null : data.restaurant_id,
         expire_date: data.expire_date,
         discount: data.discount,
-        discount_type: data.discount_type,
+        discount_type: "%", // Constant for now, will change when BE supports currency amount
         max_usage: data.max_usage,
         active: data.active,
       };
@@ -117,7 +110,7 @@ export const Index = () => {
     const restaurantNames = restaurants.items.map((res) => {
       return { id: res.id, name: res.name };
     });
-    restaurantNames.unshift({id: '6666', name: 'All Restaurants'})
+    restaurantNames.unshift({ id: '6666', name: i18n.t('allRestaurants') })
     setRestaurantName(restaurantNames);
   };
 
@@ -137,191 +130,90 @@ export const Index = () => {
     }
   }, [restaurantsSuccess, success]);
 
-  
-    const inputFormiks = {
-        getFormErrorMessage,
-        isFormFieldValid
-    }
+
+  const inputFormiks = {
+    getFormErrorMessage,
+    isFormFieldValid
+  }
   return (
     <div id='create_coupons'>
       <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
       <Toast id='toastMessage' ref={toast}></Toast>
       <S.ContainerCard id='container'>
         <form id='createForm' onSubmit={formik.handleSubmit}>
-          <div className='p-fluid'>
-            <div id='nameDiv' className='p-field'>
-              <h4 id='nameHeader'>{i18n.t('couponName')}</h4>
-              <InputText
-                id='name'
-                name='name'
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                type='text'
-                autoFocus
-                className={classNames({
-                  'p-invalid': isFormFieldValid('name'),
-                })}
-              />
-              <label
-                id='errorName'
-                htmlFor='name'
-                className={classNames({ 'p-error': isFormFieldValid('name') })}
-              ></label>
-              {getFormErrorMessage('name')}
-            </div>
-            <div id='descriptionDiv' className='p-field'>
-              <h4 id='descriptionHeader'>{i18n.t('couponDescription')}</h4>
-              <InputText
-                id='description'
-                name='description'
-                onChange={formik.handleChange}
-                type='text'
-                autoFocus
-                className={classNames({
-                  'p-invalid': isFormFieldValid('description'),
-                })}
-              />
-              <label
-                id='description'
-                htmlFor='description'
-                className={classNames({
-                  'p-error': isFormFieldValid('description'),
-                })}
-              ></label>
-              {getFormErrorMessage('description')}
-            </div>
-            <div id='restaurantDiv' className='p-field'>
-              <h4 id='restaurantHeader'>{i18n.t('restaurant')}</h4>
-              <Dropdown
-                id='resName'
-                name='resName'
-                value={formik.values.resName}
-                options={restaurantName}
-                onChange={formik.handleChange}
-                optionLabel='name'
-                optionValue='id'
-                placeholder='Select a Restaurant'
-                autoFocus
-                className={classNames({
-                  'p-invalid': isFormFieldValid('resName'),
-                })}
-              />
-              <label
-                id='errorDescription'
-                htmlFor='resName'
-                className={classNames({
-                  'p-error': isFormFieldValid('resName'),
-                })}
-              ></label>
-              {getFormErrorMessage('resName')}
-            </div>
-            <div id='codeDiv' className='p-field'>
-              <h4 id='codeHeader'>{i18n.t('couponCode')}</h4>
-              <InputText
-                id='coupon_code'
-                name='coupon_code'
-                onChange={formik.handleChange}
-                type='text'
-                autoFocus
-                className={classNames({
-                  'p-invalid': isFormFieldValid('coupon_code'),
-                })}
-              />
-              <label
-                id='errorCode'
-                htmlFor='coupon_code'
-                className={classNames({
-                  'p-error': isFormFieldValid('coupon_code'),
-                })}
-              ></label>
-              {getFormErrorMessage('coupon_code')}
-            </div>
+          <div className='p-grid'>
+
+            <FormColumn divideCount={3}>
+              <InputGroup>
+                <InputContainer label={i18n.t('couponName')} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                  value: formik.values.name,
+                  onChange: formik.handleChange,
+                }} />
+              </InputGroup>
+              <InputGroup>
+                <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
+                  value: formik.values.restaurant_id,
+                  onChange: formik.handleChange,
+                  options: restaurantName,
+                  filter: true,
+                  filterBy: "name",
+                  placeholder: i18n.t('selectRestaurant'),
+                  optionLabel: "name",
+                  optionValue: "id",
+                }} />
+
+              </InputGroup>
+
+              <InputGroup>
+                <InputContainer label={i18n.t('description')} name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
+                  value: formik.values.description,
+                  onChange: formik.handleChange,
+                  rows: 3,
+                  autoResize: true
+                }} />
+              </InputGroup>
+            </FormColumn>
+
+            <FormColumn divideCount={3}>
+              <InputGroup>
+                <InputContainer label={i18n.t('expiration')} name='expire_date' formiks={inputFormiks} component={Calendar} iprops={{
+                  value: formik.values.date,
+                  onChange: formik.handleChange
+                }} />
+
+              </InputGroup>
+              <InputGroup>
+                <InputContainer label={i18n.t('discount')} name="discount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                  value: formik.values.discount,
+                  onValueChange: formik.handleChange,
+                  min: 1,
+                  showButtons: true,
+                  suffix: '%'
+                }} />
+                <InputContainer label={i18n.t('maximumUsage')} name="max_usage" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                  value: formik.values.max_usage,
+                  onValueChange: formik.handleChange,
+                  min: 1,
+                  showButtons: true
+                }} />
+              </InputGroup>
+              <InputGroup>
+                <InputContainer label={i18n.t('couponCode')} name="coupon_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                  onChange: formik.handleChange,
+                  value: formik.values.coupon_code
+                }} />
+                <InputContainer label={i18n.t('active')} name="active" formiks={inputFormiks} size={6} component={InputSwitch} iprops={{
+                  checked: formik.values.active,
+                  onChange: formik.handleChange
+                }} />
+              </InputGroup>
+            </FormColumn>
+            <FormColumn>
+              <S.SubmitBtn id='btnContainer'>
+                <Button id='createBtn' type='submit' label={i18n.t('create')} />
+              </S.SubmitBtn>
+            </FormColumn>
           </div>
-          <div className='p-fluid'>
-            <div id='discountTypeDiv' className='card'>
-              <h4 id='discountTypeHeader'>{i18n.t('couponType')}</h4>
-              <Dropdown
-                id='discount_type'
-                name='discount_type'
-                value={formik.values.discount_type}
-                options={discount_types}
-                onChange={formik.handleChange}
-                optionLabel='title'
-                placeholder='İndirim Türü'
-                autoFocus
-                className={classNames({
-                  'p-invalid': isFormFieldValid('discount_type'),
-                })}
-              />
-              <label
-                id='errorDiscountType'
-                htmlFor='discount_type'
-                className={classNames({
-                  'p-error': isFormFieldValid('discount_type'),
-                })}
-              ></label>
-              {getFormErrorMessage('discount_type')}
-            </div>
-          </div>
-          <div className='p-grid p-fluid'>
-            <div id='expirationDiv' className='p-field p-col-12 p-md-3'>
-              <h4 id='expirationHeader'>{i18n.t('expiration')}</h4>
-              <Calendar
-                id='expire_date'
-                name='expire_date'
-                value={formik.values.date}
-                onChange={formik.handleChange}
-              />
-            </div>
-            {formik.values.discount_type=='FIXED'?
-                              <InputContainer label={i18n.t('discount')} name="discount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                value: formik.values.discount,
-                                onValueChange: formik.handleChange,
-                                showButtons: true,
-                                suffix: '₺'
-                                }} />
-                              : 
-                              <InputContainer label={i18n.t('discount')} name="discount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                value: formik.values.discount,
-                                onValueChange: formik.handleChange,
-                                showButtons: true,
-                                suffix: '%'
-                            }} />
-                              }
-                              
-            {/* <div id='discountDiv' className='p-field p-col-12 p-md-3'>
-              <h4 id='discountHeader'>{i18n.t('discount')}</h4>
-              <InputNumber
-                id='discount'
-                name='discount'
-                value={formik.values.discount}
-                onValueChange={formik.handleChange}
-                showButtons
-              />
-            </div> */}
-            <div id='max_usage_Div' className='p-field p-col-12 p-md-3'>
-              <h4 id='max_usage_Header'>{i18n.t('maximumUsage')}</h4>
-              <InputNumber
-                id='max_usage'
-                name='max_usage'
-                value={formik.values.max_usage}
-                onValueChange={formik.handleChange}
-                showButtons
-              />
-            </div>
-          </div>
-          <div id='activeDiv'>
-            <h4 id='activeHeader'>{i18n.t('active')}</h4>
-            <InputSwitch
-              checked={formik.values.active}
-              name='active'
-              id='active'
-              onChange={formik.handleChange}
-            />
-          </div>
-          <S.SubmitBtn id='btnContainer'>
-            <Button id='createBtn' type='submit' label={i18n.t('create')} />
-          </S.SubmitBtn>
         </form>
       </S.ContainerCard>
     </div>

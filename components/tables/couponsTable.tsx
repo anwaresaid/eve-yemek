@@ -26,12 +26,7 @@ const CouponsTable = (props) => {
       field: 'active',
       header: i18n.t('active'),
       body: (rowData) => activeTag(rowData.active),
-    },
-    {
-      field: 'ops',
-      header: i18n.t('operations'),
-      body: (rowData) => editButton(rowData, router, path),
-    },
+    }
   ];
 
   return (

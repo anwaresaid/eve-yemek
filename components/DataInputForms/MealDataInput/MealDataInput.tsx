@@ -81,6 +81,10 @@ const MealDataInput = (props) => {
                 errors.description = i18n.t('isRequired', { input: i18n.t('description') });
             }
 
+            if(/^\d+$/.test(data.description)){
+                errors.description = i18n.t('onlyNumberError');
+            }
+
             if (!data.food_category_id) {
                 errors.food_category_id = i18n.t('isRequired', { input: i18n.t('categoryName') });;
             }
@@ -114,7 +118,8 @@ const MealDataInput = (props) => {
     }
 
     const setFoodCategoryDropdownOptions = () => {
-        const foodCategoryNames = foodCatlist?.items.map(res => { return { name: res.name, id: res.id } });
+        const filteredfoodCategories = foodCatlist?.items.filter((res) => res.active === true && res.is_deleted === false)
+        const foodCategoryNames = filteredfoodCategories?.map(res => { return { name: res.name, id: res.id } });
         setFoodCategoryName(foodCategoryNames);
     }
 
