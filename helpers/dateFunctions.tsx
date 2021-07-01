@@ -17,3 +17,15 @@ export function parseDateInOneRow(row){
     row.howLongAgo = moment(row.createdAt).fromNow();
     return row
 }
+
+export function fromNowDate(date){
+    return moment(date).fromNow();
+}
+
+export function detailedDate(date){
+    return moment(date).format("llll");
+}
+
+export function momentSetLocale(){
+    moment.locale(i18n.language);
+}

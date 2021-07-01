@@ -4,7 +4,7 @@ import { i18n } from "../../../language";
 
 const OrderStatus = (orderStatus, deliveryStatus) => {
     var severity, value
-    switch (status){
+    switch (orderStatus){
         case 'placed': 
             severity = "secondary"
             value = i18n.t('orderPlaced')
@@ -34,12 +34,16 @@ const OrderStatus = (orderStatus, deliveryStatus) => {
             severity = "success"
             value = i18n.t('delivered')
             break
+        case 'canceled': 
+            severity = "danger"
+            value = i18n.t('cancelled')
+            break
     }
 
     return(
-        <div id='statusTag'>
+        <span id='statusTag'>
            <Tag className="p-mr-2" value={value} severity={severity}></Tag>
-        </div>
+        </span>
     )
 }
 

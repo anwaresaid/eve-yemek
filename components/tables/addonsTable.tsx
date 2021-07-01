@@ -22,7 +22,7 @@ const AddonsTable = (props) => {
     { field: 'id', header: 'ID' },
     { field: 'name', header: i18n.t('name') },
     { field: 'add_on_category.name', header: i18n.t('category') },
-    { field: 'price', header: i18n.t('price'), body: priceBodyTemplate },
+    { field: 'price', header: i18n.t('price'), body: (rowData)=> priceBodyTemplate(rowData.price) },
     {
       field: 'active',
       header: i18n.t('active'),
