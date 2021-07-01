@@ -54,7 +54,7 @@ const RestaurantsTable = (props) => {
     return (
         <React.Fragment>
             <span className="p-column-title"> {i18n.t('country')}</span>
-            <span> {rowData.address.country}</span>
+            <span> {rowData?.address?.country}</span>
         </React.Fragment>
     );
 }
