@@ -21,12 +21,10 @@ export const listOrdersReducer = (state = { orders: { items: [] } }, action) => 
         error: action.payload
       }
     case ordersTypes.ORDER_LIST_UPDATE:
-      console.log(action.payload)
       let ordersService = new OrdersService()
       ordersService.getOrder(action.payload).then((res) => {
         for (let i = 0; i < state.orders.items.length; i++) {
           if (state.orders.items[i].order === action.payload) {
-            console.log(state.orders.items[i])
             state.orders.items[i] = parseDateInOneRow(res)
             return {
               ...state
