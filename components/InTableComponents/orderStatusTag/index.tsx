@@ -26,7 +26,7 @@ const OrderStatus = (orderStatus, deliveryStatus) => {
     }
 
     switch(deliveryStatus){
-        case 'on-the-way': 
+        case 'picked': 
             severity = "warning"
             value = i18n.t('onTheWay')
             break
