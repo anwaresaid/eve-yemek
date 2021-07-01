@@ -24,6 +24,7 @@ function MyApp(props) {
     useEffect(() => {
         auth.init();
         authCheck();
+        document.body.style.zoom = "90%";
         setLoggedIn(auth.loggedIn);
         document?.documentElement?.setAttribute("lang", i18n.language);
         document?.documentElement?.setAttribute("dir",i18n.dir());
