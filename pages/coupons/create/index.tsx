@@ -66,7 +66,7 @@ export const Index = () => {
       discount: 0,
       discount_type: '',
       max_usage: 0,
-      active: false,
+      active: true,
     },
     validate: (data) => {
       let errors: any = {};
@@ -186,12 +186,14 @@ export const Index = () => {
                 <InputContainer label={i18n.t('discount')} name="discount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                   value: formik.values.discount,
                   onValueChange: formik.handleChange,
+                  min: 1,
                   showButtons: true,
                   suffix: '%'
                 }} />
                 <InputContainer label={i18n.t('maximumUsage')} name="max_usage" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                   value: formik.values.max_usage,
                   onValueChange: formik.handleChange,
+                  min: 1,
                   showButtons: true
                 }} />
               </InputGroup>
