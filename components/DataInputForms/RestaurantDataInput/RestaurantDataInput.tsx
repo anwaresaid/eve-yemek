@@ -462,7 +462,7 @@ const RestaurantDataInput = (props) => {
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
                                     min:0,
-                                    suffix: ' ₺'
+                                    //suffix: ' ₺'
                                 }} />
                             </InputGroup>
 
@@ -472,7 +472,7 @@ const RestaurantDataInput = (props) => {
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
                                     min:0,
-                                    suffix: ' ₺'
+                                    //suffix: ' ₺'
                                 }} />
 
                                 <InputContainer label={i18n.t('rating')} name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
