@@ -36,7 +36,7 @@ const EditOrderPage = (props) => {
                 setCurrentOrderStatus(e.value);
                 dispatch({
                     type: ordersTypes.ORDER_LIST_UPDATE,
-                    payload: parseDateInOneRow(res)
+                    payload: props.orderData.order
                 })
                 toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('updateOrderStatus')})
             })
@@ -52,6 +52,10 @@ const EditOrderPage = (props) => {
         ordersService.updateDeliveryStatus(props.orderData.order, e.value)
             .then((res) => {
                 setCurrentDeliveryStatus(e.value);
+                dispatch({
+                    type: ordersTypes.ORDER_LIST_UPDATE,
+                    payload: props.orderData.order
+                })
                 toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('deliveryStatusUpdated')})
             })
             .catch((err) => {
