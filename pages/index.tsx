@@ -50,9 +50,11 @@ const Index = (props) => {
     }
 
     const getTotalOrdersWeekly = () => {
-        console.log("last 7 days",reportData )
-        return _.sum(parseCounts(reportData?.lastSevenDaysReport?.order))
+        if(reportData){
+            console.log("last 7 days",_.sum(parseCounts(reportData.lastSevenDaysReport.order)) ); 
+            return _.sum(parseCounts(reportData.lastSevenDaysReport.order))
     }
+}
     const lineChartData = {
         
         labels: reportData?.lastSevenDaysReport.order.days,
@@ -65,8 +67,19 @@ const Index = (props) => {
                 borderColor: "rgb(75, 192, 192)",
                 borderWidth: 2,
                 data: parseCounts(reportData?.lastSevenDaysReport.order)
+            } 
+        ],
+        options:{
+            tooltips:{
+                enabled: true,
+                callbacks:{
+                    label: function(tooltipItem){
+                        console.log(tooltipItem);
+                        return "test";
+                    }
+                }
             }
-        ]
+        }
     };
 
     const openClosedTag = (rowData) => {
