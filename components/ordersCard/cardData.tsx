@@ -80,7 +80,7 @@ const CardData = () => {
                                     <br />
                                     <div id='orderIdDiv'><b>{i18n.t('order')} ID: </b>{orderData.order}</div>
                                     <div id='createdAtDiv'><b>{i18n.t('orderPlaced')}: </b><CardDate date={orderData.createdAt} /></div>
-                                    {OrderStatus(orderData.status_id ?? 1)}
+                                    {OrderStatus(orderData.status, orderData.delivery_status)}
                                 </div>
                             </div>
 

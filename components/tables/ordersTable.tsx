@@ -27,7 +27,7 @@ const OrdersTable = (props) => {
     const columns = [
         {field: 'order', header: '#'},
         {field: 'restaurant.name', header: i18n.t('restaurant')},
-        {field: 'status', header: i18n.t('status'), body: (rowData)=>OrderStatus(rowData.status)},
+        {field: 'status', header: i18n.t('status'), body: (rowData)=>OrderStatus(rowData.status, rowData.delivery_status)},
         {field: 'total_amount', header: i18n.t('total')},
         {field: 'howLongAgo', header: i18n.t('orderTime')}, 
         {field: 'ops', header: i18n.t('operations'), body: (row) => editButton(row)}
