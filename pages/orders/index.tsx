@@ -55,7 +55,7 @@ const Orders = () => {
                     <StandardTable
                         header={Header(setGlobalFilter, i18n.t('orders'))}
                         columns={columns}
-                        value={_.without(_.map(rows, (item) => { if (!item.is_deleted) return item }), undefined)}
+                        value={_.without(_.map(rows, (item) => { if (!item.is_deleted) return item }), undefined).reverse()}
                         globalFilter={globalFilter}
                         emptyMessage={i18n.t('noXfound', { x: i18n.t('orders') })} >
                     </StandardTable>
