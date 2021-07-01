@@ -54,6 +54,7 @@ const RestaurantsTable = (props) => {
     return (
         <React.Fragment>
             <span className="p-column-title"> {i18n.t('country')}</span>
+            <span> {rowData.address.country}</span>
         </React.Fragment>
     );
 }
@@ -86,7 +87,7 @@ const RestaurantsTable = (props) => {
         {field: 'image', header: i18n.t('image'), body: imageBodyTemplate},
         {field: 'name', header: i18n.t('name'), body:NameBodyTemplate},
         {field: 'owner.name', header: i18n.t('restaurantOwner'), body:OwnerBodyTemplate},
-        {field: '', header: i18n.t('country'),body:CountryBodyTemplate},
+        {field: 'address.country', header: i18n.t('country'),body:CountryBodyTemplate},
         {field: 'ops', header: i18n.t('status'), body: StatusBodyTemplate},
         {field: '', header: i18n.t('operations'), body:editBodyTemplate}
     ]

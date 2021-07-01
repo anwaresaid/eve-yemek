@@ -32,7 +32,7 @@ const Index = (props) => {
             if (ownedRestaurants?.length === 0)
                 dispatch(listOwnedRestaurants())
         }
-    }, [dispatch, ownedRestaurantsSuccess])
+    }, [dispatch, ownedRestaurantsSuccess]);
 
     const parseCounts = (data) => {
         if (!data)

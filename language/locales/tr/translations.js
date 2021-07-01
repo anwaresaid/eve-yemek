@@ -80,7 +80,7 @@ export const translations = {
   mealName: 'Yemek adı',
   price: 'Tane fiyatı',
   quantity: 'Adet',
-  total: 'Ara toplama',
+  total: 'Ara toplam',
   VAT: 'Vergi',
   discountCoupon: 'Kupon indirimi',
 

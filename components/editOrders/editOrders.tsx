@@ -85,18 +85,6 @@ const EditOrderPage = (props) => {
                     label={i18n.t('deliveryStatus')}
                 />
             }
-            <DropDown
-                id='paymentStatusDropdown'
-                placeHolder={i18n.t('paymentStatus')}
-                label={i18n.t('paymentStatus')}
-                emptyMessage={i18n.t('notSupported')}
-            />
-            <DropDown
-                id='deliveryScoutAssignmentDropdown'
-                placeHolder={i18n.t('deliveryScoutAssignment')}
-                label={i18n.t('deliveryScoutAssignment')}
-                emptyMessage={i18n.t('notSupported')}
-            />
         </div>
 
     );

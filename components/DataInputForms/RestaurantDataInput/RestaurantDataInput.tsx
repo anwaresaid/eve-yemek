@@ -461,8 +461,8 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.restaurant_charges,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
-                                    min: 0,
-                                    suffix: ' ₺'
+                                    min:0,
+                                    //suffix: ' ₺'
                                 }} />
                             </InputGroup>
 
@@ -471,8 +471,8 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.minimum_order_amount,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
-                                    min: 0,
-                                    suffix: ' ₺'
+                                    min:0,
+                                    //suffix: ' ₺'
                                 }} />
 
                                 <InputContainer label={i18n.t('rating')} name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
