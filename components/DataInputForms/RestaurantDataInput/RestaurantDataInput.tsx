@@ -26,6 +26,7 @@ import jsonCities from "../../../public/data/il.json";
 import jsonDistricts from "../../../public/data/ilce.json";
 import Loading from "../../Loading";
 import CouponsTable from "../../tables/couponsTable";
+import { Tag } from "primereact/tag";
 
 const RestaurantDataInput = (props) => {
 
@@ -212,6 +213,11 @@ const RestaurantDataInput = (props) => {
     });
 
     useEffect(() => {
+        if(error){
+            dispatch({
+                type: restaurantsTypes.RESTAURAT_CREATE_RESET
+            })
+        }
         if (resOnwersSuccess && resSuccess && props.updating) {
             if (restaurant.id === props.id) {
                 setReloadCheck(true);
@@ -241,11 +247,11 @@ const RestaurantDataInput = (props) => {
             setTimeout(() => { router.push('/restaurants') }, 1000)
         }
 
-        if(error){
-            toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
-        }
+        // if(error){
+        //     toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
+        // }
 
-    }, [dispatch, props, successUpdate, restaurantCreateSuccess, error]);
+    }, [dispatch, props, successUpdate, restaurantCreateSuccess]);
 
     useEffect(() => {
 
@@ -531,6 +537,7 @@ const RestaurantDataInput = (props) => {
                         <Button type="submit" label="Gönder" />
                     </S.SubmitBtn>
                 </form>
+                {error && <div><Tag severity="danger" value={error}></Tag></div>}
             </S.ContainerCard>
         </TabPanel>
     }

@@ -51,10 +51,6 @@ export const createFood = (
         ? error.response.data.error.message
         : error.response.data.error.message,
     });
-  } finally {
-    dispatch({
-      type: foodsTypes.FOOD_CREATE_RESET
-    });
   }
 }
 export const updateFood = (id, updatedFood) => async dispatch => {
