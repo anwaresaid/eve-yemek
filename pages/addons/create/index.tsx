@@ -97,7 +97,7 @@ export const Index = () => {
     if (success) {
       toast.current.show({
         severity: 'success',
-        summary: 'Success',
+        summary:  i18n.t('success'),
         detail: i18n.t('success'),
       });
       setTimeout(() => { router.push('/addons') }, 2000)
@@ -156,18 +156,14 @@ export const Index = () => {
             </FormColumn>
             <FormColumn divideCount={3}>
               <InputGroup>
-                <InputContainer
-                  label={i18n.t('price')}
-                  name='price'
-                  formiks={inputFormiks}
-                  size={6}
-                  component={InputNumber}
-                  iprops={{
+                <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                     value: formik.values.price,
                     onValueChange: formik.handleChange,
-                    showButtons: true,
+                    mode: "currency",
+                    currency: "TRY",
+                    showButtons: true
                   }}
-                />
+                  />
               </InputGroup>
             </FormColumn>
             <S.SubmitBtn>

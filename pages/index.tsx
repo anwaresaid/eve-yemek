@@ -13,6 +13,8 @@ import StandardTable from "../components/StandardTable";
 import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/restaurant.action";
 import { SelectButton } from 'primereact/selectbutton';
 import idColumn from "../components/InTableComponents/idColumn";
+import { Tag } from "primereact/tag";
+import { changePassword } from "../store/actions/user.action";
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
@@ -27,10 +29,10 @@ const Index = (props) => {
         if (!reportData)
             dispatch(getDashboardReport())
         if (auth.hasRoles(['restaurant_owner'])) {
-            if (ownedRestaurants?.length === 0)
+            if (ownedRestaurants?.items.length === 0 && !ownedRestaurantsSuccess)
                 dispatch(listOwnedRestaurants())
         }
-    }, [dispatch, ownedRestaurantsSuccess])
+    }, [dispatch, ownedRestaurantsSuccess]);
 
     const parseCounts = (data) => {
         if (!data)
@@ -81,6 +83,16 @@ const Index = (props) => {
         { field: 'is_open', header: i18n.t('status'), body: openClosedTag },
     ]
 
+    const checkIfNoMeals = (ownedRestaurants:any) => {
+        if(ownedRestaurants?.items?.length > 0){
+            for (let one of ownedRestaurants.items){
+                if (one.foods.length > 0)
+                    return false
+            }
+        }   
+        return true
+    }
+
     return (
         
         <div id='containerPanel' className="ContainerPanel">
@@ -88,11 +100,14 @@ const Index = (props) => {
                 <S.DashboardWrapper id='dashBoard'>
                     <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
                     {
+                        auth.hasRoles(["restaurant_owner"]) && checkIfNoMeals(ownedRestaurants) && <Tag severity="danger" value={i18n.t('noneOfYourRestaurantsHaveAnyMealsAdded')}></Tag>
+                    }
+                    {
                         auth.hasRoles(["restaurant_owner"]) &&
                         <div className="p-my-5">
                             <StandardTable id='ownedRestaurants'
                                 columns={ownedRestaurantsTableColumns}
-                                value={ownedRestaurants}
+                                value={ownedRestaurants.items}
                                 noPaginator
                                 style={{ tableLayout: "auto" }}
                                 resizableColumns
@@ -108,7 +123,7 @@ const Index = (props) => {
                                     <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
                                 </div>
                                 <div className='box__icons'>
-                                    <i className=' pi pi-shopping-cart'></i>
+                                    <i className='pi pi-shopping-cart'></i>
                                 </div>
                             </div>
                         </div>

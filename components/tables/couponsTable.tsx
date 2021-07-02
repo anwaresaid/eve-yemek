@@ -26,21 +26,16 @@ const CouponsTable = (props) => {
       field: 'active',
       header: i18n.t('active'),
       body: (rowData) => activeTag(rowData.active),
-    },
-    {
-      field: 'ops',
-      header: i18n.t('operations'),
-      body: (rowData) => editButton(rowData, router, path),
-    },
+    }
   ];
 
   return (
     <StandardTable
-      header={Header(setGlobalFilter, 'Kupon')}
+      header={Header(setGlobalFilter, i18n.t('coupons'))}
       columns={columns}
       value={props.coupons}
       globalFilter={globalFilter}
-      emptyMessage='No coupons found'
+      emptyMessage={i18n.t('noXfound', {x: i18n.t('coupons')})}
     ></StandardTable>
   );
 };

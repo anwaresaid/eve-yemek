@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import StandardTable from '../StandardTable'
 import {InputText} from 'primereact/inputtext';
 import {useRouter} from 'next/router';
-import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
 import Header from "../InTableComponents/Header";
 import { i18n } from "../../language";
+import OrderStatus from "../InTableComponents/orderStatusTag";
+import { Button } from "primereact/button";
+import { priceBodyTemplate } from "../InTableComponents/price";
 
 const OrdersTable = (props) => {
     
@@ -15,14 +17,21 @@ const OrdersTable = (props) => {
     const router = useRouter();
     const path = 'orders'; 
 
+    const editButton = (row) => {
+        return (
+            <React.Fragment>
+                <Button id='editBtn' icon="pi pi-pencil" className="p-button-rounded p-button-info" onClick={() => { router.push(`/${path}/${row.order}`) }} />
+            </React.Fragment>
+        );
+    }
 
     const columns = [
-        {field: 'id', header: '#'},
-        {field: 'restaurant_id.name', header: i18n.t('restaurant')},
-        {field: 'status', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.status === "ACTIVE")},
-        {field: 'total_amount', header: i18n.t('total')},
+        {field: 'order', header: '#'},
+        {field: 'restaurant.name', header: i18n.t('restaurant')},
+        {field: 'status', header: i18n.t('status'), body: (rowData)=>OrderStatus(rowData.status, rowData.delivery_status)},
+        {field: 'total_amount', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.total_amount, rowData.currency_type)},
         {field: 'howLongAgo', header: i18n.t('orderTime')}, 
-        {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
+        {field: 'ops', header: i18n.t('operations'), body: (row) => editButton(row)}
     ]
     
     return (
@@ -31,7 +40,7 @@ const OrdersTable = (props) => {
             columns={columns} 
             value={props.orders}  
             globalFilter={globalFilter} 
-            emptyMessage="No orders found" >     
+            emptyMessage={i18n.t('noXfound',{x:i18n.t('orders')})} >     
         </StandardTable>
     )
 }

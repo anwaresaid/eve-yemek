@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Категории добавки еды',
   addonCategoryList: 'Список категорий добавки еды',
   createAddonCategory: 'Создать категорию добавки еды',
+  selectAddonCategories: 'Выбрать Категории добавки еды',
   addons: 'Добавки еды',
   addonList: 'Список добавки еды',
   createAddon: 'Создать добавки еды',
@@ -72,6 +73,16 @@ export const translations = {
   total: 'Итого',
   orderTime: 'Время заказа',
   operations: 'Операции',
+  order: 'Заказ',
+  from: 'От кого',
+  to: 'Кому',
+  receipt: 'Фактура',
+  mealName: 'Имя еды',
+  price: 'Цена за штуку',
+  quantity: 'Количество',
+  total: 'Общая цена',
+  VAT: 'Налог',
+  discountCoupon: 'Скидочный купон',
 
   // Restaurant List
   country: 'страна',
@@ -203,6 +214,8 @@ export const translations = {
   selectRestaurant: 'Выбрать ресторан',
   dragAndDropImageHere: 'Перетащите изображение сюда',
 
+  noXfound:'{{x}} не найден',
+
   fixed: 'Точный',
   percentage: 'Процентный',
 
@@ -217,5 +230,27 @@ export const translations = {
   single: 'один',
   multiple: 'несколько',
 
-  listOfX: 'Список из {{x}}'
+  listOfX: 'Список из {{x}}',
+
+  loading: 'загрузка ...',
+
+  orderStatus: 'статус заказа',
+  paymentStatus: 'статус платежа',
+  deliveryScoutAssignment: 'курьерская доставка',
+
+  notSupported: 'не поддерживается',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'нет еды ни в одном из ваших ресторанов',
+  successfullyAddedMeal: 'Успешно добавлено блюдо',
+  successfullyUpdatedMeal: 'Успешно обновленное блюдо',
+
+  successfullyAddedUser: 'Пользователь успешно добавлен',
+  successfullyUpdatedUser: 'Успешно обновленный пользователь',
+
+  orderDetail: 'деталь заказа',
+  updateOrderStatus: 'обновить статус заказа',
+  deliveryStatus: 'Статус доставки',
+  deliveryStatusUpdated: 'Обновленный статус доставки',
+  picked: 'отправлен',
+  allRestaurants: 'Все рестораны'
 };

@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'أصناف الإضافات',
   addonCategoryList: 'قائمة أصناف الإضافات',
   createAddonCategory: 'إنشاء صنف الإضافة',
+  selectAddonCategories: 'حددأصناف الإضافات',
   addons: 'الإضافات',
   addonList: 'قائمة الإضافات',
   createAddon: 'إنشاء إضافة',
@@ -72,6 +73,16 @@ export const translations = {
   total: 'المجموع',
   orderTime: 'وقت الطلب',
   operations: 'العمليات',
+  order: 'الطلب',
+  from: 'من',
+  to: 'إلى',
+  receipt: 'فاتورة',
+  mealName: 'إسم الوجبة',
+  price: 'السعر',
+  quantity: 'الكمية',
+  total: 'المجموع',
+  VAT: 'ضريبة القيمة المضافة',
+  discountCoupon: 'تخفيض الكوبون',
 
   // Restaurant List
   country: 'بلد',
@@ -203,6 +214,7 @@ export const translations = {
   selectRestaurant: 'اختر المطعم',
   dragAndDropImageHere: 'قم بسحب وإسقاط الصورة هنا',
 
+  noXfound:'لم يتم ايجاد {{x}}',
 
   fixed: 'ثابت',
   percentage: 'النسبة المئوية',
@@ -218,5 +230,27 @@ export const translations = {
   single: 'مفرد',
   multiple: 'متعدد',
 
-  listOfX: '{{x}} قائمة'
+  listOfX: '{{x}} قائمة',
+
+  loading: '...جار التحميل',
+
+  orderStatus: 'حالة الطلب',
+  paymentStatus: 'حالة السداد',
+  deliveryScoutAssignment: 'تسليم مهمة الكشفية',
+
+  notSupported: 'غير مدعوم',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'لا يوجد أي طبق في مطاعمكم',
+  successfullyAddedMeal: 'تمت إضافة الوجبة بنجاح',
+  successfullyUpdatedMeal: 'تم تحديث الوجبة بنجاح',
+
+  successfullyAddedUser: 'تمت إضافة المستخدم بنجاح',
+  successfullyUpdatedUser: 'تم تحديث المستخدم بنجاح',
+
+  orderDetail: 'تفاصيل الطلب',
+  updateOrderStatus: 'تحديث حالة الطلب',
+  deliveryStatus: 'حالة التسليم',
+  deliveryStatusUpdated: 'تم تحديث حالة التسليم',
+  picked: 'تم الإرسال',
+  allRestaurants: 'كل المطاعم'
 };

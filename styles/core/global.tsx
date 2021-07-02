@@ -112,8 +112,41 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+   //data table
+   .p-datatable-gridlines .p-datatable-tbody > tr > td .p-column-title {
+    display: none;
+}
+@media screen and (max-width: 824px) {
+     .p-datatable.p-datatable-gridlines .p-datatable-thead > tr > th,
+    .p-datatable.p-datatable-gridlines .p-datatable-tfoot > tr > td {
+        display: none !important;
+    }
+    .p-datatable-gridlines .p-datatable-tbody > tr > td .imageCol{
+        width:60px;
+    }
 
+    .p-datatable.p-datatable-gridlines .p-datatable-tbody > tr > td {
+        text-align: left;
+        display: block;
+        width: 100% !important;
+        float: left;
+        clear: left;
+        border: 0 none;
+    }
 
+     .p-datatable.p-datatable-gridlines .p-datatable-tbody > tr > td .p-column-title {
+        padding: .4rem;
+        min-width: 30%;
+        display: inline-block;
+        margin: -.4em 1em -.4em -.4rem;
+        font-weight: bold;
+    }
+
+   .p-datatable.p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
+        border-bottom: 1px solid var(--surface-d);
+    }
+}
+////
     .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
         margin-bottom: 1rem;
         font-family: inherit;

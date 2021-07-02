@@ -22,9 +22,14 @@ const FoodCategoriesList = () => {
 
   return (
     <div id="foodsTable">
-      {!loading && foodCategoriesList &&<> <h1 id="foodsCatHeader">{i18n.t('mealCategory')}</h1> <Food_CategoriesTable foodCategories={_.without(_.map(foodCategoriesList.items, (item) => {if (!item.is_deleted) return item}), undefined)}></Food_CategoriesTable></>}
+      {!loading && foodCategoriesList &&
+        <>
+          <h1 id="foodsCatHeader">{i18n.t('mealCategory')}</h1>
+          <Food_CategoriesTable foodCategories={_.without(_.map(foodCategoriesList.items, (item) => { if (!item.is_deleted) return item }), undefined)}>
+          </Food_CategoriesTable>
+        </>}
       {loading && <Loading />}
-        
+
     </div>
   );
 };

@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Eklenti Kategorileri',
   addonCategoryList: 'Eklenti Kategorileri Listesi',
   createAddonCategory: 'Eklenti Kategorisi Oluştur',
+  selectAddonCategories: 'Eklenti Kategorileri Seçin',
   addons: 'Eklentiler',
   addonList: 'Eklentiler Listesi',
   createAddon: 'Eklenti Oluştur',
@@ -72,6 +73,16 @@ export const translations = {
   total: 'Toplam Miktar',
   orderTime: 'Sipariş Zamanı',
   operations: 'Operasyonlar',
+  order: 'Sipariş',
+  from: 'Kimden',
+  to: 'Kime',
+  receipt: 'Fatura',
+  mealName: 'Yemek adı',
+  price: 'Tane fiyatı',
+  quantity: 'Adet',
+  total: 'Ara toplam',
+  VAT: 'Vergi',
+  discountCoupon: 'Kupon indirimi',
 
   // Restaurant List
   country: 'Ülke',
@@ -201,6 +212,8 @@ export const translations = {
   selectRestaurant: 'Restoran Seçin',
   dragAndDropImageHere: 'Resmi buraya sürükleyip bırakın',
 
+  noXfound:'{{x}} bulunamadı',
+
   fixed: 'Belli',
   percentage: 'Yüzdesi',
 
@@ -215,5 +228,27 @@ export const translations = {
   single: 'Tek',
   multiple: 'Çoklu',
 
-  listOfX: '{{x}} listesi'
+  listOfX: '{{x}} Listesi',
+
+  loading: 'Yükleniyor...',
+
+  orderStatus: 'Sipariş Durumu',
+  paymentStatus: 'Ödeme Durumu',
+  deliveryScoutAssignment: 'Kargocu Atama',
+
+  notSupported: 'Desteklenmiyor',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'Restoranlarınızın hiçbirinde eklenmiş yemek yok',
+  successfullyAddedMeal: 'Yemek başarıyla eklendi',
+  successfullyUpdatedMeal: 'Yemek başarıyla güncellendi',
+
+  successfullyAddedUser: 'Kullanıcı başarıyla eklendi',
+  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi',
+
+  orderDetail: 'Sipariş Detayi',
+  updateOrderStatus: 'Sipariş Durumunu Güncelle',
+  deliveryStatus: 'Teslim durumu',
+  deliveryStatusUpdated: 'Teslimat Durumu Güncellendi',
+  picked: 'Gönderildi',
+  allRestaurants: 'Tüm restoranlar'
 };

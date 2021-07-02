@@ -22,7 +22,7 @@ const AddonsTable = (props) => {
     { field: 'id', header: 'ID' },
     { field: 'name', header: i18n.t('name') },
     { field: 'add_on_category.name', header: i18n.t('category') },
-    { field: 'price', header: i18n.t('price'), body: priceBodyTemplate },
+    { field: 'price', header: i18n.t('price'), body: (rowData)=> priceBodyTemplate(rowData.price) },
     {
       field: 'active',
       header: i18n.t('active'),
@@ -37,11 +37,11 @@ const AddonsTable = (props) => {
 
   return (
     <StandardTable
-      header={Header(setGlobalFilter, 'Addons')}
+      header={Header(setGlobalFilter, i18n.t('addons'))}
       columns={columns}
       value={props.addons}
       globalFilter={globalFilter}
-      emptyMessage='No users found'
+      emptyMessage={i18n.t('noXfound', {x: i18n.t('addons')})}
     ></StandardTable>
   );
 };

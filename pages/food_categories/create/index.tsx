@@ -37,11 +37,9 @@ export const Index = () => {
         let errors:any = {};
 
         if (!data.name) {
-            errors.name = i18n.t('isRequired', {input: i18n.t('userName')});;
+            errors.name = i18n.t('isRequired', {input: i18n.t('mealCategory')});;
         }
-        if (!data.image) {
-            errors.image = i18n.t('isRequired', {input: i18n.t('image')});;
-        }
+      
         return errors;
     },
     onSubmit: (data:any) => {
@@ -54,7 +52,7 @@ export const Index = () => {
 
   useEffect(() => {
     if(success){
-      toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('createdFoodCategory')})
+      toast.current.show({severity: 'success', summary: i18n.t('success'), detail: i18n.t('createdMealCategory')})
       setTimeout(()=>{router.push('/food_categories')}, 1000)
       dispatch({type: foodCategoryTypes.FOOD_CATEGORY_CREATE_RESET})
     }
@@ -79,9 +77,9 @@ export const Index = () => {
                 value: formik.values.name,
                 onChange: formik.handleChange,
                 }} />
-                  <InputContainer label={i18n.t('image')} name="file" formiks={inputFormiks} component={StandardFileUpload} iprops={{
+                  <InputContainer label={i18n.t('image')} name="image" formiks={inputFormiks} component={StandardFileUpload} iprops={{
                     setFile:(image)=>{ formik.values.image=image },
-                    showSuccess:()=>{toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});}
+                    showSuccess:()=>{toast.current.show({severity: 'info', summary: i18n.t('success'), detail: i18n.t('fileUploaded')});}
                   }}/>
                     
                 <InputContainer label={i18n.t('active')} name="active" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
