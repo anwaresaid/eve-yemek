@@ -143,7 +143,6 @@ export const ownedRestaurantsList = (state = {ownedRestaurants: {items:[]}}, act
       } 
     case restaurantsTypes.OWNED_RESTAURANT_OPEN_CLOSE:
       for (let i = 0; i < state.ownedRestaurants.items.length; i++){
-        console.log(state.ownedRestaurants[i])
         if (state.ownedRestaurants.items[i].id === action.payload.id){
           state.ownedRestaurants.items[i] = action.payload
           return {

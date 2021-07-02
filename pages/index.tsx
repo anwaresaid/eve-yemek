@@ -70,7 +70,6 @@ const Index = (props) => {
 
     const openClosedTag = (rowData) => {
         const setIsOpen = (isOpen) => {
-            console.log(isOpen)
             if (isOpen === null)
                 return
             dispatch(openCloseRestaurant(rowData.id, { is_open: isOpen }))
