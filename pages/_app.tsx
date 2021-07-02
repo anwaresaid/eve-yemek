@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { hotjar } from 'react-hotjar';
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -15,18 +16,20 @@ import { i18n } from "../language";
 import TopBar from "../components/TopBar";
 
 function MyApp(props) {
-    
+
     const [loggedIn, setLoggedIn] = useState(false);
     const [error, setError] = useState(false);
     const [authCheckFinish, setAuthCheckFinish] = useState(false);
     const [hideBar, setHideBar] = useState(true);
 
+    
     useEffect(() => {
         auth.init();
         authCheck();
         setLoggedIn(auth.loggedIn);
         document?.documentElement?.setAttribute("lang", i18n.language);
-        document?.documentElement?.setAttribute("dir",i18n.dir());
+        document?.documentElement?.setAttribute("dir", i18n.dir());
+        hotjar.initialize(parseInt(process.env.HOTJAR_TRACKING_ID), 6);
     }, []);
 
     const authCheck = () => {
@@ -72,16 +75,16 @@ function MyApp(props) {
         }
 
         if (loggedIn) {
-                return (
-                    <>  
-                        <Sidebar open={hideBar} setOpen={setHideBar}  />
-                        <TopBar hideBar={hideBar} setHideBar={setHideBar} />
-                           
-                        <div className={"main-context" + (hideBar ? "-showBar" : "-hideBar")}>
-                            <props.Component {...props.pageProps} />
-                        </div>
-                    </>
-                );
+            return (
+                <>
+                    <Sidebar open={hideBar} setOpen={setHideBar} />
+                    <TopBar hideBar={hideBar} setHideBar={setHideBar} />
+
+                    <div className={"main-context" + (hideBar ? "-showBar" : "-hideBar")}>
+                        <props.Component {...props.pageProps} />
+                    </div>
+                </>
+            );
         }
 
         return <props.Component {...props.pageProps} />;
@@ -98,9 +101,9 @@ function MyApp(props) {
                 />
                 <meta id='adminPanelDescription' name="description" content="Eve yemek admin panel" />
             </Head>
-            <Provider  store={store}>
+            <Provider store={store}>
                 <div id='appDiv' className="app">
-                    <GlobalStyle id='globalStyle' open={hideBar} setOpen={setHideBar}/>
+                    <GlobalStyle id='globalStyle' open={hideBar} setOpen={setHideBar} />
 
                     {renderComp()}
                 </div>
