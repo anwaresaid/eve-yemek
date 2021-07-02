@@ -107,8 +107,8 @@ const RestaurantDataInput = (props) => {
                 errors.phone = i18n.t('isRequired', { input: i18n.t('phoneNumber') });
             }
 
-            if (!data.address) {
-                errors.address = i18n.t('isRequired', { input: i18n.t('fullAddress') });
+            if (!data.full_address) {
+                errors.full_address = i18n.t('isRequired', { input: i18n.t('fullAddress') });
             }
 
             if (!data.email) {
@@ -163,6 +163,11 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.longitude = formik.values.longitudeInt?.toString();
             }
+
+            if (!data.license_code) {
+                errors.license_code = i18n.t('isRequired', { input: i18n.t('licenseCode') })
+            }
+
             return errors;
         },
         onSubmit: (data: any) => {
@@ -179,12 +184,14 @@ const RestaurantDataInput = (props) => {
             tmpData.featured = tmpData.featured || false;
 
             let address: any = {
-                full_address: tmpData.address,
+                full_address: tmpData.full_address,
                 latitude: tmpData.latitude,
                 longitude: tmpData.longitude,
                 city: tmpData.city_id,
                 state: tmpData.town_id,
-                postal_code: tmpData.postal_code
+                postal_code: tmpData.postal_code,
+                country_code: tmpData.country_code,
+                country: tmpData.country_code === 'TR' ? 'Turkey' : (tmpData.country_code === 'LY' ? 'Libya' : '')
             }
 
             if (props.updating) {
@@ -251,14 +258,13 @@ const RestaurantDataInput = (props) => {
                 let selectedResOwners = resOwnerslist?.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
-
             formik.values.owner_id = restaurant.owner?.id;
             formik.values.name = restaurant.name;
             formik.values.image = restaurant.image;
             formik.values.description = restaurant.description;
             formik.values.email = restaurant.email;
             formik.values.phone = restaurant.phone;
-            formik.values.address = restaurant.address.full_address;
+            formik.values.full_address = restaurant.address.full_address;
             formik.values.city_id = restaurant.address.city;
             handleCityUpdate(restaurant.address.city);
             formik.values.town_id = restaurant.address.state;
@@ -279,7 +285,7 @@ const RestaurantDataInput = (props) => {
             formik.values.is_open = restaurant.is_open;
             formik.values.featured = restaurant.featured;
             formik.values.foods = restaurant.foods;
-
+            formik.values.country_code = restaurant.address.country_code;
         }
     }, [resOnwersSuccess, resSuccess])
 
@@ -364,35 +370,45 @@ const RestaurantDataInput = (props) => {
                             <h2>{i18n.t('addressInformation')}</h2>
 
                             <InputGroup>
-                                <InputContainer label={i18n.t('city')} name="city_id" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                    value: formik.values.city_id,
-                                    onChange: (e) => { handleCityUpdate(e.value); formik.handleChange(e); },
-                                    options: cities,
-                                    placeholder: i18n.t('city'),
-                                    filter: true,
-                                    filterBy: "name",
-                                    optionLabel: "name",
-                                    optionValue: "id",
-                                }} />
-
-                                <InputContainer label={i18n.t('district')} name="town_id" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                    value: formik.values.town_id,
+                                <InputContainer label={i18n.t('country')} name="country_code" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                    value: formik.values.country_code,
                                     onChange: formik.handleChange,
-                                    options: districts,
-                                    placeholder: i18n.t('district'),
-                                    filter: true,
-                                    filterBy: "name",
-                                    optionLabel: "name",
-                                    optionValue: "id"
-                                }} />
-                            </InputGroup>
+                                    options: [{ label: 'Turkey', value: 'TR' }, { label: 'Libya', value: 'LY' }],
 
-                            <InputGroup>
+                                }} />
+
                                 <InputContainer label={i18n.t('postalCode')} name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
                                     value: formik.values.postal_code,
                                     onChange: formik.handleChange,
                                 }} />
                             </InputGroup>
+
+                            {
+                                formik.values.country_code === 'TR' &&
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('city')} name="city_id" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value: formik.values.city_id,
+                                        onChange: (e) => { handleCityUpdate(e.value); formik.handleChange(e); },
+                                        options: cities,
+                                        placeholder: i18n.t('city'),
+                                        filter: true,
+                                        filterBy: "name",
+                                        optionLabel: "name",
+                                        optionValue: "id",
+                                    }} />
+
+                                    <InputContainer label={i18n.t('district')} name="town_id" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value: formik.values.town_id,
+                                        onChange: formik.handleChange,
+                                        options: districts,
+                                        placeholder: i18n.t('district'),
+                                        filter: true,
+                                        filterBy: "name",
+                                        optionLabel: "name",
+                                        optionValue: "id"
+                                    }} />
+                                </InputGroup>
+                            }
 
                             <InputGroup>
                                 <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
@@ -419,8 +435,8 @@ const RestaurantDataInput = (props) => {
                             </InputGroup>
 
                             <InputGroup>
-                                <InputContainer label={i18n.t('fullAddress')} name="address" formiks={inputFormiks} component={InputTextarea} iprops={{
-                                    value: formik.values.address,
+                                <InputContainer label={i18n.t('fullAddress')} name="full_address" formiks={inputFormiks} component={InputTextarea} iprops={{
+                                    value: formik.values.full_address,
                                     onChange: formik.handleChange,
                                     rows: 3,
                                     autoResize: true
@@ -461,7 +477,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.restaurant_charges,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
-                                    min:0,
+                                    min: 0,
                                     //suffix: ' ₺'
                                 }} />
                             </InputGroup>
@@ -471,7 +487,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.minimum_order_amount,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
-                                    min:0,
+                                    min: 0,
                                     //suffix: ' ₺'
                                 }} />
 
