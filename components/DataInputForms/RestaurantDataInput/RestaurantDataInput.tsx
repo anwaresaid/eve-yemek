@@ -135,11 +135,11 @@ const RestaurantDataInput = (props) => {
                 errors.owner_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') });
             }
 
-            if (!data.city_id) {
+            if (!data.city_id && formik.values.country_code === 'TR') {
                 errors.city_id = i18n.t('isRequired', { input: i18n.t('city') });
             }
 
-            if (!data.town_id) {
+            if (!data.town_id && formik.values.country_code === 'TR') {
                 errors.town_id = i18n.t('isRequired', { input: i18n.t('district') });
             }
 
@@ -167,7 +167,6 @@ const RestaurantDataInput = (props) => {
             if (!data.license_code) {
                 errors.license_code = i18n.t('isRequired', { input: i18n.t('licenseCode') })
             }
-
             return errors;
         },
         onSubmit: (data: any) => {
@@ -187,8 +186,8 @@ const RestaurantDataInput = (props) => {
                 full_address: tmpData.full_address,
                 latitude: tmpData.latitude,
                 longitude: tmpData.longitude,
-                city: tmpData.city_id,
-                state: tmpData.town_id,
+                city: tmpData.country_code === 'TR' ? tmpData.city_id : '0',
+                state: tmpData.country_code === 'TR' ? tmpData.town_id : '0',
                 postal_code: tmpData.postal_code,
                 country_code: tmpData.country_code,
                 country: tmpData.country_code === 'TR' ? 'Turkey' : (tmpData.country_code === 'LY' ? 'Libya' : '')
