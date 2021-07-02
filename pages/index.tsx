@@ -29,7 +29,7 @@ const Index = (props) => {
         if (!reportData)
             dispatch(getDashboardReport())
         if (auth.hasRoles(['restaurant_owner'])) {
-            if (ownedRestaurants?.length === 0)
+            if (ownedRestaurants?.items.length === 0 && !ownedRestaurantsSuccess)
                 dispatch(listOwnedRestaurants())
         }
     }, [dispatch, ownedRestaurantsSuccess]);
@@ -70,6 +70,7 @@ const Index = (props) => {
 
     const openClosedTag = (rowData) => {
         const setIsOpen = (isOpen) => {
+            console.log(isOpen)
             if (isOpen === null)
                 return
             dispatch(openCloseRestaurant(rowData.id, { is_open: isOpen }))
