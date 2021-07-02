@@ -47,7 +47,7 @@ const RestaurantDataInput = (props) => {
     const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success: resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
     const { loading: resLoading, success: resSuccess, restaurant } = resDetails;
-   
+
     //setting names for dropdowns.
     const settingDropDownNames = () => {
         const sortedResOwners = resOwnerslist?.items.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0));
@@ -66,8 +66,8 @@ const RestaurantDataInput = (props) => {
         name: '',
         description: '',
         image: '',
-        address:'',
-        postal_code:'',
+        address: '',
+        postal_code: '',
         phone: '',
         email: '',
         rating: 0,
@@ -145,7 +145,7 @@ const RestaurantDataInput = (props) => {
             if (!data.town_id) {
                 errors.town_id = i18n.t('isRequired', { input: i18n.t('district') });
             }
-             
+
             if (!data.restaurant_charges) {
                 data.restaurant_charges = 0;
             }
@@ -169,9 +169,9 @@ const RestaurantDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
-            
-            let tmpData = {...data};
-            if(tmpData.image.length==0 && !restaurant?.image){
+
+            let tmpData = { ...data };
+            if (tmpData.image.length == 0 && !restaurant?.image) {
                 delete tmpData.image;
             }
 
@@ -181,16 +181,16 @@ const RestaurantDataInput = (props) => {
             tmpData.is_veg = tmpData.is_veg || false;
             tmpData.featured = tmpData.featured || false;
 
-            let address:any = {
-                full_address:tmpData.address,
+            let address: any = {
+                full_address: tmpData.address,
                 latitude: tmpData.latitude,
                 longitude: tmpData.longitude,
-                city:tmpData.city_id,
-                state:tmpData.town_id,
-                postal_code:tmpData.postal_code
+                city: tmpData.city_id,
+                state: tmpData.town_id,
+                postal_code: tmpData.postal_code
             }
 
-            if(props.updating){
+            if (props.updating) {
                 address.id = restaurant.address.id;
             }
 
@@ -202,9 +202,9 @@ const RestaurantDataInput = (props) => {
             delete tmpData.town_id;
             delete tmpData.owner_name;
 
-            tmpData = {...tmpData, address:{...address}};
+            tmpData = { ...tmpData, address: { ...address } };
             if (props.updating) {
-                dispatch(updateRestaurant(props.id, tmpData));  
+                dispatch(updateRestaurant(props.id, tmpData));
             } else if (props.creating) {
                 dispatch(createRestaurant(tmpData));
             }
@@ -258,7 +258,7 @@ const RestaurantDataInput = (props) => {
                 let selectedResOwners = resOwnerslist?.items.filter(data => { return data.name.localeCompare(restaurant.name) == 0; });
                 return selectedResOwners[0];
             })
-       
+
             formik.values.owner_id = restaurant.owner?.id;
             formik.values.name = restaurant.name;
             formik.values.image = restaurant.image;
@@ -362,7 +362,7 @@ const RestaurantDataInput = (props) => {
 
                             <InputGroup>
                                 <InputContainer label={i18n.t('image')} name="image" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
-                                    setFile: (image) => {formik.values.image = image },
+                                    setFile: (image) => { formik.values.image = image },
                                     showSuccess: () => { toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' }); }
                                 }} />
                             </InputGroup>
@@ -405,22 +405,22 @@ const RestaurantDataInput = (props) => {
                                 <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.latitudeInt,
                                     onValueChange: formik.handleChange,
-                                    mode:"decimal",
-                                    min:-90,
-                                    max:90,
-                                    minFractionDigits:4,
-                                    maxFractionDigits:8,
+                                    mode: "decimal",
+                                    min: -90,
+                                    max: 90,
+                                    minFractionDigits: 4,
+                                    maxFractionDigits: 8,
                                     showButtons: true,
                                 }} />
 
                                 <InputContainer label={i18n.t('longitude')} name="longitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.longitudeInt,
                                     onValueChange: formik.handleChange,
-                                    mode:"decimal",
-                                    min:-180,
-                                    max:180,
-                                    minFractionDigits:4,
-                                    maxFractionDigits:8,
+                                    mode: "decimal",
+                                    min: -180,
+                                    max: 180,
+                                    minFractionDigits: 4,
+                                    maxFractionDigits: 8,
                                     showButtons: true,
                                 }} />
                             </InputGroup>
@@ -442,7 +442,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.delivery_time,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
-                                    min:0,
+                                    min: 0,
                                     suffix: ' min'
                                 }} />
 
@@ -450,7 +450,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.delivery_radius,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
-                                    min:0,
+                                    min: 0,
                                     suffix: ' km'
                                 }} />
                             </InputGroup>
@@ -460,7 +460,7 @@ const RestaurantDataInput = (props) => {
                                     value: formik.values.commission_rate,
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
-                                    min:0,
+                                    min: 0,
                                     suffix: ' %'
                                 }} />
 
@@ -469,7 +469,7 @@ const RestaurantDataInput = (props) => {
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
                                     min:0,
-                                    suffix: ' ₺'
+                                    //suffix: ' ₺'
                                 }} />
                             </InputGroup>
 
@@ -479,14 +479,14 @@ const RestaurantDataInput = (props) => {
                                     onValueChange: formik.handleChange,
                                     showButtons: true,
                                     min:0,
-                                    suffix: ' ₺'
+                                    //suffix: ' ₺'
                                 }} />
 
                                 <InputContainer label={i18n.t('rating')} name="rating" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.rating,
                                     onValueChange: formik.handleChange,
-                                    min:0,
-                                    max:5,
+                                    min: 0,
+                                    max: 5,
                                     showButtons: true,
                                 }} />
                             </InputGroup>

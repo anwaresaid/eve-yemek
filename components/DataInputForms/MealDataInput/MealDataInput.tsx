@@ -118,7 +118,8 @@ const MealDataInput = (props) => {
     }
 
     const setFoodCategoryDropdownOptions = () => {
-        const foodCategoryNames = foodCatlist?.items.map(res => { return { name: res.name, id: res.id } });
+        const filteredfoodCategories = foodCatlist?.items.filter((res) => res.active === true && res.is_deleted === false)
+        const foodCategoryNames = filteredfoodCategories?.map(res => { return { name: res.name, id: res.id } });
         setFoodCategoryName(foodCategoryNames);
     }
 
@@ -247,16 +248,18 @@ const MealDataInput = (props) => {
                                 <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.price,
                                     onValueChange: formik.handleChange,
-                                    mode: "currency",
-                                    currency: "TRY",
+                                    //mode: "currency",
+                                    //currency: "TRY",
+                                    min:0,
                                     showButtons: true
                                 }}
                                 />
                                 <InputContainer label={i18n.t('discountedPrice')} name="discount_price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.discount_price,
                                     onValueChange: formik.handleChange,
-                                    mode: "currency",
-                                    currency: "TRY",
+                                    //mode: "currency",
+                                    //currency: "TRY",
+                                    min:0,
                                     showButtons: true
                                 }}
                                 />

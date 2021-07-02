@@ -251,5 +251,6 @@ export const translations = {
   deliveryStatus: 'Delivery Status',
   deliveryStatusUpdated: 'Delivery status updated',
   deliveryStatusUpdateFailed: 'Delivery status update failed',
-  picked: 'Dispatched'
+  picked: 'Dispatched',
+  allRestaurants: 'All Restaurants'
 };

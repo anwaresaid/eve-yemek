@@ -252,5 +252,6 @@ export const translations = {
   updateOrderStatus: 'обновить статус заказа',
   deliveryStatus: 'Статус доставки',
   deliveryStatusUpdated: 'Обновленный статус доставки',
-  picked: 'отправлен'
+  picked: 'отправлен',
+  allRestaurants: 'Все рестораны'
 };

@@ -80,7 +80,7 @@ export const translations = {
   mealName: 'Yemek adı',
   price: 'Tane fiyatı',
   quantity: 'Adet',
-  total: 'Ara toplama',
+  total: 'Ara toplam',
   VAT: 'Vergi',
   discountCoupon: 'Kupon indirimi',
 
@@ -250,5 +250,6 @@ export const translations = {
   updateOrderStatus: 'Sipariş Durumunu Güncelle',
   deliveryStatus: 'Teslim durumu',
   deliveryStatusUpdated: 'Teslimat Durumu Güncellendi',
-  picked: 'Gönderildi'
+  picked: 'Gönderildi',
+  allRestaurants: 'Tüm restoranlar'
 };

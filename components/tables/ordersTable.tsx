@@ -7,6 +7,7 @@ import Header from "../InTableComponents/Header";
 import { i18n } from "../../language";
 import OrderStatus from "../InTableComponents/orderStatusTag";
 import { Button } from "primereact/button";
+import { priceBodyTemplate } from "../InTableComponents/price";
 
 const OrdersTable = (props) => {
     
@@ -27,8 +28,8 @@ const OrdersTable = (props) => {
     const columns = [
         {field: 'order', header: '#'},
         {field: 'restaurant.name', header: i18n.t('restaurant')},
-        {field: 'status', header: i18n.t('status'), body: (rowData)=>OrderStatus(rowData.status)},
-        {field: 'total_amount', header: i18n.t('total')},
+        {field: 'status', header: i18n.t('status'), body: (rowData)=>OrderStatus(rowData.status, rowData.delivery_status)},
+        {field: 'total_amount', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.total_amount, rowData.currency_type)},
         {field: 'howLongAgo', header: i18n.t('orderTime')}, 
         {field: 'ops', header: i18n.t('operations'), body: (row) => editButton(row)}
     ]

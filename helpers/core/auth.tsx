@@ -6,6 +6,7 @@ export default {
     user:null,
     token:null,
     allowedRoutes:[],
+    currency:"",
 
     init(){
         if(cookies.get("user")){

@@ -1,3 +1,4 @@
+import { parseDateInOneRow } from "../../helpers/dateFunctions";
 import OrdersService from "../services/orders.service";
 import { ordersTypes } from "../types/orders.type";
 
@@ -20,14 +21,18 @@ export const listOrdersReducer = (state = { orders: { items: [] } }, action) => 
         error: action.payload
       }
     case ordersTypes.ORDER_LIST_UPDATE:
-      for (let i = 0; i < state.orders.items.length; i++) {
-        if (state.orders.items[i].id === action.payload.id) {
-          state.orders.items[i] = action.payload
-          return {
-            ...state
+      let ordersService = new OrdersService()
+      ordersService.getOrder(action.payload).then((res) => {
+        for (let i = 0; i < state.orders.items.length; i++) {
+          if (state.orders.items[i].order === action.payload) {
+            state.orders.items[i] = parseDateInOneRow(res)
+            return {
+              ...state
+            }
           }
         }
-      }
+      })
+
     default:
       return state;
   }
