@@ -169,8 +169,6 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.longitude = formik.values.longitudeInt?.toString();
             }
-            
-            console.log(errors);
 
             return errors;
         },
