@@ -9,7 +9,6 @@ export const sendSms = (users, message) => async (dispatch, getState) => {
         
         const sendSmsService = new SendSmsService;
         const res = await sendSmsService.sendSms(users, message);
-        console.log(res);
         dispatch({
             type: sendSmsTypes.SEND_SMS_SUCCESS
         });

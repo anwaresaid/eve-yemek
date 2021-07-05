@@ -1,6 +1,6 @@
 import { sendSmsTypes } from '../types/send_sms';
 
-export const sendNotificationReducer = (state = {}, action) => {
+export const sendSmsReducer = (state = {}, action) => {
   switch (action.type) {
     case sendSmsTypes.SEND_SMS_REQUEST:
       return { loading: true };
@@ -14,7 +14,7 @@ export const sendNotificationReducer = (state = {}, action) => {
     case sendSmsTypes.SEND_SMS_FAIL:
       return {
         loading: false,
-        error: action.payload,
+        error: action.payload || true,
       };
 
     default:
