@@ -43,8 +43,8 @@ export const createRestaurant = (restaurantCreate) => async (dispatch, getState)
       type: restaurantsTypes.RESTAURAT_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+          ? error.response.data.error.message
+          : error.response.data.error.message,
     });
   }
 };
