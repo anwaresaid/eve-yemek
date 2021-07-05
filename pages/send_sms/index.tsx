@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { MultiSelect } from "primereact/multiselect";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,7 @@ import InputContainer from "../../components/inputs/inputContainer";
 import inputContainer from "../../components/inputs/inputContainer";
 import InputGroup from "../../components/inputs/inputGroup";
 import { i18n } from "../../language";
+import { sendSms } from "../../store/actions/send_sms";
 import { listAllUsers } from "../../store/actions/userslists.action";
 
 const SendSms = () => {
@@ -37,6 +39,7 @@ const SendSms = () => {
             users: [],
             message: "",
         },
+        validateOnChange:false,
         validate: (data) => {
             let errors: any = {};
 
@@ -55,6 +58,8 @@ const SendSms = () => {
                 message: formik.values.message,
                 users: [...formik.values.users],
             });
+
+            dispatch(sendSms([...formik.values.users], formik.values.message));
         },
     });
 
@@ -75,7 +80,7 @@ const SendSms = () => {
     };
 
     function multiSelect() {
-        if (userNames != null)
+        if (userNames != null){
             return (
                 <InputGroup>
                     <InputContainer label={i18n.t('users')} name="users" formiks={inputFormiks} component={MultiSelect} iprops={{
@@ -90,6 +95,9 @@ const SendSms = () => {
                     }} />
                 </InputGroup>
             );
+        }else{
+            return <ProgressSpinner/>
+        }
     }
 
     const inputFormiks = {
