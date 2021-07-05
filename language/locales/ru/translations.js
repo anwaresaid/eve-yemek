@@ -190,6 +190,7 @@ export const translations = {
   phoneNumber: 'Номер телефона',
   ownerName: 'Имя владельца',
   invalidEmailMessage: 'Недействительный адрес электронной почты',
+  onlyNumberError: 'этот ввод не может состоять только из чисел',
 
   // Toasts
   success: 'Успешно',
@@ -245,5 +246,12 @@ export const translations = {
   successfullyUpdatedMeal: 'Успешно обновленное блюдо',
 
   successfullyAddedUser: 'Пользователь успешно добавлен',
-  successfullyUpdatedUser: 'Успешно обновленный пользователь'
+  successfullyUpdatedUser: 'Успешно обновленный пользователь',
+
+  orderDetail: 'деталь заказа',
+  updateOrderStatus: 'обновить статус заказа',
+  deliveryStatus: 'Статус доставки',
+  deliveryStatusUpdated: 'Обновленный статус доставки',
+  picked: 'отправлен',
+  allRestaurants: 'Все рестораны'
 };

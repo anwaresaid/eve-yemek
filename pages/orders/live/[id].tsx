@@ -3,8 +3,6 @@ import CardData from "../../../components/ordersCard/cardData";
 
 
 const liveOrder = () => {
-    useEffect( () => {
-     }, []);
 
     return (
         <div className="tabview-demo">

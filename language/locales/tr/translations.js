@@ -75,12 +75,12 @@ export const translations = {
   operations: 'Operasyonlar',
   order: 'Sipariş',
   from: 'Kimden',
-  to: 'kime',
+  to: 'Kime',
   receipt: 'Fatura',
   mealName: 'Yemek adı',
   price: 'Tane fiyatı',
   quantity: 'Adet',
-  total: 'Ara toplama',
+  total: 'Ara toplam',
   VAT: 'Vergi',
   discountCoupon: 'Kupon indirimi',
 
@@ -190,6 +190,7 @@ export const translations = {
   phoneNumber: 'Telefon Numarası',
   ownerName: 'Sahibinin Adı',
   invalidEmailMessage: 'Yanlış e-posta adresi',
+  onlyNumberError: 'Bu alan sadece rakamlar ile doldurulamaz',
 
   // Toasts
   success: 'Başarılı',
@@ -243,5 +244,12 @@ export const translations = {
   successfullyUpdatedMeal: 'Yemek başarıyla güncellendi',
 
   successfullyAddedUser: 'Kullanıcı başarıyla eklendi',
-  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi'
+  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi',
+
+  orderDetail: 'Sipariş Detayi',
+  updateOrderStatus: 'Sipariş Durumunu Güncelle',
+  deliveryStatus: 'Teslim durumu',
+  deliveryStatusUpdated: 'Teslimat Durumu Güncellendi',
+  picked: 'Gönderildi',
+  allRestaurants: 'Tüm restoranlar'
 };

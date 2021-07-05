@@ -29,10 +29,10 @@ const Index = (props) => {
         if (!reportData)
             dispatch(getDashboardReport())
         if (auth.hasRoles(['restaurant_owner'])) {
-            if (ownedRestaurants?.length === 0)
+            if (ownedRestaurants?.items.length === 0 && !ownedRestaurantsSuccess)
                 dispatch(listOwnedRestaurants())
         }
-    }, [dispatch, ownedRestaurantsSuccess])
+    }, [dispatch, ownedRestaurantsSuccess]);
 
     const parseCounts = (data) => {
         if (!data)
