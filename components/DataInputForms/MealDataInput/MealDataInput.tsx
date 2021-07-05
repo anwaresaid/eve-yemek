@@ -22,6 +22,8 @@ import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { listAddonCategory } from "../../../store/actions/addon-category.action";
+import { Tag } from "primereact/tag";
+import { foodsTypes } from "../../../store/types/foods.type";
 
 const MealDataInput = (props) => {
 
@@ -43,7 +45,7 @@ const MealDataInput = (props) => {
     const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants } = resRestaurants;
 
     const createFoodState = useSelector((state: RootState) => state.createFood)
-    const { loading: creatingFood, success: createFoodSuccess, food } = createFoodState
+    const { loading: creatingFood, success: createFoodSuccess, food, error } = createFoodState
 
     const resUpdatedFood = useSelector((state: RootState) => state.updateFood);
     const { loading: updatedFoodLoading, success: updatedFoodSuccess, food: updatedFood } = resUpdatedFood;
@@ -124,6 +126,11 @@ const MealDataInput = (props) => {
     }
 
     useEffect(() => {
+        if(error){
+            dispatch({
+                type: foodsTypes.FOOD_CREATE_RESET
+            })
+        }
         if (!addOnCategoriesSuccess)
             dispatch(listAddonCategory());
 
@@ -148,6 +155,9 @@ const MealDataInput = (props) => {
         if (createFoodSuccess) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('successfullyAddedMeal') })
             setTimeout(() => { router.push('/foods') }, 2000)
+            dispatch({
+                type: foodsTypes.FOOD_CREATE_RESET
+            })
         }
 
         if (updatedFoodSuccess) {
@@ -155,6 +165,10 @@ const MealDataInput = (props) => {
             setTimeout(() => { router.push('/foods') }, 2000)
             return
         }
+
+        // if(error){
+        //     toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
+        // }
 
 
         if (props.updating && props.meal) {
@@ -297,6 +311,7 @@ const MealDataInput = (props) => {
                         <Button id="createBtn" type="submit" label={props.creating ? i18n.t('create') : i18n.t('update')} />
                     </S.SubmitBtn>
                 </form>
+                {error && <div><Tag severity="danger" value={error}></Tag></div>}
             </S.ContainerCard>
         </div>
     )

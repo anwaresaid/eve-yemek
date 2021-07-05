@@ -26,6 +26,7 @@ import jsonCities from "../../../public/data/il.json";
 import jsonDistricts from "../../../public/data/ilce.json";
 import Loading from "../../Loading";
 import CouponsTable from "../../tables/couponsTable";
+import { Tag } from "primereact/tag";
 
 const RestaurantDataInput = (props) => {
 
@@ -42,8 +43,8 @@ const RestaurantDataInput = (props) => {
     const resDetails = useSelector((state: RootState) => state.findRestaurant);
     const updatedRestaurant = useSelector((state: RootState) => state.updateRestaurant);
     const restaurantCreate = useSelector((state: RootState) => state.createRestaurant);
-    const { success: restaurantCreateSuccess } = restaurantCreate;
-
+    const { success: restaurantCreateSuccess, error } = restaurantCreate;
+   
     const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success: resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
     const { loading: resLoading, success: resSuccess, restaurant } = resDetails;
@@ -101,6 +102,9 @@ const RestaurantDataInput = (props) => {
             }
             if (!data.description) {
                 errors.description = i18n.t('isRequired', { input: i18n.t('description') });
+            }
+            if(/^\d+$/.test(data.description)){
+                errors.description = i18n.t('onlyNumberError');
             }
 
             if (!data.phone) {
@@ -215,6 +219,11 @@ const RestaurantDataInput = (props) => {
     });
 
     useEffect(() => {
+        if(error){
+            dispatch({
+                type: restaurantsTypes.RESTAURAT_CREATE_RESET
+            })
+        }
         if (resOnwersSuccess && resSuccess && props.updating) {
             if (restaurant.id === props.id) {
                 setReloadCheck(true);
@@ -243,6 +252,10 @@ const RestaurantDataInput = (props) => {
             dispatch({ type: restaurantsTypes.RESTAURAT_CREATE_RESET });
             setTimeout(() => { router.push('/restaurants') }, 1000)
         }
+
+        // if(error){
+        //     toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
+        // }
 
     }, [dispatch, props, successUpdate, restaurantCreateSuccess]);
 
@@ -539,6 +552,7 @@ const RestaurantDataInput = (props) => {
                         <Button type="submit" label="Gönder" />
                     </S.SubmitBtn>
                 </form>
+                {error && <div><Tag severity="danger" value={error}></Tag></div>}
             </S.ContainerCard>
         </TabPanel>
     }
