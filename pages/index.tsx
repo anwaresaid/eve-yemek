@@ -14,12 +14,12 @@ import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/rest
 import { SelectButton } from 'primereact/selectbutton';
 import idColumn from "../components/InTableComponents/idColumn";
 import { Tag } from "primereact/tag";
-import { changePassword } from "../store/actions/user.action";
+import { Chart } from 'chart.js'
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
     const { loading, success, reportData } = res
-
+    const chartRef = useRef<HTMLCanvasElement>(null);
     const ownedRestaurantsState = useSelector((state: RootState) => state.ownedRestaurants)
     const { loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants } = ownedRestaurantsState
 
@@ -66,22 +66,13 @@ const Index = (props) => {
                 backgroundColor: "rgba(75,192,192,1)",
                 borderColor: "rgb(75, 192, 192)",
                 borderWidth: 2,
-                data: parseCounts(reportData?.lastSevenDaysReport.order)
-            } 
-        ],
-        options:{
-            tooltips:{
-                enabled: true,
-                callbacks:{
-                    label: function(tooltipItem){
-                        console.log(tooltipItem);
-                        return "test";
-                    }
-                }
+                data: parseCounts(reportData?.lastSevenDaysReport.order),
             }
-        }
+             
+        ],
+        
+       
     };
-
     const openClosedTag = (rowData) => {
         const setIsOpen = (isOpen) => {
             if (isOpen === null)
@@ -191,14 +182,25 @@ const Index = (props) => {
                             <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
                         </i>
                         <Line
+                        ref={chartRef}
+                        getElementAtEvent={(i: any, event: any) => {
+                          if (chartRef.current) {
+                          const chart = Chart.getChart(chartRef.current)
+                          const clickedElements = chart!.getElementsAtEventForMode(event, 'y',{axis: 'x', intersect: false}, true)
+                          if (clickedElements.length > 0) {
+                            console.log(clickedElements[0].index) // Here clicked label | data index
+                          }
+                         }
+                        }}
                             type='number'
                             width={500}
                             height={100}
                             data={lineChartData}
                             options={{
+                                plugins:{
                                 legend: {
-                                    display: false
-                                },
+                                    onClick:()=>{ }
+                                }},
                                 responsive: true,
                             }}
                         />
