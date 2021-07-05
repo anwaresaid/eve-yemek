@@ -104,7 +104,7 @@ const SendSms = () => {
                         optionLabel:"name",
                         onChange: formik.handleChange,
                         filter:true,
-                        placeholder:"Select users",
+                        placeholder:i18n.t("users"),
                     }} />
                 </InputGroup>
             );
@@ -120,7 +120,7 @@ const SendSms = () => {
 
     return (
         <>
-            <h1>SMS Gönder</h1>
+            <h1>{i18n.t("sendSms")}</h1>
             <Toast ref={toast}></Toast>
             <form onSubmit={formik.handleSubmit}>
                 <div className="p-fluid">

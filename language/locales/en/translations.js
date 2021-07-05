@@ -142,6 +142,10 @@ export const translations = {
   discount: 'Discount',
   maximumUsage: 'Maximum Usage',
 
+  // Send SMS
+  sendSms:"Send SMS",
+  message:"Message",
+
   // User lists
   created: 'Created',
   createUser: 'Create User',

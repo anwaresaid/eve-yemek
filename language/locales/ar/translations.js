@@ -145,6 +145,10 @@ export const translations = {
   discount: 'تخفيض',
   maximumUsage: 'حد الاستعمال',
 
+  // Send SMS
+  sendSms:"أرسل رسالة نصية قصيرة",
+  message:"رسالة",
+
   // User lists
   created: 'تم إنشاء',
   createUser: 'إنشاء مستخدم',
