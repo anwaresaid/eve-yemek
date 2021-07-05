@@ -345,8 +345,7 @@ const RestaurantDataInput = (props) => {
                             <InputGroup>
                                 <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
                                     value: formik.values.phone,
-                                    mask: "(999) 999-9999",
-                                    placeholder: "(999) 999-9999",
+                                    placeholder: i18n.t('telephone'),
                                     onChange: formik.handleChange,
                                 }} />
 
