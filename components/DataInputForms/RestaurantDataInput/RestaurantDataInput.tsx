@@ -105,9 +105,7 @@ const RestaurantDataInput = (props) => {
             if (!data.name) {
                 errors.name = i18n.t('isRequired', { input: i18n.t('restaurantName') });
             }
-            if (!data.description) {
-                errors.description = i18n.t('isRequired', { input: i18n.t('description') });
-            }
+
             if (/^\d+$/.test(data.description)) {
                 errors.description = i18n.t('onlyNumberError');
             }
@@ -144,13 +142,6 @@ const RestaurantDataInput = (props) => {
                 errors.owner_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') });
             }
 
-            if (!data.city_id && formik.values.country_code === 'TR') {
-                errors.city_id = i18n.t('isRequired', { input: i18n.t('city') });
-            }
-
-            if (!data.town_id && formik.values.country_code === 'TR') {
-                errors.town_id = i18n.t('isRequired', { input: i18n.t('district') });
-            }
 
             if (!data.restaurant_charges) {
                 data.restaurant_charges = 0;
@@ -356,7 +347,7 @@ const RestaurantDataInput = (props) => {
                             </InputGroup>
 
                             <InputGroup>
-                                <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
+                                <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputText} iprops={{
                                     value: formik.values.phone,
                                     placeholder: i18n.t('telephone'),
                                     onChange: formik.handleChange,
