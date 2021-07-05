@@ -37,6 +37,7 @@ export const allMenuItems:any = [
     ] },
     { label:i18n.t("extra"),           expanded: true, items: [
         { label:i18n.t("send_fcm_notification"),    url:"/send_notifications",      roles:["admin"] },
+        { label:i18n.t("send_sms"),    url:"/send_sms",      roles:["admin"] },
     ] },
     { label:i18n.t("users"), url:"/users",  roles:["admin"]},
     { separator:true },
