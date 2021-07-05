@@ -115,17 +115,20 @@ const SettingsAdmin = () => {
             formik.values.razorpay_client_key = settings.razorpay_client_key;
             formik.values.razorpay_secret_key = settings.razorpay_secret_key;
             setDataSetted(true);
-            if (successUpdate) {
-                toast.current.show({
-                    severity: "success",
-                    summary: "Success",
-                    detail: "Settings Updated Successfully",
-                });
-            }
         } else {
             dispatch(listSettings());
         }
     }, [dispatch, success]);
+
+    useEffect(()=>{
+        if (successUpdate) {
+            toast.current.show({
+                severity: "success",
+                summary: "Success",
+                detail: "Settings Updated Successfully",
+            });
+        }
+    }, [successUpdate]);
 
     const inputFormiks = {
         getFormErrorMessage,
