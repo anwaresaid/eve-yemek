@@ -73,6 +73,7 @@ const RestaurantDataInput = (props) => {
         description: '',
         image: '',
         address: '',
+        full_address:'',
         postal_code: '',
         phone: '',
         email: '',
@@ -94,6 +95,7 @@ const RestaurantDataInput = (props) => {
         longitude: 0.0,
         latitude: 0.0,
         is_open: false,
+        country_code:"",
         // currency_type:'tl'
     }
 
@@ -105,9 +107,7 @@ const RestaurantDataInput = (props) => {
             if (!data.name) {
                 errors.name = i18n.t('isRequired', { input: i18n.t('restaurantName') });
             }
-            if (!data.description) {
-                errors.description = i18n.t('isRequired', { input: i18n.t('description') });
-            }
+
             if (/^\d+$/.test(data.description)) {
                 errors.description = i18n.t('onlyNumberError');
             }
@@ -144,20 +144,17 @@ const RestaurantDataInput = (props) => {
                 errors.owner_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') });
             }
 
-            if (!data.city_id && formik.values.country_code === 'TR') {
-                errors.city_id = i18n.t('isRequired', { input: i18n.t('city') });
+            if (!data.country_code) {
+                errors.country_code = i18n.t('isRequired', { input: i18n.t('country') });
             }
 
-            if (!data.town_id && formik.values.country_code === 'TR') {
-                errors.town_id = i18n.t('isRequired', { input: i18n.t('district') });
-            }
 
             if (!data.restaurant_charges) {
                 data.restaurant_charges = 0;
             }
-
+            
             if (!data.minimum_order_amount) {
-                data.minimum_order_amount = 0;
+                errors.minimum_order_amount = i18n.t('isRequired', { input: i18n.t('minimumAmount') });
             }
 
             if (!data.latitudeInt) {
@@ -173,9 +170,6 @@ const RestaurantDataInput = (props) => {
                 formik.values.longitude = formik.values.longitudeInt?.toString();
             }
 
-            if (!data.license_code) {
-                errors.license_code = i18n.t('isRequired', { input: i18n.t('licenseCode') })
-            }
             return errors;
         },
         onSubmit: (data: any) => {
@@ -190,6 +184,8 @@ const RestaurantDataInput = (props) => {
 
             tmpData.is_veg = tmpData.is_veg || false;
             tmpData.featured = tmpData.featured || false;
+            tmpData.active = tmpData.active || false;
+            tmpData.is_open = tmpData.is_open || false;
 
             let address: any = {
                 full_address: tmpData.full_address,
@@ -356,7 +352,7 @@ const RestaurantDataInput = (props) => {
                             </InputGroup>
 
                             <InputGroup>
-                                <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputMask} iprops={{
+                                <InputContainer label={i18n.t('telephone')} name="phone" formiks={inputFormiks} size={6} component={InputText} iprops={{
                                     value: formik.values.phone,
                                     placeholder: i18n.t('telephone'),
                                     onChange: formik.handleChange,
