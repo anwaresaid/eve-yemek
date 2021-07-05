@@ -33,6 +33,7 @@ jobs:
           envkey_NEXT_PUBLIC_GOOGLE_FCM_AUTH_KEY: ${{ secrets.DEV_GOOGLE_FCM_AUTH_KEY }}                                              
           envkey_NEXT_PUBLIC_API_URL: "https://api.eve-yemek.com"
           envkey_NEXT_PUBLIC_API_MODE: "production"
+          envkey_NEXT_PUBLIC_HOTJAR_TRACKING_ID: ${{ secrets.PROD_HOTJAR_TRACKING_ID }}
           file_name: .env   
       - name: Copy ENV To Box
         uses: appleboy/scp-action@master

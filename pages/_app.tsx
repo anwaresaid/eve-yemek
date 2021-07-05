@@ -29,7 +29,7 @@ function MyApp(props) {
         setLoggedIn(auth.loggedIn);
         document?.documentElement?.setAttribute("lang", i18n.language);
         document?.documentElement?.setAttribute("dir", i18n.dir());
-        hotjar.initialize(parseInt(process.env.HOTJAR_TRACKING_ID), 6);
+        hotjar.initialize(parseInt(process.env.NEXT_PUBLIC_HOTJAR_TRACKING_ID), 6);
     }, []);
 
     const authCheck = () => {
