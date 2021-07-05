@@ -27,6 +27,8 @@ import jsonDistricts from "../../../public/data/ilce.json";
 import Loading from "../../Loading";
 import CouponsTable from "../../tables/couponsTable";
 import { Tag } from "primereact/tag";
+import { getSupportedCountries } from "../../../store/actions/addresses.action";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const RestaurantDataInput = (props) => {
 
@@ -44,10 +46,13 @@ const RestaurantDataInput = (props) => {
     const updatedRestaurant = useSelector((state: RootState) => state.updateRestaurant);
     const restaurantCreate = useSelector((state: RootState) => state.createRestaurant);
     const { success: restaurantCreateSuccess, error } = restaurantCreate;
-   
+
     const { loading: loadingUpdate, success: successUpdate } = updatedRestaurant;
     const { loading, success: resOnwersSuccess, restaurantOwners: resOwnerslist } = resOwnersList;
     const { loading: resLoading, success: resSuccess, restaurant } = resDetails;
+
+    const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
+    const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
 
     //setting names for dropdowns.
     const settingDropDownNames = () => {
@@ -103,7 +108,7 @@ const RestaurantDataInput = (props) => {
             if (!data.description) {
                 errors.description = i18n.t('isRequired', { input: i18n.t('description') });
             }
-            if(/^\d+$/.test(data.description)){
+            if (/^\d+$/.test(data.description)) {
                 errors.description = i18n.t('onlyNumberError');
             }
 
@@ -219,7 +224,7 @@ const RestaurantDataInput = (props) => {
     });
 
     useEffect(() => {
-        if(error){
+        if (error) {
             dispatch({
                 type: restaurantsTypes.RESTAURAT_CREATE_RESET
             })
@@ -231,6 +236,9 @@ const RestaurantDataInput = (props) => {
             else {
                 setReloadCheck(false);
             }
+        }
+        if (!supportedCountries) {
+            dispatch(getSupportedCountries())
         }
         if (!reloadCheck || props.creating) {
             formik.values = defaultInitialValues
@@ -382,12 +390,15 @@ const RestaurantDataInput = (props) => {
                             <h2>{i18n.t('addressInformation')}</h2>
 
                             <InputGroup>
-                                <InputContainer label={i18n.t('country')} name="country_code" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                    value: formik.values.country_code,
-                                    onChange: formik.handleChange,
-                                    options: [{ label: 'Turkey', value: 'TR' }, { label: 'Libya', value: 'LY' }],
-
-                                }} />
+                                {supportedCountriesLoading && <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} />}
+                                {supportedCountriesSuccess &&
+                                   
+                                    <InputContainer label={i18n.t('country')} name="country_code" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value: formik.values.country_code,
+                                        onChange: formik.handleChange,
+                                        //options: [{ label: 'Turkey', value: 'TR' }, { label: 'Libya', value: 'LY' }],
+                                        options: Object.keys(supportedCountries).map((key) => {return {label: supportedCountries[key].english_name, value: key}})
+                                    }} />}
 
                                 <InputContainer label={i18n.t('postalCode')} name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
                                     value: formik.values.postal_code,
