@@ -8,7 +8,7 @@ import { Button } from 'primereact/button'
 import { MultiSelect } from 'primereact/multiselect'
 import { usersListTypes } from '../../../store/types/userslists.type'
 import { Toast } from 'primereact/toast'
-import { useFormik } from 'formik'
+import { FormikProvider, useFormik } from 'formik'
 import { i18n } from '../../../language'
 import Loading from '../../Loading'
 import FormColumn from '../../inputs/formColumn'
@@ -32,7 +32,7 @@ const UserDataInput = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "", email: "", phone: "", roles: [],active:'' ,address: props.updateProps ? '' : []
+            name: "", email: "", phone: "", roles: [],active:false ,address: props.updateProps ? '' : []
         },
         validate: (data) => {
             let errors: any = {}
@@ -78,6 +78,7 @@ const UserDataInput = (props) => {
                 formik.values.phone = props.updateProps.data.phone
                 formik.values.iban_no = props.updateProps.data.iban_no
                 formik.values.bank_name = props.updateProps.data.bank_name
+                formik.values.active = props.updateProps.data.active
                 setLoading(props.updateProps.loading)
             }
         } else {
