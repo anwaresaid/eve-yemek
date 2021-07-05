@@ -73,6 +73,7 @@ const RestaurantDataInput = (props) => {
         description: '',
         image: '',
         address: '',
+        full_address:'',
         postal_code: '',
         phone: '',
         email: '',
@@ -94,6 +95,7 @@ const RestaurantDataInput = (props) => {
         longitude: 0.0,
         latitude: 0.0,
         is_open: false,
+        country_code:"",
         // currency_type:'tl'
     }
 
@@ -142,13 +144,17 @@ const RestaurantDataInput = (props) => {
                 errors.owner_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') });
             }
 
+            if (!data.country_code) {
+                errors.country_code = i18n.t('isRequired', { input: i18n.t('country') });
+            }
+
 
             if (!data.restaurant_charges) {
                 data.restaurant_charges = 0;
             }
-
+            
             if (!data.minimum_order_amount) {
-                data.minimum_order_amount = 0;
+                errors.minimum_order_amount = i18n.t('isRequired', { input: i18n.t('minimumAmount') });
             }
 
             if (!data.latitudeInt) {
@@ -163,10 +169,9 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.longitude = formik.values.longitudeInt?.toString();
             }
+            
+            console.log(errors);
 
-            if (!data.license_code) {
-                errors.license_code = i18n.t('isRequired', { input: i18n.t('licenseCode') })
-            }
             return errors;
         },
         onSubmit: (data: any) => {
@@ -181,6 +186,8 @@ const RestaurantDataInput = (props) => {
 
             tmpData.is_veg = tmpData.is_veg || false;
             tmpData.featured = tmpData.featured || false;
+            tmpData.active = tmpData.active || false;
+            tmpData.is_open = tmpData.is_open || false;
 
             let address: any = {
                 full_address: tmpData.full_address,
