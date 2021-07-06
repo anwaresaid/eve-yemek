@@ -288,8 +288,8 @@ const MealDataInput = (props) => {
 
                         <FormColumn divideCount={3}>
                             <InputGroup>
-                                <InputContainer name="vegi" label={i18n.t('vegetablesOnly')} noAutoCol12 component={InputSwitch} formiks={inputFormiks} iprops={{
-                                    checked: formik.values.vegi,
+                                <InputContainer name="is_veg" label={i18n.t('vegetablesOnly')} noAutoCol12 component={InputSwitch} formiks={inputFormiks} iprops={{
+                                    checked: formik.values.is_veg,
                                     onChange: formik.handleChange
                                 }} />
                                 <InputContainer name="featured" label={i18n.t('prioritized')} noAutoCol12 component={InputSwitch} formiks={inputFormiks} iprops={{
