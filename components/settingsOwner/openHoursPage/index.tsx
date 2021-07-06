@@ -133,21 +133,24 @@ const OpenHoursPage = ({comingResData}:IProps) => {
     }, []);
 
     useEffect(()=>{
-        if(id && !restaurantInfo){
+        if(id && !comingResData){
+            setReadyToShow(false);
             dispatch(findRestaurant(id));
         }
     }, [id]);
 
     useEffect(()=>{
+
         if(resSuccess && restaurantInfo?.schedule && restaurantInfo?.schedule?.mon){
             for (const day in restaurantInfo?.schedule) {
                 if(days.includes(day)){
                     const isOpen =  restaurantInfo.schedule[day][0] != "-1" && restaurantInfo.schedule[day][1] != "-1";
-                    formik.values[day].open = isOpen;
                     if(isOpen){
+                        formik.values[day].open = isOpen;
                         formik.setFieldValue(day+".start", moment(restaurantInfo.schedule[day][0], "HH:mm").toDate());
                         formik.setFieldValue(day+".end", moment(restaurantInfo.schedule[day][1], "HH:mm").toDate());
                     }else{
+                        formik.values[day].open = isOpen;
                         formik.setFieldValue(day+".start", null);
                         formik.setFieldValue(day+".end", null);
                     }
@@ -232,8 +235,8 @@ const OpenHoursPage = ({comingResData}:IProps) => {
                                 </React.Fragment>);
                             })}
                         </tbody>
-                    </S.ScheduleTable> : <ProgressSpinner/>}
-
+                    </S.ScheduleTable> : <div><ProgressSpinner/></div>}
+                    
                     <Button
                         id="createBtn"
                         className="p-mt-3"
