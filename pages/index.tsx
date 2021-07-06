@@ -51,7 +51,6 @@ const Index = (props) => {
 
     const getTotalOrdersWeekly = () => {
         if(reportData){
-            console.log("last 7 days",_.sum(parseCounts(reportData.lastSevenDaysReport.order)) ); 
             return _.sum(parseCounts(reportData.lastSevenDaysReport.order))
     }
 }
@@ -183,15 +182,6 @@ const Index = (props) => {
                         </i>
                         <Line
                         ref={chartRef}
-                        getElementAtEvent={(i: any, event: any) => {
-                          if (chartRef.current) {
-                          const chart = Chart.getChart(chartRef.current)
-                          const clickedElements = chart!.getElementsAtEventForMode(event, 'y',{axis: 'x', intersect: false}, true)
-                          if (clickedElements.length > 0) {
-                            console.log(clickedElements[0].index) // Here clicked label | data index
-                          }
-                         }
-                        }}
                             type='number'
                             width={500}
                             height={100}
