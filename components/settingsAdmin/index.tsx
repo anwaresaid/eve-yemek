@@ -64,57 +64,6 @@ const SettingsAdmin = () => {
         validate: (data) => {
             let errors: any = {};
 
-            if (!data.app_name) {
-                errors.app_name = "App Name is required.";
-            }
-            if (!data.time_zone) {
-                errors.time_zone = "Time Zone is required.";
-            }
-            if (!data.currency_code) {
-                errors.currency_code = "Currency Code is required.";
-            }
-            if (!data.currency_symbol) {
-                errors.currency_symbol = "Currency Symbol is required.";
-            }
-            if (!data.fcm_project_id) {
-                errors.fcm_project_id = "FCM Project ID is required.";
-            }
-            if (!data.fcm_app_id) {
-                errors.fcm_app_id = "FCM APP ID is required.";
-            }
-            if (!data.fcm_sender_id) {
-                errors.fcm_sender_id = "FCM Sender ID is required.";
-            }
-            if (!data.fcm_web_certificate) {
-                errors.fcm_web_certificate = "FCM Web Certificate is required.";
-            }
-            if (!data.fcm_web_api_key) {
-                errors.fcm_web_api_key = "FCM Web API Key is required.";
-            }
-            if (!data.fcm_web_server_key) {
-                errors.fcm_web_server_key = "FCM Web Server Key is required.";
-            }
-            if (!data.twilio_sid) {
-                errors.twilio_sid = "Twilio SID is required.";
-            }
-            if (!data.twilio_access_token) {
-                errors.twilio_access_token = "Twilio Access Token is required.";
-            }
-            if (!data.twilio_service_id) {
-                errors.twilio_service_id = "Twilio Service is required.";
-            }
-            if (!data.google_api_key) {
-                errors.google_api_key = "Google API Key is required.";
-            }
-            if (!data.paypal_api_key) {
-                errors.paypal_api_key = "Paypal API Key is required.";
-            }
-            if (!data.razorpay_client_key) {
-                errors.razorpay_client_key = "Razorpay Client Key is required.";
-            }
-            if (!data.razorpay_secret_key) {
-                errors.razorpay_secret_key = "Razorpay Secret Key is required.";
-            }
             return errors;
         },
         onSubmit: (data: any) => {
@@ -166,17 +115,20 @@ const SettingsAdmin = () => {
             formik.values.razorpay_client_key = settings.razorpay_client_key;
             formik.values.razorpay_secret_key = settings.razorpay_secret_key;
             setDataSetted(true);
-            if (successUpdate) {
-                toast.current.show({
-                    severity: "success",
-                    summary: "Success",
-                    detail: "Settings Updated Successfully",
-                });
-            }
         } else {
             dispatch(listSettings());
         }
     }, [dispatch, success]);
+
+    useEffect(()=>{
+        if (successUpdate) {
+            toast.current.show({
+                severity: "success",
+                summary: "Success",
+                detail: "Settings Updated Successfully",
+            });
+        }
+    }, [successUpdate]);
 
     const inputFormiks = {
         getFormErrorMessage,
