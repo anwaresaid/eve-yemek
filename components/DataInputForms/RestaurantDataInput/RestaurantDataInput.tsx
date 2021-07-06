@@ -578,7 +578,7 @@ const RestaurantDataInput = (props) => {
                         <TabPanel header={i18n.t('meals')}>
                             <FoodsTable foods={formik.values.foods} resid={props.id} />
                         </TabPanel>
-                        <TabPanel header={"Çalışma Saatleri"} >
+                        <TabPanel header={i18n.t("workingHours")} >
                             <OpenHoursPage comingResData={restaurant}/>
                         </TabPanel>
                     </TabView>

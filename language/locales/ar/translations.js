@@ -257,5 +257,19 @@ export const translations = {
   deliveryStatus: 'حالة التسليم',
   deliveryStatusUpdated: 'تم تحديث حالة التسليم',
   picked: 'تم الإرسال',
-  allRestaurants: 'كل المطاعم'
+  allRestaurants: 'كل المطاعم',
+
+  // Open Hours Schedule
+  mon:"الاثنين",
+  tue:"يوم الثلاثاء",
+  wed:"الأربعاء",
+  thu:"يوم الخميس",
+  fri:"جمعة",
+  sat:"السبت",
+  sun:"الأحد",
+
+  edit:"يحرر",
+  workingHours:"ساعات العمل",
+  scheduleUpdateError1:"تأكد من تحديد وقت البدء والانتهاء",
+  scheduleUpdateError2:"لا يمكن أن يكون وقت البدء أكبر من وقت الانتهاء"
 };

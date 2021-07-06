@@ -264,5 +264,10 @@ export const translations = {
   thu:"Perşembe",
   fri:"Cuma",
   sat:"Cumartesi",
-  sun:"Pazar"
+  sun:"Pazar",
+
+  edit:"Düzenle",
+  workingHours:"Çalışma Saatleri",
+  scheduleUpdateError1:"Başlangıç ve bitiş zamanını belirttiğinizden emin olun",
+  scheduleUpdateError2:"Başlangıç zamanı bitiş zamanından daha büyük olamaz"
 };

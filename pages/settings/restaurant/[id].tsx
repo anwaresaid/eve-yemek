@@ -2,6 +2,7 @@ import { TabPanel, TabView } from "primereact/tabview";
 import React, { useState } from "react";
 import OpenHoursPage from "../../../components/settingsOwner/openHoursPage";
 import { getIdQuery } from "../../../helpers/getIdQuery";
+import { i18n } from "../../../language";
 
 const RestaurantsEdit = () => {
 
@@ -10,7 +11,7 @@ const RestaurantsEdit = () => {
     return (
         <>
             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                <TabPanel header={"Çalışma Saatleri"} >
+                <TabPanel header={i18n.t("workingHours")} >
                     <OpenHoursPage/>
                 </TabPanel>
             </TabView>
