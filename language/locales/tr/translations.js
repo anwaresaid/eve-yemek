@@ -145,6 +145,10 @@ export const translations = {
   discount: 'İndirim',
   maximumUsage: 'Maksimum Kullanım',
 
+  // Send SMS
+  sendSms:"SMS Gönder",
+  message:"Mesaj",
+
   // User lists
   created: 'Oluşturuldu',
   createUser: 'Kullanıcı Oluştur',
@@ -190,6 +194,7 @@ export const translations = {
   phoneNumber: 'Telefon Numarası',
   ownerName: 'Sahibinin Adı',
   invalidEmailMessage: 'Yanlış e-posta adresi',
+  onlyNumberError: 'Bu alan sadece rakamlar ile doldurulamaz',
 
   // Toasts
   success: 'Başarılı',

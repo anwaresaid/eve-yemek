@@ -145,6 +145,10 @@ export const translations = {
   discount: 'Скидка',
   maximumUsage: 'Максимальное использование',
 
+  // Send SMS
+  sendSms:"Отправить смс",
+  message:"Сообщение",
+
   // User lists
   created: 'Создано',
   createUser: 'Создать пользователя',
@@ -190,6 +194,7 @@ export const translations = {
   phoneNumber: 'Номер телефона',
   ownerName: 'Имя владельца',
   invalidEmailMessage: 'Недействительный адрес электронной почты',
+  onlyNumberError: 'этот ввод не может состоять только из чисел',
 
   // Toasts
   success: 'Успешно',

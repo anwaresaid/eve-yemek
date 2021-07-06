@@ -145,6 +145,10 @@ export const translations = {
   discount: 'تخفيض',
   maximumUsage: 'حد الاستعمال',
 
+  // Send SMS
+  sendSms:"أرسل رسالة نصية قصيرة",
+  message:"رسالة",
+
   // User lists
   created: 'تم إنشاء',
   createUser: 'إنشاء مستخدم',
@@ -190,6 +194,7 @@ export const translations = {
   phoneNumber: 'رقم الهاتف',
   ownerName: 'اسم المالك',
   invalidEmailMessage: 'البريد الإلكتروني غير صحيح',
+  onlyNumberError: 'لا يمكن أن يتألف من الأرقام فقط',
 
   // Toasts
   success: 'نجاح',

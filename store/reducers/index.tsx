@@ -50,6 +50,8 @@ import { forgotPasswordReducer, listSettingsReducer, updateSettingsReducer } fro
 import { dashboardReportReducer } from './dashboard.reducer';
 import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
 import { sendNotificationReducer } from './send_notifications.reducer';
+import { supportedCountriesReducer } from './addresses.reducer';
+import { sendSmsReducer } from './send_sms';
 
 export default combineReducers({
   login: loginReducer,
@@ -107,4 +109,7 @@ export default combineReducers({
   createCoupons: createCouponsReducer,
 
   sendNotification: sendNotificationReducer,
+  sendSms:sendSmsReducer,
+
+  supportedCountries: supportedCountriesReducer
 });

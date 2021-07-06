@@ -21,7 +21,7 @@ const UsersTable = (props) => {
         {field: 'email', header: i18n.t('email')},
         {field: 'phone', header: i18n.t('telephone')},
         {field: 'howLongAgo', header: i18n.t('created')}, // in days
-        {field: 'active', header: i18n.t('active'), body: ()=>activeTag(true)}, // change after BE supports active status for users
+        {field: 'active', header: i18n.t('active'), body: (rowData)=>activeTag(rowData.active)}, // change after BE supports active status for users
         {field: 'ops', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path='users/'+props.editPath)}
     ]
     return ( 
