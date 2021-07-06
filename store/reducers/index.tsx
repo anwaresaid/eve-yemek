@@ -49,7 +49,7 @@ import {
 import { forgotPasswordReducer, listSettingsReducer, updateSettingsReducer } from './settings.reducer';
 import { dashboardReportReducer } from './dashboard.reducer';
 import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
-import { sendNotificationReducer } from './send_notifications.reducer';
+import { createNotificationReducer, sendNotificationReducer } from './send_notifications.reducer';
 import { supportedCountriesReducer } from './addresses.reducer';
 import { sendSmsReducer } from './send_sms';
 
@@ -110,6 +110,7 @@ export default combineReducers({
 
   sendNotification: sendNotificationReducer,
   sendSms:sendSmsReducer,
+  createNotification:createNotificationReducer,
 
   supportedCountries: supportedCountriesReducer
 });
