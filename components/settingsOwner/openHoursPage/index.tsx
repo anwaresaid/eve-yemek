@@ -7,8 +7,10 @@ import { InputSwitch } from "primereact/inputswitch";
 import { Toast } from "primereact/toast";
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { momentSetLocale } from "../../../helpers/dateFunctions";
 import { i18n } from "../../../language";
+import { updateSchedule } from "../../../store/actions/settings.action";
 import FormColumn from "../../inputs/formColumn";
 import InputGroup from "../../inputs/inputGroup";
 
@@ -16,6 +18,8 @@ import * as S from "./style";
 
 const OpenHoursPage = () => {
     const toast = useRef(null);
+
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -88,6 +92,7 @@ const OpenHoursPage = () => {
             }
 
 
+            dispatch(updateSchedule("",resultDays));
         }
     });
 

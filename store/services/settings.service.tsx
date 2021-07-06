@@ -15,4 +15,9 @@ export default class SettingsService {
     const { data:{data} } = await axios.post("/users/resetPasswordRequest", { email });
     return data;
   }
+
+  public async updateSchedule(resturantId, scheduleDays){
+    const { data:{data} } = await axios.post("/restaurants/"+ resturantId +"/schedule", { schedule:scheduleDays });
+    return data;
+  }
 }
