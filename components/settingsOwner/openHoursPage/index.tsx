@@ -60,7 +60,7 @@ const OpenHoursPage = () => {
             let errors: any = {};
 
             
-            Object.entries(data).map((day:any, index)=>{
+            Object.entries(data).map((day:any)=>{
 
                 if(day[1].open){
                     if(!day[1].start || !day[1].end){
@@ -74,8 +74,21 @@ const OpenHoursPage = () => {
             return errors;
         },
         onSubmit: (data: any) => {
-            
-        },
+
+            let resultDays = {};
+
+            for (const day in data) {
+
+                if(data[day].open === false){
+                    resultDays[day] = [-1, -1];
+                    continue;
+                }
+
+                resultDays[day] = [moment(data[day].start).format("LT"), moment(data[day].end).format("LT")];
+            }
+
+
+        }
     });
 
     const isFormFieldValid = (name) =>
