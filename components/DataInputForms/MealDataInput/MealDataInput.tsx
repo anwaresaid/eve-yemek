@@ -165,7 +165,6 @@ const MealDataInput = (props) => {
             setTimeout(() => { router.push('/foods') }, 2000)
             return
         }
-
         // if(error){
         //     toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
         // }
