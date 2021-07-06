@@ -17,7 +17,7 @@ export default class SettingsService {
   }
 
   public async updateSchedule(resturantId, scheduleDays){
-    const { data:{data} } = await axios.post("/restaurants/"+ resturantId +"/schedule", { schedule:scheduleDays });
+    const { data:{data} } = await axios.put("/restaurants/"+ resturantId +"/schedule", { schedule:scheduleDays });
     return data;
   }
 }

@@ -6,7 +6,7 @@ import { i18n } from "../../language";
 const StandardTable = (props) => {//"Showing {first} to {last} of {totalRecords}"
 
     const dynamicColumns = props.columns.map((col,i) => {
-        return <Column  key={col.field} field={col.field} header={col.header} body={col.body} sortable />;
+        return <Column  key={i} field={col.field} header={col.header} body={col.body} sortable />;
     });
 
     return (

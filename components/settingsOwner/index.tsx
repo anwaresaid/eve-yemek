@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { i18n } from "../../language";
 import OpenHoursPage from "./openHoursPage";
 import PasswordChangePage from "./passwordChangePage";
+import ResturantsList from "./restaurantsList";
 
 const SettingsOwner = () => {
 
@@ -11,8 +12,8 @@ const SettingsOwner = () => {
     return (
         <>
             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                <TabPanel header={"Açık Saatler"} >
-                    <OpenHoursPage/>
+                <TabPanel header={i18n.t("restaurants")} >
+                    <ResturantsList/>
                 </TabPanel>
                 <TabPanel header={i18n.t("security")} >
                     <PasswordChangePage />
