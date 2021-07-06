@@ -146,7 +146,6 @@ const OpenHoursPage = () => {
     }, [resSuccess]);
 
     useEffect(()=>{
-        console.log(scheduleDetails, scheduleSuccess, scheduleError, scheduleLoading);
         if(scheduleSuccess){
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('success') })
         }else if(scheduleError){
