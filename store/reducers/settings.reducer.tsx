@@ -73,6 +73,8 @@ export const updateScheduleReducer = (state = initialState, action) => {
             return { loading: false, error: action.payload };
         case settingsTypes.SETTINGS_SCHEDULE_UPDATE_SUCCESS:
             return { loading: false, success: true };
+        case settingsTypes.SETTINGS_SCHEDULE_UPDATE_RESET:
+            return { };
         default:
             return state;
     }

@@ -77,7 +77,7 @@ export const forgotPasswordRequest =
         }
     };
 
-export const updateSchedule= (resturantId:string, scheduleDays: object) => async (dispatch, getState) => {
+export const updateSchedule = (resturantId:string, scheduleDays: object) => async (dispatch, getState) => {
     try {
         dispatch({
             type: settingsTypes.SETTINGS_SCHEDULE_UPDATE_REQUEST,
@@ -99,4 +99,10 @@ export const updateSchedule= (resturantId:string, scheduleDays: object) => async
                 : error.message,
       });
     }
+}
+
+export const updateScheduleReset = () => async (dispatch, getState) => {
+    dispatch({
+        type: settingsTypes.SETTINGS_SCHEDULE_UPDATE_RESET,
+    });
 }
