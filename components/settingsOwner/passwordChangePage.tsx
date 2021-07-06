@@ -15,7 +15,6 @@ import InputGroup from "../inputs/inputGroup";
 const PasswordChangePage = () => {
     const dispatch = useDispatch();
     const toast = useRef(null);
-    const [activeIndex, setActiveIndex] = useState(0);
     const changePasswordStatus = useSelector(
         (state: RootState) => state.changePassword
     );

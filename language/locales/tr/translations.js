@@ -255,5 +255,14 @@ export const translations = {
   deliveryStatus: 'Teslim durumu',
   deliveryStatusUpdated: 'Teslimat Durumu Güncellendi',
   picked: 'Gönderildi',
-  allRestaurants: 'Tüm restoranlar'
+  allRestaurants: 'Tüm restoranlar',
+
+  // Open Hours Schedule
+  mon:"Pazartesi",
+  tue:"Salı",
+  wed:"Çarşamba",
+  thu:"Perşembe",
+  fri:"Cuma",
+  sat:"Cumartesi",
+  sun:"Pazar"
 };
