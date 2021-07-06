@@ -145,6 +145,10 @@ export const translations = {
   discount: 'İndirim',
   maximumUsage: 'Maksimum Kullanım',
 
+  // Send SMS
+  sendSms:"SMS Gönder",
+  message:"Mesaj",
+
   // User lists
   created: 'Oluşturuldu',
   createUser: 'Kullanıcı Oluştur',
