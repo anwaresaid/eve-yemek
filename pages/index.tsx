@@ -111,7 +111,7 @@ const Index = (props) => {
                         <div className="p-my-5">
                             <StandardTable id='ownedRestaurants'
                                 columns={ownedRestaurantsTableColumns}
-                                value={ownedRestaurants.items}
+                                value={ownedRestaurants?.items}
                                 noPaginator
                                 style={{ tableLayout: "auto" }}
                                 resizableColumns

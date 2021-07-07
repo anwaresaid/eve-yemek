@@ -256,5 +256,20 @@ export const translations = {
   deliveryStatusUpdated: 'Delivery status updated',
   deliveryStatusUpdateFailed: 'Delivery status update failed',
   picked: 'Dispatched',
-  allRestaurants: 'All Restaurants'
+  allRestaurants: 'All Restaurants',
+
+  // Open Hours Schedule
+  mon:"Monday",
+  tue:"Tuesday",
+  wed:"Wednesday",
+  thu:"Thursday",
+  fri:"Friday",
+  sat:"Saturday",
+  sun:"Sunday",
+
+  edit:"Edit",
+  workingHours:"Working Hours",
+  scheduleUpdateError1:"Make sure to specify start and end time",
+  scheduleUpdateError2:"Start time cannot be greater than end time"
+
 };

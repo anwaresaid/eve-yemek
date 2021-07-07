@@ -255,5 +255,19 @@ export const translations = {
   deliveryStatus: 'Teslim durumu',
   deliveryStatusUpdated: 'Teslimat Durumu Güncellendi',
   picked: 'Gönderildi',
-  allRestaurants: 'Tüm restoranlar'
+  allRestaurants: 'Tüm restoranlar',
+
+  // Open Hours Schedule
+  mon:"Pazartesi",
+  tue:"Salı",
+  wed:"Çarşamba",
+  thu:"Perşembe",
+  fri:"Cuma",
+  sat:"Cumartesi",
+  sun:"Pazar",
+
+  edit:"Düzenle",
+  workingHours:"Çalışma Saatleri",
+  scheduleUpdateError1:"Başlangıç ve bitiş zamanını belirttiğinizden emin olun",
+  scheduleUpdateError2:"Başlangıç zamanı bitiş zamanından daha büyük olamaz"
 };

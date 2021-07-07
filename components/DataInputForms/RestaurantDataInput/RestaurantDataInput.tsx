@@ -29,6 +29,7 @@ import CouponsTable from "../../tables/couponsTable";
 import { Tag } from "primereact/tag";
 import { getSupportedCountries } from "../../../store/actions/addresses.action";
 import { ProgressSpinner } from "primereact/progressspinner";
+import OpenHoursPage from "../../settingsOwner/openHoursPage";
 
 const RestaurantDataInput = (props) => {
 
@@ -576,6 +577,9 @@ const RestaurantDataInput = (props) => {
                         {generalTabPanel()}
                         <TabPanel header={i18n.t('meals')}>
                             <FoodsTable foods={formik.values.foods} resid={props.id} />
+                        </TabPanel>
+                        <TabPanel header={i18n.t("workingHours")} >
+                            <OpenHoursPage comingResData={restaurant}/>
                         </TabPanel>
                     </TabView>
                     :

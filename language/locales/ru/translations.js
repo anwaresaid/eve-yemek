@@ -257,5 +257,19 @@ export const translations = {
   deliveryStatus: 'Статус доставки',
   deliveryStatusUpdated: 'Обновленный статус доставки',
   picked: 'отправлен',
-  allRestaurants: 'Все рестораны'
+  allRestaurants: 'Все рестораны',
+
+  // Open Hours Schedule
+  mon:"понедельник",
+  tue:"вторник",
+  wed:"среда",
+  thu:"Четверг",
+  fri:"Пятница",
+  sat:"Суббота",
+  sun:"Воскресенье",
+
+  edit:"редактировать",
+  workingHours:"Рабочее время",
+  scheduleUpdateError1:"Обязательно укажите время начала и окончания",
+  scheduleUpdateError2:"Время начала не может быть больше времени окончания"
 };
