@@ -24,11 +24,11 @@ const Orders = () => {
     const path = 'orders';
 
     useEffect(() => {
-        if (orders.items.length === 0 && !success)
             dispatch(listOrders())
-        else if (success)
+        if (orders)
             setRows(orders.items)
-    }, [dispatch, success])
+            
+    },[dispatch])
 
     const editButton = (row) => {
         return (
