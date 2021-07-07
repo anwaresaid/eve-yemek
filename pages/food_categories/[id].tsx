@@ -83,9 +83,6 @@ export const FoodCategoryEdit = () => {
             if (!data.name) {
                 errors.name = "user name is required.";
             }
-            if (!data.image) {
-                errors.image = "image is required.";
-            }
 
             if (!data.country) {
                 errors.country = i18n.t("isRequired", {

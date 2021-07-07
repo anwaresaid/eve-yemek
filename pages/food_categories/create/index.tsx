@@ -54,6 +54,7 @@ export const Index = () => {
                     input: i18n.t("mealCategory"),
                 });
             }
+
             if (!data.country) {
               errors.country = i18n.t("isRequired", {
                   input: i18n.t("country"),
