@@ -19,6 +19,9 @@ import InputGroup from '../../components/inputs/inputGroup';
 import InputContainer from '../../components/inputs/inputContainer';
 import Loading from '../../components/Loading';
 import { Dropdown } from 'primereact/dropdown';
+import { addonCategoryTypes } from '../../store/types/addon-category.type';
+import auth from '../../helpers/core/auth';
+import { listRestaurantOwners } from '../../store/actions/userslists.action';
 
 export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -41,6 +44,9 @@ export const AddonCategoryEdit = () => {
   );
   const { loading: loadingUpdate, success: successUpdate } =
     updatedAddonCategory;
+
+  const listOwnersState = useSelector((state: RootState) => state.listRestaurantOwners)
+  const { loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners } = listOwnersState
 
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -65,6 +71,13 @@ export const AddonCategoryEdit = () => {
       if (!data.enum) {
         errors.enum = 'enum is required.';
       }
+      if (!data.create_user_id && auth.hasRoles(['admin'])) {
+        errors.create_user_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') })
+      } else if (!data.create_user_id && auth.hasRoles(['restaurant_owner'])) {
+        data.create_user_id = auth.user.id
+      } else {
+
+      }
       return errors;
     },
     onSubmit: (data: any) => {
@@ -72,6 +85,11 @@ export const AddonCategoryEdit = () => {
     },
   });
   useEffect(() => {
+    if (auth.hasRoles(['admin'])) {
+      if (!owners || (owners.items.length === 0 && (!ownersSuccess))) {
+        dispatch(listRestaurantOwners())
+      }
+    }
     if (router.query.id) {
       if (
         detailsSuccess &&
@@ -81,12 +99,13 @@ export const AddonCategoryEdit = () => {
         setData(true);
         formik.values.name = addonCategory.name;
         formik.values.enum = addonCategory.enum;
+        formik.values.create_user_id = addonCategory.create_user_id;
         if (successUpdate) {
           dispatch({
-            type: foodCategoryTypes.FOOD_CATEGORY_UPDATE_RESET,
+            type: addonCategoryTypes.ADDON_CATEGORY_UPDATE_RESET,
           });
           dispatch({
-            type: foodCategoryTypes.FOOD_CATEGORY_DETAILS_RESET,
+            type: addonCategoryTypes.ADDON_CATEGORY_DETAILS_RESET,
           });
           toast.current.show({
             severity: 'success',
@@ -167,6 +186,24 @@ export const AddonCategoryEdit = () => {
                   ></label>
                   {getFormErrorMessage('enum')}
                 </FormColumn>
+                {
+                  auth.hasRoles(['admin']) &&
+                  <FormColumn divideCount={3}>
+                    <InputGroup>
+                      <InputContainer
+                        label={i18n.t('restaurantOwner')}
+                        name='create_user_id'
+                        formiks={inputFormiks}
+                        component={Dropdown}
+                        iprops={{
+                          value: formik.values.create_user_id,
+                          onChange: formik.handleChange,
+                          options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
+                        }}
+                      />
+                    </InputGroup>
+                  </FormColumn>
+                }
               </div>
               <S.SubmitBtn>
                 <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
