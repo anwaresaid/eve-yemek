@@ -261,9 +261,9 @@ export const translations = {
 
   // Open Hours Schedule
   mon:"الاثنين",
-  tue:"يوم الثلاثاء",
+  tue:"الثلاثاء",
   wed:"الأربعاء",
-  thu:"يوم الخميس",
+  thu:"الخميس",
   fri:"جمعة",
   sat:"السبت",
   sun:"الأحد",
