@@ -87,8 +87,8 @@ export const createAddonCategory = (data: any) => async (dispatch) => {
     dispatch({
       type: addonCategoryTypes.ADDON_CATEGORY_CREATE_FAIL,
       payload:
-        err.response && err.response.response.data.message
-          ? err.response.data.message
+        err.response && err.response.data.error.message
+          ? err.response.data.error.message
           : err.message,
     });
   }
