@@ -64,3 +64,19 @@ export const forgotPasswordReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+export const updateScheduleReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case settingsTypes.SETTINGS_SCHEDULE_UPDATE_REQUEST:
+            return { loading: true };
+        case settingsTypes.SETTINGS_SCHEDULE_UPDATE_FAIL:
+            return { loading: false, error: action.payload };
+        case settingsTypes.SETTINGS_SCHEDULE_UPDATE_SUCCESS:
+            return { loading: false, success: true };
+        case settingsTypes.SETTINGS_SCHEDULE_UPDATE_RESET:
+            return { };
+        default:
+            return state;
+    }
+};
+
