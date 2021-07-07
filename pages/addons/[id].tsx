@@ -22,6 +22,8 @@ import InputContainer from '../../components/inputs/inputContainer';
 import { useRouter } from 'next/dist/client/router';
 import { addonsTypes } from '../../store/types/addons.type';
 import { Toast } from 'primereact/toast';
+import auth from '../../helpers/core/auth';
+import { listRestaurantOwners } from '../../store/actions/userslists.action';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -38,6 +40,9 @@ export const Index = () => {
 
   const findAddon = useSelector((state: RootState) => state.findAddons);
   const { success: successFind, addon } = findAddon;
+
+  const listOwnersState = useSelector((state: RootState) => state.listRestaurantOwners)
+  const { loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners } = listOwnersState
 
   const updateAddon = useSelector((state: RootState) => state.updateAddons);
   const { success: successUpdate } = updateAddon;
@@ -80,6 +85,12 @@ export const Index = () => {
   useEffect(() => {
     if (!addonCatSuccess) dispatch(listAddonCategory());
 
+    if (auth.hasRoles(['admin'])) {
+      if (!owners || (owners.items.length === 0 && !ownersSuccess)) {
+        dispatch(listRestaurantOwners())
+      }
+    }
+
     if (!successFind || addon.id !== router.query.id) {
       dispatch(findAddons(router.query.id));
     }
@@ -92,6 +103,7 @@ export const Index = () => {
       formik.values.addOn_category_id = match[0].id;
       formik.values.name = addon.name;
       formik.values.price = addon.price;
+      formik.values.create_user_id = addon.create_user_id;
     }
 
     if (successUpdate) {
@@ -105,7 +117,7 @@ export const Index = () => {
       dispatch({ type: addonsTypes.ADDON_UPDATE_RESET });
       dispatch({ type: addonsTypes.ADDON_FIND_RESET });
     }
-  }, [dispatch, successUpdate, addonCatSuccess, successFind]);
+  }, [dispatch, successUpdate, addonCatSuccess, successFind, owners]);
 
   const inputFormiks = {
     getFormErrorMessage,
@@ -132,6 +144,22 @@ export const Index = () => {
                     }}
                   />
                 </InputGroup>
+                {
+                  auth.hasRoles(['admin']) &&
+                  <InputGroup>
+                    <InputContainer
+                      label={i18n.t('restaurantOwner')}
+                      name='create_user_id'
+                      formiks={inputFormiks}
+                      component={Dropdown}
+                      iprops={{
+                        value: formik.values.create_user_id,
+                        onChange: formik.handleChange,
+                        options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
+                      }}
+                    />
+                  </InputGroup>
+                }
                 <h4 id='addonCatHeader'>{i18n.t('addonCategory')}</h4>
                 <Dropdown
                   id='addOn_category_id'
