@@ -27,9 +27,9 @@ export const Index = () => {
     (state: RootState) => state.createAddonCategory
   );
   const { loading: creating, success: createSuccess, error: createError } = addonCategoryCreate;
-  
+
   const listOwnersState = useSelector((state: RootState) => state.listRestaurantOwners)
-  const {loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners} = listOwnersState
+  const { loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners } = listOwnersState
 
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -54,14 +54,13 @@ export const Index = () => {
       if (!data.enum) {
         errors.enum = i18n.t('isRequired', { input: i18n.t('type') });
       }
-      if (!data.create_user_id && auth.hasRoles(['admin'])){
-        errors.create_user_id = i18n.t('isRequired', {input: i18n.t('restaurantOwner')})
-      } else if (!data.create_user_id && auth.hasRoles(['restaurant_owner'])){
+      if (!data.create_user_id && auth.hasRoles(['admin'])) {
+        errors.create_user_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') })
+      } else if (!data.create_user_id && auth.hasRoles(['restaurant_owner'])) {
         data.create_user_id = auth.user.id
       } else {
-        
+
       }
-      console.log(errors)
       return errors;
     },
     onSubmit: (data: any) => {
@@ -86,9 +85,11 @@ export const Index = () => {
       });
     }
 
-    if (!owners || (owners.items.length === 0 && !ownersSuccess)){
-      dispatch(listRestaurantOwners())
-    } 
+    if (auth.hasRoles(['admin'])) {
+      if (!owners || (owners.items.length === 0 && !ownersSuccess)) {
+        dispatch(listRestaurantOwners())
+      }
+    }
   }, [createSuccess, createError, owners]);
 
   const inputFormiks = {
@@ -159,7 +160,7 @@ export const Index = () => {
                     iprops={{
                       value: formik.values.create_user_id,
                       onChange: formik.handleChange,
-                      options: owners?.items.map((one) => {return {label: one.name, value: one.id}})
+                      options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
                     }}
                   />
                 </InputGroup>
