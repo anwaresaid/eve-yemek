@@ -18,6 +18,8 @@ import InputContainer from '../../../components/inputs/inputContainer';
 import { useRouter } from 'next/dist/client/router';
 import { addonsTypes } from '../../../store/types/addons.type';
 import { Toast } from 'primereact/toast';
+import auth from '../../../helpers/core/auth';
+import { listRestaurantOwners } from '../../../store/actions/userslists.action';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -32,7 +34,10 @@ export const Index = () => {
   const { success: addonCatSuccess, addonCat: addonCatlist } = resAddonCat;
 
   const createAddon = useSelector((state: RootState) => state.createAddons);
-  const { success } = createAddon;
+  const { success: createAddOnSuccess, error: createAddOnError } = createAddon;
+
+  const listOwnersState = useSelector((state: RootState) => state.listRestaurantOwners)
+  const { loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners } = listOwnersState
 
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -68,7 +73,14 @@ export const Index = () => {
         if (selectedAddons != null)
           formik.values.addOn_category_id = selectedAddons[0]?._id;
       }
+      if (!data.create_user_id && auth.hasRoles(['admin'])) {
+        errors.create_user_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') })
+      } else if (!data.create_user_id && auth.hasRoles(['restaurant_owner'])) {
+        data.create_user_id = auth.user.id
+      } else {
 
+      }
+      console.log(errors)
       return errors;
     },
     onSubmit: (data: any) => {
@@ -77,6 +89,7 @@ export const Index = () => {
         name: data.name,
         price: data.price,
         active: data.active,
+        create_user_id: data.create_user_id
       };
       dispatch(createAddons(addonCreateDto));
     },
@@ -94,16 +107,28 @@ export const Index = () => {
 
     if (addonCatSuccess) settingDropDownNames();
 
-    if (success) {
+    if (auth.hasRoles(['admin'])) {
+      if (!owners || (owners.items.length === 0 && !ownersSuccess)) {
+        dispatch(listRestaurantOwners())
+      }
+    }
+
+    if (createAddOnSuccess) {
       toast.current.show({
         severity: 'success',
-        summary:  i18n.t('success'),
+        summary: i18n.t('success'),
         detail: i18n.t('success'),
       });
       setTimeout(() => { router.push('/addons') }, 2000)
       dispatch({ type: addonsTypes.ADDON_CREATE_RESET });
+    } else if (createAddOnError) {
+      toast.current.show({
+        severity: 'error',
+        summary: i18n.t('error'),
+        detail: createAddOnError,
+      });
     }
-  }, [addonCatSuccess, success]);
+  }, [addonCatSuccess, createAddOnSuccess, owners]);
 
   const inputFormiks = {
     getFormErrorMessage,
@@ -127,6 +152,19 @@ export const Index = () => {
                   iprops={{
                     value: formik.values.name,
                     onChange: formik.handleChange,
+                  }}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputContainer
+                  label={i18n.t('restaurantOwner')}
+                  name='create_user_id'
+                  formiks={inputFormiks}
+                  component={Dropdown}
+                  iprops={{
+                    value: formik.values.create_user_id,
+                    onChange: formik.handleChange,
+                    options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
                   }}
                 />
               </InputGroup>
@@ -157,13 +195,13 @@ export const Index = () => {
             <FormColumn divideCount={3}>
               <InputGroup>
                 <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                    value: formik.values.price,
-                    onValueChange: formik.handleChange,
-                    mode: "currency",
-                    currency: "TRY",
-                    showButtons: true
-                  }}
-                  />
+                  value: formik.values.price,
+                  onValueChange: formik.handleChange,
+                  mode: "currency",
+                  currency: "TRY",
+                  showButtons: true
+                }}
+                />
               </InputGroup>
             </FormColumn>
             <S.SubmitBtn>
