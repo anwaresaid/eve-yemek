@@ -16,7 +16,6 @@ import { priceBodyTemplate } from '../../components/InTableComponents/price'
 const Orders = () => {
 
     const router = useRouter();
-    const [rows, setRows] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
     const res = useSelector((state: RootState) => state.listOrders);
     const { loading, success, orders } = res;
@@ -25,9 +24,6 @@ const Orders = () => {
 
     useEffect(() => {
             dispatch(listOrders())
-        if (orders)
-            setRows(orders.items)
-            
     },[dispatch])
 
     const editButton = (row) => {
@@ -49,13 +45,13 @@ const Orders = () => {
 
     return (
         <div id="ordersTable">
-            {loading ? <Loading /> :
+            {loading ? <Loading /> : success && orders && orders.items &&
                 <div id="ordersCard" className="card">
                     <h1 id="ordersHeader">{i18n.t('orders')}</h1>
                     <StandardTable
                         header={Header(setGlobalFilter, i18n.t('orders'))}
                         columns={columns}
-                        value={_.without(_.map(rows, (item) => { if (!item.is_deleted) return item }), undefined).reverse()}
+                        value={_.without(_.map(orders.items, (item) => { if (!item.is_deleted) return item }), undefined).reverse()}
                         globalFilter={globalFilter}
                         emptyMessage={i18n.t('noXfound', { x: i18n.t('orders') })} >
                     </StandardTable>
