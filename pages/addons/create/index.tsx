@@ -80,7 +80,6 @@ export const Index = () => {
       } else {
 
       }
-      console.log(errors)
       return errors;
     },
     onSubmit: (data: any) => {
@@ -155,19 +154,22 @@ export const Index = () => {
                   }}
                 />
               </InputGroup>
-              <InputGroup>
-                <InputContainer
-                  label={i18n.t('restaurantOwner')}
-                  name='create_user_id'
-                  formiks={inputFormiks}
-                  component={Dropdown}
-                  iprops={{
-                    value: formik.values.create_user_id,
-                    onChange: formik.handleChange,
-                    options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
-                  }}
-                />
-              </InputGroup>
+              {
+                auth.hasRoles(['admin']) &&
+                <InputGroup>
+                  <InputContainer
+                    label={i18n.t('restaurantOwner')}
+                    name='create_user_id'
+                    formiks={inputFormiks}
+                    component={Dropdown}
+                    iprops={{
+                      value: formik.values.create_user_id,
+                      onChange: formik.handleChange,
+                      options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
+                    }}
+                  />
+                </InputGroup>
+              }
               <h4 id='addonCatHeader'>{i18n.t('addonCategory')}</h4>
               <Dropdown
                 id='addonCat'
