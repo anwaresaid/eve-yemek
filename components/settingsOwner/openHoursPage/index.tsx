@@ -90,8 +90,6 @@ const OpenHoursPage = ({comingResData}:IProps) => {
                 if(day[1].open){
                     if(!day[1].start || !day[1].end){
                         errors[day[0]] = i18n.t("scheduleUpdateError1");
-                    }else if(moment(day[1].end).diff(moment(day[1].start), "seconds") < 0){
-                        errors[day[0]] = i18n.t("scheduleUpdateError2");
                     }
                 }
             });
