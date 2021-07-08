@@ -276,5 +276,6 @@ export const translations = {
   couldNotGetUsersBasedOnYourSelection: 'لم يمكن الحصول على مستخدمين على أساس هذا الاختيار',
 
   admins: 'مدراء',
-  all: 'الجميع'
+  all: 'الجميع',
+  send: 'إرسال'
 };

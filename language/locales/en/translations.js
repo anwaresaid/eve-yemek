@@ -275,6 +275,7 @@ export const translations = {
   couldNotGetUsersBasedOnYourSelection: 'Could not get users based on your selection',
 
   admins: 'Admins',
-  all: 'All'
+  all: 'All',
+  send: 'Send'
 
 };

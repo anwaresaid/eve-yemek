@@ -276,5 +276,6 @@ export const translations = {
   couldNotGetUsersBasedOnYourSelection: 'Не удалось получить пользователей на основе выбора',
 
   admins: 'админы',
-  all: 'Все'
+  all: 'Все',
+  send: 'Отправить'
 };
