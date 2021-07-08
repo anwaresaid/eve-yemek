@@ -27,7 +27,7 @@ const liveOrdersList = () => {
       if(success){
         socket.on(`order.created.${orders.items[0].restaurant.id}`, ({payload}) => {
           orders.items.push(payload)
-          setRefresh(true)
+          setRefresh(!refresh)
         })
       }
     }
