@@ -101,6 +101,7 @@ const General=() => {
 
     return(
         <div>
+             <Toast id="toastMessage" ref={toast}></Toast>
             <form id="generalSettingsForum" onSubmit={formik.handleSubmit}>
                 <FormColumn divideCount={2}>
                 <InputGroup>
