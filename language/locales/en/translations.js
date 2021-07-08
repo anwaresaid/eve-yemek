@@ -270,6 +270,11 @@ export const translations = {
   edit:"Edit",
   workingHours:"Working Hours",
   scheduleUpdateError1:"Make sure to specify start and end time",
-  scheduleUpdateError2:"Start time cannot be greater than end time"
+  scheduleUpdateError2:"Start time cannot be greater than end time",
+
+  couldNotGetUsersBasedOnYourSelection: 'Could not get users based on your selection',
+
+  admins: 'Admins',
+  all: 'All'
 
 };

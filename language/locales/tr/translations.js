@@ -269,5 +269,10 @@ export const translations = {
   edit:"Düzenle",
   workingHours:"Çalışma Saatleri",
   scheduleUpdateError1:"Başlangıç ve bitiş zamanını belirttiğinizden emin olun",
-  scheduleUpdateError2:"Başlangıç zamanı bitiş zamanından daha büyük olamaz"
+  scheduleUpdateError2:"Başlangıç zamanı bitiş zamanından daha büyük olamaz",
+
+  couldNotGetUsersBasedOnYourSelection: 'Seçtiğiniz parametrelere göre bir Kullanıcı bulunamadı',
+
+  admins: 'Yöneticiler',
+  all: 'Tüm'
 };

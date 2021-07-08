@@ -271,5 +271,10 @@ export const translations = {
   edit:"редактировать",
   workingHours:"Рабочее время",
   scheduleUpdateError1:"Обязательно укажите время начала и окончания",
-  scheduleUpdateError2:"Время начала не может быть больше времени окончания"
+  scheduleUpdateError2:"Время начала не может быть больше времени окончания",
+
+  couldNotGetUsersBasedOnYourSelection: 'Не удалось получить пользователей на основе выбора',
+
+  admins: 'админы',
+  all: 'Все'
 };
