@@ -58,7 +58,7 @@ const EditOrderPage = (props) => {
         dispatch(
           createNotification(
             props.orderData.user.id,
-            `your order ${props.orderData.order} status now is ${e.value}`
+            `update in your order from ${props.orderData.restaurant.name}: order status now is ${e.value}`
           )
         );
       })
@@ -66,7 +66,7 @@ const EditOrderPage = (props) => {
         dispatch(
           sendNotifications(
             'order status updated',
-            `your order ${props.orderData.order} status now is ${e.value}`,
+            `update in your order from ${props.orderData.restaurant.name}: order status now is ${e.value}`,
             props.orderData.user.id
           )
         );
@@ -101,7 +101,7 @@ const EditOrderPage = (props) => {
         dispatch(
           createNotification(
             props.orderData.user.id,
-            `your order ${props.orderData.order} delivery status now is ${e.value}`
+            `update in your order from ${props.orderData.restaurant.name}: delivery status now is ${e.value}`
           )
         );
       })
@@ -109,7 +109,7 @@ const EditOrderPage = (props) => {
         dispatch(
           sendNotifications(
             'delivery status updated',
-            `your order ${props.orderData.order} delivery status now is ${e.value}`,
+            `update in your order from ${props.orderData.restaurant.name}: delivery status now is ${e.value}`,
             props.orderData.user.id
           )
         );
