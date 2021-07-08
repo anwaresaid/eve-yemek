@@ -42,12 +42,12 @@ const SendSms = () => {
     const userListsService = new UsersListsService();
 
     const roleOptions = [
+        { label: i18n.t('all'), value: '' },
         { label: i18n.t('admins'), value: 'admin' },
         { label: i18n.t('restaurantOwners'), value: 'restaurant_owner' },
         { label: i18n.t('customers'), value: 'customer' },
         { label: i18n.t('customerServiceReps'), value: 'customer_service' },
-        { label: i18n.t('deliveryScouts'), value: 'delivery_scout' },
-        { label: i18n.t('all'), value: '' }
+        { label: i18n.t('deliveryScouts'), value: 'delivery_scout' }
     ]
 
     const isFormFieldValid = (name) =>
