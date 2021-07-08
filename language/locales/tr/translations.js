@@ -273,5 +273,6 @@ export const translations = {
 
   couldNotGetUsersBasedOnYourSelection: 'Seçtiğiniz parametrelere göre bir Kullanıcı bulunamadı',
 
-  admins: 'Yöneticiler'
+  admins: 'Yöneticiler',
+  all: 'Tüm'
 };
