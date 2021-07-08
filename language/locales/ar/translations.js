@@ -271,5 +271,10 @@ export const translations = {
   edit:"يحرر",
   workingHours:"ساعات العمل",
   scheduleUpdateError1:"تأكد من تحديد وقت البدء والانتهاء",
-  scheduleUpdateError2:"لا يمكن أن يكون وقت البدء أكبر من وقت الانتهاء"
+  scheduleUpdateError2:"لا يمكن أن يكون وقت البدء أكبر من وقت الانتهاء",
+
+  couldNotGetUsersBasedOnYourSelection: 'لم يمكن الحصول على مستخدمين على أساس هذا الاختيار',
+
+  admins: 'مدراء',
+  all: 'الجميع'
 };
