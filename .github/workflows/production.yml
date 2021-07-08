@@ -52,7 +52,7 @@ jobs:
           script: |
             cd /srv/baklava/
             git restore .
-            git pull origin V-0.1.5
-            yarn install
-            yarn build
+            git fetch
+            git checkout V-0.1.5
+            yarn install && yarn build
             pm2 reload baklava --update-env
