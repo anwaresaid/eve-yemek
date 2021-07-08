@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import customAxios from '../../helpers/_axios'
 export default class SendNotificationService {
   public async sendNotifications(title, message, fcm_tokens) {
     const dto = {
@@ -12,6 +12,13 @@ export default class SendNotificationService {
     };
 
     await this.send(dto);
+  }
+
+  public async createNotification(user_id: string, message: string) {
+    const {
+      data: { data },
+    } = await customAxios.post('/notifications', {user: user_id, message});
+    return data;
   }
 
   //prettier-ignore
