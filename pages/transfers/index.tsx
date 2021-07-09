@@ -23,7 +23,7 @@ const Transfers = () => {
     const { loading, success, payments } = untransferedPaymentsState;
 
     const makeTransferButton = (row) => {
-        return <Button label="Transfer" className="p-button-secondary p-button-outlined" onClick={() => executeTransfer(row.id)} />
+        return <Button label={i18n.t('executeTransfer')} className="p-button-secondary p-button-outlined" onClick={() => executeTransfer(row.id)} />
     }
 
     function executeTransfer(id) {
