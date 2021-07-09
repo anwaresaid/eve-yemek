@@ -277,6 +277,7 @@ export const translations = {
 
   admins: 'админы',
   all: 'Все',
+
   replaceImageWithDefault: 'заменить изображение изображением по умолчанию',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений',
   send: 'Отправить'
