@@ -21,7 +21,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import StandardFileUpload from "../../inputs/fileUpload";
 import { InputNumber } from "primereact/inputnumber";
 import { InputSwitch } from "primereact/inputswitch";
-
+import { Tooltip } from 'primereact/tooltip';
 import jsonCities from "../../../public/data/il.json";
 import jsonDistricts from "../../../public/data/ilce.json";
 import Loading from "../../Loading";
@@ -30,6 +30,7 @@ import { Tag } from "primereact/tag";
 import { getSupportedCountries } from "../../../store/actions/addresses.action";
 import { ProgressSpinner } from "primereact/progressspinner";
 import OpenHoursPage from "../../settingsOwner/openHoursPage";
+import auth from "../../../helpers/core/auth";
 
 const RestaurantDataInput = (props) => {
 
@@ -55,6 +56,8 @@ const RestaurantDataInput = (props) => {
     const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
     const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
 
+    const [adminsDefaultImage, setAdminsDefaultImage] = useState(false)
+
     //setting names for dropdowns.
     const settingDropDownNames = () => {
         const sortedResOwners = resOwnerslist?.items.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0));
@@ -74,7 +77,7 @@ const RestaurantDataInput = (props) => {
         description: '',
         image: '',
         address: '',
-        full_address:'',
+        full_address: '',
         postal_code: '',
         phone: '',
         email: '',
@@ -96,7 +99,7 @@ const RestaurantDataInput = (props) => {
         longitude: 0.0,
         latitude: 0.0,
         is_open: false,
-        country_code:"",
+        country_code: "",
         // currency_type:'tl'
     }
 
@@ -153,7 +156,7 @@ const RestaurantDataInput = (props) => {
             if (!data.restaurant_charges) {
                 data.restaurant_charges = 0;
             }
-            
+
             if (!data.minimum_order_amount) {
                 errors.minimum_order_amount = i18n.t('isRequired', { input: i18n.t('minimumAmount') });
             }
@@ -170,7 +173,6 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.longitude = formik.values.longitudeInt?.toString();
             }
-
             return errors;
         },
         onSubmit: (data: any) => {
@@ -213,6 +215,9 @@ const RestaurantDataInput = (props) => {
 
             tmpData = { ...tmpData, address: { ...address } };
             if (props.updating) {
+                if (adminsDefaultImage){
+                    tmpData.image = ''
+                }
                 dispatch(updateRestaurant(props.id, tmpData));
             } else if (props.creating) {
                 dispatch(createRestaurant(tmpData));
@@ -375,12 +380,23 @@ const RestaurantDataInput = (props) => {
                                 }} />
                             </InputGroup>
 
-                            <InputGroup>
-                                <InputContainer label={i18n.t('image')} name="image" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
-                                    setFile: (image) => { formik.values.image = image },
-                                    showSuccess: () => { toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' }); }
+                            {
+                                auth.hasRoles(['admin']) && props.updating &&
+                                <InputContainer label={i18n.t('replaceImageWithDefault')} name="replaceImageWithDefault" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
+                                    checked: adminsDefaultImage,
+                                    onChange: (e) => setAdminsDefaultImage(e.target.value),
+                                    tooltip: i18n.t('thisFeatureIsForAdminsToReplaceLegacyImages')
                                 }} />
-                            </InputGroup>
+                            }
+                            {
+                                !adminsDefaultImage &&
+                                <InputGroup>
+                                    <InputContainer label={i18n.t('image')} name="image" formiks={inputFormiks} size={12} component={StandardFileUpload} iprops={{
+                                        setFile: (image) => { formik.values.image = image },
+                                        showSuccess: () => { toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' }); }
+                                    }} />
+                                </InputGroup>
+                            }
                         </FormColumn>
                         <FormColumn divideCount={3}>
                             <h2>{i18n.t('addressInformation')}</h2>
@@ -388,12 +404,12 @@ const RestaurantDataInput = (props) => {
                             <InputGroup>
                                 {supportedCountriesLoading && <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} />}
                                 {supportedCountriesSuccess &&
-                                   
+
                                     <InputContainer label={i18n.t('country')} name="country_code" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
                                         value: formik.values.country_code,
                                         onChange: formik.handleChange,
                                         //options: [{ label: 'Turkey', value: 'TR' }, { label: 'Libya', value: 'LY' }],
-                                        options: Object.keys(supportedCountries).map((key) => {return {label: supportedCountries[key].english_name, value: key}})
+                                        options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].english_name, value: key } })
                                     }} />}
 
                                 <InputContainer label={i18n.t('postalCode')} name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
@@ -579,7 +595,7 @@ const RestaurantDataInput = (props) => {
                             <FoodsTable foods={formik.values.foods} resid={props.id} />
                         </TabPanel>
                         <TabPanel header={i18n.t("workingHours")} >
-                            <OpenHoursPage comingResData={restaurant}/>
+                            <OpenHoursPage comingResData={restaurant} />
                         </TabPanel>
                     </TabView>
                     :

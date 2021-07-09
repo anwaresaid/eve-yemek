@@ -14,7 +14,7 @@ const UpdateFood = () => {
 
     const dispatch = useDispatch();
     const router = useRouter();
-    
+
     const resFood = useSelector((state: RootState) => state.findFood);
     const { loading: foodLoading, success: foodSuccess, food: foodData } = resFood;
 

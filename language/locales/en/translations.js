@@ -276,6 +276,8 @@ export const translations = {
 
   admins: 'Admins',
   all: 'All',
+  replaceImageWithDefault: 'Replace image with default',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'This feature is for Admins, to replace legacy default images',
   send: 'Send'
 
 };
