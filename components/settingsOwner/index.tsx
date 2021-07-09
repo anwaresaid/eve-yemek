@@ -1,7 +1,6 @@
 import { TabPanel, TabView } from "primereact/tabview";
 import React, { useState } from "react";
 import { i18n } from "../../language";
-import OpenHoursPage from "./openHoursPage";
 import PasswordChangePage from "./passwordChangePage";
 import ResturantsList from "./restaurantsList";
 
