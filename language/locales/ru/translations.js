@@ -276,5 +276,7 @@ export const translations = {
   couldNotGetUsersBasedOnYourSelection: 'Не удалось получить пользователей на основе выбора',
 
   admins: 'админы',
-  all: 'Все'
+  all: 'Все',
+  replaceImageWithDefault: 'заменить изображение изображением по умолчанию',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений'
 };

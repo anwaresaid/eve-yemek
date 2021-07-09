@@ -274,5 +274,7 @@ export const translations = {
   couldNotGetUsersBasedOnYourSelection: 'Seçtiğiniz parametrelere göre bir Kullanıcı bulunamadı',
 
   admins: 'Yöneticiler',
-  all: 'Tüm'
+  all: 'Tüm',
+  replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir'
 };
