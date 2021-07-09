@@ -1,5 +1,6 @@
 import React from 'react';
 import SettingsAdmin from '../../components/settingsAdmin';
+import SettingsCustomerService from '../../components/settingsCustomerService';
 import SettingsOwner from '../../components/settingsOwner';
 import auth from '../../helpers/core/auth';
 import { i18n } from '../../language';
@@ -16,7 +17,7 @@ const index = () => {
     }else if(is_owner){
       return <SettingsOwner/>;
     }else if(is_customer_service) {
-      return <SettingsOwner/> 
+      return <SettingsCustomerService/> 
     }else{
       return "No settings";
     }
