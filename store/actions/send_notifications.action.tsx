@@ -43,3 +43,31 @@ export const sendNotifications =
       });
     }
   };
+
+export const createNotification =
+  (user_id, message) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: sendNotificationTypes.NOTIFICATION_CREATE_REQUEST,
+      });
+
+      const sendNotificationService = new SendNotificationService();
+      const res = await sendNotificationService.createNotification(
+        user_id,
+        message
+      );
+
+      dispatch({
+        type: sendNotificationTypes.NOTIFICATION_CREATE_SUCCESS,
+        payload: res,
+      });
+    } catch (error) {
+      dispatch({
+        type: sendNotificationTypes.SEND_NOTIFICATION_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
