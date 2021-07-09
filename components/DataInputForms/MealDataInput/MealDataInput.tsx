@@ -79,12 +79,9 @@ const MealDataInput = (props) => {
             if (!data.name) {
                 errors.name = i18n.t('isRequired', { input: i18n.t('name') });
             }
-            if (!data.description) {
-                errors.description = i18n.t('isRequired', { input: i18n.t('description') });
-            }
 
-            if(/^\d+$/.test(data.description)){
-                errors.description = i18n.t('onlyNumberError');
+            if(data.description && /^\d+$/.test(data.description)){
+                    errors.description = i18n.t('onlyNumberError');
             }
 
             if (!data.food_category_id) {
