@@ -28,7 +28,7 @@ export default class SendNotificationService {
       headers: {
         'Content-Type': 'application/json',
         'Authorization':
-          `key=${process.env.NEXT_PUBLIC_FCM_REQUEST_KEY}`,
+          `key=${process.env.NEXT_PUBLIC_GOOGLE_FCM_AUTH_KEY}`,
       },
     };
 
