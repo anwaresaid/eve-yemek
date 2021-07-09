@@ -64,7 +64,7 @@ const Transfers = () => {
             <Toast ref={toast}></Toast>
             <h1 id="transfersHeader">{i18n.t('transfers')}</h1>
             <StandardTable
-                
+                value={payments}
                 header={Header(setGlobalFilter, "Transfers")}
                 columns={columns}
                 globalFilter={globalFilter}
