@@ -385,7 +385,7 @@ const RestaurantDataInput = (props) => {
                                 <InputContainer label={i18n.t('replaceImageWithDefault')} name="replaceImageWithDefault" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
                                     checked: adminsDefaultImage,
                                     onChange: (e) => setAdminsDefaultImage(e.target.value),
-                                    tooltip: "This feature is for Admins to replace legacy images"
+                                    tooltip: i18n.t('thisFeatureIsForAdminsToReplaceLegacyImages')
                                 }} />
                             }
                             {
