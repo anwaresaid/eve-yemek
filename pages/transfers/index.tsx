@@ -64,11 +64,11 @@ const Transfers = () => {
             <Toast ref={toast}></Toast>
             <h1 id="transfersHeader">{i18n.t('transfers')}</h1>
             <StandardTable
-                value={payments}
+                
                 header={Header(setGlobalFilter, "Transfers")}
                 columns={columns}
                 globalFilter={globalFilter}
-                emptyMessage="No transfers found"
+                emptyMessage={i18n.t('noXfound', {x: i18n.t('transfers')})}
             >
             </StandardTable>
         </div>
