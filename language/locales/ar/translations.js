@@ -279,7 +279,8 @@ export const translations = {
   all: 'الجميع',
 
   replaceImageWithDefault: 'استبدال الصورة بالصورة الافتراضية',
-  thisFeatureIsForAdminsToReplaceLegacyImages: 'هذه الميزة تُمَكِّن المشرفين على استبدال الصور القديمة',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'هذه الميزة للمشرفين لاستبدال الصور القديمة',
   send: 'إرسال',
+  havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
   executeTransfer: 'تنفيذ التحويل'
 };
