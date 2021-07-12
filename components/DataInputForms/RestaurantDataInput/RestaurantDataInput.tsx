@@ -409,7 +409,7 @@ const RestaurantDataInput = (props) => {
                                         value: formik.values.country_code,
                                         onChange: formik.handleChange,
                                         //options: [{ label: 'Turkey', value: 'TR' }, { label: 'Libya', value: 'LY' }],
-                                        options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].english_name, value: key } })
+                                        options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].native_name, value: key } })
                                     }} />}
 
                                 <InputContainer label={i18n.t('postalCode')} name="postal_code" formiks={inputFormiks} size={6} component={InputText} iprops={{

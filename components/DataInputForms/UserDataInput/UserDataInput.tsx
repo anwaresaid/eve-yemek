@@ -16,6 +16,10 @@ import InputContainer from "../../inputs/inputContainer";
 import InputGroup from "../../inputs/inputGroup";
 import { Password } from 'primereact/password'
 import auth from '../../../helpers/core/auth'
+import { RootState } from 'typesafe-actions'
+import { getSupportedCountries } from '../../../store/actions/addresses.action'
+import { ProgressSpinner } from 'primereact/progressspinner'
+import { Dropdown } from 'primereact/dropdown'
 
 
 const UserDataInput = (props) => {
@@ -23,6 +27,9 @@ const UserDataInput = (props) => {
     const toast = useRef(null);
     const router = useRouter();
     const dispatch = useDispatch()
+
+    const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
+    const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
 
     const [loading, setLoading] = useState(true)
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name])
@@ -32,7 +39,7 @@ const UserDataInput = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "", email: "", phone: "", roles: [],active:false ,address: props.updateProps ? '' : []
+            name: "", email: "", phone: "", roles: [], active: false, address: props.updateProps ? '' : []
         },
         validate: (data) => {
             let errors: any = {}
@@ -92,6 +99,12 @@ const UserDataInput = (props) => {
             props.updateProps.setData(formik.values)
     }, [formik.values])
 
+    useEffect(() => {
+        if (!supportedCountries) {
+            dispatch(getSupportedCountries())
+        }
+    }, [supportedCountries])
+
     let mySubmit = (data) => {
         formik.handleSubmit(data)
     }
@@ -111,6 +124,16 @@ const UserDataInput = (props) => {
                     <div className="p-grid">
                         <FormColumn divideCount={2}>
                             <InputGroup>
+                                {supportedCountriesLoading && <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} />}
+                                {supportedCountriesSuccess &&
+
+                                    <InputContainer label={i18n.t('country')} name="country_code" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value: formik.values.country_code,
+                                        onChange: formik.handleChange,
+                                        //options: [{ label: 'Turkey', value: 'TR' }, { label: 'Libya', value: 'LY' }],
+                                        options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].native_name, value: key } })
+                                    }} />}
+
                                 <InputContainer label={i18n.t('selectRole')} size={6} name="roles" formiks={inputFormiks} component={MultiSelect} iprops={{
                                     value: formik.values.roles,
                                     onChange: formik.handleChange,
@@ -123,10 +146,11 @@ const UserDataInput = (props) => {
                                     optionValue: "value"
                                 }} />
 
-                                <InputContainer label={i18n.t('name')} size={6} name="name" formiks={inputFormiks} component={InputText} iprops={{
-                                    value: formik.values.name,
+                            </InputGroup>
+                            <InputGroup>
+                                <InputContainer label={i18n.t('email')} size={6} name="email" formiks={inputFormiks} component={InputText} iprops={{
+                                    value: formik.values.email,
                                     onChange: formik.handleChange,
-
                                 }} />
 
                                 {!updating &&
@@ -141,11 +165,11 @@ const UserDataInput = (props) => {
                         </FormColumn>
                         <FormColumn divideCount={2}>
                             <InputGroup>
-                                <InputContainer label={i18n.t('email')} size={6} name="email" formiks={inputFormiks} component={InputText} iprops={{
-                                    value: formik.values.email,
+                                <InputContainer label={i18n.t('name')} size={6} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                                    value: formik.values.name,
                                     onChange: formik.handleChange,
-                                }} />
 
+                                }} />
                                 <InputContainer label={i18n.t('telephone')} size={6} name="phone" formiks={inputFormiks} component={InputText} iprops={{
                                     value: formik.values.phone,
                                     onChange: formik.handleChange,
