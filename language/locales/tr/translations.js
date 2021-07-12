@@ -275,8 +275,10 @@ export const translations = {
 
   admins: 'Yöneticiler',
   all: 'Tüm',
+
   replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
   send: 'Gönder',
-  havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' 
+  havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
+  executeTransfer: 'Transferi Yürüt'
 };
