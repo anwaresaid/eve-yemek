@@ -91,18 +91,29 @@ export const Index = () => {
       }
     }
 
-    if (!successFind || addon.id !== router.query.id) {
+    if ((!successFind || addon.id !== router.query.id)&& router.query.id) {
+
       dispatch(findAddons(router.query.id));
     }
+    console.log("checking addon",findAddon);
 
     if (successFind && addon.id === router.query.id) {
       setData(true);
       const match = addonCategoryList.items.filter(
         (addonCategory) => addonCategory.id === addon.add_on_category
-      );
-      formik.values.addOn_category_id = match[0].id;
+        );
+      console.log(addonCategoryList);
+      console.log(addon);
+      console.log(match);
+      console.log("checking inside the formik filter")
+      if(match.length!=0)
+        formik.values.addOn_category_id = match[0].id;
+      console.log("checking inside the formik category")
+      
       formik.values.name = addon.name;
+      console.log("checking inside the formik name")
       formik.values.price = addon.price;
+      console.log("checking inside the formik if statment")
       formik.values.create_user_id = addon.create_user_id;
     }
 
@@ -155,6 +166,7 @@ export const Index = () => {
                       iprops={{
                         value: formik.values.create_user_id,
                         onChange: formik.handleChange,
+                        
                         options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
                       }}
                     />
