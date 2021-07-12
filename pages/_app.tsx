@@ -42,8 +42,8 @@ function MyApp(props) {
             setOrderStatus(true)
             toast.current.show({
               severity: 'success',
-              summary: 'New Order',
-              detail: `You have a new order from ${payload.user.name} to ${payload.restaurant.name}`,
+              summary: i18n.t('newOrder'),
+              detail: i18n.t('newOrderMessage', {userName: payload.user.name, restaurantName: payload.restaurant.name}),
             });
             setOrderStatus(false)
           });

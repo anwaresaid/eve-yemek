@@ -238,6 +238,8 @@ export const translations = {
   loading: 'Yükleniyor...',
 
   orderStatus: 'Sipariş Durumu',
+  newOrder: 'Yeni Sipariş',
+  newOrderMessage: `Yeni Sipariş geldi {{userName}}'den {{restaurantName}} restorana`,
   paymentStatus: 'Ödeme Durumu',
   deliveryScoutAssignment: 'Kargocu Atama',
 
