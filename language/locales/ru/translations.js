@@ -279,5 +279,6 @@ export const translations = {
   all: 'Все',
   replaceImageWithDefault: 'заменить изображение изображением по умолчанию',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений',
-  send: 'Отправить'
+  send: 'Отправить',
+  havingTroubleLoggingIn: 'у вас проблемы со входом в систему?'
 };
