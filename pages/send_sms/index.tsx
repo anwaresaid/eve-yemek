@@ -198,7 +198,7 @@ const SendSms = () => {
                         }} />
                     </InputGroup>
                 </div>
-                <Button type="submit" label={i18n.t("submit")} />
+                <Button type="submit" label={i18n.t("send")} />
                 {
                     sendSmsStateLoading && <div><ProgressSpinner /></div>
                 }

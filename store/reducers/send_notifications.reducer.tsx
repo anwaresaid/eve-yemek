@@ -21,3 +21,29 @@ export const sendNotificationReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const createNotificationReducer = (state = {}, action) => {
+  switch (action.type) {
+    case sendNotificationTypes.NOTIFICATION_CREATE_REQUEST:
+      return { loading: true };
+
+    case sendNotificationTypes.NOTIFICATION_CREATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        notification: action.payload
+      };
+
+    case sendNotificationTypes.NOTIFICATION_CREATE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case sendNotificationTypes.NOTIFICATION_CREATE_RESET:
+      return {}
+
+    default:
+      return state;
+  }
+};

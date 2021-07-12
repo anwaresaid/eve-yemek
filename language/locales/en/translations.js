@@ -275,6 +275,9 @@ export const translations = {
   couldNotGetUsersBasedOnYourSelection: 'Could not get users based on your selection',
 
   admins: 'Admins',
-  all: 'All'
+  all: 'All',
+  replaceImageWithDefault: 'Replace image with default',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'This feature is for Admins, to replace legacy default images',
+  send: 'Send'
 
 };
