@@ -62,6 +62,11 @@ const UserDataInput = (props) => {
             if (!data.password && !props.updateProps) {
                 errors.password = i18n.t('isRequired', { input: i18n.t('password') });;
             }
+            if (!data.country_code) {
+                errors.country_code = i18n.t('isRequired', { input: i18n.t('country') });
+            } else {
+                data.country = data.country_code === 'TR' ? 'Turkey' : (data.country_code === 'LY' ? 'Libya' : '')
+            }
             return errors
         },
         onSubmit: (data: any) => {
