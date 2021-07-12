@@ -240,6 +240,8 @@ export const translations = {
   loading: '...جار التحميل',
 
   orderStatus: 'حالة الطلب',
+  newOrder: 'طلب جديد',
+  newOrderMessage: 'طلب جديد من {{userName}} إلى {{restaurantName}}',
   paymentStatus: 'حالة السداد',
   deliveryScoutAssignment: 'تسليم مهمة الكشفية',
 

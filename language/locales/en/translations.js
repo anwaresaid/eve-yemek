@@ -238,6 +238,8 @@ export const translations = {
   loading: 'Loading...',
 
   orderStatus: 'Order Status',
+  newOrder: 'New Order',
+  newOrderMessage: 'You have a new order from {{userName}} to {{restaurantName}}',
   paymentStatus: 'Payment Status',
   deliveryScoutAssignment: 'Delivery Scout Assignment',
 
