@@ -278,5 +278,6 @@ export const translations = {
 
   replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
-  send: 'Gönder'
+  send: 'Gönder',
+  executeTransfer: 'Transferi Yürüt'
 };

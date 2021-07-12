@@ -280,5 +280,6 @@ export const translations = {
 
   replaceImageWithDefault: 'заменить изображение изображением по умолчанию',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений',
-  send: 'Отправить'
+  send: 'Отправить',
+  executeTransfer: 'выполнить перевод'
 };
