@@ -4,7 +4,7 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import GlobalStyle from '../styles/core/global';
 import { Provider, useSelector } from 'react-redux';
@@ -14,13 +14,16 @@ import Error from 'next/error';
 import { i18n } from '../language';
 import TopBar from '../components/TopBar';
 import { useSocket } from '../helpers/socket';
-import { RootState } from 'typesafe-actions';
+import SoundToast from '../components/soundToast';
 
 function MyApp(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(false);
   const [authCheckFinish, setAuthCheckFinish] = useState(false);
   const [hideBar, setHideBar] = useState(true);
+  const [orderStatus, setOrderStatus] = useState(null)
+
+  const toast = useRef(null);
 
   let socket: any;
 
@@ -32,15 +35,19 @@ function MyApp(props) {
     document?.documentElement?.setAttribute('dir', i18n.dir());
     hotjar.initialize(parseInt(process.env.NEXT_PUBLIC_HOTJAR_TRACKING_ID), 6);
     if (auth.loggedIn && auth.hasRoles('restaurant_owner')) {
-      console.log(auth.user)
       socket = useSocket();
       if (socket) {
-        socket.on(
-          `order.created.${auth.user.restaurants_ids}`,
-          ({ payload }) => {
-            console.log('new order incoming: ', payload);
-          }
-        );
+        auth?.user?.restaurant_ids?.map((restaurant_id) => {
+          socket.on(`order.created.${restaurant_id}`, ({ payload }) => {
+            setOrderStatus(true)
+            toast.current.show({
+              severity: 'success',
+              summary: 'New Order',
+              detail: `You have a new order from ${payload.user.name} to ${payload.restaurant.name}`,
+            });
+            setOrderStatus(false)
+          });
+        });
       }
     }
   }, []);
@@ -122,6 +129,7 @@ function MyApp(props) {
         <div id='appDiv' className='app'>
           <GlobalStyle id='globalStyle' open={hideBar} setOpen={setHideBar} />
           {renderComp()}
+          <SoundToast toastRef={toast} orderStatus={orderStatus} />
         </div>
       </Provider>
     </>
