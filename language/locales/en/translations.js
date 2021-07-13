@@ -284,6 +284,7 @@ export const translations = {
   overview: 'Overview',
   areas: 'Areas',
   havingTroubleLoggingIn: 'Having trouble logging in?',
-  executeTransfer: 'Execute Transfer'
+  executeTransfer: 'Execute Transfer',
 
+  versionCode: 'Version Code',
 };
