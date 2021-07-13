@@ -237,9 +237,9 @@ const Index = (props) => {
                             tooltip: {
                                 callbacks: {
                                     label: function (context) {
-                                        var label = ''
+                                        var label = mockPieData[context.dataIndex].city + ' - '
                                         for (let x of Object.entries(mockPieData[context.dataIndex].orders)){
-                                            label += x[0] + ': ' + x[1] + '\n'
+                                            label +=  x[0] + ': ' + x[1] + '\n'
                                         }
                                         return label
                                     }
