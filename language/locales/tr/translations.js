@@ -238,6 +238,8 @@ export const translations = {
   loading: 'Yükleniyor...',
 
   orderStatus: 'Sipariş Durumu',
+  newOrder: 'Yeni Sipariş',
+  newOrderMessage: `Yeni Sipariş geldi {{userName}}'den {{restaurantName}} restorana`,
   paymentStatus: 'Ödeme Durumu',
   deliveryScoutAssignment: 'Kargocu Atama',
 
@@ -275,7 +277,12 @@ export const translations = {
 
   admins: 'Yöneticiler',
   all: 'Tüm',
+
   replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
-  send: 'Gönder'
+  send: 'Gönder',
+  overview: 'Genel Bakış',
+  areas: 'Alanlar',
+  havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
+  executeTransfer: 'Transferi Yürüt'
 };

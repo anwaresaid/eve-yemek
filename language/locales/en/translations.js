@@ -209,7 +209,7 @@ export const translations = {
   //meal category
   editFoodCategory: 'Edit Meal Category',
   createFoodCategory: 'Create Meal Category',
-  noXfound:'no {{x}} found',
+  noXfound:'No {{x}} found',
 
   selectLanguage: 'Select Language',
   submit: 'Submit',
@@ -238,6 +238,8 @@ export const translations = {
   loading: 'Loading...',
 
   orderStatus: 'Order Status',
+  newOrder: 'New Order',
+  newOrderMessage: 'You have a new order from {{userName}} to {{restaurantName}}',
   paymentStatus: 'Payment Status',
   deliveryScoutAssignment: 'Delivery Scout Assignment',
 
@@ -278,6 +280,10 @@ export const translations = {
   all: 'All',
   replaceImageWithDefault: 'Replace image with default',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'This feature is for Admins, to replace legacy default images',
-  send: 'Send'
+  send: 'Send',
+  overview: 'Overview',
+  areas: 'Areas',
+  havingTroubleLoggingIn: 'Having trouble logging in?',
+  executeTransfer: 'Execute Transfer'
 
 };

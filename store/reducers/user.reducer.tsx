@@ -3,19 +3,22 @@ import { userTypes } from "../types/user.type";
 
 const initialState = [];
 
-export const loginReducer = (state = initialState, action) => {
+export const loginReducer = (state = {attempts: 0, failed_attempts: 0}, action) => {
     const { type, payload } = action;
 
     switch (type) {
         case userTypes.LOGIN:
             return {
                 ...state,
+                attempts: state.attempts + 1,
                 login_error_msg: i18n.t('takingYouToYourDashboard'),
                 user: payload,
             };
         case userTypes.LOGIN_FAILED:
             return {
                 ...state,
+                attempts: state.attempts + 1,
+                failed_attempts: state.failed_attempts + 1, 
                 login_error_msg: payload?.login_error_msg,
             };
 

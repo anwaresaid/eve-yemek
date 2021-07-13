@@ -91,7 +91,8 @@ export const Index = () => {
       }
     }
 
-    if (!successFind || addon.id !== router.query.id) {
+    if ((!successFind || addon.id !== router.query.id)&& router.query.id) {
+
       dispatch(findAddons(router.query.id));
     }
 
@@ -99,8 +100,10 @@ export const Index = () => {
       setData(true);
       const match = addonCategoryList.items.filter(
         (addonCategory) => addonCategory.id === addon.add_on_category
-      );
-      formik.values.addOn_category_id = match[0].id;
+        );
+      if(match.length!=0)
+        formik.values.addOn_category_id = match[0].id;
+      
       formik.values.name = addon.name;
       formik.values.price = addon.price;
       formik.values.create_user_id = addon.create_user_id;
@@ -155,6 +158,7 @@ export const Index = () => {
                       iprops={{
                         value: formik.values.create_user_id,
                         onChange: formik.handleChange,
+                        
                         options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
                       }}
                     />

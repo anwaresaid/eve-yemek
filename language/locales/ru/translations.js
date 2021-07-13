@@ -240,6 +240,8 @@ export const translations = {
   loading: 'загрузка ...',
 
   orderStatus: 'статус заказа',
+  newOrder: 'новый заказ',
+  newOrderMessage: 'новый заказ от {{userName}} к {{restaurantName}}',
   paymentStatus: 'статус платежа',
   deliveryScoutAssignment: 'курьерская доставка',
 
@@ -277,7 +279,12 @@ export const translations = {
 
   admins: 'админы',
   all: 'Все',
+
   replaceImageWithDefault: 'заменить изображение изображением по умолчанию',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений',
-  send: 'Отправить'
+  send: 'Отправить',
+  overview: 'обзор',
+  areas: 'области',
+  havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
+  executeTransfer: 'выполнить перевод'
 };

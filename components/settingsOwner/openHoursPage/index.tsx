@@ -107,7 +107,7 @@ const OpenHoursPage = ({comingResData}:IProps) => {
                     continue;
                 }
 
-                resultDays[day] = [moment(data[day].start).format("LT"), moment(data[day].end).format("LT")];
+                resultDays[day] = [moment(data[day].start).format("HH:mm"), moment(data[day].end).format("HH:mm")];
             }
 
 

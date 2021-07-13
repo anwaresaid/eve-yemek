@@ -52,6 +52,7 @@ import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
 import { createNotificationReducer, sendNotificationReducer } from './send_notifications.reducer';
 import { supportedCountriesReducer } from './addresses.reducer';
 import { sendSmsReducer } from './send_sms';
+import { listUntransferedPaymentsReducer } from './payments.reducers';
 
 export default combineReducers({
   login: loginReducer,
@@ -114,5 +115,7 @@ export default combineReducers({
 
   updateSchedule:updateScheduleReducer,
 
-  supportedCountries: supportedCountriesReducer
+  supportedCountries: supportedCountriesReducer,
+
+  untransferedPayments: listUntransferedPaymentsReducer
 });
