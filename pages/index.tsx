@@ -132,7 +132,7 @@ const Index = (props) => {
         <div id='containerPanel' className="ContainerPanel">
             <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
             <TabView>
-                <TabPanel header="Overview">
+                <TabPanel header={i18n.t('overview')}>
                     {loading ? <Loading /> :
                         <S.DashboardWrapper id='dashBoard'>
 
@@ -231,7 +231,7 @@ const Index = (props) => {
                             </Card>
                         </S.DashboardWrapper>}
                 </TabPanel>
-                <TabPanel header="Demand">
+                <TabPanel header={i18n.t('areas')}>
                     <Pie type='number' data={pieChartData} width={500} height={500} options={{
                         maintainAspectRatio: false, plugins: {
                             tooltip: {

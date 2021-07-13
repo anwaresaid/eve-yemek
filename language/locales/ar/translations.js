@@ -279,5 +279,7 @@ export const translations = {
   all: 'الجميع',
   replaceImageWithDefault: 'استبدال الصورة بالصورة الافتراضية',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'هذه الميزة للمشرفين لاستبدال الصور القديمة',
-  send: 'إرسال'
+  send: 'إرسال',
+  overview: 'نظرة عامة',
+  areas: 'المناطق'
 };
