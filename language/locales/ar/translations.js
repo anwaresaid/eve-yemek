@@ -240,6 +240,8 @@ export const translations = {
   loading: '...جار التحميل',
 
   orderStatus: 'حالة الطلب',
+  newOrder: 'طلب جديد',
+  newOrderMessage: 'طلب جديد من {{userName}} إلى {{restaurantName}}',
   paymentStatus: 'حالة السداد',
   deliveryScoutAssignment: 'تسليم مهمة الكشفية',
 
@@ -277,9 +279,12 @@ export const translations = {
 
   admins: 'مدراء',
   all: 'الجميع',
+
   replaceImageWithDefault: 'استبدال الصورة بالصورة الافتراضية',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'هذه الميزة للمشرفين لاستبدال الصور القديمة',
   send: 'إرسال',
   overview: 'نظرة عامة',
-  areas: 'المناطق'
+  areas: 'المناطق',
+  havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
+  executeTransfer: 'تنفيذ التحويل'
 };
