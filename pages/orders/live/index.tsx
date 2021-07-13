@@ -12,35 +12,37 @@ const liveOrdersList = () => {
   const dispatch = useDispatch();
   const socket = useSocket();
 
+  const [refresh, setRefresh] = useState(false);
+
   const res = useSelector((state: RootState) => state.listOrders);
   const { loading, success, orders } = res;
 
   useEffect(() => {
     if (orders.items.length === 0 && !success) dispatch(listOrders());
     if (socket) {
-      socket.on('messageToClient', (payload) => {
-        //do something on listen
+      socket.on(`messageToClient`, (payload) => {
+        console.log('trying to show payload', payload)
       });
+
+      if(success){
+        socket.on(`order.created.${orders.items[0]?.restaurant.id}`, ({payload}) => {
+          orders.items.push(payload)
+          setRefresh(!refresh)
+        })
+      }
     }
 
     return () => {
       socket.disconnect();
     };
-  }, [dispatch]);
-
-  // example code to emit for future implementations
-  // const emitToSocket = () => {
-  //   const message = socket.emit('orderStatus', {
-  //     message: 'trying to reach you',
-  //   });
-  // };
+  }, [dispatch, success, refresh]);
 
   return (
     <div id="liveOrdersTable">
       <h1 id="ordersHeader">{i18n.t('liveOrders')}</h1>
       {!loading && orders &&
         <OrdersTable
-          orders={_.without(_.map(orders?.items, (item) => { if (!item.is_deleted) return item }), undefined)}
+          orders={_.without(_.map(orders?.items, (item) => {if (!item.is_deleted && item.delivery_status !== 'delivered') return item }), undefined)}
           role='restaurant_owner'
         ></OrdersTable>}
       {loading && <Loading />}

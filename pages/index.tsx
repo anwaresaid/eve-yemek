@@ -14,12 +14,12 @@ import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/rest
 import { SelectButton } from 'primereact/selectbutton';
 import idColumn from "../components/InTableComponents/idColumn";
 import { Tag } from "primereact/tag";
-import { changePassword } from "../store/actions/user.action";
+import { Chart } from 'chart.js'
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
     const { loading, success, reportData } = res
-
+    const chartRef = useRef<HTMLCanvasElement>(null);
     const ownedRestaurantsState = useSelector((state: RootState) => state.ownedRestaurants)
     const { loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants } = ownedRestaurantsState
 
@@ -29,10 +29,10 @@ const Index = (props) => {
         if (!reportData)
             dispatch(getDashboardReport())
         if (auth.hasRoles(['restaurant_owner'])) {
-            if (ownedRestaurants?.length === 0)
+            if (ownedRestaurants?.items.length === 0 && !ownedRestaurantsSuccess)
                 dispatch(listOwnedRestaurants())
         }
-    }, [dispatch, ownedRestaurantsSuccess])
+    }, [dispatch, ownedRestaurantsSuccess]);
 
     const parseCounts = (data) => {
         if (!data)
@@ -50,8 +50,10 @@ const Index = (props) => {
     }
 
     const getTotalOrdersWeekly = () => {
-        return _.sum(parseCounts(reportData?.lastSevenDaysReport?.order))
+        if(reportData){
+            return _.sum(parseCounts(reportData.lastSevenDaysReport.order))
     }
+}
     const lineChartData = {
         
         labels: reportData?.lastSevenDaysReport.order.days,
@@ -63,11 +65,13 @@ const Index = (props) => {
                 backgroundColor: "rgba(75,192,192,1)",
                 borderColor: "rgb(75, 192, 192)",
                 borderWidth: 2,
-                data: parseCounts(reportData?.lastSevenDaysReport.order)
+                data: parseCounts(reportData?.lastSevenDaysReport.order),
             }
-        ]
+             
+        ],
+        
+       
     };
-
     const openClosedTag = (rowData) => {
         const setIsOpen = (isOpen) => {
             if (isOpen === null)
@@ -107,7 +111,7 @@ const Index = (props) => {
                         <div className="p-my-5">
                             <StandardTable id='ownedRestaurants'
                                 columns={ownedRestaurantsTableColumns}
-                                value={ownedRestaurants.items}
+                                value={ownedRestaurants?.items}
                                 noPaginator
                                 style={{ tableLayout: "auto" }}
                                 resizableColumns
@@ -156,7 +160,7 @@ const Index = (props) => {
                                     <p id='failed_ordersP'>{i18n.t('failedOrders')}</p>
                                 </div>
                                 <div id='box_icons' className='box__icons'>
-                                    <i id='infoIcon' className='pi pi-info'></i>
+                                    <i id='infoIcon' className='pi pi-exclamation-triangle'></i>
                                 </div>
                             </div>
                         </div>
@@ -177,14 +181,16 @@ const Index = (props) => {
                             <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
                         </i>
                         <Line
+                        ref={chartRef}
                             type='number'
                             width={500}
                             height={100}
                             data={lineChartData}
                             options={{
+                                plugins:{
                                 legend: {
-                                    display: false
-                                },
+                                    onClick:()=>{ }
+                                }},
                                 responsive: true,
                             }}
                         />

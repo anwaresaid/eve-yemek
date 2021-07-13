@@ -75,12 +75,12 @@ export const translations = {
   operations: 'Operasyonlar',
   order: 'Sipariş',
   from: 'Kimden',
-  to: 'kime',
+  to: 'Kime',
   receipt: 'Fatura',
   mealName: 'Yemek adı',
   price: 'Tane fiyatı',
   quantity: 'Adet',
-  total: 'Ara toplama',
+  total: 'Ara toplam',
   VAT: 'Vergi',
   discountCoupon: 'Kupon indirimi',
 
@@ -145,6 +145,10 @@ export const translations = {
   discount: 'İndirim',
   maximumUsage: 'Maksimum Kullanım',
 
+  // Send SMS
+  sendSms:"SMS Gönder",
+  message:"Mesaj",
+
   // User lists
   created: 'Oluşturuldu',
   createUser: 'Kullanıcı Oluştur',
@@ -190,6 +194,7 @@ export const translations = {
   phoneNumber: 'Telefon Numarası',
   ownerName: 'Sahibinin Adı',
   invalidEmailMessage: 'Yanlış e-posta adresi',
+  onlyNumberError: 'Bu alan sadece rakamlar ile doldurulamaz',
 
   // Toasts
   success: 'Başarılı',
@@ -233,6 +238,8 @@ export const translations = {
   loading: 'Yükleniyor...',
 
   orderStatus: 'Sipariş Durumu',
+  newOrder: 'Yeni Sipariş',
+  newOrderMessage: `Yeni Sipariş geldi {{userName}}'den {{restaurantName}} restorana`,
   paymentStatus: 'Ödeme Durumu',
   deliveryScoutAssignment: 'Kargocu Atama',
 
@@ -243,5 +250,37 @@ export const translations = {
   successfullyUpdatedMeal: 'Yemek başarıyla güncellendi',
 
   successfullyAddedUser: 'Kullanıcı başarıyla eklendi',
-  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi'
+  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi',
+
+  orderDetail: 'Sipariş Detayi',
+  updateOrderStatus: 'Sipariş Durumunu Güncelle',
+  deliveryStatus: 'Teslim durumu',
+  deliveryStatusUpdated: 'Teslimat Durumu Güncellendi',
+  picked: 'Gönderildi',
+  allRestaurants: 'Tüm restoranlar',
+
+  // Open Hours Schedule
+  mon:"Pazartesi",
+  tue:"Salı",
+  wed:"Çarşamba",
+  thu:"Perşembe",
+  fri:"Cuma",
+  sat:"Cumartesi",
+  sun:"Pazar",
+
+  edit:"Düzenle",
+  workingHours:"Çalışma Saatleri",
+  scheduleUpdateError1:"Başlangıç ve bitiş zamanını belirttiğinizden emin olun",
+  scheduleUpdateError2:"Başlangıç zamanı bitiş zamanından daha büyük olamaz",
+
+  couldNotGetUsersBasedOnYourSelection: 'Seçtiğiniz parametrelere göre bir Kullanıcı bulunamadı',
+
+  admins: 'Yöneticiler',
+  all: 'Tüm',
+
+  replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
+  send: 'Gönder',
+  havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
+  executeTransfer: 'Transferi Yürüt'
 };

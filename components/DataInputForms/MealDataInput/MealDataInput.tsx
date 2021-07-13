@@ -22,6 +22,8 @@ import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { listAddonCategory } from "../../../store/actions/addon-category.action";
+import { Tag } from "primereact/tag";
+import { foodsTypes } from "../../../store/types/foods.type";
 
 const MealDataInput = (props) => {
 
@@ -43,7 +45,7 @@ const MealDataInput = (props) => {
     const { loading: restaurantsLoading, success: restaurantsSuccess, restaurants } = resRestaurants;
 
     const createFoodState = useSelector((state: RootState) => state.createFood)
-    const { loading: creatingFood, success: createFoodSuccess, food } = createFoodState
+    const { loading: creatingFood, success: createFoodSuccess, food, error } = createFoodState
 
     const resUpdatedFood = useSelector((state: RootState) => state.updateFood);
     const { loading: updatedFoodLoading, success: updatedFoodSuccess, food: updatedFood } = resUpdatedFood;
@@ -77,8 +79,9 @@ const MealDataInput = (props) => {
             if (!data.name) {
                 errors.name = i18n.t('isRequired', { input: i18n.t('name') });
             }
-            if (!data.description) {
-                errors.description = i18n.t('isRequired', { input: i18n.t('description') });
+
+            if(data.description && /^\d+$/.test(data.description)){
+                    errors.description = i18n.t('onlyNumberError');
             }
 
             if (!data.food_category_id) {
@@ -88,7 +91,7 @@ const MealDataInput = (props) => {
             if (!selectedAddOnCategories) {
                 errors.add_on_categories = i18n.t('isRequired', { input: i18n.t('addonCategories') });;
             } else {
-                data.add_on_categories = selectedAddOnCategories.map((ac) => {
+                data.add_on_categories = selectedAddOnCategories?.map((ac) => {
                     return ac.id
                 })
             }
@@ -104,21 +107,27 @@ const MealDataInput = (props) => {
     });
 
     const setRestaurantsDropdownOptions = () => {
-        const restaurantNames = restaurants.items.map(res => { return { name: res.name, id: res.id } });
+        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id } });
         setRestaurantName(restaurantNames);
     }
 
     const setAddonCategoryDropdownOptions = () => {
-        const addonCategoryNames = addonCategories.items.map(addonCategory => { return { id:addonCategory.id, name: addonCategory.name } });
+        const addonCategoryNames = addonCategories?.items.map(addonCategory => { return { id:addonCategory.id, name: addonCategory.name } });
         setAddonCategoryNames(addonCategoryNames);
     }
 
     const setFoodCategoryDropdownOptions = () => {
-        const foodCategoryNames = foodCatlist.items.map(res => { return { name: res.name, id: res.id } });
+        const filteredfoodCategories = foodCatlist?.items.filter((res) => res.active === true && res.is_deleted === false)
+        const foodCategoryNames = filteredfoodCategories?.map(res => { return { name: res.name, id: res.id } });
         setFoodCategoryName(foodCategoryNames);
     }
 
     useEffect(() => {
+        if(error){
+            dispatch({
+                type: foodsTypes.FOOD_CREATE_RESET
+            })
+        }
         if (!addOnCategoriesSuccess)
             dispatch(listAddonCategory());
 
@@ -143,6 +152,9 @@ const MealDataInput = (props) => {
         if (createFoodSuccess) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('successfullyAddedMeal') })
             setTimeout(() => { router.push('/foods') }, 2000)
+            dispatch({
+                type: foodsTypes.FOOD_CREATE_RESET
+            })
         }
 
         if (updatedFoodSuccess) {
@@ -150,6 +162,9 @@ const MealDataInput = (props) => {
             setTimeout(() => { router.push('/foods') }, 2000)
             return
         }
+        // if(error){
+        //     toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
+        // }
 
 
         if (props.updating && props.meal) {
@@ -164,7 +179,7 @@ const MealDataInput = (props) => {
             formik.values.is_veg = props.meal.is_veg;
             formik.values.active = props.meal.active;
             formik.values.featured = props.meal.featured;
-            setSelectedAddOnCategories(props.meal.add_on_categories.map((aoc) => {return {id: aoc.id, name: aoc.name}}))
+            setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => {return {id: aoc.id, name: aoc.name}}))
         }
 
     }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal]);
@@ -239,16 +254,18 @@ const MealDataInput = (props) => {
                                 <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.price,
                                     onValueChange: formik.handleChange,
-                                    mode: "currency",
-                                    currency: "TRY",
+                                    //mode: "currency",
+                                    //currency: "TRY",
+                                    min:0,
                                     showButtons: true
                                 }}
                                 />
                                 <InputContainer label={i18n.t('discountedPrice')} name="discount_price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.discount_price,
                                     onValueChange: formik.handleChange,
-                                    mode: "currency",
-                                    currency: "TRY",
+                                    //mode: "currency",
+                                    //currency: "TRY",
+                                    min:0,
                                     showButtons: true
                                 }}
                                 />
@@ -267,8 +284,8 @@ const MealDataInput = (props) => {
 
                         <FormColumn divideCount={3}>
                             <InputGroup>
-                                <InputContainer name="vegi" label={i18n.t('vegetablesOnly')} noAutoCol12 component={InputSwitch} formiks={inputFormiks} iprops={{
-                                    checked: formik.values.vegi,
+                                <InputContainer name="is_veg" label={i18n.t('vegetablesOnly')} noAutoCol12 component={InputSwitch} formiks={inputFormiks} iprops={{
+                                    checked: formik.values.is_veg,
                                     onChange: formik.handleChange
                                 }} />
                                 <InputContainer name="featured" label={i18n.t('prioritized')} noAutoCol12 component={InputSwitch} formiks={inputFormiks} iprops={{
@@ -290,6 +307,7 @@ const MealDataInput = (props) => {
                         <Button id="createBtn" type="submit" label={props.creating ? i18n.t('create') : i18n.t('update')} />
                     </S.SubmitBtn>
                 </form>
+                {error && <div><Tag severity="danger" value={error}></Tag></div>}
             </S.ContainerCard>
         </div>
     )

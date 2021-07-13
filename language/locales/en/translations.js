@@ -142,6 +142,10 @@ export const translations = {
   discount: 'Discount',
   maximumUsage: 'Maximum Usage',
 
+  // Send SMS
+  sendSms:"Send SMS",
+  message:"Message",
+
   // User lists
   created: 'Created',
   createUser: 'Create User',
@@ -187,6 +191,7 @@ export const translations = {
   phoneNumber: 'Phone Number',
   ownerName: 'Owner Name',
   invalidEmailMessage: 'Invalid email address',
+  onlyNumberError: 'Input cannot only contain numbers',
 
   // Toasts
   success: 'Success',
@@ -195,16 +200,16 @@ export const translations = {
   fileUploaded: 'File Uploaded',
   updatedUser: 'Updated User',
   userName: 'User Name',
-  updatedFoodCategory: 'Updated Food Category',
-  createdFoodCategory: 'Created Food Category',
+  updatedFoodCategory: 'Updated Meal Category',
+  createdFoodCategory: 'Created Meal Category',
 
   // Table Pagination
   showingXtoYofZ: 'Showing {{x}} to {{y}} of {{z}}',
 
   //meal category
-  editFoodCategory: 'Edit Food Category',
-  createFoodCategory: 'Create Food Category',
-  noXfound:'no {{x}} found',
+  editFoodCategory: 'Edit Meal Category',
+  createFoodCategory: 'Create Meal Category',
+  noXfound:'No {{x}} found',
 
   selectLanguage: 'Select Language',
   submit: 'Submit',
@@ -233,6 +238,8 @@ export const translations = {
   loading: 'Loading...',
 
   orderStatus: 'Order Status',
+  newOrder: 'New Order',
+  newOrderMessage: 'You have a new order from {{userName}} to {{restaurantName}}',
   paymentStatus: 'Payment Status',
   deliveryScoutAssignment: 'Delivery Scout Assignment',
 
@@ -243,5 +250,38 @@ export const translations = {
   successfullyUpdatedMeal: 'Successfully updated meal',
   
   successfullyAddedUser: 'Successfully added user',
-  successfullyUpdatedUser: 'Successfully updated user'
+  successfullyUpdatedUser: 'Successfully updated user',
+
+  orderDetail: 'Order Detail',
+  updateOrderStatus: 'Update Order Status',
+  deliveryStatus: 'Delivery Status',
+  deliveryStatusUpdated: 'Delivery status updated',
+  deliveryStatusUpdateFailed: 'Delivery status update failed',
+  picked: 'Dispatched',
+  allRestaurants: 'All Restaurants',
+
+  // Open Hours Schedule
+  mon:"Monday",
+  tue:"Tuesday",
+  wed:"Wednesday",
+  thu:"Thursday",
+  fri:"Friday",
+  sat:"Saturday",
+  sun:"Sunday",
+
+  edit:"Edit",
+  workingHours:"Working Hours",
+  scheduleUpdateError1:"Make sure to specify start and end time",
+  scheduleUpdateError2:"Start time cannot be greater than end time",
+
+  couldNotGetUsersBasedOnYourSelection: 'Could not get users based on your selection',
+
+  admins: 'Admins',
+  all: 'All',
+  replaceImageWithDefault: 'Replace image with default',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'This feature is for Admins, to replace legacy default images',
+  send: 'Send',
+  havingTroubleLoggingIn: 'Having trouble logging in?',
+  executeTransfer: 'Execute Transfer'
+
 };

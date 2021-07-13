@@ -6,6 +6,13 @@ export default class UsersListsService {
     return data;
   }
 
+  async getUsersByCountryAndRole(countryCode, role){
+    let countryQuery = countryCode ? ('country=' + countryCode + '&') : ''
+    let roleQuery = role ? ('role=' + role) : ''
+    const {data: {data}} = await axios.get('/users/custom?' + countryQuery + roleQuery);
+    return data;
+  }
+
   async getSingleUser(id) {
     const { data:{data} } = await axios.get('/users/' + id);
     return data;

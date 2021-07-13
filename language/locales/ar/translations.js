@@ -145,6 +145,10 @@ export const translations = {
   discount: 'تخفيض',
   maximumUsage: 'حد الاستعمال',
 
+  // Send SMS
+  sendSms:"أرسل رسالة نصية قصيرة",
+  message:"رسالة",
+
   // User lists
   created: 'تم إنشاء',
   createUser: 'إنشاء مستخدم',
@@ -190,6 +194,7 @@ export const translations = {
   phoneNumber: 'رقم الهاتف',
   ownerName: 'اسم المالك',
   invalidEmailMessage: 'البريد الإلكتروني غير صحيح',
+  onlyNumberError: 'لا يمكن أن يتألف من الأرقام فقط',
 
   // Toasts
   success: 'نجاح',
@@ -235,6 +240,8 @@ export const translations = {
   loading: '...جار التحميل',
 
   orderStatus: 'حالة الطلب',
+  newOrder: 'طلب جديد',
+  newOrderMessage: 'طلب جديد من {{userName}} إلى {{restaurantName}}',
   paymentStatus: 'حالة السداد',
   deliveryScoutAssignment: 'تسليم مهمة الكشفية',
 
@@ -245,5 +252,37 @@ export const translations = {
   successfullyUpdatedMeal: 'تم تحديث الوجبة بنجاح',
 
   successfullyAddedUser: 'تمت إضافة المستخدم بنجاح',
-  successfullyUpdatedUser: 'تم تحديث المستخدم بنجاح'
+  successfullyUpdatedUser: 'تم تحديث المستخدم بنجاح',
+
+  orderDetail: 'تفاصيل الطلب',
+  updateOrderStatus: 'تحديث حالة الطلب',
+  deliveryStatus: 'حالة التسليم',
+  deliveryStatusUpdated: 'تم تحديث حالة التسليم',
+  picked: 'تم الإرسال',
+  allRestaurants: 'كل المطاعم',
+
+  // Open Hours Schedule
+  mon:"الاثنين",
+  tue:"الثلاثاء",
+  wed:"الأربعاء",
+  thu:"الخميس",
+  fri:"جمعة",
+  sat:"السبت",
+  sun:"الأحد",
+
+  edit:"يحرر",
+  workingHours:"ساعات العمل",
+  scheduleUpdateError1:"تأكد من تحديد وقت البدء والانتهاء",
+  scheduleUpdateError2:"لا يمكن أن يكون وقت البدء أكبر من وقت الانتهاء",
+
+  couldNotGetUsersBasedOnYourSelection: 'لم يمكن الحصول على مستخدمين على أساس هذا الاختيار',
+
+  admins: 'مدراء',
+  all: 'الجميع',
+
+  replaceImageWithDefault: 'استبدال الصورة بالصورة الافتراضية',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'هذه الميزة للمشرفين لاستبدال الصور القديمة',
+  send: 'إرسال',
+  havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
+  executeTransfer: 'تنفيذ التحويل'
 };

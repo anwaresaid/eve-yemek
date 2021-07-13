@@ -39,6 +39,7 @@ export const createAddonsReducer = (state = initialState, action) => {
     case addonsTypes.ADDON_CREATE_FAIL:
       return {
         loading: false,
+        success: false,
         error: action.payload,
       };
 

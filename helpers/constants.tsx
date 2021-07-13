@@ -4,10 +4,12 @@ export const baseUrl = (()=> {
     return process.env.NEXT_PUBLIC_API_URL;
 })();
 
+
+
 // prettier-ignore
 export const allMenuItems:any = [
     { label:i18n.t("dashboard"),                    url:"/",                        roles:["admin", "restaurant_owner", "customer_service"] },
-    { label:i18n.t("liveOrders"),                   url:"/orders/live",             roles:["restaurant_owner","admin"]},
+    { label:i18n.t("liveOrders"),                   url:"/orders/live",             roles:["restaurant_owner"]},
     { label:i18n.t("orders"),                       url:"/orders",                  roles:["admin", "restaurant_owner", "customer_service"] },
     { label:i18n.t("restaurants"),     expanded: true, items: [
         { label:i18n.t("restaurantList"),           url:"/restaurants",             roles:["admin", "customer_service"] },
@@ -35,11 +37,12 @@ export const allMenuItems:any = [
     ] },
     { label:i18n.t("extra"),           expanded: true, items: [
         { label:i18n.t("send_fcm_notification"),    url:"/send_notifications",      roles:["admin"] },
+        { label:i18n.t("sendSms"),    url:"/send_sms",      roles:["admin"] },
     ] },
     { label:i18n.t("users"), url:"/users",  roles:["admin"]},
     { separator:true },
-    { label:i18n.t("settings"),                     url:"/settings",                roles:["admin", "restaurant_owner"] },
+    { label:i18n.t("settings"),                     url:"/settings",                roles:["admin", "customer_service", "restaurant_owner"] },
     { label:i18n.t("transfers"),                    url:"/transfers",               roles:["admin"] },
-    { label:i18n.t("logout"),                       url:"/auth/logout",             roles:["admin", "restaurant_owner"] }
+    { label:i18n.t("logout"),                       url:"/auth/logout",             roles:["admin", "restaurant_owner", "customer_service"] }
 
 ];

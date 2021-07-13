@@ -12,7 +12,11 @@ export default class OrdersService {
                 .then(res => res.data.data);
     }
 
-    updateStatus(id, status){
+    updateOrderStatus(id, status){
         return axios.put('/orders/' + id, {'status': status}).then(res => res.data.data)
+    }
+
+    updateDeliveryStatus(id, status){
+        return axios.put('/delivery/status', {'order': id, 'status': status}).then(res => res.data.data)
     }
 }

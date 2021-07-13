@@ -28,6 +28,7 @@ const Food_CategoriesTable = (props) => {
         {field: 'id', header: "ID"},
         {field: 'image', header: i18n.t('image'), body: imageBodyTemplate},
         {field: 'name', header: i18n.t('name')},
+        {field: 'country', header: i18n.t('country')},
         {field: 'status', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.active)},
         {field: '', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
     ]

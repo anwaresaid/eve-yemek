@@ -48,12 +48,8 @@ export const createFood = (
       type: foodsTypes.FOOD_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  } finally {
-    dispatch({
-      type: foodsTypes.FOOD_CREATE_RESET
+        ? error.response.data.error.message
+        : error.response.data.error.message,
     });
   }
 }
@@ -71,6 +67,10 @@ export const updateFood = (id, updatedFood) => async dispatch => {
       type: foodsTypes.FOOD_UPDATE_SUCCESS,
       payload: res,
     });
+    dispatch({
+      type: foodsTypes.FOOD_FIND_UPDATE,
+      payload: res
+    })
   } catch (error) {
     dispatch({
       type: foodsTypes.FOOD_UPDATE_FAIL,
@@ -107,11 +107,7 @@ export const findFood = (id) => async dispatch => {
           ? error.response.data.message
           : error.message,
     });
-  } finally {
-    dispatch({
-      type: foodsTypes.FOOD_FIND_RESET,
-    });
-  }
+  } 
 }
 export const listFood = () => async dispatch => {
   try {

@@ -91,6 +91,7 @@ export const createAddonCategoryReducer = (state = [], action) => {
     case addonCategoryTypes.ADDON_CATEGORY_CREATE_FAIL:
       return {
         loading: false,
+        success: false,
         error: action.payload,
       };
 

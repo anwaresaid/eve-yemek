@@ -46,10 +46,13 @@ import {
   allUsersListReducer,
   usersFcmTokensListReducer,
 } from './userslists.reducer';
-import { forgotPasswordReducer, listSettingsReducer, updateSettingsReducer } from './settings.reducer';
+import { forgotPasswordReducer, listSettingsReducer, updateScheduleReducer, updateSettingsReducer } from './settings.reducer';
 import { dashboardReportReducer } from './dashboard.reducer';
 import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
-import { sendNotificationReducer } from './send_notifications.reducer';
+import { createNotificationReducer, sendNotificationReducer } from './send_notifications.reducer';
+import { supportedCountriesReducer } from './addresses.reducer';
+import { sendSmsReducer } from './send_sms';
+import { listUntransferedPaymentsReducer } from './payments.reducers';
 
 export default combineReducers({
   login: loginReducer,
@@ -107,4 +110,12 @@ export default combineReducers({
   createCoupons: createCouponsReducer,
 
   sendNotification: sendNotificationReducer,
+  sendSms:sendSmsReducer,
+  createNotification:createNotificationReducer,
+
+  updateSchedule:updateScheduleReducer,
+
+  supportedCountries: supportedCountriesReducer,
+
+  untransferedPayments: listUntransferedPaymentsReducer
 });
