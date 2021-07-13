@@ -51,7 +51,7 @@ function MyApp(props) {
       }
     }
     
-    setHideBar(localStorage.getItem("sidebar_open") === "true");
+    setHideBar((localStorage.getItem("sidebar_open") || "true") === "true");
 
   }, []);
 
