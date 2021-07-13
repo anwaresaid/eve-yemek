@@ -94,8 +94,8 @@ const RestaurantDataInput = (props) => {
         minimum_order_amount: 0,
         latitudeInt: 0,
         longitudeInt: 0,
-        city_id: 0,
-        town_id: 0,
+        city: '',
+        town: '',
         longitude: 0.0,
         latitude: 0.0,
         is_open: false,
@@ -194,8 +194,8 @@ const RestaurantDataInput = (props) => {
                 full_address: tmpData.full_address,
                 latitude: tmpData.latitude,
                 longitude: tmpData.longitude,
-                city: tmpData.country_code === 'TR' ? tmpData.city_id : '0',
-                state: tmpData.country_code === 'TR' ? tmpData.town_id : '0',
+                city: tmpData.country_code === 'TR' ? tmpData.city : '0',
+                state: tmpData.country_code === 'TR' ? tmpData.town : '0',
                 postal_code: tmpData.postal_code,
                 country_code: tmpData.country_code,
                 country: tmpData.country_code === 'TR' ? 'Turkey' : (tmpData.country_code === 'LY' ? 'Libya' : '')
@@ -209,8 +209,8 @@ const RestaurantDataInput = (props) => {
             delete tmpData.longitudeInt;
             delete tmpData.longitude;
             delete tmpData.latitude;
-            delete tmpData.city_id;
-            delete tmpData.town_id;
+            delete tmpData.city;
+            delete tmpData.town;
             delete tmpData.owner_name;
 
             tmpData = { ...tmpData, address: { ...address } };
@@ -287,9 +287,9 @@ const RestaurantDataInput = (props) => {
             formik.values.email = restaurant.email;
             formik.values.phone = restaurant.phone;
             formik.values.full_address = restaurant.address.full_address;
-            formik.values.city_id = restaurant.address.city;
+            formik.values.city = restaurant.address.city;
             handleCityUpdate(restaurant.address.city);
-            formik.values.town_id = restaurant.address.state;
+            formik.values.town = restaurant.address.state;
             formik.values.rating = restaurant.rating;
             formik.values.delivery_time = restaurant.delivery_time;
             formik.values.latitude = restaurant.address.latitude;
@@ -316,13 +316,15 @@ const RestaurantDataInput = (props) => {
 
     const [districts, setDistricts] = useState([]);
 
-    const handleCityUpdate = (cityId) => {
+    const handleCityUpdate = (cityName) => {
 
-        formik.values.town_id = 0;
-
-        const filteredDistricts = jsonDistricts?.filter((k) => k.il_id === cityId)
+        formik.values.town_id = '';
+        const cityIdFilter = jsonCities.filter((c)=> c.name===cityName)
+        if(cityIdFilter.length!=0){
+        const filteredDistricts = jsonDistricts?.filter((k) => k.il_id === cityIdFilter[0].id)
 
         setDistricts(filteredDistricts);
+        }
     }
 
     const inputFormiks = {
@@ -421,26 +423,26 @@ const RestaurantDataInput = (props) => {
                             {
                                 formik.values.country_code === 'TR' &&
                                 <InputGroup>
-                                    <InputContainer label={i18n.t('city')} name="city_id" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                        value: formik.values.city_id,
+                                    <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value: formik.values.city,
                                         onChange: (e) => { handleCityUpdate(e.value); formik.handleChange(e); },
                                         options: cities,
                                         placeholder: i18n.t('city'),
                                         filter: true,
                                         filterBy: "name",
                                         optionLabel: "name",
-                                        optionValue: "id",
+                                        optionValue: "name",
                                     }} />
 
-                                    <InputContainer label={i18n.t('district')} name="town_id" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                        value: formik.values.town_id,
+                                    <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value: formik.values.town,
                                         onChange: formik.handleChange,
                                         options: districts,
                                         placeholder: i18n.t('district'),
                                         filter: true,
-                                        filterBy: "name",
+                                        filterBy: "name",   
                                         optionLabel: "name",
-                                        optionValue: "id"
+                                        optionValue: "name"
                                     }} />
                                 </InputGroup>
                             }
