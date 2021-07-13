@@ -78,15 +78,15 @@ const Index = (props) => {
     const mockPieData = [
         {
             city: 'Ankara',
-            orders: {'Çankaya': 465, 'Akyurt': 435}
+            orders: { 'Çankaya': 465, 'Akyurt': 435 }
         },
         {
             city: 'Istanbul',
-            orders: {'Sariyer': 343, 'Pendik': 897}
+            orders: { 'Sariyer': 343, 'Pendik': 897 }
         },
         {
             city: 'Eskişehir',
-            orders: {'Tepebaşı': 545}
+            orders: { 'Tepebaşı': 545 }
         }
     ]
 
@@ -96,7 +96,7 @@ const Index = (props) => {
         datasets: [
             {
                 data: mockPieData.map((el) => _.sum(Object.values(el.orders))),
-                backgroundColor: mockPieData.map(() => {return getRandomColor()})
+                backgroundColor: mockPieData.map(() => { return getRandomColor() })
             }
         ],
 
@@ -232,7 +232,21 @@ const Index = (props) => {
                         </S.DashboardWrapper>}
                 </TabPanel>
                 <TabPanel header="Demand">
-                    <Pie type='number' data={pieChartData} width={500} height={500} options={{ maintainAspectRatio: false }}>
+                    <Pie type='number' data={pieChartData} width={500} height={500} options={{
+                        maintainAspectRatio: false, plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        var label = ''
+                                        for (let x of Object.entries(mockPieData[context.dataIndex].orders)){
+                                            label += x[0] + ': ' + x[1] + '\n'
+                                        }
+                                        return label
+                                    }
+                                }
+                            }
+                        }
+                    }}>
 
                     </Pie>
                 </TabPanel>
