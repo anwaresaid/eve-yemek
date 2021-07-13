@@ -50,9 +50,8 @@ function MyApp(props) {
         });
       }
     }
-
-    const storageSideBar = localStorage.getItem("sidebar_open");
-    setHideBar(storageSideBar === "true");
+    
+    setHideBar(localStorage.getItem("sidebar_open") === "true");
 
   }, []);
 
