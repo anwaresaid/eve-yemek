@@ -6,6 +6,7 @@ import {
   parseDateInAllRows,
   parseDateInOneRow,
 } from '../../helpers/dateFunctions';
+import AddressesService from '../services/addresses.service';
 
 export const listCustomers = () => async (dispatch, getState) => {
   try {
@@ -110,8 +111,16 @@ export const getSingleUser = (id) => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
+    const addressService = new AddressesService();
 
     const result = await usersListsService.getSingleUser(id);
+
+    let addresses = []
+    for (let addressID of result.addresses){
+      console.log(addressID)
+      const address = await addressService.getAddressDetails(addressID)
+      console.log(address)
+    }
 
     dispatch({
       type: usersListTypes.GET_USER_SUCCESS,

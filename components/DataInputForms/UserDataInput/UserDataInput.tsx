@@ -20,6 +20,8 @@ import { RootState } from 'typesafe-actions'
 import { getSupportedCountries } from '../../../store/actions/addresses.action'
 import { ProgressSpinner } from 'primereact/progressspinner'
 import { Dropdown } from 'primereact/dropdown'
+import { InputNumber } from 'primereact/inputnumber'
+
 
 
 const UserDataInput = (props) => {
@@ -121,6 +123,7 @@ const UserDataInput = (props) => {
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + props.updateProps.error });
 
     }, [props.updateProps?.updateUserSuccess, props.updateProps?.updating])
+
     const body = (updating) => {
         return (
             <div id='editUsers'>
@@ -152,6 +155,44 @@ const UserDataInput = (props) => {
                                 }} />
 
                             </InputGroup>
+
+                            <InputGroup>
+                                <InputContainer label={i18n.t('latitude')} name="latitude" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    value: formik.values.address.latitude,
+                                    onValueChange: formik.handleChange,
+                                    mode: "decimal",
+                                    min: -90,
+                                    max: 90,
+                                    minFractionDigits: 4,
+                                    maxFractionDigits: 8,
+                                    showButtons: true,
+                                }} />
+
+                                <InputContainer label={i18n.t('longitude')} name="longitude" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    value: formik.values.address.longitude,
+                                    onValueChange: formik.handleChange,
+                                    mode: "decimal",
+                                    min: -180,
+                                    max: 180,
+                                    minFractionDigits: 4,
+                                    maxFractionDigits: 8,
+                                    showButtons: true,
+                                }} />
+                            </InputGroup>
+
+                        </FormColumn>
+                        <FormColumn divideCount={2}>
+                            <InputGroup>
+                                <InputContainer label={i18n.t('name')} size={6} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                                    value: formik.values.name,
+                                    onChange: formik.handleChange,
+
+                                }} />
+                                <InputContainer label={i18n.t('telephone')} size={6} name="phone" formiks={inputFormiks} component={InputText} iprops={{
+                                    value: formik.values.phone,
+                                    onChange: formik.handleChange,
+                                }} />
+                            </InputGroup>
                             <InputGroup>
                                 <InputContainer label={i18n.t('email')} size={6} name="email" formiks={inputFormiks} component={InputText} iprops={{
                                     value: formik.values.email,
@@ -166,19 +207,6 @@ const UserDataInput = (props) => {
                                         toggleMask: true
                                     }} />
                                 }
-                            </InputGroup>
-                        </FormColumn>
-                        <FormColumn divideCount={2}>
-                            <InputGroup>
-                                <InputContainer label={i18n.t('name')} size={6} name="name" formiks={inputFormiks} component={InputText} iprops={{
-                                    value: formik.values.name,
-                                    onChange: formik.handleChange,
-
-                                }} />
-                                <InputContainer label={i18n.t('telephone')} size={6} name="phone" formiks={inputFormiks} component={InputText} iprops={{
-                                    value: formik.values.phone,
-                                    onChange: formik.handleChange,
-                                }} />
                             </InputGroup>
                         </FormColumn>
 
