@@ -282,6 +282,7 @@ export const translations = {
   thisFeatureIsForAdminsToReplaceLegacyImages: 'This feature is for Admins, to replace legacy default images',
   send: 'Send',
   havingTroubleLoggingIn: 'Having trouble logging in?',
-  executeTransfer: 'Execute Transfer'
+  executeTransfer: 'Execute Transfer',
 
+  versionCode: 'Version Code',
 };

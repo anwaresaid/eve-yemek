@@ -282,5 +282,7 @@ export const translations = {
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
   send: 'Gönder',
   havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
-  executeTransfer: 'Transferi Yürüt'
+  executeTransfer: 'Transferi Yürüt',
+
+  versionCode: 'Versiyon Numarası',
 };

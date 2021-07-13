@@ -284,5 +284,7 @@ export const translations = {
   thisFeatureIsForAdminsToReplaceLegacyImages: 'هذه الميزة للمشرفين لاستبدال الصور القديمة',
   send: 'إرسال',
   havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
-  executeTransfer: 'تنفيذ التحويل'
+  executeTransfer: 'تنفيذ التحويل',
+
+  versionCode: 'رقم النسحة',
 };

@@ -284,5 +284,7 @@ export const translations = {
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений',
   send: 'Отправить',
   havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
-  executeTransfer: 'выполнить перевод'
+  executeTransfer: 'выполнить перевод',
+
+  versionCode: 'номер версии',
 };
