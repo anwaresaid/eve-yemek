@@ -50,6 +50,17 @@ export const DashboardWrapper = styled.div`
         font-size: 80px;
     }
 
+    @media (max-width: 500px) {
+        .box__icons i {
+            font-size: 50px;
+        }
+    }
+    @media (max-width: 250px) {
+        .box__icons i {
+            font-size: 25px;
+        }
+    }
+
     .p-component {
         margin-top: 15px !important;
     }

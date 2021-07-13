@@ -23,7 +23,7 @@ const Login = (props) => {
 
 		e?.preventDefault();
 
-		if(!email || !password){
+		if (!email || !password) {
 			alert("Please fill E-Mail and Password fields");
 			return;
 		}
@@ -37,8 +37,8 @@ const Login = (props) => {
 			<S.Wrapper>
 				<S.LoginWrapper>
 					<Card className='p-shadow-5'>
-						<form onSubmit={(e)=>handleSubmit(e)}>
-							<S.Header className='p-text-center'>{i18n.t('loginTitle')}</S.Header>
+						<form onSubmit={(e) => handleSubmit(e)}>
+							<S.Header className='p-text-center'>{i18n.t('login')}</S.Header>
 
 							<div className='p-fluid p-formgrid p-grid'>
 								<div className='p-field p-col-12 p-md-12'>
@@ -74,6 +74,10 @@ const Login = (props) => {
 							<div className="p-error">
 								{props.error}
 							</div>
+							{
+								props.failed_attempts > 0 && props.attempts === props.failed_attempts &&
+								<a href="https://eve-yemek.com/contact" target="_blank" style={{textDecoration:"none"}}>{i18n.t('havingTroubleLoggingIn')}</a>
+							}
 							<Button
 								type="submit"
 								label={i18n.t('login')}
@@ -89,7 +93,7 @@ const Login = (props) => {
 
 
 function mapStateToProps(state) {
-	return { user:state?.user, error: state?.login.login_error_msg };
+	return { user: state?.user, error: state?.login.login_error_msg, attempts: state?.login.attempts, failed_attempts: state?.login.failed_attempts };
 }
 
 export default connect(mapStateToProps, userActions)(Login)

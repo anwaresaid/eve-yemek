@@ -1,0 +1,6 @@
+export const sendSmsTypes = {
+    SEND_SMS_REQUEST: 'SEND_SMS_REQUEST',
+    SEND_SMS_SUCCESS: 'SEND_SMS_SUCCESS',
+    SEND_SMS_FAIL: 'SEND_NOTIFICATION_FAIL',
+  };
+  

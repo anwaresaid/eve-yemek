@@ -27,7 +27,7 @@ const FoodsTable = (props) => {
         {field: 'image', header: i18n.t('image'), body: imageBodyTemplate},
         {field: 'name', header: i18n.t('name')},
         {field: 'food_category.name', header: i18n.t('category')},
-        {field: 'price', header: i18n.t('price'), body: priceBodyTemplate}, 
+        {field: 'price', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.price)}, 
         {field: 'ops', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.active)},
         {field: '', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}
     ]
@@ -35,11 +35,11 @@ const FoodsTable = (props) => {
     return(
         
         <StandardTable
-                    header={Header(setGlobalFilter,"Food")}
+                    header={Header(setGlobalFilter, i18n.t('meals'))}
                     columns={columns} 
                     value={props.foods}  
                     globalFilter={globalFilter} 
-                    emptyMessage="No food found" >  
+                    emptyMessage={i18n.t('noXfound', {x: i18n.t('meals')})} >  
         </StandardTable>
     )
 

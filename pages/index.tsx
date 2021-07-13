@@ -13,11 +13,13 @@ import StandardTable from "../components/StandardTable";
 import { listOwnedRestaurants, openCloseRestaurant } from "../store/actions/restaurant.action";
 import { SelectButton } from 'primereact/selectbutton';
 import idColumn from "../components/InTableComponents/idColumn";
+import { Tag } from "primereact/tag";
+import { Chart } from 'chart.js'
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
     const { loading, success, reportData } = res
-
+    const chartRef = useRef<HTMLCanvasElement>(null);
     const ownedRestaurantsState = useSelector((state: RootState) => state.ownedRestaurants)
     const { loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants } = ownedRestaurantsState
 
@@ -27,10 +29,10 @@ const Index = (props) => {
         if (!reportData)
             dispatch(getDashboardReport())
         if (auth.hasRoles(['restaurant_owner'])) {
-            if (ownedRestaurants?.length === 0)
+            if (ownedRestaurants?.items.length === 0 && !ownedRestaurantsSuccess)
                 dispatch(listOwnedRestaurants())
         }
-    }, [dispatch, ownedRestaurantsSuccess])
+    }, [dispatch, ownedRestaurantsSuccess]);
 
     const parseCounts = (data) => {
         if (!data)
@@ -48,8 +50,10 @@ const Index = (props) => {
     }
 
     const getTotalOrdersWeekly = () => {
-        return _.sum(parseCounts(reportData?.lastSevenDaysReport?.order))
+        if(reportData){
+            return _.sum(parseCounts(reportData.lastSevenDaysReport.order))
     }
+}
     const lineChartData = {
         
         labels: reportData?.lastSevenDaysReport.order.days,
@@ -61,11 +65,13 @@ const Index = (props) => {
                 backgroundColor: "rgba(75,192,192,1)",
                 borderColor: "rgb(75, 192, 192)",
                 borderWidth: 2,
-                data: parseCounts(reportData?.lastSevenDaysReport.order)
+                data: parseCounts(reportData?.lastSevenDaysReport.order),
             }
-        ]
+             
+        ],
+        
+       
     };
-
     const openClosedTag = (rowData) => {
         const setIsOpen = (isOpen) => {
             if (isOpen === null)
@@ -81,6 +87,16 @@ const Index = (props) => {
         { field: 'is_open', header: i18n.t('status'), body: openClosedTag },
     ]
 
+    const checkIfNoMeals = (ownedRestaurants:any) => {
+        if(ownedRestaurants?.items?.length > 0){
+            for (let one of ownedRestaurants.items){
+                if (one.foods.length > 0)
+                    return false
+            }
+        }   
+        return true
+    }
+
     return (
         
         <div id='containerPanel' className="ContainerPanel">
@@ -88,11 +104,14 @@ const Index = (props) => {
                 <S.DashboardWrapper id='dashBoard'>
                     <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
                     {
+                        auth.hasRoles(["restaurant_owner"]) && checkIfNoMeals(ownedRestaurants) && <Tag severity="danger" value={i18n.t('noneOfYourRestaurantsHaveAnyMealsAdded')}></Tag>
+                    }
+                    {
                         auth.hasRoles(["restaurant_owner"]) &&
                         <div className="p-my-5">
                             <StandardTable id='ownedRestaurants'
                                 columns={ownedRestaurantsTableColumns}
-                                value={ownedRestaurants}
+                                value={ownedRestaurants?.items}
                                 noPaginator
                                 style={{ tableLayout: "auto" }}
                                 resizableColumns
@@ -108,7 +127,7 @@ const Index = (props) => {
                                     <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
                                 </div>
                                 <div className='box__icons'>
-                                    <i className=' pi pi-shopping-cart'></i>
+                                    <i className='pi pi-shopping-cart'></i>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +160,7 @@ const Index = (props) => {
                                     <p id='failed_ordersP'>{i18n.t('failedOrders')}</p>
                                 </div>
                                 <div id='box_icons' className='box__icons'>
-                                    <i id='infoIcon' className='pi pi-info'></i>
+                                    <i id='infoIcon' className='pi pi-exclamation-triangle'></i>
                                 </div>
                             </div>
                         </div>
@@ -162,14 +181,16 @@ const Index = (props) => {
                             <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
                         </i>
                         <Line
+                        ref={chartRef}
                             type='number'
                             width={500}
                             height={100}
                             data={lineChartData}
                             options={{
+                                plugins:{
                                 legend: {
-                                    display: false
-                                },
+                                    onClick:()=>{ }
+                                }},
                                 responsive: true,
                             }}
                         />

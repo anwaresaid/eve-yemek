@@ -15,12 +15,15 @@ const index = () => {
   const { loading, coupons } = res;
 
   useEffect(() => {
-    if (!coupons) dispatch(listCoupons());
+    dispatch(listCoupons());
   }, [dispatch]);
 
   return (
     <div id="couponsTabe">
-      {!loading && coupons &&<> <h1 id="couponsHeader">{i18n.t('coupons')}</h1> <CouponsTable coupons={_.without(_.map(coupons.items, (item) => {if (!item.is_deleted) return item}), undefined)}/></>}
+      {!loading && coupons &&
+        <>
+          <CouponsTable coupons={_.without(_.map(coupons.items, (item) => { if (!item.is_deleted) return item }), undefined)} />
+        </>}
       {loading && <Loading />}
     </div>
   );

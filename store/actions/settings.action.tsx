@@ -76,3 +76,33 @@ export const forgotPasswordRequest =
           });
         }
     };
+
+export const updateSchedule = (resturantId:string, scheduleDays: object) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: settingsTypes.SETTINGS_SCHEDULE_UPDATE_REQUEST,
+        });
+
+        const settingsService = new SettingsService();
+
+        const res = await settingsService.updateSchedule(resturantId, scheduleDays);
+
+        dispatch({
+          type: settingsTypes.SETTINGS_SCHEDULE_UPDATE_SUCCESS,
+        });
+    } catch (error) {
+      dispatch({
+        type: settingsTypes.SETTINGS_SCHEDULE_UPDATE_FAIL,
+        payload:
+            error.response && error.response.data?.error?.message
+                ? error.response.data.error.message
+                : error.message,
+      });
+    }
+}
+
+export const updateScheduleReset = () => async (dispatch, getState) => {
+    dispatch({
+        type: settingsTypes.SETTINGS_SCHEDULE_UPDATE_RESET,
+    });
+}

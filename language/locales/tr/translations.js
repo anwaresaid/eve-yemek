@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Eklenti Kategorileri',
   addonCategoryList: 'Eklenti Kategorileri Listesi',
   createAddonCategory: 'Eklenti Kategorisi Oluştur',
+  selectAddonCategories: 'Eklenti Kategorileri Seçin',
   addons: 'Eklentiler',
   addonList: 'Eklentiler Listesi',
   createAddon: 'Eklenti Oluştur',
@@ -72,6 +73,16 @@ export const translations = {
   total: 'Toplam Miktar',
   orderTime: 'Sipariş Zamanı',
   operations: 'Operasyonlar',
+  order: 'Sipariş',
+  from: 'Kimden',
+  to: 'Kime',
+  receipt: 'Fatura',
+  mealName: 'Yemek adı',
+  price: 'Tane fiyatı',
+  quantity: 'Adet',
+  total: 'Ara toplam',
+  VAT: 'Vergi',
+  discountCoupon: 'Kupon indirimi',
 
   // Restaurant List
   country: 'Ülke',
@@ -134,6 +145,10 @@ export const translations = {
   discount: 'İndirim',
   maximumUsage: 'Maksimum Kullanım',
 
+  // Send SMS
+  sendSms:"SMS Gönder",
+  message:"Mesaj",
+
   // User lists
   created: 'Oluşturuldu',
   createUser: 'Kullanıcı Oluştur',
@@ -179,6 +194,7 @@ export const translations = {
   phoneNumber: 'Telefon Numarası',
   ownerName: 'Sahibinin Adı',
   invalidEmailMessage: 'Yanlış e-posta adresi',
+  onlyNumberError: 'Bu alan sadece rakamlar ile doldurulamaz',
 
   // Toasts
   success: 'Başarılı',
@@ -201,6 +217,8 @@ export const translations = {
   selectRestaurant: 'Restoran Seçin',
   dragAndDropImageHere: 'Resmi buraya sürükleyip bırakın',
 
+  noXfound:'{{x}} bulunamadı',
+
   fixed: 'Belli',
   percentage: 'Yüzdesi',
 
@@ -215,5 +233,54 @@ export const translations = {
   single: 'Tek',
   multiple: 'Çoklu',
 
-  listOfX: '{{x}} listesi'
+  listOfX: '{{x}} Listesi',
+
+  loading: 'Yükleniyor...',
+
+  orderStatus: 'Sipariş Durumu',
+  newOrder: 'Yeni Sipariş',
+  newOrderMessage: `Yeni Sipariş geldi {{userName}}'den {{restaurantName}} restorana`,
+  paymentStatus: 'Ödeme Durumu',
+  deliveryScoutAssignment: 'Kargocu Atama',
+
+  notSupported: 'Desteklenmiyor',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'Restoranlarınızın hiçbirinde eklenmiş yemek yok',
+  successfullyAddedMeal: 'Yemek başarıyla eklendi',
+  successfullyUpdatedMeal: 'Yemek başarıyla güncellendi',
+
+  successfullyAddedUser: 'Kullanıcı başarıyla eklendi',
+  successfullyUpdatedUser: 'Kullanıcı başarıyla güncellendi',
+
+  orderDetail: 'Sipariş Detayi',
+  updateOrderStatus: 'Sipariş Durumunu Güncelle',
+  deliveryStatus: 'Teslim durumu',
+  deliveryStatusUpdated: 'Teslimat Durumu Güncellendi',
+  picked: 'Gönderildi',
+  allRestaurants: 'Tüm restoranlar',
+
+  // Open Hours Schedule
+  mon:"Pazartesi",
+  tue:"Salı",
+  wed:"Çarşamba",
+  thu:"Perşembe",
+  fri:"Cuma",
+  sat:"Cumartesi",
+  sun:"Pazar",
+
+  edit:"Düzenle",
+  workingHours:"Çalışma Saatleri",
+  scheduleUpdateError1:"Başlangıç ve bitiş zamanını belirttiğinizden emin olun",
+  scheduleUpdateError2:"Başlangıç zamanı bitiş zamanından daha büyük olamaz",
+
+  couldNotGetUsersBasedOnYourSelection: 'Seçtiğiniz parametrelere göre bir Kullanıcı bulunamadı',
+
+  admins: 'Yöneticiler',
+  all: 'Tüm',
+
+  replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
+  send: 'Gönder',
+  havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
+  executeTransfer: 'Transferi Yürüt'
 };

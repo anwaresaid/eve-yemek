@@ -15,6 +15,7 @@ export const translations = {
   addonCategories: 'Категории добавки еды',
   addonCategoryList: 'Список категорий добавки еды',
   createAddonCategory: 'Создать категорию добавки еды',
+  selectAddonCategories: 'Выбрать Категории добавки еды',
   addons: 'Добавки еды',
   addonList: 'Список добавки еды',
   createAddon: 'Создать добавки еды',
@@ -72,6 +73,16 @@ export const translations = {
   total: 'Итого',
   orderTime: 'Время заказа',
   operations: 'Операции',
+  order: 'Заказ',
+  from: 'От кого',
+  to: 'Кому',
+  receipt: 'Фактура',
+  mealName: 'Имя еды',
+  price: 'Цена за штуку',
+  quantity: 'Количество',
+  total: 'Общая цена',
+  VAT: 'Налог',
+  discountCoupon: 'Скидочный купон',
 
   // Restaurant List
   country: 'страна',
@@ -134,6 +145,10 @@ export const translations = {
   discount: 'Скидка',
   maximumUsage: 'Максимальное использование',
 
+  // Send SMS
+  sendSms:"Отправить смс",
+  message:"Сообщение",
+
   // User lists
   created: 'Создано',
   createUser: 'Создать пользователя',
@@ -179,6 +194,7 @@ export const translations = {
   phoneNumber: 'Номер телефона',
   ownerName: 'Имя владельца',
   invalidEmailMessage: 'Недействительный адрес электронной почты',
+  onlyNumberError: 'этот ввод не может состоять только из чисел',
 
   // Toasts
   success: 'Успешно',
@@ -203,6 +219,8 @@ export const translations = {
   selectRestaurant: 'Выбрать ресторан',
   dragAndDropImageHere: 'Перетащите изображение сюда',
 
+  noXfound:'{{x}} не найден',
+
   fixed: 'Точный',
   percentage: 'Процентный',
 
@@ -217,5 +235,54 @@ export const translations = {
   single: 'один',
   multiple: 'несколько',
 
-  listOfX: 'Список из {{x}}'
+  listOfX: 'Список из {{x}}',
+
+  loading: 'загрузка ...',
+
+  orderStatus: 'статус заказа',
+  newOrder: 'новый заказ',
+  newOrderMessage: 'новый заказ от {{userName}} к {{restaurantName}}',
+  paymentStatus: 'статус платежа',
+  deliveryScoutAssignment: 'курьерская доставка',
+
+  notSupported: 'не поддерживается',
+
+  noneOfYourRestaurantsHaveAnyMealsAdded: 'нет еды ни в одном из ваших ресторанов',
+  successfullyAddedMeal: 'Успешно добавлено блюдо',
+  successfullyUpdatedMeal: 'Успешно обновленное блюдо',
+
+  successfullyAddedUser: 'Пользователь успешно добавлен',
+  successfullyUpdatedUser: 'Успешно обновленный пользователь',
+
+  orderDetail: 'деталь заказа',
+  updateOrderStatus: 'обновить статус заказа',
+  deliveryStatus: 'Статус доставки',
+  deliveryStatusUpdated: 'Обновленный статус доставки',
+  picked: 'отправлен',
+  allRestaurants: 'Все рестораны',
+
+  // Open Hours Schedule
+  mon:"понедельник",
+  tue:"вторник",
+  wed:"среда",
+  thu:"Четверг",
+  fri:"Пятница",
+  sat:"Суббота",
+  sun:"Воскресенье",
+
+  edit:"редактировать",
+  workingHours:"Рабочее время",
+  scheduleUpdateError1:"Обязательно укажите время начала и окончания",
+  scheduleUpdateError2:"Время начала не может быть больше времени окончания",
+
+  couldNotGetUsersBasedOnYourSelection: 'Не удалось получить пользователей на основе выбора',
+
+  admins: 'админы',
+  all: 'Все',
+
+  replaceImageWithDefault: 'заменить изображение изображением по умолчанию',
+  thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений',
+  send: 'Отправить',
+  havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
+  executeTransfer: 'выполнить перевод'
 };

@@ -1,5 +1,6 @@
 import { restaurantsTypes } from "../types/restaurants.type";
 import RestaurantService from "../services/restaurants.service";
+import { parseDateInAllRows } from "../../helpers/dateFunctions";
 
 
 
@@ -43,8 +44,8 @@ export const createRestaurant = (restaurantCreate) => async (dispatch, getState)
       type: restaurantsTypes.RESTAURAT_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+          ? error.response.data.error.message
+          : error.response.data.error.message,
     });
   }
 };
@@ -84,7 +85,7 @@ export const listRestaurant = () => async (dispatch, getState) => {
     const res = await restaurantService.getRestaurants();
     dispatch({
       type: restaurantsTypes.RESTAURAT_LIST_SUCCESS,
-      payload: res,
+      payload: parseDateInAllRows(res),
     });
   } catch (error) {
     dispatch({

@@ -2,30 +2,22 @@ import { Tag } from "primereact/tag";
 import React, { useEffect, useState } from "react";
 import { i18n } from "../../../language";
 
-const OrderStatus = (status:number) => {
+const OrderStatus = (orderStatus, deliveryStatus) => {
     var severity, value
-    switch (status){
-        case 1: 
+    switch (orderStatus){
+        case 'placed': 
             severity = "secondary"
             value = i18n.t('orderPlaced')
             break
-        case 2:
+        case 'accepted':
             severity = "primary"
             value = i18n.t('orderAccepted')
             break
-        case 3:
+        case 'prepared':
             severity = "info"
             value = i18n.t('orderPrepared')
             break
-        case 4: 
-            severity = "warning"
-            value = i18n.t('onTheWay')
-            break
-        case 5:
-            severity = "success"
-            value = i18n.t('delivered')
-            break
-        case 6: 
+        case 'canceled': 
             severity = "danger"
             value = i18n.t('cancelled')
             break
@@ -33,10 +25,25 @@ const OrderStatus = (status:number) => {
             return <div></div>
     }
 
+    switch(deliveryStatus){
+        case 'picked': 
+            severity = "warning"
+            value = i18n.t('onTheWay')
+            break
+        case 'delivered':
+            severity = "success"
+            value = i18n.t('delivered')
+            break
+        case 'canceled': 
+            severity = "danger"
+            value = i18n.t('cancelled')
+            break
+    }
+
     return(
-        <div id='statusTag'>
+        <span id='statusTag'>
            <Tag className="p-mr-2" value={value} severity={severity}></Tag>
-        </div>
+        </span>
     )
 }
 
