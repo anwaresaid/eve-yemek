@@ -275,6 +275,7 @@ export const translations = {
 
   admins: 'Yöneticiler',
   all: 'Tüm',
+
   replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
   send: 'Gönder'
