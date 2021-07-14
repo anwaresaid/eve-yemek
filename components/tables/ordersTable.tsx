@@ -29,8 +29,8 @@ const OrdersTable = (props) => {
         return (
             <div>
                 <React.Fragment>
-                    <span className="p-column-title"> {i18n.t('statusfdsf')} </span>
-                    <span> {OrderStatus(rowData.status, rowData.delivery_status)} </span>
+                    <span className="p-column-title"> {i18n.t('status')} </span>
+                    <span> {OrderStatus(rowData.status)} </span>
                 </React.Fragment>
             </div>
         );
