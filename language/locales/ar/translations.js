@@ -286,5 +286,7 @@ export const translations = {
   overview: 'نظرة عامة',
   areas: 'المناطق',
   havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
-  executeTransfer: 'تنفيذ التحويل'
+  executeTransfer: 'تنفيذ التحويل',
+
+  versionCode: 'رقم النسحة',
 };

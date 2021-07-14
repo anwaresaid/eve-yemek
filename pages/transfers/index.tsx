@@ -50,6 +50,7 @@ const Transfers = () => {
         { field: 'amount', header: i18n.t('totalAmount') },
         { field: 'createdAt', header: i18n.t('created') },
         { field: 'status', header: i18n.t('status') },
+        { field: 'gateway_response', header: 'Gateway Response'},
         { header: i18n.t('executeTransfer'), body: (row) => makeTransferButton(row) }
     ]
 

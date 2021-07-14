@@ -286,5 +286,7 @@ export const translations = {
   overview: 'обзор',
   areas: 'области',
   havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
-  executeTransfer: 'выполнить перевод'
+  executeTransfer: 'выполнить перевод',
+
+  versionCode: 'номер версии',
 };

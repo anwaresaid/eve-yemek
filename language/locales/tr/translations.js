@@ -284,5 +284,7 @@ export const translations = {
   overview: 'Genel Bakış',
   areas: 'Alanlar',
   havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
-  executeTransfer: 'Transferi Yürüt'
+  executeTransfer: 'Transferi Yürüt',
+
+  versionCode: 'Versiyon Numarası',
 };

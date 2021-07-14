@@ -47,6 +47,7 @@ const General=() => {
             tax_rate: 0,
             is_delivery_charged: false,
             delivery_charge: 0,
+            version_code: '',
         },
         validate: (data) => {
             let errors: any = {};
@@ -79,6 +80,7 @@ const General=() => {
             formik.values.tax_rate = settings.tax_rate;
             formik.values.is_delivery_charged = settings.is_delivery_charged;
             formik.values.delivery_charge = settings.delivery_charge;
+            formik.values.version_code = settings.version_code;
             setDataSetted(true);
         } else {
             dispatch(listSettings());
@@ -266,6 +268,18 @@ const General=() => {
                                 );
                                 router.reload();
                             },
+                        }}
+                    />
+                    <InputContainer
+                        name="version_code"
+                        label={i18n.t("versionCode")}
+                        formiks={inputFormiks}
+                        size={3}
+                        component={InputText}
+                        iprops={{
+                            value: formik.values
+                                .version_code,
+                            onChange: formik.handleChange,
                         }}
                     />
                 </InputGroup>
