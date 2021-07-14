@@ -36,7 +36,7 @@ const Orders = () => {
 
     const columns = [
         { field: 'order', header: 'ID' },
-        { field: 'restaurant.name', header: i18n.t('restaurant') },
+        { header: i18n.t('restaurant'), body: row => <a href={"/restaurants/"+row.restaurant.id} style={{textDecoration: 'none'}} >{row.restaurant.name}</a> },
         { field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status, rowData.delivery_status)},
         { field: 'total_amount', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.total_amount, rowData.currency_type) },
         { field: 'howLongAgo', header: i18n.t('orderTime') },
