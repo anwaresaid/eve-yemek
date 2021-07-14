@@ -47,7 +47,7 @@ const RestaurantsTable = (props) => {
     return (
         <React.Fragment>
             <span className="p-column-title"> {i18n.t('restaurantOwner')}</span>
-            {rowData.owner && rowData.owner.name}
+            <a href={"/users/restaurant_owners/"+rowData.owner.id} style={{textDecoration: 'none'}}>{rowData.owner.name}</a>
         </React.Fragment>
     );
 }
