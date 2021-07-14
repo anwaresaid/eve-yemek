@@ -39,8 +39,9 @@ const Orders = () => {
 
     const columns = [
         { field: 'order', header: 'ID' },
-        { header: i18n.t('restaurant'), body: row => <a href={"/restaurants/"+row.restaurant.id} style={{textDecoration: 'none'}} >{row.restaurant.name}</a> },
-        { field: 'status', header: i18n.t('status'), body: (rowData) => OrderStatus(rowData.status, rowData.delivery_status)},
+        { header: i18n.t('restaurant'), body: row => <a href={"/restaurants/" + row.restaurant.id} style={{ textDecoration: 'none' }} >{row.restaurant.name}</a> },
+        { header: i18n.t('orderStatus'), body: (rowData) => OrderStatus(rowData.status) },
+        { header: i18n.t('deliveryStatus'), body: (rowData) => OrderStatus(rowData.delivery_status) },
         { field: 'total_amount', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.total_amount, rowData.currency_type) },
         { field: 'howLongAgo', header: i18n.t('orderTime') },
         { field: 'ops', header: i18n.t('operations'), body: (rowData) => editButton(rowData) }
@@ -53,7 +54,18 @@ const Orders = () => {
                 items: [
                     { label: i18n.t('orderPlaced'), value: 'placed' },
                     { label: i18n.t('orderAccepted'), value: 'accepted' },
-                    { label: i18n.t('orderPrepared'), value: 'prepared' },
+                    { label: i18n.t('orderPrepared'), value: 'prepared' }
+                ]
+            },
+            {
+                label: i18n.t('deliveryStatus'), code: 'DS',
+                items: [
+                    { label: i18n.t('onTheWay'), value: 'picked' },
+                    { label: i18n.t('delivered'), value: 'delivered' }
+                ]
+            },
+            {
+                items: [
                     { label: i18n.t('cancelled'), value: 'canceled' }
                 ]
             }
@@ -62,7 +74,7 @@ const Orders = () => {
 
     const getList = () => {
         return _.without(_.map(orders.items, (item) => {
-            if (!item.is_deleted && (selectedStatuses.includes(item.status) || selectedStatuses.length === 0)) {
+            if (!item.is_deleted && ((selectedStatuses.includes(item.status) || selectedStatuses.includes(item.delivery_status)) || selectedStatuses.length === 0)) {
                 return item
             }
         }), undefined)
