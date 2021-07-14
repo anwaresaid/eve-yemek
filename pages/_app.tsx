@@ -50,7 +50,21 @@ function MyApp(props) {
         });
       }
     }
+    
+    setHideBar((localStorage.getItem("sidebar_open") || "true") === "true");
+
   }, []);
+
+  useEffect(()=>{
+    const storageSideBar = localStorage.getItem("sidebar_open");
+    if(storageSideBar){
+      if( (storageSideBar === "true") !== hideBar ){
+        localStorage.setItem("sidebar_open", hideBar.toString());
+      }
+    }else{
+      localStorage.setItem("sidebar_open", hideBar.toString());
+    }
+  }, [hideBar]);
 
   const authCheck = () => {
     if (auth.loggedIn && window.location.pathname === '/auth/login') {
