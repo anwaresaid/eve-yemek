@@ -58,7 +58,7 @@ const Transfers = () => {
         if (!payments) {
             dispatch(getUntransferedPayments())
         }
-        console.log(payments)
+        
     }, [payments])
 
     return (
