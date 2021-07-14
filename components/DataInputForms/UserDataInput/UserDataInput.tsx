@@ -41,7 +41,7 @@ const UserDataInput = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "", email: "", phone: "", roles: [], active: false, address: {}, latitude: '', longitude: ''
+            name: "", email: "", phone: "", roles: [], active: false, address: {}, latitude: '', longitude: '', country_code: ''
         },
         validate: (data) => {
             let errors: any = {}
