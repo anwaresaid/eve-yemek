@@ -36,7 +36,6 @@ const EditOrderPage = (props) => {
     { label: i18n.t('delivered'), value: 'delivered' },
     { label: i18n.t('cancelled'), value: 'canceled' },
   ];
-  console.log('orderData: ', props.orderData);
   const onChangeOrderStatus = (e) => {
     let oldStatus = currentOrderStatus;
     setCurrentOrderStatus('loading');

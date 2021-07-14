@@ -115,13 +115,6 @@ export const getSingleUser = (id) => async (dispatch, getState) => {
 
     const result = await usersListsService.getSingleUser(id);
 
-    let addresses = []
-    for (let addressID of result.addresses){
-      console.log(addressID)
-      const address = await addressService.getAddressDetails(addressID)
-      console.log(address)
-    }
-
     dispatch({
       type: usersListTypes.GET_USER_SUCCESS,
       payload: result,

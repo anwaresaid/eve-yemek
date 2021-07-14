@@ -41,7 +41,7 @@ const UserDataInput = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "", email: "", phone: "", roles: [], active: false, address: props.updateProps ? '' : []
+            name: "", email: "", phone: "", roles: [], active: false, address: {}, latitude: '', longitude: ''
         },
         validate: (data) => {
             let errors: any = {}
@@ -67,15 +67,32 @@ const UserDataInput = (props) => {
             if (!data.country_code) {
                 errors.country_code = i18n.t('isRequired', { input: i18n.t('country') });
             } else {
-                data.country = data.country_code === 'TR' ? 'Turkey' : (data.country_code === 'LY' ? 'Libya' : '')
+                data.address.country = data.country_code === 'TR' ? 'Turkey' : (data.country_code === 'LY' ? 'Libya' : '')
+                data.address.country_code = data.country_code       
             }
+            if (!data.latitude) {
+                errors.latitude = i18n.t('isRequired', { input: i18n.t('latitude') })
+            } else {
+                data.address.latitude = data.latitude
+            }
+            if (!data.longitude) {
+                errors.longitude = i18n.t('isRequired', { input: i18n.t('longitude') })
+            } else {
+                data.address.longitude = data.longitude
+            }
+
             return errors
         },
         onSubmit: (data: any) => {
+            let toSend = {...data}
+            delete toSend.country
+            delete toSend.country_code
+            delete toSend.latitude
+            delete toSend.longitude
             if (props.updateProps)
-                dispatch(updateUser(props.updateProps.id, data))
+                dispatch(updateUser(props.updateProps.data.id, toSend))
             else
-                dispatch(addUser(data))
+                dispatch(addUser(toSend))
         }
     })
 
@@ -93,6 +110,9 @@ const UserDataInput = (props) => {
                 formik.values.iban_no = props.updateProps.data.iban_no
                 formik.values.bank_name = props.updateProps.data.bank_name
                 formik.values.active = props.updateProps.data.active
+                formik.values.country_code = props.updateProps.data.addresses ? props.updateProps.data.addresses[0].country_code : 0
+                formik.values.latitude = props.updateProps.data.addresses ? props.updateProps.data.addresses[0].latitude : 0
+                formik.values.longitude = props.updateProps.data.addresses ? props.updateProps.data.addresses[0].longitude : 0
                 setLoading(props.updateProps.loading)
             }
         } else {
@@ -101,10 +121,11 @@ const UserDataInput = (props) => {
     }, [props.updateProps?.data])
 
 
+    /*
     useEffect(() => {
         if (props.updateProps)
             props.updateProps.setData(formik.values)
-    }, [formik.values])
+    }, [formik.values])*/
 
     useEffect(() => {
         if (!supportedCountries) {
@@ -158,7 +179,7 @@ const UserDataInput = (props) => {
 
                             <InputGroup>
                                 <InputContainer label={i18n.t('latitude')} name="latitude" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                    value: formik.values.address.latitude,
+                                    value: formik.values.latitude,
                                     onValueChange: formik.handleChange,
                                     mode: "decimal",
                                     min: -90,
@@ -169,7 +190,7 @@ const UserDataInput = (props) => {
                                 }} />
 
                                 <InputContainer label={i18n.t('longitude')} name="longitude" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                                    value: formik.values.address.longitude,
+                                    value: formik.values.longitude,
                                     onValueChange: formik.handleChange,
                                     mode: "decimal",
                                     min: -180,
