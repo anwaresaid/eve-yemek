@@ -16,6 +16,7 @@ import { i18n } from "../../language";
 import InputContainer from "../../components/inputs/inputContainer";
 import { Dropdown } from "primereact/dropdown";
 import { useRouter } from "next/router";
+import { languageOptions } from "../../helpers/constants";
 
 const Login = (props) => {
 	const [email, setEmail] = useState("");
@@ -39,24 +40,7 @@ const Login = (props) => {
 	return (
 		<>
 			<S.Wrapper>
-				<Dropdown className="p-mx-3 p-mt-3" placeholder={i18n.t('selectLanguage')} options={[
-					{
-						value: "en",
-						label: "English",
-					},
-					{
-						value: "ar",
-						label: "اَلْعَرَبِيَّةُ",
-					},
-					{
-						value: "ru",
-						label: "Русский ",
-					},
-					{
-						value: "tr",
-						label: "Türkçe",
-					},
-				]} onChange ={ (e) => {
+				<Dropdown className="p-mx-3 p-mt-3" placeholder={i18n.t('selectLanguage')} options={languageOptions} onChange ={ (e) => {
 					i18n.changeLanguage(
 						e.value
 					);
