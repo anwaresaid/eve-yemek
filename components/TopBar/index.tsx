@@ -3,6 +3,7 @@ import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { Dropdown } from "primereact/dropdown";
 import React from "react";
+import { languageOptions } from "../../helpers/constants";
 import { i18n } from "../../language";
 import vars from "../../styles/core/variables";
 
@@ -23,12 +24,7 @@ const TopBar = (props:IProps) => {
                     id="language"
                     name="language"
                     placeholder="Language"
-                    options={[
-                        {value: 'en', label:'English'},
-                        {value: 'ar', label:'اَلْعَرَبِيَّةُ'},
-                        {value: 'ru', label:'Русский '},
-                        {value: 'tr', label:'Türkçe'}
-                    ]}
+                    options={languageOptions}
                     value={i18n.language}
                     onChange={(e) => {i18n.changeLanguage(e.value); router.reload();}}
                 />
