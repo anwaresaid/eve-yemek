@@ -165,6 +165,11 @@ export const translations = {
   changeYourPassword: 'Change Your Password',
   redirectingToLoginPage: 'Redirecting to the login page',
 
+  changePassword: 'Change Password',
+  updateUserPassword: 'Update User Password',
+  enterANewPasswordForThisUser: 'Enter a new password for this user',
+  updatedPassword: 'Password updated',
+
   // Transfers
   totalAmount: 'Total Amount',
 
