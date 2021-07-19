@@ -3,6 +3,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
+import BackBtn from "../../components/backBtn";
 import MealDataInput from "../../components/DataInputForms/MealDataInput/MealDataInput"
 import Loading from "../../components/Loading";
 import { getIdQuery } from "../../helpers/getIdQuery";
@@ -25,7 +26,7 @@ const UpdateFood = () => {
         }
     }, [foodSuccess, router.isReady])
 
-    return foodLoading ? <ProgressSpinner/> : <MealDataInput updating meal={foodData}></MealDataInput>
+    return foodLoading ? <ProgressSpinner/> : <><BackBtn router={router}/><MealDataInput updating meal={foodData}></MealDataInput></>
 }
 
 export default UpdateFood
