@@ -18,6 +18,7 @@ import InputGroup from "../../../components/inputs/inputGroup";
 import { Dropdown } from "primereact/dropdown";
 import { getSupportedCountries } from "../../../store/actions/addresses.action";
 import { ProgressSpinner } from "primereact/progressspinner";
+import BackBtn from "../../../components/backBtn";
 
 export const Index = () => {
     const dispatch = useDispatch();
@@ -97,6 +98,7 @@ export const Index = () => {
 
     return (
         <div id="edit_food_categories">
+            <BackBtn router={router}/>
             <h1 id="editHeader">{i18n.t("createFoodCategory")}</h1>
             <Toast id="toastMessage" ref={toast}></Toast>
             <S.ContainerCard id="container">

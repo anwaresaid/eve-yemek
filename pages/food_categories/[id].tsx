@@ -22,6 +22,7 @@ import {
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Dropdown } from "primereact/dropdown";
 import { getSupportedCountries } from "../../store/actions/addresses.action";
+import BackBtn from "../../components/backBtn";
 
 export const FoodCategoryEdit = () => {
     const id = getIdQuery();
@@ -153,6 +154,7 @@ export const FoodCategoryEdit = () => {
 
     return (
         <div id="edit_food_categories">
+            <BackBtn router={router}/>
             <h1 id="editHeader">{i18n.t("editFoodCategory")}</h1>
             <Toast id="toastMessage" ref={toast}></Toast>
             <S.ContainerCard id="container">
