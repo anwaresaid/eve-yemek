@@ -17,6 +17,7 @@ import { Tag } from "primereact/tag";
 import { Chart } from 'chart.js'
 import { TabPanel, TabView } from "primereact/tabview";
 import { getRandomColor } from "../helpers/colors";
+import { getDemandData } from "../store/actions/service-demand.action";
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
@@ -24,6 +25,9 @@ const Index = (props) => {
     const chartRef = useRef<HTMLCanvasElement>(null);
     const ownedRestaurantsState = useSelector((state: RootState) => state.ownedRestaurants)
     const { loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants } = ownedRestaurantsState
+
+    const serviceDemandState = useSelector((state: RootState) => state.serviceDemand)
+    const { loading: serviceDemandLoading, success: serviceDemandSuccess, demandData } = serviceDemandState
 
     const dispatch = useDispatch()
 
@@ -33,6 +37,12 @@ const Index = (props) => {
         if (auth.hasRoles(['restaurant_owner'])) {
             if (ownedRestaurants?.items.length === 0 && !ownedRestaurantsSuccess)
                 dispatch(listOwnedRestaurants())
+        }
+        if (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) {
+            if (!demandData) {
+                dispatch(getDemandData())
+            }
+
         }
     }, [dispatch, ownedRestaurantsSuccess]);
 
@@ -75,28 +85,13 @@ const Index = (props) => {
 
     };
 
-    const mockPieData = [
-        {
-            city: 'Ankara',
-            orders: { 'Çankaya': 465, 'Akyurt': 435 }
-        },
-        {
-            city: 'Istanbul',
-            orders: { 'Sariyer': 343, 'Pendik': 897 }
-        },
-        {
-            city: 'Eskişehir',
-            orders: { 'Tepebaşı': 545 }
-        }
-    ]
-
     const pieChartData = {
 
-        labels: mockPieData.map(el => el.city),
+        labels: demandData?.map(el => el._id === null ? 'Other' : el._id),
         datasets: [
             {
-                data: mockPieData.map((el) => _.sum(Object.values(el.orders))),
-                backgroundColor: mockPieData.map(() => { return getRandomColor() })
+                data: demandData?.map(city => _.sum(city.states.map(state => state.count))),
+                backgroundColor: demandData?.map(() => { return getRandomColor() })
             }
         ],
 
@@ -237,11 +232,9 @@ const Index = (props) => {
                         tooltip: {
                             callbacks: {
                                 label: function (context) {
-                                    var label = mockPieData[context.dataIndex].city + ' - '
-                                    for (let x of Object.entries(mockPieData[context.dataIndex].orders)) {
-                                        label += x[0] + ': ' + x[1] + '\n'
-                                    }
-                                    return label
+                                    var print = ' ' + context.label + ' |'
+                                    print += demandData[context.dataIndex].states.map(s => ' ' + s.state + ': ' + s.count)
+                                    return print
                                 }
                             }
                         }

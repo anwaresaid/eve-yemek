@@ -53,6 +53,7 @@ import { createNotificationReducer, sendNotificationReducer } from './send_notif
 import { supportedCountriesReducer } from './addresses.reducer';
 import { sendSmsReducer } from './send_sms';
 import { listUntransferedPaymentsReducer } from './payments.reducers';
+import { serviceDemandReducer } from './service-demands.reducer';
 
 export default combineReducers({
   login: loginReducer,
@@ -117,5 +118,6 @@ export default combineReducers({
 
   supportedCountries: supportedCountriesReducer,
 
-  untransferedPayments: listUntransferedPaymentsReducer
+  untransferedPayments: listUntransferedPaymentsReducer,
+  serviceDemand: serviceDemandReducer
 });
