@@ -162,6 +162,11 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+    .p-button-danger{
+        background:#ff0439!important;
+        border-color:#ff0439!important;
+    }
+
 `;
 
 export default GlobalStyle;
