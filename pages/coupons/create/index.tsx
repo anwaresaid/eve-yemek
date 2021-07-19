@@ -20,6 +20,7 @@ import InputContainer from '../../../components/inputs/inputContainer';
 import InputGroup from '../../../components/inputs/inputGroup';
 import FormColumn from '../../../components/inputs/formColumn';
 import { InputTextarea } from 'primereact/inputtextarea';
+import BackBtn from '../../../components/backBtn';
 
 export const Index = () => {
   const toast = useRef(null);
@@ -137,6 +138,7 @@ export const Index = () => {
   }
   return (
     <div id='create_coupons'>
+      <BackBtn router={router}/>
       <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
       <Toast id='toastMessage' ref={toast}></Toast>
       <S.ContainerCard id='container'>

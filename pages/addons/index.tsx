@@ -7,10 +7,13 @@ import { RootState } from "typesafe-actions"
 import _ from 'lodash'
 import Loading from "../../components/Loading"
 import { i18n } from "../../language"
+import BackBtn from "../../components/backBtn";
+import {useRouter} from "next/router";
 
 
 const restaurantOwnerList = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const res = useSelector((state: RootState) => state.listAddons);
   const { loading, success, addons } = res;

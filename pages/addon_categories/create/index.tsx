@@ -17,6 +17,7 @@ import InputContainer from '../../../components/inputs/inputContainer';
 import { Dropdown } from 'primereact/dropdown';
 import auth from '../../../helpers/core/auth';
 import { listRestaurantOwners } from '../../../store/actions/userslists.action';
+import BackBtn from '../../../components/backBtn';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -104,6 +105,7 @@ export const Index = () => {
 
   return (
     <div id='create_Add_On_Category'>
+      <BackBtn router={router}/>
       <h1 id='createHeader'>{i18n.t('createAddonCategory')}</h1>
       <Toast id='toastMessage' ref={toast}></Toast>
       <form onSubmit={formik.handleSubmit}>
