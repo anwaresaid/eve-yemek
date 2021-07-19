@@ -10,6 +10,7 @@ import AddOnCategoryTable from '../../components/tables/addonCategoryTable';
 import { listAddonCategory } from '../../store/actions/addon-category.action';
 import _ from 'lodash'
 import Loading from '../../components/Loading';
+import BackBtn from '../../components/backBtn';
 
 const AddonCategoriesList = () => {
   const [globalFilter, setGlobalFilter] = useState(null);

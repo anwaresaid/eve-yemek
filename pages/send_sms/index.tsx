@@ -10,19 +10,20 @@ import { Toast } from "primereact/toast";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
+import BackBtn from "../../components/backBtn";
 import InputContainer from "../../components/inputs/inputContainer";
-import inputContainer from "../../components/inputs/inputContainer";
 import InputGroup from "../../components/inputs/inputGroup";
-import Loading from "../../components/Loading";
 import { i18n } from "../../language";
 import { getSupportedCountries } from "../../store/actions/addresses.action";
 import { sendSms } from "../../store/actions/send_sms";
 import { listAllUsers } from "../../store/actions/userslists.action";
 import UsersListsService from "../../store/services/userslists.service";
+import {useRouter} from 'next/router';
 
 const SendSms = () => {
     const dispatch = useDispatch();
     const toast = useRef(null);
+    const router = useRouter();
 
     const [userNames, setUserNames] = useState(null);
 
@@ -184,6 +185,7 @@ const SendSms = () => {
 
     return (
         <>
+            <BackBtn router={router}/>
             <h1>{i18n.t("sendSms")}</h1>
             <Toast ref={toast}></Toast>
             <form onSubmit={formik.handleSubmit}>
