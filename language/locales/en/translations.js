@@ -238,6 +238,8 @@ export const translations = {
   loading: 'Loading...',
 
   orderStatus: 'Order Status',
+  newOrder: 'New Order',
+  newOrderMessage: 'You have a new order from {{userName}} to {{restaurantName}}',
   paymentStatus: 'Payment Status',
   deliveryScoutAssignment: 'Delivery Scout Assignment',
 
@@ -279,6 +281,7 @@ export const translations = {
   replaceImageWithDefault: 'Replace image with default',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'This feature is for Admins, to replace legacy default images',
   send: 'Send',
+  havingTroubleLoggingIn: 'Having trouble logging in?',
   executeTransfer: 'Execute Transfer'
 
 };
