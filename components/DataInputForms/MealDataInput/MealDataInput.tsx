@@ -266,6 +266,9 @@ const MealDataInput = (props) => {
                                 <InputContainer label={i18n.t('discountedPrice')} name="discount_price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.discount_price,
                                     onValueChange: formik.handleChange,
+                                    mode: "decimal",
+                                    minFractionDigits: 1,
+                                    maxFractionDigits: 2,
                                     //mode: "currency",
                                     //currency: "TRY",
                                     min:0,
