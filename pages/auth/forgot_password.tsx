@@ -5,6 +5,7 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { i18n } from '../../language';
 import { useDispatch } from 'react-redux';
+import { resetPasswordRequest } from '../../store/actions/user.action';
 
 const ForgotPassword = () => {
 	const dispatch = useDispatch()
@@ -18,7 +19,7 @@ const ForgotPassword = () => {
       return;
     }
 
-    
+    dispatch(resetPasswordRequest(email))
   };
 
   return (
