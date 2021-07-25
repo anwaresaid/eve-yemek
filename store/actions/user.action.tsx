@@ -101,6 +101,30 @@ export const resetPasswordRequest = (email: string) => async (dispatch) => {
   }
 };
 
+export const resetPassword = (password: string, token, id) => async (dispatch) => {
+  try {
+    const userService = new UserService();
+    dispatch({
+      type: userTypes.RESET_PASSWORD_REQUEST,
+    });
+
+    const res = await userService.resetPassword(password, token, id);
+
+    dispatch({
+      type: userTypes.RESET_PASSWORD_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: userTypes.RESET_PASSWORD_FAIL,
+      payload:
+        error.response && error.response.data?.error?.message
+          ? error.response.data.error.message
+          : error.message,
+    });
+  }
+};
+
 export default {
   login,
 };

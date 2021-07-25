@@ -35,4 +35,12 @@ export default class UserService {
   
       return data;
   }
+
+  public async resetPassword(password: string, token: string, id: string){
+    const {
+      data: { data },
+    } = await _axios.post(`${baseUrl}/users/resetPassword?token=${token}&id=${id}`, { password });
+
+    return data;
+  }
 }
