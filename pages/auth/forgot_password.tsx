@@ -10,8 +10,8 @@ import { RootState } from 'typesafe-actions';
 import Loading from '../../components/Loading';
 
 const ForgotPassword = () => {
-	const dispatch = useDispatch()
-	
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
 
   const res = useSelector((state: RootState) => state.resetPasswordRequest);
@@ -24,7 +24,7 @@ const ForgotPassword = () => {
       return;
     }
 
-    dispatch(resetPasswordRequest(email))
+    dispatch(resetPasswordRequest(email));
   };
 
   return (
@@ -54,16 +54,16 @@ const ForgotPassword = () => {
               {message === false && (
                 <p>something wrong happened while trying to reach your email</p>
               )}
-              {error && (
-                <p>{error}</p>
-              )}
+              {error && <p>{error}</p>}
               {!loading ? (
                 <Button
-                type='submit'
-                label={i18n.t('submit')}
-                className='p-button-rounded p-button-danger'
-              />
-              ) : <Loading />}
+                  type='submit'
+                  label={i18n.t('submit')}
+                  className='p-button-rounded p-button-danger'
+                />
+              ) : (
+                <Loading />
+              )}
             </form>
           </Card>
         </S.LoginWrapper>

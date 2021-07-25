@@ -293,4 +293,5 @@ export const translations = {
 
   versionCode: 'Versiyon Numarası',
   forgotPassword: 'Şifremi Unuttum',
+  resetPassword: 'Şifre yenileme',
 };

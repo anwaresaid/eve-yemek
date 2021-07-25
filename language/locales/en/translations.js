@@ -293,4 +293,5 @@ export const translations = {
 
   versionCode: 'Version Code',
   forgotPassword: 'Forgot Password',
+  resetPassword: 'Reset Password'
 };
