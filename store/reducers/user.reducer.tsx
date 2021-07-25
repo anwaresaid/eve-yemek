@@ -78,3 +78,28 @@ export const resetPasswordRequestReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const resetPasswordReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case userTypes.RESET_PASSWORD_REQUEST:
+      return {
+        loading: true,
+      };
+    case userTypes.RESET_PASSWORD_SUCCESS:
+      return {
+        loading: false,
+        data: payload,
+        success: true,
+      };
+    case userTypes.RESET_PASSWORD_FAIL:
+      return {
+        loading: false,
+        error: payload,
+      };
+
+    default:
+      return state;
+  }
+};
