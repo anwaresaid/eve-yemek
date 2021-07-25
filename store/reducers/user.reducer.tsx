@@ -58,17 +58,17 @@ export const resetPasswordRequestReducer = (state = {}, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case userTypes.RESET_PASSWORD_REQUEST:
+    case userTypes.RESET_PASSWORD_REQUEST_REQUEST:
       return {
         loading: true,
       };
-    case userTypes.RESET_PASSWORD_SUCCESS:
+    case userTypes.RESET_PASSWORD_REQUEST_SUCCESS:
       return {
         loading: false,
         message: payload,
         success: true,
       };
-    case userTypes.RESET_PASSWORD_FAIL:
+    case userTypes.RESET_PASSWORD_REQUEST_FAIL:
       return {
         loading: false,
         error: payload,

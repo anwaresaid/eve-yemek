@@ -4,13 +4,18 @@ import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { i18n } from '../../language';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetPasswordRequest } from '../../store/actions/user.action';
+import { RootState } from 'typesafe-actions';
+import Loading from '../../components/Loading';
 
 const ForgotPassword = () => {
 	const dispatch = useDispatch()
 	
   const [email, setEmail] = useState('');
+
+  const res = useSelector((state: RootState) => state.resetPasswordRequest);
+  const { loading, message, success, error } = res;
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
@@ -43,11 +48,22 @@ const ForgotPassword = () => {
                   />
                 </div>
               </div>
-              <Button
+              {message === true && (
+                <p>a reset password mail has been sent to your email address</p>
+              )}
+              {message === false && (
+                <p>something wrong happened while trying to reach your email</p>
+              )}
+              {error && (
+                <p>{error}</p>
+              )}
+              {!loading ? (
+                <Button
                 type='submit'
                 label={i18n.t('submit')}
                 className='p-button-rounded p-button-danger'
               />
+              ) : <Loading />}
             </form>
           </Card>
         </S.LoginWrapper>
