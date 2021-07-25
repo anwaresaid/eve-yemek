@@ -1,4 +1,6 @@
 import axios from '../../helpers/_axios';
+import _axios from 'axios';
+import { baseUrl } from "../../helpers/constants";
 export default class UserService {
   public async login(email: string, password: string, remember: boolean) {
     if (!email || !password) {
@@ -29,7 +31,7 @@ export default class UserService {
   public async resetPasswordRequest(email: string){
     const {
         data: { data },
-      } = await axios.post('/users/resetPasswordRequest', { email });
+      } = await _axios.post(`${baseUrl}/users/resetPasswordRequest`, { email });
   
       return data;
   }
