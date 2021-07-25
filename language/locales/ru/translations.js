@@ -289,4 +289,5 @@ export const translations = {
   executeTransfer: 'выполнить перевод',
 
   versionCode: 'номер версии',
+  forgotPassword: 'забыл пароль',
 };

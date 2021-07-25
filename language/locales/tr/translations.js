@@ -287,4 +287,5 @@ export const translations = {
   executeTransfer: 'Transferi Yürüt',
 
   versionCode: 'Versiyon Numarası',
+  forgotPassword: 'Şifremi Unuttum',
 };

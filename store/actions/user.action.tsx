@@ -3,7 +3,7 @@ import UserService from '../services/user.service';
 import auth from '../../helpers/core/auth';
 import { i18n } from '../../language';
 
-const login =
+export const login =
   (email: string, password: string, remember: boolean) => async (dispatch) => {
     try {
       const res: any = await UserService.login(email, password, remember);

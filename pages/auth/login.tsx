@@ -13,6 +13,7 @@ import { connect, useSelector } from "react-redux";
 
 import userActions from "../../store/actions/user.action";
 import { i18n } from "../../language";
+import Link from "next/link";
 
 const Login = (props) => {
 	const [email, setEmail] = useState("");
@@ -73,6 +74,9 @@ const Login = (props) => {
 							</div>
 							<div className="p-error">
 								{props.error}
+							</div>
+							<div>
+								<Link href='forgot_password'>Forgot Password?</Link>
 							</div>
 							{
 								props.failed_attempts > 0 && props.attempts === props.failed_attempts &&
