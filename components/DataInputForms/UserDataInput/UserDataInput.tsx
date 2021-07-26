@@ -137,7 +137,7 @@ const UserDataInput = (props) => {
                 <h1 id='editHeader'>{updating ? i18n.t('updateUser') : i18n.t('createUser')}</h1>
                 <form id='editForm' onSubmit={mySubmit} >
                     {
-                        auth.hasRoles(['admin']) &&
+                        auth.hasRoles(['admin']) && updating &&
                         <Button type="button" label={i18n.t('changePassword')} className="p-button-outlined" onClick={() => setChangePasswordModalOpen(true)}></Button>
                     }
                     <div className="p-grid">
