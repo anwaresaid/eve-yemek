@@ -296,4 +296,6 @@ export const translations = {
   versionCode: 'رقم النسحة',
   forgotPassword: 'نسيت كلمة المرور',
   resetPassword: 'إعادة تعيين كلمة المرور',
+  
+  clickHere: 'انقر هنا'
 };

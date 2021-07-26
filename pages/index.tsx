@@ -206,7 +206,7 @@ const Index = (props) => {
                         </i>
                         <Line
                             ref={chartRef}
-                            type='number'
+                            type={'number'}
                             width={500}
                             height={100}
                             data={lineChartData}
