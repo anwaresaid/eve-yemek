@@ -12,10 +12,12 @@ import { FormikProvider, useFormik } from 'formik'
 import { i18n } from '../../../language'
 import Loading from '../../Loading'
 import FormColumn from '../../inputs/formColumn'
+import { Dialog } from 'primereact/dialog';
 import InputContainer from "../../inputs/inputContainer";
 import InputGroup from "../../inputs/inputGroup";
 import { Password } from 'primereact/password'
 import auth from '../../../helpers/core/auth'
+import SettingsService from '../../../store/services/settings.service'
 
 
 const UserDataInput = (props) => {
@@ -23,6 +25,11 @@ const UserDataInput = (props) => {
     const toast = useRef(null);
     const router = useRouter();
     const dispatch = useDispatch()
+
+    const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false)
+    const changePasswordInput = useRef(null)
+    const [changePasswordInputValue, setChangePasswordInputValue] = useState('')
+    let settingsService = new SettingsService()
 
     const [loading, setLoading] = useState(true)
     const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name])
@@ -59,7 +66,7 @@ const UserDataInput = (props) => {
         },
         onSubmit: (data: any) => {
             if (props.updateProps)
-                dispatch(updateUser(props.updateProps.id, data))
+                dispatch(updateUser(router.query.id, data))
             else
                 dispatch(addUser(data))
         }
@@ -103,11 +110,36 @@ const UserDataInput = (props) => {
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + props.updateProps.error });
 
     }, [props.updateProps?.updateUserSuccess, props.updateProps?.updating])
+
+    const sendChangePasswordRequest = (newPassword) => {
+        if (!auth.hasRoles(['admin'])) {
+            toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Unauthorized' });
+            return
+        }
+        console.log(newPassword)
+        settingsService.adminResetPassword(router.query.id, newPassword).then((res) => {
+            toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedPassword') })
+            setChangePasswordModalOpen(false)
+        }).catch((res) => {
+            toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: i18n.t('updatePasswordFailed') });
+        })
+    }
+
+    const changePasswordModalFooter = (
+        <div>
+            <Button style={{ float: 'left' }} className="p-button-info" label={i18n.t('update')} onClick={() => sendChangePasswordRequest(changePasswordInputValue)}></Button>
+        </div>
+    );
+
     const body = (updating) => {
         return (
             <div id='editUsers'>
                 <h1 id='editHeader'>{updating ? i18n.t('updateUser') : i18n.t('createUser')}</h1>
                 <form id='editForm' onSubmit={mySubmit} >
+                    {
+                        auth.hasRoles(['admin']) && updating &&
+                        <Button type="button" label={i18n.t('changePassword')} className="p-button-outlined" onClick={() => setChangePasswordModalOpen(true)}></Button>
+                    }
                     <div className="p-grid">
                         <FormColumn divideCount={2}>
                             <InputGroup>
@@ -177,6 +209,21 @@ const UserDataInput = (props) => {
                             checked: formik.values.active,
                             onChange: formik.handleChange
                         }} />
+
+                        {
+                            auth.hasRoles(['admin']) &&
+                            <Dialog header={i18n.t('updateUserPassword')} footer={changePasswordModalFooter} visible={changePasswordModalOpen} style={{ width: '50vw' }} onHide={() => setChangePasswordModalOpen(false)}>
+                                <p>{i18n.t('enterANewPasswordForThisUser')}</p>
+                                <Password
+                                    value={changePasswordInputValue}
+                                    ref={changePasswordInput}
+                                    style={{ float: 'left' }}
+                                    toggleMask={true}
+                                    onChange={(e) => setChangePasswordInputValue(e.target.value)}
+                                >
+                                </Password>
+                            </Dialog>
+                        }
                         <Button id='submitBtn' type="submit" label={updating ? i18n.t('update') : i18n.t('create')}></Button>
 
                     </div>

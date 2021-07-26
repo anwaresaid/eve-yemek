@@ -168,6 +168,11 @@ export const translations = {
   changeYourPassword: 'Şifreni Değiştir',
   redirectingToLoginPage: 'Giriş yap sayfasına yönlendiriliyorsunuz',
 
+  changePassword: 'Şifre değiştir',
+  updateUserPassword: 'Kullanıcı Şifresini Güncelle',
+  enterANewPasswordForThisUser: 'Bu kullanıcı için yeni bir şifre girin',
+  updatedPassword: 'Şifre güncellendi',
+
   //Transfers
   totalAmount: 'Toplam Tutar',
 
@@ -281,6 +286,12 @@ export const translations = {
   replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
   send: 'Gönder',
+  overview: 'Genel Bakış',
+  areas: 'Alanlar',
   havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
-  executeTransfer: 'Transferi Yürüt'
+  executeTransfer: 'Transferi Yürüt',
+
+  versionCode: 'Versiyon Numarası',
+
+  clickHere: 'Buraya tıklayın'
 };

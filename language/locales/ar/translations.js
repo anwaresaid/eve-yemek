@@ -168,6 +168,11 @@ export const translations = {
   changeYourPassword: 'تغيير الرمز السري',
   redirectingToLoginPage: 'يتم إعادة توجيهك إلى صفحة تسجيل الدخول',
 
+  changePassword: 'تغيير كلمة المرور',
+  updateUserPassword: 'تحديث كلمة مرور المستخدم',
+  enterANewPasswordForThisUser: 'أدخل كلمة مرور جديدة لهذا المستخدم', 
+  updatedPassword: 'تم تحديث كلمة السر',
+
   //Transfers
   totalAmount: 'إجمالي',
 
@@ -283,6 +288,12 @@ export const translations = {
   replaceImageWithDefault: 'استبدال الصورة بالصورة الافتراضية',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'هذه الميزة للمشرفين لاستبدال الصور القديمة',
   send: 'إرسال',
+  overview: 'نظرة عامة',
+  areas: 'المناطق',
   havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
-  executeTransfer: 'تنفيذ التحويل'
+  executeTransfer: 'تنفيذ التحويل',
+
+  versionCode: 'رقم النسحة',
+
+  clickHere: 'انقر هنا'
 };

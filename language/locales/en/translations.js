@@ -165,6 +165,11 @@ export const translations = {
   changeYourPassword: 'Change Your Password',
   redirectingToLoginPage: 'Redirecting to the login page',
 
+  changePassword: 'Change Password',
+  updateUserPassword: 'Update User Password',
+  enterANewPasswordForThisUser: 'Enter a new password for this user',
+  updatedPassword: 'Password updated',
+
   // Transfers
   totalAmount: 'Total Amount',
 
@@ -281,7 +286,12 @@ export const translations = {
   replaceImageWithDefault: 'Replace image with default',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'This feature is for Admins, to replace legacy default images',
   send: 'Send',
+  overview: 'Overview',
+  areas: 'Areas',
   havingTroubleLoggingIn: 'Having trouble logging in?',
-  executeTransfer: 'Execute Transfer'
+  executeTransfer: 'Execute Transfer',
 
+  versionCode: 'Version Code',
+
+  clickHere: 'Click here'
 };

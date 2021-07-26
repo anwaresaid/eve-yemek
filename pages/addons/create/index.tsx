@@ -20,6 +20,7 @@ import { addonsTypes } from '../../../store/types/addons.type';
 import { Toast } from 'primereact/toast';
 import auth from '../../../helpers/core/auth';
 import { listRestaurantOwners } from '../../../store/actions/userslists.action';
+import BackBtn from '../../../components/backBtn';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -136,6 +137,7 @@ export const Index = () => {
 
   return (
     <div id='create_Add_ons'>
+      <BackBtn router={router}/>
       <Toast id='toastMessage' ref={toast}></Toast>
       <h1 id='createHeader'>{i18n.t('createAddon')}</h1>
       <form onSubmit={formik.handleSubmit}>

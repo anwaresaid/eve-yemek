@@ -168,6 +168,11 @@ export const translations = {
   changeYourPassword: 'Изменить пароль',
   redirectingToLoginPage: 'Вы будете перенаправлены на страницу входа',
 
+  changePassword: 'Изменить пароль',
+  updateUserPassword: 'Обновить пароль пользователя',
+  enterANewPasswordForThisUser: 'Введите новый пароль для этого пользователя',
+  updatedPassword: 'Пароль обновлен',
+
   //Transfers
   totalAmount: 'Общая сумма',
 
@@ -283,6 +288,12 @@ export const translations = {
   replaceImageWithDefault: 'заменить изображение изображением по умолчанию',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений',
   send: 'Отправить',
+  overview: 'обзор',
+  areas: 'области',
   havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
-  executeTransfer: 'выполнить перевод'
+  executeTransfer: 'выполнить перевод',
+
+  versionCode: 'номер версии',
+
+  clickHere: 'Kликните сюда'
 };

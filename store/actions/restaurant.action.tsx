@@ -40,12 +40,14 @@ export const createRestaurant = (restaurantCreate) => async (dispatch, getState)
       payload: res,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: restaurantsTypes.RESTAURAT_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.error.message
           : error.response.data.error.message,
+          
     });
   }
 };

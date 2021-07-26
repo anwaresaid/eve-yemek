@@ -46,10 +46,11 @@ const Transfers = () => {
 
     let columns = [
         { field: 'id', header: 'ID' },
-        { field: 'restaurant', header: i18n.t('restaurant'), body: (row) => { return row.restaurant ? row.restaurant.name : row.restaurant_id.name } },
+        { field: 'restaurant', header: i18n.t('restaurant'), body: (row) => <a href={"/restaurants/" + (row.restaurant ? row.restaurant.id : row.restaurant_id.id)} style={{textDecoration: 'none'}}>{ row.restaurant ? row.restaurant.name : row.restaurant_id.name }</a> },
         { field: 'amount', header: i18n.t('totalAmount') },
         { field: 'createdAt', header: i18n.t('created') },
         { field: 'status', header: i18n.t('status') },
+        { field: 'gateway_response', header: 'Gateway Response'},
         { header: i18n.t('executeTransfer'), body: (row) => makeTransferButton(row) }
     ]
 
@@ -57,6 +58,7 @@ const Transfers = () => {
         if (!payments) {
             dispatch(getUntransferedPayments())
         }
+        
     }, [payments])
 
     return (
