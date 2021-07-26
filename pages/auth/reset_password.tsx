@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as S from '../../styles/auth/login.style';
-import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { i18n } from '../../language';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPassword } from '../../store/actions/user.action';
 import { RootState } from 'typesafe-actions';
-import Loading from '../../components/Loading';
 import { Password } from 'primereact/password';
 import { useRouter } from 'next/dist/client/router';
+import { useEffect } from 'react';
+import { userTypes } from '../../store/types/user.type';
+import { Toast } from 'primereact/toast';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const toast = useRef(null);
 
   const token = router.query.token;
   const id = router.query.id;
@@ -36,14 +38,26 @@ const ResetPassword = () => {
       return;
     }
 
-    // console.log('new password: ', password);
-    // console.log('confirm password: ', confirmPassword);
     dispatch(resetPassword(password, token, id))
   };
+
+  useEffect(() => {
+    if(success){
+      toast.current.show({
+        severity: 'success',
+        summary: 'Success',
+        detail: i18n.t('success'),
+      });
+      setTimeout(() => { router.push('/auth/login') }, 2000)
+      dispatch({ type: userTypes.RESET_PASSWORD_REQUEST_RESET });
+      dispatch({ type: userTypes.RESET_PASSWORD_RESET });
+    }
+  },[success])
 
   return (
     <>
       <S.Wrapper>
+      <Toast id='toastMessage' ref={toast}></Toast>
         <S.LoginWrapper>
           <Card className='p-shadow-5'>
             <form onSubmit={(e) => handleSubmit(e)}>
