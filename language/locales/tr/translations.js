@@ -292,4 +292,6 @@ export const translations = {
   executeTransfer: 'Transferi Yürüt',
 
   versionCode: 'Versiyon Numarası',
+
+  clickHere: 'Buraya tıklayın'
 };

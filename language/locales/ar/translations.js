@@ -294,4 +294,6 @@ export const translations = {
   executeTransfer: 'تنفيذ التحويل',
 
   versionCode: 'رقم النسحة',
+
+  clickHere: 'انقر هنا'
 };

@@ -294,4 +294,6 @@ export const translations = {
   executeTransfer: 'выполнить перевод',
 
   versionCode: 'номер версии',
+
+  clickHere: 'Kликните сюда'
 };

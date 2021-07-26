@@ -87,7 +87,7 @@ const Login = (props) => {
 							</div>
 							{
 								props.failed_attempts > 0 && props.attempts === props.failed_attempts &&
-								<a href="https://eve-yemek.com/contact" target="_blank" style={{ textDecoration: "none" }}>{i18n.t('havingTroubleLoggingIn')}</a>
+								<a href="https://eve-yemek.com/contact" target="_blank" style={{ textDecoration: "none" }}>{i18n.t('havingTroubleLoggingIn')} <u>{i18n.t('clickHere')}</u></a>
 							}
 							<Button
 								type="submit"
