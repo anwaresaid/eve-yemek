@@ -21,7 +21,7 @@ function MyApp(props) {
   const [error, setError] = useState(false);
   const [authCheckFinish, setAuthCheckFinish] = useState(false);
   const [hideBar, setHideBar] = useState(true);
-  const [orderStatus, setOrderStatus] = useState(null)
+  const [orderStatus, setOrderStatus] = useState(null);
 
   const toast = useRef(null);
 
@@ -39,30 +39,32 @@ function MyApp(props) {
       if (socket) {
         auth?.user?.restaurant_ids?.map((restaurant_id) => {
           socket.on(`order.created.${restaurant_id}`, ({ payload }) => {
-            setOrderStatus(true)
+            setOrderStatus(true);
             toast.current.show({
               severity: 'success',
               summary: i18n.t('newOrder'),
-              detail: i18n.t('newOrderMessage', {userName: payload.user.name, restaurantName: payload.restaurant.name}),
+              detail: i18n.t('newOrderMessage', {
+                userName: payload.user.name,
+                restaurantName: payload.restaurant.name,
+              }),
             });
-            setOrderStatus(false)
+            setOrderStatus(false);
           });
         });
       }
     }
-    
-    setHideBar((localStorage.getItem("sidebar_open") || "true") === "true");
 
+    setHideBar((localStorage.getItem('sidebar_open') || 'true') === 'true');
   }, []);
 
-  useEffect(()=>{
-    const storageSideBar = localStorage.getItem("sidebar_open");
-    if(storageSideBar){
-      if( (storageSideBar === "true") !== hideBar ){
-        localStorage.setItem("sidebar_open", hideBar.toString());
+  useEffect(() => {
+    const storageSideBar = localStorage.getItem('sidebar_open');
+    if (storageSideBar) {
+      if ((storageSideBar === 'true') !== hideBar) {
+        localStorage.setItem('sidebar_open', hideBar.toString());
       }
-    }else{
-      localStorage.setItem("sidebar_open", hideBar.toString());
+    } else {
+      localStorage.setItem('sidebar_open', hideBar.toString());
     }
   }, [hideBar]);
 
@@ -72,7 +74,11 @@ function MyApp(props) {
       return;
     }
 
-    if (window.location.pathname !== '/auth/login') {
+    if (
+      window.location.pathname !== '/auth/login' &&
+      window.location.pathname !== '/auth/forgot_password' &&
+      window.location.pathname !== '/auth/reset_password'
+    ) {
       if (!auth.loggedIn || !auth.user?.roles) {
         window.location.replace('/auth/login');
         return;
