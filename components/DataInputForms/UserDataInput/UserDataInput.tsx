@@ -39,28 +39,28 @@ const UserDataInput = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "", email: "", phone: "", roles: [], active: false, address: props.updateProps ? '' : []
+            name: "", email: "", phone: "", roles: [],active:false ,address: props.updateProps ? '' : undefined
         },
         validate: (data) => {
             let errors: any = {}
 
             if (!data.name) {
-                errors.name = i18n.t('isRequired', { input: i18n.t('userName') });;
+                errors.name = i18n.t('isRequired', { input: i18n.t('userName') });
             }
             if (!data.email) {
-                errors.email = i18n.t('isRequired', { input: i18n.t('email') });;
+                errors.email = i18n.t('isRequired', { input: i18n.t('email') });
             }
             else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
                 errors.email = i18n.t('invalidEmailMessage');
             }
             if (!data.phone) {
-                errors.phone = i18n.t('isRequired', { input: i18n.t('phoneNumber') });;
+                errors.phone = i18n.t('isRequired', { input: i18n.t('phoneNumber') });
             }
             if (!data.roles) {
-                errors.roles = i18n.t('isRequired', { input: i18n.t('role') });;
+                errors.roles = i18n.t('isRequired', { input: i18n.t('role') });
             }
             if (!data.password && !props.updateProps) {
-                errors.password = i18n.t('isRequired', { input: i18n.t('password') });;
+                errors.password = i18n.t('isRequired', { input: i18n.t('password') });
             }
             return errors
         },
@@ -137,7 +137,7 @@ const UserDataInput = (props) => {
                 <h1 id='editHeader'>{updating ? i18n.t('updateUser') : i18n.t('createUser')}</h1>
                 <form id='editForm' onSubmit={mySubmit} >
                     {
-                        auth.hasRoles(['admin']) &&
+                        auth.hasRoles(['admin']) && updating &&
                         <Button type="button" label={i18n.t('changePassword')} className="p-button-outlined" onClick={() => setChangePasswordModalOpen(true)}></Button>
                     }
                     <div className="p-grid">

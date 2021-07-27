@@ -13,6 +13,7 @@ import { connect, useSelector } from "react-redux";
 
 import userActions from "../../store/actions/user.action";
 import { i18n } from "../../language";
+import Link from "next/link";
 import InputContainer from "../../components/inputs/inputContainer";
 import { Dropdown } from "primereact/dropdown";
 import { useRouter } from "next/router";
@@ -85,9 +86,12 @@ const Login = (props) => {
 							<div className="p-error">
 								{props.error}
 							</div>
+							<div>
+								<Link href='forgot_password'>Forgot Password?</Link>
+							</div>
 							{
 								props.failed_attempts > 0 && props.attempts === props.failed_attempts &&
-								<a href="https://eve-yemek.com/contact" target="_blank" style={{ textDecoration: "none" }}>{i18n.t('havingTroubleLoggingIn')}</a>
+								<a href="https://eve-yemek.com/contact" target="_blank" style={{ textDecoration: "none" }}>{i18n.t('havingTroubleLoggingIn')} <u>{i18n.t('clickHere')}</u></a>
 							}
 							<Button
 								type="submit"

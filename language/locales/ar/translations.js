@@ -294,4 +294,8 @@ export const translations = {
   executeTransfer: 'تنفيذ التحويل',
 
   versionCode: 'رقم النسحة',
+  forgotPassword: 'نسيت كلمة المرور',
+  resetPassword: 'إعادة تعيين كلمة المرور',
+  
+  clickHere: 'انقر هنا'
 };
