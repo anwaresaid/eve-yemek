@@ -2,7 +2,7 @@ name: Baklava Dev Build & Deploy
 
 on:
   push:
-    branches: [ Feras/DeploymentBugs ]
+    branches: [ develop ]
 
 jobs:
   build:
