@@ -24,6 +24,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { listAddonCategory } from "../../../store/actions/addon-category.action";
 import { Tag } from "primereact/tag";
 import { foodsTypes } from "../../../store/types/foods.type";
+import { currencyDirectory } from "../../../helpers/constants";
 
 const MealDataInput = (props) => {
 
@@ -32,6 +33,7 @@ const MealDataInput = (props) => {
     const [addonCategoryNames, setAddonCategoryNames] = useState(null);
     const [selectedAddOnCategories, setSelectedAddOnCategories] = useState([])
     const [foodCategoryName, setFoodCategoryName] = useState(null);
+    const [currency, setCurrency] = useState('TRY')
     const [restaurantName, setRestaurantName] = useState(null);
     const dispatch = useDispatch();
 
@@ -101,6 +103,7 @@ const MealDataInput = (props) => {
             if (!data.description || data.description === null){
                 data.description = ""
             }
+            data.currency_type = currency
             if (props.creating) {
                 dispatch(createFood(data));
             } else if (props.updating) {
@@ -110,7 +113,7 @@ const MealDataInput = (props) => {
     });
 
     const setRestaurantsDropdownOptions = () => {
-        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id } });
+        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id} });
         setRestaurantName(restaurantNames);
     }
 
@@ -193,6 +196,13 @@ const MealDataInput = (props) => {
         isFormFieldValid
     }
 
+    const setCurrencyByRestaurant = (restaurantID) => {
+        let currentRestaurant = restaurants.items?.filter(res => res.id === restaurantID)[0]
+        if (!currentRestaurant)
+            return
+        setCurrency(currencyDirectory[currentRestaurant.country_code] ?? 'TRY')
+    }
+
     return (
         <div id="meal_input">
             <h1 id="createHeader">{props.creating ? i18n.t('createMeal') : i18n.t('updateMeal')}</h1>
@@ -205,7 +215,7 @@ const MealDataInput = (props) => {
                                 <InputGroup>
                                     <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
                                         value: formik.values.restaurant_id,
-                                        onChange: formik.handleChange,
+                                        onChange: (e) => {formik.handleChange(e); setCurrencyByRestaurant(e.value)},
                                         options: restaurantName ?? [],
                                         filter: true,
                                         filterBy: "name",
@@ -257,11 +267,11 @@ const MealDataInput = (props) => {
                                 <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.price,
                                     onValueChange: formik.handleChange,
-                                    mode: "decimal",
+                                    //mode: "decimal",
                                     minFractionDigits: 1,
                                     maxFractionDigits: 2,
-                                    //mode: "currency",
-                                    //currency: "TRY",
+                                    mode: "currency",
+                                    currency: currency,
                                     min:0,
                                     showButtons: true
                                 }}
@@ -269,11 +279,10 @@ const MealDataInput = (props) => {
                                 <InputContainer label={i18n.t('discountedPrice')} name="discount_price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.discount_price,
                                     onValueChange: formik.handleChange,
-                                    mode: "decimal",
                                     minFractionDigits: 1,
                                     maxFractionDigits: 2,
-                                    //mode: "currency",
-                                    //currency: "TRY",
+                                    mode: "currency",
+                                    currency: currency,
                                     min:0,
                                     showButtons: true
                                 }}
