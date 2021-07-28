@@ -104,6 +104,7 @@ const MealDataInput = (props) => {
                 data.description = ""
             }
             data.currency_type = currency
+            console.log(data)
             if (props.creating) {
                 dispatch(createFood(data));
             } else if (props.updating) {
