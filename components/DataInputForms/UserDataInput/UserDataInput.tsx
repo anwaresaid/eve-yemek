@@ -90,13 +90,14 @@ const UserDataInput = (props) => {
         },
         onSubmit: (data: any) => {
             let toSend = {...data}
-            toSend.address.id = props.updateProps.data.addresses[0]?.id
             delete toSend.country
             delete toSend.country_code
             delete toSend.latitude
             delete toSend.longitude
-            if (props.updateProps)
+            if (props.updateProps){
+                toSend.address.id = props.updateProps.data.addresses[0]?.id
                 dispatch(updateUser(router.query.id, toSend))
+            }
             else
                 dispatch(addUser(toSend))
         }
