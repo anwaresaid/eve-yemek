@@ -85,6 +85,7 @@ const UserDataInput = (props) => {
         },
         onSubmit: (data: any) => {
             let toSend = {...data}
+            toSend.address.id = props.updateProps.data.addresses[0]?.id
             delete toSend.country
             delete toSend.country_code
             delete toSend.latitude
@@ -110,9 +111,9 @@ const UserDataInput = (props) => {
                 formik.values.iban_no = props.updateProps.data.iban_no
                 formik.values.bank_name = props.updateProps.data.bank_name
                 formik.values.active = props.updateProps.data.active
-                formik.values.country_code = props.updateProps.data.addresses ? props.updateProps.data.addresses[0].country_code : 0
-                formik.values.latitude = props.updateProps.data.addresses ? props.updateProps.data.addresses[0].latitude : 0
-                formik.values.longitude = props.updateProps.data.addresses ? props.updateProps.data.addresses[0].longitude : 0
+                formik.values.country_code = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].country_code : 0
+                formik.values.latitude = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].latitude : 0
+                formik.values.longitude = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].longitude : 0
                 setLoading(props.updateProps.loading)
             }
         } else {
