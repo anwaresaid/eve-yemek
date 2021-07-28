@@ -6,6 +6,7 @@ import {
   parseDateInAllRows,
   parseDateInOneRow,
 } from '../../helpers/dateFunctions';
+import AddressesService from '../services/addresses.service';
 
 export const listCustomers = () => async (dispatch, getState) => {
   try {
@@ -110,6 +111,7 @@ export const getSingleUser = (id) => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
+    const addressService = new AddressesService();
 
     const result = await usersListsService.getSingleUser(id);
 
@@ -193,7 +195,7 @@ export const updateUser = (id, data, noTableEdit?:boolean) => async (dispatch, g
       type: usersListTypes.UPDATE_USER_FAIL,
       payload:
         error.response && error.response.data.error
-          ? error.response.data.error?.response.message[0]
+          ? error.response.data.error?.message
           : 'Error',
     });
   }
