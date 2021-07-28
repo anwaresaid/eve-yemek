@@ -54,7 +54,8 @@ const Orders = () => {
                 items: [
                     { label: i18n.t('orderPlaced'), value: 'placed' },
                     { label: i18n.t('orderAccepted'), value: 'accepted' },
-                    { label: i18n.t('orderPrepared'), value: 'prepared' }
+                    { label: i18n.t('orderPrepared'), value: 'prepared' },
+                    { label: i18n.t('cancelled'), value: 'canceled' }
                 ]
             },
             {
@@ -62,11 +63,6 @@ const Orders = () => {
                 items: [
                     { label: i18n.t('onTheWay'), value: 'picked' },
                     { label: i18n.t('delivered'), value: 'delivered' }
-                ]
-            },
-            {
-                items: [
-                    { label: i18n.t('cancelled'), value: 'canceled' }
                 ]
             }
         ]} placeholder={i18n.t('status')} value={selectedStatuses} onChange={(e) => setSelectedStatuses(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"></MultiSelect>
