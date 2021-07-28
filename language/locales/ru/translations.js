@@ -168,6 +168,11 @@ export const translations = {
   changeYourPassword: 'Изменить пароль',
   redirectingToLoginPage: 'Вы будете перенаправлены на страницу входа',
 
+  changePassword: 'Изменить пароль',
+  updateUserPassword: 'Обновить пароль пользователя',
+  enterANewPasswordForThisUser: 'Введите новый пароль для этого пользователя',
+  updatedPassword: 'Пароль обновлен',
+
   //Transfers
   totalAmount: 'Общая сумма',
 
@@ -289,4 +294,8 @@ export const translations = {
   executeTransfer: 'выполнить перевод',
 
   versionCode: 'номер версии',
+  forgotPassword: 'забыл пароль',
+  resetPassword: 'Сброс пароля',
+
+  clickHere: 'Kликните сюда',
 };

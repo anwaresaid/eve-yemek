@@ -82,7 +82,7 @@ const MealDataInput = (props) => {
 
             if(data.description && /^\d+$/.test(data.description)){
                     errors.description = i18n.t('onlyNumberError');
-            }
+            } 
 
             if (!data.food_category_id) {
                 errors.food_category_id = i18n.t('isRequired', { input: i18n.t('categoryName') });;
@@ -98,6 +98,9 @@ const MealDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
+            if (!data.description || data.description === null){
+                data.description = ""
+            }
             if (props.creating) {
                 dispatch(createFood(data));
             } else if (props.updating) {
@@ -266,6 +269,9 @@ const MealDataInput = (props) => {
                                 <InputContainer label={i18n.t('discountedPrice')} name="discount_price" formiks={inputFormiks} noAutoCol12 component={InputNumber} iprops={{
                                     value: formik.values.discount_price,
                                     onValueChange: formik.handleChange,
+                                    mode: "decimal",
+                                    minFractionDigits: 1,
+                                    maxFractionDigits: 2,
                                     //mode: "currency",
                                     //currency: "TRY",
                                     min:0,

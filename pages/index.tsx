@@ -17,6 +17,7 @@ import { Tag } from "primereact/tag";
 import { Chart } from 'chart.js'
 import { TabPanel, TabView } from "primereact/tabview";
 import { getRandomColor } from "../helpers/colors";
+import { getDemandData } from "../store/actions/service-demand.action";
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
@@ -24,6 +25,9 @@ const Index = (props) => {
     const chartRef = useRef<HTMLCanvasElement>(null);
     const ownedRestaurantsState = useSelector((state: RootState) => state.ownedRestaurants)
     const { loading: ownedRestaurantsLoading, success: ownedRestaurantsSuccess, ownedRestaurants } = ownedRestaurantsState
+
+    const serviceDemandState = useSelector((state: RootState) => state.serviceDemand)
+    const { loading: serviceDemandLoading, success: serviceDemandSuccess, demandData } = serviceDemandState
 
     const dispatch = useDispatch()
 
@@ -33,6 +37,12 @@ const Index = (props) => {
         if (auth.hasRoles(['restaurant_owner'])) {
             if (ownedRestaurants?.items.length === 0 && !ownedRestaurantsSuccess)
                 dispatch(listOwnedRestaurants())
+        }
+        if (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) {
+            if (!demandData) {
+                dispatch(getDemandData())
+            }
+
         }
     }, [dispatch, ownedRestaurantsSuccess]);
 
@@ -75,28 +85,13 @@ const Index = (props) => {
 
     };
 
-    const mockPieData = [
-        {
-            city: 'Ankara',
-            orders: { 'Çankaya': 465, 'Akyurt': 435 }
-        },
-        {
-            city: 'Istanbul',
-            orders: { 'Sariyer': 343, 'Pendik': 897 }
-        },
-        {
-            city: 'Eskişehir',
-            orders: { 'Tepebaşı': 545 }
-        }
-    ]
-
     const pieChartData = {
 
-        labels: mockPieData.map(el => el.city),
+        labels: demandData?.map(el => el._id === null ? 'Other' : el._id),
         datasets: [
             {
-                data: mockPieData.map((el) => _.sum(Object.values(el.orders))),
-                backgroundColor: mockPieData.map(() => { return getRandomColor() })
+                data: demandData?.map(city => _.sum(city.states.map(state => state.count))),
+                backgroundColor: demandData?.map(() => { return getRandomColor() })
             }
         ],
 
@@ -127,130 +122,151 @@ const Index = (props) => {
         return true
     }
 
+    const overviewTabPanel = () => {
+        return <TabPanel header={i18n.t('overview')}>
+            {loading ? <Loading /> :
+                <S.DashboardWrapper id='dashBoard'>
+
+                    {
+                        auth.hasRoles(["restaurant_owner"]) && checkIfNoMeals(ownedRestaurants) && <Tag severity="danger" value={i18n.t('noneOfYourRestaurantsHaveAnyMealsAdded')}></Tag>
+                    }
+                    {
+                        auth.hasRoles(["restaurant_owner"]) &&
+                        <div className="p-my-5">
+                            <StandardTable id='ownedRestaurants'
+                                columns={ownedRestaurantsTableColumns}
+                                value={ownedRestaurants?.items}
+                                noPaginator
+                                style={{ tableLayout: "auto" }}
+                                resizableColumns
+                                columnResizeMode="expand" showGridlines
+                            ></StandardTable>
+                        </div>
+                    }
+                    <div className='p-grid p-grid-container'>
+                        <div className='p-col-6 p-md-6 p-lg-2'>
+                            <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
+                                <div id='boxInfoDiv' className='box__info'>
+                                    <span id='dailyOrders'>{reportData?.report.daily_orders.length}</span>
+                                    <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
+                                </div>
+                                <div className='box__icons'>
+                                    <i className='pi pi-shopping-cart'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-6 p-lg-2'>
+                            <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
+                                <div id='box_infoDiv' className='box__info'>
+                                    <span id='daily_income_report'>₺{reportData?.report.daily_income}</span>
+                                    <p id='daily_incomeP'>{i18n.t('dailyEarnings')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='money_bill' className=' pi pi-money-bill'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-4 p-lg-2'>
+                            <div id='box' className='box' style={{ backgroundColor: "#ffc107" }}>
+                                <div id='box_info' className='box__info'>
+                                    <span id='total_orders_report'>{reportData?.report.total_orders.total}</span>
+                                    <p id='total_ordersP'>{i18n.t('totalOrders')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='shopping_cartIcon' className=' pi pi-shopping-cart'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-4 p-lg-2'>
+                            <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
+                                <div id='box_info' className='box__info'>
+                                    <span id='failed_orders_report'>{reportData?.report.failed_orders}</span>
+                                    <p id='failed_ordersP'>{i18n.t('failedOrders')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='infoIcon' className='pi pi-exclamation-triangle'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-4 p-lg-2'>
+                            <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
+                                <div id='box_info' className='box__info'>
+                                    <span id='total_income_report'>₺{reportData?.report.total_income}</span>
+                                    <p id='total_incomeP'>{i18n.t('totalEarnings')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='money_billIcon' className=' pi  pi-money-bill'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <Card id='last_7_days_orders' subTitle={i18n.t('ordersFromTheLast7Days')}>
+                        <i id='shopping_cartIcon' className='pi pi-shopping-cart'>
+                            <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
+                        </i>
+                        <Line
+                            ref={chartRef}
+                            width={500}
+                            datatype='number'
+                            height={100}
+                            data={lineChartData}
+                            options={{
+                                plugins: {
+                                    legend: {
+                                        onClick: () => { }
+                                    }
+                                },
+                                responsive: true,
+                            }}
+                        />
+                    </Card>
+                </S.DashboardWrapper>}
+        </TabPanel>
+    }
+
+    const areasTabPanel = () => {
+        return (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) ?
+            <TabPanel header={i18n.t('areas')}>
+                <Pie datatype='number' data={pieChartData} width={500} height={500} options={{
+                    maintainAspectRatio: false, plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    var print = ' ' + context.label + ' |'
+                                    print += demandData[context.dataIndex].states.map(s => ' ' + s.state + ': ' + s.count)
+                                    return print
+                                }
+                            }
+                        }
+                    }
+                }}>
+                </Pie>
+            </TabPanel>
+            :
+            <p>Unauthorized</p>
+    }
+
+    const restrictedTabView = () => {
+        return <TabView>
+            {overviewTabPanel()}
+        </TabView>
+    }
+
+    const extendedTabView = () => {
+        return <TabView>
+            {overviewTabPanel()}
+            {areasTabPanel()}
+        </TabView >
+    }
+
     return (
 
         <div id='containerPanel' className="ContainerPanel">
             <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
-            <TabView>
-                <TabPanel header={i18n.t('overview')}>
-                    {loading ? <Loading /> :
-                        <S.DashboardWrapper id='dashBoard'>
-
-                            {
-                                auth.hasRoles(["restaurant_owner"]) && checkIfNoMeals(ownedRestaurants) && <Tag severity="danger" value={i18n.t('noneOfYourRestaurantsHaveAnyMealsAdded')}></Tag>
-                            }
-                            {
-                                auth.hasRoles(["restaurant_owner"]) &&
-                                <div className="p-my-5">
-                                    <StandardTable id='ownedRestaurants'
-                                        columns={ownedRestaurantsTableColumns}
-                                        value={ownedRestaurants?.items}
-                                        noPaginator
-                                        style={{ tableLayout: "auto" }}
-                                        resizableColumns
-                                        columnResizeMode="expand" showGridlines
-                                    ></StandardTable>
-                                </div>
-                            }
-                            <div className='p-grid p-grid-container'>
-                                <div className='p-col-6 p-md-6 p-lg-2'>
-                                    <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
-                                        <div id='boxInfoDiv' className='box__info'>
-                                            <span id='dailyOrders'>{reportData?.report.daily_orders.length}</span>
-                                            <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
-                                        </div>
-                                        <div className='box__icons'>
-                                            <i className='pi pi-shopping-cart'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='p-col-6 p-md-6 p-lg-2'>
-                                    <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
-                                        <div id='box_infoDiv' className='box__info'>
-                                            <span id='daily_income_report'>₺{reportData?.report.daily_income}</span>
-                                            <p id='daily_incomeP'>{i18n.t('dailyEarnings')}</p>
-                                        </div>
-                                        <div id='box_icons' className='box__icons'>
-                                            <i id='money_bill' className=' pi pi-money-bill'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='p-col-6 p-md-4 p-lg-2'>
-                                    <div id='box' className='box' style={{ backgroundColor: "#ffc107" }}>
-                                        <div id='box_info' className='box__info'>
-                                            <span id='total_orders_report'>{reportData?.report.total_orders.total}</span>
-                                            <p id='total_ordersP'>{i18n.t('totalOrders')}</p>
-                                        </div>
-                                        <div id='box_icons' className='box__icons'>
-                                            <i id='shopping_cartIcon' className=' pi pi-shopping-cart'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='p-col-6 p-md-4 p-lg-2'>
-                                    <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
-                                        <div id='box_info' className='box__info'>
-                                            <span id='failed_orders_report'>{reportData?.report.failed_orders}</span>
-                                            <p id='failed_ordersP'>{i18n.t('failedOrders')}</p>
-                                        </div>
-                                        <div id='box_icons' className='box__icons'>
-                                            <i id='infoIcon' className='pi pi-exclamation-triangle'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='p-col-6 p-md-4 p-lg-2'>
-                                    <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
-                                        <div id='box_info' className='box__info'>
-                                            <span id='total_income_report'>₺{reportData?.report.total_income}</span>
-                                            <p id='total_incomeP'>{i18n.t('totalEarnings')}</p>
-                                        </div>
-                                        <div id='box_icons' className='box__icons'>
-                                            <i id='money_billIcon' className=' pi  pi-money-bill'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <Card id='last_7_days_orders' subTitle={i18n.t('ordersFromTheLast7Days')}>
-                                <i id='shopping_cartIcon' className='pi pi-shopping-cart'>
-                                    <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
-                                </i>
-                                <Line
-                                    ref={chartRef}
-                                    type='number'
-                                    width={500}
-                                    height={100}
-                                    data={lineChartData}
-                                    options={{
-                                        plugins: {
-                                            legend: {
-                                                onClick: () => { }
-                                            }
-                                        },
-                                        responsive: true,
-                                    }}
-                                />
-                            </Card>
-                        </S.DashboardWrapper>}
-                </TabPanel>
-                <TabPanel header={i18n.t('areas')}>
-                    <Pie type='number' data={pieChartData} width={500} height={500} options={{
-                        maintainAspectRatio: false, plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        var label = mockPieData[context.dataIndex].city + ' - '
-                                        for (let x of Object.entries(mockPieData[context.dataIndex].orders)){
-                                            label +=  x[0] + ': ' + x[1] + '\n'
-                                        }
-                                        return label
-                                    }
-                                }
-                            }
-                        }
-                    }}>
-
-                    </Pie>
-                </TabPanel>
-            </TabView>
+            {
+                (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) ?
+                    extendedTabView() : restrictedTabView()
+            }
         </div >
     );
 };

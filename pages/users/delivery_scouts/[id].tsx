@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {useRouter} from 'next/router'
 import UpdateUser from '../../../components/UpdateUser'
+import BackBtn from '../../../components/backBtn'
 
 const UpdateDeliveryScout = () => {
    
@@ -9,6 +10,7 @@ const UpdateDeliveryScout = () => {
 
     return(
         <div id='deliveryScoutsDiv'>
+            <BackBtn router={router}/>
             <UpdateUser 
                 id={id}
                 returnTo="/users/delivery_scouts">

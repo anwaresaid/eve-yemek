@@ -12,11 +12,13 @@ import { listAllUsers } from '../../store/actions/userslists.action';
 import { MultiSelect } from 'primereact/multiselect';
 import { sendNotifications } from '../../store/actions/send_notifications.action';
 import { i18n } from '../../language';
+import BackBtn from '../../components/backBtn';
+
 
 export const Index = () => {
   const dispatch = useDispatch();
   const toast = useRef(null);
-
+  const router = useRouter();
   const [userNames, setUserNames] = useState(null);
 
   const allUsersList = useSelector((state: RootState) => state.allUsersList);
@@ -104,6 +106,7 @@ export const Index = () => {
 
   return (
     <div>
+      <BackBtn router={router}/>
       <h1>FCM Bildirim gonder</h1>
       <Toast ref={toast}></Toast>
       {success && !loading && users ? (

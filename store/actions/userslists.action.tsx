@@ -191,11 +191,12 @@ export const updateUser = (id, data, noTableEdit?:boolean) => async (dispatch, g
 
     return result;
   } catch (error) {
+    console.log(error.response)
     dispatch({
       type: usersListTypes.UPDATE_USER_FAIL,
       payload:
         error.response && error.response.data.error
-          ? error.response.data.error?.response.message[0]
+          ? error.response.data.error?.message
           : 'Error',
     });
   }

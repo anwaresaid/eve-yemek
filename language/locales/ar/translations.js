@@ -168,6 +168,11 @@ export const translations = {
   changeYourPassword: 'تغيير الرمز السري',
   redirectingToLoginPage: 'يتم إعادة توجيهك إلى صفحة تسجيل الدخول',
 
+  changePassword: 'تغيير كلمة المرور',
+  updateUserPassword: 'تحديث كلمة مرور المستخدم',
+  enterANewPasswordForThisUser: 'أدخل كلمة مرور جديدة لهذا المستخدم', 
+  updatedPassword: 'تم تحديث كلمة السر',
+
   //Transfers
   totalAmount: 'إجمالي',
 
@@ -289,4 +294,8 @@ export const translations = {
   executeTransfer: 'تنفيذ التحويل',
 
   versionCode: 'رقم النسحة',
+  forgotPassword: 'نسيت كلمة المرور',
+  resetPassword: 'إعادة تعيين كلمة المرور',
+  
+  clickHere: 'انقر هنا'
 };

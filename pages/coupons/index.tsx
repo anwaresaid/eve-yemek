@@ -7,10 +7,12 @@ import CouponsTable from '../../components/tables/couponsTable';
 import Loading from '../../components/Loading';
 import { i18n } from '../../language';
 import _ from 'lodash'
+import BackBtn from '../../components/backBtn';
+import { useRouter } from 'next/router';
 
 const index = () => {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const res = useSelector((state: RootState) => state.listCoupons);
   const { loading, coupons } = res;
 
