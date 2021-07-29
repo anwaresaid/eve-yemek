@@ -6,7 +6,7 @@ import {
   createAddonCategoryReducer,
   updateAddonCategoryReducer,
 } from './addon-category.reducer';
-import { changePasswordReducer, loginReducer } from './user.reducer';
+import { changePasswordReducer, loginReducer, resetPasswordReducer, resetPasswordRequestReducer } from './user.reducer';
 import {
   createRestaurantReducer,
   findRestaurantReducer,
@@ -58,6 +58,8 @@ import { serviceDemandReducer } from './service-demands.reducer';
 export default combineReducers({
   login: loginReducer,
   changePassword: changePasswordReducer,
+  resetPasswordRequest: resetPasswordRequestReducer,
+  resetPassword: resetPasswordReducer,
 
   dashboardReport: dashboardReportReducer,
 

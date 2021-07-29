@@ -292,6 +292,8 @@ export const translations = {
   executeTransfer: 'Transferi Yürüt',
 
   versionCode: 'Versiyon Numarası',
+  forgotPassword: 'Şifremi Unuttum',
+  resetPassword: 'Şifre yenileme',
 
-  clickHere: 'Buraya tıklayın'
+  clickHere: 'Buraya tıklayın',
 };

@@ -292,6 +292,8 @@ export const translations = {
   executeTransfer: 'Execute Transfer',
 
   versionCode: 'Version Code',
-
-  clickHere: 'Click here'
+  forgotPassword: 'Forgot Password',
+  resetPassword: 'Reset Password',
+  
+  clickHere: 'Click here',
 };

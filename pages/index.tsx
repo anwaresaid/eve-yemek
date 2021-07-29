@@ -206,8 +206,8 @@ const Index = (props) => {
                         </i>
                         <Line
                             ref={chartRef}
-                            type={'number'}
                             width={500}
+                            datatype='number'
                             height={100}
                             data={lineChartData}
                             options={{
@@ -227,7 +227,7 @@ const Index = (props) => {
     const areasTabPanel = () => {
         return (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) ?
             <TabPanel header={i18n.t('areas')}>
-                <Pie type='number' data={pieChartData} width={500} height={500} options={{
+                <Pie datatype='number' data={pieChartData} width={500} height={500} options={{
                     maintainAspectRatio: false, plugins: {
                         tooltip: {
                             callbacks: {
