@@ -168,6 +168,11 @@ export const translations = {
   changeYourPassword: 'Şifreni Değiştir',
   redirectingToLoginPage: 'Giriş yap sayfasına yönlendiriliyorsunuz',
 
+  changePassword: 'Şifre değiştir',
+  updateUserPassword: 'Kullanıcı Şifresini Güncelle',
+  enterANewPasswordForThisUser: 'Bu kullanıcı için yeni bir şifre girin',
+  updatedPassword: 'Şifre güncellendi',
+
   //Transfers
   totalAmount: 'Toplam Tutar',
 
@@ -287,4 +292,8 @@ export const translations = {
   executeTransfer: 'Transferi Yürüt',
 
   versionCode: 'Versiyon Numarası',
+  forgotPassword: 'Şifremi Unuttum',
+  resetPassword: 'Şifre yenileme',
+
+  clickHere: 'Buraya tıklayın',
 };

@@ -3,10 +3,11 @@ import UserService from '../services/user.service';
 import auth from '../../helpers/core/auth';
 import { i18n } from '../../language';
 
-const login =
+export const login =
   (email: string, password: string, remember: boolean) => async (dispatch) => {
     try {
-      const res: any = await UserService.login(email, password, remember);
+      const userService = new UserService();
+      const res: any = await userService.login(email, password, remember);
 
       if (res?.ok) {
         const user = {
@@ -55,11 +56,12 @@ const login =
 export const changePassword =
   (new_password: string, password: string) => async (dispatch) => {
     try {
+      const userService = new UserService();
       dispatch({
         type: userTypes.CHANGE_PASSWORD_REQUEST,
       });
 
-      const res = await UserService.changePassword(new_password, password);
+      const res = await userService.changePassword(new_password, password);
 
       dispatch({
         type: userTypes.CHANGE_PASSWORD_SUCCESS,
@@ -74,6 +76,54 @@ export const changePassword =
       });
     }
   };
+
+export const resetPasswordRequest = (email: string) => async (dispatch) => {
+  try {
+    const userService = new UserService();
+    dispatch({
+      type: userTypes.RESET_PASSWORD_REQUEST_REQUEST,
+    });
+
+    const res = await userService.resetPasswordRequest(email);
+
+    dispatch({
+      type: userTypes.RESET_PASSWORD_REQUEST_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: userTypes.RESET_PASSWORD_REQUEST_FAIL,
+      payload:
+        error.response && error.response.data?.error?.message
+          ? error.response.data.error.message
+          : error.message,
+    });
+  }
+};
+
+export const resetPassword = (password: string, token, id) => async (dispatch) => {
+  try {
+    const userService = new UserService();
+    dispatch({
+      type: userTypes.RESET_PASSWORD_REQUEST,
+    });
+
+    const res = await userService.resetPassword(password, token, id);
+
+    dispatch({
+      type: userTypes.RESET_PASSWORD_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: userTypes.RESET_PASSWORD_FAIL,
+      payload:
+        error.response && error.response.data?.error?.message
+          ? error.response.data.error.message
+          : error.message,
+    });
+  }
+};
 
 export default {
   login,
