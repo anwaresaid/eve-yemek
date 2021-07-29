@@ -254,13 +254,15 @@ const Index = (props) => {
                                 }
                             },
                             onClick: function (evt, item) {
+                               if (item[0]){
                                 setCityIndex(item[0]?.index)
                                 setActiveIndexAreas(1)
+                               }
                             },
                         }}>
                         </Pie>
                     </TabPanel>
-                    <TabPanel header={demandData ? i18n.t('districtsInX', {x: demandData[cityIndex]._id}) : ''}>
+                    <TabPanel header={demandData ? i18n.t('districtsInX', {x: demandData[cityIndex]?._id}) : ''}>
                         <Pie datatype='number' data={districtsPieChartData} width={500} height={500} options={{
                             maintainAspectRatio: false
                         }}
