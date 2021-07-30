@@ -299,4 +299,7 @@ export const translations = {
   resetPassword: 'Reset Password',
   didYouForgetYourPassword: 'Forgot Password?',
   clickHere: 'Click here',
+
+  anEmailHasBeenSentToYourAddress: 'An e-mail has been sent to your address.',
+  errorTryingToReachYourEmail: 'Error trying to reach your email'
 };

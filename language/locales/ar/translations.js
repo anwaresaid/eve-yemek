@@ -300,5 +300,8 @@ export const translations = {
   forgotPassword: 'نسيت كلمة المرور',
   resetPassword: 'إعادة تعيين كلمة المرور',
   didYouForgetYourPassword: 'هل نسيت كلمة السر؟',
-  clickHere: 'انقر هنا'
+  clickHere: 'انقر هنا',
+
+  anEmailHasBeenSentToYourAddress: 'تم إرسال بريد إلكتروني إلى عنوانك.',
+  errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني'
 };

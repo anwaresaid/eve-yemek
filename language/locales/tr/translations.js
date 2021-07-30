@@ -299,4 +299,7 @@ export const translations = {
   resetPassword: 'Şifre yenileme',
   didYouForgetYourPassword: 'Parolanızı mı unuttunuz?',
   clickHere: 'Buraya tıklayın',
+
+  anEmailHasBeenSentToYourAddress: 'Adresinize bir e-posta gönderildi.',
+  errorTryingToReachYourEmail: 'E-postanıza ulaşılırken hata oluştu'
 };

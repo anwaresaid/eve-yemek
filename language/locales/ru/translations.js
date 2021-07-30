@@ -301,4 +301,7 @@ export const translations = {
   resetPassword: 'Сброс пароля',
   didYouForgetYourPassword: 'Забыли пароль?',
   clickHere: 'Kликните сюда',
+
+  anEmailHasBeenSentToYourAddress: 'На ваш адрес отправлено электронное письмо.',
+  errorTryingToReachYourEmail: 'Не удалось получить ваш адрес электронной почты'
 };
