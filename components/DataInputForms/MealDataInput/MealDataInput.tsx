@@ -24,6 +24,8 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { listAddonCategory } from "../../../store/actions/addon-category.action";
 import { Tag } from "primereact/tag";
 import { foodsTypes } from "../../../store/types/foods.type";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
 const MealDataInput = (props) => {
 
@@ -173,6 +175,7 @@ const MealDataInput = (props) => {
         if (props.updating && props.meal) {
             if (updatedFoodLoading || updatedFoodSuccess)
                 return
+            console.log(props.meal)
             formik.values.restaurant_id = props.meal.restaurant
             formik.values.food_category_id = props.meal.food_category
             formik.values.name = props.meal.name;
@@ -280,6 +283,12 @@ const MealDataInput = (props) => {
                                 />
                             </InputGroup>
                         </FormColumn>
+                        
+                        <DataTable header={i18n.t('variants')} emptyMessage={i18n.t('noXfound', {x: i18n.t('variants')})}>
+                            <Column header={i18n.t('name')} field={"name"}></Column>
+                            <Column header={i18n.t('price')} field={"price"}></Column>
+                            <Column header={i18n.t('description')} field={"description"}></Column>
+                        </DataTable>
 
                         <FormColumn divideCount={3}>
 
