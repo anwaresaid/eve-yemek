@@ -301,4 +301,6 @@ export const translations = {
   resetPassword: 'Сброс пароля',
   didYouForgetYourPassword: 'Забыли пароль?',
   clickHere: 'Kликните сюда',
+
+  notes: 'Примечания'
 };
