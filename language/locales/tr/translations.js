@@ -301,5 +301,6 @@ export const translations = {
   clickHere: 'Buraya tıklayın',
 
   anEmailHasBeenSentToYourAddress: 'Adresinize bir e-posta gönderildi.',
-  errorTryingToReachYourEmail: 'E-postanıza ulaşılırken hata oluştu'
+  errorTryingToReachYourEmail: 'E-postanıza ulaşılırken hata oluştu',
+  notes: 'Notlar'
 };

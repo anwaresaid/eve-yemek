@@ -303,5 +303,6 @@ export const translations = {
   clickHere: 'انقر هنا',
 
   anEmailHasBeenSentToYourAddress: 'تم إرسال بريد إلكتروني إلى عنوانك.',
-  errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني'
+  errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني',
+  notes: 'ملاحظات '
 };
