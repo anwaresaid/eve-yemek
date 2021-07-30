@@ -48,7 +48,7 @@ const General=() => {
             tax_rate: 0,
             is_delivery_charged: false,
             delivery_charge: 0,
-            version_code: '',
+            version_code: 0,
         },
         validate: (data) => {
             let errors: any = {};
@@ -259,11 +259,13 @@ const General=() => {
                         label={i18n.t("versionCode")}
                         formiks={inputFormiks}
                         size={3}
-                        component={InputText}
+                        component={InputNumber}
                         iprops={{
                             value: formik.values
                                 .version_code,
-                            onChange: formik.handleChange,
+                            onValueChange:
+                                formik.handleChange,
+                            showButtons: true,
                         }}
                     />
                 </InputGroup>
