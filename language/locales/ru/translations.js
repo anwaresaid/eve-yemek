@@ -299,6 +299,6 @@ export const translations = {
   versionCode: 'номер версии',
   forgotPassword: 'забыл пароль',
   resetPassword: 'Сброс пароля',
-
+  didYouForgetYourPassword: 'Забыли пароль?',
   clickHere: 'Kликните сюда',
 };
