@@ -29,6 +29,9 @@ const Index = (props) => {
     const serviceDemandState = useSelector((state: RootState) => state.serviceDemand)
     const { loading: serviceDemandLoading, success: serviceDemandSuccess, demandData } = serviceDemandState
 
+    const [activeIndexAreas, setActiveIndexAreas] = useState(0);
+    const [cityIndex, setCityIndex] = useState(0)
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -85,7 +88,7 @@ const Index = (props) => {
 
     };
 
-    const pieChartData = {
+    const citiesPieChartData = {
 
         labels: demandData?.map(el => el._id === null ? 'Other' : el._id),
         datasets: [
@@ -94,9 +97,18 @@ const Index = (props) => {
                 backgroundColor: demandData?.map(() => { return getRandomColor() })
             }
         ],
-
-
     };
+
+    const districtsPieChartData = {
+        labels: demandData ? demandData[cityIndex]?.states.map(district => district.state) : [''],
+        datasets: [
+            {
+                data: demandData ? demandData[cityIndex]?.states.map(district => district.count) : [''],
+                backgroundColor: demandData?.map(() => { return getRandomColor() })
+            }
+        ]
+    }
+
     const openClosedTag = (rowData) => {
         const setIsOpen = (isOpen) => {
             if (isOpen === null)
@@ -227,20 +239,38 @@ const Index = (props) => {
     const areasTabPanel = () => {
         return (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) ?
             <TabPanel header={i18n.t('areas')}>
-                <Pie datatype='number' data={pieChartData} width={500} height={500} options={{
-                    maintainAspectRatio: false, plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    var print = ' ' + context.label + ' |'
-                                    print += demandData[context.dataIndex].states.map(s => ' ' + s.state + ': ' + s.count)
-                                    return print
+                <TabView activeIndex={activeIndexAreas} onTabChange={e => setActiveIndexAreas(e?.index)}>
+                    <TabPanel header={i18n.t('cities')}>
+                        <Pie datatype='number' data={citiesPieChartData} width={500} height={500} options={{
+                            maintainAspectRatio: false, plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            var print = ' ' + context.label + ' |'
+                                            print += demandData[context.dataIndex].states.map(s => ' ' + s.state + ': ' + s.count)
+                                            return print
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                    }
-                }}>
-                </Pie>
+                            },
+                            onClick: function (evt, item) {
+                               if (item[0]){
+                                setCityIndex(item[0]?.index)
+                                setActiveIndexAreas(1)
+                               }
+                            },
+                        }}>
+                        </Pie>
+                    </TabPanel>
+                    <TabPanel header={demandData ? i18n.t('districtsInX', {x: demandData[cityIndex]?._id}) : ''}>
+                        <Pie datatype='number' data={districtsPieChartData} width={500} height={500} options={{
+                            maintainAspectRatio: false
+                        }}
+                        >
+
+                        </Pie>
+                    </TabPanel>
+                </TabView>
             </TabPanel>
             :
             <p>Unauthorized</p>
