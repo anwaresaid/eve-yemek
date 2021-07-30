@@ -299,4 +299,6 @@ export const translations = {
   resetPassword: 'Reset Password',
   didYouForgetYourPassword: 'Forgot Password?',
   clickHere: 'Click here',
+
+  notes: 'Notes'
 };

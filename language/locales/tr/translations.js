@@ -299,4 +299,6 @@ export const translations = {
   resetPassword: 'Şifre yenileme',
   didYouForgetYourPassword: 'Parolanızı mı unuttunuz?',
   clickHere: 'Buraya tıklayın',
+
+  notes: 'Notlar'
 };
