@@ -302,5 +302,7 @@ export const translations = {
   didYouForgetYourPassword: 'Забыли пароль?',
   clickHere: 'Kликните сюда',
 
+  anEmailHasBeenSentToYourAddress: 'На ваш адрес отправлено электронное письмо.',
+  errorTryingToReachYourEmail: 'Не удалось получить ваш адрес электронной почты',
   notes: 'Примечания'
 };

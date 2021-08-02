@@ -302,5 +302,7 @@ export const translations = {
   didYouForgetYourPassword: 'هل نسيت كلمة السر؟',
   clickHere: 'انقر هنا',
 
+  anEmailHasBeenSentToYourAddress: 'تم إرسال بريد إلكتروني إلى عنوانك.',
+  errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني',
   notes: 'ملاحظات '
 };
