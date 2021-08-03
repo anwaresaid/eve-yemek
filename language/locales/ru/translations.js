@@ -97,6 +97,9 @@ export const translations = {
   email: 'Электронная почта',
   city: 'Город',
   district: 'Район',
+  cities: 'Города',
+  districts: 'Районы',
+  districtsInX: 'Районы в {{x}}',
   rating: 'Рейтинг',
   approximateDeliveryTime: 'Приблизительное время доставки',
   fullAddress: 'Полный адрес',
@@ -296,6 +299,10 @@ export const translations = {
   versionCode: 'номер версии',
   forgotPassword: 'забыл пароль',
   resetPassword: 'Сброс пароля',
-
+  didYouForgetYourPassword: 'Забыли пароль?',
   clickHere: 'Kликните сюда',
+
+  anEmailHasBeenSentToYourAddress: 'На ваш адрес отправлено электронное письмо.',
+  errorTryingToReachYourEmail: 'Не удалось получить ваш адрес электронной почты',
+  notes: 'Примечания'
 };

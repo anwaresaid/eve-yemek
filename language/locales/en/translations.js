@@ -97,6 +97,9 @@ export const translations = {
   email: 'Email',
   city: 'City',
   district: 'District',
+  cities: 'Cities',
+  districts: 'Districts',
+  districtsInX: 'Districts in {{x}}',
   rating: 'Rating',
   approximateDeliveryTime: 'Approximate Delivery Time',
   fullAddress: 'Full Address',
@@ -294,6 +297,10 @@ export const translations = {
   versionCode: 'Version Code',
   forgotPassword: 'Forgot Password',
   resetPassword: 'Reset Password',
-  
+  didYouForgetYourPassword: 'Forgot Password?',
   clickHere: 'Click here',
+  
+  anEmailHasBeenSentToYourAddress: 'An e-mail has been sent to your address.',
+  errorTryingToReachYourEmail: 'Error trying to reach your email',
+  notes: 'Notes'
 };

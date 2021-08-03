@@ -25,6 +25,8 @@ import { listAddonCategory } from "../../../store/actions/addon-category.action"
 import { Tag } from "primereact/tag";
 import { foodsTypes } from "../../../store/types/foods.type";
 import { currencyDirectory } from "../../../helpers/constants";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
 const MealDataInput = (props) => {
 
@@ -35,6 +37,11 @@ const MealDataInput = (props) => {
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [currency, setCurrency] = useState('TRY')
     const [restaurantName, setRestaurantName] = useState(null);
+
+    const [variants, setVariants] = useState([])
+    const [variantsBackup, setVariantsBackup] = useState({})
+    const [variantsEditingRows, setVariantsEditingRows] = useState({})
+
     const dispatch = useDispatch();
 
     const resAddOnCategories = useSelector((state: RootState) => state.listAddonCategory);
@@ -82,9 +89,9 @@ const MealDataInput = (props) => {
                 errors.name = i18n.t('isRequired', { input: i18n.t('name') });
             }
 
-            if(data.description && /^\d+$/.test(data.description)){
-                    errors.description = i18n.t('onlyNumberError');
-            } 
+            if (data.description && /^\d+$/.test(data.description)) {
+                errors.description = i18n.t('onlyNumberError');
+            }
 
             if (!data.food_category_id) {
                 errors.food_category_id = i18n.t('isRequired', { input: i18n.t('categoryName') });;
@@ -100,7 +107,8 @@ const MealDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
-            if (!data.description || data.description === null){
+            data.variants = variants
+            if (!data.description || data.description === null) {
                 data.description = ""
             }
             data.currency_type = currency
@@ -119,7 +127,7 @@ const MealDataInput = (props) => {
     }
 
     const setAddonCategoryDropdownOptions = () => {
-        const addonCategoryNames = addonCategories?.items.map(addonCategory => { return { id:addonCategory.id, name: addonCategory.name } });
+        const addonCategoryNames = addonCategories?.items.map(addonCategory => { return { id: addonCategory.id, name: addonCategory.name } });
         setAddonCategoryNames(addonCategoryNames);
     }
 
@@ -130,7 +138,7 @@ const MealDataInput = (props) => {
     }
 
     useEffect(() => {
-        if(error){
+        if (error) {
             dispatch({
                 type: foodsTypes.FOOD_CREATE_RESET
             })
@@ -186,11 +194,49 @@ const MealDataInput = (props) => {
             formik.values.is_veg = props.meal.is_veg;
             formik.values.active = props.meal.active;
             formik.values.featured = props.meal.featured;
-            setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => {return {id: aoc.id, name: aoc.name}}))
+            setVariants(props.meal.variants)
+            setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => { return { id: aoc.id, name: aoc.name } }))
         }
 
     }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal]);
 
+
+    const onAddNewVariant = () => {
+       let current = [...variants]
+       current.push({name: '', description: '', price: 0})
+       setVariants(current)
+    }
+
+    const onVariantsRowEditInit = (event) => {
+        let backup = {}
+        backup[event.index] = { ...variants[event.index] };
+        setVariantsBackup(backup)
+    }
+
+    const onVariantsRowEditChange = (event) => {
+        setVariantsEditingRows(event.data)
+    }
+
+    const onEditorValueChange = (props, value) => {
+        let updatedVariants = [...props.value];
+        updatedVariants[props.rowIndex][props.field] = value;
+        setVariants(updatedVariants)
+    }
+
+    const onVariantsRowEditCancel = (event) => {
+        let variantsReverting = [...variants];
+        variantsReverting[event.index] = variantsBackup[event.index];
+        setVariantsBackup({})
+        setVariants(variantsReverting)
+    }
+
+    const inputTextEditor = (props) => {
+        return <InputText type="text" value={props.rowData[props.field]} onChange={(e) => onEditorValueChange(props, e.target.value)} />;
+    }
+
+    const inputNumberEditor = (props) => {
+        return <InputNumber mode="currency" currency={'TRY'} min={0} value={props.rowData[props.field]} showButtons onChange={(e) => onEditorValueChange(props, e.value)} />;
+    }
 
     const inputFormiks = {
         getFormErrorMessage,
@@ -256,7 +302,7 @@ const MealDataInput = (props) => {
                                 <InputContainer label={i18n.t('selectAddonCategories')} name="add_on_categories" formiks={inputFormiks} component={MultiSelect} iprops={{
                                     value: selectedAddOnCategories,
                                     options: addonCategoryNames ?? [],
-                                    onChange: (e)=>setSelectedAddOnCategories(e.target.value),
+                                    onChange: (e) => setSelectedAddOnCategories(e.target.value),
                                     optionLabel: "name",
                                     placeholder: i18n.t('selectAddonCategories'),
                                     display: "addonCategories",
@@ -290,6 +336,15 @@ const MealDataInput = (props) => {
                                 />
                             </InputGroup>
                         </FormColumn>
+
+                        <DataTable header={<Button label={'Add New Variant'} type="button" onClick={() => onAddNewVariant()}></Button>} emptyMessage={i18n.t('noXfound', { x: i18n.t('variants') })}
+                            value={variants} editMode="row" onRowEditInit={onVariantsRowEditInit} onRowEditCancel={onVariantsRowEditCancel}
+                            >
+                            <Column header={i18n.t('name')} field={"name"} editor={props => inputTextEditor(props)}></Column>
+                            <Column header={i18n.t('price')} field={"price"} editor={props => inputNumberEditor(props)}></Column>
+                            <Column header={i18n.t('description')} field={"description"} editor={props => inputTextEditor(props)}></Column>
+                            <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                        </DataTable>
 
                         <FormColumn divideCount={3}>
 
@@ -333,3 +388,4 @@ const MealDataInput = (props) => {
 }
 
 export default MealDataInput
+
