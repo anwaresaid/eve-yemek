@@ -64,6 +64,8 @@ export const listDeliveryScouts = () => async (dispatch, getState) => {
 
     const usersListsService = new UsersListsService();
     const result = await usersListsService.getDeliveryScouts()
+  
+  
     dispatch({
       type: usersListTypes.DELIVERY_SCOUT_LIST_SUCCESS,
       payload: parseDeliveryScoutData(result),
