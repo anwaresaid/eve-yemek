@@ -304,5 +304,9 @@ export const translations = {
 
   anEmailHasBeenSentToYourAddress: 'تم إرسال بريد إلكتروني إلى عنوانك.',
   errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني',
-  notes: 'ملاحظات '
+  notes: 'ملاحظات ',
+
+  deliveryCount: 'عدد التسليمات',
+  paymentInformation: 'معلومات الدفع',
+  deliveryInformation: 'معلومات التوصيل'
 };

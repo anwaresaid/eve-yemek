@@ -5,10 +5,9 @@ import {useRouter} from 'next/router';
 
 const editButton = (rowData,router,path) => {
 
-    
         return (
             <React.Fragment>
-                <Button id='editBtn' icon="pi pi-pencil" className="p-button-rounded p-button-info" onClick={()=>{router.push(`/${path}/${rowData.id}`)}}/>
+                <Button id='editBtn' icon="pi pi-pencil" className="p-button-rounded p-button-info" onClick={()=>{router.push(`/${path}/${rowData.id ?? rowData._id}`)}}/>
             </React.Fragment>
         );
 }

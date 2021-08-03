@@ -302,5 +302,9 @@ export const translations = {
 
   anEmailHasBeenSentToYourAddress: 'Adresinize bir e-posta gönderildi.',
   errorTryingToReachYourEmail: 'E-postanıza ulaşılırken hata oluştu',
-  notes: 'Notlar'
+  notes: 'Notlar',
+
+  deliveryCount: 'Teslimat sayısı',
+  paymentInformation: 'Ödeme Bilgileri',
+  deliveryInformation: 'Teslimat Bilgileri'
 };
