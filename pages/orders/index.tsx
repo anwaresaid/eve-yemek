@@ -30,7 +30,6 @@ const Orders = () => {
     }, [dispatch])
 
     const editButton = (row) => {
-        console.log(row)
         return (
             <React.Fragment>
                 <Button id='editBtn' icon="pi pi-pencil" className="p-button-rounded p-button-info" onClick={() => { router.push(`/${path}/${row.id}`) }} />
