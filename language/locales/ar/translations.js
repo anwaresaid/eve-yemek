@@ -310,5 +310,5 @@ export const translations = {
   paymentInformation: 'معلومات الدفع',
   deliveryInformation: 'معلومات التوصيل',
 
-  addNewVariant: 'أضف متغيرًا جديدًا'
+  addNewVariant: 'أضف خيارًا جديدًا'
 };

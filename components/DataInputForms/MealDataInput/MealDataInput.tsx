@@ -245,9 +245,10 @@ const MealDataInput = (props) => {
 
     const setCurrencyByRestaurant = (restaurantID) => {
         let currentRestaurant = restaurants.items?.filter(res => res.id === restaurantID)[0]
+        console.log(currentRestaurant)
         if (!currentRestaurant)
             return
-        setCurrency(currencyDirectory[currentRestaurant.country_code] ?? 'TRY')
+        setCurrency(currencyDirectory[currentRestaurant.address.country_code] ?? 'TRY')
     }
 
     return (
