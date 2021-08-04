@@ -291,6 +291,7 @@ export const translations = {
   send: 'Send',
   overview: 'Overview',
   areas: 'Areas',
+  areasOfResponsibility: 'Areas of responsibility',
   havingTroubleLoggingIn: 'Having trouble logging in?',
   executeTransfer: 'Execute Transfer',
 
