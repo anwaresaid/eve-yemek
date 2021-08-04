@@ -34,7 +34,7 @@ const deliveryScoutList = () => {
 
     return (
         <div id="deliveryScoutsTable">
-            {!loading && success && deliveryScouts && [deliveryScouts.length == 0 ? <h1>{i18n.t('noXfound', { x: i18n.t('deliveryScouts') })}</h1> : <StandardTable columns={columns} value={deliveryScouts}></StandardTable>]}
+            {!loading && success && deliveryScouts && [deliveryScouts.length == 0 ? <h1>{i18n.t('noXfound', { x: i18n.t('deliveryScouts') })}</h1> : <StandardTable header={i18n.t('listOfX', {x: i18n.t('deliveryScouts')})} columns={columns} value={deliveryScouts}></StandardTable>]}
             {!loading && !success && <h4 id='deliveryScoutsHeader'>Kargocuların verileri alınamadı!</h4>}
             {loading && <Loading />}
         </div>
