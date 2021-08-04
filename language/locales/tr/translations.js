@@ -306,5 +306,7 @@ export const translations = {
 
   deliveryCount: 'Teslimat sayısı',
   paymentInformation: 'Ödeme Bilgileri',
-  deliveryInformation: 'Teslimat Bilgileri'
+  deliveryInformation: 'Teslimat Bilgileri',
+
+  deliveries: 'Teslimat',
 };

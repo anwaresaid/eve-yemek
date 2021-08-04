@@ -308,5 +308,7 @@ export const translations = {
 
   deliveryCount: 'Количество доставок',
   paymentInformation: 'Платежная информация',
-  deliveryInformation: 'информация о доставке'
+  deliveryInformation: 'информация о доставке',
+
+  deliveries: 'Доставки',
 };
