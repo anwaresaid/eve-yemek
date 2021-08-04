@@ -112,7 +112,6 @@ const MealDataInput = (props) => {
                 data.description = ""
             }
             data.currency_type = currency
-            console.log(data)
             if (props.creating) {
                 dispatch(createFood(data));
             } else if (props.updating) {
@@ -245,7 +244,6 @@ const MealDataInput = (props) => {
 
     const setCurrencyByRestaurant = (restaurantID) => {
         let currentRestaurant = restaurants.items?.filter(res => res.id === restaurantID)[0]
-        console.log(currentRestaurant)
         if (!currentRestaurant)
             return
         setCurrency(currencyDirectory[currentRestaurant.address.country_code] ?? 'TRY')
