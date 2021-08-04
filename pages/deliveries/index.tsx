@@ -7,7 +7,6 @@ import Loading from '../../components/Loading';
 import StandardTable from '../../components/StandardTable';
 import { listOrders } from '../../store/actions/orders.action';
 import { i18n } from '../../language';
-import { MultiSelect } from 'primereact/multiselect';
 import Header from '../../components/InTableComponents/Header/index';
 import OrderStatus from '../../components/InTableComponents/orderStatusTag';
 import { priceBodyTemplate } from '../../components/InTableComponents/price';
@@ -17,7 +16,6 @@ const Deliveries = () => {
   const router = useRouter();
   const [globalFilter, setGlobalFilter] = useState(null);
   const res = useSelector((state: RootState) => state.listOrders);
-  const [selectedStatuses, setSelectedStatuses] = useState([]);
   const { loading, success, orders } = res;
   const dispatch = useDispatch();
   const path = 'orders';
@@ -79,12 +77,7 @@ const Deliveries = () => {
   const getList = () => {
     return _.without(
       _.map(orders.items, (item) => {
-        if (
-          !item.is_deleted &&
-          (selectedStatuses.includes(item.status) ||
-            selectedStatuses.includes(item.delivery_status) ||
-            selectedStatuses.length === 0)
-        ) {
+        if (!item.is_deleted) {
           return item;
         }
       }),
