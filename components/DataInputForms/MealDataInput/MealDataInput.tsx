@@ -121,7 +121,7 @@ const MealDataInput = (props) => {
     });
 
     const setRestaurantsDropdownOptions = () => {
-        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id} });
+        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id } });
         setRestaurantName(restaurantNames);
     }
 
@@ -193,7 +193,7 @@ const MealDataInput = (props) => {
             formik.values.is_veg = props.meal.is_veg;
             formik.values.active = props.meal.active;
             formik.values.featured = props.meal.featured;
-            setVariants(props.meal.variants)
+            setVariants(props.meal.variants.map((v, i) => {return {id: i, ...v}}))
             setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => { return { id: aoc.id, name: aoc.name } }))
         }
 
@@ -201,15 +201,24 @@ const MealDataInput = (props) => {
 
 
     const onAddNewVariant = () => {
-       let current = [...variants]
-       current.push({name: '', description: '', price: 0})
-       setVariants(current)
+        let current = [...variants]
+        current.push({id: current.length, name: '', description: '', price: 0 })
+        setVariants(current)
     }
 
     const onVariantsRowEditInit = (event) => {
         let backup = {}
         backup[event.index] = { ...variants[event.index] };
         setVariantsBackup(backup)
+    }
+
+    const onVariantsRowDelete = (id) => {
+        let tempVariants = variants.filter(v => v.id !== id)
+        tempVariants.forEach(v => {
+            if (v.id > id)
+                v.id--
+        })
+        setVariants(tempVariants)
     }
 
     const onVariantsRowEditChange = (event) => {
@@ -261,7 +270,7 @@ const MealDataInput = (props) => {
                                 <InputGroup>
                                     <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
                                         value: formik.values.restaurant_id,
-                                        onChange: (e) => {formik.handleChange(e); setCurrencyByRestaurant(e.value)},
+                                        onChange: (e) => { formik.handleChange(e); setCurrencyByRestaurant(e.value) },
                                         options: restaurantName ?? [],
                                         filter: true,
                                         filterBy: "name",
@@ -318,7 +327,7 @@ const MealDataInput = (props) => {
                                     maxFractionDigits: 2,
                                     mode: "currency",
                                     currency: currency,
-                                    min:0,
+                                    min: 0,
                                     showButtons: true
                                 }}
                                 />
@@ -329,7 +338,7 @@ const MealDataInput = (props) => {
                                     maxFractionDigits: 2,
                                     mode: "currency",
                                     currency: currency,
-                                    min:0,
+                                    min: 0,
                                     showButtons: true
                                 }}
                                 />
@@ -338,11 +347,13 @@ const MealDataInput = (props) => {
 
                         <DataTable header={<Button label={i18n.t('addNewVariant')} type="button" onClick={() => onAddNewVariant()}></Button>} emptyMessage={i18n.t('noXfound', { x: i18n.t('variants') })}
                             value={variants} editMode="row" onRowEditInit={onVariantsRowEditInit} onRowEditCancel={onVariantsRowEditCancel}
-                            >
+                        >
                             <Column header={i18n.t('name')} field={"name"} editor={props => inputTextEditor(props)}></Column>
                             <Column header={i18n.t('price')} field={"price"} editor={props => inputNumberEditor(props)}></Column>
                             <Column header={i18n.t('description')} field={"description"} editor={props => inputTextEditor(props)}></Column>
                             <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                            <Column body={(row) => <Button type="button" id={'deleteRow_'+row.id} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-icon-only p-button-secondary"
+                                onClick={() => onVariantsRowDelete(row.id)}></Button>}></Column>
                         </DataTable>
 
                         <FormColumn divideCount={3}>
