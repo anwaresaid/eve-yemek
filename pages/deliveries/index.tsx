@@ -5,23 +5,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import Loading from '../../components/Loading';
 import StandardTable from '../../components/StandardTable';
-import { listOrders } from '../../store/actions/orders.action';
 import { i18n } from '../../language';
 import Header from '../../components/InTableComponents/Header/index';
-import OrderStatus from '../../components/InTableComponents/orderStatusTag';
-import { priceBodyTemplate } from '../../components/InTableComponents/price';
 import _ from 'lodash';
+import { listDeliveries } from '../../store/actions/deliveries.action';
 
 const Deliveries = () => {
   const router = useRouter();
   const [globalFilter, setGlobalFilter] = useState(null);
-  const res = useSelector((state: RootState) => state.listOrders);
-  const { loading, success, orders } = res;
+  const res = useSelector((state: RootState) => state.listDeliveries);
+  const { loading, success, deliveries } = res;
   const dispatch = useDispatch();
-  const path = 'orders';
+  const path = 'deliveries';
 
   useEffect(() => {
-    dispatch(listOrders());
+    dispatch(listDeliveries());
   }, [dispatch]);
 
   const editButton = (row) => {
@@ -40,33 +38,32 @@ const Deliveries = () => {
   };
 
   const columns = [
-    { field: 'order', header: 'ID' },
     {
-      header: i18n.t('restaurant'),
+      header: i18n.t('order'),
       body: (row) => (
         <a
-          href={'/restaurants/' + row.restaurant.id}
+          href={'/orders/' + row.order}
           style={{ textDecoration: 'none' }}
         >
-          {row.restaurant.name}
+          {row.order}
         </a>
       ),
     },
     {
-      header: i18n.t('orderStatus'),
-      body: (rowData) => OrderStatus(rowData.status),
+      header: i18n.t('user'),
+      body: (row) => (
+        <a
+          href={'/users/delivery_scouts/' + row.user}
+          style={{ textDecoration: 'none' }}
+        >
+          {row.user}
+        </a>
+      ),
     },
     {
-      header: i18n.t('deliveryStatus'),
-      body: (rowData) => OrderStatus(rowData.delivery_status),
+      header: i18n.t('status'),
+      body: (row) => (row.status),
     },
-    {
-      field: 'total_amount',
-      header: i18n.t('price'),
-      body: (rowData) =>
-        priceBodyTemplate(rowData.total_amount, rowData.currency_type),
-    },
-    { field: 'howLongAgo', header: i18n.t('orderTime') },
     {
       field: 'ops',
       header: i18n.t('operations'),
@@ -76,7 +73,7 @@ const Deliveries = () => {
 
   const getList = () => {
     return _.without(
-      _.map(orders.items, (item) => {
+      _.map(deliveries, (item) => {
         if (!item.is_deleted) {
           return item;
         }
@@ -91,8 +88,7 @@ const Deliveries = () => {
         <Loading />
       ) : (
         success &&
-        orders &&
-        orders.items && (
+        deliveries && (
           <div id='deliveriesCard' className='card'>
             <h1 id='deliveriesHeader'>{i18n.t('deliveries')}</h1>
             <StandardTable
