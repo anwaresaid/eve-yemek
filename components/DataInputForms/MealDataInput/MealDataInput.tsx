@@ -337,7 +337,7 @@ const MealDataInput = (props) => {
                             </InputGroup>
                         </FormColumn>
 
-                        <DataTable header={<Button label={'Add New Variant'} type="button" onClick={() => onAddNewVariant()}></Button>} emptyMessage={i18n.t('noXfound', { x: i18n.t('variants') })}
+                        <DataTable header={<Button label={i18n.t('addNewVariant')} type="button" onClick={() => onAddNewVariant()}></Button>} emptyMessage={i18n.t('noXfound', { x: i18n.t('variants') })}
                             value={variants} editMode="row" onRowEditInit={onVariantsRowEditInit} onRowEditCancel={onVariantsRowEditCancel}
                             >
                             <Column header={i18n.t('name')} field={"name"} editor={props => inputTextEditor(props)}></Column>
