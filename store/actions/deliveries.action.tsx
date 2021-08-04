@@ -1,4 +1,5 @@
 import { deliveriesTypes } from '../types/deliveries.type';
+import DeliveryService from '../services/deliveries.service';
 
 export const listDeliveries = () => async (dispatch, getState) => {
   try {
@@ -6,9 +7,11 @@ export const listDeliveries = () => async (dispatch, getState) => {
       type: deliveriesTypes.DELIVERY_LIST_REQUEST,
     });
 
+    const deliveryService = new DeliveryService();
+    const res = await deliveryService.getAllDeliveries();
     dispatch({
       type: deliveriesTypes.DELIVERY_LIST_SUCCESS,
-      payload: {},
+      payload: res,
     });
   } catch (error) {
     dispatch({
