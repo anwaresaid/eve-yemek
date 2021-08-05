@@ -215,6 +215,8 @@ const MealDataInput = (props) => {
 
 
     const onAddNewVariant = () => {
+        if(!validateVariants())
+            return
         let current = [...variants]
         current.push({id: current.length, name: '', description: '', price: 0 })
         setVariants(current)
