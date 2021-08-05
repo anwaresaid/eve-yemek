@@ -307,5 +307,7 @@ export const translations = {
 
   deliveryCount: 'Delivery Count',
   paymentInformation: 'Payment Information',
-  deliveryInformation: 'Delivery Information'
+  deliveryInformation: 'Delivery Information',
+
+  deliveries: 'Deliveries',
 };
