@@ -293,6 +293,7 @@ export const translations = {
   send: 'Отправить',
   overview: 'обзор',
   areas: 'области',
+  areasOfResponsibility: 'Ответственные области', 
   havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
   executeTransfer: 'выполнить перевод',
 
