@@ -50,7 +50,7 @@ const Deliveries = () => {
       ),
     },
     {
-      header: i18n.t('user'),
+      header: i18n.t('deliveryScouts'),
       body: (row) => (
         row.user ? (
           <a
