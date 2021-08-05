@@ -105,7 +105,8 @@ const UserDataInput = (props) => {
             toSend.area_of_responsibility = areasOfResponsibility
 
             if (props.updateProps) {
-                toSend.address.id = props.updateProps.data.addresses[0]?.id
+                toSend.address.id = props.updateProps.data.address.id
+
                 dispatch(updateUser(router.query.id, toSend))
             }
             else
@@ -128,23 +129,18 @@ const UserDataInput = (props) => {
                 formik.values.iban_no = props.updateProps.data.iban_no
                 formik.values.bank_name = props.updateProps.data.bank_name
                 formik.values.active = props.updateProps.data.active
-                formik.values.country_code = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].country_code : 0
-                formik.values.latitude = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].latitude : 0
-                formik.values.longitude = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].longitude : 0
+
+                formik.values.country_code = props.updateProps.data.address?.country_code
+                formik.values.latitude = props.updateProps.data.address?.latitude
+                formik.values.longitude = props.updateProps.data.address?.longitude
                 setAreasOfResponsibility(props.updateProps.data.area_of_responsibility)
+
                 setLoading(props.updateProps.loading)
             }
         } else {
             setLoading(false)
         }
     }, [props.updateProps?.data])
-
-
-    /*
-    useEffect(() => {
-        if (props.updateProps)
-            props.updateProps.setData(formik.values)
-    }, [formik.values])*/
 
     useEffect(() => {
         if (!supportedCountries) {
