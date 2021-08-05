@@ -33,6 +33,9 @@ const UserDataInput = (props) => {
 
     const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
     const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
+
+    const [areasOfResponsibility, setAreasOfResponsibility] = useState([])
+
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false)
     const changePasswordInput = useRef(null)
     const [changePasswordInputValue, setChangePasswordInputValue] = useState('')
@@ -46,7 +49,8 @@ const UserDataInput = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "", email: "", phone: "", roles: [], active: false, address: {}, latitude: '', longitude: '', country_code: ''
+            name: "", email: "", phone: "", roles: [], active: false, address: {}, latitude: '', longitude: '', country_code: '',
+            area_of_responsibility: []
         },
         validate: (data) => {
             let errors: any = {}
@@ -73,7 +77,7 @@ const UserDataInput = (props) => {
                 errors.country_code = i18n.t('isRequired', { input: i18n.t('country') });
             } else {
                 data.address.country = data.country_code === 'TR' ? 'Turkey' : (data.country_code === 'LY' ? 'Libya' : '')
-                data.address.country_code = data.country_code       
+                data.address.country_code = data.country_code
             }
             if (!data.latitude) {
                 errors.latitude = i18n.t('isRequired', { input: i18n.t('latitude') })
@@ -85,17 +89,24 @@ const UserDataInput = (props) => {
             } else {
                 data.address.longitude = data.longitude
             }
+            if (!areasOfResponsibility || areasOfResponsibility.length === 0){
+                errors.area_of_responsibility = i18n.t('isRequired', { input: i18n.t('areasOfResponsibility') })
+            }
 
             return errors
         },
         onSubmit: (data: any) => {
-            let toSend = {...data}
+            let toSend = { ...data }
             delete toSend.country
             delete toSend.country_code
             delete toSend.latitude
             delete toSend.longitude
-            if (props.updateProps){
+
+            toSend.area_of_responsibility = areasOfResponsibility
+
+            if (props.updateProps) {
                 toSend.address.id = props.updateProps.data.address.id
+
                 dispatch(updateUser(router.query.id, toSend))
             }
             else
@@ -110,6 +121,7 @@ const UserDataInput = (props) => {
     useEffect(() => {
         if (props.updateProps) {
             if (Object.keys(props.updateProps.data).length !== 0) {
+                console.log(props.updateProps.data)
                 formik.values.name = props.updateProps.data.name
                 formik.values.email = props.updateProps.data.email
                 formik.values.roles = props.updateProps.data.roles
@@ -117,22 +129,18 @@ const UserDataInput = (props) => {
                 formik.values.iban_no = props.updateProps.data.iban_no
                 formik.values.bank_name = props.updateProps.data.bank_name
                 formik.values.active = props.updateProps.data.active
+
                 formik.values.country_code = props.updateProps.data.address?.country_code
                 formik.values.latitude = props.updateProps.data.address?.latitude
                 formik.values.longitude = props.updateProps.data.address?.longitude
+                setAreasOfResponsibility(props.updateProps.data.area_of_responsibility)
+
                 setLoading(props.updateProps.loading)
             }
         } else {
             setLoading(false)
         }
     }, [props.updateProps?.data])
-
-
-    /*
-    useEffect(() => {
-        if (props.updateProps)
-            props.updateProps.setData(formik.values)
-    }, [formik.values])*/
 
     useEffect(() => {
         if (!supportedCountries) {
@@ -147,7 +155,7 @@ const UserDataInput = (props) => {
     useEffect(() => {
         if (props.updateProps?.updateUserSuccess)
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedUser') })
-        else if ( props.updateProps?.error)
+        else if (props.updateProps?.error)
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + props.updateProps.error });
 
     }, [props.updateProps?.updateUserSuccess, props.updateProps?.updating, props.updateProps?.error])
@@ -280,12 +288,25 @@ const UserDataInput = (props) => {
                             </FormColumn>
                         }
 
-                        <InputContainer label={i18n.t('active')} name="active" formiks={inputFormiks} component={InputSwitch} iprops={{
-                            value: formik.values.active,
-                            checked: formik.values.active,
-                            onChange: formik.handleChange
-                        }} />
-
+                        <FormColumn>
+                            <InputGroup>
+                                {supportedCountriesLoading && <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} />}
+                                {
+                                    supportedCountriesSuccess &&
+                                    <InputContainer label={i18n.t('areasOfResponsibility')} size={6} name="area_of_responsibility" formiks={inputFormiks}
+                                        component={MultiSelect} iprops={{
+                                            value: areasOfResponsibility,
+                                            options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].native_name, value: key } }),
+                                            onChange: e => setAreasOfResponsibility(e.value)
+                                        }} />
+                                }
+                                <InputContainer label={i18n.t('active')} name="active" size={6} formiks={inputFormiks} component={InputSwitch} iprops={{
+                                    value: formik.values.active,
+                                    checked: formik.values.active,
+                                    onChange: formik.handleChange
+                                }} />
+                            </InputGroup>
+                        </FormColumn>
                         {
                             auth.hasRoles(['admin']) &&
                             <Dialog header={i18n.t('updateUserPassword')} footer={changePasswordModalFooter} visible={changePasswordModalOpen} style={{ width: '50vw' }} onHide={() => setChangePasswordModalOpen(false)}>

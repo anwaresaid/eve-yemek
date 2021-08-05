@@ -293,6 +293,7 @@ export const translations = {
   send: 'إرسال',
   overview: 'نظرة عامة',
   areas: 'المناطق',
+  areasOfResponsibility: 'المناطق المسؤول عنها',
   havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
   executeTransfer: 'تنفيذ التحويل',
 
