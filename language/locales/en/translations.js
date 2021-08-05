@@ -308,5 +308,7 @@ export const translations = {
   paymentInformation: 'Payment Information',
   deliveryInformation: 'Delivery Information',
 
-  addNewVariant: 'Add new variant'
+  variants: 'Options',
+  addNewVariant: 'Add new option',
+  variantNamesCannotBeEmpty: 'Option names cannot be empty'
 };

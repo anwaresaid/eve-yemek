@@ -310,5 +310,7 @@ export const translations = {
   paymentInformation: 'Платежная информация',
   deliveryInformation: 'информация о доставке',
 
-  addNewVariant: 'Добавить новый вариант'
+  variants: 'Вариант',
+  addNewVariant: 'Добавить новый вариант',
+  variantNamesCannotBeEmpty: 'Имена вариантов не могут быть пустыми'
 };

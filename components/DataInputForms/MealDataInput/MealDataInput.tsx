@@ -107,6 +107,11 @@ const MealDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
+            if(!validateVariants()){
+                toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: i18n.t('variantNamesCannotBeEmpty') })
+                return
+            }
+
             data.variants = variants
             if (!data.description || data.description === null) {
                 data.description = ""
@@ -119,6 +124,15 @@ const MealDataInput = (props) => {
             }
         }
     });
+
+    const validateVariants = () => {
+        var check = true
+        variants.forEach(v => {
+            if (v.name === "")
+                check = false
+        })
+        return check
+    }
 
     const setRestaurantsDropdownOptions = () => {
         const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id } });
