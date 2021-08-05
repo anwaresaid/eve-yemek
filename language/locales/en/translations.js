@@ -291,6 +291,7 @@ export const translations = {
   send: 'Send',
   overview: 'Overview',
   areas: 'Areas',
+  areasOfResponsibility: 'Areas of responsibility',
   havingTroubleLoggingIn: 'Having trouble logging in?',
   executeTransfer: 'Execute Transfer',
 
@@ -308,7 +309,9 @@ export const translations = {
   paymentInformation: 'Payment Information',
   deliveryInformation: 'Delivery Information',
 
+
   variants: 'Options',
   addNewVariant: 'Add new option',
-  variantNamesCannotBeEmpty: 'Option names cannot be empty'
+  variantNamesCannotBeEmpty: 'Option names cannot be empty',
+  deliveries: 'Deliveries',
 };

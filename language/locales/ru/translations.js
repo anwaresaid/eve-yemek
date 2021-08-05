@@ -293,6 +293,7 @@ export const translations = {
   send: 'Отправить',
   overview: 'обзор',
   areas: 'области',
+  areasOfResponsibility: 'Ответственные области', 
   havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
   executeTransfer: 'выполнить перевод',
 
@@ -310,7 +311,9 @@ export const translations = {
   paymentInformation: 'Платежная информация',
   deliveryInformation: 'информация о доставке',
 
+
   variants: 'Вариант',
   addNewVariant: 'Добавить новый вариант',
-  variantNamesCannotBeEmpty: 'Имена вариантов не могут быть пустыми'
+  variantNamesCannotBeEmpty: 'Имена вариантов не могут быть пустыми',
+  deliveries: 'Доставки',
 };

@@ -291,6 +291,7 @@ export const translations = {
   send: 'Gönder',
   overview: 'Genel Bakış',
   areas: 'Alanlar',
+  areasOfResponsibility: 'Sorumluluk bölgeleri',
   havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
   executeTransfer: 'Transferi Yürüt',
 
@@ -310,5 +311,6 @@ export const translations = {
 
   variants: 'Seçenekler',
   addNewVariant: 'Yeni seçenek ekle',
-  variantNamesCannotBeEmpty: 'Seçenekler boş olmamalıdır'
+  variantNamesCannotBeEmpty: 'Seçenekler boş olmamalıdır',
+  deliveries: 'Teslimat',
 };

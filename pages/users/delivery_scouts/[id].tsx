@@ -31,15 +31,23 @@ const UpdateDeliveryScout = () => {
                 return
           
             usersListsService.getScoutDetails(router.query.id).then((res) => {
-                setScoutDetails(res[0])
+                console.log(res)
                 if (typeof res[0].user.address === 'string') {
+                    setScoutDetails(null)
                     addressesService.getAddressDetails(res[0].user.address).then((addRes) => {
-                        // Address API not working
+                        let newDetails = {...res[0].user, address: addRes}
+                        setScoutDetails(newDetails)
                     })
+                } else {
+                    setScoutDetails(res[0].user)
                 }
             })
         }
     }, [router.query.id])
+
+    useEffect(() => {
+
+    }, [scoutDetails])
 
     return (
         <div id='deliveryScoutsDiv'>
@@ -56,7 +64,7 @@ const UpdateDeliveryScout = () => {
                                 getUserSuccess: getUserSuccess,
                                 updateUserSuccess: updateUserSuccess,
                                 error: error,
-                                data: scoutDetails.user,
+                                data: scoutDetails,
                                 loading: loading
                             }}
                         ></UserDataInput>

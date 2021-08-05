@@ -293,6 +293,7 @@ export const translations = {
   send: 'إرسال',
   overview: 'نظرة عامة',
   areas: 'المناطق',
+  areasOfResponsibility: 'المناطق المسؤول عنها',
   havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
   executeTransfer: 'تنفيذ التحويل',
 
@@ -312,5 +313,6 @@ export const translations = {
 
   variants: 'خيارات',
   addNewVariant: 'أضف خيارًا جديدًا',
-  variantNamesCannotBeEmpty: 'لا يمكن أن تكون أسماء المتغيرات فارغة'
+  variantNamesCannotBeEmpty: 'لا يمكن أن تكون أسماء المتغيرات فارغة',
+  deliveries: 'التسليمات',
 };
