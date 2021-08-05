@@ -42,22 +42,24 @@ const Deliveries = () => {
       header: i18n.t('order'),
       body: (row) => (
         <a
-          href={'/orders/' + row.order}
+          href={'/orders/' + row.order.id}
           style={{ textDecoration: 'none' }}
         >
-          {row.order}
+          {row.order.order_code}
         </a>
       ),
     },
     {
       header: i18n.t('user'),
       body: (row) => (
-        <a
-          href={'/users/delivery_scouts/' + row.user}
+        row.user ? (
+          <a
+          href={'/users/delivery_scouts/' + row.user.id}
           style={{ textDecoration: 'none' }}
         >
-          {row.user}
+          {row.user.name}
         </a>
+        ) : ''
       ),
     },
     {
