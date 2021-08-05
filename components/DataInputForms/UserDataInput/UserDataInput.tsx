@@ -17,6 +17,11 @@ import InputContainer from "../../inputs/inputContainer";
 import InputGroup from "../../inputs/inputGroup";
 import { Password } from 'primereact/password'
 import auth from '../../../helpers/core/auth'
+import { RootState } from 'typesafe-actions'
+import { getSupportedCountries } from '../../../store/actions/addresses.action'
+import { ProgressSpinner } from 'primereact/progressspinner'
+import { Dropdown } from 'primereact/dropdown'
+import { InputNumber } from 'primereact/inputnumber'
 import SettingsService from '../../../store/services/settings.service'
 
 
@@ -26,6 +31,8 @@ const UserDataInput = (props) => {
     const router = useRouter();
     const dispatch = useDispatch()
 
+    const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
+    const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false)
     const changePasswordInput = useRef(null)
     const [changePasswordInputValue, setChangePasswordInputValue] = useState('')
@@ -39,7 +46,7 @@ const UserDataInput = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name: "", email: "", phone: "", roles: [],active:false ,address: props.updateProps ? '' : undefined
+            name: "", email: "", phone: "", roles: [], active: false, address: {}, latitude: '', longitude: '', country_code: ''
         },
         validate: (data) => {
             let errors: any = {}
@@ -62,13 +69,37 @@ const UserDataInput = (props) => {
             if (!data.password && !props.updateProps) {
                 errors.password = i18n.t('isRequired', { input: i18n.t('password') });
             }
+            if (!data.country_code) {
+                errors.country_code = i18n.t('isRequired', { input: i18n.t('country') });
+            } else {
+                data.address.country = data.country_code === 'TR' ? 'Turkey' : (data.country_code === 'LY' ? 'Libya' : '')
+                data.address.country_code = data.country_code       
+            }
+            if (!data.latitude) {
+                errors.latitude = i18n.t('isRequired', { input: i18n.t('latitude') })
+            } else {
+                data.address.latitude = data.latitude
+            }
+            if (!data.longitude) {
+                errors.longitude = i18n.t('isRequired', { input: i18n.t('longitude') })
+            } else {
+                data.address.longitude = data.longitude
+            }
+
             return errors
         },
         onSubmit: (data: any) => {
-            if (props.updateProps)
-                dispatch(updateUser(router.query.id, data))
+            let toSend = {...data}
+            delete toSend.country
+            delete toSend.country_code
+            delete toSend.latitude
+            delete toSend.longitude
+            if (props.updateProps){
+                toSend.address.id = props.updateProps.data.addresses[0]?.id
+                dispatch(updateUser(router.query.id, toSend))
+            }
             else
-                dispatch(addUser(data))
+                dispatch(addUser(toSend))
         }
     })
 
@@ -86,6 +117,9 @@ const UserDataInput = (props) => {
                 formik.values.iban_no = props.updateProps.data.iban_no
                 formik.values.bank_name = props.updateProps.data.bank_name
                 formik.values.active = props.updateProps.data.active
+                formik.values.country_code = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].country_code : 0
+                formik.values.latitude = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].latitude : 0
+                formik.values.longitude = props.updateProps.data.addresses[0] ? props.updateProps.data.addresses[0].longitude : 0
                 setLoading(props.updateProps.loading)
             }
         } else {
@@ -94,10 +128,17 @@ const UserDataInput = (props) => {
     }, [props.updateProps?.data])
 
 
+    /*
     useEffect(() => {
         if (props.updateProps)
             props.updateProps.setData(formik.values)
-    }, [formik.values])
+    }, [formik.values])*/
+
+    useEffect(() => {
+        if (!supportedCountries) {
+            dispatch(getSupportedCountries())
+        }
+    }, [supportedCountries])
 
     let mySubmit = (data) => {
         formik.handleSubmit(data)
@@ -106,10 +147,10 @@ const UserDataInput = (props) => {
     useEffect(() => {
         if (props.updateProps?.updateUserSuccess)
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedUser') })
-        else if (!props.updateProps?.updating && props.updateProps?.error)
+        else if ( props.updateProps?.error)
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + props.updateProps.error });
 
-    }, [props.updateProps?.updateUserSuccess, props.updateProps?.updating])
+    }, [props.updateProps?.updateUserSuccess, props.updateProps?.updating, props.updateProps?.error])
 
     const sendChangePasswordRequest = (newPassword) => {
         if (!auth.hasRoles(['admin'])) {
@@ -143,6 +184,16 @@ const UserDataInput = (props) => {
                     <div className="p-grid">
                         <FormColumn divideCount={2}>
                             <InputGroup>
+                                {supportedCountriesLoading && <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} />}
+                                {supportedCountriesSuccess &&
+
+                                    <InputContainer label={i18n.t('country')} name="country_code" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
+                                        value: formik.values.country_code,
+                                        onChange: formik.handleChange,
+                                        //options: [{ label: 'Turkey', value: 'TR' }, { label: 'Libya', value: 'LY' }],
+                                        options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].native_name, value: key } })
+                                    }} />}
+
                                 <InputContainer label={i18n.t('selectRole')} size={6} name="roles" formiks={inputFormiks} component={MultiSelect} iprops={{
                                     value: formik.values.roles,
                                     onChange: formik.handleChange,
@@ -155,10 +206,49 @@ const UserDataInput = (props) => {
                                     optionValue: "value"
                                 }} />
 
+                            </InputGroup>
+
+                            <InputGroup>
+                                <InputContainer label={i18n.t('latitude')} name="latitude" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    value: formik.values.latitude,
+                                    onValueChange: formik.handleChange,
+                                    mode: "decimal",
+                                    min: -90,
+                                    max: 90,
+                                    minFractionDigits: 4,
+                                    maxFractionDigits: 8,
+                                    showButtons: true,
+                                }} />
+
+                                <InputContainer label={i18n.t('longitude')} name="longitude" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                                    value: formik.values.longitude,
+                                    onValueChange: formik.handleChange,
+                                    mode: "decimal",
+                                    min: -180,
+                                    max: 180,
+                                    minFractionDigits: 4,
+                                    maxFractionDigits: 8,
+                                    showButtons: true,
+                                }} />
+                            </InputGroup>
+
+                        </FormColumn>
+                        <FormColumn divideCount={2}>
+                            <InputGroup>
                                 <InputContainer label={i18n.t('name')} size={6} name="name" formiks={inputFormiks} component={InputText} iprops={{
                                     value: formik.values.name,
                                     onChange: formik.handleChange,
 
+                                }} />
+                                <InputContainer label={i18n.t('telephone')} size={6} name="phone" formiks={inputFormiks} component={InputText} iprops={{
+                                    value: formik.values.phone,
+                                    onChange: formik.handleChange,
+                                }} />
+                            </InputGroup>
+                            <InputGroup>
+                                <InputContainer label={i18n.t('email')} size={6} name="email" formiks={inputFormiks} component={InputText} iprops={{
+                                    value: formik.values.email,
+                                    onChange: formik.handleChange,
                                 }} />
 
                                 {!updating &&
@@ -169,19 +259,6 @@ const UserDataInput = (props) => {
                                         toggleMask: true
                                     }} />
                                 }
-                            </InputGroup>
-                        </FormColumn>
-                        <FormColumn divideCount={2}>
-                            <InputGroup>
-                                <InputContainer label={i18n.t('email')} size={6} name="email" formiks={inputFormiks} component={InputText} iprops={{
-                                    value: formik.values.email,
-                                    onChange: formik.handleChange,
-                                }} />
-
-                                <InputContainer label={i18n.t('telephone')} size={6} name="phone" formiks={inputFormiks} component={InputText} iprops={{
-                                    value: formik.values.phone,
-                                    onChange: formik.handleChange,
-                                }} />
                             </InputGroup>
                         </FormColumn>
 
