@@ -147,7 +147,6 @@ const Index = (props) => {
 
     const overviewTabPanel = () => {
         return <TabPanel header={i18n.t('overview')}>
-            {console.log(demandData)}
             {loading ? <Loading /> :
                 <S.DashboardWrapper id='dashBoard'>
 
