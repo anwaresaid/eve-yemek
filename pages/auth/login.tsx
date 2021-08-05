@@ -87,7 +87,7 @@ const Login = (props) => {
 								{props.error}
 							</div>
 							<div>
-								<Link href='forgot_password'>Forgot Password?</Link>
+								<Link href='forgot_password'>{i18n.t('didYouForgetYourPassword')}</Link>
 							</div>
 							{
 								props.failed_attempts > 0 && props.attempts === props.failed_attempts &&

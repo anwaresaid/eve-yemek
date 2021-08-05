@@ -97,6 +97,9 @@ export const translations = {
   email: 'البريد الإلكتروني',
   city: 'المدينة',
   district: 'المقاطعة',
+  cities: 'مدن',
+  districts: 'المقاطعات',
+  districtsInX: 'المقاطعات في {{x}}',
   rating: 'التقييم',
   approximateDeliveryTime: 'زمن التوصيل تقريباَ',
   fullAddress: 'العنوان بالكامل',
@@ -296,6 +299,10 @@ export const translations = {
   versionCode: 'رقم النسحة',
   forgotPassword: 'نسيت كلمة المرور',
   resetPassword: 'إعادة تعيين كلمة المرور',
-  
-  clickHere: 'انقر هنا'
+  didYouForgetYourPassword: 'هل نسيت كلمة السر؟',
+  clickHere: 'انقر هنا',
+
+  anEmailHasBeenSentToYourAddress: 'تم إرسال بريد إلكتروني إلى عنوانك.',
+  errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني',
+  notes: 'ملاحظات '
 };

@@ -49,10 +49,10 @@ const ForgotPassword = () => {
                 </div>
               </div>
               {message === true && (
-                <p>a reset password mail has been sent to your email address</p>
+                <p>{i18n.t('anEmailHasBeenSentToYourAddress')}</p>
               )}
               {message === false && (
-                <p>something wrong happened while trying to reach your email</p>
+                <p>{i18n.t('errorTryingToReachYourEmail')}</p>
               )}
               {error && <p>{error}</p>}
               {!loading ? (
