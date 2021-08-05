@@ -291,7 +291,7 @@ export const translations = {
   send: 'Gönder',
   overview: 'Genel Bakış',
   areas: 'Alanlar',
-  areasOfResponsibility: 'Sorumlu olan alanlar',
+  areasOfResponsibility: 'Sorumluluk bölgeler',
   havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
   executeTransfer: 'Transferi Yürüt',
 
