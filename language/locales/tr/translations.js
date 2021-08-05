@@ -97,6 +97,9 @@ export const translations = {
   email: 'E-Posta',
   city: 'Şehir',
   district: 'İlçe',
+  cities: 'İller',
+  districts: 'İlçeler',
+  districtsInX: '{{x}} içindeki ilçeler',
   rating: 'Derece',
   approximateDeliveryTime: 'Tahmini Teslim Zamanı',
   fullAddress: 'Tam Adres',
@@ -294,6 +297,10 @@ export const translations = {
   versionCode: 'Versiyon Numarası',
   forgotPassword: 'Şifremi Unuttum',
   resetPassword: 'Şifre yenileme',
-
+  didYouForgetYourPassword: 'Parolanızı mı unuttunuz?',
   clickHere: 'Buraya tıklayın',
+
+  anEmailHasBeenSentToYourAddress: 'Adresinize bir e-posta gönderildi.',
+  errorTryingToReachYourEmail: 'E-postanıza ulaşılırken hata oluştu',
+  notes: 'Notlar'
 };

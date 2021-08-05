@@ -26,7 +26,7 @@ const FoodsTable = (props) => {
         {field: 'id', header: "ID", body:idColumn},
         {field: 'image', header: i18n.t('image'), body: imageBodyTemplate},
         {field: 'name', header: i18n.t('name')},
-        {field: 'food_category.name', header: i18n.t('category'), body: row => <a href={'/food_categories/'+row.food_category.id} style={{textDecoration: 'none'}}>{row.food_category.name}</a>},
+        {field: 'food_category.name', header: i18n.t('category'), body: row => <a href={'/food_categories/'+row.food_category?.id} style={{textDecoration: 'none'}}>{row.food_category?.name}</a>},
         {field: 'price', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.price)}, 
         {field: 'ops', header: i18n.t('status'), body: (rowData)=>activeTag(rowData.active)},
         {field: '', header: i18n.t('operations'), body: (rowData) =>editButton(rowData,router,path)}

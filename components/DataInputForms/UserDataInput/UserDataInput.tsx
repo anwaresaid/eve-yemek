@@ -157,7 +157,6 @@ const UserDataInput = (props) => {
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Unauthorized' });
             return
         }
-        console.log(newPassword)
         settingsService.adminResetPassword(router.query.id, newPassword).then((res) => {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('updatedPassword') })
             setChangePasswordModalOpen(false)
