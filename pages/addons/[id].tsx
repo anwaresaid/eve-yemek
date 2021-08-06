@@ -111,7 +111,7 @@ export const Index = () => {
 
       formik.values.name = addon.name;
       formik.values.price = addon.price;
-      setCurrency(addon.currency_type)
+      setCurrency(addon.currency_type ?? 'TRY')
       formik.values.create_user_id = addon.create_user_id;
     }
 
@@ -200,6 +200,7 @@ export const Index = () => {
                   <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                     value: formik.values.price,
                     onValueChange: formik.handleChange,
+                    min: 0,
                     mode: "currency",
                     currency: currency,
                     showButtons: true
