@@ -63,11 +63,10 @@ export const listDeliveryScouts = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('delivery_scout');
-
+    const result = await usersListsService.getDeliveryScouts()
     dispatch({
       type: usersListTypes.DELIVERY_SCOUT_LIST_SUCCESS,
-      payload: parseDateInAllRows(result),
+      payload: parseDeliveryScoutData(result),
     });
   } catch (error) {
     dispatch({
@@ -163,7 +162,7 @@ export const addUser = (data) => async (dispatch, getState) => {
   }
 };
 
-export const updateUser = (id, data, noTableEdit?:boolean) => async (dispatch, getState) => {
+export const updateUser = (id, data, noTableEdit?: boolean) => async (dispatch, getState) => {
   try {
     dispatch({
       type: usersListTypes.UPDATE_USER_REQUEST,
@@ -178,7 +177,7 @@ export const updateUser = (id, data, noTableEdit?:boolean) => async (dispatch, g
       payload: result,
     });
 
-    if(noTableEdit !== true){
+    if (noTableEdit !== true) {
       var tempRoles = [...data.roles, ...result.roles];
       tempRoles = tempRoles.filter(onlyUnique);
 
@@ -233,7 +232,7 @@ function updateEditedRowInStore(roles, result, dispatch) {
         });
         break;
       default:
-  
+
     }
   }
 }
@@ -261,3 +260,15 @@ export const listAllUsers = () => async (dispatch, getState) => {
     });
   }
 };
+
+const parseDeliveryScoutData = (data) => {
+  for (let i = 0; i < data.length; i++){
+    let deliveryCount = data[i].count
+    let scout = data[i].user[0]
+    delete data[i].count
+    delete data[i].user
+    data[i] = { ...data[i], ...scout, delivery_count: deliveryCount}
+    data[i] = parseDateInOneRow(data[i])
+  }
+  return data
+}
