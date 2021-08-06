@@ -309,5 +309,8 @@ export const translations = {
   paymentInformation: 'Ödeme Bilgileri',
   deliveryInformation: 'Teslimat Bilgileri',
 
+  variants: 'Seçenekler',
+  addNewVariant: 'Yeni seçenek ekle',
+  variantNamesCannotBeEmpty: 'Seçenekler boş olmamalıdır',
   deliveries: 'Teslimat',
 };

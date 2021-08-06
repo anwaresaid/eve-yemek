@@ -15,8 +15,9 @@ export const createFood = (
     featured,
     addon_id,
     active,
-    description, 
-    add_on_categories}
+    description,
+    add_on_categories,
+    variants }
 ) => async dispatch => {
   try {
 
@@ -38,7 +39,8 @@ export const createFood = (
       is_veg,
       featured,
       active,
-      add_on_categories
+      add_on_categories,
+      variants
     );
 
     dispatch({
@@ -50,8 +52,8 @@ export const createFood = (
       type: foodsTypes.FOOD_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
-        ? error.response.data.error.message
-        : error.response.data.error.message,
+          ? error.response.data.error.message
+          : error.response.data.error.message,
     });
   }
 }
@@ -109,7 +111,7 @@ export const findFood = (id) => async dispatch => {
           ? error.response.data.message
           : error.message,
     });
-  } 
+  }
 }
 export const listFood = () => async dispatch => {
   try {

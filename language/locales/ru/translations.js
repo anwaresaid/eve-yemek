@@ -311,5 +311,9 @@ export const translations = {
   paymentInformation: 'Платежная информация',
   deliveryInformation: 'информация о доставке',
 
+
+  variants: 'Вариант',
+  addNewVariant: 'Добавить новый вариант',
+  variantNamesCannotBeEmpty: 'Имена вариантов не могут быть пустыми',
   deliveries: 'Доставки',
 };
