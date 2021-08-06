@@ -21,6 +21,7 @@ import { Toast } from 'primereact/toast';
 import auth from '../../../helpers/core/auth';
 import { listRestaurantOwners } from '../../../store/actions/userslists.action';
 import BackBtn from '../../../components/backBtn';
+import { currencyDirectory } from '../../../helpers/constants';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,8 @@ export const Index = () => {
 
   const listOwnersState = useSelector((state: RootState) => state.listRestaurantOwners)
   const { loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners } = listOwnersState
+
+  const [currency, setCurrency] = useState('TRY')
 
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -88,6 +91,7 @@ export const Index = () => {
         add_on_category_id: data.addonCat,
         name: data.name,
         price: data.price,
+        currency_type: currency,
         active: data.active,
         create_user_id: data.create_user_id
       };
@@ -201,11 +205,18 @@ export const Index = () => {
                 <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                   value: formik.values.price,
                   onValueChange: formik.handleChange,
+                  min: 0,
                   mode: "currency",
-                  currency: "TRY",
+                  currency: currency,
                   showButtons: true
                 }}
                 />
+                <InputContainer label={i18n.t('currencyCode')} name="currency_type" size={6} formiks={inputFormiks} component={Dropdown} iprops={{
+                  options: Object.values(currencyDirectory),
+                  value: currency,
+                  onChange: e => setCurrency(e.value)
+                }}/>
+              
               </InputGroup>
             </FormColumn>
             <S.SubmitBtn>
