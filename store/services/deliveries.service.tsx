@@ -5,4 +5,9 @@ export default class DeliveryService {
     const { data:{data} } = await axios.get('/delivery');
     return data;
   }
+  
+  async getDeliveryDetails(id) {
+    const { data:{data} } = await axios.get(`/delivery/details/${id}`);
+    return data;
+  }
 }

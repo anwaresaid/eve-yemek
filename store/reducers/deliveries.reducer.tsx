@@ -25,3 +25,29 @@ export const listDeliveriesReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const listDeliveryDetailsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case deliveriesTypes.DELIVERY_LIST_DETAILS_REQUEST:
+      return { loading: true };
+
+    case deliveriesTypes.DELIVERY_LIST_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        deliveryDetails: action.payload,
+      };
+
+    case deliveriesTypes.DELIVERY_LIST_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case deliveriesTypes.DELIVERY_LIST_DETAILS_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};

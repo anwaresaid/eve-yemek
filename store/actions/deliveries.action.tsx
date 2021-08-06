@@ -23,3 +23,26 @@ export const listDeliveries = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const listDeliveryDetails = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: deliveriesTypes.DELIVERY_LIST_DETAILS_REQUEST,
+    });
+
+    const deliveryService = new DeliveryService();
+    const res = await deliveryService.getDeliveryDetails(id);
+    dispatch({
+      type: deliveriesTypes.DELIVERY_LIST_DETAILS_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: deliveriesTypes.DELIVERY_LIST_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
