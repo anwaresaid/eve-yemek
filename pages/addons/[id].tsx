@@ -25,6 +25,7 @@ import { Toast } from 'primereact/toast';
 import auth from '../../helpers/core/auth';
 import { listRestaurantOwners } from '../../store/actions/userslists.action';
 import BackBtn from '../../components/backBtn';
+import { currencyDirectory } from '../../helpers/constants';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,8 @@ export const Index = () => {
 
   const updateAddon = useSelector((state: RootState) => state.updateAddons);
   const { success: successUpdate } = updateAddon;
+
+  const [currency, setCurrency] = useState('TRY')
 
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -79,6 +82,7 @@ export const Index = () => {
       return errors;
     },
     onSubmit: (data: any) => {
+      data.currency_type = currency
       dispatch(updateAddons(addon.id, data));
     },
   });
@@ -92,7 +96,7 @@ export const Index = () => {
       }
     }
 
-    if ((!successFind || addon.id !== router.query.id)&& router.query.id) {
+    if ((!successFind || addon.id !== router.query.id) && router.query.id) {
 
       dispatch(findAddons(router.query.id));
     }
@@ -101,12 +105,13 @@ export const Index = () => {
       setData(true);
       const match = addonCategoryList.items.filter(
         (addonCategory) => addonCategory.id === addon.add_on_category
-        );
-      if(match.length!=0)
+      );
+      if (match.length != 0)
         formik.values.addOn_category_id = match[0].id;
-      
+
       formik.values.name = addon.name;
       formik.values.price = addon.price;
+      setCurrency(addon.currency_type ?? 'TRY')
       formik.values.create_user_id = addon.create_user_id;
     }
 
@@ -129,7 +134,7 @@ export const Index = () => {
   };
   return (
     <div id='create_Add_ons'>
-      <BackBtn router={router}/>
+      <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('editAddon')}</h1>
       <Toast id='toastMessage' ref={toast}></Toast>
       {addonCatSuccess && addonCategoryList && successFind && (
@@ -160,7 +165,7 @@ export const Index = () => {
                       iprops={{
                         value: formik.values.create_user_id,
                         onChange: formik.handleChange,
-                        
+
                         options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
                       }}
                     />
@@ -195,11 +200,17 @@ export const Index = () => {
                   <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                     value: formik.values.price,
                     onValueChange: formik.handleChange,
+                    min: 0,
                     mode: "currency",
-                    currency: "TRY",
+                    currency: currency,
                     showButtons: true
                   }}
                   />
+                  <InputContainer label={i18n.t('currencyCode')} name="currency_type" size={6} formiks={inputFormiks} component={Dropdown} iprops={{
+                    options: Object.values(currencyDirectory),
+                    value: currency,
+                    onChange: e => setCurrency(e.value)
+                  }} />
                 </InputGroup>
               </FormColumn>
             </div>
