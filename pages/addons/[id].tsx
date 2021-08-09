@@ -25,7 +25,7 @@ import { Toast } from 'primereact/toast';
 import auth from '../../helpers/core/auth';
 import { listRestaurantOwners } from '../../store/actions/userslists.action';
 import BackBtn from '../../components/backBtn';
-import { currencyDirectory } from '../../helpers/constants';
+import { getSupportedCountries } from '../../store/actions/addresses.action';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -45,6 +45,9 @@ export const Index = () => {
 
   const listOwnersState = useSelector((state: RootState) => state.listRestaurantOwners)
   const { loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners } = listOwnersState
+
+  const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
+  const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
 
   const updateAddon = useSelector((state: RootState) => state.updateAddons);
   const { success: successUpdate } = updateAddon;
@@ -126,7 +129,12 @@ export const Index = () => {
       dispatch({ type: addonsTypes.ADDON_UPDATE_RESET });
       dispatch({ type: addonsTypes.ADDON_FIND_RESET });
     }
-  }, [dispatch, successUpdate, addonCatSuccess, successFind, owners]);
+
+    if (!supportedCountries) {
+      dispatch(getSupportedCountries())
+  }
+
+  }, [dispatch, successUpdate, addonCatSuccess, successFind, owners, supportedCountries]);
 
   const inputFormiks = {
     getFormErrorMessage,
@@ -207,7 +215,7 @@ export const Index = () => {
                   }}
                   />
                   <InputContainer label={i18n.t('currencyCode')} name="currency_type" size={6} formiks={inputFormiks} component={Dropdown} iprops={{
-                    options: Object.values(currencyDirectory),
+                    options: Object.values(supportedCountries).map(country => country.currency_name_alt),
                     value: currency,
                     onChange: e => setCurrency(e.value)
                   }} />

@@ -121,7 +121,7 @@ const UserDataInput = (props) => {
     useEffect(() => {
         if (props.updateProps) {
             if (Object.keys(props.updateProps.data).length !== 0) {
-                console.log(props.updateProps.data)
+                
                 formik.values.name = props.updateProps.data.name
                 formik.values.email = props.updateProps.data.email
                 formik.values.roles = props.updateProps.data.roles
