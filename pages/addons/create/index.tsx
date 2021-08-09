@@ -21,7 +21,7 @@ import { Toast } from 'primereact/toast';
 import auth from '../../../helpers/core/auth';
 import { listRestaurantOwners } from '../../../store/actions/userslists.action';
 import BackBtn from '../../../components/backBtn';
-import { currencyDirectory } from '../../../helpers/constants';
+import { getSupportedCountries } from '../../../store/actions/addresses.action';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -40,6 +40,9 @@ export const Index = () => {
 
   const listOwnersState = useSelector((state: RootState) => state.listRestaurantOwners)
   const { loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners } = listOwnersState
+
+  const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
+  const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
 
   const [currency, setCurrency] = useState('TRY')
 
@@ -132,16 +135,26 @@ export const Index = () => {
         detail: createAddOnError,
       });
     }
-  }, [addonCatSuccess, createAddOnSuccess, owners]);
+
+    if (!supportedCountries) {
+      dispatch(getSupportedCountries())
+    }
+  }, [addonCatSuccess, createAddOnSuccess, owners, supportedCountries]);
 
   const inputFormiks = {
     getFormErrorMessage,
     isFormFieldValid,
   };
 
+  const getCurrencies = () => {
+    if (supportedCountries){
+      return supportedCountries.map(country => country.currency_name_alt)
+    }
+  }
+
   return (
     <div id='create_Add_ons'>
-      <BackBtn router={router}/>
+      <BackBtn router={router} />
       <Toast id='toastMessage' ref={toast}></Toast>
       <h1 id='createHeader'>{i18n.t('createAddon')}</h1>
       <form onSubmit={formik.handleSubmit}>
@@ -211,12 +224,13 @@ export const Index = () => {
                   showButtons: true
                 }}
                 />
+                
                 <InputContainer label={i18n.t('currencyCode')} name="currency_type" size={6} formiks={inputFormiks} component={Dropdown} iprops={{
-                  options: Object.values(currencyDirectory),
+                  options: Object.values(supportedCountries ?? {}).map(country => country.currency_name_alt),
                   value: currency,
                   onChange: e => setCurrency(e.value)
-                }}/>
-              
+                }} />
+
               </InputGroup>
             </FormColumn>
             <S.SubmitBtn>
