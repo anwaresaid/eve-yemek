@@ -215,7 +215,7 @@ export const Index = () => {
                   }}
                   />
                   <InputContainer label={i18n.t('currencyCode')} name="currency_type" size={6} formiks={inputFormiks} component={Dropdown} iprops={{
-                    options: Object.values(supportedCountries).map(country => country.currency_name_alt),
+                    options: Object.values(supportedCountries).map(country => country['currency_name_alt']),
                     value: currency,
                     onChange: e => setCurrency(e.value)
                   }} />
