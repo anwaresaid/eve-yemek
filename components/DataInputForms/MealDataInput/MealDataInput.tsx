@@ -24,6 +24,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { listAddonCategory } from "../../../store/actions/addon-category.action";
 import { Tag } from "primereact/tag";
 import { foodsTypes } from "../../../store/types/foods.type";
+import { currencyDirectory } from "../../../helpers/constants";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { getSupportedCountries } from "../../../store/actions/addresses.action";
@@ -120,6 +121,7 @@ const MealDataInput = (props) => {
                 data.description = ""
             }
             data.currency_type = currency
+
             if (props.creating) {
                 dispatch(createFood(data));
             } else if (props.updating) {
@@ -138,7 +140,7 @@ const MealDataInput = (props) => {
     }
 
     const setRestaurantsDropdownOptions = () => {
-        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id } });
+        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id} });
         setRestaurantName(restaurantNames);
     }
 
@@ -291,7 +293,9 @@ const MealDataInput = (props) => {
                                 <InputGroup>
                                     <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
                                         value: formik.values.restaurant_id,
+
                                         onChange: (e) => { formik.handleChange(e); setCurrencyByRestaurant(e.value) },
+
                                         options: restaurantName ?? [],
                                         filter: true,
                                         filterBy: "name",
@@ -348,7 +352,9 @@ const MealDataInput = (props) => {
                                     maxFractionDigits: 2,
                                     mode: "currency",
                                     currency: currency,
+
                                     min: 0,
+
                                     showButtons: true
                                 }}
                                 />
@@ -359,7 +365,9 @@ const MealDataInput = (props) => {
                                     maxFractionDigits: 2,
                                     mode: "currency",
                                     currency: currency,
+
                                     min: 0,
+
                                     showButtons: true
                                 }}
                                 />

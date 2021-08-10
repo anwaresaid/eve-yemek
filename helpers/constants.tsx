@@ -23,6 +23,11 @@ export const languageOptions = [
     }
 ]
 
+export const currencyDirectory = {
+    'TR': 'TRY',
+    'LY': 'LYD'
+}
+
 // prettier-ignore
 export const allMenuItems: any = [
     { label: i18n.t("dashboard"), url: "/", roles: ["admin", "restaurant_owner", "customer_service"] },
