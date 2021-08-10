@@ -9,6 +9,7 @@ import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
 import { i18n } from "../../language";
 import auth from "../../helpers/core/auth";
+import SSPaginatorTable from "../SSPaginatorTable";
 
 const RestaurantsTable = (props) => {
 
@@ -96,14 +97,15 @@ const RestaurantsTable = (props) => {
 
     return (
 
-        <StandardTable
-
+        <SSPaginatorTable
+            fetch={props.fetch}
             header={Header(setGlobalFilter, i18n.t('restaurants'))}
+            loading={props.loading}
             columns={columns}
             value={props.restaurants}
             globalFilter={globalFilter}
             emptyMessage={i18n.t('noXfound', { x: i18n.t('restaurants') })} >
-        </StandardTable>
+        </SSPaginatorTable>
     )
 
 }

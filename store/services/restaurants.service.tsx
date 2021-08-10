@@ -2,8 +2,8 @@ import axios from "../../helpers/_axios";
 
 export default class RestaurantsService {
 
-    async getRestaurants() {
-        const { data:{data} } = await axios.get('/restaurants')
+    async getRestaurants(offset, limit) {
+        const { data:{data} } = await axios.get('/restaurants?offset='+offset+'&limit='+limit)
         return data;
     }
 
