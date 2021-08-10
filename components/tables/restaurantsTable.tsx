@@ -99,6 +99,7 @@ const RestaurantsTable = (props) => {
 
         <SSPaginatorTable
             fetch={props.fetch}
+            total={props.total}
             header={Header(setGlobalFilter, i18n.t('restaurants'))}
             loading={props.loading}
             columns={columns}

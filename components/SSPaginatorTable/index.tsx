@@ -37,7 +37,7 @@ const SSPaginatorTable = (props) => {
             first={first}
             rows={rowsPerPage}
             rowsPerPageOptions={[10, 20, 50]}
-            totalRecords={50}
+            totalRecords={props.total}
             lazy
             onPage={onPage}
         >

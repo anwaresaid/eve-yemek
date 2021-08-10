@@ -19,6 +19,7 @@ const Index = () => {
     const [restaurants, setRestaurants] = useState(null)
     const [loadingRestaurants, setLoadingRestaurants] = useState(true)
     const [initialLoading, setInitialLoading] = useState(true)
+    const [total, setTotal] = useState(0)
 
     useEffect(() => {
         if (!restaurants) {
@@ -29,7 +30,9 @@ const Index = () => {
     const fetch = (offset, limit) => {
         setLoadingRestaurants(true)
         restaurantService.getRestaurants(offset, limit).then(res => {
+            console.log(res)
             setRestaurants(res)
+            setTotal(res.total)
             setInitialLoading(false)
             setLoadingRestaurants(false)
         }).catch(e => {
@@ -43,10 +46,11 @@ const Index = () => {
                 initialLoading ? <ProgressSpinner></ProgressSpinner>
                     :
                     <>
-                        <h1 id="restaurantsHeader">{i18n.t('restaurants') + " - " + i18n.t('total') + " (" + (restaurants['items']?.length ?? 0) + ")"}</h1>
+                        <h1 id="restaurantsHeader">{i18n.t('restaurants') + " - " + i18n.t('total') + " (" + (total ?? 0) + ")"}</h1>
                         <RestaurantsTable
                             fetch={fetch}
                             loading={loadingRestaurants}
+                            total={total}
                             restaurants={_.without(_.map(restaurants['items'], (item) => { if (!item.is_deleted) return item }), undefined)}>
 
                         </RestaurantsTable>
