@@ -291,6 +291,7 @@ export const translations = {
   send: 'Send',
   overview: 'Overview',
   areas: 'Areas',
+  areasOfResponsibility: 'Areas of responsibility',
   havingTroubleLoggingIn: 'Having trouble logging in?',
   executeTransfer: 'Execute Transfer',
 
@@ -302,5 +303,11 @@ export const translations = {
   
   anEmailHasBeenSentToYourAddress: 'An e-mail has been sent to your address.',
   errorTryingToReachYourEmail: 'Error trying to reach your email',
-  notes: 'Notes'
+  notes: 'Notes',
+
+  deliveryCount: 'Delivery Count',
+  paymentInformation: 'Payment Information',
+  deliveryInformation: 'Delivery Information',
+
+  deliveries: 'Deliveries',
 };

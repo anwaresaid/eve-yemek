@@ -11,6 +11,11 @@ export default class UsersListsService {
     return data;
   }
 
+  async getScoutDetails(id){
+    const { data: { data } } = await axios.get('/delivery/' + id);
+    return data;
+  }
+
   async getUsersByCountryAndRole(countryCode, role) {
     let countryQuery = countryCode ? ('country=' + countryCode + '&') : ''
     let roleQuery = role ? ('role=' + role) : ''

@@ -293,6 +293,7 @@ export const translations = {
   send: 'إرسال',
   overview: 'نظرة عامة',
   areas: 'المناطق',
+  areasOfResponsibility: 'المناطق المسؤول عنها',
   havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
   executeTransfer: 'تنفيذ التحويل',
 
@@ -304,5 +305,11 @@ export const translations = {
 
   anEmailHasBeenSentToYourAddress: 'تم إرسال بريد إلكتروني إلى عنوانك.',
   errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني',
-  notes: 'ملاحظات '
+  notes: 'ملاحظات ',
+
+  deliveryCount: 'عدد التسليمات',
+  paymentInformation: 'معلومات الدفع',
+  deliveryInformation: 'معلومات التوصيل',
+
+  deliveries: 'التسليمات',
 };
