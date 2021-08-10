@@ -15,6 +15,7 @@ export default class FoodsService{
         description: string, 
         image: string, 
         price:number,
+        currency_type: string,
         discount_price: number,
         restaurant_id: string,
         food_category_id: string, 
@@ -22,12 +23,14 @@ export default class FoodsService{
         is_veg: boolean,
         featured: boolean,
         active: boolean,
-        add_on_categories){
+        add_on_categories,
+        variants){
         const {data:{data}} = await axios.post('/foods',{
             name,
             description,
             image,
             price,
+            currency_type,
             discount_price,
             restaurant_id,
             food_category_id,
@@ -35,7 +38,8 @@ export default class FoodsService{
             is_veg,
             featured,
             active,
-            add_on_categories
+            add_on_categories,
+            variants
         })
         return data
     }
