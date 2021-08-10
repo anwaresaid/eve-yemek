@@ -311,5 +311,8 @@ export const translations = {
   paymentInformation: 'معلومات الدفع',
   deliveryInformation: 'معلومات التوصيل',
 
+  variants: 'خيارات',
+  addNewVariant: 'أضف خيارًا جديدًا',
+  variantNamesCannotBeEmpty: 'لا يمكن أن تكون أسماء المتغيرات فارغة',
   deliveries: 'التسليمات',
 };
