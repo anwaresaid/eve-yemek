@@ -39,9 +39,9 @@ const FoodCategoriesList = () => {
 
   return (
     <div id="foodsTable">
-      <h1 id="foodsCatHeader">{i18n.t('mealCategory')}</h1>
+      <h1 id="foodsCatHeader">{i18n.t('mealCategories')}</h1>
       <SSPaginatorTable
-        headerText={i18n.t('listOfX', { x: i18n.t('mealCategory') })}
+        headerText={i18n.t('listOfX', { x: i18n.t('mealCategories') })}
         fetch={fetch}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('mealCategories') })}
