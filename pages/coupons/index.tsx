@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AddonsTable from '../../components/tables/addonsTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
 import { listCoupons } from '../../store/actions/coupons.action';
