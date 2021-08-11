@@ -1,24 +1,15 @@
 import React, { useState } from "react";
-import StandardTable from '../StandardTable';
 import * as S from '../../styles/food/food.list.style'
-import { InputText } from 'primereact/inputtext';
 import { useRouter } from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
-import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
 import { i18n } from "../../language";
-import auth from "../../helpers/core/auth";
 import SSPaginatorTable from "../SSPaginatorTable";
 
 const RestaurantsTable = (props) => {
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [globalFilter, setGlobalFilter] = useState(null);
-    const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const router = useRouter();
     const path = 'restaurants';
-
 
     const imageBodyTemplate = (rowData) => {
         return (
@@ -63,7 +54,6 @@ const RestaurantsTable = (props) => {
     const StatusBodyTemplate = (rowData) => {
         return (
             <div>
-
                 <React.Fragment>
                     <span className="p-column-title"> {i18n.t('status')} </span>
                     <span> {activeTag(rowData.active)}</span>
@@ -75,7 +65,6 @@ const RestaurantsTable = (props) => {
     const editBodyTemplate = (rowData) => {
         return (
             <div>
-
                 <React.Fragment>
                     <span className="p-column-title"> {i18n.t('operations')} </span>
                     <span> {editButton(rowData, router, path)}</span>
@@ -83,6 +72,12 @@ const RestaurantsTable = (props) => {
             </div>
         );
     }
+
+    const searchOptions = [
+        {label: i18n.t('name'), value: 'name'},
+        {label: i18n.t('restaurantOwner'), value: 'owner.name'},
+        {label: i18n.t('country'), value: 'address.country'}
+    ]
 
     const columns = [
         { field: 'id', header: "ID", body: IdBodyTemplate },
@@ -96,15 +91,10 @@ const RestaurantsTable = (props) => {
     ]
 
     return (
-
         <SSPaginatorTable
             fetch={props.fetch}
-            total={props.total}
-            header={Header(setGlobalFilter, i18n.t('restaurants'))}
-            loading={props.loading}
             columns={columns}
-            value={props.restaurants}
-            globalFilter={globalFilter}
+            searchOptions={searchOptions}
             emptyMessage={i18n.t('noXfound', { x: i18n.t('restaurants') })} >
         </SSPaginatorTable>
     )
