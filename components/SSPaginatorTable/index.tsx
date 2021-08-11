@@ -49,7 +49,7 @@ const SSPaginatorTable = (props) => {
         props.fetch(first, rowsPerPage, searchBy ?? null, searchKey ?? null)
             .then(res => {
                 setTotalItems(res.total)
-                setCurrentRows(res.items)
+                setCurrentRows(res.items ?? res)
                 setLoading(false)
             })
             .catch(err => {

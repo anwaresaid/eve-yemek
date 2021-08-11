@@ -54,15 +54,6 @@ const Orders = () => {
         { field: 'ops', header: i18n.t('operations'), body: (rowData) => editButton(rowData) }
     ]
 
-    /*
-    const getList = () => {
-        return _.without(_.map(orders.items, (item) => {
-            if (!item.is_deleted && ((selectedStatuses.includes(item.status) || selectedStatuses.includes(item.delivery_status)) || selectedStatuses.length === 0)) {
-                return item
-            }
-        }), undefined)
-    }*/
-
     const fetch = (offset, limit, fields = null, text = null) => {
         return new Promise((resolve, reject) => {
             ordersService.getOrders(offset, limit, fields, text)
