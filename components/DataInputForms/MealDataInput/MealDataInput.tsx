@@ -27,6 +27,7 @@ import { foodsTypes } from "../../../store/types/foods.type";
 import { currencyDirectory } from "../../../helpers/constants";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { getSupportedCountries } from "../../../store/actions/addresses.action";
 
 const MealDataInput = (props) => {
 
@@ -37,6 +38,9 @@ const MealDataInput = (props) => {
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [currency, setCurrency] = useState('TRY')
     const [restaurantName, setRestaurantName] = useState(null);
+
+    const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
+    const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
 
     const [variants, setVariants] = useState([])
     const [variantsBackup, setVariantsBackup] = useState({})
@@ -117,6 +121,7 @@ const MealDataInput = (props) => {
                 data.description = ""
             }
             data.currency_type = currency
+
             if (props.creating) {
                 dispatch(createFood(data));
             } else if (props.updating) {
@@ -135,7 +140,7 @@ const MealDataInput = (props) => {
     }
 
     const setRestaurantsDropdownOptions = () => {
-        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id } });
+        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id} });
         setRestaurantName(restaurantNames);
     }
 
@@ -190,10 +195,6 @@ const MealDataInput = (props) => {
             setTimeout(() => { router.push('/foods') }, 2000)
             return
         }
-        // if(error){
-        //     toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
-        // }
-
 
         if (props.updating && props.meal) {
             if (updatedFoodLoading || updatedFoodSuccess)
@@ -211,7 +212,11 @@ const MealDataInput = (props) => {
             setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => { return { id: aoc.id, name: aoc.name } }))
         }
 
-    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal]);
+        if (!supportedCountries) {
+            dispatch(getSupportedCountries())
+        }
+
+    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal, supportedCountries]);
 
 
     const onAddNewVariant = () => {
@@ -271,7 +276,9 @@ const MealDataInput = (props) => {
         let currentRestaurant = restaurants.items?.filter(res => res.id === restaurantID)[0]
         if (!currentRestaurant)
             return
-        setCurrency(currencyDirectory[currentRestaurant.address.country_code] ?? 'TRY')
+        if (supportedCountries){
+            setCurrency(supportedCountries[currentRestaurant.address.country_code].currency_name_alt ?? 'TRY')
+        } 
     }
 
     return (
@@ -286,7 +293,9 @@ const MealDataInput = (props) => {
                                 <InputGroup>
                                     <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
                                         value: formik.values.restaurant_id,
+
                                         onChange: (e) => { formik.handleChange(e); setCurrencyByRestaurant(e.value) },
+
                                         options: restaurantName ?? [],
                                         filter: true,
                                         filterBy: "name",
@@ -343,7 +352,9 @@ const MealDataInput = (props) => {
                                     maxFractionDigits: 2,
                                     mode: "currency",
                                     currency: currency,
+
                                     min: 0,
+
                                     showButtons: true
                                 }}
                                 />
@@ -354,7 +365,9 @@ const MealDataInput = (props) => {
                                     maxFractionDigits: 2,
                                     mode: "currency",
                                     currency: currency,
+
                                     min: 0,
+
                                     showButtons: true
                                 }}
                                 />

@@ -313,5 +313,5 @@ export const translations = {
   variants: 'Options',
   addNewVariant: 'Add new option',
   variantNamesCannotBeEmpty: 'Option names cannot be empty',
-  deliveries: 'Deliveries',
+  deliveries: 'Deliveries'
 };
