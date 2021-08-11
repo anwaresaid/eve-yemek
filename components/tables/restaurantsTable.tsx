@@ -73,18 +73,13 @@ const RestaurantsTable = (props) => {
         );
     }
 
-    const searchOptions = [
-        {label: i18n.t('name'), value: 'name'},
-        {label: i18n.t('restaurantOwner'), value: 'owner.name'},
-        {label: i18n.t('country'), value: 'address.country'}
-    ]
 
     const columns = [
         { field: 'id', header: "ID", body: IdBodyTemplate },
         { field: 'image', header: i18n.t('image'), body: imageBodyTemplate },
-        { field: 'name', header: i18n.t('name'), body: NameBodyTemplate },
-        { field: 'owner.name', header: i18n.t('restaurantOwner'), body: OwnerBodyTemplate },
-        { field: 'address.country', header: i18n.t('country'), body: CountryBodyTemplate },
+        { field: 'name', header: i18n.t('name'), body: NameBodyTemplate, filter: true, filterType: 'search'},
+        { field: 'owner.name', header: i18n.t('restaurantOwner'), body: OwnerBodyTemplate, filter: true, filterType: 'search' },
+        { field: 'address.country', header: i18n.t('country'), body: CountryBodyTemplate, filter: true, filterType: 'search' },
         { field: 'createdAt', header: i18n.t('created') },
         { field: 'ops', header: i18n.t('status'), body: StatusBodyTemplate },
         { field: '', header: i18n.t('operations'), body: editBodyTemplate }
@@ -92,9 +87,9 @@ const RestaurantsTable = (props) => {
 
     return (
         <SSPaginatorTable
+            headerText={i18n.t('listOfX', { x: i18n.t('restaurants') })}
             fetch={props.fetch}
             columns={columns}
-            searchOptions={searchOptions}
             emptyMessage={i18n.t('noXfound', { x: i18n.t('restaurants') })} >
         </SSPaginatorTable>
     )

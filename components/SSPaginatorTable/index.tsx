@@ -3,10 +3,8 @@ import { Column } from 'primereact/column';
 import * as S from '../../styles/standard_table_style/standard.table.style'
 import { i18n } from "../../language";
 import _ from 'lodash';
-import { Tooltip } from 'primereact/tooltip';
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
-import { MultiSelect } from "primereact/multiselect";
 import { Dropdown } from "primereact/dropdown";
 
 const SSPaginatorTable = (props) => {
@@ -21,19 +19,13 @@ const SSPaginatorTable = (props) => {
 
     const [currentRows, setCurrentRows] = useState([])
     const [searchKey, setSearchKey] = useState(null)
-    const [searchBy, setSearchBy] = useState('name')
-    const [debouncedFetch] = useState((e) => _.debounce((e) => setSearchKey(e.target.value), 1000));
+    const [searchBy, setSearchBy] = useState('')
+    const [debouncedFetch] = useState((val) => _.debounce((val) => setSearchKey(val), 650));
 
     const headerComp = () => {
         return (
             <div id='tableHeader' className="table-header">
-                {i18n.t('listOfX', { x: i18n.t('restaurants') })}
-                <span id='tableIcon' className="p-input-icon-left">
-                    <i id='tableSearchIcon' className="pi pi-search" />
-                    <InputText id='tableSearch' type="search" onInput={debouncedFetch} placeholder="Search" />
-                    <Dropdown placeholder={i18n.t('searchBy')} value={searchBy} onChange={(e) => setSearchBy(e.value)}
-                        options={props.searchOptions}></Dropdown>
-                </span>
+                {props.headerText}
             </div>
         );
     }
@@ -41,7 +33,7 @@ const SSPaginatorTable = (props) => {
     useEffect(() => {
         setLoading(true)
         if (searchKey) {
-            if (!searchBy){
+            if (!searchBy) {
                 toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: i18n.t('error') })
                 setLoading(false)
                 return
@@ -72,8 +64,39 @@ const SSPaginatorTable = (props) => {
         setRowsPerPage(e.rows)
     }
 
+    const clearFilterInputsExcept = (except) => {
+        let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
+        filterInputs.forEach((one) => {
+            if (one.id != except) {
+                (one as HTMLInputElement).value = ''
+            }
+        })
+    }
+
+    const getFilterElement = (col) => {
+        let currentID = "filter_input_" + col.field
+        switch (col.filterType) {
+            case 'search':
+                return <InputText id={currentID} placeholder={col.header}
+                    style={{ width: '145px' }}
+                    onChange={e => {
+                        clearFilterInputsExcept(currentID)
+                        setSearchBy(col.field)
+                        debouncedFetch(e.target.value)
+                    }}></InputText>
+            case 'dropdown':
+                return <Dropdown id={currentID} value={searchKey} options={col.dropdownOptions} placeholder={col.header}
+                    onChange={e => {
+                        clearFilterInputsExcept(currentID)
+                        setSearchBy(col.field)
+                        debouncedFetch(e.target.value)
+                    }}>
+                </Dropdown>
+        }
+    }
+
     const dynamicColumns = props.columns.map((col, i) => {
-        return <Column key={i} {...col} sortable />;
+        return <Column key={i} {...col} filter={col.filter} filterElement={getFilterElement(col)} sortable />;
     });
 
     return (
