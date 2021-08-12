@@ -19,7 +19,7 @@ export default class RestaurantsService {
     }
 
     async getRestaurantOwners() {
-        const { data: { data } } = await axios.get('/users?fields=roles&text=restaurant_owner');
+        const { data: { data } } = await axios.get('/users?fields=roles&text=restaurant_owner&offset=0&limit=9999');
         return data
     }
 
