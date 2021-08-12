@@ -15,12 +15,14 @@ const SSPaginatorTable = (props) => {
     const [loading, setLoading] = useState(true)
     const [showPaginator, setShowPaginator] = useState(true)
 
+    const [returnFocusTo, setReturnFocusTo] = useState('')
+
     const toast = useRef(null)
 
     const [currentRows, setCurrentRows] = useState([])
     const [searchKey, setSearchKey] = useState(null)
     const [searchBy, setSearchBy] = useState('')
-    const [debouncedFetch] = useState((val) => _.debounce((val) => setSearchKey(val), 650));
+    const [debouncedFetch] = useState(() => _.debounce((val) => setSearchKey(val), 800));
 
     const headerComp = () => {
         return (
@@ -58,6 +60,21 @@ const SSPaginatorTable = (props) => {
                 setLoading(false)
             })
     }, [rowsPerPage, first, searchKey])
+
+    useEffect(() => {
+        if (loading){
+            let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
+            filterInputs.forEach((one:HTMLElement) => {
+                if (one === document.activeElement){
+                    setReturnFocusTo(one.id)
+                    one.blur()
+                }
+            })
+        } else {
+            document.getElementById(returnFocusTo).focus()
+            setReturnFocusTo('')
+        }
+    }, [loading])
 
     const onPage = (e) => {
         setFirst(e.first)
