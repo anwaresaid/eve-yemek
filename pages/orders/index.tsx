@@ -20,8 +20,6 @@ const Orders = () => {
     const router = useRouter();
     const ordersService = new OrdersService()
 
-    const [selectedStatuses, setSelectedStatuses] = useState([])
-
     const path = 'orders';
 
     const editButton = (row) => {
@@ -36,12 +34,14 @@ const Orders = () => {
         { label: i18n.t('orderPlaced'), value: 'placed' },
         { label: i18n.t('orderAccepted'), value: 'accepted' },
         { label: i18n.t('orderPrepared'), value: 'prepared' },
-        { label: i18n.t('cancelled'), value: 'canceled' }
+        { label: i18n.t('cancelled'), value: 'canceled' },
+        { label: i18n.t('all'), value: '' }
     ]
 
     const deliveryStatusFilterOptions = [
         { label: i18n.t('onTheWay'), value: 'picked' },
-        { label: i18n.t('delivered'), value: 'delivered' }
+        { label: i18n.t('delivered'), value: 'delivered' },
+        { label: i18n.t('all'), value: '' }
     ]
 
     const columns = [
