@@ -41,7 +41,6 @@ const SSPaginatorTable = (props) => {
             setRowsPerPage(9999)
             setShowPaginator(false)
         } else {
-            setFirst(0)
             setRowsPerPage(10)
             setShowPaginator(true)
         }
