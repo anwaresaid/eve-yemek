@@ -315,4 +315,6 @@ export const translations = {
   variantNamesCannotBeEmpty: 'Option names cannot be empty',
   deliveries: 'Deliveries',
 
+  noData: 'No Data'
+
 };
