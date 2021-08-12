@@ -89,7 +89,7 @@ const UserDataInput = (props) => {
             } else {
                 data.address.longitude = data.longitude
             }
-            if (!areasOfResponsibility || areasOfResponsibility.length === 0) {
+            if ((!areasOfResponsibility || areasOfResponsibility.length === 0) && (formik.values.roles.includes('admin') || formik.values.roles.includes('customer_service'))) {
                 errors.area_of_responsibility = i18n.t('isRequired', { input: i18n.t('areasOfResponsibility') })
             }
 
