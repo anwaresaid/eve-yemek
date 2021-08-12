@@ -8,7 +8,7 @@ export const listFoodCategory = () => async (dispatch) => {
     });
 
     const foodCategoryService = new FoodCategoryService();
-    const res = await foodCategoryService.getFoodCategory();
+    const res = await foodCategoryService.getAllFoodCategories(0, 9999);
     dispatch({
       type: foodCategoryTypes.FOOD_CATEGORY_LIST_SUCCESS,
       payload: res,

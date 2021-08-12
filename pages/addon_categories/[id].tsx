@@ -200,7 +200,9 @@ export const AddonCategoryEdit = () => {
                         iprops={{
                           value: formik.values.create_user_id,
                           onChange: formik.handleChange,
-                          options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
+                          options: owners?.items.map((one) => { return { label: one.name, value: one.id } }),
+                          filter: true,
+                          filterBy: "label",
                         }}
                       />
                     </InputGroup>

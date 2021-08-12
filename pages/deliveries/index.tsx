@@ -1,26 +1,19 @@
 import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'typesafe-actions';
+import DeliveryService from '../../store/services/deliveries.service';
 import Loading from '../../components/Loading';
 import StandardTable from '../../components/StandardTable';
 import { i18n } from '../../language';
 import Header from '../../components/InTableComponents/Header/index';
 import _ from 'lodash';
-import { listDeliveries } from '../../store/actions/deliveries.action';
+import SSPaginatorTable from '../../components/SSPaginatorTable';
 
 const Deliveries = () => {
   const router = useRouter();
-  const [globalFilter, setGlobalFilter] = useState(null);
-  const res = useSelector((state: RootState) => state.listDeliveries);
-  const { loading, success, deliveries } = res;
-  const dispatch = useDispatch();
   const path = 'deliveries';
 
-  useEffect(() => {
-    dispatch(listDeliveries());
-  }, [dispatch]);
+  const deliveryService = new DeliveryService();
 
   const editButton = (row) => {
     return (
@@ -39,6 +32,7 @@ const Deliveries = () => {
 
   const columns = [
     {
+      field: 'order.order_code',
       header: i18n.t('order'),
       body: (row) => (
         <a
@@ -48,19 +42,24 @@ const Deliveries = () => {
           {row.order.order_code}
         </a>
       ),
+      filter: true,
+      filterType: 'search'
     },
     {
+      field: 'user.name',
       header: i18n.t('deliveryScouts'),
       body: (row) => (
         row.user ? (
           <a
-          href={'/users/delivery_scouts/' + row.user.id}
-          style={{ textDecoration: 'none' }}
-        >
-          {row.user.name}
-        </a>
+            href={'/users/delivery_scouts/' + row.user.id}
+            style={{ textDecoration: 'none' }}
+          >
+            {row.user.name}
+          </a>
         ) : ''
       ),
+      filter: true,
+      filterType: 'search'
     },
     {
       header: i18n.t('status'),
@@ -73,39 +72,23 @@ const Deliveries = () => {
     },
   ];
 
-  const getList = () => {
-    return _.without(
-      _.map(deliveries, (item) => {
-        if (!item.is_deleted) {
-          return item;
-        }
-      }),
-      undefined
-    );
-  };
+  const fetch = (offset, limit, fields = null, text = null) => {
+    return new Promise((resolve, reject) => {
+      deliveryService.getAllDeliveries(offset, limit, fields, text)
+        .then(res => resolve(res))
+        .catch(err => reject(err))
+    })
+  }
 
   return (
-    <div id='deliveriesTable'>
-      {loading ? (
-        <Loading />
-      ) : (
-        success &&
-        deliveries && (
-          <div id='deliveriesCard' className='card'>
-            <h1 id='deliveriesHeader'>{i18n.t('deliveries')}</h1>
-            <StandardTable
-              header={Header(
-                setGlobalFilter,
-                i18n.t('deliveries')
-              )}
-              columns={columns}
-              value={getList()}
-              globalFilter={globalFilter}
-              emptyMessage={i18n.t('noXfound', { x: i18n.t('deliveries') })}
-            ></StandardTable>
-          </div>
-        )
-      )}
+    <div id='deliveriesCard' className='card'>
+      <h1 id='deliveriesHeader'>{i18n.t('deliveries')}</h1>
+      <SSPaginatorTable
+        headerText={i18n.t('listOfX', { x: i18n.t('deliveries') })}
+        fetch={fetch}
+        columns={columns}
+        emptyMessage={i18n.t('noXfound', { x: i18n.t('deliveries') })}
+      ></SSPaginatorTable>
     </div>
   );
 };
