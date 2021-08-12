@@ -1,31 +1,25 @@
 import React, { useState, useEffect } from "react"
 import UsersTable from "../../../components/tables/usersTable"
-import { listCustomerService } from "../../../store/actions/userslists.action"
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from "typesafe-actions"
-import Loading from "../../../components/Loading"
+import { parseDateInAllRows } from "../../../helpers/dateFunctions"
 import { i18n } from "../../../language"
+import UsersListsService from "../../../store/services/userslists.service"
 
 const customerServiceList = () => {
 
-    const dispatch = useDispatch();
-    const res = useSelector((state: RootState) => state.listCustomerService)
-    const { loading, success, customerService } = res
+    const usersListsService = new UsersListsService();
 
-
-    useEffect(() => {
-        dispatch(listCustomerService())
-    }, [dispatch]);
+    const fetch = (offset, limit, fields = null, text = null) => {
+        return new Promise((resolve, reject) => {
+            usersListsService.getUsersByRole('customer_service', offset, limit)
+                .then(res => resolve(parseDateInAllRows(res)))
+                .catch(err => reject(err))
+        })
+    }
 
     return (
         <div id="customerServiceTable">
-
-            {!loading && success &&
-                <UsersTable users={customerService.items} editPath="customer_service" userType={i18n.t('customerServiceReps')}>
-                </UsersTable>
-            }
-            {!loading && !success && <h4 id='warning'>Müşteri hizmetlerinin verileri alınamadı!</h4>}
-            {loading && <Loading />}
+            <UsersTable fetch={fetch} editPath="customer_service" userType={i18n.t('customerServiceReps')}>
+            </UsersTable>
 
         </div>
     )

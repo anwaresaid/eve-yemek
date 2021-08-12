@@ -1,7 +1,6 @@
-import restaurantOwnerList from '../../pages/users/restaurant_owners';
 import UsersListsService from '../services/userslists.service';
 import { usersListTypes } from '../types/userslists.type';
-import { useDispatch } from 'react-redux';
+
 import {
   parseDateInAllRows,
   parseDateInOneRow,
@@ -15,7 +14,7 @@ export const listCustomers = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('customer');
+    const result = await usersListsService.getUsersByRole('customer', 0, 9999);
 
     dispatch({
       type: usersListTypes.CUSTOMER_LIST_SUCCESS,
@@ -39,7 +38,7 @@ export const listRestaurantOwners = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('restaurant_owner');
+    const result = await usersListsService.getUsersByRole('restaurant_owner', 0, 9999);
 
     dispatch({
       type: usersListTypes.RESTAURANT_OWNER_LIST_SUCCESS,
@@ -63,7 +62,7 @@ export const listDeliveryScouts = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getDeliveryScouts()
+    const result = await usersListsService.getDeliveryScouts(0, 9999)
   
   
     dispatch({
@@ -88,7 +87,7 @@ export const listCustomerService = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('customer_service');
+    const result = await usersListsService.getUsersByRole('customer_service', 0, 9999);
 
     dispatch({
       type: usersListTypes.CUSTOMER_SERVICE_LIST_SUCCESS,
@@ -246,7 +245,7 @@ export const listAllUsers = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('');
+    const result = await usersListsService.getUsersByRole('', 0, 9999);
 
     dispatch({
       type: usersListTypes.ALL_USER_LIST_SUCCESS,
