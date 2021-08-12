@@ -14,17 +14,12 @@ const SSPaginatorTable = (props) => {
     const [totalItems, setTotalItems] = useState(0)
     const [loading, setLoading] = useState(true)
     const [showPaginator, setShowPaginator] = useState(true)
-    const paginatorNormal = "CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-    const paginatorSearch = "CurrentPageReport PrevPageLink NextPageLink"
-    const [paginatorMode, setPaginatorMode] = useState(paginatorNormal)
     const [returnFocusTo, setReturnFocusTo] = useState('')
     const toast = useRef(null)
     const [currentRows, setCurrentRows] = useState([])
     const [searchKey, setSearchKey] = useState(null)
     const [searchBy, setSearchBy] = useState('')
     const [debouncedFetch] = useState(() => _.debounce((val) => setSearchKey(val), 800));
-
-    
 
     const tableHeader = () => {
         return (
@@ -42,10 +37,12 @@ const SSPaginatorTable = (props) => {
                 setLoading(false)
                 return
             }
-            setPaginatorMode(paginatorSearch)
+            setFirst(0)
+            setRowsPerPage(9999)
+            setShowPaginator(false)
         } else {
             setRowsPerPage(10)
-            //setShowPaginator(true)
+            setShowPaginator(true)
         }
         props.fetch(first, rowsPerPage, searchBy ?? null, searchKey ?? null)
             .then(res => {
@@ -119,7 +116,7 @@ const SSPaginatorTable = (props) => {
         <div>
             <Toast id="toastMessage" ref={toast}></Toast>
             <S.Table id='ssptable' {...props} className="p-datatable-gridlines p-datatable-sm p-datatable-striped" autoLayout={true} paginator={!props.noPaginator && showPaginator}
-                paginatorTemplate={paginatorMode}
+                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 currentPageReportTemplate={i18n.t('showingXtoYofZ', { x: '{first}', y: '{last}', z: '{totalRecords}' })}
                 value={currentRows}
                 first={first}

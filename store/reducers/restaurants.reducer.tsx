@@ -79,7 +79,6 @@ export const listRestaurantReducer = (state = initialState, action) => {
     case restaurantsTypes.RESTAURAT_LIST_REQUEST:
       return { loading: true}
     case restaurantsTypes.RESTAURAT_LIST_SUCCESS:
-      console.log(action.payload)
       return {
         loading: false,
         success: true,
