@@ -168,7 +168,7 @@ const MealDataInput = (props) => {
             dispatch(listFoodCategory());
 
         if (!restaurantsSuccess)
-            dispatch(listRestaurant());
+            dispatch(listRestaurant(0, 9999));
 
         if (addOnCategoriesSuccess) {
             setAddonCategoryDropdownOptions();
@@ -325,6 +325,8 @@ const MealDataInput = (props) => {
                                         value: formik.values.food_category_id,
                                         onChange: formik.handleChange,
                                         options: foodCategoryName ?? [],
+                                        filter: true,
+                                        filterBy: "name",
                                         placeholder: i18n.t('mealCategory'),
                                         optionLabel: 'name',
                                         optionValue: 'id'
@@ -336,6 +338,8 @@ const MealDataInput = (props) => {
                                     value: selectedAddOnCategories,
                                     options: addonCategoryNames ?? [],
                                     onChange: (e) => setSelectedAddOnCategories(e.target.value),
+                                    filter: true,
+                                    filterBy: "name",
                                     optionLabel: "name",
                                     placeholder: i18n.t('selectAddonCategories'),
                                     display: "addonCategories",

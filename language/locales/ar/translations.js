@@ -315,4 +315,6 @@ export const translations = {
   addNewVariant: 'أضف خيارًا جديدًا',
   variantNamesCannotBeEmpty: 'لا يمكن أن تكون أسماء المتغيرات فارغة',
   deliveries: 'التسليمات',
+
+  noData: 'لايوجد بيانات'
 };

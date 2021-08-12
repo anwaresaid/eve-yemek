@@ -1,23 +1,15 @@
 import React, { useState } from "react";
-import StandardTable from '../StandardTable';
 import * as S from '../../styles/food/food.list.style'
-import { InputText } from 'primereact/inputtext';
 import { useRouter } from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
-import { priceBodyTemplate } from "../InTableComponents/price";
 import Header from '../InTableComponents/Header';
 import { i18n } from "../../language";
-import auth from "../../helpers/core/auth";
+import SSPaginatorTable from "../SSPaginatorTable";
 
 const RestaurantsTable = (props) => {
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [globalFilter, setGlobalFilter] = useState(null);
-    const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const router = useRouter();
     const path = 'restaurants';
-
 
     const imageBodyTemplate = (rowData) => {
         return (
@@ -62,7 +54,6 @@ const RestaurantsTable = (props) => {
     const StatusBodyTemplate = (rowData) => {
         return (
             <div>
-
                 <React.Fragment>
                     <span className="p-column-title"> {i18n.t('status')} </span>
                     <span> {activeTag(rowData.active)}</span>
@@ -74,7 +65,6 @@ const RestaurantsTable = (props) => {
     const editBodyTemplate = (rowData) => {
         return (
             <div>
-
                 <React.Fragment>
                     <span className="p-column-title"> {i18n.t('operations')} </span>
                     <span> {editButton(rowData, router, path)}</span>
@@ -83,27 +73,25 @@ const RestaurantsTable = (props) => {
         );
     }
 
+
     const columns = [
         { field: 'id', header: "ID", body: IdBodyTemplate },
         { field: 'image', header: i18n.t('image'), body: imageBodyTemplate },
-        { field: 'name', header: i18n.t('name'), body: NameBodyTemplate },
-        { field: 'owner.name', header: i18n.t('restaurantOwner'), body: OwnerBodyTemplate },
-        { field: 'address.country', header: i18n.t('country'), body: CountryBodyTemplate },
+        { field: 'name', header: i18n.t('name'), body: NameBodyTemplate, filter: true, filterType: 'search'},
+        { field: 'owner.name', header: i18n.t('restaurantOwner'), body: OwnerBodyTemplate, filter: true, filterType: 'search' },
+        { field: 'address.country', header: i18n.t('country'), body: CountryBodyTemplate, filter: true, filterType: 'search' },
         { field: 'createdAt', header: i18n.t('created') },
         { field: 'ops', header: i18n.t('status'), body: StatusBodyTemplate },
         { field: '', header: i18n.t('operations'), body: editBodyTemplate }
     ]
 
     return (
-
-        <StandardTable
-
-            header={Header(setGlobalFilter, i18n.t('restaurants'))}
+        <SSPaginatorTable
+            headerText={i18n.t('listOfX', { x: i18n.t('restaurants') })}
+            fetch={props.fetch}
             columns={columns}
-            value={props.restaurants}
-            globalFilter={globalFilter}
             emptyMessage={i18n.t('noXfound', { x: i18n.t('restaurants') })} >
-        </StandardTable>
+        </SSPaginatorTable>
     )
 
 }

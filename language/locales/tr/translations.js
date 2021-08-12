@@ -313,4 +313,6 @@ export const translations = {
   addNewVariant: 'Yeni seçenek ekle',
   variantNamesCannotBeEmpty: 'Seçenekler boş olmamalıdır',
   deliveries: 'Teslimat',
+
+  noData: 'Veri yok'
 };
