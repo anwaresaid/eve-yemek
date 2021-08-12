@@ -14,17 +14,14 @@ const SSPaginatorTable = (props) => {
     const [totalItems, setTotalItems] = useState(0)
     const [loading, setLoading] = useState(true)
     const [showPaginator, setShowPaginator] = useState(true)
-
     const [returnFocusTo, setReturnFocusTo] = useState('')
-
     const toast = useRef(null)
-
     const [currentRows, setCurrentRows] = useState([])
     const [searchKey, setSearchKey] = useState(null)
     const [searchBy, setSearchBy] = useState('')
     const [debouncedFetch] = useState(() => _.debounce((val) => setSearchKey(val), 800));
 
-    const headerComp = () => {
+    const tableHeader = () => {
         return (
             <div id='tableHeader' className="table-header">
                 {props.headerText}
@@ -62,16 +59,16 @@ const SSPaginatorTable = (props) => {
     }, [rowsPerPage, first, searchKey])
 
     useEffect(() => {
-        if (loading){
+        if (loading) {
             let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
-            filterInputs.forEach((one:HTMLElement) => {
-                if (one === document.activeElement){
+            filterInputs.forEach((one: HTMLElement) => {
+                if (one === document.activeElement) {
                     setReturnFocusTo(one.id)
                     one.blur()
                 }
             })
         } else {
-            document.getElementById(returnFocusTo).focus()
+            document.getElementById(returnFocusTo)?.focus()
             setReturnFocusTo('')
         }
     }, [loading])
@@ -83,9 +80,9 @@ const SSPaginatorTable = (props) => {
 
     const clearFilterInputsExcept = (except) => {
         let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
-        filterInputs.forEach((one) => {
+        filterInputs.forEach((one: HTMLInputElement) => {
             if (one.id != except) {
-                (one as HTMLInputElement).value = ''
+                one.value = ''
             }
         })
     }
@@ -126,7 +123,7 @@ const SSPaginatorTable = (props) => {
                 first={first}
                 rows={rowsPerPage}
                 rowsPerPageOptions={[10, 20, 50]}
-                header={headerComp()}
+                header={tableHeader()}
                 totalRecords={totalItems}
                 lazy
                 onPage={onPage}
