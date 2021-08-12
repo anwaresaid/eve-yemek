@@ -97,6 +97,9 @@ export const translations = {
   email: 'Электронная почта',
   city: 'Город',
   district: 'Район',
+  cities: 'Города',
+  districts: 'Районы',
+  districtsInX: 'Районы в {{x}}',
   rating: 'Рейтинг',
   approximateDeliveryTime: 'Приблизительное время доставки',
   fullAddress: 'Полный адрес',
@@ -167,6 +170,11 @@ export const translations = {
   passwordsDoesntMatch: 'Несовпадение паролей',
   changeYourPassword: 'Изменить пароль',
   redirectingToLoginPage: 'Вы будете перенаправлены на страницу входа',
+
+  changePassword: 'Изменить пароль',
+  updateUserPassword: 'Обновить пароль пользователя',
+  enterANewPasswordForThisUser: 'Введите новый пароль для этого пользователя',
+  updatedPassword: 'Пароль обновлен',
 
   //Transfers
   totalAmount: 'Общая сумма',
@@ -283,6 +291,31 @@ export const translations = {
   replaceImageWithDefault: 'заменить изображение изображением по умолчанию',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Эта функция предназначена для администраторов для замены устаревших изображений',
   send: 'Отправить',
+  overview: 'обзор',
+  areas: 'области',
+  areasOfResponsibility: 'Ответственные области', 
   havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
-  executeTransfer: 'выполнить перевод'
+  executeTransfer: 'выполнить перевод',
+
+  versionCode: 'номер версии',
+  forgotPassword: 'забыл пароль',
+  resetPassword: 'Сброс пароля',
+  didYouForgetYourPassword: 'Забыли пароль?',
+  clickHere: 'Kликните сюда',
+
+  anEmailHasBeenSentToYourAddress: 'На ваш адрес отправлено электронное письмо.',
+  errorTryingToReachYourEmail: 'Не удалось получить ваш адрес электронной почты',
+  notes: 'Примечания',
+
+  deliveryCount: 'Количество доставок',
+  paymentInformation: 'Платежная информация',
+  deliveryInformation: 'информация о доставке',
+
+
+  variants: 'Вариант',
+  addNewVariant: 'Добавить новый вариант',
+  variantNamesCannotBeEmpty: 'Имена вариантов не могут быть пустыми',
+  deliveries: 'Доставки',
+
+  noData: 'Нет данных'
 };

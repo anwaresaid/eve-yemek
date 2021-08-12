@@ -20,6 +20,7 @@ import { Button } from "primereact/button";
 import InputContainer from "../inputs/inputContainer";
 import FormColumn from "../inputs/formColumn";
 import InputGroup from "../inputs/inputGroup";
+import { languageOptions } from "../../helpers/constants";
 
 
 
@@ -47,6 +48,7 @@ const General=() => {
             tax_rate: 0,
             is_delivery_charged: false,
             delivery_charge: 0,
+            version_code: 0,
         },
         validate: (data) => {
             let errors: any = {};
@@ -79,6 +81,7 @@ const General=() => {
             formik.values.tax_rate = settings.tax_rate;
             formik.values.is_delivery_charged = settings.is_delivery_charged;
             formik.values.delivery_charge = settings.delivery_charge;
+            formik.values.version_code = settings.version_code;
             setDataSetted(true);
         } else {
             dispatch(listSettings());
@@ -237,35 +240,32 @@ const General=() => {
                     <InputContainer
                         name="languageSelect"
                         label={i18n.t("selectLanguage")}
-                        noErrorLabel={true}
+                        formiks={inputFormiks}
                         size={3}
                         component={Dropdown}
                         iprops={{
                             value: i18n.language,
-                            options: [
-                                {
-                                    value: "en",
-                                    label: "English",
-                                },
-                                {
-                                    value: "ar",
-                                    label: "اَلْعَرَبِيَّةُ",
-                                },
-                                {
-                                    value: "ru",
-                                    label: "Русский ",
-                                },
-                                {
-                                    value: "tr",
-                                    label: "Türkçe",
-                                },
-                            ],
+                            options: languageOptions,
                             onChange: (e) => {
                                 i18n.changeLanguage(
                                     e.value
                                 );
                                 router.reload();
                             },
+                        }}
+                    />
+                    <InputContainer
+                        name="version_code"
+                        label={i18n.t("versionCode")}
+                        formiks={inputFormiks}
+                        size={3}
+                        component={InputNumber}
+                        iprops={{
+                            value: formik.values
+                                .version_code,
+                            onValueChange:
+                                formik.handleChange,
+                            showButtons: true,
                         }}
                     />
                 </InputGroup>

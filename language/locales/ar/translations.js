@@ -97,6 +97,9 @@ export const translations = {
   email: 'البريد الإلكتروني',
   city: 'المدينة',
   district: 'المقاطعة',
+  cities: 'مدن',
+  districts: 'المقاطعات',
+  districtsInX: 'المقاطعات في {{x}}',
   rating: 'التقييم',
   approximateDeliveryTime: 'زمن التوصيل تقريباَ',
   fullAddress: 'العنوان بالكامل',
@@ -167,6 +170,11 @@ export const translations = {
   passwordsDoesntMatch: 'رمز المرور ليس متطابقا',
   changeYourPassword: 'تغيير الرمز السري',
   redirectingToLoginPage: 'يتم إعادة توجيهك إلى صفحة تسجيل الدخول',
+
+  changePassword: 'تغيير كلمة المرور',
+  updateUserPassword: 'تحديث كلمة مرور المستخدم',
+  enterANewPasswordForThisUser: 'أدخل كلمة مرور جديدة لهذا المستخدم', 
+  updatedPassword: 'تم تحديث كلمة السر',
 
   //Transfers
   totalAmount: 'إجمالي',
@@ -283,6 +291,30 @@ export const translations = {
   replaceImageWithDefault: 'استبدال الصورة بالصورة الافتراضية',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'هذه الميزة للمشرفين لاستبدال الصور القديمة',
   send: 'إرسال',
+  overview: 'نظرة عامة',
+  areas: 'المناطق',
+  areasOfResponsibility: 'المناطق المسؤول عنها',
   havingTroubleLoggingIn: 'هل تواجه مشكلة في تسجيل الدخول؟',
-  executeTransfer: 'تنفيذ التحويل'
+  executeTransfer: 'تنفيذ التحويل',
+
+  versionCode: 'رقم النسحة',
+  forgotPassword: 'نسيت كلمة المرور',
+  resetPassword: 'إعادة تعيين كلمة المرور',
+  didYouForgetYourPassword: 'هل نسيت كلمة السر؟',
+  clickHere: 'انقر هنا',
+
+  anEmailHasBeenSentToYourAddress: 'تم إرسال بريد إلكتروني إلى عنوانك.',
+  errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني',
+  notes: 'ملاحظات ',
+
+  deliveryCount: 'عدد التسليمات',
+  paymentInformation: 'معلومات الدفع',
+  deliveryInformation: 'معلومات التوصيل',
+
+  variants: 'خيارات',
+  addNewVariant: 'أضف خيارًا جديدًا',
+  variantNamesCannotBeEmpty: 'لا يمكن أن تكون أسماء المتغيرات فارغة',
+  deliveries: 'التسليمات',
+
+  noData: 'لايوجد بيانات'
 };

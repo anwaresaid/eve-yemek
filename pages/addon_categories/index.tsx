@@ -1,52 +1,41 @@
 import { useRouter } from 'next/router';
-import { Button } from 'primereact/button';
-import { Column } from 'primereact/column';
-import { InputText } from 'primereact/inputtext';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'typesafe-actions';
 import { i18n } from '../../language';
-import AddOnCategoryTable from '../../components/tables/addonCategoryTable';
-import { listAddonCategory } from '../../store/actions/addon-category.action';
-import _ from 'lodash'
-import Loading from '../../components/Loading';
+import SSPaginatorTable from '../../components/SSPaginatorTable';
+import editButton from '../../components/InTableComponents/editButton';
+import AddOnCategoryService from '../../store/services/addon-category.service';
 
 const AddonCategoriesList = () => {
-  const [globalFilter, setGlobalFilter] = useState(null);
-  const dispatch = useDispatch();
+
   const router = useRouter();
-
-  const res = useSelector((state: RootState) => state.listAddonCategory);
-  const { loading, success, addonCat: addonCategories } = res;
   const path = 'addon_categories';
-  useEffect(() => {
-    dispatch(listAddonCategory());
-  }, [dispatch]);
+  const addOnCategoryService = new AddOnCategoryService();
 
-  // global filter
-  const header = (
-    <div className='table-header'>
-      {i18n.t('addonCategories')}
-      <span className='p-input-icon-left'>
-        <i className='pi pi-search' />
-        <InputText
-          type='search'
-          onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)}
-          placeholder='Ara'
-        />
-      </span>
-    </div>
-  );
+  const columns = [
+    { field: 'id', header: "ID" },
+    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search' },
+    { field: 'enum', header: i18n.t('type'), filter: true, filterType: 'search' },
+    { field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }
+  ]
+
+  const fetch = (offset, limit, fields = null, text = null) => {
+    return new Promise((resolve, reject) => {
+      addOnCategoryService.getAllAddonCategories(offset, limit, fields, text)
+        .then(res => resolve(res))
+        .catch(err => reject(err))
+    })
+  }
 
   return (
     <div id="addonCategoryTabe">
-      {!loading && addonCategories &&
-        <>
-          <h1 id="addonCatHeader">{i18n.t('addonCategories')}</h1>
-          <AddOnCategoryTable addonCategories={_.without(_.map(addonCategories.items, (item) => { if (!item.is_deleted) return item }), undefined)}>
-          </AddOnCategoryTable>
-        </>}
-      {loading && <Loading />}
+      <h1 id="addonCatHeader">{i18n.t('addonCategories')}</h1>
+      <SSPaginatorTable
+        headerText={i18n.t('listOfX', { x: i18n.t('addonCategories') })}
+        fetch={fetch}
+        columns={columns}
+        emptyMessage={i18n.t('noXfound', { x: i18n.t('addonCategories') })}
+      >
+      </SSPaginatorTable>
     </div>
   );
 };

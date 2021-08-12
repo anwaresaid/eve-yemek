@@ -25,10 +25,21 @@ const OrdersTable = (props) => {
         );
     }
 
+    const StatusBodyTemplate = (rowData) => {
+        return (
+            <div>
+                <React.Fragment>
+                    <span className="p-column-title"> {i18n.t('status')} </span>
+                    <span> {OrderStatus(rowData.status)} </span>
+                </React.Fragment>
+            </div>
+        );
+    }
+
     const columns = [
         {field: 'order', header: '#'},
         {field: 'restaurant.name', header: i18n.t('restaurant')},
-        {field: 'status', header: i18n.t('status'), body: (rowData)=>OrderStatus(rowData.status, rowData.delivery_status)},
+        {field: 'status', body: StatusBodyTemplate},
         {field: 'total_amount', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.total_amount, rowData.currency_type)},
         {field: 'howLongAgo', header: i18n.t('orderTime')}, 
         {field: 'ops', header: i18n.t('operations'), body: (row) => editButton(row)}

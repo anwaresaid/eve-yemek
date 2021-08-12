@@ -97,6 +97,9 @@ export const translations = {
   email: 'E-Posta',
   city: 'Şehir',
   district: 'İlçe',
+  cities: 'İller',
+  districts: 'İlçeler',
+  districtsInX: '{{x}} içindeki ilçeler',
   rating: 'Derece',
   approximateDeliveryTime: 'Tahmini Teslim Zamanı',
   fullAddress: 'Tam Adres',
@@ -167,6 +170,11 @@ export const translations = {
   passwordsDoesntMatch: 'Şifreler eşleşmiyor',
   changeYourPassword: 'Şifreni Değiştir',
   redirectingToLoginPage: 'Giriş yap sayfasına yönlendiriliyorsunuz',
+
+  changePassword: 'Şifre değiştir',
+  updateUserPassword: 'Kullanıcı Şifresini Güncelle',
+  enterANewPasswordForThisUser: 'Bu kullanıcı için yeni bir şifre girin',
+  updatedPassword: 'Şifre güncellendi',
 
   //Transfers
   totalAmount: 'Toplam Tutar',
@@ -281,6 +289,30 @@ export const translations = {
   replaceImageWithDefault: 'Resmi varsayılan resimle değiştir',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'Bu özellik, Yöneticilerin eski resimleri değiştirmesi içindir',
   send: 'Gönder',
+  overview: 'Genel Bakış',
+  areas: 'Alanlar',
+  areasOfResponsibility: 'Sorumluluk bölgeleri',
   havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
-  executeTransfer: 'Transferi Yürüt'
+  executeTransfer: 'Transferi Yürüt',
+
+  versionCode: 'Versiyon Numarası',
+  forgotPassword: 'Şifremi Unuttum',
+  resetPassword: 'Şifre yenileme',
+  didYouForgetYourPassword: 'Parolanızı mı unuttunuz?',
+  clickHere: 'Buraya tıklayın',
+
+  anEmailHasBeenSentToYourAddress: 'Adresinize bir e-posta gönderildi.',
+  errorTryingToReachYourEmail: 'E-postanıza ulaşılırken hata oluştu',
+  notes: 'Notlar',
+
+  deliveryCount: 'Teslimat sayısı',
+  paymentInformation: 'Ödeme Bilgileri',
+  deliveryInformation: 'Teslimat Bilgileri',
+
+  variants: 'Seçenekler',
+  addNewVariant: 'Yeni seçenek ekle',
+  variantNamesCannotBeEmpty: 'Seçenekler boş olmamalıdır',
+  deliveries: 'Teslimat',
+
+  noData: 'Veri yok'
 };

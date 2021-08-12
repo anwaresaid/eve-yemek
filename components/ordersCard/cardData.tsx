@@ -81,7 +81,7 @@ const CardData = () => {
                                     <br />
                                     <div id='orderIdDiv'><b>{i18n.t('order')} ID: </b>{orderData.order}</div>
                                     <div id='createdAtDiv'><b>{i18n.t('orderPlaced')}: </b>{fromNowDate(orderData.createdAt)}</div><br/>
-                                    <div id='orderStatusDiv'><b>{i18n.t('orderStatus')}: </b>{OrderStatus(orderData.status, orderData.delivery_status)}</div><br/>
+                                    <div id='orderStatusDiv'><b>{i18n.t('orderStatus')}: </b>{OrderStatus(orderData.status)}</div><br/>
                                 </div>
                             </div>
 
@@ -92,6 +92,7 @@ const CardData = () => {
                             <div className="p-grid">
                                 <div id='dividerDiv' className="p-col">
                                     <OrderDivider id='orderDivider' label={i18n.t('paymentGateway')} value={orderData.payment_type} />
+                                    <OrderDivider id='notes' label={i18n.t('notes')} value={orderData.notes} />
                                 </div>
                                 <div id='orderDetailsDiv' className="p-col-5">
                                     <div>

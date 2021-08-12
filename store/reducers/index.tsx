@@ -6,7 +6,7 @@ import {
   createAddonCategoryReducer,
   updateAddonCategoryReducer,
 } from './addon-category.reducer';
-import { changePasswordReducer, loginReducer } from './user.reducer';
+import { changePasswordReducer, loginReducer, resetPasswordReducer, resetPasswordRequestReducer } from './user.reducer';
 import {
   createRestaurantReducer,
   findRestaurantReducer,
@@ -53,10 +53,14 @@ import { createNotificationReducer, sendNotificationReducer } from './send_notif
 import { supportedCountriesReducer } from './addresses.reducer';
 import { sendSmsReducer } from './send_sms';
 import { listUntransferedPaymentsReducer } from './payments.reducers';
+import { serviceDemandReducer } from './service-demands.reducer';
+import { listDeliveriesReducer } from './deliveries.reducer';
 
 export default combineReducers({
   login: loginReducer,
   changePassword: changePasswordReducer,
+  resetPasswordRequest: resetPasswordRequestReducer,
+  resetPassword: resetPasswordReducer,
 
   dashboardReport: dashboardReportReducer,
 
@@ -117,5 +121,8 @@ export default combineReducers({
 
   supportedCountries: supportedCountriesReducer,
 
-  untransferedPayments: listUntransferedPaymentsReducer
+  untransferedPayments: listUntransferedPaymentsReducer,
+  serviceDemand: serviceDemandReducer,
+
+  listDeliveries:listDeliveriesReducer,
 });

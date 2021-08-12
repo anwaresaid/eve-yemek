@@ -97,6 +97,9 @@ export const translations = {
   email: 'Email',
   city: 'City',
   district: 'District',
+  cities: 'Cities',
+  districts: 'Districts',
+  districtsInX: 'Districts in {{x}}',
   rating: 'Rating',
   approximateDeliveryTime: 'Approximate Delivery Time',
   fullAddress: 'Full Address',
@@ -164,6 +167,11 @@ export const translations = {
   passwordsDoesntMatch: 'Passwords do not match',
   changeYourPassword: 'Change Your Password',
   redirectingToLoginPage: 'Redirecting to the login page',
+
+  changePassword: 'Change Password',
+  updateUserPassword: 'Update User Password',
+  enterANewPasswordForThisUser: 'Enter a new password for this user',
+  updatedPassword: 'Password updated',
 
   // Transfers
   totalAmount: 'Total Amount',
@@ -281,7 +289,32 @@ export const translations = {
   replaceImageWithDefault: 'Replace image with default',
   thisFeatureIsForAdminsToReplaceLegacyImages: 'This feature is for Admins, to replace legacy default images',
   send: 'Send',
+  overview: 'Overview',
+  areas: 'Areas',
+  areasOfResponsibility: 'Areas of responsibility',
   havingTroubleLoggingIn: 'Having trouble logging in?',
-  executeTransfer: 'Execute Transfer'
+  executeTransfer: 'Execute Transfer',
+
+  versionCode: 'Version Code',
+  forgotPassword: 'Forgot Password',
+  resetPassword: 'Reset Password',
+  didYouForgetYourPassword: 'Forgot Password?',
+  clickHere: 'Click here',
+  
+  anEmailHasBeenSentToYourAddress: 'An e-mail has been sent to your address.',
+  errorTryingToReachYourEmail: 'Error trying to reach your email',
+  notes: 'Notes',
+
+  deliveryCount: 'Delivery Count',
+  paymentInformation: 'Payment Information',
+  deliveryInformation: 'Delivery Information',
+
+
+  variants: 'Options',
+  addNewVariant: 'Add new option',
+  variantNamesCannotBeEmpty: 'Option names cannot be empty',
+  deliveries: 'Deliveries',
+
+  noData: 'No Data'
 
 };

@@ -1,11 +1,11 @@
-import restaurantOwnerList from '../../pages/users/restaurant_owners';
 import UsersListsService from '../services/userslists.service';
 import { usersListTypes } from '../types/userslists.type';
-import { useDispatch } from 'react-redux';
+
 import {
   parseDateInAllRows,
   parseDateInOneRow,
 } from '../../helpers/dateFunctions';
+import AddressesService from '../services/addresses.service';
 
 export const listCustomers = () => async (dispatch, getState) => {
   try {
@@ -14,7 +14,7 @@ export const listCustomers = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('customer');
+    const result = await usersListsService.getUsersByRole('customer', 0, 9999);
 
     dispatch({
       type: usersListTypes.CUSTOMER_LIST_SUCCESS,
@@ -38,7 +38,7 @@ export const listRestaurantOwners = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('restaurant_owner');
+    const result = await usersListsService.getUsersByRole('restaurant_owner', 0, 9999);
 
     dispatch({
       type: usersListTypes.RESTAURANT_OWNER_LIST_SUCCESS,
@@ -62,11 +62,12 @@ export const listDeliveryScouts = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('delivery_scout');
-
+    const result = await usersListsService.getDeliveryScouts(0, 9999)
+  
+  
     dispatch({
       type: usersListTypes.DELIVERY_SCOUT_LIST_SUCCESS,
-      payload: parseDateInAllRows(result),
+      payload: parseDeliveryScoutData(result),
     });
   } catch (error) {
     dispatch({
@@ -86,7 +87,7 @@ export const listCustomerService = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('customer_service');
+    const result = await usersListsService.getUsersByRole('customer_service', 0, 9999);
 
     dispatch({
       type: usersListTypes.CUSTOMER_SERVICE_LIST_SUCCESS,
@@ -110,6 +111,7 @@ export const getSingleUser = (id) => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
+    const addressService = new AddressesService();
 
     const result = await usersListsService.getSingleUser(id);
 
@@ -161,7 +163,7 @@ export const addUser = (data) => async (dispatch, getState) => {
   }
 };
 
-export const updateUser = (id, data, noTableEdit?:boolean) => async (dispatch, getState) => {
+export const updateUser = (id, data, noTableEdit?: boolean) => async (dispatch, getState) => {
   try {
     dispatch({
       type: usersListTypes.UPDATE_USER_REQUEST,
@@ -176,7 +178,7 @@ export const updateUser = (id, data, noTableEdit?:boolean) => async (dispatch, g
       payload: result,
     });
 
-    if(noTableEdit !== true){
+    if (noTableEdit !== true) {
       var tempRoles = [...data.roles, ...result.roles];
       tempRoles = tempRoles.filter(onlyUnique);
 
@@ -193,7 +195,7 @@ export const updateUser = (id, data, noTableEdit?:boolean) => async (dispatch, g
       type: usersListTypes.UPDATE_USER_FAIL,
       payload:
         error.response && error.response.data.error
-          ? error.response.data.error?.response.message[0]
+          ? error.response.data.error?.message
           : 'Error',
     });
   }
@@ -231,7 +233,7 @@ function updateEditedRowInStore(roles, result, dispatch) {
         });
         break;
       default:
-  
+
     }
   }
 }
@@ -243,7 +245,7 @@ export const listAllUsers = () => async (dispatch, getState) => {
     });
 
     const usersListsService = new UsersListsService();
-    const result = await usersListsService.getUsersByRole('');
+    const result = await usersListsService.getUsersByRole('', 0, 9999);
 
     dispatch({
       type: usersListTypes.ALL_USER_LIST_SUCCESS,
@@ -259,3 +261,15 @@ export const listAllUsers = () => async (dispatch, getState) => {
     });
   }
 };
+
+const parseDeliveryScoutData = (data) => {
+  for (let i = 0; i < data.length; i++){
+    let deliveryCount = data[i].count
+    let scout = data[i].user[0]
+    delete data[i].count
+    delete data[i].user
+    data[i] = { ...data[i], ...scout, delivery_count: deliveryCount}
+    data[i] = parseDateInOneRow(data[i])
+  }
+  return data
+}

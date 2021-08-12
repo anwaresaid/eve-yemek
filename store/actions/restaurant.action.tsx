@@ -40,12 +40,14 @@ export const createRestaurant = (restaurantCreate) => async (dispatch, getState)
       payload: res,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: restaurantsTypes.RESTAURAT_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.error.message
           : error.response.data.error.message,
+          
     });
   }
 };
@@ -75,14 +77,14 @@ export const updateRestaurant = (id, restaurantUpdate) => async (dispatch, getSt
 
 
 
-export const listRestaurant = () => async (dispatch, getState) => {
+export const listRestaurant = (offset, limit) => async (dispatch, getState) => {
   try {
     dispatch({
       type: restaurantsTypes.RESTAURAT_LIST_REQUEST,
     });
 
     const restaurantService = new RestaurantService;
-    const res = await restaurantService.getRestaurants();
+    const res = await restaurantService.getRestaurants(offset, limit);
     dispatch({
       type: restaurantsTypes.RESTAURAT_LIST_SUCCESS,
       payload: parseDateInAllRows(res),

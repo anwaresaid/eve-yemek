@@ -1,30 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import AddonsTable from '../../components/tables/addonsTable';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'typesafe-actions';
-import { listCoupons } from '../../store/actions/coupons.action';
-import CouponsTable from '../../components/tables/couponsTable';
-import Loading from '../../components/Loading';
 import { i18n } from '../../language';
-import _ from 'lodash'
+import activeTag from '../../components/InTableComponents/activeTag';
+import SSPaginatorTable from '../../components/SSPaginatorTable';
+import CouponService from '../../store/services/coupons.service';
 
 const index = () => {
-  const dispatch = useDispatch();
 
-  const res = useSelector((state: RootState) => state.listCoupons);
-  const { loading, coupons } = res;
+  const couponsService = new CouponService();
 
-  useEffect(() => {
-    dispatch(listCoupons());
-  }, [dispatch]);
+  const columns = [
+    { field: 'id', header: 'ID' },
+    { field: 'coupon_code', header: i18n.t('couponCode'), filter: true, filterType: 'search'},
+    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search' },
+    { field: 'description', header: i18n.t('description'), filter: true, filterType: 'search' },
+    { field: 'expire_date', header: i18n.t('expiration') },
+    { field: 'discount_type', header: i18n.t('couponType') },
+    { field: 'discount', header: i18n.t('discount') },
+    { field: 'max_usage', header: i18n.t('maximumUsage') },
+    {
+      field: 'active',
+      header: i18n.t('active'),
+      body: (rowData) => activeTag(rowData.active),
+    }
+  ];
+
+  const fetch = (offset, limit, fields = null, text = null) => {
+    return new Promise((resolve, reject) => {
+      couponsService.getAllCoupons(offset, limit, fields, text)
+        .then(res => resolve(res))
+        .catch(err => reject(err))
+    })
+  }
 
   return (
-    <div id="couponsTabe">
-      {!loading && coupons &&
-        <>
-          <CouponsTable coupons={_.without(_.map(coupons.items, (item) => { if (!item.is_deleted) return item }), undefined)} />
-        </>}
-      {loading && <Loading />}
+    <div id="couponsTable">
+      <SSPaginatorTable
+        headerText={i18n.t('listOfX', { x: i18n.t('coupons') })}
+        fetch={fetch}
+        columns={columns}
+        emptyMessage={i18n.t('noXfound', { x: i18n.t('coupons') })}
+      >
+      </SSPaginatorTable>
     </div>
   );
 };

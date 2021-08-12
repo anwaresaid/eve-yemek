@@ -1,10 +1,16 @@
 import axios from "../../helpers/_axios";
 
-export default class AddonService {
+export default class AddOnsService {
 
-    async getAddons() {
-        const { data: { data } } = await axios.get('/add-ons');
-        return data
+    async getAllAddOns(offset, limit, fields = null, text = null) {
+        var query
+        if (!fields || fields == '' || !text || text == '') {
+            query = '/add-ons?offset=' + offset + '&limit=' + limit
+        } else {
+            query = '/add-ons?offset=' + offset + '&limit=' + limit + '&fields=' + fields + '&text=' + text
+        }
+        const { data: { data } } = await axios.get(query)
+        return data;
     }
 
     async createAddons(addons) {

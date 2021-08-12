@@ -13,11 +13,17 @@ import { connect, useSelector } from "react-redux";
 
 import userActions from "../../store/actions/user.action";
 import { i18n } from "../../language";
+import Link from "next/link";
+import InputContainer from "../../components/inputs/inputContainer";
+import { Dropdown } from "primereact/dropdown";
+import { useRouter } from "next/router";
+import { languageOptions } from "../../helpers/constants";
 
 const Login = (props) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [remember, setRemember] = useState(false);
+	const router = useRouter();
 
 	const handleSubmit = async (e) => {
 
@@ -35,6 +41,12 @@ const Login = (props) => {
 	return (
 		<>
 			<S.Wrapper>
+				<Dropdown className="p-mx-3 p-mt-3" placeholder={i18n.t('selectLanguage')} options={languageOptions} onChange ={ (e) => {
+					i18n.changeLanguage(
+						e.value
+					);
+					router.reload();
+				}} 	value={i18n.language}></Dropdown>
 				<S.LoginWrapper>
 					<Card className='p-shadow-5'>
 						<form onSubmit={(e) => handleSubmit(e)}>
@@ -74,9 +86,12 @@ const Login = (props) => {
 							<div className="p-error">
 								{props.error}
 							</div>
+							<div>
+								<Link href='forgot_password'>{i18n.t('didYouForgetYourPassword')}</Link>
+							</div>
 							{
 								props.failed_attempts > 0 && props.attempts === props.failed_attempts &&
-								<a href="https://eve-yemek.com/contact" target="_blank" style={{textDecoration:"none"}}>{i18n.t('havingTroubleLoggingIn')}</a>
+								<a href="https://eve-yemek.com/contact" target="_blank" style={{ textDecoration: "none" }}>{i18n.t('havingTroubleLoggingIn')} <u>{i18n.t('clickHere')}</u></a>
 							}
 							<Button
 								type="submit"

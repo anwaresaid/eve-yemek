@@ -22,6 +22,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { addonCategoryTypes } from '../../store/types/addon-category.type';
 import auth from '../../helpers/core/auth';
 import { listRestaurantOwners } from '../../store/actions/userslists.action';
+import BackBtn from '../../components/backBtn';
 
 export const AddonCategoryEdit = () => {
   const dispatch = useDispatch();
@@ -140,6 +141,7 @@ export const AddonCategoryEdit = () => {
 
   return (
     <div id='edit_Add_On_Category'>
+      <BackBtn router={router}/>
       <h1 id='editHeader'>Kategori Detayi</h1>
       <Toast id='toastMessage' ref={toast}></Toast>
       {!loading && detailsSuccess ? (
@@ -198,7 +200,9 @@ export const AddonCategoryEdit = () => {
                         iprops={{
                           value: formik.values.create_user_id,
                           onChange: formik.handleChange,
-                          options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
+                          options: owners?.items.map((one) => { return { label: one.name, value: one.id } }),
+                          filter: true,
+                          filterBy: "label",
                         }}
                       />
                     </InputGroup>
