@@ -195,8 +195,8 @@ const RestaurantDataInput = (props) => {
                 full_address: tmpData.full_address,
                 latitude: tmpData.latitude,
                 longitude: tmpData.longitude,
-                city: tmpData.country_code === 'TR' ? tmpData.city : '0',
-                state: tmpData.country_code === 'TR' ? tmpData.town : '0',
+                city: tmpData.city ,
+                state: tmpData.town,
                 postal_code: tmpData.postal_code,
                 country_code: tmpData.country_code,
                 country: tmpData.country_code === 'TR' ? 'Turkey' : (tmpData.country_code === 'LY' ? 'Libya' : '')
