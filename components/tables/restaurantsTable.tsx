@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import * as S from '../../styles/food/food.list.style'
 import { useRouter } from 'next/router';
 import editButton from "../InTableComponents/editButton";
 import activeTag from "../InTableComponents/activeTag";
-import Header from '../InTableComponents/Header';
 import { i18n } from "../../language";
 import SSPaginatorTable from "../SSPaginatorTable";
-import { detailedDate, fromNowDate } from "../../helpers/dateFunctions";
+import { detailedDate } from "../../helpers/dateFunctions";
 
 const RestaurantsTable = (props) => {
     const router = useRouter();
