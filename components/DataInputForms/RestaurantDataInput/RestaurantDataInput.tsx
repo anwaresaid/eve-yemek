@@ -438,13 +438,18 @@ const RestaurantDataInput = (props) => {
                                 }} />
                             </InputGroup>
 
-                            {
-                                formik.values.country_code === 'TR' &&
                                 <InputGroup>
                                     <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
                                         value: formik.values.city,
-                                        onChange: (e) => { handleTrCityUpdate(e.value); formik.handleChange(e); },
-                                        options: TrCities,
+                                        onChange: (e) => {formik.values.country_code == 'TR'?(
+                                        handleTrCityUpdate(e.value), 
+                                        formik.handleChange(e)):
+                                        (
+                                            handleLyCityUpdate(e.value), formik.handleChange(e)
+                                        )
+                                         },
+
+                                        options: formik.values.country_code =='TR'? TrCities:LyCities,
                                         placeholder: i18n.t('city'),
                                         filter: true,
                                         filterBy: "name",
@@ -455,7 +460,7 @@ const RestaurantDataInput = (props) => {
                                     <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
                                         value: formik.values.town,
                                         onChange: formik.handleChange,
-                                        options: TrDistricts,
+                                        options: formik.values.country_code =='TR'? TrDistricts:LyDistricts,
                                         placeholder: i18n.t('district'),
                                         filter: true,
                                         filterBy: "name",   
@@ -463,34 +468,6 @@ const RestaurantDataInput = (props) => {
                                         optionValue: "name"
                                     }} />
                                 </InputGroup>
-                            }
-                            {
-                                formik.values.country_code === 'LY' &&
-                                <InputGroup>
-                                    <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                        value: formik.values.city,
-                                        onChange: (e) => { handleLyCityUpdate(e.value); formik.handleChange(e); },
-                                        options: LyCities,
-                                        placeholder: i18n.t('city'),
-                                        filter: true,
-                                        filterBy: "name",
-                                        optionLabel: "name",
-                                        optionValue: "name",
-                                    }} />
-
-                                    <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
-                                        value: formik.values.town,
-                                        onChange: formik.handleChange,
-                                        options: LyDistricts,
-                                        placeholder: i18n.t('district'),
-                                        filter: true,
-                                        filterBy: "name",   
-                                        optionLabel: "name",
-                                        optionValue: "name"
-                                    }} />
-                                </InputGroup>
-                            }
-
                             <InputGroup>
                                 <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.latitudeInt,
