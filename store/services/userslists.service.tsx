@@ -1,13 +1,18 @@
 import axios from '../../helpers/_axios';
 
 export default class UsersListsService {
-  async getUsersByRole(role) {
-    const { data: { data } } = await axios.get('/users?fields=roles&text=' + role);
+  async getUsersByRole(role, offset, limit) {
+    const { data: { data } } = await axios.get('/users?fields=roles&text=' + role + '&offset=' + offset + '&limit=' + limit);
     return data;
   }
 
-  async getDeliveryScouts() { // this is among the delivery endpoints, so it is different from Get Users by Role
-    const { data: { data } } = await axios.get('/delivery/all');
+  async getDeliveryScouts(offset, limit) { // this is among the delivery endpoints, so it is different from Get Users by Role
+    const { data: { data } } = await axios.get('/delivery/all?' + 'offset=' + offset + '&limit=' + limit);
+    return data;
+  }
+
+  async getScoutDetails(id) {
+    const { data: { data } } = await axios.get('/delivery/' + id);
     return data;
   }
 
