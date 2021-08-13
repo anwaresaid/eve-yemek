@@ -293,6 +293,7 @@ export const translations = {
   send: 'Отправить',
   overview: 'обзор',
   areas: 'области',
+  areasOfResponsibility: 'Ответственные области', 
   havingTroubleLoggingIn: 'у вас проблемы со входом в систему?',
   executeTransfer: 'выполнить перевод',
 
@@ -306,5 +307,18 @@ export const translations = {
   errorTryingToReachYourEmail: 'Не удалось получить ваш адрес электронной почты',
   notes: 'Примечания',
 
-  print: 'Распечатать'
+
+  print: 'Распечатать',
+
+  deliveryCount: 'Количество доставок',
+  paymentInformation: 'Платежная информация',
+  deliveryInformation: 'информация о доставке',
+
+
+  variants: 'Вариант',
+  addNewVariant: 'Добавить новый вариант',
+  variantNamesCannotBeEmpty: 'Имена вариантов не могут быть пустыми',
+  deliveries: 'Доставки',
+
+  noData: 'Нет данных'
 };

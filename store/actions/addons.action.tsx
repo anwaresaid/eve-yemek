@@ -1,5 +1,5 @@
 import { addonsTypes } from "../types/addons.type";
-import AddonService from "../services/addons.service";
+import AddOnsService from "../services/addons.service";
 
 
 
@@ -9,8 +9,8 @@ export const listAddons = () => async (dispatch, getState) => {
         type: addonsTypes.ADDON_LIST_REQUEST,
       });
   
-      const addonService = new AddonService;
-      const res = await addonService.getAddons();
+      const addonService = new AddOnsService;
+      const res = await addonService.getAllAddOns(0, 9999);
       dispatch({
         type: addonsTypes.ADDON_LIST_SUCCESS,
         payload: res,
@@ -32,7 +32,7 @@ export const createAddons = (addon) => async (dispatch, getState) => {
         type: addonsTypes.ADDON_CREATE_REQUEST,
       });
   
-      const addonService = new AddonService;
+      const addonService = new AddOnsService;
       const res = await addonService.createAddons(addon);
       dispatch({
         type: addonsTypes.ADDON_CREATE_SUCCESS,
@@ -54,7 +54,7 @@ export const findAddons = (id) => async (dispatch, getState) => {
         type: addonsTypes.ADDON_FIND_REQUEST,
       });
   
-      const addonService = new AddonService;
+      const addonService = new AddOnsService;
       const res = await addonService.findAddons(id);
       dispatch({
         type: addonsTypes.ADDON_FIND_SUCCESS,
@@ -76,7 +76,7 @@ export const updateAddons = (id,addon) => async (dispatch, getState) => {
         type: addonsTypes.ADDON_UPDATE_REQUEST,
       });
   
-      const addonService = new AddonService;
+      const addonService = new AddOnsService;
       const res = await addonService.updateAddons(id,addon);
       dispatch({
         type: addonsTypes.ADDON_UPDATE_SUCCESS,

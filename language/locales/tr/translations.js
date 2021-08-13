@@ -291,6 +291,7 @@ export const translations = {
   send: 'Gönder',
   overview: 'Genel Bakış',
   areas: 'Alanlar',
+  areasOfResponsibility: 'Sorumluluk bölgeleri',
   havingTroubleLoggingIn: 'Giriş yapamiyor musunuz?' ,
   executeTransfer: 'Transferi Yürüt',
 
@@ -304,5 +305,18 @@ export const translations = {
   errorTryingToReachYourEmail: 'E-postanıza ulaşılırken hata oluştu',
   notes: 'Notlar',
 
-  print: 'Yazdır'
+
+  print: 'Yazdır',
+
+  deliveryCount: 'Teslimat sayısı',
+  paymentInformation: 'Ödeme Bilgileri',
+  deliveryInformation: 'Teslimat Bilgileri',
+
+  variants: 'Seçenekler',
+  addNewVariant: 'Yeni seçenek ekle',
+  variantNamesCannotBeEmpty: 'Seçenekler boş olmamalıdır',
+  deliveries: 'Teslimat',
+
+  noData: 'Veri yok'
+
 };

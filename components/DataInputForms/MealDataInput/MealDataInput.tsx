@@ -27,6 +27,7 @@ import { foodsTypes } from "../../../store/types/foods.type";
 import { currencyDirectory } from "../../../helpers/constants";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { getSupportedCountries } from "../../../store/actions/addresses.action";
 
 const MealDataInput = (props) => {
 
@@ -37,6 +38,9 @@ const MealDataInput = (props) => {
     const [foodCategoryName, setFoodCategoryName] = useState(null);
     const [currency, setCurrency] = useState('TRY')
     const [restaurantName, setRestaurantName] = useState(null);
+
+    const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
+    const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
 
     const [variants, setVariants] = useState([])
     const [variantsBackup, setVariantsBackup] = useState({})
@@ -107,12 +111,17 @@ const MealDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
+            if(!validateVariants()){
+                toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: i18n.t('variantNamesCannotBeEmpty') })
+                return
+            }
+
             data.variants = variants
             if (!data.description || data.description === null) {
                 data.description = ""
             }
             data.currency_type = currency
-            console.log(data)
+
             if (props.creating) {
                 dispatch(createFood(data));
             } else if (props.updating) {
@@ -120,6 +129,15 @@ const MealDataInput = (props) => {
             }
         }
     });
+
+    const validateVariants = () => {
+        var check = true
+        variants.forEach(v => {
+            if (v.name === "")
+                check = false
+        })
+        return check
+    }
 
     const setRestaurantsDropdownOptions = () => {
         const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id} });
@@ -150,7 +168,7 @@ const MealDataInput = (props) => {
             dispatch(listFoodCategory());
 
         if (!restaurantsSuccess)
-            dispatch(listRestaurant());
+            dispatch(listRestaurant(0, 9999));
 
         if (addOnCategoriesSuccess) {
             setAddonCategoryDropdownOptions();
@@ -177,10 +195,6 @@ const MealDataInput = (props) => {
             setTimeout(() => { router.push('/foods') }, 2000)
             return
         }
-        // if(error){
-        //     toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: error })
-        // }
-
 
         if (props.updating && props.meal) {
             if (updatedFoodLoading || updatedFoodSuccess)
@@ -194,23 +208,38 @@ const MealDataInput = (props) => {
             formik.values.is_veg = props.meal.is_veg;
             formik.values.active = props.meal.active;
             formik.values.featured = props.meal.featured;
-            setVariants(props.meal.variants)
+            setVariants(props.meal.variants.map((v, i) => {return {id: i, ...v}}))
             setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => { return { id: aoc.id, name: aoc.name } }))
         }
 
-    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal]);
+        if (!supportedCountries) {
+            dispatch(getSupportedCountries())
+        }
+
+    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal, supportedCountries]);
 
 
     const onAddNewVariant = () => {
-       let current = [...variants]
-       current.push({name: '', description: '', price: 0})
-       setVariants(current)
+        if(!validateVariants())
+            return
+        let current = [...variants]
+        current.push({id: current.length, name: '', description: '', price: 0 })
+        setVariants(current)
     }
 
     const onVariantsRowEditInit = (event) => {
         let backup = {}
         backup[event.index] = { ...variants[event.index] };
         setVariantsBackup(backup)
+    }
+
+    const onVariantsRowDelete = (id) => {
+        let tempVariants = variants.filter(v => v.id !== id)
+        tempVariants.forEach(v => {
+            if (v.id > id)
+                v.id--
+        })
+        setVariants(tempVariants)
     }
 
     const onVariantsRowEditChange = (event) => {
@@ -247,7 +276,9 @@ const MealDataInput = (props) => {
         let currentRestaurant = restaurants.items?.filter(res => res.id === restaurantID)[0]
         if (!currentRestaurant)
             return
-        setCurrency(currencyDirectory[currentRestaurant.country_code] ?? 'TRY')
+        if (supportedCountries){
+            setCurrency(supportedCountries[currentRestaurant.address.country_code].currency_name_alt ?? 'TRY')
+        } 
     }
 
     return (
@@ -262,7 +293,9 @@ const MealDataInput = (props) => {
                                 <InputGroup>
                                     <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
                                         value: formik.values.restaurant_id,
-                                        onChange: (e) => {formik.handleChange(e); setCurrencyByRestaurant(e.value)},
+
+                                        onChange: (e) => { formik.handleChange(e); setCurrencyByRestaurant(e.value) },
+
                                         options: restaurantName ?? [],
                                         filter: true,
                                         filterBy: "name",
@@ -292,6 +325,8 @@ const MealDataInput = (props) => {
                                         value: formik.values.food_category_id,
                                         onChange: formik.handleChange,
                                         options: foodCategoryName ?? [],
+                                        filter: true,
+                                        filterBy: "name",
                                         placeholder: i18n.t('mealCategory'),
                                         optionLabel: 'name',
                                         optionValue: 'id'
@@ -303,6 +338,8 @@ const MealDataInput = (props) => {
                                     value: selectedAddOnCategories,
                                     options: addonCategoryNames ?? [],
                                     onChange: (e) => setSelectedAddOnCategories(e.target.value),
+                                    filter: true,
+                                    filterBy: "name",
                                     optionLabel: "name",
                                     placeholder: i18n.t('selectAddonCategories'),
                                     display: "addonCategories",
@@ -319,7 +356,9 @@ const MealDataInput = (props) => {
                                     maxFractionDigits: 2,
                                     mode: "currency",
                                     currency: currency,
-                                    min:0,
+
+                                    min: 0,
+
                                     showButtons: true
                                 }}
                                 />
@@ -330,20 +369,24 @@ const MealDataInput = (props) => {
                                     maxFractionDigits: 2,
                                     mode: "currency",
                                     currency: currency,
-                                    min:0,
+
+                                    min: 0,
+
                                     showButtons: true
                                 }}
                                 />
                             </InputGroup>
                         </FormColumn>
 
-                        <DataTable header={<Button label={'Add New Variant'} type="button" onClick={() => onAddNewVariant()}></Button>} emptyMessage={i18n.t('noXfound', { x: i18n.t('variants') })}
+                        <DataTable header={<Button label={i18n.t('addNewVariant')} type="button" onClick={() => onAddNewVariant()}></Button>} emptyMessage={i18n.t('noXfound', { x: i18n.t('variants') })}
                             value={variants} editMode="row" onRowEditInit={onVariantsRowEditInit} onRowEditCancel={onVariantsRowEditCancel}
-                            >
+                        >
                             <Column header={i18n.t('name')} field={"name"} editor={props => inputTextEditor(props)}></Column>
                             <Column header={i18n.t('price')} field={"price"} editor={props => inputNumberEditor(props)}></Column>
                             <Column header={i18n.t('description')} field={"description"} editor={props => inputTextEditor(props)}></Column>
                             <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                            <Column body={(row) => <Button type="button" id={'deleteRow_'+row.id} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-icon-only p-button-secondary"
+                                onClick={() => onVariantsRowDelete(row.id)}></Button>}></Column>
                         </DataTable>
 
                         <FormColumn divideCount={3}>

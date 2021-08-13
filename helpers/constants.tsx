@@ -33,6 +33,7 @@ export const allMenuItems: any = [
     { label: i18n.t("dashboard"), url: "/", roles: ["admin", "restaurant_owner", "customer_service"] },
     { label: i18n.t("liveOrders"), url: "/orders/live", roles: ["restaurant_owner"] },
     { label: i18n.t("orders"), url: "/orders", roles: ["admin", "restaurant_owner", "customer_service"] },
+    { label: i18n.t("deliveries"), url: "/deliveries", roles: ["admin"] },
     {
         label: i18n.t("restaurants"), expanded: true, items: [
             { label: i18n.t("restaurantList"), url: "/restaurants", roles: ["admin", "customer_service"] },
@@ -82,3 +83,17 @@ export const allMenuItems: any = [
     { label: i18n.t("logout"), url: "/auth/logout", roles: ["admin", "restaurant_owner", "customer_service"] }
 
 ];
+
+export const debounce = (func, wait) => {
+    let timeout;
+  
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+  
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
