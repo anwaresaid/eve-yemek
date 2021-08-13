@@ -11,7 +11,7 @@ export const listOrders = () => async (dispatch, getState) => {
       })
   
       const orderService = new OrdersService;
-      const res = await orderService.getOrders()
+      const res = await orderService.getOrders(0, 9999)
       dispatch({
         type: ordersTypes.ORDER_LIST_SUCCESS,
         payload: parseDateInAllRows(res),

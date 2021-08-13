@@ -15,6 +15,7 @@ import { i18n } from '../language';
 import TopBar from '../components/TopBar';
 import { useSocket } from '../helpers/socket';
 import SoundToast from '../components/soundToast';
+import { momentSetLocale } from '../helpers/dateFunctions';
 
 function MyApp(props) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,6 +32,7 @@ function MyApp(props) {
     auth.init();
     authCheck();
     setLoggedIn(auth.loggedIn);
+    momentSetLocale();
     document?.documentElement?.setAttribute('lang', i18n.language);
     document?.documentElement?.setAttribute('dir', i18n.dir());
     hotjar.initialize(parseInt(process.env.NEXT_PUBLIC_HOTJAR_TRACKING_ID), 6);

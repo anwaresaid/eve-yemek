@@ -21,6 +21,7 @@ import { Toast } from 'primereact/toast';
 import auth from '../../../helpers/core/auth';
 import { listRestaurantOwners } from '../../../store/actions/userslists.action';
 import BackBtn from '../../../components/backBtn';
+import { getSupportedCountries } from '../../../store/actions/addresses.action';
 
 export const Index = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,11 @@ export const Index = () => {
 
   const listOwnersState = useSelector((state: RootState) => state.listRestaurantOwners)
   const { loading: loadingOwners, success: ownersSuccess, restaurantOwners: owners } = listOwnersState
+
+  const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
+  const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
+
+  const [currency, setCurrency] = useState('TRY')
 
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -88,6 +94,7 @@ export const Index = () => {
         add_on_category_id: data.addonCat,
         name: data.name,
         price: data.price,
+        currency_type: currency,
         active: data.active,
         create_user_id: data.create_user_id
       };
@@ -96,7 +103,7 @@ export const Index = () => {
   });
   //setting names for dropdowns.
   const settingDropDownNames = () => {
-    const addonCatName = addonCatlist.items.map((res) => {
+    const addonCatName = addonCatlist?.items.map((res) => {
       return { id: res.id, name: res.name };
     });
     setAddonCategoryName(addonCatName);
@@ -128,7 +135,11 @@ export const Index = () => {
         detail: createAddOnError,
       });
     }
-  }, [addonCatSuccess, createAddOnSuccess, owners]);
+
+    if (!supportedCountries) {
+      dispatch(getSupportedCountries())
+    }
+  }, [addonCatSuccess, createAddOnSuccess, owners, supportedCountries]);
 
   const inputFormiks = {
     getFormErrorMessage,
@@ -137,7 +148,7 @@ export const Index = () => {
 
   return (
     <div id='create_Add_ons'>
-      <BackBtn router={router}/>
+      <BackBtn router={router} />
       <Toast id='toastMessage' ref={toast}></Toast>
       <h1 id='createHeader'>{i18n.t('createAddon')}</h1>
       <form onSubmit={formik.handleSubmit}>
@@ -167,7 +178,9 @@ export const Index = () => {
                     iprops={{
                       value: formik.values.create_user_id,
                       onChange: formik.handleChange,
-                      options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
+                      options: owners?.items.map((one) => { return { label: one.name, value: one.id } }),
+                      filter: true,
+                      filterBy: "label",
                     }}
                   />
                 </InputGroup>
@@ -183,6 +196,8 @@ export const Index = () => {
                 optionLabel='name'
                 placeholder='Select an addon category'
                 autoFocus
+                filter
+                filterBy= "name"
                 className={classNames({
                   'p-invalid': isFormFieldValid('addonCat'),
                 })}
@@ -201,11 +216,19 @@ export const Index = () => {
                 <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                   value: formik.values.price,
                   onValueChange: formik.handleChange,
+                  min: 0,
                   mode: "currency",
-                  currency: "TRY",
+                  currency: currency,
                   showButtons: true
                 }}
                 />
+                
+                <InputContainer label={i18n.t('currencyCode')} name="currency_type" size={6} formiks={inputFormiks} component={Dropdown} iprops={{
+                  options: Object.values(supportedCountries ?? {}).map(country => country['currency_name_alt']),
+                  value: currency,
+                  onChange: e => setCurrency(e.value)
+                }} />
+
               </InputGroup>
             </FormColumn>
             <S.SubmitBtn>

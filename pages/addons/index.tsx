@@ -1,45 +1,55 @@
 import React, { useState, useEffect } from "react"
-import AddonsTable from "../../components/tables/addonsTable"
-import { listAddons } from "../../store/actions/addons.action"
-import { listAddonCategory } from "../../store/actions/addon-category.action"
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from "typesafe-actions"
-import _ from 'lodash'
-import Loading from "../../components/Loading"
+import AddOnsService from "../../store/services/addons.service";
 import { i18n } from "../../language"
-import BackBtn from "../../components/backBtn";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+import SSPaginatorTable from "../../components/SSPaginatorTable"
+import { priceBodyTemplate } from "../../components/InTableComponents/price";
+import activeTag from "../../components/InTableComponents/activeTag";
+import editButton from "../../components/InTableComponents/editButton";
 
 
-const restaurantOwnerList = () => {
-  const dispatch = useDispatch();
+const AddOnsList = () => {
   const router = useRouter();
+  const path = 'addons';
+  const addOnsService = new AddOnsService;
 
-  const res = useSelector((state: RootState) => state.listAddons);
-  const { loading, success, addons } = res;
+  const columns = [
+    { field: 'id', header: 'ID' },
+    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search' },
+    { field: 'add_on_category.name', header: i18n.t('category'), body: row => <a href={'/addon_categories/' + row.add_on_category.id} style={{ textDecoration: 'none' }}>{row.add_on_category.name}</a>, filter: true, filterType: 'search' },
+    { field: 'price', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.price, rowData.currency_type) },
+    {
+      field: 'active',
+      header: i18n.t('active'),
+      body: (rowData) => activeTag(rowData.active),
+    },
+    {
+      field: 'ops',
+      header: i18n.t('operations'),
+      body: (rowData) => editButton(rowData, router, path),
+    },
+  ];
 
-  const resCat = useSelector((state: RootState) => state.listAddonCategory);
-  const { success: successCat, addonCat } = resCat;
-
-  useEffect(() => {
-    dispatch(listAddons());
-    if (!addonCat) dispatch(listAddonCategory());
-  }, [dispatch]);
+  const fetch = (offset, limit, fields = null, text = null) => {
+    return new Promise((resolve, reject) => {
+      addOnsService.getAllAddOns(offset, limit, fields, text)
+        .then(res => resolve(res))
+        .catch(err => reject(err))
+    })
+  }
 
   return (
-    <div id='addonsTabe'>
-      {!loading && success && successCat &&
-        <>
-          <h1 id="addonsHeader">{i18n.t('addons')}</h1>
-          <AddonsTable
-            addons={_.without(_.map(addons.items, (item) => { if (!item.is_deleted) return item }), undefined)}
-            addonCat={_.without(_.map(addonCat.items, (item) => { if (!item.is_deleted) return item }), undefined)}
-          ></AddonsTable>
-        </>
-      }
-      {loading && <Loading />}
+    <div id='addOnsTable'>
+      <h1 id="addOnsHeader">{i18n.t('addons')}</h1>
+      <SSPaginatorTable
+        headerText={i18n.t('listOfX', { x: i18n.t('addons') })}
+        fetch={fetch}
+        columns={columns}
+        emptyMessage={i18n.t('noXfound', { x: i18n.t('addons') })}
+      >
+      </SSPaginatorTable>
     </div>
   );
 };
 
-export default restaurantOwnerList;
+export default AddOnsList;
