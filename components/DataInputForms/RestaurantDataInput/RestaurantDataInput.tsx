@@ -22,8 +22,6 @@ import StandardFileUpload from "../../inputs/fileUpload";
 import { InputNumber } from "primereact/inputnumber";
 import { InputSwitch } from "primereact/inputswitch";
 import { Tooltip } from 'primereact/tooltip';
-import jsonCities from "../../../public/data/tr_city.json";
-import jsonDistricts from "../../../public/data/tr_district.json";
 import Loading from "../../Loading";
 import CouponsTable from "../../tables/couponsTable";
 import { Tag } from "primereact/tag";
@@ -199,6 +197,7 @@ const RestaurantDataInput = (props) => {
                 state: tmpData.town,
                 postal_code: tmpData.postal_code,
                 country_code: tmpData.country_code,
+                
                 country: tmpData.country_code === 'TR' ? 'Turkey' : (tmpData.country_code === 'LY' ? 'Libya' : '')
             }
 
@@ -332,7 +331,7 @@ const RestaurantDataInput = (props) => {
         const cityIdFilter = TrCities.filter((c)=> c.name===cityName)
     
         if(cityIdFilter.length!=0){
-        const filteredDistricts = jsonDistricts?.filter((k) => k.il_id === cityIdFilter[0].id)
+        const filteredDistricts = getTurkishDistricts()?.filter((k) => k.il_id === cityIdFilter[0].id)
 
         setTrDistricts(filteredDistricts);
         }
