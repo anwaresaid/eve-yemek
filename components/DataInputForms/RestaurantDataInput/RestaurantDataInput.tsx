@@ -16,14 +16,11 @@ import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
-import { InputMask } from "primereact/inputmask";
 import { InputTextarea } from "primereact/inputtextarea";
 import StandardFileUpload from "../../inputs/fileUpload";
 import { InputNumber } from "primereact/inputnumber";
 import { InputSwitch } from "primereact/inputswitch";
-import { Tooltip } from 'primereact/tooltip';
 import Loading from "../../Loading";
-import CouponsTable from "../../tables/couponsTable";
 import { Tag } from "primereact/tag";
 import { getSupportedCountries } from "../../../store/actions/addresses.action";
 import { ProgressSpinner } from "primereact/progressspinner";
@@ -197,7 +194,7 @@ const RestaurantDataInput = (props) => {
                 state: tmpData.town,
                 postal_code: tmpData.postal_code,
                 country_code: tmpData.country_code,
-                
+
                 country: tmpData.country_code === 'TR' ? 'Turkey' : (tmpData.country_code === 'LY' ? 'Libya' : '')
             }
 
