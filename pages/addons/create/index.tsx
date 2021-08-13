@@ -103,7 +103,7 @@ export const Index = () => {
   });
   //setting names for dropdowns.
   const settingDropDownNames = () => {
-    const addonCatName = addonCatlist.items.map((res) => {
+    const addonCatName = addonCatlist?.items.map((res) => {
       return { id: res.id, name: res.name };
     });
     setAddonCategoryName(addonCatName);
