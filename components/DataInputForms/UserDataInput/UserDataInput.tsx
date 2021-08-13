@@ -89,7 +89,7 @@ const UserDataInput = (props) => {
             } else {
                 data.address.longitude = data.longitude
             }
-            if (!areasOfResponsibility || areasOfResponsibility.length === 0){
+            if ((!areasOfResponsibility || areasOfResponsibility.length === 0) && (formik.values.roles.includes('admin') || formik.values.roles.includes('customer_service'))) {
                 errors.area_of_responsibility = i18n.t('isRequired', { input: i18n.t('areasOfResponsibility') })
             }
 
@@ -102,7 +102,9 @@ const UserDataInput = (props) => {
             delete toSend.latitude
             delete toSend.longitude
 
-            toSend.area_of_responsibility = areasOfResponsibility
+            if (areasOfResponsibility) {
+                toSend.area_of_responsibility
+            }
 
             if (props.updateProps) {
                 toSend.address.id = props.updateProps.data.address.id
@@ -121,7 +123,7 @@ const UserDataInput = (props) => {
     useEffect(() => {
         if (props.updateProps) {
             if (Object.keys(props.updateProps.data).length !== 0) {
-                
+
                 formik.values.name = props.updateProps.data.name
                 formik.values.email = props.updateProps.data.email
                 formik.values.roles = props.updateProps.data.roles
@@ -292,7 +294,7 @@ const UserDataInput = (props) => {
                             <InputGroup>
                                 {supportedCountriesLoading && <ProgressSpinner strokeWidth="1.5" style={{ width: "50px" }} />}
                                 {
-                                    supportedCountriesSuccess &&
+                                    supportedCountriesSuccess && (formik.values.roles.includes('admin') || formik.values.roles.includes('customer_service')) &&
                                     <InputContainer label={i18n.t('areasOfResponsibility')} size={6} name="area_of_responsibility" formiks={inputFormiks}
                                         component={MultiSelect} iprops={{
                                             value: areasOfResponsibility,
