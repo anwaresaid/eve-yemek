@@ -302,5 +302,7 @@ export const translations = {
   
   anEmailHasBeenSentToYourAddress: 'An e-mail has been sent to your address.',
   errorTryingToReachYourEmail: 'Error trying to reach your email',
-  notes: 'Notes'
+  notes: 'Notes',
+
+  print: 'Print'
 };

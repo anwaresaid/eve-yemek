@@ -109,7 +109,7 @@ const CardData = () => {
                         </Card>
                         <div>
                             <ReactToPrint
-                                trigger={() => <Button icon="pi pi-print" label="print" />}
+                                trigger={() => <Button icon="pi pi-print" label={i18n.t('print')} />}
                                 content={() => printReceipt.current}
                             />
                         </div>
