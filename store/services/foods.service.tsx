@@ -23,7 +23,8 @@ export default class FoodsService{
         is_veg: boolean,
         featured: boolean,
         active: boolean,
-        add_on_categories){
+        add_on_categories,
+        variants){
         const {data:{data}} = await axios.post('/foods',{
             name,
             description,
@@ -37,7 +38,8 @@ export default class FoodsService{
             is_veg,
             featured,
             active,
-            add_on_categories
+            add_on_categories,
+            variants
         })
         return data
     }
