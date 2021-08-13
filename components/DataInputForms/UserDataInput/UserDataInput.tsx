@@ -103,7 +103,7 @@ const UserDataInput = (props) => {
             delete toSend.longitude
 
             if (areasOfResponsibility) {
-                toSend.area_of_responsibility
+                toSend.area_of_responsibility = areasOfResponsibility
             }
 
             if (props.updateProps) {
