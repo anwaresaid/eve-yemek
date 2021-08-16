@@ -14,6 +14,7 @@ import { priceBodyTemplate } from '../../components/InTableComponents/price'
 import { Dropdown } from 'primereact/dropdown'
 import { MultiSelect } from 'primereact/multiselect'
 import SSPaginatorTable from '../../components/SSPaginatorTable'
+import { parseDateInAllRows } from '../../helpers/dateFunctions'
 
 const Orders = () => {
 
@@ -57,7 +58,7 @@ const Orders = () => {
     const fetch = (offset, limit, fields = null, text = null) => {
         return new Promise((resolve, reject) => {
             ordersService.getOrders(offset, limit, fields, text)
-                .then(res => resolve(res))
+                .then(res => resolve(parseDateInAllRows(res)))
                 .catch(err => reject(err))
         })
     }
