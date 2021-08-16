@@ -17,6 +17,25 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { detailedDate, fromNowDate, momentSetLocale } from '../../helpers/dateFunctions';
 
+type FoodType = {
+    name:string,
+    image:string,
+    price:number,
+    quantity:number,
+    variants:VariantsType,
+    addons:AddonType[]
+}
+
+type AddonType = {
+    name:string,
+    price:number
+}
+
+type VariantsType = {
+    name:string,
+    price:number
+}
+
 const CardData = () => {
     const dispatch = useDispatch();
     const router = useRouter();
@@ -36,11 +55,55 @@ const CardData = () => {
         return price + ' ' + orderData.currency_type
     }
 
+    const addonsList = (addons:AddonType[]) => {
+        if(addons?.length > 0){
+            return addons.map((addon, index) => {
+                return <small key={index}>{addon?.name + (addons.length > index + 1 ? ', ' : " ")}</small>
+            });
+        }
+    }
+
+    const productVariantsList = (variants:VariantsType) => {
+        return <small title={i18n.t("variants")} className="p-pb-1">{variants?.name}</small>
+    }
+
+    const calcFoodPrice = (food:FoodType) => {
+        let total_price = food.price;
+
+        //Calculate addon prices
+        if(food?.addons){
+            if(food.addons.length > 0){
+                food.addons.map((addon, index)=>{
+                    if(addon?.price > 0){
+                        total_price += addon.price;
+                    }
+                });
+            }
+        }
+
+        //Calculate variants prices
+        if(food?.variants){
+            if(food?.variants?.price > 0){
+                total_price += food.variants.price;
+            }
+        }
+
+        return total_price;
+    }
+
+    const foodNameTemplate = (row:FoodType) => {
+        return (<>
+            <div>{row?.name}</div>
+            <div>{productVariantsList(row?.variants)}</div>
+            <div>{addonsList(row?.addons)}</div>
+        </>)
+    }
+
     const mealTableColumns = [
-        {field: 'name', header: i18n.t('name')},
-        {header: i18n.t('price'), body: (row) => priceTag(row.price)},
+        {field: 'name', header: i18n.t('name'), body:foodNameTemplate},
+        {header: i18n.t('price'), body: (food:FoodType) => priceTag(calcFoodPrice(food))},
         {field: 'quantity', header: i18n.t('quantity')},
-        {header: i18n.t('total'), body: (row) => priceTag(row.quantity * row.price)}
+        {header: i18n.t('total'), body: (food:FoodType) => priceTag(food.quantity * calcFoodPrice(food))}
     ].map((col, i) => {
         return <Column key={i} field={col.field} header={col.header} body={col.body} sortable />;
     });
