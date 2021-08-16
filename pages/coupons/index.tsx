@@ -3,6 +3,7 @@ import { i18n } from '../../language';
 import activeTag from '../../components/InTableComponents/activeTag';
 import SSPaginatorTable from '../../components/SSPaginatorTable';
 import CouponService from '../../store/services/coupons.service';
+import { detailedDate } from '../../helpers/dateFunctions';
 
 const index = () => {
 
@@ -13,7 +14,7 @@ const index = () => {
     { field: 'coupon_code', header: i18n.t('couponCode'), filter: true, filterType: 'search'},
     { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search' },
     { field: 'description', header: i18n.t('description'), filter: true, filterType: 'search' },
-    { field: 'expire_date', header: i18n.t('expiration') },
+    { field: 'expire_date', header: i18n.t('expiration'), body: row => detailedDate(row.expire_date) },
     { field: 'discount_type', header: i18n.t('couponType') },
     { field: 'discount', header: i18n.t('discount') },
     { field: 'max_usage', header: i18n.t('maximumUsage') },
