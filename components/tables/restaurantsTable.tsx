@@ -14,7 +14,6 @@ const RestaurantsTable = (props) => {
     const imageBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <span className="p-column-title"> {i18n.t('image')}</span>
                 <S.Image className="imageCol" src={`${rowData.image}`} alt={rowData.image} />
             </React.Fragment>
         )
@@ -22,7 +21,6 @@ const RestaurantsTable = (props) => {
     const IdBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <span className="p-column-title">ID</span>
                 {rowData.id}
             </React.Fragment>
         );
@@ -30,7 +28,6 @@ const RestaurantsTable = (props) => {
     const NameBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <span className="p-column-title"> {i18n.t('name')}</span>
                 {rowData.name}
             </React.Fragment>
         );
@@ -38,7 +35,6 @@ const RestaurantsTable = (props) => {
     const OwnerBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <span className="p-column-title"> {i18n.t('restaurantOwner')}</span>
                 {rowData.owner && rowData.owner.name}
             </React.Fragment>
         );
@@ -46,7 +42,6 @@ const RestaurantsTable = (props) => {
     const CountryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <span className="p-column-title"> {i18n.t('country')}</span>
                 <span> {rowData?.address?.country}</span>
             </React.Fragment>
         );
@@ -55,7 +50,6 @@ const RestaurantsTable = (props) => {
         return (
             <div>
                 <React.Fragment>
-                    <span className="p-column-title"> {i18n.t('status')} </span>
                     <span> {activeTag(rowData.active)}</span>
                 </React.Fragment>
             </div>
@@ -66,7 +60,6 @@ const RestaurantsTable = (props) => {
         return (
             <div>
                 <React.Fragment>
-                    <span className="p-column-title"> {i18n.t('operations')} </span>
                     <span> {editButton(rowData, router, path)}</span>
                 </React.Fragment>
             </div>
@@ -77,7 +70,6 @@ const RestaurantsTable = (props) => {
         return (
             <div>
                 <React.Fragment>
-                    <span className="p-column-title"> {i18n.t('created')} </span>
                     <span> {detailedDate(rowData.createdAt)}</span>
                 </React.Fragment>
             </div>

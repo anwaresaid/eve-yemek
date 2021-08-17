@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { Dropdown } from "primereact/dropdown";
+import { DataTable } from "primereact/datatable";
 
 const SSPaginatorTable = (props) => {
 
@@ -115,7 +116,7 @@ const SSPaginatorTable = (props) => {
     return (
         <div>
             <Toast id="toastMessage" ref={toast}></Toast>
-            <S.Table id='ssptable' {...props} className="p-datatable-gridlines p-datatable-sm p-datatable-striped" autoLayout={true} paginator={!props.noPaginator && showPaginator}
+            <S.Table id='ssptable' {...props} autoLayout={true} paginator={!props.noPaginator && showPaginator}
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 currentPageReportTemplate={i18n.t('showingXtoYofZ', { x: '{first}', y: '{last}', z: '{totalRecords}' })}
                 value={currentRows}
