@@ -116,7 +116,7 @@ const SSPaginatorTable = (props) => {
     return (
         <div>
             <Toast id="toastMessage" ref={toast}></Toast>
-            <S.Table id='ssptable' {...props} autoLayout={false} paginator={!props.noPaginator && showPaginator}
+            <S.Table id='ssptable' {...props} autoLayout={true} paginator={!props.noPaginator && showPaginator}
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 currentPageReportTemplate={i18n.t('showingXtoYofZ', { x: '{first}', y: '{last}', z: '{totalRecords}' })}
                 value={currentRows}
