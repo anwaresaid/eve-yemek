@@ -305,6 +305,8 @@ export const translations = {
   errorTryingToReachYourEmail: 'Error trying to reach your email',
   notes: 'Notes',
 
+  print: 'Print',
+
   deliveryCount: 'Delivery Count',
   paymentInformation: 'Payment Information',
   deliveryInformation: 'Delivery Information',

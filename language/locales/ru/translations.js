@@ -307,6 +307,9 @@ export const translations = {
   errorTryingToReachYourEmail: 'Не удалось получить ваш адрес электронной почты',
   notes: 'Примечания',
 
+
+  print: 'Распечатать',
+
   deliveryCount: 'Количество доставок',
   paymentInformation: 'Платежная информация',
   deliveryInformation: 'информация о доставке',
