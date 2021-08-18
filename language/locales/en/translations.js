@@ -315,6 +315,13 @@ export const translations = {
   variantNamesCannotBeEmpty: 'Option names cannot be empty',
   deliveries: 'Deliveries',
 
-  noData: 'No Data'
+  noData: 'No Data',
 
+  
+  userInformation: 'User Information',
+  todaysDeliveries: 'Today\'s Deliveries',
+  todaysAmount: 'Today\'s Amount',
+  totalDeliveries: 'Total Deliveries',
+  selectDates: 'Select Dates',
+  currentTotal: 'Current Total'
 };

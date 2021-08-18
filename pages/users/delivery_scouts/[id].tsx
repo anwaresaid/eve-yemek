@@ -46,7 +46,7 @@ const UpdateScout = () => {
             header: i18n.t('order'),
             body: (row) => (
                 <a
-                    href={'/orders/' + row.order._id}
+                    href={'/orders/' + row.order?._id}
                     style={{ textDecoration: 'none' }}
                 >
                     {row.order.order_code}
@@ -69,7 +69,7 @@ const UpdateScout = () => {
 
     const getTableHeaderComps = () => {
         return <div className="table-header">
-            <Calendar selectionMode="range" value={dates} onChange={(e) => { setDates(e.value); console.log(e.value) }}
+            <Calendar selectionMode="range" value={dates} onChange={(e) => { setDates(e.value)}}
                 placeholder={i18n.t('selectDates')}
                 style={{ float: 'right' }}
                 dateFormat="dd/mm/yy"
@@ -126,7 +126,7 @@ const UpdateScout = () => {
                             <div className='p-col-6 p-md-6 p-lg-2'>
                                 <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
                                     <div id='box_infoDiv' className='box__info'>
-                                        <span id='todaysAmountBox'>₺{getTodaysAmount()}</span>
+                                        <span id='todaysAmountBox'>{getTodaysAmount()}</span>
                                         <p id='today_amountP'>{i18n.t('todaysAmount')}</p>
                                     </div>
                                     <div id='box_icons' className='box__icons'>

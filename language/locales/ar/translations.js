@@ -316,5 +316,13 @@ export const translations = {
   variantNamesCannotBeEmpty: 'لا يمكن أن تكون أسماء المتغيرات فارغة',
   deliveries: 'التسليمات',
 
-  noData: 'لايوجد بيانات'
+  noData: 'لايوجد بيانات',
+
+
+  userInformation: 'معلومات المستخدم',
+  todaysDeliveries: 'عمليات التسليم اليوم',
+  todaysAmount: 'كمية اليوم',
+  totalDeliveries: 'إجمالي عمليات التسليم',
+  selectDates: 'حدد التواريخ',
+  currentTotal: 'المجموع الحالي'
 };
