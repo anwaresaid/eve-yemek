@@ -307,6 +307,9 @@ export const translations = {
   errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني',
   notes: 'ملاحظات ',
 
+
+  print: 'طباعة',
+
   deliveryCount: 'عدد التسليمات',
   paymentInformation: 'معلومات الدفع',
   deliveryInformation: 'معلومات التوصيل',
@@ -317,7 +320,6 @@ export const translations = {
   deliveries: 'التسليمات',
 
   noData: 'لايوجد بيانات',
-
 
   userInformation: 'معلومات المستخدم',
   todaysDeliveries: 'عمليات التسليم اليوم',
