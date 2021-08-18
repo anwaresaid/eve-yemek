@@ -1,6 +1,7 @@
 import axios from '../../helpers/_axios';
 
 export default class DeliveryService {
+
   async getAllDeliveries(offset, limit, fields = null, text = null) {
     var query
     if (!fields || fields == '' || !text || text == '') {
@@ -11,4 +12,10 @@ export default class DeliveryService {
     const { data: { data } } = await axios.get(query)
     return data;
   }
+
+  async getScoutData(scoutUserID){
+    const { data: { data } } = await axios.get('/delivery/scout/' + scoutUserID)
+    return data;
+  }
+  
 }
