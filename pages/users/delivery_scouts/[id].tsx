@@ -163,7 +163,7 @@ const UpdateScout = () => {
                         header={getTableHeaderComps()}
                         columns={deliveriesTableColumns}
                         value={deliveryScoutData?.items.filter(filterDeliveries)}
-                        emptyMessage={'No deliveries found for this scout'}
+                        emptyMessage={i18n.t('noXfound', {x: i18n.t('deliveries')})}
                         noPaginator
                     >
                     </StandardTable>
