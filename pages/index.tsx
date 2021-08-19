@@ -311,7 +311,7 @@ const Index = (props) => {
                         </div>
                     </TabPanel>
                     <TabPanel header={demandData ? i18n.t('districtsInX', { x: demandData[cityIndex]?._id }) : ''}>
-                        <Pie datatype='number' data={districtsPieChartData} width={500} height={500} options={{
+                        <Pie type='number' data={districtsPieChartData} width={500} height={500} options={{
                             maintainAspectRatio: false
                         }}
                         >
