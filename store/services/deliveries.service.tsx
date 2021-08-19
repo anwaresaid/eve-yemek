@@ -12,10 +12,15 @@ export default class DeliveryService {
     const { data: { data } } = await axios.get(query)
     return data;
   }
+  
+  async getDeliveryDetails(id) {
+    const { data:{data} } = await axios.get(`/delivery/details/${id}`);
+    return data;
+  }
 
   async getScoutData(scoutUserID){
     const { data: { data } } = await axios.get('/delivery/scout/' + scoutUserID)
     return data;
   }
-  
+
 }

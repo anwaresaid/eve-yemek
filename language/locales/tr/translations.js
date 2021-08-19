@@ -65,6 +65,7 @@ export const translations = {
   onTheWay: 'Yolda',
   delivered: 'Teslim Edildi',
   cancelled: 'İptal Edildi',
+  assigned: 'Atanmiş',
 
   // Orders and Live Orders Pages
   liveOrders: 'Canlı Siparişler',

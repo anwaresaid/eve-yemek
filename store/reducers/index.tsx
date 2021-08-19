@@ -54,7 +54,7 @@ import { supportedCountriesReducer } from './addresses.reducer';
 import { sendSmsReducer } from './send_sms';
 import { listUntransferedPaymentsReducer } from './payments.reducers';
 import { serviceDemandReducer } from './service-demands.reducer';
-import { listDeliveriesReducer } from './deliveries.reducer';
+import { listDeliveriesReducer, listDeliveryDetailsReducer } from './deliveries.reducer';
 
 export default combineReducers({
   login: loginReducer,
@@ -124,5 +124,6 @@ export default combineReducers({
   untransferedPayments: listUntransferedPaymentsReducer,
   serviceDemand: serviceDemandReducer,
 
-  listDeliveries:listDeliveriesReducer,
+  listDeliveries: listDeliveriesReducer,
+  listDeliveryDetails: listDeliveryDetailsReducer,
 });
