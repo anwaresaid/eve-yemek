@@ -308,6 +308,9 @@ export const translations = {
   errorTryingToReachYourEmail: 'خطأ في الوصول إلى بريدك الإلكتروني',
   notes: 'ملاحظات ',
 
+
+  print: 'طباعة',
+
   deliveryCount: 'عدد التسليمات',
   paymentInformation: 'معلومات الدفع',
   deliveryInformation: 'معلومات التوصيل',
@@ -317,5 +320,12 @@ export const translations = {
   variantNamesCannotBeEmpty: 'لا يمكن أن تكون أسماء المتغيرات فارغة',
   deliveries: 'التسليمات',
 
-  noData: 'لايوجد بيانات'
+  noData: 'لايوجد بيانات',
+
+  userInformation: 'معلومات المستخدم',
+  todaysDeliveries: 'عمليات التسليم اليوم',
+  todaysAmount: 'كمية اليوم',
+  totalDeliveries: 'إجمالي عمليات التسليم',
+  selectDates: 'حدد التواريخ',
+  currentTotal: 'المجموع الحالي'
 };

@@ -230,7 +230,7 @@ const Index = (props) => {
                         <Line
                             ref={chartRef}
                             width={500}
-                            datatype='number'
+                            type='number'
                             height={100}
                             data={lineChartData}
                             options={{
@@ -280,7 +280,7 @@ const Index = (props) => {
 
                         {
                             citiesChartType === 'pie' && <div>
-                                <Pie datatype='number' data={citiesPieChartData} width={500} height={500} options={{
+                                <Pie type='number' data={citiesPieChartData} width={500} height={500} options={{
                                     maintainAspectRatio: false, plugins: {
                                         tooltip: {
                                             callbacks: {
@@ -311,7 +311,7 @@ const Index = (props) => {
                         </div>
                     </TabPanel>
                     <TabPanel header={demandData ? i18n.t('districtsInX', { x: demandData[cityIndex]?._id }) : ''}>
-                        <Pie datatype='number' data={districtsPieChartData} width={500} height={500} options={{
+                        <Pie type='number' data={districtsPieChartData} width={500} height={500} options={{
                             maintainAspectRatio: false
                         }}
                         >

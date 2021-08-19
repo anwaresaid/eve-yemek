@@ -20,14 +20,13 @@ import { InputTextarea } from "primereact/inputtextarea";
 import StandardFileUpload from "../../inputs/fileUpload";
 import { InputNumber } from "primereact/inputnumber";
 import { InputSwitch } from "primereact/inputswitch";
-import jsonCities from "../../../public/data/il.json";
-import jsonDistricts from "../../../public/data/ilce.json";
 import Loading from "../../Loading";
 import { Tag } from "primereact/tag";
 import { getSupportedCountries } from "../../../store/actions/addresses.action";
 import { ProgressSpinner } from "primereact/progressspinner";
 import OpenHoursPage from "../../settingsOwner/openHoursPage";
 import auth from "../../../helpers/core/auth";
+import {getLibyanCities, getTurkishCities, getLibyanDistricts, getTurkishDistricts } from "../../../helpers/cities"
 
 const RestaurantDataInput = (props) => {
 
@@ -191,10 +190,11 @@ const RestaurantDataInput = (props) => {
                 full_address: tmpData.full_address,
                 latitude: tmpData.latitude,
                 longitude: tmpData.longitude,
-                city: tmpData.country_code === 'TR' ? tmpData.city : '0',
-                state: tmpData.country_code === 'TR' ? tmpData.town : '0',
+                city: tmpData.city ,
+                state: tmpData.town,
                 postal_code: tmpData.postal_code,
                 country_code: tmpData.country_code,
+
                 country: tmpData.country_code === 'TR' ? 'Turkey' : (tmpData.country_code === 'LY' ? 'Libya' : '')
             }
 
@@ -285,7 +285,14 @@ const RestaurantDataInput = (props) => {
             formik.values.phone = restaurant.phone;
             formik.values.full_address = restaurant.address.full_address;
             formik.values.city = restaurant.address.city;
-            handleCityUpdate(restaurant.address.city);
+            {
+                restaurant.address.country_code =='TR'&&
+                    handleTrCityUpdate(restaurant.address.city);
+            }
+            {
+                restaurant.address.country_code =='LY'&&
+                    handleLyCityUpdate(restaurant.address.city);
+            }
             formik.values.town = restaurant.address.state;
             formik.values.rating = restaurant.rating;
             formik.values.delivery_time = restaurant.delivery_time;
@@ -309,18 +316,32 @@ const RestaurantDataInput = (props) => {
     }, [resOnwersSuccess, resSuccess])
 
 
-    const cities = jsonCities;
+    const TrCities = getTurkishCities();
+    const LyCities = getLibyanCities();
 
-    const [districts, setDistricts] = useState([]);
+    const [TrDistricts, setTrDistricts] = useState([]);
+    const [LyDistricts, setLyDistricts] = useState([]);
 
-    const handleCityUpdate = (cityName) => {
+    const handleTrCityUpdate = (cityName) => {
 
         formik.values.town_id = '';
-        const cityIdFilter = jsonCities.filter((c)=> c.name===cityName)
+        const cityIdFilter = TrCities.filter((c)=> c.name===cityName)
+    
         if(cityIdFilter.length!=0){
-        const filteredDistricts = jsonDistricts?.filter((k) => k.il_id === cityIdFilter[0].id)
+        const filteredDistricts = getTurkishDistricts()?.filter((k) => k.il_id === cityIdFilter[0].id)
 
-        setDistricts(filteredDistricts);
+        setTrDistricts(filteredDistricts);
+        }
+    }
+    const handleLyCityUpdate = (cityName) => {
+
+        formik.values.town_id = '';
+        const cityIdFilter = LyCities.filter((c)=> c.name===cityName)
+    
+        if(cityIdFilter.length!=0){
+        const filteredDistricts = getLibyanDistricts()?.filter((k) => k.il_id === cityIdFilter[0].id)
+
+        setLyDistricts(filteredDistricts);
         }
     }
 
@@ -417,13 +438,18 @@ const RestaurantDataInput = (props) => {
                                 }} />
                             </InputGroup>
 
-                            {
-                                formik.values.country_code === 'TR' &&
                                 <InputGroup>
                                     <InputContainer label={i18n.t('city')} name="city" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
                                         value: formik.values.city,
-                                        onChange: (e) => { handleCityUpdate(e.value); formik.handleChange(e); },
-                                        options: cities,
+                                        onChange: (e) => {formik.values.country_code == 'TR'?(
+                                        handleTrCityUpdate(e.value), 
+                                        formik.handleChange(e)):
+                                        (
+                                            handleLyCityUpdate(e.value), formik.handleChange(e)
+                                        )
+                                         },
+
+                                        options: formik.values.country_code =='TR'? TrCities:LyCities,
                                         placeholder: i18n.t('city'),
                                         filter: true,
                                         filterBy: "name",
@@ -434,7 +460,7 @@ const RestaurantDataInput = (props) => {
                                     <InputContainer label={i18n.t('district')} name="town" formiks={inputFormiks} size={6} component={Dropdown} iprops={{
                                         value: formik.values.town,
                                         onChange: formik.handleChange,
-                                        options: districts,
+                                        options: formik.values.country_code =='TR'? TrDistricts:LyDistricts,
                                         placeholder: i18n.t('district'),
                                         filter: true,
                                         filterBy: "name",   
@@ -442,8 +468,6 @@ const RestaurantDataInput = (props) => {
                                         optionValue: "name"
                                     }} />
                                 </InputGroup>
-                            }
-
                             <InputGroup>
                                 <InputContainer label={i18n.t('latitude')} name="latitudeInt" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                                     value: formik.values.latitudeInt,

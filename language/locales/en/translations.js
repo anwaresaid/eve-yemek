@@ -306,6 +306,8 @@ export const translations = {
   errorTryingToReachYourEmail: 'Error trying to reach your email',
   notes: 'Notes',
 
+  print: 'Print',
+
   deliveryCount: 'Delivery Count',
   paymentInformation: 'Payment Information',
   deliveryInformation: 'Delivery Information',
@@ -316,6 +318,12 @@ export const translations = {
   variantNamesCannotBeEmpty: 'Option names cannot be empty',
   deliveries: 'Deliveries',
 
-  noData: 'No Data'
-
+  noData: 'No Data',
+  
+  userInformation: 'User Information',
+  todaysDeliveries: 'Today\'s Deliveries',
+  todaysAmount: 'Today\'s Amount',
+  totalDeliveries: 'Total Deliveries',
+  selectDates: 'Select Dates',
+  currentTotal: 'Current Total'
 };

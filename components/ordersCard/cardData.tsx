@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { findOrder } from "../../store/actions/orders.action";
-import { getSingleUser } from "../../store/actions/userslists.action";
-import { findRestaurant } from "../../store/actions/restaurant.action";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "typesafe-actions";
 import EditDate from '../editOrders/editOrders';
@@ -16,6 +14,8 @@ import OrderStatus from '../InTableComponents/orderStatusTag';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { detailedDate, fromNowDate, momentSetLocale } from '../../helpers/dateFunctions';
+import ReactToPrint from 'react-to-print';
+import { Button } from 'primereact/button';
 
 type FoodType = {
     name:string,
@@ -39,7 +39,8 @@ type VariantsType = {
 const CardData = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-    let toast = useRef(null)
+    let toast = useRef(null);
+    const printReceipt = useRef();
     const res = useSelector((state: RootState) => state.findOrder);
     const { loading: orderLoading, success: orderSuccess, orderData } = res;
 
@@ -114,7 +115,7 @@ const CardData = () => {
             <div id='ordersDiv'>
                 {orderData &&
                     <>
-                        <Card id='ordersCard' title={orderData.user?.name}>
+                        <Card ref={printReceipt} id='ordersCard' title={orderData.user?.name}>
                             <div className="p-grid">
                                 {
                                     orderData.user &&
@@ -169,6 +170,12 @@ const CardData = () => {
                                 </div>
                             </div>
                         </Card>
+                        <div>
+                            <ReactToPrint
+                                trigger={() => <Button icon="pi pi-print" label={i18n.t('print')} />}
+                                content={() => printReceipt.current}
+                            />
+                        </div>
                     </>}
             </div>
 

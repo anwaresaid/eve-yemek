@@ -306,6 +306,9 @@ export const translations = {
   errorTryingToReachYourEmail: 'E-postanıza ulaşılırken hata oluştu',
   notes: 'Notlar',
 
+
+  print: 'Yazdır',
+
   deliveryCount: 'Teslimat sayısı',
   paymentInformation: 'Ödeme Bilgileri',
   deliveryInformation: 'Teslimat Bilgileri',
@@ -315,5 +318,12 @@ export const translations = {
   variantNamesCannotBeEmpty: 'Seçenekler boş olmamalıdır',
   deliveries: 'Teslimat',
 
-  noData: 'Veri yok'
+  noData: 'Veri yok',
+
+  userInformation: 'Kullanıcı Bilgileri',
+  todaysDeliveries: 'Günlük Teslimatları',
+  todaysAmount: 'Günlük Tutar',
+  totalDeliveries: 'Toplam Teslimat',
+  selectDates: 'Tarihleri Seçin',
+  currentTotal: 'Şuanki Toplam'
 };
