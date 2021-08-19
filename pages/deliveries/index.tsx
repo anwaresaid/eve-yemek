@@ -9,6 +9,8 @@ import { i18n } from '../../language';
 import Header from '../../components/InTableComponents/Header/index';
 import _ from 'lodash';
 import { listDeliveries } from '../../store/actions/deliveries.action';
+import OrderAndDeliveryStatus from '../../components/InTableComponents/orderStatusTag';
+import { fromNowDate } from '../../helpers/dateFunctions';
 
 const Deliveries = () => {
   const router = useRouter();
@@ -63,8 +65,12 @@ const Deliveries = () => {
       ),
     },
     {
+      header: i18n.t('orderTime'),
+      body: (row) => (fromNowDate(row.order.createdAt)),
+    },
+    {
       header: i18n.t('status'),
-      body: (row) => (row.status),
+      body: (row) => (OrderAndDeliveryStatus(row.status)),
     },
     {
       field: 'ops',

@@ -2,7 +2,7 @@ import { Tag } from "primereact/tag";
 import React, { useEffect, useState } from "react";
 import { i18n } from "../../../language";
 
-const OrderStatus = (orderStatus) => {
+const OrderAndDeliveryStatus = (orderStatus) => {
     var severity, value
     switch (orderStatus){
         case 'placed': 
@@ -29,6 +29,14 @@ const OrderStatus = (orderStatus) => {
             severity = "success"
             value = i18n.t('delivered')
             break
+        case 'unassigned':
+            severity = "secondary"
+            value = i18n.t('unassigned')
+            break
+        case 'assigned':
+            severity = "primary"
+            value = i18n.t('assigned')
+            break
         default:
             return <div></div>
     }
@@ -40,4 +48,4 @@ const OrderStatus = (orderStatus) => {
     )
 }
 
-export default OrderStatus;
+export default OrderAndDeliveryStatus;

@@ -65,6 +65,7 @@ export const translations = {
   onTheWay: 'في الطريق',
   delivered: 'تم التوصيل',
   cancelled: 'تم إلغاء',
+  assigned: 'تم التعيين',
 
   // Orders and Live Orders Pages
   liveOrders: 'الطلبات الحالية',

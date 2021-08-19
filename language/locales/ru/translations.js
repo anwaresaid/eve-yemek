@@ -65,6 +65,7 @@ export const translations = {
   onTheWay: 'В пути',
   delivered: 'Доставлено',
   cancelled: 'Отменено',
+  assigned: 'Назначенный',
 
   // Orders and Live Orders Pages
   liveOrders: 'Текущие заказы',
