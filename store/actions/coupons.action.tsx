@@ -8,7 +8,7 @@ export const listCoupons = () => async (dispatch, getState) => {
     });
 
     const couponsService = new CouponService();
-    const res = await couponsService.getAllCoupons();
+    const res = await couponsService.getAllCoupons(0, 9999);
     dispatch({
       type: couponsTypes.COUPON_LIST_SUCCESS,
       payload: res,

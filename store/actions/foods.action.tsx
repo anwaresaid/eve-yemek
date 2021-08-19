@@ -121,7 +121,7 @@ export const listFood = () => async dispatch => {
     });
 
     const foodService = new FoodsService;
-    const res = await foodService.getFood();
+    const res = await foodService.getAllFoods(0, 9999);
     dispatch({
       type: foodsTypes.FOOD_LIST_SUCCESS,
       payload: res,

@@ -32,7 +32,7 @@ export function fromNowDate(date) {
 }
 
 export function detailedDate(date) {
-    return moment(date).format("llll");
+    return moment(date).format("DD-MM-YYYY HH:mm");
 }
 
 export function momentSetLocale() {

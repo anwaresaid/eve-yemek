@@ -72,22 +72,22 @@ export const Index = () => {
     validate: (data) => {
       let errors: any = {};
       if (!data.restaurant_id) {
-        errors.restaurant_id = i18n.t('isRequired', {input: i18n.t('restaurant')});
+        errors.restaurant_id = i18n.t('isRequired', { input: i18n.t('restaurant') });
       }
       if (!data.name) {
-        errors.name = i18n.t('isRequired', {input: i18n.t('name')});
+        errors.name = i18n.t('isRequired', { input: i18n.t('name') });
       }
       if (!data.description) {
-        errors.description = i18n.t('isRequired', {input: i18n.t('description')});
+        errors.description = i18n.t('isRequired', { input: i18n.t('description') });
       }
       if (!data.expire_date) {
-        errors.expire_date = i18n.t('isRequired', {input: i18n.t('expiration')});
+        errors.expire_date = i18n.t('isRequired', { input: i18n.t('expiration') });
       }
       if (!data.coupon_code) {
-        errors.coupon_code = i18n.t('isRequired', {input: i18n.t('couponCode')});
+        errors.coupon_code = i18n.t('isRequired', { input: i18n.t('couponCode') });
       }
       if (!data.max_usage) {
-        errors.max_usage = i18n.t('isRequired', {input: i18n.t('maximumUsage')});
+        errors.max_usage = i18n.t('isRequired', { input: i18n.t('maximumUsage') });
       }
       return errors;
     },
@@ -116,7 +116,7 @@ export const Index = () => {
   };
 
   useEffect(() => {
-    if (!restaurantsSuccess) dispatch(listRestaurant());
+    if (!restaurantsSuccess) dispatch(listRestaurant(0, 9999));
 
     if (restaurantsSuccess) settingDropDownNames();
 
@@ -138,7 +138,7 @@ export const Index = () => {
   }
   return (
     <div id='create_coupons'>
-      <BackBtn router={router}/>
+      <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
       <Toast id='toastMessage' ref={toast}></Toast>
       <S.ContainerCard id='container'>

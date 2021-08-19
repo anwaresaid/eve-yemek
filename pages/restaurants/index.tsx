@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { listRestaurant } from "../../store/actions/restaurant.action";
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'typesafe-actions';
 import RestaurantsTable from '../../components/tables/restaurantsTable';
-import Loading from '../../components/Loading';
 import { i18n } from '../../language';
 import _ from 'lodash';
-const Index = () => {
-    const dispatch = useDispatch();
-    const resList = useSelector((state: RootState) => state.listRestaurant);
-    const { loading, success, restaurants } = resList;
+import RestaurantService from "../../store/services/restaurants.service";
 
-    useEffect(() => {
-        dispatch(listRestaurant());
-    }, [dispatch]);
+const Index = () => {
+
+    const restaurantService = new RestaurantService();
+
+    const fetch = (offset, limit, fields = null, text = null) => {
+        return new Promise((resolve, reject) => {
+            restaurantService.getRestaurants(offset, limit, fields, text)
+                .then(res => resolve(res))
+                .catch(err => reject(err))
+        })
+    }
 
     return (
         <div id="restaurantsTable">
-
-            {!loading && restaurants &&
-                <>
-                    <h1 id="restaurantsHeader">{i18n.t('restaurants')+ " - " +i18n.t('total') +" (" + restaurants.items.length +")"}</h1>
-                    <RestaurantsTable
-                        restaurants={_.without(_.map(restaurants.items, (item) => { if (!item.is_deleted) return item }), undefined)}>
-                    </RestaurantsTable>
-                </>}
-            {loading && <Loading />}
-
+            <h1 id="restaurantsHeader">{i18n.t('restaurants')}</h1>
+            <RestaurantsTable
+                fetch={fetch}>
+            </RestaurantsTable>
         </div>
     );
 }
+
 export default Index;

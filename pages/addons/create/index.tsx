@@ -103,7 +103,7 @@ export const Index = () => {
   });
   //setting names for dropdowns.
   const settingDropDownNames = () => {
-    const addonCatName = addonCatlist.items.map((res) => {
+    const addonCatName = addonCatlist?.items.map((res) => {
       return { id: res.id, name: res.name };
     });
     setAddonCategoryName(addonCatName);
@@ -178,7 +178,9 @@ export const Index = () => {
                     iprops={{
                       value: formik.values.create_user_id,
                       onChange: formik.handleChange,
-                      options: owners?.items.map((one) => { return { label: one.name, value: one.id } })
+                      options: owners?.items.map((one) => { return { label: one.name, value: one.id } }),
+                      filter: true,
+                      filterBy: "label",
                     }}
                   />
                 </InputGroup>
@@ -194,6 +196,8 @@ export const Index = () => {
                 optionLabel='name'
                 placeholder='Select an addon category'
                 autoFocus
+                filter
+                filterBy= "name"
                 className={classNames({
                   'p-invalid': isFormFieldValid('addonCat'),
                 })}

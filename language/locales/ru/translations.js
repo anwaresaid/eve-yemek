@@ -317,4 +317,6 @@ export const translations = {
   addNewVariant: 'Добавить новый вариант',
   variantNamesCannotBeEmpty: 'Имена вариантов не могут быть пустыми',
   deliveries: 'Доставки',
+
+  noData: 'Нет данных'
 };
