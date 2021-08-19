@@ -320,5 +320,12 @@ export const translations = {
   variantNamesCannotBeEmpty: 'Имена вариантов не могут быть пустыми',
   deliveries: 'Доставки',
 
-  noData: 'Нет данных'
+  noData: 'Нет данных',
+
+  userInformation: 'информация о пользователе',
+  todaysDeliveries: 'Сегодняшние поставки',
+  todaysAmount: 'Сегодняшняя сумма',
+  totalDeliveries: 'Всего доставок',
+  selectDates: 'Выберите даты',
+  currentTotal: 'Текущее Итого'
 };

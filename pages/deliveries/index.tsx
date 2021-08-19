@@ -70,7 +70,7 @@ const Deliveries = () => {
       header: i18n.t('operations'),
       body: (rowData) => editButton(rowData),
     },
-  ];
+  ]
 
   const fetch = (offset, limit, fields = null, text = null) => {
     return new Promise((resolve, reject) => {

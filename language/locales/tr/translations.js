@@ -317,6 +317,12 @@ export const translations = {
   variantNamesCannotBeEmpty: 'Seçenekler boş olmamalıdır',
   deliveries: 'Teslimat',
 
-  noData: 'Veri yok'
+  noData: 'Veri yok',
 
+  userInformation: 'Kullanıcı Bilgileri',
+  todaysDeliveries: 'Günlük Teslimatları',
+  todaysAmount: 'Günlük Tutar',
+  totalDeliveries: 'Toplam Teslimat',
+  selectDates: 'Tarihleri Seçin',
+  currentTotal: 'Şuanki Toplam'
 };

@@ -14,7 +14,7 @@ const StandardTable = (props) => {//"Showing {first} to {last} of {totalRecords}
         <S.Table id='styledTable' {...props} className="p-datatable-gridlines p-datatable-sm p-datatable-striped" autoLayout={true} paginator={!props.noPaginator}
         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
         currentPageReportTemplate={i18n.t('showingXtoYofZ',{x: '{first}', y: '{last}', z: '{totalRecords}'})} rows={10} rowsPerPageOptions={[10,20,50]}
-
+        header = {props.header ?? null}
         >
             {dynamicColumns}
         </S.Table>
