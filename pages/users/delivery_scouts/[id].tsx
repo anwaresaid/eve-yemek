@@ -69,7 +69,7 @@ const UpdateScout = () => {
 
     const getTableHeaderComps = () => {
         return <div className="table-header">
-            <Calendar selectionMode="range" value={dates} onChange={(e) => { setDates(e.value)}}
+            <Calendar selectionMode="range" value={dates} onChange={(e) => { setDates(e.value as Array<Date>)}}
                 placeholder={i18n.t('selectDates')}
                 style={{ float: 'right' }}
                 dateFormat="dd/mm/yy"
