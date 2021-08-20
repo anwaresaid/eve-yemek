@@ -23,11 +23,6 @@ export const languageOptions = [
     }
 ]
 
-export const currencyDirectory = {
-    'TR': 'TRY',
-    'LY': 'LYD'
-}
-
 // prettier-ignore
 export const allMenuItems: any = [
     { label: i18n.t("dashboard"), url: "/", roles: ["super_admin", "admin", "restaurant_owner", "customer_service"] },
@@ -80,6 +75,7 @@ export const allMenuItems: any = [
     { separator: true },
     { label: i18n.t("settings"), url: "/settings", roles: ["super_admin", "admin", "customer_service", "restaurant_owner"] },
     { label: i18n.t("transfers"), url: "/transfers", roles: ["super_admin", "admin"] },
+    { label: i18n.t("FAQs"), url: "/faqs", roles: ["restaurant_owner", "customer_service"] },
     { label: i18n.t("logout"), url: "/auth/logout", roles: ["super_admin", "admin", "restaurant_owner", "customer_service"] }
 
 ];
