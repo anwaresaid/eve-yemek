@@ -170,8 +170,7 @@ const DeliveryDetail = () => {
                     value={priceTag(
                       deliveryDetails.order.total_amount -
                       deliveryDetails.order.delivery_amount -
-                      deliveryDetails.order.tax -
-                      deliveryDetails.order.coupon_discount -
+                      deliveryDetails.order.restaurant.commission_rate -
                       deliveryDetails.order.restaurant.restaurant_charges
                     )}
                   />
@@ -191,13 +190,8 @@ const DeliveryDetail = () => {
                     value={priceTag(deliveryDetails.order.delivery_amount)}
                   />
                   <OrderDivider
-                    id='discountCoupon'
-                    label={i18n.t('discountCoupon')}
-                    value={priceTag(deliveryDetails.order.restaurant.coupon_discount)}
-                  />
-                  <OrderDivider
                     id='totalAmount'
-                    label={i18n.t('total')}
+                    label={i18n.t('totalEarnings')}
                     value={priceTag(deliveryDetails.order.total_amount)}
                   />
                 </div>
