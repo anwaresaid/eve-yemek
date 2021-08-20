@@ -631,3 +631,4 @@ const RestaurantDataInput = (props) => {
 }
 
 export default RestaurantDataInput;
+
