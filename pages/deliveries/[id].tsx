@@ -170,7 +170,6 @@ const DeliveryDetail = () => {
                     value={priceTag(
                       deliveryDetails.order.total_amount -
                       deliveryDetails.order.delivery_amount -
-                      (deliveryDetails.order.restaurant.commission_rate / 100 * deliveryDetails.order.total_amount) -
                       deliveryDetails.order.restaurant.restaurant_charges
                     )}
                   />
@@ -178,11 +177,6 @@ const DeliveryDetail = () => {
                     id='deliveryAmount'
                     label={i18n.t('restaurantFee')}
                     value={priceTag(deliveryDetails.order.restaurant.restaurant_charges)}
-                  />
-                  <OrderDivider
-                    id='tax'
-                    label={i18n.t('commissionRate')}
-                    value={`${deliveryDetails.order.restaurant.commission_rate} %`}
                   />
                   <OrderDivider
                     id='deliveryAmount'
@@ -193,6 +187,11 @@ const DeliveryDetail = () => {
                     id='totalAmount'
                     label={i18n.t('total')}
                     value={priceTag(deliveryDetails.order.total_amount)}
+                  />
+                  <OrderDivider
+                    id='tax'
+                    label={i18n.t('commissionRate') + ` (${deliveryDetails.order.restaurant.commission_rate}%)`}
+                    value={priceTag(deliveryDetails.order.restaurant.commission_rate / 100 * deliveryDetails.order.total_amount)}
                   />
                 </div>
               </div>
