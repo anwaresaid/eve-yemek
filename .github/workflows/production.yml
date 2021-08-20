@@ -2,7 +2,7 @@ name: Baklava Production Build & Deploy
 
 on:
   push:
-    branches: [V-0.1.14]
+    branches: [V-0.1.15]
 
 jobs:
   build:
@@ -16,8 +16,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i
-      - run: npm run build
+      - run: npm i -g yarn
+      - run: yarn install
+      - run: yarn build
 
   deploy:
     needs: build
@@ -53,6 +54,6 @@ jobs:
             cd /srv/baklava/
             git restore .
             git fetch
-            git checkout V-0.1.14
+            git checkout V-0.1.15
             yarn install && yarn build
             pm2 reload baklava --update-env

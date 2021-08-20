@@ -166,12 +166,10 @@ const DeliveryDetail = () => {
                 <div>
                   <OrderDivider
                     id='totalFoodAmount'
-                    label={i18n.t('total') + ':'}
+                    label={i18n.t('totalEarnings') + ':'}
                     value={priceTag(
                       deliveryDetails.order.total_amount -
                       deliveryDetails.order.delivery_amount -
-                      deliveryDetails.order.tax -
-                      deliveryDetails.order.coupon_discount -
                       deliveryDetails.order.restaurant.restaurant_charges
                     )}
                   />
@@ -181,24 +179,19 @@ const DeliveryDetail = () => {
                     value={priceTag(deliveryDetails.order.restaurant.restaurant_charges)}
                   />
                   <OrderDivider
-                    id='tax'
-                    label={i18n.t('commissionRate')}
-                    value={priceTag(deliveryDetails.order.restaurant.commission_rate)}
-                  />
-                  <OrderDivider
                     id='deliveryAmount'
                     label={i18n.t('deliveryFee')}
                     value={priceTag(deliveryDetails.order.delivery_amount)}
                   />
                   <OrderDivider
-                    id='discountCoupon'
-                    label={i18n.t('discountCoupon')}
-                    value={priceTag(deliveryDetails.order.restaurant.coupon_discount)}
-                  />
-                  <OrderDivider
                     id='totalAmount'
                     label={i18n.t('total')}
                     value={priceTag(deliveryDetails.order.total_amount)}
+                  />
+                  <OrderDivider
+                    id='tax'
+                    label={i18n.t('commissionRate') + ` (${deliveryDetails.order.restaurant.commission_rate}%)`}
+                    value={priceTag(deliveryDetails.order.restaurant.commission_rate / 100 * deliveryDetails.order.total_amount)}
                   />
                 </div>
               </div>
