@@ -93,7 +93,7 @@ export const Index = () => {
   useEffect(() => {
     if (!addonCatSuccess) dispatch(listAddonCategory());
 
-    if (auth.hasRoles(['admin'])) {
+    if (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) {
       if (!owners || (owners.items.length === 0 && !ownersSuccess)) {
         dispatch(listRestaurantOwners())
       }
@@ -163,7 +163,7 @@ export const Index = () => {
                   />
                 </InputGroup>
                 {
-                  auth.hasRoles(['admin']) &&
+                  (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) &&
                   <InputGroup>
                     <InputContainer
                       label={i18n.t('restaurantOwner')}

@@ -55,7 +55,7 @@ export const Index = () => {
       if (!data.enum) {
         errors.enum = i18n.t('isRequired', { input: i18n.t('type') });
       }
-      if (!data.create_user_id && auth.hasRoles(['admin'])) {
+      if (!data.create_user_id && (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin']))) {
         errors.create_user_id = i18n.t('isRequired', { input: i18n.t('restaurantOwner') })
       } else if (!data.create_user_id && auth.hasRoles(['restaurant_owner'])) {
         data.create_user_id = auth.user.id
@@ -86,7 +86,7 @@ export const Index = () => {
       });
     }
 
-    if (auth.hasRoles(['admin'])) {
+    if ((auth.hasRoles(['admin']) || auth.hasRoles(['super_admin']))) {
       if (!owners || (owners.items.length === 0 && !ownersSuccess)) {
         dispatch(listRestaurantOwners())
       }
@@ -151,7 +151,7 @@ export const Index = () => {
               {getFormErrorMessage('enum')}
             </FormColumn>
             {
-              auth.hasRoles(['admin']) &&
+              (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) &&
               <FormColumn divideCount={3}>
                 <InputGroup>
                   <InputContainer
