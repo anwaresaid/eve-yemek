@@ -163,7 +163,7 @@ const UserDataInput = (props) => {
     }, [props.updateProps?.updateUserSuccess, props.updateProps?.updating, props.updateProps?.error])
 
     const sendChangePasswordRequest = (newPassword) => {
-        if (!auth.hasRoles(['admin'])) {
+        if (!(auth.hasRoles(['admin']) || auth.hasRoles(['super_admin']))) {
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Unauthorized' });
             return
         }
@@ -187,7 +187,7 @@ const UserDataInput = (props) => {
                 <h1 id='editHeader'>{updating ? i18n.t('updateUser') : i18n.t('createUser')}</h1>
                 <form id='editForm' onSubmit={mySubmit} >
                     {
-                        auth.hasRoles(['admin']) && updating &&
+                        (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) && updating &&
                         <Button type="button" label={i18n.t('changePassword')} className="p-button-outlined" onClick={() => setChangePasswordModalOpen(true)}></Button>
                     }
                     <div className="p-grid">
@@ -310,7 +310,7 @@ const UserDataInput = (props) => {
                             </InputGroup>
                         </FormColumn>
                         {
-                            auth.hasRoles(['admin']) &&
+                            (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) &&
                             <Dialog header={i18n.t('updateUserPassword')} footer={changePasswordModalFooter} visible={changePasswordModalOpen} style={{ width: '50vw' }} onHide={() => setChangePasswordModalOpen(false)}>
                                 <p>{i18n.t('enterANewPasswordForThisUser')}</p>
                                 <Password

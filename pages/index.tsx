@@ -51,7 +51,7 @@ const Index = (props) => {
             if (ownedRestaurants?.items.length === 0 && !ownedRestaurantsSuccess)
                 dispatch(listOwnedRestaurants())
         }
-        if (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) {
+        if ((auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) || auth.hasRoles(['customer_service'])) {
             if (!demandData) {
                 dispatch(getDemandData())
             }
@@ -249,7 +249,7 @@ const Index = (props) => {
     }
 
     const areasTabPanel = () => {
-        return (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) ?
+        return ((auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) || auth.hasRoles(['customer_service'])) ?
             <TabPanel header={i18n.t('areas')}>
                 <TabView activeIndex={activeIndexAreas} onTabChange={e => setActiveIndexAreas(e?.index)}>
                     <TabPanel header={i18n.t('cities')}>
@@ -342,7 +342,7 @@ const Index = (props) => {
         <div id='containerPanel' className="ContainerPanel">
             <h1 id='controlPanelHeader'>{i18n.t('dashboard')}</h1>
             {
-                (auth.hasRoles(['admin']) || auth.hasRoles(['customer_service'])) ?
+                ((auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) || auth.hasRoles(['customer_service'])) ?
                     extendedTabView() : restrictedTabView()
             }
         </div >

@@ -401,7 +401,7 @@ const RestaurantDataInput = (props) => {
                             </InputGroup>
 
                             {
-                                auth.hasRoles(['admin']) && props.updating &&
+                                (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) && props.updating &&
                                 <InputContainer label={i18n.t('replaceImageWithDefault')} name="replaceImageWithDefault" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
                                     checked: adminsDefaultImage,
                                     onChange: (e) => setAdminsDefaultImage(e.target.value),
