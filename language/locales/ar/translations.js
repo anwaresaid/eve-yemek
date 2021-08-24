@@ -66,6 +66,7 @@ export const translations = {
   delivered: 'تم التوصيل',
   cancelled: 'تم إلغاء',
   assigned: 'تم التعيين',
+  unassigned: 'غير معين',
 
   // Orders and Live Orders Pages
   liveOrders: 'الطلبات الحالية',

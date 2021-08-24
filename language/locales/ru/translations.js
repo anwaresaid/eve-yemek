@@ -66,6 +66,7 @@ export const translations = {
   delivered: 'Доставлено',
   cancelled: 'Отменено',
   assigned: 'Назначенный',
+  unassigned: 'Не назначен',
 
   // Orders and Live Orders Pages
   liveOrders: 'Текущие заказы',
