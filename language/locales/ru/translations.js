@@ -328,5 +328,6 @@ export const translations = {
   todaysAmount: 'Сегодняшняя сумма',
   totalDeliveries: 'Всего доставок',
   selectDates: 'Выберите даты',
-  currentTotal: 'Текущее Итого'
+  currentTotal: 'Текущее Итого',
+  profile:'Профиль'
 };

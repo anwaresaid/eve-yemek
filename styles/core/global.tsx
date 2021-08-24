@@ -59,7 +59,7 @@ const GlobalStyle = createGlobalStyle`
     .profileContainer .profile .profileImage
     { 
         position: absolute;
-        top:10px;
+        top:13px;
         left:10px;
         width:40px;
         height:40px;
@@ -67,7 +67,7 @@ const GlobalStyle = createGlobalStyle`
         overflow: hidden;
         object-fit:cover;
     }
-    .profileContainer .profile:hover .profileImage
+    .profileContainer .profile .profileImage:hover
     {
         box-shadow: 1px 1px 10px gray;
     }
@@ -78,19 +78,29 @@ const GlobalStyle = createGlobalStyle`
         right:-10px;
         padding: 10px;
         background: white;
-        width:175px;
+        width:220px;
         box-sizing: 0 5px 25px rgba(0,0,0,0.1);
         border-radius:15px;
         transition: 0.5s;
         visibility: hidden;
         opacity:0;
         box-shadow: -1px 1px 5px rgba(0,0,0,.3);
+        white-space: pre-wrap;
     }
-    .profileContainer .menu h3
+    .profileContainer .menu ul li h3
     {
         width:100%;
         font-size:15px;
+        font-weight: 500;
+        color:gray;
+        line-height:1.2em;
+        padding:0 -10px !important;
+    }
+    .profileContainer .menu h2
+    {
         padding:0 10px;
+        width:100%;
+        font-size:15px;
         font-weight: 500;
         color:gray;
         line-height:1.2em;
@@ -125,7 +135,7 @@ const GlobalStyle = createGlobalStyle`
         right:0;
         font-family: Arial, sans-serif;
         list-style:none;
-        padding:10px 5px;
+        padding:10px 10px;
         font-size: 10;
         border-top:1px solid rgba(0,0,0,0.05);
         
