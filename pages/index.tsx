@@ -226,6 +226,7 @@ const Index = (props) => {
                             <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
                         </i>
                         <Line
+                            type="line"
                             ref={chartRef}
                             width={500}
                             height={100}
@@ -251,7 +252,7 @@ const Index = (props) => {
                     <TabPanel header={i18n.t('cities')}>
                         {
                             citiesChartType === 'bar' && <div>
-                                <Bar data={citiesPieChartData} width={500} height={500} options={{
+                                <Bar type="bar" data={citiesPieChartData} width={500} height={500} options={{
                                     maintainAspectRatio: false,
                                     plugins: {
                                        
@@ -277,7 +278,7 @@ const Index = (props) => {
 
                         {
                             citiesChartType === 'pie' && <div>
-                                <Pie data={citiesPieChartData} width={500} height={500} options={{
+                                <Pie type="pie" data={citiesPieChartData} width={500} height={500} options={{
                                     maintainAspectRatio: false, plugins: {
                                         tooltip: {
                                             callbacks: {
@@ -308,7 +309,7 @@ const Index = (props) => {
                         </div>
                     </TabPanel>
                     <TabPanel header={demandData ? i18n.t('districtsInX', { x: demandData[cityIndex]?._id }) : ''}>
-                        <Pie data={districtsPieChartData} width={500} height={500} options={{
+                        <Pie type="pie" data={districtsPieChartData} width={500} height={500} options={{
                             maintainAspectRatio: false
                         }}
                         >
