@@ -66,6 +66,7 @@ export const translations = {
   delivered: 'Teslim Edildi',
   cancelled: 'İptal Edildi',
   assigned: 'Atanmiş',
+  unassigned: 'Atanmamış',
 
   // Orders and Live Orders Pages
   liveOrders: 'Canlı Siparişler',
