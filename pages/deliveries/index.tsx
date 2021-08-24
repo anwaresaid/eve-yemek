@@ -69,8 +69,19 @@ const Deliveries = () => {
       body: (row) => (fromNowDate(row.order.createdAt)),
     },
     {
+      field: 'status',
       header: i18n.t('status'),
       body: (row) => (OrderAndDeliveryStatus(row.status)),
+      filter: true,
+      filterType: 'dropdown',
+      dropdownOptions: [
+        { label: i18n.t('unassigned'), value: 'unassigned' },
+        { label: i18n.t('assigned'), value: 'assigned' },
+        { label: i18n.t('picked'), value: 'picked' },
+        { label: i18n.t('delivered'), value: 'delivered' },
+        { label: i18n.t('cancelled'), value: 'canceled' },
+        { label: i18n.t('all'), value: '' }
+      ]
     },
     {
       field: 'ops',
