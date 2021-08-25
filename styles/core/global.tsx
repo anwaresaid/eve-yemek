@@ -80,6 +80,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 10px;
         background: white;
         width:220px;
+        word-break: break-word;
         box-sizing: 0 5px 25px rgba(0,0,0,0.1);
         border-radius:15px;
         transition: 0.5s;
