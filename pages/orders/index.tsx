@@ -46,12 +46,12 @@ const Orders = () => {
     ]
 
     const columns = [
-        { field: 'order', header: 'ID' },
-        { field: 'restaurant.name', header: i18n.t('restaurant'), body: row => <a href={"/restaurants/" + row.restaurant.id} style={{ textDecoration: 'none' }} >{row.restaurant.name}</a>, filter: true, filterType: 'search' },
+        { field: 'order', header: 'ID', sortable: true },
+        { field: 'restaurant.name', header: i18n.t('restaurant'), body: row => <a href={"/restaurants/" + row.restaurant.id} style={{ textDecoration: 'none' }} >{row.restaurant.name}</a>, filter: true, filterType: 'search', sortable: true },
         { field: 'status', header: i18n.t('orderStatus'), body: (rowData) => OrderStatus(rowData.status), filter: true, filterType: 'dropdown', dropdownOptions: orderStatusFilterOptions },
         { field: 'delivery_status', header: i18n.t('deliveryStatus'), body: (rowData) => OrderStatus(rowData.delivery_status), filter: true, filterType: 'dropdown', dropdownOptions: deliveryStatusFilterOptions },
-        { field: 'total_amount', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.total_amount, rowData.currency_type) },
-        { field: 'createdAt', header: i18n.t('orderTime') },
+        { field: 'total_amount', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.total_amount, rowData.currency_type), sortable: true},
+        { field: 'createdAt', header: i18n.t('orderTime'), sortable: true },
         { field: 'ops', header: i18n.t('operations'), body: (rowData) => editButton(rowData) }
     ]
 

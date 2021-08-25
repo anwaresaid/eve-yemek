@@ -130,7 +130,7 @@ const SSPaginatorTable = (props) => {
     }
 
     const dynamicColumns = props.columns.map((col, i) => {
-        return <Column key={i} {...col} filter={col.filter} filterElement={getFilterElement(col)} sortable></Column>;
+        return <Column key={i} {...col} filter={col.filter} filterElement={getFilterElement(col)}></Column>;
     });
 
     return (
