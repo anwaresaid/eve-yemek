@@ -1,8 +1,10 @@
 import axios from '../../helpers/_axios';
 
 export default class UsersListsService {
-  async getUsersByRole(role, offset, limit) {
-    const { data: { data } } = await axios.get('/users?fields=roles&text=' + role + '&offset=' + offset + '&limit=' + limit);
+  async getUsersByRole(role, ...args) {
+    let query = '/users?fields=roles&text=' + role + '&'
+    Object.keys(args[0]).forEach(key => query += args[0][key] ? (key + '=' + args[0][key] + '&') : '')
+    const { data: { data } } = await axios.get(query)
     return data;
   }
 
