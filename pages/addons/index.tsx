@@ -14,10 +14,10 @@ const AddOnsList = () => {
   const addOnsService = new AddOnsService;
 
   const columns = [
-    { field: 'id', header: 'ID' },
-    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search' },
-    { field: 'add_on_category.name', header: i18n.t('category'), body: row => <a href={'/addon_categories/' + row.add_on_category.id} style={{ textDecoration: 'none' }}>{row.add_on_category.name}</a>, filter: true, filterType: 'search' },
-    { field: 'price', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.price, rowData.currency_type) },
+    { field: 'id', header: 'ID', sortable: true },
+    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search', sortable: true },
+    { field: 'add_on_category.name', header: i18n.t('category'), body: row => <a href={'/addon_categories/' + row.add_on_category.id} style={{ textDecoration: 'none' }}>{row.add_on_category.name}</a>, filter: true, filterType: 'search', sortable: true },
+    { field: 'price', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.price, rowData.currency_type), sortable: true },
     {
       field: 'active',
       header: i18n.t('active'),
@@ -30,20 +30,12 @@ const AddOnsList = () => {
     },
   ];
 
-  const fetch = (offset, limit, fields = null, text = null) => {
-    return new Promise((resolve, reject) => {
-      addOnsService.getAllAddOns(offset, limit, fields, text)
-        .then(res => resolve(res))
-        .catch(err => reject(err))
-    })
-  }
-
   return (
     <div id='addOnsTable'>
       <h1 id="addOnsHeader">{i18n.t('addons')}</h1>
       <SSPaginatorTable
         headerText={i18n.t('listOfX', { x: i18n.t('addons') })}
-        fetch={fetch}
+        fetch={addOnsService.getAllAddOns}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('addons') })}
       >

@@ -10,14 +10,14 @@ const index = () => {
   const couponsService = new CouponService();
 
   const columns = [
-    { field: 'id', header: 'ID' },
-    { field: 'coupon_code', header: i18n.t('couponCode'), filter: true, filterType: 'search'},
-    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search' },
-    { field: 'description', header: i18n.t('description'), filter: true, filterType: 'search' },
-    { field: 'expire_date', header: i18n.t('expiration'), body: row => detailedDate(row.expire_date) },
-    { field: 'discount_type', header: i18n.t('couponType') },
-    { field: 'discount', header: i18n.t('discount') },
-    { field: 'max_usage', header: i18n.t('maximumUsage') },
+    { field: 'id', header: 'ID', sortable: true },
+    { field: 'coupon_code', header: i18n.t('couponCode'), filter: true, filterType: 'search', sortable: true },
+    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search', sortable: true },
+    { field: 'description', header: i18n.t('description'), filter: true, filterType: 'search', sortable: true },
+    { field: 'expire_date', header: i18n.t('expiration'), body: row => detailedDate(row.expire_date), sortable: true },
+    { field: 'discount_type', header: i18n.t('couponType'), sortable: true },
+    { field: 'discount', header: i18n.t('discount'), sortable: true },
+    { field: 'max_usage', header: i18n.t('maximumUsage'), sortable: true },
     {
       field: 'active',
       header: i18n.t('active'),
@@ -25,19 +25,11 @@ const index = () => {
     }
   ];
 
-  const fetch = (offset, limit, fields = null, text = null) => {
-    return new Promise((resolve, reject) => {
-      couponsService.getAllCoupons(offset, limit, fields, text)
-        .then(res => resolve(res))
-        .catch(err => reject(err))
-    })
-  }
-
   return (
     <div id="couponsTable">
       <SSPaginatorTable
         headerText={i18n.t('listOfX', { x: i18n.t('coupons') })}
-        fetch={fetch}
+        fetch={couponsService.getAllCoupons}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('coupons') })}
       >
