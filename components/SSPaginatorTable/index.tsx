@@ -54,7 +54,7 @@ const SSPaginatorTable = (props) => {
             fields: searchBy ?? null,
             text: searchKey ?? null,
             sort_field: sortField,
-            sort_by: sortField ? (sortOrder === 1 ? 'asc' : 'desc') : null
+            sort_by: sortField ? (sortOrder === 1 ? 'asc' : (sortOrder === -1 ? 'desc' : null)) : null
         })
             .then(res => {
                 setTotalItems(res.total)
@@ -93,6 +93,12 @@ const SSPaginatorTable = (props) => {
         setRowsPerPage(e.rows)
     }
 
+    const setSort = (e) => {
+        setSortField(e.sortField);
+        setSortOrder(e.sortOrder)
+        console.log(e)
+    }
+
     const clearFilterInputsExcept = (except) => {
         let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
         filterInputs.forEach((one: HTMLInputElement) => {
@@ -122,11 +128,6 @@ const SSPaginatorTable = (props) => {
                     }}>
                 </Dropdown>
         }
-    }
-
-    const setSort = (e) => {
-        setSortField(e.sortField);
-        setSortOrder(e.sortOrder)
     }
 
     const dynamicColumns = props.columns.map((col, i) => {
