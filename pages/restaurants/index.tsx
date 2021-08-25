@@ -1,7 +1,6 @@
 import React from "react";
 import * as S from '../../styles/food/food.list.style'
 import { useRouter } from 'next/router';
-
 import { detailedDate } from "../../helpers/dateFunctions";
 import activeTag from "../../components/InTableComponents/activeTag";
 import editButton from "../../components/InTableComponents/editButton";
