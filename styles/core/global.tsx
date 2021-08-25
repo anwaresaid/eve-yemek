@@ -45,6 +45,7 @@ const GlobalStyle = createGlobalStyle`
     }
     .profileContainer{
         position:fixed;
+        z-index:4;
         top:0px;
         right:20px;
     }
@@ -163,10 +164,23 @@ const GlobalStyle = createGlobalStyle`
     }
     .profileContainer .menu ul li:hover a
     { 
-        color: orange;
+        color: #ff0439;
 
     }
-
+    .overFlow
+    { 
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        visibility:hidden;
+    }
+    .overFlow.active
+    { 
+        z-index:3;
+        visibility:visible;
+    }
     .main-context-card .dropdownMenuContainer .dropdownMenu{
         position:absolute;
         top :80px;
