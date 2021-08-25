@@ -55,20 +55,12 @@ const Orders = () => {
         { field: 'ops', header: i18n.t('operations'), body: (rowData) => editButton(rowData) }
     ]
 
-    const fetch = (offset, limit, fields = null, text = null) => {
-        return new Promise((resolve, reject) => {
-            ordersService.getOrders(offset, limit, fields, text)
-                .then(res => resolve(parseDateInAllRows(res)))
-                .catch(err => reject(err))
-        })
-    }
-
     return (
         <div id="ordersTable">
             <h1 id="ordersHeader">{i18n.t('orders')}</h1>
             <SSPaginatorTable
                 headerText={i18n.t('listOfX', { x: i18n.t('orders') })}
-                fetch={fetch}
+                fetch={ordersService.getOrders}
                 columns={columns}
                 emptyMessage={i18n.t('noXfound', { x: i18n.t('orders') })} >
             </SSPaginatorTable>

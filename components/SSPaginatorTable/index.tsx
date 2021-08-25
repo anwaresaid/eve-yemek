@@ -7,6 +7,7 @@ import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { Dropdown } from "primereact/dropdown";
 import { DataTable } from "primereact/datatable";
+import { parseDateInOneRow } from "../../helpers/dateFunctions";
 
 const SSPaginatorTable = (props) => {
 
@@ -20,6 +21,8 @@ const SSPaginatorTable = (props) => {
     const [currentRows, setCurrentRows] = useState([])
     const [searchKey, setSearchKey] = useState(null)
     const [searchBy, setSearchBy] = useState('')
+    const [sortField, setSortField] = useState('')
+    const [sortOrder, setSortOrder] = useState(0)
     const [debouncedFetch] = useState(() => _.debounce((val) => setSearchKey(val), 800));
 
     const tableHeader = () => {
@@ -45,10 +48,22 @@ const SSPaginatorTable = (props) => {
             setRowsPerPage(10)
             setShowPaginator(true)
         }
-        props.fetch(first, rowsPerPage, searchBy ?? null, searchKey ?? null)
+        props.fetch({
+            offset: first,
+            limit: rowsPerPage,
+            fields: searchBy ?? null,
+            text: searchKey ?? null,
+            sort_field: sortField,
+            sort_by: sortField ? (sortOrder === 1 ? 'asc' : 'desc') : null
+        })
             .then(res => {
                 setTotalItems(res.total)
-                setCurrentRows((res.items ?? res).filter(row => !row.is_deleted))
+                setCurrentRows((res.items ?? res).filter(row => !row.is_deleted).map(one => {
+                    if (one.createdAt) {
+                        one = parseDateInOneRow(one)
+                        return one
+                    }
+                }))
                 setLoading(false)
             })
             .catch(err => {
@@ -56,7 +71,7 @@ const SSPaginatorTable = (props) => {
                 setCurrentRows([])
                 setLoading(false)
             })
-    }, [rowsPerPage, first, searchKey])
+    }, [rowsPerPage, first, searchKey, sortField, sortOrder])
 
     useEffect(() => {
         if (loading) {
@@ -109,8 +124,13 @@ const SSPaginatorTable = (props) => {
         }
     }
 
+    const setSort = (e) => {
+        setSortField(e.sortField);
+        setSortOrder(e.sortOrder)
+    }
+
     const dynamicColumns = props.columns.map((col, i) => {
-        return <Column key={i} {...col} filter={col.filter} filterElement={getFilterElement(col)} sortable />;
+        return <Column key={i} {...col} filter={col.filter} filterElement={getFilterElement(col)} sortable></Column>;
     });
 
     return (
@@ -128,6 +148,9 @@ const SSPaginatorTable = (props) => {
                 lazy
                 onPage={onPage}
                 loading={loading}
+                onSort={e => setSort(e)}
+                sortField={sortField}
+                sortOrder={sortOrder}
             >
                 {dynamicColumns}
             </S.Table>
