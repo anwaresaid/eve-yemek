@@ -326,5 +326,6 @@ export const translations = {
   todaysAmount: 'Today\'s Amount',
   totalDeliveries: 'Total Deliveries',
   selectDates: 'Select Dates',
-  currentTotal: 'Current Total'
+  currentTotal: 'Current Total',
+  profile:'Profile'
 };

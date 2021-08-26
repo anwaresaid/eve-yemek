@@ -326,5 +326,6 @@ export const translations = {
   todaysAmount: 'Günlük Tutar',
   totalDeliveries: 'Toplam Teslimat',
   selectDates: 'Tarihleri Seçin',
-  currentTotal: 'Şuanki Toplam'
+  currentTotal: 'Şuanki Toplam',
+  profile:'Hesabım'
 };

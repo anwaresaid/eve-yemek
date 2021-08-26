@@ -328,5 +328,6 @@ export const translations = {
   todaysAmount: 'كمية اليوم',
   totalDeliveries: 'إجمالي عمليات التسليم',
   selectDates: 'حدد التواريخ',
-  currentTotal: 'المجموع الحالي'
+  currentTotal: 'المجموع الحالي',
+  profile:'الملف الشخصي'
 };
