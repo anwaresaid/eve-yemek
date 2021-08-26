@@ -6,7 +6,7 @@ import FAQsService from '../../store/services/faqs.service';
 export const FAQs = () => {
 
     let faqsService = new FAQsService()
-    const [FAQsData, setFAQsData] = useState({title: 'FAQs', rows: []})
+    const [FAQsData, setFAQsData] = useState({title: i18n.t('FAQs'), rows: []})
 
     useEffect(() => {
         faqsService.getFAQs(i18n.language)

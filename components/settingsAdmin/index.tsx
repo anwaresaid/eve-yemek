@@ -38,7 +38,7 @@ const SettingsAdmin = () => {
                         <TabPanel header={i18n.t("security")} >
                             <PasswordChangePage />
                         </TabPanel>
-                        <TabPanel header={i18n.t('FAQs')}>
+                        <TabPanel header={i18n.t('FAQ')}>
                             <FAQsEdit/>
                         </TabPanel>
                     </TabView>

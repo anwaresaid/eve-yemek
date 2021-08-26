@@ -325,5 +325,24 @@ export const translations = {
   todaysAmount: 'Günlük Tutar',
   totalDeliveries: 'Toplam Teslimat',
   selectDates: 'Tarihleri Seçin',
-  currentTotal: 'Şuanki Toplam'
+  currentTotal: 'Şuanki Toplam',
+
+  english: 'İngilizce',
+  turkish: 'Türkçe',
+  arabic: 'Arapça',
+  russian: 'Rusca',
+
+  question: 'Soru',
+  answer: 'Cevap',
+
+  addedFAQ: 'SSS Eklendi',
+  updatedFAQ: 'SSS Güncellendi',
+
+  questionAndAnswerCannotBeEmpty: 'Soru ve cevap boş bırakılmamalıdır',
+  errorAddingFAQ: 'SSS eklenirken hata oluştu',
+  errorUpdatingFAQ: 'SSS güncellenirken hata oluştu',
+
+  errorGettingFAQsData: 'SSS verileri alınırken hata oluştu',
+  addAFAQ: 'Yeni SSS Ekle',
+  FAQ: 'SSS'
 };

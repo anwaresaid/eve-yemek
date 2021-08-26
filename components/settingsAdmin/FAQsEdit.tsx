@@ -180,9 +180,9 @@ const FAQsEdit = () => {
                                 }
                                 <Button
                                     id="add_faq_btn"
-                                    label={i18n.t('add')}
+                                    label={i18n.t('addAFAQ')}
                                     className="p-col-fixed"
-                                    style={{ width: '50px' }}
+                                    style={{ width: '120px' }}
                                     onClick={e => {
                                         if (!isAnyRowInEditing()) {
                                             setFAQsData({
