@@ -8,7 +8,7 @@ import { i18n } from '../../language';
 const index = () => {
 
   const renderSettings = () => {
-    const is_admin = auth.hasRoles(["admin"]);
+    const is_admin = auth.hasRoles(["admin"]) || auth.hasRoles(["super_admin"]);
     const is_owner = auth.hasRoles(["restaurant_owner"]);
     const is_customer_service = auth.hasRoles(["customer_service"])
 

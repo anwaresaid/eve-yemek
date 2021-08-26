@@ -327,5 +327,24 @@ export const translations = {
   totalDeliveries: 'Total Deliveries',
   selectDates: 'Select Dates',
   currentTotal: 'Current Total',
-  profile:'Profile'
+
+  english: 'English',
+  turkish: 'Turkish',
+  arabic: 'Arabic',
+  russian: 'Russian',
+
+  question: 'Question',
+  answer: 'Answer',
+
+  addedFAQ: 'Added FAQ',
+  updatedFAQ: 'Updated FAQ',
+
+  questionAndAnswerCannotBeEmpty: 'Question and answer cannot be empty',
+  errorAddingFAQ: 'Error adding FAQ',
+  errorUpdatingFAQ: 'Error updating FAQ',
+
+  errorGettingFAQsData: 'Error getting FAQs data',
+  addAFAQ: 'Add a FAQ',
+  FAQ: 'FAQs',
+  profile:'Profile',
 };

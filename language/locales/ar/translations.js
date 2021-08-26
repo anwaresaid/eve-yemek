@@ -329,5 +329,24 @@ export const translations = {
   totalDeliveries: 'إجمالي عمليات التسليم',
   selectDates: 'حدد التواريخ',
   currentTotal: 'المجموع الحالي',
-  profile:'الملف الشخصي'
+
+  english: 'الإنكليزية',
+  turkish: 'التركية',
+  arabic: 'العربية',
+  russian: 'الروسية',
+
+  question: 'سؤال',
+  answer: 'جواب',
+
+  addedFAQ: 'تمت إضافة السؤال',
+  updatedFAQ: 'تم تعديل السؤال',
+
+  questionAndAnswerCannotBeEmpty: 'حقل السؤال والجواب لا يمكن أن يكون فارغًا',
+  errorAddingFAQ: 'هناك مشكلة في إضافة السؤال',
+  errorUpdatingFAQ: 'هناك مشكلة في تعديل السؤال',
+
+  errorGettingFAQsData: 'هناك مشكلة في استخراج الأسئلة',
+  addAFAQ: 'أضف سؤال',
+  FAQ: 'لأسئلة التي يتواتر طرحها',
+  profile:'الملف الشخصي',
 };

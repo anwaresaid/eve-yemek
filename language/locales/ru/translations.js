@@ -330,5 +330,24 @@ export const translations = {
   totalDeliveries: 'Всего доставок',
   selectDates: 'Выберите даты',
   currentTotal: 'Текущее Итого',
-  profile:'Профиль'
+
+  english: 'английский',
+  turkish: 'турецкий',
+  arabic: 'арабский',
+  russian: 'русский',
+
+  question: 'Вопрос',
+  answer: 'Отвечать',
+
+  addedFAQ: 'Добавлен FAQ',
+  updatedFAQ: 'обновленный FAQ',
+
+  questionAndAnswerCannotBeEmpty: 'вопрос и ответ не могут быть пустыми',
+  errorAddingFAQ: 'Ошибка при добавлении FAQ',
+  errorUpdatingFAQ: 'Ошибка обновления FAQ',
+
+  errorGettingFAQsData: 'Ошибка при получении данных FAQ',
+  addAFAQ: 'Добавить FAQ',
+  FAQ: 'часто задаваемые вопросы',
+  profile:'Профиль',
 };

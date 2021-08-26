@@ -8,6 +8,7 @@ import Notification from "./notifications";
 import SmsGateWay from "./smsGateWay";
 import GoogleMaps from "./googleMaps";
 import PaymentGateway from "./paymentGateway";
+import FAQsEdit from "./FAQsEdit";
 
 const SettingsAdmin = () => {
 
@@ -36,6 +37,9 @@ const SettingsAdmin = () => {
                         </TabPanel>
                         <TabPanel header={i18n.t("security")} >
                             <PasswordChangePage />
+                        </TabPanel>
+                        <TabPanel header={i18n.t('FAQ')}>
+                            <FAQsEdit/>
                         </TabPanel>
                     </TabView>
         </div>
