@@ -96,7 +96,6 @@ const SSPaginatorTable = (props) => {
     const setSort = (e) => {
         setSortField(e.sortField);
         setSortOrder(e.sortOrder)
-        console.log(e)
     }
 
     const clearFilterInputsExcept = (except) => {
