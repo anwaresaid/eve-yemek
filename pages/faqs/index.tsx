@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Faq from "react-faq-component";
+import { i18n } from '../../language';
 import FAQsService from '../../store/services/faqs.service';
 
 export const FAQs = () => {
@@ -8,9 +9,9 @@ export const FAQs = () => {
     const [FAQsData, setFAQsData] = useState({title: 'FAQs', rows: []})
 
     useEffect(() => {
-        faqsService.getFAQs()
+        faqsService.getFAQs(i18n.language)
             .then(res => {
-                setFAQsData({...FAQsData, rows: res})
+                setFAQsData({...FAQsData, rows: res.filter(one => one.is_deleted === false).map(one => one.faq)})
             })
             .catch(err => {
 
