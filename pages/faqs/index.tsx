@@ -6,12 +6,12 @@ import FAQsService from '../../store/services/faqs.service';
 export const FAQs = () => {
 
     let faqsService = new FAQsService()
-    const [FAQsData, setFAQsData] = useState({title: i18n.t('FAQs'), rows: []})
+    const [FAQsData, setFAQsData] = useState({ title: i18n.t('FAQ'), rows: [] })
 
     useEffect(() => {
-        faqsService.getFAQs(i18n.language)
+        faqsService.getFAQs(i18n.language.slice(0, 2))
             .then(res => {
-                setFAQsData({...FAQsData, rows: res.filter(one => one.is_deleted === false).map(one => one.faq)})
+                setFAQsData({ ...FAQsData, rows: res.filter(one => one.is_deleted === false).map(one => one.faq) })
             })
             .catch(err => {
 
