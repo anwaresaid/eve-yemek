@@ -8,12 +8,8 @@ const customerList = () => {
 
     const usersListsService = new UsersListsService();
 
-    const fetch = (offset, limit, fields = null, text = null) => {
-        return new Promise((resolve, reject) => {
-            usersListsService.getUsersByRole('customer', offset, limit)
-                .then(res => resolve(parseDateInAllRows(res)))
-                .catch(err => reject(err))
-        })
+    const fetch = (...args) => {
+        return usersListsService.getUsersByRole('customer', ...args)
     }
 
     return (

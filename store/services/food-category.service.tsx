@@ -1,13 +1,9 @@
 import axios from '../../helpers/_axios';
 
 export default class FoodCategoryService {
-  public async getAllFoodCategories(offset, limit, fields = null, text = null) {
-    var query
-    if (!fields || fields == '' || !text || text == '') {
-      query = '/food-categories?offset=' + offset + '&limit=' + limit
-    } else {
-      query = '/food-categories?offset=' + offset + '&limit=' + limit + '&fields=' + fields + '&text=' + text
-    }
+  public async getAllFoodCategories(...args) {
+    let query = '/food-categories?'
+    Object.keys(args[0]).forEach(key => query += args[0][key] ? (key + '=' + args[0][key] + '&') : '')
     const { data: { data } } = await axios.get(query)
     return data;
   }

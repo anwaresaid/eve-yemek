@@ -12,26 +12,18 @@ const AddonCategoriesList = () => {
   const addOnCategoryService = new AddOnCategoryService();
 
   const columns = [
-    { field: 'id', header: "ID" },
-    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search' },
-    { field: 'enum', header: i18n.t('type'), filter: true, filterType: 'search' },
+    { field: 'id', header: "ID", sortable: true },
+    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search', sortable: true },
+    { field: 'enum', header: i18n.t('type'), filter: true, filterType: 'search', sortable: true },
     { field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }
   ]
-
-  const fetch = (offset, limit, fields = null, text = null) => {
-    return new Promise((resolve, reject) => {
-      addOnCategoryService.getAllAddonCategories(offset, limit, fields, text)
-        .then(res => resolve(res))
-        .catch(err => reject(err))
-    })
-  }
 
   return (
     <div id="addonCategoryTabe">
       <h1 id="addonCatHeader">{i18n.t('addonCategories')}</h1>
       <SSPaginatorTable
         headerText={i18n.t('listOfX', { x: i18n.t('addonCategories') })}
-        fetch={fetch}
+        fetch={addOnCategoryService.getAllAddonCategories}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('addonCategories') })}
       >

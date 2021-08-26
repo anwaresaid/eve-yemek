@@ -8,7 +8,7 @@ export const listDeliveries = () => async (dispatch, getState) => {
     });
 
     const deliveryService = new DeliveryService();
-    const res = await deliveryService.getAllDeliveries(0, 9999);
+    const res = await deliveryService.getAllDeliveries({offset: 0, limit: 9999});
     dispatch({
       type: deliveriesTypes.DELIVERY_LIST_SUCCESS,
       payload: res,

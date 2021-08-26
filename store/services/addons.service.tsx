@@ -2,13 +2,9 @@ import axios from "../../helpers/_axios";
 
 export default class AddOnsService {
 
-    async getAllAddOns(offset, limit, fields = null, text = null) {
-        var query
-        if (!fields || fields == '' || !text || text == '') {
-            query = '/add-ons?offset=' + offset + '&limit=' + limit
-        } else {
-            query = '/add-ons?offset=' + offset + '&limit=' + limit + '&fields=' + fields + '&text=' + text
-        }
+    async getAllAddOns(...args) {
+        let query = '/add-ons?'
+        Object.keys(args[0]).forEach(key => query += args[0][key] ? (key + '=' + args[0][key] + '&') : '')
         const { data: { data } } = await axios.get(query)
         return data;
     }

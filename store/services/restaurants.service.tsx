@@ -2,13 +2,9 @@ import axios from "../../helpers/_axios";
 
 export default class RestaurantsService {
 
-    async getRestaurants(offset, limit, fields = null, text = null) {
-        var query
-        if (!fields || fields == '' || !text || text == '') {
-            query = '/restaurants?offset=' + offset + '&limit=' + limit
-        } else {
-            query = '/restaurants?offset=' + offset + '&limit=' + limit + '&fields=' + fields + '&text=' + text
-        }
+    async getRestaurants(...args) {
+        let query = '/restaurants?'
+        Object.keys(args[0]).forEach(key => query += args[0][key] ? (key + '=' + args[0][key] + '&'): '')
         const { data: { data } } = await axios.get(query)
         return data;
     }

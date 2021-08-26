@@ -1,15 +1,11 @@
 import axios from '../../helpers/_axios';
 
 export default class AddOnCategoryService {
-  public async getAllAddonCategories(offset, limit, fields = null, text = null) {
-    var query
-    if (!fields || fields == '' || !text || text == '') {
-      query = '/add-on-category?offset=' + offset + '&limit=' + limit
-    } else {
-      query = '/add-on-category?offset=' + offset + '&limit=' + limit + '&fields=' + fields + '&text=' + text
-    }
-    const { data: { data } } = await axios.get(query)
-    return data;
+  public async getAllAddonCategories(...args) {
+    let query = '/add-on-category?'
+        Object.keys(args[0]).forEach(key => query += args[0][key] ? (key + '=' + args[0][key] + '&') : '')
+        const { data: { data } } = await axios.get(query)
+        return data;
   }
 
   public async getAddonCategoryDetails(id: string) {
