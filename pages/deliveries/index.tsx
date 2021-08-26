@@ -2,12 +2,8 @@ import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
 import React, { useEffect, useState } from 'react';
 import DeliveryService from '../../store/services/deliveries.service';
-import Loading from '../../components/Loading';
-import StandardTable from '../../components/StandardTable';
 import { i18n } from '../../language';
-import Header from '../../components/InTableComponents/Header/index';
 import _ from 'lodash';
-import { listDeliveries } from '../../store/actions/deliveries.action';
 import OrderAndDeliveryStatus from '../../components/InTableComponents/orderStatusTag';
 import { fromNowDate } from '../../helpers/dateFunctions';
 import SSPaginatorTable from '../../components/SSPaginatorTable';
@@ -46,7 +42,8 @@ const Deliveries = () => {
         </a>
       ),
       filter: true,
-      filterType: 'search'
+      filterType: 'search',
+      sortable: true
     },
     {
       field: 'user.name',
@@ -62,11 +59,14 @@ const Deliveries = () => {
         ) : ''
       ),
       filter: true,
-      filterType: 'search'
+      filterType: 'search',
+      sortable: true
     },
     {
+      field: 'order.createdAt',
       header: i18n.t('orderTime'),
       body: (row) => (fromNowDate(row.order.createdAt)),
+      sortable: true
     },
     {
       field: 'status',
@@ -90,20 +90,12 @@ const Deliveries = () => {
     },
   ]
 
-  const fetch = (offset, limit, fields = null, text = null) => {
-    return new Promise((resolve, reject) => {
-      deliveryService.getAllDeliveries(offset, limit, fields, text)
-        .then(res => resolve(res))
-        .catch(err => reject(err))
-    })
-  }
-
   return (
     <div id='deliveriesCard' className='card'>
       <h1 id='deliveriesHeader'>{i18n.t('deliveries')}</h1>
       <SSPaginatorTable
         headerText={i18n.t('listOfX', { x: i18n.t('deliveries') })}
-        fetch={fetch}
+        fetch={deliveryService.getAllDeliveries}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('deliveries') })}
       ></SSPaginatorTable>

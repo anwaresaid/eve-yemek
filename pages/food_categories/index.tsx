@@ -21,28 +21,20 @@ const FoodCategoriesList = () => {
   }
 
   const columns = [
-    { field: 'id', header: "ID" },
+    { field: 'id', header: "ID", sortable: true },
     { field: 'image', header: i18n.t('image'), body: imageBodyTemplate },
-    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search' },
-    { field: 'country', header: i18n.t('country'), filter: true, filterType: 'search' },
+    { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search', sortable: true },
+    { field: 'country', header: i18n.t('country'), filter: true, filterType: 'search', sortable: true },
     { field: 'status', header: i18n.t('status'), body: (rowData) => activeTag(rowData.active) },
     { field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }
   ]
-
-  const fetch = (offset, limit, fields = null, text = null) => {
-    return new Promise((resolve, reject) => {
-      foodCategoryService.getAllFoodCategories(offset, limit, fields, text)
-        .then(res => resolve(res))
-        .catch(err => reject(err))
-    })
-  }
 
   return (
     <div id="foodsTable">
       <h1 id="foodsCatHeader">{i18n.t('mealCategories')}</h1>
       <SSPaginatorTable
         headerText={i18n.t('listOfX', { x: i18n.t('mealCategories') })}
-        fetch={fetch}
+        fetch={foodCategoryService.getAllFoodCategories}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('mealCategories') })}
       >

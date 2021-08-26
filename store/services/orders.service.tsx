@@ -2,13 +2,9 @@ import axios from "../../helpers/_axios";
 
 export default class OrdersService {
 
-    async getOrders(offset, limit, fields = null, text = null) {
-        var query
-        if (!fields || fields == '' || !text || text == '') {
-            query = '/orders?offset=' + offset + '&limit=' + limit
-        } else {
-            query = '/orders?offset=' + offset + '&limit=' + limit + '&fields=' + fields + '&text=' + text
-        }
+    async getOrders(...args) {
+        let query = '/orders?'
+        Object.keys(args[0]).forEach(key => query += args[0][key] ? (key + '=' + args[0][key] + '&'): '')
         const { data: { data } } = await axios.get(query)
         return data;
     }

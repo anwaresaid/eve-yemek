@@ -13,11 +13,11 @@ const UsersTable = (props) => {
     var path;
 
     const columns = [
-        { field: 'name', header: i18n.t('name') },
-        { field: 'email', header: i18n.t('email') },
+        { field: 'name', header: i18n.t('name'), sortable: true },
+        { field: 'email', header: i18n.t('email'), sortable: true },
         { field: 'phone', header: i18n.t('telephone') },
-        { field: 'howLongAgo', header: i18n.t('created') }, 
-        { field: 'active', header: i18n.t('active'), body: (rowData) => activeTag(rowData.active) }, // change after BE supports active status for users
+        { field: 'createdAt', header: i18n.t('created'), sortable: true }, 
+        { field: 'active', header: i18n.t('active'), body: (rowData) => activeTag(rowData.active) },
         { field: 'ops', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path = 'users/' + props.editPath) }
     ]
 
