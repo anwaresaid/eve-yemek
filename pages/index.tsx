@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import * as S from "../styles/index.style";
 import { Card } from "primereact/card";
-import { Line, Pie } from "react-chartjs-2";
-import { Chart } from 'primereact/chart';
+import { Bar, Line, Pie } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "typesafe-actions";
 import { getDashboardReport } from "../store/actions/dashboard.action";
@@ -18,9 +17,8 @@ import { Tag } from "primereact/tag";
 import { TabPanel, TabView } from "primereact/tabview";
 import { getRandomColor } from "../helpers/colors";
 import { getDemandData } from "../store/actions/service-demand.action";
-import { InputSwitch } from "primereact/inputswitch";
-import InputContainer from "../components/inputs/inputContainer";
 import { Dropdown } from "primereact/dropdown";
+import { ChartType } from "chart.js";
 
 const Index = (props) => {
     const res = useSelector((state: RootState) => state.dashboardReport)
@@ -228,10 +226,9 @@ const Index = (props) => {
                             <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
                         </i>
                         <Line
+                            type="line"
                             ref={chartRef}
                             width={500}
-                            // TODO: Make sure what to use, datatype or type. 3 usages in this file at the time of writing.
-                            datatype='number'
                             height={100}
                             data={lineChartData}
                             options={{
@@ -255,7 +252,7 @@ const Index = (props) => {
                     <TabPanel header={i18n.t('cities')}>
                         {
                             citiesChartType === 'bar' && <div>
-                                <Chart type="bar" data={citiesPieChartData} width="500" height="500" options={{
+                                <Bar type="bar" data={citiesPieChartData} width={500} height={500} options={{
                                     maintainAspectRatio: false,
                                     plugins: {
                                        
@@ -275,13 +272,13 @@ const Index = (props) => {
                                             setActiveIndexAreas(1)
                                         }
                                     },
-                                }}></Chart>
+                                }}></Bar>
                             </div>
                         }
 
                         {
                             citiesChartType === 'pie' && <div>
-                                <Pie datatype='number' data={citiesPieChartData} width={500} height={500} options={{
+                                <Pie type="pie" data={citiesPieChartData} width={500} height={500} options={{
                                     maintainAspectRatio: false, plugins: {
                                         tooltip: {
                                             callbacks: {
@@ -312,7 +309,7 @@ const Index = (props) => {
                         </div>
                     </TabPanel>
                     <TabPanel header={demandData ? i18n.t('districtsInX', { x: demandData[cityIndex]?._id }) : ''}>
-                        <Pie datatype='number' data={districtsPieChartData} width={500} height={500} options={{
+                        <Pie type="pie" data={districtsPieChartData} width={500} height={500} options={{
                             maintainAspectRatio: false
                         }}
                         >

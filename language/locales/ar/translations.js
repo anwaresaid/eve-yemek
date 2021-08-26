@@ -66,6 +66,7 @@ export const translations = {
   delivered: 'تم التوصيل',
   cancelled: 'تم إلغاء',
   assigned: 'تم التعيين',
+  unassigned: 'غير معين',
 
   // Orders and Live Orders Pages
   liveOrders: 'الطلبات الحالية',
@@ -346,5 +347,6 @@ export const translations = {
 
   errorGettingFAQsData: 'هناك مشكلة في استخراج الأسئلة',
   addAFAQ: 'أضف سؤال',
-  FAQ: 'لأسئلة التي يتواتر طرحها'
+  FAQ: 'لأسئلة التي يتواتر طرحها',
+  profile:'الملف الشخصي',
 };

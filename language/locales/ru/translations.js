@@ -66,6 +66,7 @@ export const translations = {
   delivered: 'Доставлено',
   cancelled: 'Отменено',
   assigned: 'Назначенный',
+  unassigned: 'Не назначен',
 
   // Orders and Live Orders Pages
   liveOrders: 'Текущие заказы',
@@ -347,5 +348,6 @@ export const translations = {
 
   errorGettingFAQsData: 'Ошибка при получении данных FAQ',
   addAFAQ: 'Добавить FAQ',
-  FAQ: 'часто задаваемые вопросы'
+  FAQ: 'часто задаваемые вопросы',
+  profile:'Профиль',
 };

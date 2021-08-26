@@ -55,7 +55,7 @@ const FAQsEdit = () => {
 
         const startEdit = (id) => {
             setFAQsData({
-                ...FAQsData, rows: FAQsData.rows.map(r => r.id === id ? { ...r, editing: true } : r)
+                ...FAQsData, rows: FAQsData.rows.map(r => r.id === id ? { ...r, editing: true } : {...r, editing: false})
             })
         }
 

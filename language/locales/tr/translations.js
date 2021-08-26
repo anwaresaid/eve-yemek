@@ -66,6 +66,7 @@ export const translations = {
   delivered: 'Teslim Edildi',
   cancelled: 'İptal Edildi',
   assigned: 'Atanmiş',
+  unassigned: 'Atanmamış',
 
   // Orders and Live Orders Pages
   liveOrders: 'Canlı Siparişler',
@@ -344,5 +345,6 @@ export const translations = {
 
   errorGettingFAQsData: 'SSS verileri alınırken hata oluştu',
   addAFAQ: 'Yeni SSS Ekle',
-  FAQ: 'SSS'
+  FAQ: 'SSS',
+  profile:'Hesabım',
 };

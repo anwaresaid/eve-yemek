@@ -43,6 +43,152 @@ const GlobalStyle = createGlobalStyle`
             flex:1;
         }
     }
+    .profileContainer{
+        position:fixed;
+        z-index:4;
+        top:0px;
+        right:20px;
+    }
+    .profileContainer .profile{
+        position:relative;
+        width:60px;
+        height:60px;
+        border-radius:50%;
+        /* overflow: hidden;  */
+        cursor: pointer;
+    }
+    .profileContainer .profile .profileImage
+    { 
+        position: absolute;
+        top:13px;
+        left:10px;
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        overflow: hidden;
+        object-fit:cover;
+    }
+    .profileContainer .profile .profileImage:hover
+    {
+        box-shadow: 1px 1px 10px gray;
+    }
+    .profileContainer .menu
+    { 
+        position: absolute;
+        top:120px;
+        right:-10px;
+        padding: 10px;
+        background: white;
+        width:220px;
+        word-break: break-word;
+        box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+        border-radius:15px;
+        transition: 0.5s;
+        visibility: hidden;
+        opacity:0;
+        box-shadow: -1px 1px 5px rgba(0,0,0,.3);
+        white-space: pre-wrap;
+    }
+    .profileContainer .menu ul li h3
+    {
+        width:100%;
+        font-size:15px;
+        font-weight: 500;
+        color:gray;
+        line-height:1.2em;
+        padding:0 -10px !important;
+    }
+    .profileContainer .menu h2
+    {
+        padding:0 10px;
+        width:100%;
+        font-size:15px;
+        font-weight: 500;
+        color:gray;
+        line-height:1.2em;
+    }
+    .profileContainer .menu.active
+    {
+        font-size:15px;
+        top:80px;
+        visibility: visible;
+        opacity: 1;
+    }
+    .profileContainer .menu::before
+    { 
+        content: '';
+        position: absolute;
+        top:-5px;
+        right:0px;
+        margin-right:30px;
+        width:20px;
+        height:20px;
+        background: white;
+        transform: rotate(45deg);
+    }
+    .profileContainer .menu ul
+    { 
+        list-style:none;
+        padding:10px 0;
+        margin: 0;
+    }
+    .profileContainer .menu ul li
+    { 
+        right:0;
+        font-family: Arial, sans-serif;
+        list-style:none;
+        padding:10px 10px;
+        font-size: 10;
+        border-top:1px solid rgba(0,0,0,0.05);
+        
+    }
+    /* .profileContainer .menu ul li img
+    { 
+        max-width:20px;
+        max-height:20px;
+        margin-right:10px;
+        opacity:0.5s;
+        transition:0.5s;
+    } */
+    /* .profileContainer .menu ul li:hover img
+    {
+        opacity:1;
+    } */
+    
+    .profileContainer .menu ul li a
+    {
+        display:inline-block;
+        text-decoration: none;
+        color:#555;
+        font-weight:500;
+        transition:0.5s;
+    }
+    .profileContainer .menu ul li:hover a
+    { 
+        color: #ff0439;
+
+    }
+    .overFlow
+    { 
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        visibility:hidden;
+    }
+    .overFlow.active
+    { 
+        z-index:3;
+        visibility:visible;
+    }
+    .main-context-card .dropdownMenuContainer .dropdownMenu{
+        position:absolute;
+        top :80px;
+        right : -10px;
+        padding : 10px 20px;
+
+    }
         
     .ContainerPanel{
         margin-top:-30px;
