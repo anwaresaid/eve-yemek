@@ -24,7 +24,6 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { listAddonCategory } from "../../../store/actions/addon-category.action";
 import { Tag } from "primereact/tag";
 import { foodsTypes } from "../../../store/types/foods.type";
-import { currencyDirectory } from "../../../helpers/constants";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { getSupportedCountries } from "../../../store/actions/addresses.action";
