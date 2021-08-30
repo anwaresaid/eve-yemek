@@ -93,7 +93,7 @@ export const Index = () => {
   useEffect(() => {
     if (!addonCatSuccess) dispatch(listAddonCategory());
 
-    if (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) {
+    if (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])&& owners.items) {
       if (!owners || (owners.items.length === 0 && !ownersSuccess)) {
         dispatch(listRestaurantOwners())
       }
@@ -104,7 +104,7 @@ export const Index = () => {
       dispatch(findAddons(router.query.id));
     }
 
-    if (successFind && addon.id === router.query.id) {
+    if (successFind && addon.id === router.query.id && addonCategoryList.items) {
       setData(true);
       const match = addonCategoryList.items.filter(
         (addonCategory) => addonCategory.id === addon.add_on_category
@@ -141,6 +141,7 @@ export const Index = () => {
     isFormFieldValid,
   };
   return (
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
     <div id='create_Add_ons'>
       <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('editAddon')}</h1>
@@ -185,7 +186,7 @@ export const Index = () => {
                   id='addOn_category_id'
                   name='addOn_category_id'
                   value={formik.values.addOn_category_id}
-                  options={addonCategoryList.items}
+                  options={addonCategoryList?.items}
                   optionValue='id'
                   onChange={formik.handleChange}
                   optionLabel='name'

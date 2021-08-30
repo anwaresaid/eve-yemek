@@ -6,6 +6,7 @@ import SSPaginatorTable from "../../components/SSPaginatorTable"
 import { priceBodyTemplate } from "../../components/InTableComponents/price";
 import activeTag from "../../components/InTableComponents/activeTag";
 import editButton from "../../components/InTableComponents/editButton";
+import auth from '../../helpers/core/auth';
 
 
 const AddOnsList = () => {
@@ -23,7 +24,7 @@ const AddOnsList = () => {
       header: i18n.t('active'),
       body: (rowData) => activeTag(rowData.active),
     },
-    {
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&{
       field: 'ops',
       header: i18n.t('operations'),
       body: (rowData) => editButton(rowData, router, path),

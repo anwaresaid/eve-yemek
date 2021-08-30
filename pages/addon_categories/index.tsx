@@ -4,6 +4,7 @@ import { i18n } from '../../language';
 import SSPaginatorTable from '../../components/SSPaginatorTable';
 import editButton from '../../components/InTableComponents/editButton';
 import AddOnCategoryService from '../../store/services/addon-category.service';
+import auth from '../../helpers/core/auth';
 
 const AddonCategoriesList = () => {
 
@@ -15,7 +16,7 @@ const AddonCategoriesList = () => {
     { field: 'id', header: "ID", sortable: true },
     { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search', sortable: true },
     { field: 'enum', header: i18n.t('type'), filter: true, filterType: 'search', sortable: true },
-    { field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&{ field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }
   ]
 
   return (

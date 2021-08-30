@@ -104,6 +104,7 @@ export const Index = () => {
   ];
 
   return (
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
     <div id='create_Add_On_Category'>
       <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('createAddonCategory')}</h1>

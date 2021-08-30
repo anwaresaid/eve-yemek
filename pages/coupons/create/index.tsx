@@ -21,6 +21,7 @@ import InputGroup from '../../../components/inputs/inputGroup';
 import FormColumn from '../../../components/inputs/formColumn';
 import { InputTextarea } from 'primereact/inputtextarea';
 import BackBtn from '../../../components/backBtn';
+import auth from '../../../helpers/core/auth';
 
 export const Index = () => {
   const toast = useRef(null);
@@ -137,6 +138,7 @@ export const Index = () => {
     isFormFieldValid
   }
   return (
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
     <div id='create_coupons'>
       <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>

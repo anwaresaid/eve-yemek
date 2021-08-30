@@ -8,6 +8,7 @@ import MealDataInput from "../../components/DataInputForms/MealDataInput/MealDat
 import Loading from "../../components/Loading";
 import { getIdQuery } from "../../helpers/getIdQuery";
 import { findFood } from "../../store/actions/foods.action";
+import auth from '../../helpers/core/auth';
 
 const UpdateFood = () => {
 
@@ -26,7 +27,7 @@ const UpdateFood = () => {
         }
     }, [foodSuccess, router.isReady])
 
-    return foodLoading ? <ProgressSpinner/> : <><BackBtn router={router}/><MealDataInput updating meal={foodData}></MealDataInput></>
+    return foodLoading ? <ProgressSpinner/> : auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&<><BackBtn router={router}/><MealDataInput updating meal={foodData}></MealDataInput></>
 }
 
 export default UpdateFood

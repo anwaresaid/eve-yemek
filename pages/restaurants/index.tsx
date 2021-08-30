@@ -7,6 +7,7 @@ import editButton from "../../components/InTableComponents/editButton";
 import { i18n } from "../../language";
 import SSPaginatorTable from "../../components/SSPaginatorTable";
 import RestaurantsService from "../../store/services/restaurants.service";
+import auth from '../../helpers/core/auth';
 
 const RestaurantsList = (props) => {
     const router = useRouter();
@@ -87,7 +88,7 @@ const RestaurantsList = (props) => {
         { field: 'address.country', header: i18n.t('country'), body: CountryBodyTemplate, filter: true, filterType: 'search', sortable: true },
         { field: 'createdAt', header: i18n.t('created'), body: dateBodyTemplate, sortable: true },
         { field: 'ops', header: i18n.t('status'), body: StatusBodyTemplate },
-        { field: '', header: i18n.t('operations'), body: editBodyTemplate }
+        auth.user.roles=='admin'|| auth.user.roles=='super_admin'&& { field: '', header: i18n.t('operations'), body: editBodyTemplate }
     ]
 
     return (

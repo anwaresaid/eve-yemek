@@ -19,6 +19,7 @@ import { Dropdown } from "primereact/dropdown";
 import { getSupportedCountries } from "../../../store/actions/addresses.action";
 import { ProgressSpinner } from "primereact/progressspinner";
 import BackBtn from "../../../components/backBtn";
+import auth from '../../../helpers/core/auth';
 
 export const Index = () => {
     const dispatch = useDispatch();
@@ -97,6 +98,7 @@ export const Index = () => {
     };
 
     return (
+        auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
         <div id="edit_food_categories">
             <BackBtn router={router}/>
             <h1 id="editHeader">{i18n.t("createFoodCategory")}</h1>
