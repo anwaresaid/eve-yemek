@@ -32,37 +32,37 @@ export const allMenuItems: any = [
     {
         label: i18n.t("restaurants"), expanded: true, items: [
             { label: i18n.t("restaurantList"), url: "/restaurants", roles: ["super_admin", "admin", "customer_service"] },
-            { label: i18n.t("createRestaurant"), url: "/restaurants/create", roles: ["super_admin", "admin", "customer_service"] },
+            { label: i18n.t("createRestaurant"), url: "/restaurants/create", roles: ["super_admin", "admin"] },
         ]
     },
     {
         label: i18n.t("meals"), expanded: true, items: [
             { label: i18n.t("mealList"), url: "/foods", roles: ["super_admin", "admin", "restaurant_owner", "customer_service"] },
-            { label: i18n.t("createMeal"), url: "/foods/create", roles: ["super_admin", "admin", "restaurant_owner", "customer_service"] }
+            { label: i18n.t("createMeal"), url: "/foods/create", roles: ["super_admin", "admin", "restaurant_owner" ] }
         ]
     },
     {
         label: i18n.t("mealCategories"), expanded: true, items: [
             { label: i18n.t("categoryList"), url: "/food_categories", roles: ["super_admin", "admin", "customer_service"] },
-            { label: i18n.t("createMealCategory"), url: "/food_categories/create", roles: ["super_admin", "admin", "customer_service"] }
+            { label: i18n.t("createMealCategory"), url: "/food_categories/create", roles: ["super_admin", "admin"] }
         ]
     },
     {
         label: i18n.t("addonCategories"), expanded: true, items: [
             { label: i18n.t("addonCategoryList"), url: "/addon_categories", roles: ["super_admin", "admin", "restaurant_owner", "customer_service"] },
-            { label: i18n.t("createAddonCategory"), url: "/addon_categories/create", roles: ["super_admin", "admin", "restaurant_owner", "customer_service"] }
+            { label: i18n.t("createAddonCategory"), url: "/addon_categories/create", roles: ["super_admin", "admin", "restaurant_owner"] }
         ]
     },
     {
         label: i18n.t("addons"), expanded: true, items: [
             { label: i18n.t("addonList"), url: "/addons", roles: ["super_admin", "admin", "restaurant_owner", "customer_service"] },
-            { label: i18n.t("createAddon"), url: "/addons/create", roles: ["super_admin", "admin", "restaurant_owner", "customer_service"] },
+            { label: i18n.t("createAddon"), url: "/addons/create", roles: ["super_admin", "admin", "restaurant_owner"] },
         ]
     },
     {
         label: i18n.t("coupons"), expanded: true, items: [
             { label: i18n.t("couponList"), url: "/coupons", roles: ["super_admin", "admin", "customer_service"] },
-            { label: i18n.t("createCoupon"), url: "/coupons/create", roles: ["super_admin", "admin", "customer_service"] },
+            { label: i18n.t("createCoupon"), url: "/coupons/create", roles: ["super_admin", "admin"] },
         ]
     },
     {

@@ -3,6 +3,7 @@ import RestaurantDataInput from "../../components/DataInputForms/RestaurantDataI
 import Loading from "../../components/Loading";
 import { getIdQuery } from "../../helpers/getIdQuery";
 import {useRouter} from 'next/router';
+import auth from '../../helpers/core/auth';
 
 const UpdateRestaurants = () => {
 
@@ -10,7 +11,7 @@ const UpdateRestaurants = () => {
     const id = getIdQuery();
 
     return (
-        id ?<><BackBtn router={router}/>  <RestaurantDataInput id={id} updating ></RestaurantDataInput> </>: <Loading/>
+        id ?auth.user.roles=='admin'|| auth.user.roles=='super_admin'&& <><BackBtn router={router}/>  <RestaurantDataInput id={id} updating ></RestaurantDataInput></>: <Loading/>
     )
     
 }

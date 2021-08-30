@@ -147,6 +147,7 @@ export const Index = () => {
   };
 
   return (
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
     <div id='create_Add_ons'>
       <BackBtn router={router} />
       <Toast id='toastMessage' ref={toast}></Toast>
