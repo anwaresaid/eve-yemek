@@ -51,7 +51,7 @@ const SSPaginatorTable = (props) => {
         props.fetch({
             offset: first,
             limit: rowsPerPage,
-            fields: searchBy ?? null,
+            fields: searchKey ? (searchBy ?? null) : null,
             text: searchKey ?? null,
             sort_field: sortField,
             sort_by: sortField ? (sortOrder === 1 ? 'asc' : (sortOrder === -1 ? 'desc' : null)) : null
