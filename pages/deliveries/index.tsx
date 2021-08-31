@@ -35,7 +35,7 @@ const Deliveries = () => {
       field: 'order.order_code',
       header: i18n.t('order'),
       body: (row) => (
-        <a
+        row.order&&<a
           href={'/orders/' + row.order.id}
           style={{ textDecoration: 'none' }}
         >
@@ -50,14 +50,14 @@ const Deliveries = () => {
       field: 'user.name',
       header: i18n.t('deliveryScouts'),
       body: (row) => (
-        row.user ? (
+        row.user && (
           <a
             href={'/users/delivery_scouts/' + row.user.id}
             style={{ textDecoration: 'none' }}
           >
             {row.user.name}
           </a>
-        ) : ''
+        )
       ),
       filter: true,
       filterType: 'search',
@@ -66,13 +66,13 @@ const Deliveries = () => {
     {
       field: 'order.createdAt',
       header: i18n.t('orderTime'),
-      body: (row) => (fromNowDate(row.order.createdAt)),
+      body: (row) => (fromNowDate(row.order?.createdAt)),
       sortable: true
     },
     {
       field: 'status',
       header: i18n.t('status'),
-      body: (row) => (OrderAndDeliveryStatus(row.status)),
+      body: (row) => (OrderAndDeliveryStatus(row?.status)),
       filter: true,
       filterType: 'dropdown',
       dropdownOptions: [
