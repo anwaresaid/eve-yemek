@@ -112,7 +112,6 @@ const SSPaginatorTable = (props) => {
     }
 
     const setSort = (e) => {
-        console.log(e)
         setSortField(e.sortField);
         setSortOrder(e.sortOrder)
     }
