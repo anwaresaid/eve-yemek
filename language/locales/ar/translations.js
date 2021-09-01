@@ -350,7 +350,7 @@ export const translations = {
   FAQ: 'لأسئلة التي يتواتر طرحها',
   profile:'الملف الشخصي',
 
-  filter: 'منقي',
+  filter: 'تصفية',
   sort: 'نوع',
   ascending: 'تصاعدي',
   descending: 'تنازلي',

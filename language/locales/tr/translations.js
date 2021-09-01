@@ -348,11 +348,11 @@ export const translations = {
   FAQ: 'SSS',
   profile:'Hesabım',
 
-  filter: 'Filtrele',
+  filter: 'Filtre',
   sort: 'Sıralama',
   ascending: 'Artan',
   descending: 'Azalan',
   filterField: 'Filtre Alanı',
   sortField: 'Sıralama Alanı',
-  sequence: 'Sıra', // ascending vs descending
+  sequence: 'Sıralama Tipi', // ascending vs descending
 };
