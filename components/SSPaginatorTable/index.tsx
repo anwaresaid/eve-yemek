@@ -8,6 +8,9 @@ import { Toast } from "primereact/toast";
 import { Dropdown } from "primereact/dropdown";
 import { DataTable } from "primereact/datatable";
 import { parseDateInOneRow } from "../../helpers/dateFunctions";
+import MobileFilterDialog from "./mobileFilterDialog";
+import { Button } from "primereact/button";
+import MobileSortDialog from "./mobileSortDialog";
 
 const SSPaginatorTable = (props) => {
 
@@ -23,12 +26,27 @@ const SSPaginatorTable = (props) => {
     const [searchBy, setSearchBy] = useState('')
     const [sortField, setSortField] = useState('')
     const [sortOrder, setSortOrder] = useState(0)
+    const [isMobileFilterDialogOpen, setMobileFilterDialogOpen] = useState(false)
+    const [isMobileSortDialogOpen, setMobileSortDialogOpen] = useState(false)
     const [debouncedFetch] = useState(() => _.debounce((val) => setSearchKey(val), 800));
 
     const tableHeader = () => {
         return (
             <div id='tableHeader' className="table-header">
                 {props.headerText}
+                {
+                    window.innerWidth < 825 &&
+                    <div className="p-fluid p-formgrid p-grid">
+                        <div className="p-field p-col">
+                            <Button label={i18n.t('filter')} onClick={() => setMobileFilterDialogOpen(true)}></Button>
+                        </div>
+                        <div className="p-field p-col">
+                            <Button label={i18n.t('sort')} onClick={() => setMobileSortDialogOpen(true)}></Button>
+                        </div>
+
+                    </div>
+                    //props.columns.map(col => getFilterElement(col, "header"))
+                }
             </div>
         );
     }
@@ -94,6 +112,7 @@ const SSPaginatorTable = (props) => {
     }
 
     const setSort = (e) => {
+        console.log(e)
         setSortField(e.sortField);
         setSortOrder(e.sortOrder)
     }
@@ -107,8 +126,8 @@ const SSPaginatorTable = (props) => {
         })
     }
 
-    const getFilterElement = (col) => {
-        let currentID = "filter_input_" + col.field
+    const getFilterElement = (col, source = "") => {
+        let currentID = "filter_input_" + col.field + source
         switch (col.filterType) {
             case 'search':
                 return <InputText id={currentID} placeholder={col.header}
@@ -136,7 +155,19 @@ const SSPaginatorTable = (props) => {
     return (
         <div>
             <Toast id="toastMessage" ref={toast}></Toast>
-            <S.Table id='ssptable' {...props} autoLayout={true} paginator={!props.noPaginator && showPaginator}
+            <MobileFilterDialog
+                open={isMobileFilterDialogOpen}
+                hide={() => setMobileFilterDialogOpen(false)}
+                getFilterElement={getFilterElement}
+                columns={props.columns}
+            />
+            <MobileSortDialog
+                open={isMobileSortDialogOpen}
+                hide={() => setMobileSortDialogOpen(false)}
+                setSort={setSort}
+                columns={props.columns}
+            />
+            <S.Table id='ssptable' {...props} className="p-datatable-gridlines p-datatable-sm p-datatable-striped" autoLayout={true} paginator={!props.noPaginator && showPaginator}
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 currentPageReportTemplate={i18n.t('showingXtoYofZ', { x: '{first}', y: '{last}', z: '{totalRecords}' })}
                 value={currentRows}
