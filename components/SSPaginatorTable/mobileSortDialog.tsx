@@ -4,13 +4,20 @@ import React, { useState } from "react"
 import { useEffect } from "react"
 import { i18n } from "../../language"
 
+type MSDProps = {
+    columns: Array<any>,
+    open: boolean,
+    hide: () => void,
+    setSort: (e: Object) => void
+}
+
 const MobileSortDialog = (props) => {
 
     const [sortField, setSortField] = useState('')
     const [sortBy, setSortBy] = useState('')
     const sortFieldOptions = []
 
-    props.columns.map(col => {
+    props.columns?.map(col => {
         if (col.sortable) {
             sortFieldOptions.push({
                 label: col.header,

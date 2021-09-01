@@ -3,12 +3,19 @@ import { Dropdown } from "primereact/dropdown"
 import React, { useState } from "react"
 import { i18n } from "../../language"
 
-const MobileFilterDialog = (props) => {
+type MFDProps = {
+    columns: Array<any>,
+    open: boolean,
+    hide: () => void,
+    getFilterElement: (col: any, source?: string) => JSX.Element
+}
+
+const MobileFilterDialog = (props: MFDProps) => {
 
     const [filterBy, setFilterBy] = useState('')
     const filterByOptions = []
 
-    props.columns.map(col => {
+    props.columns?.map(col => {
         if (col.filter) {
             filterByOptions.push({
                 label: col.header,
@@ -18,7 +25,7 @@ const MobileFilterDialog = (props) => {
     })
 
     const getColByField = (field) => {
-        return props.columns.filter(col => col.field == field)[0]
+        return props.columns?.filter(col => col.field == field)[0]
     }
 
     return (

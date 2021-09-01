@@ -12,7 +12,14 @@ import MobileFilterDialog from "./mobileFilterDialog";
 import { Button } from "primereact/button";
 import MobileSortDialog from "./mobileSortDialog";
 
-const SSPaginatorTable = (props) => {
+type SSPTProps = {
+    headerText?: any,
+    fetch: (params: any) => Promise<any>,
+    columns: Array<any>,
+    noPaginator?: boolean
+}
+
+const SSPaginatorTable = (props: SSPTProps) => {
 
     const [first, setFirst] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -33,7 +40,7 @@ const SSPaginatorTable = (props) => {
     const tableHeader = () => {
         return (
             <div id='tableHeader' className="table-header">
-                {props.headerText}
+                {props.headerText ?? <span></span>}
                 {
                     window.innerWidth < 825 &&
                     <div className="p-fluid p-formgrid p-grid">
@@ -45,7 +52,6 @@ const SSPaginatorTable = (props) => {
                         </div>
 
                     </div>
-                    //props.columns.map(col => getFilterElement(col, "header"))
                 }
             </div>
         );
@@ -144,6 +150,8 @@ const SSPaginatorTable = (props) => {
                         debouncedFetch(e.target.value)
                     }}>
                 </Dropdown>
+            default: 
+                    return <div></div>
         }
     }
 
