@@ -40,8 +40,7 @@ const FoodsList = () => {
                 headerText={i18n.t('listOfX', { x: i18n.t('foods') })}
                 fetch={foodService.getAllFoods}
                 columns={columns}
-                emptyMessage={i18n.t('noXfound', { x: i18n.t('meals') })} >
-            </SSPaginatorTable>
+                emptyMessage={i18n.t('noXfound', { x: i18n.t('meals') })} />
         </div >
     );
 }
