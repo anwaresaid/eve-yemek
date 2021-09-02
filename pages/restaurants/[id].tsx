@@ -11,7 +11,7 @@ const UpdateRestaurants = () => {
     const id = getIdQuery();
 
     return (
-        id ?auth.user.roles=='admin'|| auth.user.roles=='super_admin'&& <><BackBtn router={router}/>  <RestaurantDataInput id={id} updating ></RestaurantDataInput></>: <Loading/>
+        id ?auth.user.roles=='admin'|| auth.user.roles=='super_admin'?<><BackBtn router={router}/>  <RestaurantDataInput id={id} updating ></RestaurantDataInput></>: <Loading/>:<></>
     )
     
 }

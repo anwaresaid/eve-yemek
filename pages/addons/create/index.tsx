@@ -147,7 +147,7 @@ export const Index = () => {
   };
 
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'||auth.user.roles=='restaurant_owner'?
     <div id='create_Add_ons'>
       <BackBtn router={router} />
       <Toast id='toastMessage' ref={toast}></Toast>
@@ -238,7 +238,7 @@ export const Index = () => {
           </div>
         </S.ContainerCard>
       </form>
-    </div>
+    </div>:<></>
   );
 };
 

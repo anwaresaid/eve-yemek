@@ -27,7 +27,7 @@ const FoodCategoriesList = () => {
     { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search', sortable: true },
     { field: 'country', header: i18n.t('country'), filter: true, filterType: 'search', sortable: true },
     { field: 'status', header: i18n.t('status'), body: (rowData) => activeTag(rowData.active) },
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&{ field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'?{ field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }:''
   ]
 
   return (

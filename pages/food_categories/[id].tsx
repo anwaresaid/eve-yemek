@@ -154,7 +154,7 @@ export const FoodCategoryEdit = () => {
     };
 
     return (
-        auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
+        auth.user.roles=='admin'|| auth.user.roles=='super_admin'?
         <div id="edit_food_categories">
             <BackBtn router={router}/>
             <h1 id="editHeader">{i18n.t("editFoodCategory")}</h1>
@@ -229,7 +229,7 @@ export const FoodCategoryEdit = () => {
                     </div>
                 </form>
             </S.ContainerCard>
-        </div>
+        </div>:<></>
     );
 };
 

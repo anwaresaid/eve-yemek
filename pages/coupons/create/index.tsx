@@ -138,7 +138,7 @@ export const Index = () => {
     isFormFieldValid
   }
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'?
     <div id='create_coupons'>
       <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
@@ -220,7 +220,7 @@ export const Index = () => {
           </div>
         </form>
       </S.ContainerCard>
-    </div>
+    </div>:<></>
   );
 };
 
