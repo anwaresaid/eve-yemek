@@ -203,7 +203,18 @@ const UserDataInput = (props) => {
                                         options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].native_name, value: key } })
                                     }} />}
 
-                                <InputContainer label={i18n.t('selectRole')} size={6} name="roles" formiks={inputFormiks} component={MultiSelect} iprops={{
+                                <InputContainer label={i18n.t('selectRole')} size={6} name="roles" formiks={inputFormiks} component={MultiSelect}   iprops={auth.hasRoles(['super_admin'])?{
+                                    value: formik.values.roles,
+                                    onChange: formik.handleChange,
+                                    options: usersListTypes.SUPER_ADMIN_ROLES_FOR_DROPDOWN,
+                                    autoResize: true,
+                                    placeholder: i18n.t('selectRole'),
+                                    filter: true,
+                                    filterBy: "label",
+                                    optionLabel: "label",
+                                    optionValue: "value"
+                                }:
+                                {
                                     value: formik.values.roles,
                                     onChange: formik.handleChange,
                                     options: usersListTypes.USER_ROLES_FOR_DROPDOWN,

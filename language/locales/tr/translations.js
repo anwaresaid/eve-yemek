@@ -347,4 +347,12 @@ export const translations = {
   addAFAQ: 'Yeni SSS Ekle',
   FAQ: 'SSS',
   profile:'Hesabım',
+
+  filter: 'Filtre',
+  sort: 'Sıralama',
+  ascending: 'Artan',
+  descending: 'Azalan',
+  filterField: 'Filtre Alanı',
+  sortField: 'Sıralama Alanı',
+  sequence: 'Sıralama Tipi', // ascending vs descending
 };

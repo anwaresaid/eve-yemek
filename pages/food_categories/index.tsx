@@ -38,8 +38,7 @@ const FoodCategoriesList = () => {
         fetch={foodCategoryService.getAllFoodCategories}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('mealCategories') })}
-      >
-      </SSPaginatorTable>
+      />
     </div>
   );
 };

@@ -5,7 +5,7 @@ export default class DeliveryService {
   async getAllDeliveries(...args) {
     let query = '/delivery?'
     Object.keys(args[0]).forEach(key => query += args[0][key] ? (key + '=' + args[0][key] + '&') : '')
-    const { data: { data } } = await axios.get(query)
+    const { data: { data } } = await axios.get(query);
     return data;
   }
 

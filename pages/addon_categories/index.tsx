@@ -27,8 +27,7 @@ console.log(auth.user.roles)
         fetch={addOnCategoryService.getAllAddonCategories}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('addonCategories') })}
-      >
-      </SSPaginatorTable>
+      />
     </div>
   );
 };

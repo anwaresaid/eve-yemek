@@ -8,8 +8,19 @@ import { Toast } from "primereact/toast";
 import { Dropdown } from "primereact/dropdown";
 import { DataTable } from "primereact/datatable";
 import { parseDateInOneRow } from "../../helpers/dateFunctions";
+import MobileFilterDialog from "./mobileFilterDialog";
+import { Button } from "primereact/button";
+import MobileSortDialog from "./mobileSortDialog";
 
-const SSPaginatorTable = (props) => {
+type SSPTProps = {
+    headerText?: any,
+    fetch: (params: any) => Promise<any>,
+    columns: Array<any>,
+    noPaginator?: boolean,
+    emptyMessage?: string
+}
+
+const SSPaginatorTable = (props: SSPTProps) => {
 
     const [first, setFirst] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -23,12 +34,29 @@ const SSPaginatorTable = (props) => {
     const [searchBy, setSearchBy] = useState('')
     const [sortField, setSortField] = useState('')
     const [sortOrder, setSortOrder] = useState(0)
+    const [isMobileFilterDialogOpen, setMobileFilterDialogOpen] = useState(false)
+    const [isMobileSortDialogOpen, setMobileSortDialogOpen] = useState(false)
+
+    const [filterValues, setFilterValues] = useState({})
+
     const [debouncedFetch] = useState(() => _.debounce((val) => setSearchKey(val), 800));
 
     const tableHeader = () => {
         return (
             <div id='tableHeader' className="table-header">
-                {props.headerText}
+                {props.headerText ?? <span></span>}
+                {
+                    window.innerWidth < 825 &&
+                    <div className="p-fluid p-formgrid p-grid">
+                        <div className="p-field p-col">
+                            <Button label={i18n.t('filter')} onClick={() => setMobileFilterDialogOpen(true)}></Button>
+                        </div>
+                        <div className="p-field p-col">
+                            <Button label={i18n.t('sort')} onClick={() => setMobileSortDialogOpen(true)}></Button>
+                        </div>
+
+                    </div>
+                }
             </div>
         );
     }
@@ -51,7 +79,7 @@ const SSPaginatorTable = (props) => {
         props.fetch({
             offset: first,
             limit: rowsPerPage,
-            fields: searchBy ?? null,
+            fields: searchKey ? (searchBy ?? null) : null,
             text: searchKey ?? null,
             sort_field: sortField,
             sort_by: sortField ? (sortOrder === 1 ? 'asc' : (sortOrder === -1 ? 'desc' : null)) : null
@@ -99,33 +127,49 @@ const SSPaginatorTable = (props) => {
     }
 
     const clearFilterInputsExcept = (except) => {
-        let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
+        /*let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
         filterInputs.forEach((one: HTMLInputElement) => {
             if (one.id != except) {
                 one.value = ''
             }
+        })*/
+        let temp = {...filterValues}
+        Object.keys(temp).map(key => {
+            console.log(key, except)
+            if (key != except){
+                delete temp[key]
+            }
         })
+        setFilterValues(temp)
     }
 
-    const getFilterElement = (col) => {
-        let currentID = "filter_input_" + col.field
+    const getFilterElement = (col, source = "") => {
+        let currentID = "filter_input_" + col.field + source
         switch (col.filterType) {
             case 'search':
-                return <InputText id={currentID} placeholder={col.header}
+                return <InputText id={currentID} value={filterValues[currentID]} placeholder={col.header}
                     style={{ width: '145px' }}
                     onChange={e => {
+                        let temp = {...filterValues}
+                        temp[currentID] = e.target.value
+                        setFilterValues(temp)
                         clearFilterInputsExcept(currentID)
                         setSearchBy(col.field)
                         debouncedFetch(e.target.value)
                     }}></InputText>
             case 'dropdown':
-                return <Dropdown id={currentID} value={searchKey} options={col.dropdownOptions} placeholder={col.header}
+                return <Dropdown id={currentID} value={filterValues[currentID]} options={col.dropdownOptions} placeholder={col.header}
                     onChange={e => {
+                        let temp = {...filterValues}
+                        temp[currentID] = e.target.value
+                        setFilterValues(temp)
                         clearFilterInputsExcept(currentID)
                         setSearchBy(col.field)
                         debouncedFetch(e.target.value)
                     }}>
                 </Dropdown>
+            default: 
+                    return <div></div>
         }
     }
 
@@ -136,7 +180,19 @@ const SSPaginatorTable = (props) => {
     return (
         <div>
             <Toast id="toastMessage" ref={toast}></Toast>
-            <S.Table id='ssptable' {...props} autoLayout={true} paginator={!props.noPaginator && showPaginator}
+            <MobileFilterDialog
+                open={isMobileFilterDialogOpen}
+                hide={() => setMobileFilterDialogOpen(false)}
+                getFilterElement={getFilterElement}
+                columns={props.columns}
+            />
+            <MobileSortDialog
+                open={isMobileSortDialogOpen}
+                hide={() => setMobileSortDialogOpen(false)}
+                setSort={setSort}
+                columns={props.columns}
+            />
+            <S.Table id='ssptable' {...props} className="p-datatable-gridlines p-datatable-sm p-datatable-striped" autoLayout={true} paginator={!props.noPaginator && showPaginator}
                 paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                 currentPageReportTemplate={i18n.t('showingXtoYofZ', { x: '{first}', y: '{last}', z: '{totalRecords}' })}
                 value={currentRows}

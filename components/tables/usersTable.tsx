@@ -27,8 +27,7 @@ const UsersTable = (props) => {
                 headerText={i18n.t('listOfX', { x: props.userType })}
                 columns={columns}
                 fetch={props.fetch}
-                emptyMessage={i18n.t('noXfound', { x: props.userType })}>
-            </SSPaginatorTable>
+                emptyMessage={i18n.t('noXfound', { x: props.userType })} />
         </div>
 
     )

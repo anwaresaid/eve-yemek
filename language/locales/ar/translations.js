@@ -349,4 +349,12 @@ export const translations = {
   addAFAQ: 'أضف سؤال',
   FAQ: 'لأسئلة التي يتواتر طرحها',
   profile:'الملف الشخصي',
+
+  filter: 'تصفية',
+  sort: 'نوع',
+  ascending: 'تصاعدي',
+  descending: 'تنازلي',
+  filterField: 'مجال التصفية',
+  sortField: 'فرز المجال',
+  sequence: 'تسلسل', // ascending vs descending
 };
