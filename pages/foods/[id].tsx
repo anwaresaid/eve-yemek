@@ -27,7 +27,7 @@ const UpdateFood = () => {
         }
     }, [foodSuccess, router.isReady])
 
-    return foodLoading ? <ProgressSpinner/> : auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&<><BackBtn router={router}/><MealDataInput updating meal={foodData}></MealDataInput></>
+    return foodLoading ? <ProgressSpinner/> : auth.user.roles=='admin'|| auth.user.roles=='super_admin'||auth.user.roles=='restaurant_owner'?<><BackBtn router={router}/><MealDataInput updating meal={foodData}></MealDataInput></>:<></>
 }
 
 export default UpdateFood
