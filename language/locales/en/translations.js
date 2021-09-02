@@ -347,4 +347,12 @@ export const translations = {
   addAFAQ: 'Add a FAQ',
   FAQ: 'FAQs',
   profile:'Profile',
+
+  filter: 'Filter',
+  sort: 'Sort',
+  ascending: 'Ascending',
+  descending: 'Descending',
+  filterField: 'Filter Field',
+  sortField: 'Sort Field',
+  sequence: 'Sequence', 
 };

@@ -350,4 +350,12 @@ export const translations = {
   addAFAQ: 'Добавить FAQ',
   FAQ: 'часто задаваемые вопросы',
   profile:'Профиль',
+
+  filter: 'фильтр',
+  sort: 'Сортировать',
+  ascending: 'по возрастанию',
+  descending: 'нисходящий',
+  filterField: 'поле фильтра',
+  sortField: 'поле сортировки',
+  sequence: 'последовательность', // ascending vs descending
 };

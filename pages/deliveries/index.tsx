@@ -99,7 +99,7 @@ const Deliveries = () => {
         fetch={deliveryService.getAllDeliveries}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('deliveries') })}
-      ></SSPaginatorTable>
+      />
     </div>
   );
 };

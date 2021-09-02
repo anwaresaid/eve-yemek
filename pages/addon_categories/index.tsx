@@ -27,8 +27,7 @@ const AddonCategoriesList = () => {
         fetch={addOnCategoryService.getAllAddonCategories}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('addonCategories') })}
-      >
-      </SSPaginatorTable>
+      />
     </div>
   );
 };

@@ -39,8 +39,7 @@ const AddOnsList = () => {
         fetch={addOnsService.getAllAddOns}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('addons') })}
-      >
-      </SSPaginatorTable>
+      />
     </div>
   );
 };
