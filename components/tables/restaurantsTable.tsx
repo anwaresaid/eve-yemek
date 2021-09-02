@@ -65,7 +65,7 @@ const RestaurantsTable = (props) => {
             </div>
         );
     }
-    
+
     const dateBodyTemplate = (rowData) => {
         return (
             <div>
@@ -80,7 +80,7 @@ const RestaurantsTable = (props) => {
     const columns = [
         { field: 'id', header: "ID", body: IdBodyTemplate },
         { field: 'image', header: i18n.t('image'), body: imageBodyTemplate },
-        { field: 'name', header: i18n.t('name'), body: NameBodyTemplate, filter: true, filterType: 'search'},
+        { field: 'name', header: i18n.t('name'), body: NameBodyTemplate, filter: true, filterType: 'search' },
         { field: 'owner.name', header: i18n.t('restaurantOwner'), body: OwnerBodyTemplate, filter: true, filterType: 'search' },
         { field: 'address.country', header: i18n.t('country'), body: CountryBodyTemplate, filter: true, filterType: 'search' },
         { field: 'createdAt', header: i18n.t('created'), body: dateBodyTemplate },
@@ -93,8 +93,7 @@ const RestaurantsTable = (props) => {
             headerText={i18n.t('listOfX', { x: i18n.t('restaurants') })}
             fetch={props.fetch}
             columns={columns}
-            emptyMessage={i18n.t('noXfound', { x: i18n.t('restaurants') })} >
-        </SSPaginatorTable>
+            emptyMessage={i18n.t('noXfound', { x: i18n.t('restaurants') })} />
     )
 
 }

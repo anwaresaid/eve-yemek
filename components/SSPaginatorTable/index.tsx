@@ -16,7 +16,8 @@ type SSPTProps = {
     headerText?: any,
     fetch: (params: any) => Promise<any>,
     columns: Array<any>,
-    noPaginator?: boolean
+    noPaginator?: boolean,
+    emptyMessage?: string
 }
 
 const SSPaginatorTable = (props: SSPTProps) => {
@@ -35,6 +36,9 @@ const SSPaginatorTable = (props: SSPTProps) => {
     const [sortOrder, setSortOrder] = useState(0)
     const [isMobileFilterDialogOpen, setMobileFilterDialogOpen] = useState(false)
     const [isMobileSortDialogOpen, setMobileSortDialogOpen] = useState(false)
+
+    const [filterValues, setFilterValues] = useState({})
+
     const [debouncedFetch] = useState(() => _.debounce((val) => setSearchKey(val), 800));
 
     const tableHeader = () => {
@@ -123,28 +127,42 @@ const SSPaginatorTable = (props: SSPTProps) => {
     }
 
     const clearFilterInputsExcept = (except) => {
-        let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
+        /*let filterInputs = document.querySelectorAll('[id^="filter_input_"]')
         filterInputs.forEach((one: HTMLInputElement) => {
             if (one.id != except) {
                 one.value = ''
             }
+        })*/
+        let temp = {...filterValues}
+        Object.keys(temp).map(key => {
+            console.log(key, except)
+            if (key != except){
+                delete temp[key]
+            }
         })
+        setFilterValues(temp)
     }
 
     const getFilterElement = (col, source = "") => {
         let currentID = "filter_input_" + col.field + source
         switch (col.filterType) {
             case 'search':
-                return <InputText id={currentID} placeholder={col.header}
+                return <InputText id={currentID} value={filterValues[currentID]} placeholder={col.header}
                     style={{ width: '145px' }}
                     onChange={e => {
+                        let temp = {...filterValues}
+                        temp[currentID] = e.target.value
+                        setFilterValues(temp)
                         clearFilterInputsExcept(currentID)
                         setSearchBy(col.field)
                         debouncedFetch(e.target.value)
                     }}></InputText>
             case 'dropdown':
-                return <Dropdown id={currentID} value={searchKey} options={col.dropdownOptions} placeholder={col.header}
+                return <Dropdown id={currentID} value={filterValues[currentID]} options={col.dropdownOptions} placeholder={col.header}
                     onChange={e => {
+                        let temp = {...filterValues}
+                        temp[currentID] = e.target.value
+                        setFilterValues(temp)
                         clearFilterInputsExcept(currentID)
                         setSearchBy(col.field)
                         debouncedFetch(e.target.value)

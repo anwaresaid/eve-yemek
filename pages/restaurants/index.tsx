@@ -88,7 +88,7 @@ const RestaurantsList = (props) => {
         { field: 'address.country', header: i18n.t('country'), body: CountryBodyTemplate, filter: true, filterType: 'search', sortable: true },
         { field: 'createdAt', header: i18n.t('created'), body: dateBodyTemplate, sortable: true },
         { field: 'ops', header: i18n.t('status'), body: StatusBodyTemplate },
-        auth.user.roles=='admin'|| auth.user.roles=='super_admin'&& { field: '', header: i18n.t('operations'), body: editBodyTemplate }
+        auth.user.roles == 'admin' || auth.user.roles == 'super_admin' && { field: '', header: i18n.t('operations'), body: editBodyTemplate }
     ]
 
     return (
@@ -96,8 +96,8 @@ const RestaurantsList = (props) => {
             headerText={i18n.t('listOfX', { x: i18n.t('restaurants') })}
             fetch={restaurantsService.getRestaurants}
             columns={columns}
-            emptyMessage={i18n.t('noXfound', { x: i18n.t('restaurants') })} >
-        </SSPaginatorTable>
+            emptyMessage={i18n.t('noXfound', { x: i18n.t('restaurants') })}
+        />
     )
 
 }

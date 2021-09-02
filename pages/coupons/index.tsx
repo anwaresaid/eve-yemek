@@ -32,8 +32,7 @@ const index = () => {
         fetch={couponsService.getAllCoupons}
         columns={columns}
         emptyMessage={i18n.t('noXfound', { x: i18n.t('coupons') })}
-      >
-      </SSPaginatorTable>
+      />
     </div>
   );
 };
