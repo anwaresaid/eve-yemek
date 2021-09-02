@@ -42,6 +42,13 @@ export const usersListTypes = {
     { label: 'Restaurant Owner', value: 'restaurant_owner' },
     { label: 'Delivery Scout', value: 'delivery_scout' },
   ],
+  SUPER_ADMIN_ROLES_FOR_DROPDOWN: [
+    { label: 'Customer Service', value: 'customer_service' },
+    { label: 'Customer', value: 'customer' },
+    { label: 'Restaurant Owner', value: 'restaurant_owner' },
+    { label: 'Delivery Scout', value: 'delivery_scout' },
+    {label: 'Admin', value: 'admin'},
+  ],
 
   ALL_USER_LIST_REQUEST: 'ALL_USER_LIST_REQUEST',
   ALL_USER_LIST_SUCCESS: 'ALL_USER_LIST_SUCCESS',
