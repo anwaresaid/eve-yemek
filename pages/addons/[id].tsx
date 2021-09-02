@@ -141,7 +141,7 @@ export const Index = () => {
     isFormFieldValid,
   };
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin' || auth.user.roles=='restaurant_owner'&&
     <div id='create_Add_ons'>
       <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('editAddon')}</h1>

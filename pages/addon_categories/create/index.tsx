@@ -104,7 +104,7 @@ export const Index = () => {
   ];
 
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'||auth.user.roles=='restaurant_owner'?
     <div id='create_Add_On_Category'>
       <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('createAddonCategory')}</h1>
@@ -177,7 +177,7 @@ export const Index = () => {
           </S.SubmitBtn>
         </S.ContainerCard>
       </form>
-    </div>
+    </div>:<></>
   );
 };
 

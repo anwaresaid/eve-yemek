@@ -16,9 +16,9 @@ const AddonCategoriesList = () => {
     { field: 'id', header: "ID", sortable: true },
     { field: 'name', header: i18n.t('name'), filter: true, filterType: 'search', sortable: true },
     { field: 'enum', header: i18n.t('type'), filter: true, filterType: 'search', sortable: true },
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&{ field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'|| auth.user.roles=='restaurant_owner'?{ field: '', header: i18n.t('operations'), body: (rowData) => editButton(rowData, router, path) }:''
   ]
-
+console.log(auth.user.roles)
   return (
     <div id="addonCategoryTabe">
       <h1 id="addonCatHeader">{i18n.t('addonCategories')}</h1>

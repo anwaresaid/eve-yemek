@@ -24,11 +24,11 @@ const AddOnsList = () => {
       header: i18n.t('active'),
       body: (rowData) => activeTag(rowData.active),
     },
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&{
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin'||auth.user.roles=='restaurant_owner'?{
       field: 'ops',
       header: i18n.t('operations'),
       body: (rowData) => editButton(rowData, router, path),
-    },
+    }:'',
   ];
 
   return (
