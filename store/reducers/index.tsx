@@ -48,7 +48,7 @@ import {
 } from './userslists.reducer';
 import { forgotPasswordReducer, listSettingsReducer, updateScheduleReducer, updateSettingsReducer } from './settings.reducer';
 import { dashboardReportReducer } from './dashboard.reducer';
-import { listCouponsReducer, createCouponsReducer } from './coupons.reducer';
+import { listCouponsReducer, createCouponsReducer, updateCouponReducer, findCouponReducer } from './coupons.reducer';
 import { createNotificationReducer, sendNotificationReducer } from './send_notifications.reducer';
 import { supportedCountriesReducer } from './addresses.reducer';
 import { sendSmsReducer } from './send_sms';
@@ -112,6 +112,8 @@ export default combineReducers({
 
   listCoupons: listCouponsReducer,
   createCoupons: createCouponsReducer,
+  updateCoupons: updateCouponReducer,
+  findCoupons: findCouponReducer,
 
   sendNotification: sendNotificationReducer,
   sendSms:sendSmsReducer,
