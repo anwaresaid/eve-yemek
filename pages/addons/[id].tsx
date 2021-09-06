@@ -93,7 +93,7 @@ export const Index = () => {
   useEffect(() => {
     if (!addonCatSuccess) dispatch(listAddonCategory());
 
-    if (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])&& owners.items) {
+    if (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])&& owners?.items) {
       if (!owners || (owners.items.length === 0 && !ownersSuccess)) {
         dispatch(listRestaurantOwners())
       }
@@ -141,7 +141,7 @@ export const Index = () => {
     isFormFieldValid,
   };
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin' || auth.user.roles=='restaurant_owner'&&
+    auth.user.roles=='admin'|| auth.user.roles=='super_admin' || auth.user.roles=='restaurant_owner'?
     <div id='create_Add_ons'>
       <BackBtn router={router} />
       <h1 id='createHeader'>{i18n.t('editAddon')}</h1>
@@ -232,7 +232,7 @@ export const Index = () => {
           </S.ContainerCard>
         </form>
       )}
-    </div>
+    </div>: <></>
   );
 };
 
