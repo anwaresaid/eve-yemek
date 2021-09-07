@@ -140,7 +140,7 @@ export const AddonCategoryEdit = () => {
   ];
 
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'&&
+    (auth.user.roles=='admin'|| auth.user.roles=='super_admin')&&
     <div id='edit_Add_On_Category'>
       <BackBtn router={router}/>
       <h1 id='editHeader'>Kategori Detayi</h1>
