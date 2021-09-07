@@ -23,7 +23,7 @@ export const translations = {
   couponList: 'قائمة الكوبونات',
   createCoupon: 'إنشاء كوبون جديد',
   updateCoupon: 'تعديل الكوبون',
-  timesused: 'مرات الإستعمال',
+  timesUsed: 'مرات الإستعمال',
   accountSettings: 'إعدادات الحساب',
   customers: 'الزبائن',
   restaurantOwners: 'مالك المطعم',

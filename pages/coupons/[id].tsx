@@ -230,7 +230,7 @@ export const Index = () => {
                    min: 1,
                    showButtons: true
                   }} />
-                  <InputContainer label={i18n.t('timesused')} name="times_used" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                  <InputContainer label={i18n.t('timesUsed')} name="times_used" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
                     value: formik.values.times_used,
                     onValueChange: formik.handleChange,
                     min: 1,

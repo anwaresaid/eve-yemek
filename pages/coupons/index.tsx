@@ -21,6 +21,7 @@ const index = () => {
     { field: 'discount_type', header: i18n.t('couponType'), sortable: true },
     { field: 'discount', header: i18n.t('discount'), sortable: true },
     { field: 'max_usage', header: i18n.t('maximumUsage'), sortable: true },
+    { field: 'times_used', header: i18n.t('timesUsed'), sortable: true },
     {
       field: 'active',
       header: i18n.t('active'),

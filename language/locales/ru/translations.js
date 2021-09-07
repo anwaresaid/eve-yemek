@@ -23,7 +23,7 @@ export const translations = {
   couponList: 'Список купонов',
   createCoupon: 'Создать купон',
   updateCoupon: 'Измени купон',
-  updateCoupon: 'раз использовано',
+  timesUsed: 'раз использовано',
   accountSettings: 'Настройки учетной записи',
   customers: 'Клиенты',
   restaurantOwners: 'Владельцы ресторанов',

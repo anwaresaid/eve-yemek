@@ -23,7 +23,7 @@ export const translations = {
   couponList: 'Kupon Listesi',
   createCoupon: 'Kupon Oluştur',
   updateCoupon: 'Kupon Düzenleme',
-  timesused: 'kullanılan',
+  timesUsed: 'kullanılan',
   accountSettings: 'Hesap Ayarları',
   customers: 'Müşteriler',
   restaurantOwners: 'Restoran Sahipleri',

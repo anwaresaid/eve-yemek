@@ -23,6 +23,7 @@ export const translations = {
   couponList: 'Coupon List',
   createCoupon: 'Create Coupon',
   updateCoupon: 'Update Coupon',
+  timesUsed: 'Times Used',
   accountSettings: 'Account Settings',
   customers: 'Customers',
   restaurantOwners: 'Restaurant Owners',
