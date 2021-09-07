@@ -22,6 +22,7 @@ export const translations = {
   coupons: 'Kuponlar',
   couponList: 'Kupon Listesi',
   createCoupon: 'Kupon Oluştur',
+  updateCoupon: 'Kupon Düzenleme',
   accountSettings: 'Hesap Ayarları',
   customers: 'Müşteriler',
   restaurantOwners: 'Restoran Sahipleri',

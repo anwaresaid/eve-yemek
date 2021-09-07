@@ -17,6 +17,7 @@ export default class CouponService {
   }
   
   async findCoupon(id){ 
-    const {data:{data}} = await axios.get(`/coupon${id}`)
+    const {data:{data}} = await axios.get(`/coupon/${id}`)
+    return data;
   }
 }

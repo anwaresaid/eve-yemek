@@ -59,7 +59,8 @@ export const findCouponReducer = (state = initialState, action) => {
       return {
         loading: false,
         success: true,
-        COUPON: action.payload,
+        coupon: action.payload,
+        
       };
     case couponsTypes.COUPON_FIND_RESET:
       return {};
@@ -83,7 +84,7 @@ export const updateCouponReducer = (state = initialState, action) => {
       return {
         loading: false,
         success: true,
-        COUPONs: action.payload,
+        coupon: action.payload,
       };
     case couponsTypes.COUPON_UPDATE_RESET:
       return {};
