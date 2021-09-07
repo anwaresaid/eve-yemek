@@ -73,6 +73,7 @@ const RestaurantsList = (props) => {
         return (
             <div>
                 <React.Fragment>
+                    {console.log(rowData.createdAt, rowData.updatedAt)}
                     <span> {detailedDate(rowData.createdAt)}</span>
                 </React.Fragment>
             </div>
