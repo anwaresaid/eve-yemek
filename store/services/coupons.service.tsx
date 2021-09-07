@@ -11,4 +11,13 @@ export default class CouponService {
     const { data: { data } } = await axios.post('/coupon', coupon);
     return data;
   }
+
+  async updateCoupon(id, coupons){ 
+    const {data:{data}} = await axios.put(`/coupon/${id}`,{...coupons})
+  }
+  
+  async findCoupon(id){ 
+    const {data:{data}} = await axios.get(`/coupon/${id}`)
+    return data;
+  }
 }

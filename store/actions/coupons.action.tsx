@@ -45,3 +45,48 @@ export const createCoupons = (coupon) => async (dispatch, getState) => {
     });
   }
 };
+
+export const updateCoupons = (id,coupon) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: couponsTypes.COUPON_UPDATE_REQUEST,
+    });
+
+    const couponsService = new CouponService();
+    const res = await couponsService.updateCoupon(id,coupon);
+    dispatch({
+      type: couponsTypes.COUPON_UPDATE_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: couponsTypes.COUPON_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const findCoupons = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: couponsTypes.COUPON_FIND_REQUEST,
+    });
+
+    const couponsService = new CouponService();
+    const res = await couponsService.findCoupon(id);
+    dispatch({
+      type: couponsTypes.COUPON_FIND_SUCCESS,
+      payload: res,
+    });
+  } catch (error) {
+    dispatch({
+      type: couponsTypes.COUPON_FIND_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

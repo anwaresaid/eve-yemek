@@ -22,6 +22,8 @@ export const translations = {
   coupons: 'كوبونات',
   couponList: 'قائمة الكوبونات',
   createCoupon: 'إنشاء كوبون جديد',
+  updateCoupon: 'تعديل الكوبون',
+  timesUsed: 'مرات الإستعمال',
   accountSettings: 'إعدادات الحساب',
   customers: 'الزبائن',
   restaurantOwners: 'مالك المطعم',
