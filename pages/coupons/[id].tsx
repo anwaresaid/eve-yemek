@@ -224,18 +224,18 @@ export const Index = () => {
                   showButtons: true,
                   suffix: '%'
                 }} />
-                <InputContainer label={i18n.t('maximumUsage')} name="times_used" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                  value: formik.values.times_used,
-                  onValueChange: formik.handleChange,
-                  min: 1,
-                  showButtons: true
-                }} />
                  <InputContainer label={i18n.t('maximumUsage')} name="max_usage" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                  value: formik.values.max_usage,
-                  onValueChange: formik.handleChange,
-                  min: 1,
-                  showButtons: true
-                }} />
+                   value: formik.values.max_usage,
+                   onValueChange: formik.handleChange,
+                   min: 1,
+                   showButtons: true
+                  }} />
+                  <InputContainer label={i18n.t('timesused')} name="times_used" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                    value: formik.values.times_used,
+                    onValueChange: formik.handleChange,
+                    min: 1,
+                    showButtons: true
+                  }} />
               </InputGroup>
               <InputGroup>
                 <InputContainer label={i18n.t('couponCode')} name="coupon_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
