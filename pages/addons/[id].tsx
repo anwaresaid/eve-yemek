@@ -104,7 +104,7 @@ export const Index = () => {
       dispatch(findAddons(router.query.id));
     }
 
-    if (successFind && addon.id === router.query.id && addonCategoryList.items) {
+    if (successFind && addon.id === router.query.id && addonCategoryList?.items) {
       setData(true);
       const match = addonCategoryList.items.filter(
         (addonCategory) => addonCategory.id === addon.add_on_category
