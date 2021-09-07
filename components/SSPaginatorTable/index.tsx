@@ -69,16 +69,13 @@ const SSPaginatorTable = (props: SSPTProps) => {
                 setLoading(false)
                 return
             }
-            setFirst(0)
-            setRowsPerPage(9999)
             setShowPaginator(false)
         } else {
-            setRowsPerPage(10)
             setShowPaginator(true)
         }
         props.fetch({
-            offset: first,
-            limit: rowsPerPage,
+            offset: searchKey ? 0 : first,
+            limit: searchKey ? 9999 : rowsPerPage,
             fields: searchKey ? (searchBy ?? null) : null,
             text: searchKey ?? null,
             sort_field: sortField,
