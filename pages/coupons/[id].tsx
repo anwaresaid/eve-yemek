@@ -29,6 +29,7 @@ export const Index = () => {
   const router = useRouter();
   const [restaurantName, setRestaurantName] = useState(null);
   const dispatch = useDispatch();
+  const [reloadCheck, setReloadCheck] = useState(false);
   //use selectors for setting dispatch to variable.
 
   const resRestaurants = useSelector(
@@ -134,21 +135,21 @@ export const Index = () => {
   useEffect(() => {
     if (!restaurantsSuccess) dispatch(listRestaurant(0, 9999));
     if(router.query.id)
-      if(!couponSuccess) dispatch(findCoupons(router.query.id));
+      if(!couponSuccess|| router.query.id!=coupon.id) dispatch(findCoupons(router.query.id));
 
-    if (restaurantsSuccess) 
-    {settingDropDownNames();
-      if(coupon){
-        formik.values.name = coupon.name;
-        formik.values.restaurant_id = coupon.restaurant.id;
-        formik.values.description =  coupon.description;
-        formik.values.date= coupon.expire_date;
-        formik.values.discount = coupon.discount;
-        formik.values.max_usage = coupon.max_usage;
-        formik.values.times_used = coupon.times_used;
-        formik.values.coupon_code = coupon.coupon_code;
-      }
-
+    if(restaurantsSuccess)
+        settingDropDownNames();
+    if (coupon ) 
+    {
+      formik.values.name = coupon.name;
+      formik.values.restaurant_id = coupon.restaurant.id;
+      formik.values.description =  coupon.description;
+      formik.values.date= coupon.expire_date;
+      formik.values.discount = coupon.discount;
+      formik.values.max_usage = coupon.max_usage;
+      formik.values.times_used = coupon.times_used;
+      formik.values.coupon_code = coupon.coupon_code;
+      setReloadCheck(true);
     }
     if (updateSuccess) {
       toast.current.show({
@@ -158,8 +159,9 @@ export const Index = () => {
       });
       setTimeout(() => { router.push('/coupons') }, 2000)
       dispatch({ type: couponsTypes.COUPON_UPDATE_RESET });
+      dispatch({ type: couponsTypes.COUPON_FIND_RESET });
     }
-  }, [restaurantsSuccess, updateSuccess, couponSuccess]);
+  }, [restaurantsSuccess, updateSuccess, couponSuccess, reloadCheck]);
 
 
   const inputFormiks = {
