@@ -86,7 +86,6 @@ const SSPaginatorTable = (props: SSPTProps) => {
         })
             .then(res => {
                 setTotalItems(res.total)
-                console.log(res.items)
                 setCurrentRows((res.items ?? res).filter(row => !row.is_deleted).map(one => {
                     if (one.createdAt) {
                         one = parseDateInOneRow(one)
@@ -136,7 +135,6 @@ const SSPaginatorTable = (props: SSPTProps) => {
         })*/
         let temp = {...filterValues}
         Object.keys(temp).map(key => {
-            console.log(key, except)
             if (key != except){
                 delete temp[key]
             }
