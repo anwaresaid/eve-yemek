@@ -132,7 +132,6 @@ const SSPaginatorTable = (props: SSPTProps) => {
         })*/
         let temp = {...filterValues}
         Object.keys(temp).map(key => {
-            console.log(key, except)
             if (key != except){
                 delete temp[key]
             }

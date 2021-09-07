@@ -23,7 +23,7 @@ export function parseDateInAllRows(rows) {
 // parses createdAt to howLongAgo 
 export function parseDateInOneRow(row) {
     row.howLongAgo = moment(row.createdAt).fromNow();
-    row.createdAt = detailedDate(row.createdAt);
+    row.createdAtDetailed = detailedDate(row.createdAt);
     return row
 }
 

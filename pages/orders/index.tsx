@@ -14,7 +14,7 @@ import { priceBodyTemplate } from '../../components/InTableComponents/price'
 import { Dropdown } from 'primereact/dropdown'
 import { MultiSelect } from 'primereact/multiselect'
 import SSPaginatorTable from '../../components/SSPaginatorTable'
-import { parseDateInAllRows } from '../../helpers/dateFunctions'
+import { detailedDate, parseDateInAllRows } from '../../helpers/dateFunctions'
 
 const Orders = () => {
 
@@ -50,7 +50,7 @@ const Orders = () => {
         { field: 'status', header: i18n.t('orderStatus'), body: (rowData) => OrderStatus(rowData.status), filter: true, filterType: 'dropdown', dropdownOptions: orderStatusFilterOptions },
         { field: 'delivery_status', header: i18n.t('deliveryStatus'), body: (rowData) => OrderStatus(rowData.delivery_status), filter: true, filterType: 'dropdown', dropdownOptions: deliveryStatusFilterOptions },
         { field: 'total_amount', header: i18n.t('price'), body: (rowData) => priceBodyTemplate(rowData.total_amount, rowData.currency_type), sortable: true },
-        { field: 'createdAt', header: i18n.t('orderTime'), sortable: true },
+        { field: 'createdAt', header: i18n.t('orderTime'), body: row => detailedDate(row.createdAt), sortable: true },
         { field: 'ops', header: i18n.t('operations'), body: (rowData) => editButton(rowData) },
         { field: 'order', header: 'ID', sortable: true }
     ]
