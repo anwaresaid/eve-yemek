@@ -142,7 +142,7 @@ export const Index = () => {
     if (coupon ) 
     {
       formik.values.name = coupon.name;
-      formik.values.restaurant_id = coupon.restaurant?.id;
+      coupon.restaurant?formik.values.restaurant_id = coupon.restaurant.id: formik.values.restaurant_id='6666';
       formik.values.description =  coupon.description;
       formik.values.date= coupon.expire_date;
       formik.values.discount = coupon.discount;
