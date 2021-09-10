@@ -22,6 +22,8 @@ export const translations = {
   coupons: 'Купоны',
   couponList: 'Список купонов',
   createCoupon: 'Создать купон',
+  updateCoupon: 'Измени купон',
+  timesUsed: 'раз использовано',
   accountSettings: 'Настройки учетной записи',
   customers: 'Клиенты',
   restaurantOwners: 'Владельцы ресторанов',
