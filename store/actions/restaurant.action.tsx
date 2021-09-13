@@ -90,6 +90,7 @@ export const listRestaurant = (offset, limit) => async (dispatch, getState) => {
       payload: parseDateInAllRows(res),
     });
   } catch (error) {
+    console.log(error.response)
     dispatch({
       type: restaurantsTypes.RESTAURAT_LIST_FAIL,
       payload:

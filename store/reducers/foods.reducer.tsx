@@ -69,10 +69,7 @@ export const findFoodReducer = (state = initialState, action) => {
         success: true,
         food: action.payload
       }
-    case foodsTypes.FOOD_FIND_UPDATE:
-      return {
-        food: action.payload
-      }
+ 
     case foodsTypes.FOOD_FIND_FAIL:
       return {
         loading: false,
