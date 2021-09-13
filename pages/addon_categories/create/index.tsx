@@ -41,11 +41,14 @@ export const Index = () => {
       )
     );
   };
+
+  const defaultInitialValues = {
+    name: '',
+    enum: '',
+  }
+
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      enum: '',
-    },
+    initialValues: defaultInitialValues,
     validate: (data) => {
       let errors: any = {};
 
@@ -76,7 +79,7 @@ export const Index = () => {
         summary: i18n.t('success'),
         detail: i18n.t('success'),
       });
-      setTimeout(() => { router.push('/addon_categories') }, 2000)
+      clearAllInputs()
       dispatch({ type: addonCategoryTypes.ADDON_CATEGORY_CREATE_RESET });
     } else if (createError) {
       toast.current.show({
@@ -98,86 +101,93 @@ export const Index = () => {
     isFormFieldValid,
   };
 
+  const clearAllInputs = () => {
+    Object.keys(formik.values).map(k => {
+      if  (k != 'create_user_id')
+        formik.values[k] = defaultInitialValues[k]
+    })
+  }
+
   const enumerationTypes = [
     { id: 'SINGLE', name: i18n.t('single') },
     { id: 'MULTIPLE', name: i18n.t('multiple') },
   ];
 
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'||auth.user.roles=='restaurant_owner'?
-    <div id='create_Add_On_Category'>
-      <BackBtn router={router} />
-      <h1 id='createHeader'>{i18n.t('createAddonCategory')}</h1>
-      <Toast id='toastMessage' ref={toast}></Toast>
-      <form onSubmit={formik.handleSubmit}>
-        <S.ContainerCard id='container'>
-          <div className='p-grid'>
-            <FormColumn divideCount={3}>
-              <InputGroup>
-                <InputContainer
-                  label={i18n.t('name')}
-                  name='name'
-                  formiks={inputFormiks}
-                  component={InputText}
-                  iprops={{
-                    value: formik.values.name,
-                    onChange: formik.handleChange,
-                  }}
-                />
-              </InputGroup>
-            </FormColumn>
-            <FormColumn divideCount={3}>
-              <h4 id='enum'>{i18n.t('enum')}</h4>
-              <Dropdown
-                id='enum'
-                name='enum'
-                value={formik.values.enum}
-                options={enumerationTypes}
-                optionValue='id'
-                optionLabel='name'
-                onChange={formik.handleChange}
-                placeholder='Select Add-On Category Type'
-                autoFocus
-                className={classNames({
-                  'p-invalid': isFormFieldValid('enum'),
-                })}
-              />
-              <label
-                id='enumError'
-                htmlFor='enum'
-                className={classNames({
-                  'p-error': isFormFieldValid('enum'),
-                })}
-              ></label>
-              {getFormErrorMessage('enum')}
-            </FormColumn>
-            {
-              (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) &&
+    auth.user.roles == 'admin' || auth.user.roles == 'super_admin' || auth.user.roles == 'restaurant_owner' ?
+      <div id='create_Add_On_Category'>
+        <BackBtn router={router} />
+        <h1 id='createHeader'>{i18n.t('createAddonCategory')}</h1>
+        <Toast id='toastMessage' ref={toast}></Toast>
+        <form onSubmit={formik.handleSubmit}>
+          <S.ContainerCard id='container'>
+            <div className='p-grid'>
               <FormColumn divideCount={3}>
                 <InputGroup>
                   <InputContainer
-                    label={i18n.t('restaurantOwner')}
-                    name='create_user_id'
+                    label={i18n.t('name')}
+                    name='name'
                     formiks={inputFormiks}
-                    component={Dropdown}
+                    component={InputText}
                     iprops={{
-                      value: formik.values.create_user_id,
+                      value: formik.values.name,
                       onChange: formik.handleChange,
-                      options: owners?.items.map((one) => { return { label: one.name, value: one.id } }),
-                      filter: true,
-                      filterBy: "label"
                     }}
                   />
                 </InputGroup>
               </FormColumn>
-            }
-          </div>
-          <S.SubmitBtn>
-            <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
-          </S.SubmitBtn>
-        </S.ContainerCard>
-      </form>
-    </div>:<></>
+              <FormColumn divideCount={3}>
+                <h4 id='enum'>{i18n.t('enum')}</h4>
+                <Dropdown
+                  id='enum'
+                  name='enum'
+                  value={formik.values.enum}
+                  options={enumerationTypes}
+                  optionValue='id'
+                  optionLabel='name'
+                  onChange={formik.handleChange}
+                  placeholder='Select Add-On Category Type'
+                  autoFocus
+                  className={classNames({
+                    'p-invalid': isFormFieldValid('enum'),
+                  })}
+                />
+                <label
+                  id='enumError'
+                  htmlFor='enum'
+                  className={classNames({
+                    'p-error': isFormFieldValid('enum'),
+                  })}
+                ></label>
+                {getFormErrorMessage('enum')}
+              </FormColumn>
+              {
+                (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) &&
+                <FormColumn divideCount={3}>
+                  <InputGroup>
+                    <InputContainer
+                      label={i18n.t('restaurantOwner')}
+                      name='create_user_id'
+                      formiks={inputFormiks}
+                      component={Dropdown}
+                      iprops={{
+                        value: formik.values.create_user_id,
+                        onChange: formik.handleChange,
+                        options: owners?.items.map((one) => { return { label: one.name, value: one.id } }),
+                        filter: true,
+                        filterBy: "label"
+                      }}
+                    />
+                  </InputGroup>
+                </FormColumn>
+              }
+            </div>
+            <S.SubmitBtn>
+              <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
+            </S.SubmitBtn>
+          </S.ContainerCard>
+        </form>
+      </div> : <></>
   );
 };
 
