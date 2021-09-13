@@ -157,7 +157,7 @@ export const Index = () => {
         summary: i18n.t('success'),
         detail: i18n.t('success'),
       });
-      setTimeout(() => { router.push('/coupons') }, 2000)
+     
       dispatch({ type: couponsTypes.COUPON_UPDATE_RESET });
       dispatch({ type: couponsTypes.COUPON_FIND_RESET });
     }

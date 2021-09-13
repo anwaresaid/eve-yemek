@@ -57,19 +57,21 @@ export const Index = () => {
     { title: i18n.t('percentage'), value: 'PERCENTAGE' },
   ];
 
+  const defaultInitialValues = {
+    restaurant: '',
+    name: '',
+    description: '',
+    coupon_code: '',
+    restaurant_id: '',
+    expire_date: '',
+    discount: 0,
+    discount_type: '',
+    max_usage: 0,
+    active: true,
+  }
+
   const formik = useFormik({
-    initialValues: {
-      restaurant: '',
-      name: '',
-      description: '',
-      coupon_code: '',
-      restaurant_id: '',
-      expire_date: '',
-      discount: 0,
-      discount_type: '',
-      max_usage: 0,
-      active: true,
-    },
+    initialValues: defaultInitialValues,
     validate: (data) => {
       let errors: any = {};
       if (!data.restaurant_id) {
@@ -127,7 +129,7 @@ export const Index = () => {
         summary: i18n.t('success'),
         detail: i18n.t('success'),
       });
-      setTimeout(() => { router.push('/coupons') }, 2000)
+      clearAllInputs()
       dispatch({ type: couponsTypes.COUPON_CREATE_RESET });
     }
   }, [restaurantsSuccess, success]);
@@ -137,90 +139,99 @@ export const Index = () => {
     getFormErrorMessage,
     isFormFieldValid
   }
+
+  const clearAllInputs = () => {
+    Object.keys(formik.values).map(k => {
+      if (k != 'restaurant_id') {
+        formik.values[k] = defaultInitialValues[k]
+      }
+    })
+  }
+
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'?
-    <div id='create_coupons'>
-      <BackBtn router={router} />
-      <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
-      <Toast id='toastMessage' ref={toast}></Toast>
-      <S.ContainerCard id='container'>
-        <form id='createForm' onSubmit={formik.handleSubmit}>
-          <div className='p-grid'>
+    auth.user.roles == 'admin' || auth.user.roles == 'super_admin' ?
+      <div id='create_coupons'>
+        <BackBtn router={router} />
+        <h1 id='createHeader'>{i18n.t('createCoupon')}</h1>
+        <Toast id='toastMessage' ref={toast}></Toast>
+        <S.ContainerCard id='container'>
+          <form id='createForm' onSubmit={formik.handleSubmit}>
+            <div className='p-grid'>
 
-            <FormColumn divideCount={3}>
-              <InputGroup>
-                <InputContainer label={i18n.t('couponName')} name="name" formiks={inputFormiks} component={InputText} iprops={{
-                  value: formik.values.name,
-                  onChange: formik.handleChange,
-                }} />
-              </InputGroup>
-              <InputGroup>
-                <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
-                  value: formik.values.restaurant_id,
-                  onChange: formik.handleChange,
-                  options: restaurantName,
-                  filter: true,
-                  filterBy: "name",
-                  placeholder: i18n.t('selectRestaurant'),
-                  optionLabel: "name",
-                  optionValue: "id",
-                }} />
+              <FormColumn divideCount={3}>
+                <InputGroup>
+                  <InputContainer label={i18n.t('couponName')} name="name" formiks={inputFormiks} component={InputText} iprops={{
+                    value: formik.values.name,
+                    onChange: formik.handleChange,
+                  }} />
+                </InputGroup>
+                <InputGroup>
+                  <InputContainer label={i18n.t('restaurant')} name="restaurant_id" formiks={inputFormiks} component={Dropdown} iprops={{
+                    value: formik.values.restaurant_id,
+                    onChange: formik.handleChange,
+                    options: restaurantName,
+                    filter: true,
+                    filterBy: "name",
+                    placeholder: i18n.t('selectRestaurant'),
+                    optionLabel: "name",
+                    optionValue: "id",
+                  }} />
 
-              </InputGroup>
+                </InputGroup>
 
-              <InputGroup>
-                <InputContainer label={i18n.t('description')} name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
-                  value: formik.values.description,
-                  onChange: formik.handleChange,
-                  rows: 3,
-                  autoResize: true
-                }} />
-              </InputGroup>
-            </FormColumn>
+                <InputGroup>
+                  <InputContainer label={i18n.t('description')} name="description" formiks={inputFormiks} component={InputTextarea} iprops={{
+                    value: formik.values.description,
+                    onChange: formik.handleChange,
+                    rows: 3,
+                    autoResize: true
+                  }} />
+                </InputGroup>
+              </FormColumn>
 
-            <FormColumn divideCount={3}>
-              <InputGroup>
-                <InputContainer label={i18n.t('expiration')} name='expire_date' formiks={inputFormiks} component={Calendar} iprops={{
-                  value: formik.values.date,
-                  onChange: formik.handleChange
-                }} />
+              <FormColumn divideCount={3}>
+                <InputGroup>
+                  <InputContainer label={i18n.t('expiration')} name='expire_date' formiks={inputFormiks} component={Calendar} iprops={{
+                    value: formik.values.date,
+                    onChange: formik.handleChange
+                  }} />
 
-              </InputGroup>
-              <InputGroup>
-                <InputContainer label={i18n.t('discount')} name="discount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                  value: formik.values.discount,
-                  onValueChange: formik.handleChange,
-                  min: 1,
-                  showButtons: true,
-                  suffix: '%'
-                }} />
-                <InputContainer label={i18n.t('maximumUsage')} name="max_usage" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                  value: formik.values.max_usage,
-                  onValueChange: formik.handleChange,
-                  min: 1,
-                  showButtons: true
-                }} />
-              </InputGroup>
-              <InputGroup>
-                <InputContainer label={i18n.t('couponCode')} name="coupon_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
-                  onChange: formik.handleChange,
-                  value: formik.values.coupon_code
-                }} />
-                <InputContainer label={i18n.t('active')} name="active" formiks={inputFormiks} size={6} component={InputSwitch} iprops={{
-                  checked: formik.values.active,
-                  onChange: formik.handleChange
-                }} />
-              </InputGroup>
-            </FormColumn>
-            <FormColumn>
-              <S.SubmitBtn id='btnContainer'>
-                <Button id='createBtn' type='submit' label={i18n.t('create')} />
-              </S.SubmitBtn>
-            </FormColumn>
-          </div>
-        </form>
-      </S.ContainerCard>
-    </div>:<></>
+                </InputGroup>
+                <InputGroup>
+                  <InputContainer label={i18n.t('discount')} name="discount" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                    value: formik.values.discount,
+                    onValueChange: formik.handleChange,
+                    min: 1,
+                    showButtons: true,
+                    suffix: '%'
+                  }} />
+                  <InputContainer label={i18n.t('maximumUsage')} name="max_usage" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                    value: formik.values.max_usage,
+                    onValueChange: formik.handleChange,
+                    min: 1,
+                    showButtons: true
+                  }} />
+                </InputGroup>
+                <InputGroup>
+                  <InputContainer label={i18n.t('couponCode')} name="coupon_code" formiks={inputFormiks} size={6} component={InputText} iprops={{
+                    onChange: formik.handleChange,
+                    value: formik.values.coupon_code
+                  }} />
+                  <InputContainer label={i18n.t('active')} name="active" formiks={inputFormiks} size={6} component={InputSwitch} iprops={{
+                    checked: formik.values.active,
+                    onChange: formik.handleChange
+                  }} />
+                </InputGroup>
+              </FormColumn>
+              <FormColumn>
+                <S.SubmitBtn id='btnContainer'>
+                  <Button id='createBtn' type='submit' label={i18n.t('create')} />
+                </S.SubmitBtn>
+              </FormColumn>
+            </div>
+          </form>
+        </S.ContainerCard>
+      </div> : <></>
   );
 };
 
