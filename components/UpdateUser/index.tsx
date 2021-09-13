@@ -30,14 +30,6 @@ const UpdateUser = (props) => {
         }
     }, [getUserSuccess]);
 
-    useEffect(() => {
-        if (!updating && updateUserSuccess)
-            setTimeout(() => { router.push(props.returnTo) }, 2000)
-    }, [updating])
-
-
-
-
     return (
         <UserDataInput
 
