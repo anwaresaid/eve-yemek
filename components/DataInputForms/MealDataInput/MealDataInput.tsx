@@ -206,7 +206,7 @@ const MealDataInput = (props) => {
         if (props.updating && props.meal) {
             if (updatedFood)
                 return
-            debugger
+            
             formik.values.restaurant_id = props.meal.restaurant
             formik.values.food_category_id = props.meal.food_category
             formik.values.name = props.meal.name;
