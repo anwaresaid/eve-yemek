@@ -41,13 +41,16 @@ export const Index = () => {
             )
         );
     };
+
+    const defaultInitialValues = {
+        name: '',
+        image: '',
+        country: '',
+        active: false,
+    }
+
     const formik = useFormik({
-        initialValues: {
-            name: "",
-            image: "",
-            country:"",
-            active: false,
-        },
+        initialValues: defaultInitialValues,
         validate: (data) => {
             let errors: any = {};
 
@@ -58,9 +61,9 @@ export const Index = () => {
             }
 
             if (!data.country) {
-              errors.country = i18n.t("isRequired", {
-                  input: i18n.t("country"),
-              });
+                errors.country = i18n.t("isRequired", {
+                    input: i18n.t("country"),
+                });
             }
 
             return errors;
@@ -74,22 +77,20 @@ export const Index = () => {
 
     useEffect(() => {
         if (success) {
+            clearAllInputs()
             toast.current.show({
                 severity: "success",
                 summary: i18n.t("success"),
                 detail: i18n.t("createdMealCategory"),
             });
-            setTimeout(() => {
-                router.push("/food_categories");
-            }, 1000);
             dispatch({ type: foodCategoryTypes.FOOD_CATEGORY_CREATE_RESET });
         }
     }, [success]);
 
-    useEffect(()=>{
-      if (!supportedCountries) {
-        dispatch(getSupportedCountries())
-      }
+    useEffect(() => {
+        if (!supportedCountries) {
+            dispatch(getSupportedCountries())
+        }
     }, []);
 
     const inputFormiks = {
@@ -97,85 +98,91 @@ export const Index = () => {
         isFormFieldValid,
     };
 
-    return (
-        auth.user.roles=='admin'|| auth.user.roles=='super_admin'?
-        <div id="edit_food_categories">
-            <BackBtn router={router}/>
-            <h1 id="editHeader">{i18n.t("createFoodCategory")}</h1>
-            <Toast id="toastMessage" ref={toast}></Toast>
-            <S.ContainerCard id="container">
-                <form id="editForm" onSubmit={formik.handleSubmit}>
-                    <div className="p-grid">
-                        <FormColumn divideCount={3}>
-                            <InputGroup>
-                                <InputContainer
-                                    label={i18n.t("name")}
-                                    name="name"
-                                    formiks={inputFormiks}
-                                    component={InputText}
-                                    size={8}
-                                    iprops={{
-                                        value: formik.values.name,
-                                        onChange: formik.handleChange,
-                                    }}
-                                />
-                                {supportedCountriesLoading && <ProgressSpinner />}
-                                {supportedCountriesSuccess &&
-                                
-                                    <InputContainer label={i18n.t('country')} name="country" formiks={inputFormiks} size={4} component={Dropdown} iprops={{
-                                        value: formik.values.country,
-                                        onChange: formik.handleChange,
-                                        options: Object.keys(supportedCountries).map((key) => {return {label: supportedCountries[key].english_name, value: key}})
-                                    }} />
-                                    
-                                  
-                                }
-                            </InputGroup>
-                            <InputGroup>
-                                <InputContainer
-                                    label={i18n.t("image")}
-                                    name="image"
-                                    formiks={inputFormiks}
-                                    component={StandardFileUpload}
-                                    iprops={{
-                                        setFile: (image) => {
-                                            formik.values.image = image;
-                                        },
-                                        showSuccess: () => {
-                                            toast.current.show({
-                                                severity: "info",
-                                                summary: i18n.t("success"),
-                                                detail: i18n.t("fileUploaded"),
-                                            });
-                                        },
-                                    }}
-                                />
+    const clearAllInputs = () => {
+        Object.keys(formik.values).map(k => {
+            formik.values[k] = defaultInitialValues[k]
+        })
+    }
 
-                                <InputContainer
-                                    label={i18n.t("active")}
-                                    name="active"
-                                    noAutoCol12
-                                    formiks={inputFormiks}
-                                    component={InputSwitch}
-                                    iprops={{
-                                        value: formik.values.active,
-                                        checked: formik.values.active,
-                                        onChange: formik.handleChange,
-                                    }}
-                                />
-                            </InputGroup>
-                            <S.SubmitBtn id="btnContainer">
-                                <Button
-                                    id="editBtn"
-                                    type="submit"
-                                    label={i18n.t("submit")}
-                                />
-                            </S.SubmitBtn>
-                        </FormColumn>
-                    </div>
-                </form>
-            </S.ContainerCard>
-        </div>:<></>
+    return (
+        auth.user.roles == 'admin' || auth.user.roles == 'super_admin' ?
+            <div id="edit_food_categories">
+                <BackBtn router={router} />
+                <h1 id="editHeader">{i18n.t("createFoodCategory")}</h1>
+                <Toast id="toastMessage" ref={toast}></Toast>
+                <S.ContainerCard id="container">
+                    <form id="editForm" onSubmit={formik.handleSubmit}>
+                        <div className="p-grid">
+                            <FormColumn divideCount={3}>
+                                <InputGroup>
+                                    <InputContainer
+                                        label={i18n.t("name")}
+                                        name="name"
+                                        formiks={inputFormiks}
+                                        component={InputText}
+                                        size={8}
+                                        iprops={{
+                                            value: formik.values.name,
+                                            onChange: formik.handleChange,
+                                        }}
+                                    />
+                                    {supportedCountriesLoading && <ProgressSpinner />}
+                                    {supportedCountriesSuccess &&
+
+                                        <InputContainer label={i18n.t('country')} name="country" formiks={inputFormiks} size={4} component={Dropdown} iprops={{
+                                            value: formik.values.country,
+                                            onChange: formik.handleChange,
+                                            options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].english_name, value: key } })
+                                        }} />
+
+
+                                    }
+                                </InputGroup>
+                                <InputGroup>
+                                    <InputContainer
+                                        label={i18n.t("image")}
+                                        name="image"
+                                        formiks={inputFormiks}
+                                        component={StandardFileUpload}
+                                        iprops={{
+                                            setFile: (image) => {
+                                                formik.values.image = image;
+                                            },
+                                            showSuccess: () => {
+                                                toast.current.show({
+                                                    severity: "info",
+                                                    summary: i18n.t("success"),
+                                                    detail: i18n.t("fileUploaded"),
+                                                });
+                                            },
+                                        }}
+                                    />
+
+                                    <InputContainer
+                                        label={i18n.t("active")}
+                                        name="active"
+                                        noAutoCol12
+                                        formiks={inputFormiks}
+                                        component={InputSwitch}
+                                        iprops={{
+                                            value: formik.values.active,
+                                            checked: formik.values.active,
+                                            onChange: formik.handleChange,
+                                        }}
+                                    />
+                                </InputGroup>
+                                <S.SubmitBtn id="btnContainer">
+                                    <Button
+                                        id="editBtn"
+                                        type="submit"
+                                        label={i18n.t("submit")}
+                                    />
+                                </S.SubmitBtn>
+                            </FormColumn>
+                        </div>
+                    </form>
+                </S.ContainerCard>
+            </div> : <></>
     );
 };
 
