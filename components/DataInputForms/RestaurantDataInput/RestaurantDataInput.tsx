@@ -354,7 +354,7 @@ const RestaurantDataInput = (props) => {
             <S.ContainerCard>
                 <form onSubmit={formik.handleSubmit} >
                     <div className="p-grid">
-                        {auth.user.roles.includes('admin'||'super_admin')?
+                        {auth.user.roles.includes('admin')|| auth.user.roles.includes('super_admin')?
                         <>
                         <FormColumn divideCount={3}>
                             <h2>{i18n.t('general')}</h2>
@@ -622,7 +622,7 @@ const RestaurantDataInput = (props) => {
             <Toast id="toastMessage" ref={toast}></Toast>
             {
 
-                 auth.user.roles.includes('admin'||'super_admin') ?
+                 auth.user.roles.includes('admin')|| auth.user.roles.includes('super_admin') ?
                     props.updating?
                     <TabView>
                         {generalTabPanel()}
