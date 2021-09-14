@@ -354,6 +354,8 @@ const RestaurantDataInput = (props) => {
             <S.ContainerCard>
                 <form onSubmit={formik.handleSubmit} >
                     <div className="p-grid">
+                        {auth.user.roles.includes('admin'||'super_admin')?
+                        <>
                         <FormColumn divideCount={3}>
                             <h2>{i18n.t('general')}</h2>
 
@@ -592,6 +594,15 @@ const RestaurantDataInput = (props) => {
                                 }} />
                             </InputGroup>
                         </FormColumn>
+                        </>:
+                        <>
+                        <InputContainer label={i18n.t('active')} name="active" noAutoCol12 formiks={inputFormiks} component={InputSwitch} iprops={{
+                                    value: formik.values.active,
+                                    checked: formik.values.active,
+                                    onChange: formik.handleChange
+                                }} />
+                        </>
+    }
                     </div>
 
                     <S.SubmitBtn>
@@ -611,7 +622,8 @@ const RestaurantDataInput = (props) => {
             <Toast id="toastMessage" ref={toast}></Toast>
             {
 
-                props.updating ?
+                 auth.user.roles.includes('admin'||'super_admin') ?
+                    props.updating?
                     <TabView>
                         {generalTabPanel()}
                         <TabPanel header={i18n.t('meals')}>
@@ -624,6 +636,10 @@ const RestaurantDataInput = (props) => {
                     :
                     <TabView>
                         {generalTabPanel()}
+                    </TabView>
+                    :
+                    <TabView>
+                    {generalTabPanel()}
                     </TabView>
             }
         </div>
