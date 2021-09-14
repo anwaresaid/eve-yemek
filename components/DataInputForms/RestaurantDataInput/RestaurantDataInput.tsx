@@ -169,10 +169,11 @@ const RestaurantDataInput = (props) => {
             else {
                 formik.values.longitude = formik.values.longitudeInt?.toString();
             }
+       
             return errors;
         },
         onSubmit: (data: any) => {
-
+            console.log('submitting')
             let tmpData = { ...data };
             if (tmpData.image.length == 0 && !restaurant?.image) {
                 delete tmpData.image;
@@ -199,6 +200,7 @@ const RestaurantDataInput = (props) => {
             }
 
             if (props.updating) {
+                console.log(restaurant)
                 address.id = restaurant.address.id;
             }
 
