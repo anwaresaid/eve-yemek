@@ -153,8 +153,10 @@ const Index = (props) => {
         try {
             if (item.key) {
                 valueText = reportData?.report[item.key] ?? i18n.t('noData')
+                valueText = (Math.round(valueText * 100) / 100).toFixed(2); // rounding should be done on BE, remove this line later
             } else if (item.enclosingKey && item.innerKey) {
                 valueText = reportData?.report[item.enclosingKey][item.innerKey] ?? i18n.t('noData')
+                valueText = (Math.round(valueText * 100) / 100).toFixed(2); // rounding should be done on BE, remove this line later
             } else {
                 valueText = i18n.t('noData')
             }
