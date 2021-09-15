@@ -29,7 +29,7 @@ const Index = (props) => {
 
     const serviceDemandState = useSelector((state: RootState) => state.serviceDemand)
     const { loading: serviceDemandLoading, success: serviceDemandSuccess, demandData } = serviceDemandState
-    
+
     const [citiesChartType, setCitiesChartType] = useState('pie')
 
     let citiesChartTypeOptions = [
@@ -255,7 +255,7 @@ const Index = (props) => {
                                 <Bar type="bar" data={citiesPieChartData} width={500} height={500} options={{
                                     maintainAspectRatio: false,
                                     plugins: {
-                                       
+
                                         tooltip: {
                                             callbacks: {
                                                 label: function (context) {
@@ -321,6 +321,50 @@ const Index = (props) => {
             <p>Unauthorized</p>
     }
 
+    const profitsTabPanel = () => {
+        return (
+            <TabPanel header={i18n.t('profits')}>
+                <S.DashboardWrapper>
+                    <div className='p-grid p-grid-container'>
+                        <div className='p-col-6 p-md-6 p-lg-2'>
+                            <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
+                                <div id='boxInfoDiv' className='box__info'>
+                                    <span id='daily_profit'>{121}</span>
+                                    <p id='daily_profitP'>{i18n.t('dailyProfit')}</p>
+                                </div>
+                                <div className='box__icons'>
+                                    <i id='money_bill' className=' pi pi-money-bill'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-6 p-lg-2'>
+                            <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
+                                <div id='box_infoDiv' className='box__info'>
+                                    <span id='weekly_profit'>₺{798}</span>
+                                    <p id='weekly_profitP'>{i18n.t('weeklyProfit')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='money_bill' className=' pi pi-money-bill'></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-col-6 p-md-4 p-lg-2'>
+                            <div id='box' className='box' style={{ backgroundColor: "#ffc107" }}>
+                                <div id='box_info' className='box__info'>
+                                    <span id='monthly_profit'>{2900}</span>
+                                    <p id='monthly_profitP'>{i18n.t('monthlyProfit')}</p>
+                                </div>
+                                <div id='box_icons' className='box__icons'>
+                                    <i id='money_bill' className=' pi pi-money-bill'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </S.DashboardWrapper>
+            </TabPanel>
+        )
+    }
+
     const restrictedTabView = () => {
         return <TabView>
             {overviewTabPanel()}
@@ -331,6 +375,7 @@ const Index = (props) => {
         return <TabView>
             {overviewTabPanel()}
             {areasTabPanel()}
+            {profitsTabPanel()}
         </TabView >
     }
 
