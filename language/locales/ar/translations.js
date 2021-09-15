@@ -359,4 +359,8 @@ export const translations = {
   filterField: 'مجال التصفية',
   sortField: 'فرز المجال',
   sequence: 'تسلسل', // ascending vs descending
+
+  dailyProfit: '',
+  weeklyProfit: '',
+  monthlyProfit: '',
 };

@@ -360,4 +360,8 @@ export const translations = {
   filterField: 'поле фильтра',
   sortField: 'поле сортировки',
   sequence: 'последовательность', // ascending vs descending
+
+  dailyProfit: '',
+  weeklyProfit: '',
+  monthlyProfit: '',
 };

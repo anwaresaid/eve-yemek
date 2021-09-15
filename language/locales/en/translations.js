@@ -357,4 +357,8 @@ export const translations = {
   filterField: 'Filter Field',
   sortField: 'Sort Field',
   sequence: 'Sequence', 
+
+  dailyProfit: 'Today\'s Profit',
+  weeklyProfit: 'This week\'s Profit',
+  monthlyProfit: 'This month\'s Profit',
 };

@@ -356,5 +356,9 @@ export const translations = {
   descending: 'Azalan',
   filterField: 'Filtre Alanı',
   sortField: 'Sıralama Alanı',
-  sequence: 'Sıralama Tipi', // ascending vs descending
+  sequence: 'Sıralama Tipi', // ascending vs descending,
+
+  dailyProfit: '',
+  weeklyProfit: '',
+  monthlyProfit: '',
 };

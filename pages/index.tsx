@@ -18,6 +18,7 @@ import { TabPanel, TabView } from "primereact/tabview";
 import { getRandomColor } from "../helpers/colors";
 import { getDemandData } from "../store/actions/service-demand.action";
 import { Dropdown } from "primereact/dropdown";
+import { Carousel } from 'primereact/carousel';
 import { ChartType } from "chart.js";
 
 const Index = (props) => {
@@ -133,6 +134,29 @@ const Index = (props) => {
         { field: 'is_open', header: i18n.t('status'), body: openClosedTag },
     ]
 
+    const carouselItems = [
+        { enclosingKey: 'daily_orders', innerKey: 'length', backgroundColor: '#17a2b8', text: i18n.t('dailyOrders'), icon: 'pi pi-shopping-cart' },
+        { key: 'daily_income', backgroundColor: '#28a745', text: i18n.t('dailyEarnings'), icon: 'pi pi-money-bill' },
+        { enclosingKey: 'total_orders', innerKey: 'total', backgroundColor: '#ffc107', text: i18n.t('totalOrders'), icon: 'pi pi-shopping-cart' },
+        { key: 'failed_orders', backgroundColor: '#dc3545', text: i18n.t('failedOrders'), icon: 'pi pi-exclamation-triangle' },
+        { key: 'total_income', backgroundColor: '#008080', text: i18n.t('totalEarnings'), icon: 'pi pi-money-bill' },
+        { key: 'daily_profit', backgroundColor: '#90EE90', text: i18n.t('dailyProfit', ), icon: 'pi pi-angle-up' },
+        { key: 'weekly_profit', backgroundColor: '#00FF00', text: i18n.t('weeklyProfit', ), icon: 'pi pi-angle-up' },
+        { key: 'monthly_profit', backgroundColor: '#006400', text: i18n.t('monthlyProfit', ), icon: 'pi pi-angle-up' }
+    ]
+
+    const carouselItemTemplate = (item) => {
+        return <div id='box' className='box p-mr-2' style={{ backgroundColor: item.backgroundColor }} >
+            <div id='box_info' className='box__info'>
+                <span id='total_orders_report'>{item.key ? reportData?.report[item.key] : reportData?.report[item.enclosingKey][item.innerKey]}</span>
+                <p id='total_ordersP'>{item.text}</p>
+            </div>
+            <div id='box_icons' className='box__icons'>
+                <i className={item.icon}></i>
+            </div>
+        </div>
+    }
+
     const checkIfNoMeals = (ownedRestaurants: any) => {
         if (ownedRestaurants?.items?.length > 0) {
             for (let one of ownedRestaurants.items) {
@@ -164,63 +188,7 @@ const Index = (props) => {
                             ></StandardTable>
                         </div>
                     }
-                    <div className='p-grid p-grid-container'>
-                        <div className='p-col-6 p-md-6 p-lg-2'>
-                            <div id='boxDiv' className='box' style={{ backgroundColor: "#17a2b8" }}>
-                                <div id='boxInfoDiv' className='box__info'>
-                                    <span id='dailyOrders'>{reportData?.report.daily_orders.length}</span>
-                                    <p id='boxInfoP'>{i18n.t('dailyOrders')}</p>
-                                </div>
-                                <div className='box__icons'>
-                                    <i className='pi pi-shopping-cart'></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='p-col-6 p-md-6 p-lg-2'>
-                            <div id='boxDiv' className='box' style={{ backgroundColor: "#28a745" }}>
-                                <div id='box_infoDiv' className='box__info'>
-                                    <span id='daily_income_report'>₺{reportData?.report.daily_income}</span>
-                                    <p id='daily_incomeP'>{i18n.t('dailyEarnings')}</p>
-                                </div>
-                                <div id='box_icons' className='box__icons'>
-                                    <i id='money_bill' className=' pi pi-money-bill'></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='p-col-6 p-md-4 p-lg-2'>
-                            <div id='box' className='box' style={{ backgroundColor: "#ffc107" }}>
-                                <div id='box_info' className='box__info'>
-                                    <span id='total_orders_report'>{reportData?.report.total_orders.total}</span>
-                                    <p id='total_ordersP'>{i18n.t('totalOrders')}</p>
-                                </div>
-                                <div id='box_icons' className='box__icons'>
-                                    <i id='shopping_cartIcon' className=' pi pi-shopping-cart'></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='p-col-6 p-md-4 p-lg-2'>
-                            <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
-                                <div id='box_info' className='box__info'>
-                                    <span id='failed_orders_report'>{reportData?.report.failed_orders}</span>
-                                    <p id='failed_ordersP'>{i18n.t('failedOrders')}</p>
-                                </div>
-                                <div id='box_icons' className='box__icons'>
-                                    <i id='infoIcon' className='pi pi-exclamation-triangle'></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='p-col-6 p-md-4 p-lg-2'>
-                            <div id='box' className='box' style={{ backgroundColor: "#dc3545" }}>
-                                <div id='box_info' className='box__info'>
-                                    <span id='total_income_report'>₺{reportData?.report.total_income}</span>
-                                    <p id='total_incomeP'>{i18n.t('totalEarnings')}</p>
-                                </div>
-                                <div id='box_icons' className='box__icons'>
-                                    <i id='money_billIcon' className=' pi  pi-money-bill'></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Carousel className='p-grid p-grid-container' value={carouselItems} itemTemplate={carouselItemTemplate} numVisible={3} numScroll={2}></Carousel>
                     <Card id='last_7_days_orders' subTitle={i18n.t('ordersFromTheLast7Days')}>
                         <i id='shopping_cartIcon' className='pi pi-shopping-cart'>
                             <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
@@ -375,7 +343,6 @@ const Index = (props) => {
         return <TabView>
             {overviewTabPanel()}
             {areasTabPanel()}
-            {profitsTabPanel()}
         </TabView >
     }
 
