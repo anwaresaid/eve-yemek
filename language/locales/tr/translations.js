@@ -358,7 +358,7 @@ export const translations = {
   sortField: 'Sıralama Alanı',
   sequence: 'Sıralama Tipi', // ascending vs descending,
 
-  dailyProfit: '',
-  weeklyProfit: '',
-  monthlyProfit: '',
+  dailyProfit: 'Günlük Kâr',
+  weeklyProfit: 'Haftalık Kâr',
+  monthlyProfit: 'Aylık Kâr',
 };

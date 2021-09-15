@@ -360,7 +360,7 @@ export const translations = {
   sortField: 'فرز المجال',
   sequence: 'تسلسل', // ascending vs descending
 
-  dailyProfit: '',
-  weeklyProfit: '',
-  monthlyProfit: '',
+  dailyProfit: 'العائدات اليومية',
+  weeklyProfit: 'العائدات الأسبوعية',
+  monthlyProfit: 'العائدات الشهرية',
 };

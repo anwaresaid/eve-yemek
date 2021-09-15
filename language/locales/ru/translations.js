@@ -361,7 +361,7 @@ export const translations = {
   sortField: 'поле сортировки',
   sequence: 'последовательность', // ascending vs descending
 
-  dailyProfit: '',
-  weeklyProfit: '',
-  monthlyProfit: '',
+  dailyProfit: 'Ежедневная прибыль',
+  weeklyProfit: 'Еженедельная прибыль',
+  monthlyProfit: 'Ежемесячная прибыль',
 };
