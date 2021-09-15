@@ -136,22 +136,24 @@ const Index = (props) => {
 
     const carouselItems = [
         { enclosingKey: 'daily_orders', innerKey: 'length', backgroundColor: '#17a2b8', text: i18n.t('dailyOrders'), icon: 'pi pi-shopping-cart' },
-        { key: 'daily_income', backgroundColor: '#28a745', text: i18n.t('dailyEarnings'), icon: 'pi pi-money-bill' },
+        { key: 'daily_income', currency: 'LD', backgroundColor: '#28a745', text: i18n.t('dailyEarnings'), icon: 'pi pi-money-bill' },
         { enclosingKey: 'total_orders', innerKey: 'total', backgroundColor: '#ffc107', text: i18n.t('totalOrders'), icon: 'pi pi-shopping-cart' },
         { key: 'failed_orders', backgroundColor: '#dc3545', text: i18n.t('failedOrders'), icon: 'pi pi-exclamation-triangle' },
-        { key: 'total_income', backgroundColor: '#008080', text: i18n.t('totalEarnings'), icon: 'pi pi-money-bill' }
+        { key: 'total_income', currency: 'LD', backgroundColor: '#008080', text: i18n.t('totalEarnings'), icon: 'pi pi-money-bill' }
     ]
 
     if ((auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) || auth.hasRoles(['customer_service'])) {
-        carouselItems.push({ key: 'daily_profit', backgroundColor: '#90EE90', text: i18n.t('dailyProfit', ), icon: 'pi pi-angle-up' })
-        carouselItems.push({ key: 'weekly_profit', backgroundColor: '#00FF00', text: i18n.t('weeklyProfit', ), icon: 'pi pi-angle-up' })
-        carouselItems.push({ key: 'monthly_profit', backgroundColor: '#006400', text: i18n.t('monthlyProfit', ), icon: 'pi pi-angle-up' })
+        carouselItems.push({ key: 'daily_profit', currency: 'LD', backgroundColor: '#90EE90', text: i18n.t('dailyProfit', ), icon: 'pi pi-angle-up' })
+        carouselItems.push({ key: 'weekly_profit', currency: 'LD', backgroundColor: '#00FF00', text: i18n.t('weeklyProfit', ), icon: 'pi pi-angle-up' })
+        carouselItems.push({ key: 'monthly_profit', currency: 'LD', backgroundColor: '#006400', text: i18n.t('monthlyProfit', ), icon: 'pi pi-angle-up' })
     }
 
     const carouselItemTemplate = (item) => {
+        let valueText = item.key ? reportData?.report[item.key] : reportData?.report[item.enclosingKey][item.innerKey]
+
         return <div id='box' className='box p-mr-2' style={{ backgroundColor: item.backgroundColor }} >
             <div id='box_info' className='box__info'>
-                <span id='total_orders_report'>{item.key ? reportData?.report[item.key] : reportData?.report[item.enclosingKey][item.innerKey]}</span>
+                <span id='total_orders_report'>{(item.currency ?? '') + ' ' + valueText}</span>
                 <p id='total_ordersP'>{item.text}</p>
             </div>
             <div id='box_icons' className='box__icons'>
