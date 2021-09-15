@@ -149,7 +149,18 @@ const Index = (props) => {
     }
 
     const carouselItemTemplate = (item) => {
-        let valueText = item.key ? reportData?.report[item.key] : reportData?.report[item.enclosingKey][item.innerKey]
+        let valueText
+        try {
+            if (item.key) {
+                valueText = reportData?.report[item.key] ?? i18n.t('noData')
+            } else if (item.enclosingKey && item.innerKey) {
+                valueText = reportData?.report[item.enclosingKey][item.innerKey] ?? i18n.t('noData')
+            } else {
+                valueText = i18n.t('noData')
+            }
+        } catch (e) {
+            valueText = i18n.t('noData')
+        }
         return <div id='box' className='box p-mr-2' style={{ backgroundColor: item.backgroundColor }} >
             <div id='box_info' className='box__info'>
                 <span id='total_orders_report'>{(item.currency ?? '') + ' ' + valueText}</span>
