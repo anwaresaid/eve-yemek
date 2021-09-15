@@ -161,7 +161,7 @@ const Index = (props) => {
         </div>
     }
 
-    const responsiveOptions = [
+    const carouselResponsiveOptions = [
         {
             breakpoint: '1220px',
             numVisible: 3,
@@ -212,7 +212,7 @@ const Index = (props) => {
                     }
                     <Carousel className='p-grid p-grid-container' value={carouselItems}
                         itemTemplate={carouselItemTemplate} numVisible={4} numScroll={3}
-                        responsiveOptions={responsiveOptions}
+                        responsiveOptions={carouselResponsiveOptions}
                         contentClassName='carousel-content'
                     />
 
