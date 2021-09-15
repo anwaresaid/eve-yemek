@@ -86,4 +86,8 @@ export const DashboardWrapper = styled.div`
     .p-col-6 {
         flex: 1;
     }
+
+    .carousel-content{
+        max-width: 100%;
+    }
 `;

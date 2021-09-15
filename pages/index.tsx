@@ -143,14 +143,13 @@ const Index = (props) => {
     ]
 
     if ((auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) || auth.hasRoles(['customer_service'])) {
-        carouselItems.push({ key: 'daily_profit', currency: 'LD', backgroundColor: '#90EE90', text: i18n.t('dailyProfit', ), icon: 'pi pi-angle-up' })
-        carouselItems.push({ key: 'weekly_profit', currency: 'LD', backgroundColor: '#00FF00', text: i18n.t('weeklyProfit', ), icon: 'pi pi-angle-up' })
-        carouselItems.push({ key: 'monthly_profit', currency: 'LD', backgroundColor: '#006400', text: i18n.t('monthlyProfit', ), icon: 'pi pi-angle-up' })
+        carouselItems.push({ key: 'daily_profit', currency: 'LD', backgroundColor: '#90EE90', text: i18n.t('dailyProfit',), icon: 'pi pi-angle-up' })
+        carouselItems.push({ key: 'weekly_profit', currency: 'LD', backgroundColor: '#00FF00', text: i18n.t('weeklyProfit',), icon: 'pi pi-angle-up' })
+        carouselItems.push({ key: 'monthly_profit', currency: 'LD', backgroundColor: '#006400', text: i18n.t('monthlyProfit',), icon: 'pi pi-angle-up' })
     }
 
     const carouselItemTemplate = (item) => {
         let valueText = item.key ? reportData?.report[item.key] : reportData?.report[item.enclosingKey][item.innerKey]
-
         return <div id='box' className='box p-mr-2' style={{ backgroundColor: item.backgroundColor }} >
             <div id='box_info' className='box__info'>
                 <span id='total_orders_report'>{(item.currency ?? '') + ' ' + valueText}</span>
@@ -161,6 +160,24 @@ const Index = (props) => {
             </div>
         </div>
     }
+
+    const responsiveOptions = [
+        {
+            breakpoint: '1220px',
+            numVisible: 3,
+            numScroll: 2
+        },
+        {
+            breakpoint: '1020px',
+            numVisible: 2,
+            numScroll: 1
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1,
+            numScroll: 1
+        }
+    ];
 
     const checkIfNoMeals = (ownedRestaurants: any) => {
         if (ownedRestaurants?.items?.length > 0) {
@@ -193,7 +210,12 @@ const Index = (props) => {
                             ></StandardTable>
                         </div>
                     }
-                    <Carousel className='p-grid p-grid-container' value={carouselItems} itemTemplate={carouselItemTemplate} numVisible={3} numScroll={2}></Carousel>
+                    <Carousel className='p-grid p-grid-container' value={carouselItems}
+                        itemTemplate={carouselItemTemplate} numVisible={4} numScroll={3}
+                        responsiveOptions={responsiveOptions}
+                        contentClassName='carousel-content'
+                    />
+
                     <Card id='last_7_days_orders' subTitle={i18n.t('ordersFromTheLast7Days')}>
                         <i id='shopping_cartIcon' className='pi pi-shopping-cart'>
                             <span id='last_seven_days_report'>{getTotalOrdersWeekly()}</span>
