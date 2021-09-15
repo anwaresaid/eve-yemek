@@ -359,6 +359,6 @@ export const translations = {
   sequence: 'Sequence', 
 
   dailyProfit: 'Today\'s Profit',
-  weeklyProfit: 'This week\'s Profit',
-  monthlyProfit: 'This month\'s Profit',
+  weeklyProfit: 'This Week\'s Profit',
+  monthlyProfit: 'This Month\'s Profit',
 };

@@ -139,11 +139,14 @@ const Index = (props) => {
         { key: 'daily_income', backgroundColor: '#28a745', text: i18n.t('dailyEarnings'), icon: 'pi pi-money-bill' },
         { enclosingKey: 'total_orders', innerKey: 'total', backgroundColor: '#ffc107', text: i18n.t('totalOrders'), icon: 'pi pi-shopping-cart' },
         { key: 'failed_orders', backgroundColor: '#dc3545', text: i18n.t('failedOrders'), icon: 'pi pi-exclamation-triangle' },
-        { key: 'total_income', backgroundColor: '#008080', text: i18n.t('totalEarnings'), icon: 'pi pi-money-bill' },
-        { key: 'daily_profit', backgroundColor: '#90EE90', text: i18n.t('dailyProfit', ), icon: 'pi pi-angle-up' },
-        { key: 'weekly_profit', backgroundColor: '#00FF00', text: i18n.t('weeklyProfit', ), icon: 'pi pi-angle-up' },
-        { key: 'monthly_profit', backgroundColor: '#006400', text: i18n.t('monthlyProfit', ), icon: 'pi pi-angle-up' }
+        { key: 'total_income', backgroundColor: '#008080', text: i18n.t('totalEarnings'), icon: 'pi pi-money-bill' }
     ]
+
+    if ((auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) || auth.hasRoles(['customer_service'])) {
+        carouselItems.push({ key: 'daily_profit', backgroundColor: '#90EE90', text: i18n.t('dailyProfit', ), icon: 'pi pi-angle-up' })
+        carouselItems.push({ key: 'weekly_profit', backgroundColor: '#00FF00', text: i18n.t('weeklyProfit', ), icon: 'pi pi-angle-up' })
+        carouselItems.push({ key: 'monthly_profit', backgroundColor: '#006400', text: i18n.t('monthlyProfit', ), icon: 'pi pi-angle-up' })
+    }
 
     const carouselItemTemplate = (item) => {
         return <div id='box' className='box p-mr-2' style={{ backgroundColor: item.backgroundColor }} >
