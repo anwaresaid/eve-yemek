@@ -89,7 +89,7 @@ const RestaurantsList = (props) => {
         { field: 'createdAt', header: i18n.t('created'), body: dateBodyTemplate, sortable: true },
         { field: 'ops', header: i18n.t('status'), body: StatusBodyTemplate },
 
-        auth.user.roles=='admin'|| auth.user.roles=='super_admin'? { field: '', header: i18n.t('operations'), body: editBodyTemplate }:''
+         { field: '', header: i18n.t('operations'), body: editBodyTemplate }
 
     ]
 
