@@ -113,7 +113,6 @@ export const AddonCategoryEdit = () => {
             summary: 'Success',
             detail: i18n.t('success'),
           });
-          setTimeout(() => { router.push('/addon_categories') }, 2000)
         }
       } else {
         setData(false);

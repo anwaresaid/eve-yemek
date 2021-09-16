@@ -71,10 +71,7 @@ export const updateFood = (id, updatedFood) => async dispatch => {
       type: foodsTypes.FOOD_UPDATE_SUCCESS,
       payload: res,
     });
-    dispatch({
-      type: foodsTypes.FOOD_FIND_UPDATE,
-      payload: res
-    })
+ 
   } catch (error) {
     dispatch({
       type: foodsTypes.FOOD_UPDATE_FAIL,
@@ -84,9 +81,7 @@ export const updateFood = (id, updatedFood) => async dispatch => {
           : error.message,
     });
   } finally {
-    dispatch({
-      type: foodsTypes.FOOD_UPDATE_RESET,
-    });
+   
   }
 }
 export const findFood = (id) => async dispatch => {

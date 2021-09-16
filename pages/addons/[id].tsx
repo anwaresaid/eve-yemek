@@ -125,7 +125,7 @@ export const Index = () => {
         summary: 'Success',
         detail: i18n.t('success'),
       });
-      setTimeout(() => { router.push('/addons') }, 2000)
+
       dispatch({ type: addonsTypes.ADDON_UPDATE_RESET });
       dispatch({ type: addonsTypes.ADDON_FIND_RESET });
     }

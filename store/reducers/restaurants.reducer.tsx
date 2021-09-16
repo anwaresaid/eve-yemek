@@ -99,7 +99,7 @@ export const listRestaurantReducer = (state = initialState, action) => {
   }
 };
 
-export const findRestaurantReducer = (state = initialState, action) => {
+export const findRestaurantReducer = (state = {restaurant: null}, action) => {
   switch (action.type) {
     case restaurantsTypes.RESTAURAT_FIND_REQUEST:
       return { loading: true}
@@ -117,7 +117,8 @@ export const findRestaurantReducer = (state = initialState, action) => {
       } 
     case restaurantsTypes.RESTAURAT_FIND_RESET:
       return {
-        loading: false
+        loading: false,
+        restaurant: state.restaurant
       } 
       
     default:

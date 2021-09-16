@@ -34,6 +34,9 @@ const UserDataInput = (props) => {
     const supportedCountriesState = useSelector((state: RootState) => state.supportedCountries);
     const { loading: supportedCountriesLoading, success: supportedCountriesSuccess, supportedCountries } = supportedCountriesState;
 
+    const userAdd = useSelector((state: RootState) => state.addUser)
+    const { adding: addingUser, success: addUserSuccess, response: addUserResponse, error: addUserError } = userAdd
+
     const [areasOfResponsibility, setAreasOfResponsibility] = useState([])
 
     const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false)
@@ -47,11 +50,13 @@ const UserDataInput = (props) => {
         return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>
     }
 
+    const defaultInitialValues = {
+        name: "", email: "", phone: "", roles: [], active: false, address: {}, latitude: '', longitude: '', country_code: '',
+        area_of_responsibility: []
+    }
+
     const formik = useFormik({
-        initialValues: {
-            name: "", email: "", phone: "", roles: [], active: false, address: {}, latitude: '', longitude: '', country_code: '',
-            area_of_responsibility: []
-        },
+        initialValues: defaultInitialValues,
         validate: (data) => {
             let errors: any = {}
 
@@ -162,6 +167,15 @@ const UserDataInput = (props) => {
 
     }, [props.updateProps?.updateUserSuccess, props.updateProps?.updating, props.updateProps?.error])
 
+    useEffect(() => {
+        if (addUserSuccess) {
+            toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('successfullyAddedUser') })
+            clearAllInputs()
+        }
+        else if (addUserError)
+            toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Server: ' + addUserError })
+    }, [addUserSuccess, addUserError])
+
     const sendChangePasswordRequest = (newPassword) => {
         if (!(auth.hasRoles(['admin']) || auth.hasRoles(['super_admin']))) {
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: 'Unauthorized' });
@@ -172,6 +186,12 @@ const UserDataInput = (props) => {
             setChangePasswordModalOpen(false)
         }).catch((res) => {
             toast.current.show({ severity: 'warn', summary: i18n.t('error'), detail: i18n.t('updatePasswordFailed') });
+        })
+    }
+
+    const clearAllInputs = () => {
+        Object.keys(formik.values).map(k => {
+            formik.values[k] = defaultInitialValues[k]
         })
     }
 
@@ -203,7 +223,7 @@ const UserDataInput = (props) => {
                                         options: Object.keys(supportedCountries).map((key) => { return { label: supportedCountries[key].native_name, value: key } })
                                     }} />}
 
-                                <InputContainer label={i18n.t('selectRole')} size={6} name="roles" formiks={inputFormiks} component={MultiSelect}   iprops={auth.hasRoles(['super_admin'])?{
+                                <InputContainer label={i18n.t('selectRole')} size={6} name="roles" formiks={inputFormiks} component={MultiSelect} iprops={auth.hasRoles(['super_admin']) ? {
                                     value: formik.values.roles,
                                     onChange: formik.handleChange,
                                     options: usersListTypes.SUPER_ADMIN_ROLES_FOR_DROPDOWN,
@@ -213,18 +233,18 @@ const UserDataInput = (props) => {
                                     filterBy: "label",
                                     optionLabel: "label",
                                     optionValue: "value"
-                                }:
-                                {
-                                    value: formik.values.roles,
-                                    onChange: formik.handleChange,
-                                    options: usersListTypes.USER_ROLES_FOR_DROPDOWN,
-                                    autoResize: true,
-                                    placeholder: i18n.t('selectRole'),
-                                    filter: true,
-                                    filterBy: "label",
-                                    optionLabel: "label",
-                                    optionValue: "value"
-                                }} />
+                                } :
+                                    {
+                                        value: formik.values.roles,
+                                        onChange: formik.handleChange,
+                                        options: usersListTypes.USER_ROLES_FOR_DROPDOWN,
+                                        autoResize: true,
+                                        placeholder: i18n.t('selectRole'),
+                                        filter: true,
+                                        filterBy: "label",
+                                        optionLabel: "label",
+                                        optionValue: "value"
+                                    }} />
 
                             </InputGroup>
 

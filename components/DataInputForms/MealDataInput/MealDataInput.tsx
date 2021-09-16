@@ -67,20 +67,22 @@ const MealDataInput = (props) => {
         return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
     };
 
+    const defaultInitialValues = {
+        restaurant_id: '',
+        name: '',
+        description: '',
+        food_category_id: '',
+        addons: '',
+        image: '',
+        price: 0,
+        discount_price: 0,
+        is_veg: false,
+        featured: false,
+        active: false
+    }
+
     const formik = useFormik({
-        initialValues: {
-            restaurant_id: '',
-            name: '',
-            description: '',
-            food_category_id: '',
-            addons: '',
-            image: '',
-            price: 0,
-            discount_price: 0,
-            is_veg: false,
-            featured: false,
-            active: false
-        },
+        initialValues: defaultInitialValues,
         validate: (data) => {
             let errors: any = {}
 
@@ -110,7 +112,7 @@ const MealDataInput = (props) => {
             return errors;
         },
         onSubmit: (data: any) => {
-            if(!validateVariants()){
+            if (!validateVariants()) {
                 toast.current.show({ severity: 'error', summary: i18n.t('error'), detail: i18n.t('variantNamesCannotBeEmpty') })
                 return
             }
@@ -139,7 +141,7 @@ const MealDataInput = (props) => {
     }
 
     const setRestaurantsDropdownOptions = () => {
-        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id} });
+        const restaurantNames = restaurants?.items.map(res => { return { name: res.name, id: res.id } });
         setRestaurantName(restaurantNames);
     }
 
@@ -183,21 +185,28 @@ const MealDataInput = (props) => {
 
         if (createFoodSuccess) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('successfullyAddedMeal') })
-            setTimeout(() => { router.push('/foods') }, 2000)
             dispatch({
                 type: foodsTypes.FOOD_CREATE_RESET
             })
+            clearAllInputs()
         }
 
         if (updatedFoodSuccess) {
             toast.current.show({ severity: 'success', summary: i18n.t('success'), detail: i18n.t('successfullyUpdatedMeal') })
-            setTimeout(() => { router.push('/foods') }, 2000)
             return
         }
 
+        if (!supportedCountries) {
+            dispatch(getSupportedCountries())
+        }
+
+    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, supportedCountries]);
+
+    useEffect(() => {
         if (props.updating && props.meal) {
-            if (updatedFoodLoading || updatedFoodSuccess)
+            if (updatedFood)
                 return
+            
             formik.values.restaurant_id = props.meal.restaurant
             formik.values.food_category_id = props.meal.food_category
             formik.values.name = props.meal.name;
@@ -207,22 +216,26 @@ const MealDataInput = (props) => {
             formik.values.is_veg = props.meal.is_veg;
             formik.values.active = props.meal.active;
             formik.values.featured = props.meal.featured;
-            setVariants(props.meal.variants.map((v, i) => {return {id: i, ...v}}))
+            setVariants(props.meal.variants.map((v, i) => { return { id: i, ...v } }))
             setSelectedAddOnCategories(props.meal.add_on_categories?.map((aoc) => { return { id: aoc.id, name: aoc.name } }))
         }
+    }, [props.meal])
 
-        if (!supportedCountries) {
-            dispatch(getSupportedCountries())
-        }
-
-    }, [addOnCategoriesSuccess, foodCatSuccess, restaurantsSuccess, createFoodSuccess, updatedFoodSuccess, props.meal, supportedCountries]);
-
+    const clearAllInputs = () => {
+        Object.keys(formik.values).map(k => {
+            if (k != 'restaurant_id') {
+                formik.values[k] = defaultInitialValues[k]
+            }
+        })
+        setSelectedAddOnCategories([])
+        setVariants([])
+    }
 
     const onAddNewVariant = () => {
-        if(!validateVariants())
+        if (!validateVariants())
             return
         let current = [...variants]
-        current.push({id: current.length, name: '', description: '', price: 0 })
+        current.push({ id: current.length, name: '', description: '', price: 0 })
         setVariants(current)
     }
 
@@ -275,9 +288,9 @@ const MealDataInput = (props) => {
         let currentRestaurant = restaurants.items?.filter(res => res.id === restaurantID)[0]
         if (!currentRestaurant)
             return
-        if (supportedCountries){
+        if (supportedCountries) {
             setCurrency(supportedCountries[currentRestaurant.address.country_code].currency_name_alt ?? 'TRY')
-        } 
+        }
     }
 
     return (
@@ -384,7 +397,7 @@ const MealDataInput = (props) => {
                             <Column header={i18n.t('price')} field={"price"} editor={props => inputNumberEditor(props)}></Column>
                             <Column header={i18n.t('description')} field={"description"} editor={props => inputTextEditor(props)}></Column>
                             <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
-                            <Column body={(row) => <Button type="button" id={'deleteRow_'+row.id} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-icon-only p-button-secondary"
+                            <Column body={(row) => <Button type="button" id={'deleteRow_' + row.id} icon="pi pi-trash" className="p-button-rounded p-button-text p-button-icon-only p-button-secondary"
                                 onClick={() => onVariantsRowDelete(row.id)}></Button>}></Column>
                         </DataTable>
 

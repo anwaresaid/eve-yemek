@@ -40,7 +40,7 @@ export const createRestaurant = (restaurantCreate) => async (dispatch, getState)
       payload: res,
     });
   } catch (error) {
-    console.log(error);
+   
     dispatch({
       type: restaurantsTypes.RESTAURAT_CREATE_FAIL,
       payload:
@@ -90,6 +90,7 @@ export const listRestaurant = (offset, limit) => async (dispatch, getState) => {
       payload: parseDateInAllRows(res),
     });
   } catch (error) {
+    
     dispatch({
       type: restaurantsTypes.RESTAURAT_LIST_FAIL,
       payload:

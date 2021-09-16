@@ -56,13 +56,15 @@ export const Index = () => {
     );
   };
 
+  const defaultInitialValues = {
+    name: '',
+    addonCat: '',
+    price: 0,
+    active: true,
+  }
+
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      addonCat: '',
-      price: 0,
-      active: true,
-    },
+    initialValues: defaultInitialValues,
     validate: (data) => {
       let errors: any = {};
       if (!data.name) {
@@ -126,7 +128,7 @@ export const Index = () => {
         summary: i18n.t('success'),
         detail: i18n.t('success'),
       });
-      setTimeout(() => { router.push('/addons') }, 2000)
+      clearAllInputs()
       dispatch({ type: addonsTypes.ADDON_CREATE_RESET });
     } else if (createAddOnError) {
       toast.current.show({
@@ -146,99 +148,107 @@ export const Index = () => {
     isFormFieldValid,
   };
 
+  const clearAllInputs = () => {
+    Object.keys(formik.values).map(k => {
+      if (k != 'create_user_id' && k != 'addonCat') {
+        formik.values[k] = defaultInitialValues[k]
+      }
+    })
+  }
+
   return (
-    auth.user.roles=='admin'|| auth.user.roles=='super_admin'||auth.user.roles=='restaurant_owner'?
-    <div id='create_Add_ons'>
-      <BackBtn router={router} />
-      <Toast id='toastMessage' ref={toast}></Toast>
-      <h1 id='createHeader'>{i18n.t('createAddon')}</h1>
-      <form onSubmit={formik.handleSubmit}>
-        <S.ContainerCard id='createContainer'>
-          <div className='p-grid'>
-            <FormColumn divideCount={3}>
-              <InputGroup>
-                <InputContainer
-                  label={i18n.t('addonName')}
-                  name='name'
-                  formiks={inputFormiks}
-                  component={InputText}
-                  iprops={{
-                    value: formik.values.name,
-                    onChange: formik.handleChange,
-                  }}
-                />
-              </InputGroup>
-              {
-                (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) &&
+    auth.user.roles == 'admin' || auth.user.roles == 'super_admin' || auth.user.roles == 'restaurant_owner' ?
+      <div id='create_Add_ons'>
+        <BackBtn router={router} />
+        <Toast id='toastMessage' ref={toast}></Toast>
+        <h1 id='createHeader'>{i18n.t('createAddon')}</h1>
+        <form onSubmit={formik.handleSubmit}>
+          <S.ContainerCard id='createContainer'>
+            <div className='p-grid'>
+              <FormColumn divideCount={3}>
                 <InputGroup>
                   <InputContainer
-                    label={i18n.t('restaurantOwner')}
-                    name='create_user_id'
+                    label={i18n.t('addonName')}
+                    name='name'
                     formiks={inputFormiks}
-                    component={Dropdown}
+                    component={InputText}
                     iprops={{
-                      value: formik.values.create_user_id,
+                      value: formik.values.name,
                       onChange: formik.handleChange,
-                      options: owners?.items.map((one) => { return { label: one.name, value: one.id } }),
-                      filter: true,
-                      filterBy: "label",
                     }}
                   />
                 </InputGroup>
-              }
-              <h4 id='addonCatHeader'>{i18n.t('addonCategory')}</h4>
-              <Dropdown
-                id='addonCat'
-                name='addonCat'
-                value={formik.values.addonCat}
-                options={addonCategoryName}
-                optionValue='id'
-                onChange={formik.handleChange}
-                optionLabel='name'
-                placeholder='Select an addon category'
-                autoFocus
-                filter
-                filterBy= "name"
-                className={classNames({
-                  'p-invalid': isFormFieldValid('addonCat'),
-                })}
-              />
-              <label
-                id='addonCatError'
-                htmlFor='addonCat'
-                className={classNames({
-                  'p-error': isFormFieldValid('addonCat'),
-                })}
-              ></label>
-              {getFormErrorMessage('addonCat')}
-            </FormColumn>
-            <FormColumn divideCount={3}>
-              <InputGroup>
-                <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
-                  value: formik.values.price,
-                  onValueChange: formik.handleChange,
-                  min: 0,
-                  mode: "currency",
-                  currency: currency,
-                  showButtons: true
-                }}
+                {
+                  (auth.hasRoles(['admin']) || auth.hasRoles(['super_admin'])) &&
+                  <InputGroup>
+                    <InputContainer
+                      label={i18n.t('restaurantOwner')}
+                      name='create_user_id'
+                      formiks={inputFormiks}
+                      component={Dropdown}
+                      iprops={{
+                        value: formik.values.create_user_id,
+                        onChange: formik.handleChange,
+                        options: owners?.items.map((one) => { return { label: one.name, value: one.id } }),
+                        filter: true,
+                        filterBy: "label",
+                      }}
+                    />
+                  </InputGroup>
+                }
+                <h4 id='addonCatHeader'>{i18n.t('addonCategory')}</h4>
+                <Dropdown
+                  id='addonCat'
+                  name='addonCat'
+                  value={formik.values.addonCat}
+                  options={addonCategoryName}
+                  optionValue='id'
+                  onChange={formik.handleChange}
+                  optionLabel='name'
+                  placeholder='Select an addon category'
+                  autoFocus
+                  filter
+                  filterBy="name"
+                  className={classNames({
+                    'p-invalid': isFormFieldValid('addonCat'),
+                  })}
                 />
-                
-                <InputContainer label={i18n.t('currencyCode')} name="currency_type" size={6} formiks={inputFormiks} component={Dropdown} iprops={{
-                  options: Object.values(supportedCountries ?? {}).map(country => country['currency_name_alt']),
-                  value: currency,
-                  onChange: e => setCurrency(e.value)
-                }} />
+                <label
+                  id='addonCatError'
+                  htmlFor='addonCat'
+                  className={classNames({
+                    'p-error': isFormFieldValid('addonCat'),
+                  })}
+                ></label>
+                {getFormErrorMessage('addonCat')}
+              </FormColumn>
+              <FormColumn divideCount={3}>
+                <InputGroup>
+                  <InputContainer label={i18n.t('price')} name="price" formiks={inputFormiks} size={6} component={InputNumber} iprops={{
+                    value: formik.values.price,
+                    onValueChange: formik.handleChange,
+                    min: 0,
+                    mode: "currency",
+                    currency: currency,
+                    showButtons: true
+                  }}
+                  />
 
-              </InputGroup>
-            </FormColumn>
-            <S.SubmitBtn>
-              <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
-            </S.SubmitBtn>
-          </div>
-        </S.ContainerCard>
-      </form>
-    </div>:<></>
+                  <InputContainer label={i18n.t('currencyCode')} name="currency_type" size={6} formiks={inputFormiks} component={Dropdown} iprops={{
+                    options: Object.values(supportedCountries ?? {}).map(country => country['currency_name_alt']),
+                    value: currency,
+                    onChange: e => setCurrency(e.value)
+                  }} />
+
+                </InputGroup>
+              </FormColumn>
+              <S.SubmitBtn>
+                <Button id='btnCreate' type='submit' label={i18n.t('submit')} />
+              </S.SubmitBtn>
+            </div>
+          </S.ContainerCard>
+        </form>
+      </div> : <></>
   );
 };
 
