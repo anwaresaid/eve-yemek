@@ -2,7 +2,7 @@ name: Baklava Production Build & Deploy
 
 on:
   push:
-    branches: [ V-0.1.18 ]
+    branches: [ V-0.1.19 ]
 
 jobs:
   build:
@@ -55,6 +55,6 @@ jobs:
             cd /srv/baklava/
             git restore .
             git fetch
-            git checkout V-0.1.18
+            git checkout V-0.1.19
             yarn install && yarn build
             pm2 reload baklava --update-env
