@@ -20,7 +20,7 @@ type SSPTProps = {
     emptyMessage?: string
 }
 
-const SSPaginatorTable = (props: SSPTProps) => {
+const   SSPaginatorTable = (props: SSPTProps) => {
 
     const [first, setFirst] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -141,6 +141,7 @@ const SSPaginatorTable = (props: SSPTProps) => {
 
     const getFilterElement = (col, source = "") => {
         let currentID = "filter_input_" + col.field + source
+        {console.log('filter values',filterValues)}
         switch (col.filterType) {
             case 'search':
                 return <InputText id={currentID} value={filterValues[currentID]} placeholder={col.header}

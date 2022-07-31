@@ -5,6 +5,7 @@ export default class RestaurantsService {
     async getRestaurants(...args) {
         let query = '/restaurants?'
         Object.keys(args[0]).forEach(key => query += args[0][key] ? (key + '=' + args[0][key] + '&'): '')
+        console.log(query);
         const { data: { data } } = await axios.get(query)
         return data;
     }

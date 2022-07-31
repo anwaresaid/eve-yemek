@@ -77,14 +77,14 @@ export const updateRestaurant = (id, restaurantUpdate) => async (dispatch, getSt
 
 
 
-export const listRestaurant = (offset, limit) => async (dispatch, getState) => {
+export const listRestaurant = (offset, limit,text,fields) => async (dispatch, getState) => {
   try {
     dispatch({
       type: restaurantsTypes.RESTAURAT_LIST_REQUEST,
     });
 
     const restaurantService = new RestaurantService;
-    const res = await restaurantService.getRestaurants({offset: offset, limit: limit});
+    const res = await restaurantService.getRestaurants({offset: offset, limit: limit,text:text,fields});
     dispatch({
       type: restaurantsTypes.RESTAURAT_LIST_SUCCESS,
       payload: parseDateInAllRows(res),

@@ -169,7 +169,7 @@ const MealDataInput = (props) => {
             dispatch(listFoodCategory());
 
         if (!restaurantsSuccess)
-            dispatch(listRestaurant(0, 9999));
+            dispatch(listRestaurant(0, 9999,null,null));
 
         if (addOnCategoriesSuccess) {
             setAddonCategoryDropdownOptions();
